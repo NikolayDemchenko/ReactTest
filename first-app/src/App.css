@@ -1,0 +1,25 @@
+.Menu {
+  height: 40px;
+  color: aliceblue;
+  text-align: center;
+  line-height: 40px;
+  background-color: #161a22df;
+}
+
+.Slide {
+  cursor: pointer;
+  text-align: center;
+}
+.Slide:hover {
+  color: aliceblue;
+}
+.Slide:active {
+  background-color: rgba(240, 248, 255, 0.103);
+  transition: 0.1s;
+}
+.Icon {
+  font-size: 30pt;
+}
+
+
+

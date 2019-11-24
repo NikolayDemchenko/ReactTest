@@ -1,0 +1,16 @@
+.NavigationPanel { 
+  /* border: 2px solid rgb(185, 58, 53); */
+  display: flex;
+}
+.Navigation,
+.Search,
+.Filter {
+  min-width: 10%;
+  margin:auto;
+}
+.Search {
+  min-width: 50%;
+}
+.Navigation {
+  min-width: 32%;
+}

@@ -1,0 +1,5 @@
+server/
+Data/
+.vscode/
+apollo-server-express/node_modules/
+first-app/node_modules/

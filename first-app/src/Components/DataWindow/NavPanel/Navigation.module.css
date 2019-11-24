@@ -1,0 +1,22 @@
+.Container {
+  /* border: 2px solid rgb(200, 255, 0); */
+  width: 100%;
+  display: flex;
+}
+.ArrowLeft {
+  padding-top: 6px;
+}
+.ArrowLeft:hover {
+  cursor: pointer;
+  color: aliceblue;
+}
+.ArrowLeft:active {
+  transition: 0.1s;
+  color: rgba(240, 248, 255, 0.198);
+}
+
+.NavName {
+  /* border: 2px solid rgb(200, 255, 0); */
+  margin: auto;
+  font-size: 1.3em;
+}

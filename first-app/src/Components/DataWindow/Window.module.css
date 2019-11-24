@@ -1,0 +1,26 @@
+.Header {
+  margin: 0 auto;
+  position: sticky;
+  max-width: 960px;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 101;
+}
+.Slider {
+  /* border: 2px solid greenyellow; */
+  height: 80px;
+  padding: 0px 40px 0px 40px;
+  overflow: hidden;
+  background-color: #3b485d;
+  color: rgba(192, 220, 255, 0.712);
+}
+.NavigationPanel {
+  color: rgba(206, 224, 247, 0.931);
+  background-color: #3b485d;
+  height: 50px;
+}
+.Content {
+  margin: 0 auto;
+  max-width: 960px;
+}

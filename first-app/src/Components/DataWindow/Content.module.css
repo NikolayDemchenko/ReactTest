@@ -1,0 +1,25 @@
+.Content {
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+}
+.Item {
+  cursor: pointer;
+  text-align: center;
+  color: aliceblue;
+  background-color: #272e38;
+  border-radius: 4px;
+  margin: 6px;
+  width: 460px;
+  height: 248px;
+}
+.Item:hover {
+  background-color: #2e3a4be5;
+  /* color: rgba(221, 239, 255, 0.5); */
+
+}
+.Item:active {
+  /* background-color: #2e3a4b57; */
+  color: rgba(221, 239, 255, 0.5);
+
+}
