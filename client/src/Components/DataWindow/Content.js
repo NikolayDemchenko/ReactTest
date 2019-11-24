@@ -5,7 +5,7 @@ import {GET_FOLDER_CHILDS} from './folderQueries'
 
 
 export default function Content() {
-  let parentId = "5dc4c1c221154e08bc1b979e";
+  let parentId = null;
   const { loading, error, data } = useQuery(GET_FOLDER_CHILDS, {
     variables: {parentId}
   });
