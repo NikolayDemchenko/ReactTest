@@ -7,7 +7,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "cd ../apollo-server-express && yarn start",
+    "server": "cd ../server && yarn start",
     "start": "concurrently \"yarn  server\" \"yarn  client\""
   },
   "eslintConfig": {
