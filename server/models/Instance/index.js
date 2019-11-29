@@ -1,26 +1,26 @@
-const Templates = require("./model");
+const Instances = require("./model");
 const typeDefs = require('./typeDefs');
 
 const resolvers = {
   Query: {
-    allTemplates: () => {
-      return Templates.find({});
+    allInstances: () => {
+      return Instances.find({});
     },
-    Template: (_, { id }) => {
-      return Templates.findById(id);
+    Instance: (_, { id }) => {
+      return Instances.findById(id);
     },
-    folderTemplates: (_, { folderId }) => {
-      return Templates.find({ folderId });
+    folderInstances: (_, { folderId }) => {
+      return Instances.find({ folderId });
     },
   },
-  Template: {
-    templates: ({ id }) => {
-      return Templates.find({ parentId: id });
+  Instance: {
+    Instances: ({ id }) => {
+      return Instances.find({ parentId: id });
     }
   },
   Mutation: {
-    addTemplate: async (_, { name, folderId, specsSheets }) => {
-      const item = new Templates({
+    addInstance: async (_, { name, folderId, specsSheets }) => {
+      const item = new Instances({
         name,
         folderId,
         specsSheets,
@@ -33,17 +33,17 @@ const resolvers = {
         throw err;
       }
     },
-    deleteTemplate: async (_, { id }) => {
+    deleteInstance: async (_, { id }) => {
       try {
-        await Templates.findByIdAndDelete(id);
+        await Instances.findByIdAndDelete(id);
         return true;
       } catch (err) {
         throw err;
       }
     },
-    updateTemplate: async (_, { id, name, folderId, specsSheets }) => {
+    updateInstance: async (_, { id, name, folderId, specsSheets }) => {
       try {
-        const item = await Templates.findByIdAndUpdate(id, { name, folderId, specsSheets, updated: new Date() }, { new: true });
+        const item = await Instances.findByIdAndUpdate(id, { name, folderId, specsSheets, updated: new Date() }, { new: true });
         return item;
       } catch (err) {
         throw err;
@@ -53,4 +53,3 @@ const resolvers = {
 };
 
 module.exports = { typeDefs, resolvers }
-// module.exports = resolvers

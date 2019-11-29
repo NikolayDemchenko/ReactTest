@@ -1,10 +1,5 @@
 const mongoose = require('mongoose')
-
-// const scheme = new mongoose.Schema({
-//     name: String,
-//     parentId: { type: String, default: null },
-//     updated: { type: Date, default: Date.now } 
-// }, { versionKey: false });
+const ObjectId=mongoose.Schema.Types.ObjectId;
 
 const scheme = new mongoose.Schema({
     name:String,
@@ -15,7 +10,7 @@ const scheme = new mongoose.Schema({
             specs: [
                 {
                     name: String,
-                    unit: String
+                    unit: ObjectId
                 }
             ]
         }

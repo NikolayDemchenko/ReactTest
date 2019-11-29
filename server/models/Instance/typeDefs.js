@@ -1,10 +1,21 @@
 const { gql } = require("apollo-server-express");
 
 module.exports = gql`
+ type Instance {
+    id: ID!   
+    templateId: ID!
+    price:Price!
+    quantity:Quantity!
+    delivery: [ID!]
+    payment: [ID!]
+    location:String!
+    specsSheets: [SpecsSheet]
+    updated:String!
+  }
  extend type Query {
-    allTemplates: [Template]!
-    Template(id: ID!): Template
-    folderTemplates(folderId: ID): [Template]!
+    allInstances: [Instance]!
+    Instance(id: ID!): Instance
+    folderInstances(templateId: ID): [Instance]!
   } 
   type Specs {
     id: ID!
@@ -24,19 +35,13 @@ module.exports = gql`
     name: String!  
     specs: [SpecsInput]    
   }
-  type Template {
-    id: ID!
-    name: String!
-    folderId: ID!
-    specsSheets: [SpecsSheet]
-    updated:String!
-  }
+ 
   extend type Mutation {
-    addTemplate(
+    addInstance(
       name: String!,
        folderId: ID, 
-       specsSheets: [SpecsSheetInput]): Template
-    deleteTemplate(id: ID!): Boolean
-    updateTemplate(id: ID!, name: String!, folderId: ID, specsSheets: [SpecsSheetInput]):Template
+       specsSheets: [SpecsSheetInput]): Instance
+    deleteInstance(id: ID!): Boolean
+    updateInstance(id: ID!, name: String!, folderId: ID, specsSheets: [SpecsSheetInput]):Instance
   }
 `;
