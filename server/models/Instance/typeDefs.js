@@ -12,29 +12,41 @@ module.exports = gql`
     specsSheets: [SpecsSheet]
     updated:String!
   }
- extend type Query {
-    allInstances: [Instance]!
-    Instance(id: ID!): Instance
-    folderInstances(templateId: ID): [Instance]!
-  } 
-  type Specs {
+  type Price {
+    values: [Value]  
+    unit: ID!    
+  }
+  type Value {   
+    value: Float
+    updated: String!    
+  }
+
+
+
+  type Spec {
     id: ID!
     name: String!  
     unit: String!    
   }
-  input SpecsInput {   
+  input SpecInput {   
     name: String!  
     unit: String!    
   }
   type SpecsSheet {
     id: ID!
     name: String!  
-    specs: [Specs]    
+    specs: [Spec]    
   }
   input SpecsSheetInput {    
     name: String!  
-    specs: [SpecsInput]    
+    specs: [SpecInput]    
   }
+ extend type Query {
+    allInstances: [Instance]!
+    Instance(id: ID!): Instance
+    folderInstances(templateId: ID): [Instance]!
+  } 
+ 
  
   extend type Mutation {
     addInstance(

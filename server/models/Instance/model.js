@@ -4,14 +4,18 @@ const ObjectId = mongoose.Schema.Types.ObjectId;
 const InstanceScheme = new mongoose.Schema({
     templateId: ObjectId,
     price: {
+        _id: false,
         values: [{
+            _id: false,
             value: Number,
             updated: { type: Date, default: Date.now }
         }],
-        Unit: ObjectId
+        unit: ObjectId
     },
     quantity: {
+        _id: false,
         values: [{
+            _id: false,
             value: Number,
             updated: { type: Date, default: Date.now }
         }],

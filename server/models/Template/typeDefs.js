@@ -6,23 +6,23 @@ module.exports = gql`
     Template(id: ID!): Template
     folderTemplates(folderId: ID): [Template]!
   } 
-  type Specs {
+  type Spec {
     id: ID!
     name: String!  
     unit: String!    
   }
-  input SpecsInput {   
+  input SpecInput {   
     name: String!  
     unit: String!    
   }
   type SpecsSheet {
     id: ID!
     name: String!  
-    specs: [Specs]    
+    specs: [Spec]    
   }
   input SpecsSheetInput {    
     name: String!  
-    specs: [SpecsInput]    
+    specs: [SpecInput]    
   }
   type Template {
     id: ID!
