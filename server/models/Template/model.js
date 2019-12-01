@@ -3,14 +3,14 @@ const ObjectId=mongoose.Schema.Types.ObjectId;
 
 const scheme = new mongoose.Schema({
     name:String,
-    folderId: String,
+    folderId: ObjectId,
     specsSheets: [
         {
             name: String,
             specs: [
                 {
                     name: String,
-                    unit: ObjectId
+                    unitId: ObjectId
                 }
             ]
         }

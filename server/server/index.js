@@ -10,7 +10,8 @@ const startServer = async () => {
   const server = new ApolloServer({
     modules: [
       require("../models/Folder"),
-      require("../models/Template")
+      require("../models/Template"),
+      require("../models/Instance")
     ]
   });
   server.applyMiddleware({ app, path: "/graphql" });

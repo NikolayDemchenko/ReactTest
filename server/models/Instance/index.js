@@ -1,7 +1,32 @@
+const { GraphQLScalarType } = require('graphql')
+const { Kind } = require('graphql/language')
+// Кастомный graphql тип Object
+const ObjectType = new GraphQLScalarType({
+  name: 'Object',
+  description: 'Arbitrary object',
+  parseValue: (value) => {
+    return typeof value === 'object' ? value
+      : typeof value === 'string' ? JSON.parse(value)
+        : null
+  },
+  serialize: (value) => {
+    return typeof value === 'object' ? value
+      : typeof value === 'string' ? JSON.parse(value)
+        : null
+  },
+  parseLiteral: (ast) => {
+    switch (ast.kind) {
+      case Kind.STRING: return JSON.parse(ast.value)
+      case Kind.OBJECT: throw new Error(`Not sure what to do with OBJECT for ObjectScalarType`)
+      default: return null
+    }
+  }
+})
 const Instances = require("./model");
 const typeDefs = require('./typeDefs');
 
 const resolvers = {
+  Object: ObjectType,
   Query: {
     allInstances: () => {
       return Instances.find({});
@@ -9,15 +34,11 @@ const resolvers = {
     Instance: (_, { id }) => {
       return Instances.findById(id);
     },
-    folderInstances: (_, { folderId }) => {
-      return Instances.find({ folderId });
+    folderInstances: (_, { templateId }) => {
+      return Instances.find({ templateId });
     },
   },
-  Instance: {
-    Instances: ({ id }) => {
-      return Instances.find({ parentId: id });
-    }
-  },
+  
   Mutation: {
     addInstance: async (_, { name, folderId, specsSheets }) => {
       const item = new Instances({

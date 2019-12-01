@@ -34,7 +34,10 @@ const InstanceScheme = new mongoose.Schema({
                 }
             ]
         }
-    ]
+    ],
+    updated: { 
+        type: Date, default: Date.now 
+     }
 }, { versionKey: false });
 
 module.exports = mongoose.model("instance", InstanceScheme);

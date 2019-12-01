@@ -13,11 +13,11 @@ const resolvers = {
       return Templates.find({ folderId });
     },
   },
-  Template: {
-    templates: ({ id }) => {
-      return Templates.find({ parentId: id });
-    }
-  },
+  // Template: {
+  //   templates: ({ id }) => {
+  //     return Templates.find({ parentId: id });
+  //   }
+  // },
   Mutation: {
     addTemplate: async (_, { name, folderId, specsSheets }) => {
       const item = new Templates({

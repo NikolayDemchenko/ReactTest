@@ -9,11 +9,11 @@ module.exports = gql`
   type Spec {
     id: ID!
     name: String!  
-    unit: String!    
+    unitId: ID!    
   }
   input SpecInput {   
     name: String!  
-    unit: String!    
+    unitId: ID!    
   }
   type SpecsSheet {
     id: ID!
