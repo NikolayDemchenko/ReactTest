@@ -38,13 +38,11 @@ const resolvers = {
       return Instances.find({ templateId });
     },
   },
-  
+
   Mutation: {
-    addInstance: async (_, { name, folderId, specsSheets }) => {
+    addInstance: async (_, { templateId, price, quantity, delivery, payment, location, specsSheets }) => {
       const item = new Instances({
-        name,
-        folderId,
-        specsSheets,
+        templateId, price, quantity, delivery, payment, location, specsSheets,
         updated: new Date()
       });
       try {
@@ -62,9 +60,9 @@ const resolvers = {
         throw err;
       }
     },
-    updateInstance: async (_, { id, name, folderId, specsSheets }) => {
+    updateInstance: async (_, { templateId, price, quantity, delivery, payment, location, specsSheets }) => {
       try {
-        const item = await Instances.findByIdAndUpdate(id, { name, folderId, specsSheets, updated: new Date() }, { new: true });
+        const item = await Instances.findByIdAndUpdate(id, { templateId, price, quantity, delivery, payment, location, specsSheets, updated: new Date() }, { new: true });
         return item;
       } catch (err) {
         throw err;

@@ -6,21 +6,21 @@ scalar Object
  type Instance {
     id: ID!   
     templateId: ID!
-    price:Quantity!
-    quantity:Quantity!
+    price:Quantity
+    quantity:Quantity
     delivery: [ID!]
     payment: [ID!]
     location:Object
-    specsSheets: [SpecsSheet]
-    updated:String!
+    specsSheets: [InstanceSpecsSheet]
+    updated:String
   }
   type Quantity {
     values: [Value]  
-    unit: ID!    
+    unitId: ID!    
   }
   input QuantityInput{
     values: [ValueInput]  
-    unit: ID! 
+    unitId: ID! 
   }
   type Value {   
     value: Object
@@ -28,22 +28,22 @@ scalar Object
   }
   input ValueInput{
     value: Object
-    updated: String! 
+    updated: String 
   }
   type InstanceSpecsSheet {
-    id: ID! 
-    specs: [Spec]    
+    specsSheetId: ID! 
+    specs: [InstanceSpec]    
   }
   input InstanceSpecsSheetInput {    
-    id: ID!  
+    specsSheetId: ID!  
     specs: [InstanceSpecInput]    
   }
   type InstanceSpec {
-    id: ID!  
+    specId: ID!  
     value: Object   
   }
   input InstanceSpecInput {   
-    id: ID!  
+    specId: ID!  
     value: Object    
   }
 
