@@ -10,7 +10,7 @@ const InstanceScheme = new mongoose.Schema({
             value: Number,
             updated: { type: Date, default: Date.now }
         }],
-        unit: ObjectId
+        unitId: ObjectId
     },
     quantity: {
         _id: false,
@@ -19,7 +19,7 @@ const InstanceScheme = new mongoose.Schema({
             value: Number,
             updated: { type: Date, default: Date.now }
         }],
-        Unit: ObjectId
+        unitId: ObjectId
     },
     delivery: [ObjectId],
     payment: [ObjectId],
