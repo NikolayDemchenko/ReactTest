@@ -26,18 +26,20 @@ const InstanceScheme = new mongoose.Schema({
     location: Object,
     specsSheets: [
         {
-            _id: ObjectId,
+            _id: false,
+            specsSheetId: ObjectId,
             specs: [
                 {
-                    _id: ObjectId,
+                    _id: false,
+                    specId: ObjectId,
                     value: Object
                 }
             ]
         }
     ],
-    updated: { 
-        type: Date, default: Date.now 
-     }
+    updated: {
+        type: Date, default: Date.now
+    }
 }, { versionKey: false });
 
 module.exports = mongoose.model("instance", InstanceScheme);
