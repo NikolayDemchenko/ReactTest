@@ -1,7 +1,7 @@
 import React from "react";
 import Slider from "./WindowSlider";
 import NavigationPanel from "./NavPanel/NavigationPanel";
-import Content from "./Content";
+import Content from "./Content/Content";
 import style from "./Window.module.css";
 
 const Window = props => {
