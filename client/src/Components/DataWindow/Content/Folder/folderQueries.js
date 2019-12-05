@@ -41,9 +41,6 @@ mutation($name:String,$parentId:ID) {
     id
     name
     parentId
-    folders{
-      name
-    }
   }
 }
 `;
@@ -54,11 +51,12 @@ mutation($id:ID!,$name:String!,$parentId:ID) {
     id
     name
     parentId
-    folders{
-      name
-    }
   }
 }
+`;
+// Удаление объекта Folder
+export const DELETE_FOLDER = gql`
+mutation($id:ID!) {deleteFolder(id:$id)}
 `;
 
 // Составной запрос
