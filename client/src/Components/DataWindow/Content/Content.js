@@ -19,7 +19,9 @@ export default function Content() {
 
   if (loading) return 'Loading...';
   if (error) return `Error! ${error.message}`;
-
+const updateOrCreateFolder=(item)=>{
+  updateFolder(item);
+}
   const handleClick = (item) => {
     parentId = item;
     // console.log(parentId);
@@ -34,7 +36,7 @@ export default function Content() {
         <button onClick={e => {
           console.log(input.value);
           e.preventDefault();
-          updateFolder({ variables: { id: folder.id, name: input.value, parentId: null } });
+          updateOrCreateFolder({ variables: { id: folder.id, name: input.value, parentId: null } });
         }}>Применить</button>
         <button onClick={e => {
           console.log(input.value);
