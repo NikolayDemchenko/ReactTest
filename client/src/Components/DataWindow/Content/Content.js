@@ -1,27 +1,43 @@
 import React, { useState } from "react";
 import style from "./Content.module.css";
-import { useQuery, useMutation } from '@apollo/react-hooks';
+import { useQuery, useMutation, useApolloClient } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
 import { GET_FOLDER_CHILDS, ADD_FOLDER, UPDATE_FOLDER, DELETE_FOLDER } from './Folder/folderQueries'
 
-
+const NEW_FOLDER = gql`
+mutation NewFolder($name:String,$parentId:ID) {
+    newFolder (name:$name,parentId:$parentId) @client{
+    id
+    name
+    parentId
+  }
+}
+`;
 export default function Content() {
+
   let parentId = null;
-  const { loading, error, data } = useQuery(GET_FOLDER_CHILDS, {
+  const { loading, error, data,} = useQuery(GET_FOLDER_CHILDS, {
     variables: { parentId }
-  });  
+  });
+
+  // const client = useApolloClient();
+  // client.writeData({ data: { childFolders:[{ Folder: "Хуйня!!!!!!!!!"} ] } });
+
+  const [newFolder] = useMutation(NEW_FOLDER, { variables: {name:"" ,parentId:""} });
+  
   const [updateFolder] = useMutation(UPDATE_FOLDER);
   const [deleteFolder] = useMutation(DELETE_FOLDER, {
     refetchQueries: [{
       query: GET_FOLDER_CHILDS,
-      variables: ({ parentId})
+      variables: ({ parentId })
     }]
   });
 
   if (loading) return 'Loading...';
   if (error) return `Error! ${error.message}`;
-const updateOrCreateFolder=(item)=>{
-  updateFolder(item);
-}
+  const updateOrCreateFolder = (item) => {
+    updateFolder(item);
+  }
   const handleClick = (item) => {
     parentId = item;
     // console.log(parentId);
@@ -50,7 +66,7 @@ const updateOrCreateFolder=(item)=>{
 
   return (
     <div className={style.Content}>{items}
-      <button>Добавить</button>
+      <button onClick={newFolder}>Добавить</button>
     </div>
   );
 };
