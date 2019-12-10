@@ -53,4 +53,3 @@ const resolvers = {
 };
 
 module.exports ={typeDefs,resolvers}
-// module.exports = resolvers

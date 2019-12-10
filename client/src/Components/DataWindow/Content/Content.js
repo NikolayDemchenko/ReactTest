@@ -23,7 +23,7 @@ export default function Content() {
   // const client = useApolloClient();
   // client.writeData({ data: { childFolders:[{ Folder: "Хуйня!!!!!!!!!"} ] } });
 
-  const [newFolder] = useMutation(NEW_FOLDER, { variables: {name:"" ,parentId:""} });
+  const [newFolder] = useMutation(NEW_FOLDER, { variables: {name:"" ,parentId} });
   
   const [updateFolder] = useMutation(UPDATE_FOLDER);
   const [deleteFolder] = useMutation(DELETE_FOLDER, {

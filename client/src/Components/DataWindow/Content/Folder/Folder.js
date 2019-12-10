@@ -15,9 +15,18 @@ mutation NewFolder($name:String,$parentId:ID) {
   }
 }
 `;
+const GET_FOLDER_CHILDS = gql`
+query($parentId:ID){
+  childFolders(parentId:$parentId)@client{
+    id
+    name
+    parentId
+    }
+  }
+`;
 export const GET_ALL_FOLDERS = gql`
-query AllFolders{
-  allFolders @client{
+query {
+  childFolders {
     id
     name 
     parentId
@@ -26,27 +35,16 @@ query AllFolders{
 
 export const resolvers={
     Mutation: {
-        newFolder: (_root, variables, { cache, getCacheKey }) => {
-        const id = getCacheKey({ __typename: 'TodoItem', id: variables.id })
-
-        const todo = cache.readFragment({ fragment, id });
-        const data = { ...todo, completed: !todo.completed };
-        cache.writeData({ id, data });
+        newFolder: (_, {name,parentId}, { cache, getCacheKey }) => {
+          const { Folders } = cache.readQuery({ 
+            query: gql`
+            query childFolders {[Folder]
+            }
+          `});
+   
+          // console.log(Folders);
+          // cache.writeQuery({ query: GET_ALL_FOLDERS, data });
         return null;
       },
     },
   };
-
-  Mutation: {
-    addFolder: async (_, { name, parentId }) => {
-      const folder = new Folders({
-        name,
-        parentId,
-        updated: new Date()
-      });
-      try {
-        await folder.save();
-        return folder;
-      } catch (err) {
-        throw err;
-      }

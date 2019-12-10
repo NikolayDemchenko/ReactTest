@@ -6,7 +6,7 @@ const resolvers = {
     allTemplates: () => {
       return Templates.find({});
     },
-    Template: (_, { id }) => {
+    template: (_, { id }) => {
       return Templates.findById(id);
     },
     folderTemplates: (_, { folderId }) => {

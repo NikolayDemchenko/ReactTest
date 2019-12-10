@@ -3,17 +3,15 @@ const { gql } = require("apollo-server-express");
 module.exports = gql`
  extend type Query {
     allTemplates: [Template]!
-    Template(id: ID!): Template
+    template(id: ID!): Template
     folderTemplates(folderId: ID): [Template]!
   } 
-  type Spec {
+  type Template {
     id: ID!
-    name: String!  
-    unitId: ID!    
-  }
-  input SpecInput {   
-    name: String!  
-    unitId: ID!    
+    name: String!
+    folderId: ID!
+    specsSheets: [SpecsSheet]
+    updated:String!
   }
   type SpecsSheet {
     id: ID!
@@ -24,13 +22,16 @@ module.exports = gql`
     name: String!  
     specs: [SpecInput]    
   }
-  type Template {
+  type Spec {
     id: ID!
-    name: String!
-    folderId: ID!
-    specsSheets: [SpecsSheet]
-    updated:String!
+    name: String!  
+    unitId: ID!    
   }
+  input SpecInput {   
+    name: String!  
+    unitId: ID!    
+  }
+
   extend type Mutation {
     addTemplate(
       name: String!,
