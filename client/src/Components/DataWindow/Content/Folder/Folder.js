@@ -1,52 +1,31 @@
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 
-export const typeDefs = gql`
-  extend type Mutation {
-    newFolder(name: String!, parentId: ID): Folder
+export const GET_FOLDERS = gql`
+  query Folders {
+    childFolders(parentId: null) {
+      id
+      name
+      parentId
+    }
   }
 `;
 
-export const NEW_FOLDER = gql`
-mutation NewFolder($name:String,$parentId:ID) {
-    newFolder (name:$name,parentId:$parentId) @client{
-    id
-    name
-    parentId
-  }
-}
-`;
-export const GET_ALL_FOLDERS = gql`
-query AllFolders{
-  allFolders @client{
-    id
-    name 
-    parentId
-  }
-}`;
-
-export const resolvers={
-    Mutation: {
-        newFolder: (_root, variables, { cache, getCacheKey }) => {
-        const id = getCacheKey({ __typename: 'TodoItem', id: variables.id })
-
-        const todo = cache.readFragment({ fragment, id });
-        const data = { ...todo, completed: !todo.completed };
-        cache.writeData({ id, data });
-        return null;
-      },
-    },
-  };
-
+export const resolvers = {
   Mutation: {
-    addFolder: async (_, { name, parentId }) => {
-      const folder = new Folders({
+    newFolder: (_root, { name, parentId }, { cache }) => {
+      let { childFolders } = cache.readQuery({ query: GET_FOLDERS });
+      const newFolder = {
+        id: null,
         name,
         parentId,
-        updated: new Date()
-      });
-      try {
-        await folder.save();
-        return folder;
-      } catch (err) {
-        throw err;
-      }
+        __typename: "Folder"
+      };
+      const data = { childFolders: [...childFolders, newFolder] };
+
+      // console.log(...data.childFolders);
+
+      cache.writeQuery({query: GET_FOLDERS, data });
+      return newFolder;
+    }
+  }
+};
