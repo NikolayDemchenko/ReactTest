@@ -34,9 +34,19 @@ query($parentId:ID){
     }
   }
 `;
-// Создание объекта Folder
+// Создание формы для создания объекта Folder
+export const NEW_FOLDER = gql`
+  mutation NewFolder($name: String, $parentId: ID) {
+    newFolder(name: $name, parentId: $parentId) @client {
+      id
+      name
+      parentId
+    }
+  }
+`;
+// Добавление объекта Folder в базу
 export const ADD_FOLDER = gql`
-mutation($name:String,$parentId:ID) {
+mutation($name:String!,$parentId:ID) {
   addFolder(name:$name,parentId:$parentId) {
     id
     name
