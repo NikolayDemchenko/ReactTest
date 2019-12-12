@@ -16,6 +16,20 @@ const resolvers = {
   Folder: {
     folders: ({ id }) => {
       return Folders.find({ parentId: id });
+    },
+    parents: ({ parentId }) => {
+      const getParents = (parents, parentId) => {
+        if (parentId != null) {
+          const folder = Folders.findById(parentId);
+          parents.push(folder)         
+          getParents(parents, folder.parentId) 
+          return parents
+        } else {
+          // console.log(parents)
+          return parents
+        }
+      }
+      return getParents([], parentId)
     }
   },
   Mutation: {
@@ -52,4 +66,4 @@ const resolvers = {
   }
 };
 
-module.exports ={typeDefs,resolvers}
+module.exports = { typeDefs, resolvers }

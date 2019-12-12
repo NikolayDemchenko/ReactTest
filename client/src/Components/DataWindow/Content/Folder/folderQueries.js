@@ -26,7 +26,7 @@ query ($id: ID){
 }
 `;
 export const GET_FOLDER_CHILDS = gql`
-query($parentId:ID){
+query ChildFolders($parentId:ID){
   childFolders(parentId:$parentId){
     id
     name
@@ -46,7 +46,7 @@ export const NEW_FOLDER = gql`
 `;
 // Добавление объекта Folder в базу
 export const ADD_FOLDER = gql`
-mutation($name:String!,$parentId:ID) {
+mutation AddFolder($name:String!,$parentId:ID) {
   addFolder(name:$name,parentId:$parentId) {
     id
     name
@@ -56,7 +56,7 @@ mutation($name:String!,$parentId:ID) {
 `;
 // Обновление объекта Folder
 export const UPDATE_FOLDER = gql`
-mutation($id:ID!,$name:String!,$parentId:ID) {
+mutation UpdateFolder($id:ID!,$name:String!,$parentId:ID) {
   updateFolder(id:$id,name:$name,parentId:$parentId) {
     id
     name
@@ -66,7 +66,7 @@ mutation($id:ID!,$name:String!,$parentId:ID) {
 `;
 // Удаление объекта Folder
 export const DELETE_FOLDER = gql`
-mutation($id:ID!) {deleteFolder(id:$id)}
+mutation DeleteFolder($id:ID!) {deleteFolder(id:$id)}
 `;
 
 // Составной запрос

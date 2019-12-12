@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./Content.module.css";
-import { useQuery, useMutation } from "@apollo/react-hooks";
+import { useQuery, useMutation, useApolloClient } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import {
   GET_FOLDER_CHILDS,
@@ -11,13 +11,14 @@ import {
 } from "./Folder/folderQueries";
 
 export default function Content() {
+
   let parentId = null;
   const { loading, error, data } = useQuery(GET_FOLDER_CHILDS, {
     variables: { parentId }
   });
   // Создание формы для добавления объекта Folder
   const [newFolder] = useMutation(NEW_FOLDER, {
-    variables: { name: "", parentId: "" }
+    variables: { name: "", parentId}
   });
 
   const [addFolder] = useMutation(ADD_FOLDER, {
@@ -61,6 +62,7 @@ export default function Content() {
   const items = data.childFolders.map(folder => {
     let input;
     return (
+    
       <div
         onClick={() => handleClick(folder)}
         className={style.Item}
@@ -100,7 +102,7 @@ export default function Content() {
     );
   });
   // console.log(data.childFolders);
-
+console.log("Опа!!!")
   return (
     <div className={style.Content}>
       {items}

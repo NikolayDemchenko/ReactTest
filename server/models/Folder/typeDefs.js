@@ -11,6 +11,7 @@ module.exports = gql`
     name: String!
     parentId: ID
     folders: [Folder]
+    parents:[Folder]
   }
   type Mutation {
     addFolder(name: String!, parentId: ID): Folder
