@@ -1,30 +1,34 @@
 import gql from "graphql-tag";
 
-export const GET_FOLDERS = gql`
-  query Folders {
-    childFolders(parentId: null) {
-      id
-      name
-      parentId
+export const GET_FOLDERS = gql` 
+    query GetFolderById($id: ID!) {
+    folder(id: $id) {     
+      id    
+      folders {
+        name
+        id
+        parentId
+      } 
     }
   }
 `;
 
 export const resolvers = {
   Mutation: {
-    newFolder: (_root, { name, parentId }, { cache }) => {
-      let { childFolders } = cache.readQuery({ query: GET_FOLDERS });
+    newFolder: (_root, { name, id }, { cache }) => {
+      let { folder } = cache.readQuery({ query: GET_FOLDERS,variables:{id} });
+
       const newFolder = {
-        id: null,
         name,
-        parentId,
+        id: null,
+        parentId:folder.id,
         __typename: "Folder"
       };
-      const data = { childFolders: [...childFolders, newFolder] };
+      folder.folders =  [...folder.folders, newFolder] ;
+      const data ={folder};
+      console.log(data);
 
-      // console.log(...data.childFolders);
-
-      cache.writeQuery({query: GET_FOLDERS, data });
+      cache.writeQuery({query: GET_FOLDERS,variables:{id}, data });
       return newFolder;
     }
   }

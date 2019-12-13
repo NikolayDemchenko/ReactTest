@@ -7,33 +7,54 @@ import {
   ADD_FOLDER,
   UPDATE_FOLDER,
   DELETE_FOLDER,
-  NEW_FOLDER
+  NEW_FOLDER,
+  GET_FOLDER_BY_ID
 } from "./Folder/folderQueries";
 
 export default function Content() {
 
-  let parentId = null;
-  const { loading, error, data } = useQuery(GET_FOLDER_CHILDS, {
-    variables: { parentId }
+  /////
+  const useGetParentFolders = () => {
+    const parentFolders = useQuery(GET_FOLDER_CHILDS, {
+      variables: { parentId: null }
+    });
+    const gh = parentFolders.data;
+    console.log(gh);
+  }; 
+  const GET_FOLDER_ID = gql`
+    {
+      FolderId @client
+    }
+  `;
+  const dataState = useQuery(GET_FOLDER_ID);
+  // let id = dataState.data.FolderId;
+  // console.log(id);
+/////
+
+  
+  let id = "5df2741180d5e02ee4e78759";
+  const { loading, error, data } = useQuery(GET_FOLDER_BY_ID, {
+    variables: { id }
   });
   // Создание формы для добавления объекта Folder
   const [newFolder] = useMutation(NEW_FOLDER, {
-    variables: { name: "", parentId}
+    variables: { id, name: "", parentId: id }
   });
 
   const [addFolder] = useMutation(ADD_FOLDER, {
     refetchQueries: [
       {
-        query: GET_FOLDER_CHILDS,
-        variables: { parentId }
+        query: GET_FOLDER_BY_ID,
+        variables: { id }
       }
-    ]});
+    ]
+  });
   const [updateFolder] = useMutation(UPDATE_FOLDER);
   const [deleteFolder] = useMutation(DELETE_FOLDER, {
     refetchQueries: [
       {
-        query: GET_FOLDER_CHILDS,
-        variables: { parentId }
+        query: GET_FOLDER_BY_ID,
+        variables: { id }
       }
     ]
   });
@@ -48,33 +69,33 @@ export default function Content() {
         const { name, parentId } = item.variables;
         return { variables: { name, parentId } };
       })();
-      addFolder(newItem)
+      addFolder(newItem);
       // console.log(newItem);
     } else {
       // console.log(item);
       updateFolder(item);
     }
   };
-  const handleClick = item => {
-    parentId = item;
-    // console.log(parentId);
+  const handleClick = itemId => {
+    id = itemId;
+    console.log(id);
   };
-  const items = data.childFolders.map(folder => {
+  const contentFolders = data.folder.folders;
+  const parentId = data.folder.id;
+
+  // console.log(childFolders);
+
+  const items = contentFolders.map(({ id, name }) => {
     let input;
     return (
-    
-      <div
-        onClick={() => handleClick(folder)}
-        className={style.Item}
-        key={folder.id}
-      >
+      <div className={style.Item} key={id}>
         <input
           placeholder="Введите наименование"
           ref={node => {
             input = node;
           }}
           className={style.Input}
-          defaultValue={folder.name}
+          defaultValue={name}
         />
         <button
           onClick={e => {
@@ -82,7 +103,7 @@ export default function Content() {
             // console.log(input.value);
             e.preventDefault();
             updateOrCreateFolder({
-              variables: { id: folder.id, name: input.value, parentId: null }
+              variables: { id, name: input.value, parentId }
             });
           }}
         >
@@ -93,16 +114,17 @@ export default function Content() {
             //Проверка
             console.log(input.value);
             e.preventDefault();
-            deleteFolder({ variables: { id: folder.id } });
+            deleteFolder({ variables: { id } });
           }}
         >
           Удалить
         </button>
+        <div onClick={() => handleClick(id)} className={style.InnerItem}></div>
       </div>
     );
   });
-  // console.log(data.childFolders);
-console.log("Опа!!!")
+
+  console.log("Опа!!!");
   return (
     <div className={style.Content}>
       {items}

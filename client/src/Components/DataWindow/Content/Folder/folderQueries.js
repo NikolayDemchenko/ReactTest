@@ -1,43 +1,50 @@
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 
 export const GET_ALL_FOLDERS = gql`
-{
-  allFolders{
-    id
-    name 
-    parentId
-    folders{
-      name
-    }
-  }
-}
-`;
-export const GET_FOLDER_BY_ID = gql`
-query ($id: ID){
-  folder(id:$id){
-    id
-    name
-    parentId
-    folders{
-      name
+  {
+    allFolders {
       id
+      name
+      parentId
+      folders {
+        name
+      }
     }
   }
-}
 `;
 export const GET_FOLDER_CHILDS = gql`
-query ChildFolders($parentId:ID){
-  childFolders(parentId:$parentId){
-    id
-    name
-    parentId
+  query ChildFolders($parentId: ID) {
+    childFolders(parentId: $parentId) {
+      id
+      name
+      parentId     
     }
   }
 `;
+export const GET_FOLDER_BY_ID = gql`
+  query GetFolderById($id: ID!) {
+    folder(id: $id) {
+      name
+      id
+      parentId
+      folders {
+        name
+        id
+        parentId
+      }
+      parents {
+        name
+        id
+        parentId
+      }
+    }
+  }
+`;
+
 // Создание формы для создания объекта Folder
 export const NEW_FOLDER = gql`
-  mutation NewFolder($name: String, $parentId: ID) {
-    newFolder(name: $name, parentId: $parentId) @client {
+  mutation NewFolder($id:ID,$name: String, $parentId: ID) {
+    newFolder(id:$id, name: $name, parentId: $parentId) @client {
       id
       name
       parentId
@@ -46,27 +53,29 @@ export const NEW_FOLDER = gql`
 `;
 // Добавление объекта Folder в базу
 export const ADD_FOLDER = gql`
-mutation AddFolder($name:String!,$parentId:ID) {
-  addFolder(name:$name,parentId:$parentId) {
-    id
-    name
-    parentId
+  mutation AddFolder($name: String!, $parentId: ID) {
+    addFolder(name: $name, parentId: $parentId) {
+      id
+      name
+      parentId
+    }
   }
-}
 `;
 // Обновление объекта Folder
 export const UPDATE_FOLDER = gql`
-mutation UpdateFolder($id:ID!,$name:String!,$parentId:ID) {
-  updateFolder(id:$id,name:$name,parentId:$parentId) {
-    id
-    name
-    parentId
+  mutation UpdateFolder($id: ID!, $name: String!, $parentId: ID) {
+    updateFolder(id: $id, name: $name, parentId: $parentId) {
+      id
+      name
+      parentId
+    }
   }
-}
 `;
 // Удаление объекта Folder
 export const DELETE_FOLDER = gql`
-mutation DeleteFolder($id:ID!) {deleteFolder(id:$id)}
+  mutation DeleteFolder($id: ID!) {
+    deleteFolder(id: $id)
+  }
 `;
 
 // Составной запрос
