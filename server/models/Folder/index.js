@@ -1,5 +1,6 @@
 const Folders = require("./model");
-const typeDefs = require('./typeDefs');
+const typeDefs = require("./typeDefs");
+const {getParents} = require("./getParents");
 
 const resolvers = {
   Query: {
@@ -11,25 +12,14 @@ const resolvers = {
     },
     childFolders: (_, { parentId }) => {
       return Folders.find({ parentId });
-    },
+    }
   },
   Folder: {
     folders: ({ id }) => {
       return Folders.find({ parentId: id });
     },
-    parents: ({ parentId }) => {
-      const getParents = (parents, parentId) => {
-        if (parentId != null) {
-          const folder = Folders.findById(parentId);
-          parents.push(folder)         
-          getParents(parents, folder.parentId) 
-          return parents
-        } else {
-          // console.log(parents)
-          return parents
-        }
-      }
-      return getParents([], parentId)
+    parents: ({ parentId }) => {     
+      return getParents([], parentId, Folders);
     }
   },
   Mutation: {
@@ -45,7 +35,6 @@ const resolvers = {
       } catch (err) {
         throw err;
       }
-
     },
     deleteFolder: async (_, { id }) => {
       try {
@@ -57,7 +46,11 @@ const resolvers = {
     },
     updateFolder: async (_, { id, name, parentId }) => {
       try {
-        const folder = await Folders.findByIdAndUpdate(id, { name, parentId, updated: new Date() }, { new: true });
+        const folder = await Folders.findByIdAndUpdate(
+          id,
+          { name, parentId, updated: new Date() },
+          { new: true }
+        );
         return folder;
       } catch (err) {
         throw err;
@@ -66,4 +59,4 @@ const resolvers = {
   }
 };
 
-module.exports = { typeDefs, resolvers }
+module.exports = { typeDefs, resolvers };
