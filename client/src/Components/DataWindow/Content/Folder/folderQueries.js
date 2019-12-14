@@ -51,6 +51,16 @@ export const NEW_FOLDER = gql`
     }
   }
 `;
+// Создание формы для создания объекта ParentFolder
+export const NEW_PARENT_FOLDER = gql`
+  mutation NewParentFolder($name: String, $parentId: ID) {
+    newParentFolder(name: $name, parentId: $parentId) @client {
+      id
+      name
+      parentId
+    }
+  }
+`;
 // Добавление объекта Folder в базу
 export const ADD_FOLDER = gql`
   mutation AddFolder($name: String!, $parentId: ID) {

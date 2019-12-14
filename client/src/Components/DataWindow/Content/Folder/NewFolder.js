@@ -1,6 +1,7 @@
 import gql from "graphql-tag";
-
-export const GET_FOLDERS = gql` 
+import parentResolver from "./NewParentFolder";
+import {merge} from "lodash"
+const GET_FOLDERS = gql` 
     query GetFolderById($id: ID!) {
     folder(id: $id) {     
       id    
@@ -13,7 +14,7 @@ export const GET_FOLDERS = gql`
   }
 `;
 
-export const resolvers = {
+const resolver = {
   Mutation: {
     newFolder: (_root, { name, id }, { cache }) => {
       let { folder } = cache.readQuery({ query: GET_FOLDERS,variables:{id} });
@@ -33,3 +34,4 @@ export const resolvers = {
     }
   }
 };
+export const resolvers=merge(resolver,parentResolver)
