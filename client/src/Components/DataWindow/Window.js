@@ -1,6 +1,6 @@
 import React from "react";
 import Slider from "./WindowSlider";
-import NavigationPanel from "./NavPanel/NavigationPanel";
+import NavigationPanel from "./Navigation/NavigationPanel";
 import Content from "./Content/Content";
 import style from "./Window.module.css";
 
@@ -17,15 +17,15 @@ const Window = props => {
     Slides = SlideShow;
   }
   return (
-    <div cn={style.Window}>
+    <div>
       <div className={style.Header}>
+        <Slides  />
         <div className={style.NavigationPanel}>
           <NavigationPanel slides={slideCount} />
         </div>
-        <Slides  />
       </div>
       <div className={style.Content}>
-        <Content items={props.items} />
+        <Content  />
       </div>
     </div>
   );

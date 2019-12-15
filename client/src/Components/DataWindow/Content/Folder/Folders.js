@@ -3,7 +3,7 @@ import style from "../Content.module.css";
 import { useQuery, useMutation, useApolloClient } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import {
-  GET_FOLDER_CHILDS,
+  GET_FOLDER_ID,
   ADD_FOLDER,
   UPDATE_FOLDER,
   DELETE_FOLDER,
@@ -11,17 +11,12 @@ import {
   GET_FOLDER_BY_ID
 } from "./FolderQueries";
 
-export default function Content() {
- 
-  const GET_FOLDER_ID = gql`
-    query GetFolderId{
-      FolderId @client
-    }
-  `;
+export default function Content() { 
+
   const client = useApolloClient();
   const dataState = useQuery(GET_FOLDER_ID);
   let id = dataState.data.FolderId;
-  // console.log(id);
+  console.log("Айдишник:",id);
   const handleClick = itemId => {
     client.writeData({
       data: {
@@ -32,7 +27,7 @@ export default function Content() {
   };
 
 
-  const { loading, error, data, refetch  } = useQuery(GET_FOLDER_BY_ID, {
+  const { loading, error, data } = useQuery(GET_FOLDER_BY_ID, {
     variables: { id }
   });
   // Создание формы для добавления объекта Folder

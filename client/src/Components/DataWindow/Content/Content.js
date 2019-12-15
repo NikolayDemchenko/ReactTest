@@ -1,17 +1,11 @@
 import React from "react";
 import { useQuery, useMutation, useApolloClient } from "@apollo/react-hooks";
-import gql from "graphql-tag";
 import Folders from "./Folder/Folders";
 import ParentFolders from "./Folder/ParentFolders";
-
+import {GET_FOLDER_ID} from "./Folder/FolderQueries";
 export default function Content() {
-  const GET_FOLDER_ID = gql`
-    query GetFolderId {
-      FolderId @client
-    }
-  `;
+  
   const { data } = useQuery(GET_FOLDER_ID);
-  let id = data.FolderId;
   const getContent = () => {
     if (data.FolderId == null) {
       return ParentFolders;
