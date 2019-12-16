@@ -1,8 +1,7 @@
-import React,{useEffect} from "react";
+import React from "react";
 import style from "../Content.module.css";
-import { useQuery, useMutation, useApolloClient } from "@apollo/react-hooks";
+import { useMutation, useApolloClient } from "@apollo/react-hooks";
 import {
-  GET_FOLDER_ID,
   ADD_FOLDER,
   UPDATE_FOLDER,
   DELETE_FOLDER,
@@ -10,37 +9,20 @@ import {
   GET_FOLDER_BY_ID
 } from "./FolderQueries";
 
-export default function Content() { 
-  const handleClick = itemId => {
-    client.writeData({
-      data: {
-        FolderId: itemId
-      }
-    });   
-    console.log("!!!!! Клик по айдишнику:",itemId);
-  };
-  useEffect(() => {
-    console.log("!!!!! Хук Эффекта ");
-  });
-
-  const client = useApolloClient();
-  const dataState = useQuery(GET_FOLDER_ID);
-  const id = dataState.data.FolderId;
-  console.log("Полученный айдишник:",id);
-
-  const { loading, error, data } = useQuery(GET_FOLDER_BY_ID, {
-    variables: { id }
-  });
+export default function Folders({data}) {
+  console.log("Рендеринг Folders");
+  const parentId = data.folder.id
+  console.log("Проверяемое:",parentId);
   // Создание формы для добавления объекта Folder
   const [newFolder] = useMutation(NEW_FOLDER, {
-    variables: { id, name: "", parentId: id }
+    variables: { id:parentId, name: "", parentId: parentId }
   });
 
   const [addFolder] = useMutation(ADD_FOLDER, {
     refetchQueries: [
       {
         query: GET_FOLDER_BY_ID,
-        variables: { id }
+        variables: { parentId }
       }
     ]
   });
@@ -49,14 +31,19 @@ export default function Content() {
     refetchQueries: [
       {
         query: GET_FOLDER_BY_ID,
-        variables: { id }
+        variables: { parentId }
       }
     ]
   });
-
-  if (loading) return "Loading...";
-  if (error) return `Error! ${error.message}`;
-
+  const client = useApolloClient();
+  const handleClick = itemId => {
+    client.writeData({
+      data: {
+        FolderId: itemId
+      }
+    });
+    console.log(" --- Получен новый айдишник:",itemId);
+  };
   const updateOrCreateFolder = item => {
     // console.log(item.variables.id);
     if (item.variables.id === null) {
@@ -67,19 +54,18 @@ export default function Content() {
       addFolder(newItem);
       // console.log(newItem);
     } else {
-      // console.log(item);
+      console.log("Обновляемые данные",item);
       updateFolder(item);
     }
   };
-  
-  const items = data.folder.folders.map(({ id, name }) => {
-    let input;
-    return (
+  let input; 
+  const items = data.folder.folders.map(({ id, name }) => (
       <div className={style.Item} key={id}>
         <input
           placeholder="Введите наименование"
           ref={node => {
             input = node;
+            console.log("Данные в инпуте:",input);
           }}
           className={style.Input}
           defaultValue={name}
@@ -90,7 +76,7 @@ export default function Content() {
             // console.log(input.value);
             e.preventDefault();
             updateOrCreateFolder({
-              variables: { id, name: input.value, parentId:data.folder.id }
+              variables: { id, name: input.value, parentId: data.folder.id }
             });
           }}
         >
@@ -106,16 +92,16 @@ export default function Content() {
         >
           Удалить
         </button>
-        <div onClick={() => handleClick(id)} className={style.InnerItem}></div>
+        <div onClick={() => handleClick(id)} className={style.InnerItem}></div>        
       </div>
-    );
-  });
+    ));
 
-  console.log("Загрузка папок");
+
   return (
-    <div className={style.Content}>
-      {items}
-      <button onClick={newFolder}>Добавить</button>
+    <div>
+       {items}
+       <button onClick={newFolder}>Добавить</button>
     </div>
-  );
+  )
+ ;
 }

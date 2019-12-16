@@ -1,23 +1,22 @@
 import React from "react";
+import style from "./Content.module.css";
 import { useQuery } from "@apollo/react-hooks";
 import Folders from "./Folder/Folders";
-import ParentFolders from "./Folder/ParentFolders";
-import {GET_FOLDER_ID} from "./Folder/FolderQueries";
-export default function Content({data}) {
-  
-  // const { data } = useQuery(GET_FOLDER_ID);
-  // const DataContent = () => {
-  //   if (data.FolderId == null) {
-  //     return <ParentFolders/>;
-  //   }else{
-  //     return <Folders/>
-  //   }
-  // };
+import { GET_FOLDER_BY_ID } from "./Folder/FolderQueries";
+import NavigationPanel from "../NavigationPanel/NavigationPanel";
 
-  console.log("Отображение папок в браузере");
+export default function Content({ id }) {
+  const { loading, error, data } = useQuery(GET_FOLDER_BY_ID, {
+    variables: { id }
+  });
+
+  if (loading) return "Loading...";
+  if (error) return `Error! ${error.message}`;
+  console.log("Загрузка папок");
   return (
-    <div>     
-      {data}
+    <div className={style.Content}>
+      <NavigationPanel folder={data.folder} />
+      <Folders data={data} />
     </div>
-  );  
+  );
 }

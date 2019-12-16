@@ -1,10 +1,8 @@
 import React from "react";
 import { useQuery, useMutation, useApolloClient } from "@apollo/react-hooks";
-import { GET_FOLDER_ID } from "../../Content/Folder/FolderQueries";
 import gql from "graphql-tag";
 
-export default  function  NvigationContent () {
-  const getFolderId = useQuery(GET_FOLDER_ID);
+export default  function  NvigationContent ({folder}) {
 
   // Получение родителя открытой Folder
   const GET_FOLDER_PARENTID = gql`
@@ -16,13 +14,13 @@ export default  function  NvigationContent () {
     }
   `;
   const {data} =  useQuery(GET_FOLDER_PARENTID, {
-    variables: { id: getFolderId.data.FolderId }
+    variables: { id: folder.id }
   });
   
-  console.log("Открыта папка:",getFolderId.data.FolderId);
+  console.log("Открыта папка:",data);
   return (
     <div>
-     {/* {data.folder.name} */}
+     {data.folder.name}
     </div>
   );
 }

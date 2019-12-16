@@ -9,18 +9,17 @@ import {
   NEW_PARENT_FOLDER
 } from "./FolderQueries";
 
-export default function Content() {
+export default function ParentFolders({parentId}) {
 
-  const client = useApolloClient(); 
+    const client = useApolloClient(); 
   const handleClick = itemId => {
+    console.log(" --- Получен новый айдишник:",itemId);
     client.writeData({
       data: {
         FolderId: itemId
       }
     });   
-    console.log("!!!!! Клик по айдишнику:",itemId);
-  };
-  let parentId = null;
+  };  
   const { loading, error, data } = useQuery(GET_FOLDER_CHILDS, {
     variables: { parentId }
   });
@@ -66,6 +65,7 @@ export default function Content() {
 
   const items = data.childFolders.map(({ id, name }) => {
     let input;
+  
     return (    
       <div
         className={style.Item}
@@ -105,7 +105,7 @@ export default function Content() {
       </div>
     );
   });
-console.log("Загрузка родительских папок")
+  console.log("Рендеринг ParentFolders");
   return (
     <div className={style.Content}>
       {items}
