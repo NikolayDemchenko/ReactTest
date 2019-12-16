@@ -1,7 +1,6 @@
-import React from "react";
+import React,{useEffect} from "react";
 import style from "../Content.module.css";
 import { useQuery, useMutation, useApolloClient } from "@apollo/react-hooks";
-import gql from "graphql-tag";
 import {
   GET_FOLDER_ID,
   ADD_FOLDER,
@@ -12,20 +11,22 @@ import {
 } from "./FolderQueries";
 
 export default function Content() { 
-
-  const client = useApolloClient();
-  const dataState = useQuery(GET_FOLDER_ID);
-  let id = dataState.data.FolderId;
-  console.log("Айдишник:",id);
   const handleClick = itemId => {
     client.writeData({
       data: {
         FolderId: itemId
       }
     });   
-    console.log(itemId);
+    console.log("!!!!! Клик по айдишнику:",itemId);
   };
+  useEffect(() => {
+    console.log("!!!!! Хук Эффекта ");
+  });
 
+  const client = useApolloClient();
+  const dataState = useQuery(GET_FOLDER_ID);
+  const id = dataState.data.FolderId;
+  console.log("Полученный айдишник:",id);
 
   const { loading, error, data } = useQuery(GET_FOLDER_BY_ID, {
     variables: { id }
@@ -71,12 +72,7 @@ export default function Content() {
     }
   };
   
-  const contentFolders = data.folder.folders;
-  const parentId = data.folder.id;
-
-  // console.log(childFolders);
-
-  const items = contentFolders.map(({ id, name }) => {
+  const items = data.folder.folders.map(({ id, name }) => {
     let input;
     return (
       <div className={style.Item} key={id}>
@@ -94,7 +90,7 @@ export default function Content() {
             // console.log(input.value);
             e.preventDefault();
             updateOrCreateFolder({
-              variables: { id, name: input.value, parentId }
+              variables: { id, name: input.value, parentId:data.folder.id }
             });
           }}
         >
@@ -115,7 +111,7 @@ export default function Content() {
     );
   });
 
-  console.log("Опа!!!");
+  console.log("Загрузка папок");
   return (
     <div className={style.Content}>
       {items}

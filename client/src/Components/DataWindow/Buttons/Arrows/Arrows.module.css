@@ -1,4 +1,5 @@
 .UndoArrow {
+  color: rgba(206, 224, 247, 0.931);
   padding-top: 6px;
 }
 .UndoArrow:hover {

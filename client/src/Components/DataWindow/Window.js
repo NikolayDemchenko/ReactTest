@@ -1,10 +1,25 @@
 import React from "react";
 import Slider from "./WindowSlider";
-import NavigationPanel from "./Navigation/NavigationPanel";
+import NavigationPanel from "./NavigationPanel/NavigationPanel";
 import Content from "./Content/Content";
 import style from "./Window.module.css";
+import { useQuery } from "@apollo/react-hooks";
+import Folders from "./Content/Folder/Folders";
+import ParentFolders from "./Content/Folder/ParentFolders";
+import {GET_FOLDER_ID} from "./Content/Folder/FolderQueries";
 
 const Window = props => {
+// Генерация контента
+  const { data } = useQuery(GET_FOLDER_ID);
+  const DataContent = () => {
+    if (data.FolderId == null) {
+      return <ParentFolders/>;
+    }else{
+      return <Folders/>
+    }
+  };
+
+
   // Генерация слайдера
   const slideCount = 8;
   const SlideShow = () => (
@@ -19,13 +34,11 @@ const Window = props => {
   return (
     <div>
       <div className={style.Header}>
-        <Slides  />
-        <div className={style.NavigationPanel}>
-          <NavigationPanel slides={slideCount} />
-        </div>
+        <Slides />
+        <NavigationPanel />
       </div>
       <div className={style.Content}>
-        <Content  />
+        <DataContent/>
       </div>
     </div>
   );

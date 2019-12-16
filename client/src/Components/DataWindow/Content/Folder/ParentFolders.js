@@ -1,7 +1,6 @@
 import React from "react";
 import style from "../Content.module.css";
 import { useQuery, useMutation, useApolloClient } from "@apollo/react-hooks";
-import gql from "graphql-tag";
 import {
   GET_FOLDER_CHILDS,
   ADD_FOLDER,
@@ -19,7 +18,7 @@ export default function Content() {
         FolderId: itemId
       }
     });   
-    console.log(itemId);
+    console.log("!!!!! Клик по айдишнику:",itemId);
   };
   let parentId = null;
   const { loading, error, data } = useQuery(GET_FOLDER_CHILDS, {
@@ -106,8 +105,7 @@ export default function Content() {
       </div>
     );
   });
-  // console.log(data.childFolders);
-console.log("Опа!!!")
+console.log("Загрузка родительских папок")
   return (
     <div className={style.Content}>
       {items}

@@ -2,7 +2,7 @@ import React from "react";
 import Icon from "react-icons-kit";
 import { undo2 } from "react-icons-kit/icomoon/undo2";
 import style from "./Arrows.module.css";
-import { useQuery, useMutation, useApolloClient } from "@apollo/react-hooks";
+import { useQuery} from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
 const UndoArrow = ({folderId}) => {
@@ -21,7 +21,7 @@ const UndoArrow = ({folderId}) => {
           FolderId: data.folder.parentId
         }
       });
-      console.log("Клик!", data.folder.parentId);
+      console.log("Возврат к:", data.folder.parentId);
     };
     return (
       <div 

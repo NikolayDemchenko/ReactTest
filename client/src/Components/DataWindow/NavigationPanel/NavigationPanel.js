@@ -1,28 +1,30 @@
 import React from "react";
 import style from "./NavigationPanel.module.css";
-import { useQuery, useMutation, useApolloClient } from "@apollo/react-hooks";
-
+import { useQuery } from "@apollo/react-hooks";
 import { GET_FOLDER_ID } from "../Content/Folder/FolderQueries";
+import NvigationContent from "./NavigationContent/NavigationContent"
 import UndoArrow from "../Buttons/Arrows/UndoArrow"
-const NavigationPanel = props => {
+const NavigationPanel =() => {
  
   //Получение FolderID
   const {data} = useQuery(GET_FOLDER_ID);
-  console.log("Данные:", data.FolderId);
 
  // Генерация кнопки назад
-  const GetArrow = () => {
+  const GetPanel = () => {
     if (data.FolderId == null) {
       return <div />;
     } else {
-      return <UndoArrow  folderId={data.FolderId} />;
+      console.log("Генерация кнопки назад для папки:", data.FolderId);
+      return(
+      <div className={style.Navigation}>
+        <UndoArrow  folderId={data.FolderId} />
+        <div className={style.NavName}><NvigationContent/></div>
+      </div>)
+       ;
     }
   };
   return (
-    <div className={style.Navigation}>
-      <GetArrow />
-      <div className={style.NavName}>Навигация</div>
-    </div>
+    <GetPanel/>
   );
 };
 export default NavigationPanel;
