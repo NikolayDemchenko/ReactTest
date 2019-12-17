@@ -19,6 +19,7 @@ export const GET_ALL_FOLDERS = gql`
     }
   }
 `;
+// Получить все дочерние Folders
 export const GET_FOLDER_CHILDS = gql`
   query ChildFolders($parentId: ID) {
     childFolders(parentId: $parentId) {
@@ -28,6 +29,7 @@ export const GET_FOLDER_CHILDS = gql`
     }
   }
 `;
+// Получить Folder по id со всеми дочерними Folders
 export const GET_FOLDER_BY_ID = gql`
   query GetFolderById($id: ID!) {
     folder(id: $id) {
@@ -39,7 +41,8 @@ export const GET_FOLDER_BY_ID = gql`
         id
         parentId
       }
-      # parents {
+      # parents 
+      # {
       #   name
       #   id
       #   parentId
@@ -49,9 +52,19 @@ export const GET_FOLDER_BY_ID = gql`
 `;
 
 // Создание формы для создания объекта Folder
+// export const NEW_FOLDER = gql`
+//   mutation NewFolder($id:ID,$name: String, $parentId: ID) {
+//     newFolder(id:$id, name: $name, parentId: $parentId) @client {
+//       id
+//       name
+//       parentId
+//     }
+//   }
+// `;
+// Создание формы для создания объекта Folder с передачей Folder
 export const NEW_FOLDER = gql`
-  mutation NewFolder($id:ID,$name: String, $parentId: ID) {
-    newFolder(id:$id, name: $name, parentId: $parentId) @client {
+  mutation NewFolder($folder:Folder,$name: String) {
+    newFolder(folder:$folder, name: $name) @client {
       id
       name
       parentId

@@ -7,7 +7,7 @@ import {
   UPDATE_FOLDER,
   DELETE_FOLDER,
   NEW_PARENT_FOLDER
-} from "./FolderQueries";
+} from "./folderQueries";
 
 export default function ParentFolders({ parentId }) {
   const client = useApolloClient();

@@ -1,4 +1,4 @@
-import { GET_FOLDER_CHILDS as query  } from "./FolderQueries";
+import { GET_FOLDER_CHILDS as query  } from "./folderQueries";
 
 export default {
   Mutation: {

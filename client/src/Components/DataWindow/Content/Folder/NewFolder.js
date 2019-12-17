@@ -1,12 +1,9 @@
-import parentResolver from "./NewParentFolder";
-import { merge } from "lodash";
-import { GET_FOLDER_BY_ID as query } from "./FolderQueries";
+import { GET_FOLDER_BY_ID as query } from "./folderQueries";
 
-const resolver = {
+export default {
   Mutation: {
-    newFolder: (_root, { name, id }, { cache }) => {
+    newFolder: (_root, { name, folder }, { cache }) => {
       // console.log("_root:", _root);
-      let { folder } = cache.readQuery({ query, variables: { id } });
       const newFolder = {
         name,
         id: null,
@@ -14,9 +11,9 @@ const resolver = {
         __typename: "Folder"
       };
       folder.folders = [...folder.folders, newFolder];
-      cache.writeQuery({ query, variables: { id }, data: { folder } });
+      cache.writeQuery({ query, variables: { id:folder.id }, data: { folder } });
       return newFolder;
     }
   }
 };
-export const resolvers = merge(resolver, parentResolver);
+

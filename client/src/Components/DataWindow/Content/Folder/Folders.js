@@ -7,7 +7,7 @@ import {
   DELETE_FOLDER,
   NEW_FOLDER,
   GET_FOLDER_BY_ID
-} from "./FolderQueries";
+} from "./folderQueries";
 
 export default function Folders({ folder }) {
   console.log("Рендеринг Folders");
@@ -16,7 +16,9 @@ export default function Folders({ folder }) {
 
   // Создание формы для добавления объекта Folder
   const [newFolder] = useMutation(NEW_FOLDER, {
-    variables: { id, name: "", parentId: id }
+    variables: { folder, name: ""
+    // , parentId: id 
+  }
   });
 
   const [addFolder] = useMutation(ADD_FOLDER, {

@@ -18,9 +18,9 @@ const resolvers = {
     folders: ({ id }) => {
       return Folders.find({ parentId: id });
     },
-    parents: ({ parentId }) => {     
-      return getParents([], parentId, Folders);
-    }
+    // parents: ({ parentId }) => {     
+    //   return getParents([], parentId, Folders);
+    // }
   },
   Mutation: {
     addFolder: async (_, { name, parentId }) => {
