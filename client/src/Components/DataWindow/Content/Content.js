@@ -16,7 +16,7 @@ export default function Content({ id }) {
   return (
     <div className={style.Content}>
       <NavigationPanel folder={data.folder} />
-      <Folders data={data} />
+      <Folders folder={data.folder} />
     </div>
   );
 }

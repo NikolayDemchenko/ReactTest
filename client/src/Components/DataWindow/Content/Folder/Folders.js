@@ -9,20 +9,21 @@ import {
   GET_FOLDER_BY_ID
 } from "./FolderQueries";
 
-export default function Folders({data}) {
+export default function Folders({ folder }) {
   console.log("Рендеринг Folders");
-  const parentId = data.folder.id
-  console.log("Проверяемое:",parentId);
+  const id = folder.id;
+  // console.log("Проверяемое:", parentId);
+
   // Создание формы для добавления объекта Folder
   const [newFolder] = useMutation(NEW_FOLDER, {
-    variables: { id:parentId, name: "", parentId: parentId }
+    variables: { id, name: "", parentId: id }
   });
 
   const [addFolder] = useMutation(ADD_FOLDER, {
     refetchQueries: [
       {
         query: GET_FOLDER_BY_ID,
-        variables: { parentId }
+        variables: { id }
       }
     ]
   });
@@ -31,7 +32,7 @@ export default function Folders({data}) {
     refetchQueries: [
       {
         query: GET_FOLDER_BY_ID,
-        variables: { parentId }
+        variables: { id }
       }
     ]
   });
@@ -42,7 +43,7 @@ export default function Folders({data}) {
         FolderId: itemId
       }
     });
-    console.log(" --- Получен новый айдишник:",itemId);
+    console.log(" --- Получен новый айдишник:", itemId);
   };
   const updateOrCreateFolder = item => {
     // console.log(item.variables.id);
@@ -52,20 +53,21 @@ export default function Folders({data}) {
         return { variables: { name, parentId } };
       })();
       addFolder(newItem);
-      // console.log(newItem);
+      console.log("Добавляемые данные",newItem);
     } else {
-      console.log("Обновляемые данные",item);
+      console.log("Обновляемые данные", item);
       updateFolder(item);
     }
   };
-  let input; 
-  const items = data.folder.folders.map(({ id, name }) => (
+
+  const items = folder.folders.map(({ id, name }) => {
+    let input;
+    return (
       <div className={style.Item} key={id}>
         <input
           placeholder="Введите наименование"
           ref={node => {
             input = node;
-            console.log("Данные в инпуте:",input);
           }}
           className={style.Input}
           defaultValue={name}
@@ -73,10 +75,10 @@ export default function Folders({data}) {
         <button
           onClick={e => {
             //Проверка
-            // console.log(input.value);
+            console.log("Данные в инпуте:", input.value);
             e.preventDefault();
             updateOrCreateFolder({
-              variables: { id, name: input.value, parentId: data.folder.id }
+              variables: { id, name: input.value, parentId: folder.id }
             });
           }}
         >
@@ -92,16 +94,15 @@ export default function Folders({data}) {
         >
           Удалить
         </button>
-        <div onClick={() => handleClick(id)} className={style.InnerItem}></div>        
+        <div onClick={() => handleClick(id)} className={style.InnerItem}></div>
       </div>
-    ));
-
+    );
+  });
 
   return (
-    <div>
-       {items}
-       <button onClick={newFolder}>Добавить</button>
+    <div className={style.Content}>
+      {items}
+      <button onClick={newFolder}>Добавить</button>
     </div>
-  )
- ;
+  );
 }

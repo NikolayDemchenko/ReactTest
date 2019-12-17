@@ -5,9 +5,7 @@ import style from "./Window.module.css";
 import { useQuery } from "@apollo/react-hooks";
 import Content from "./Content/Content";
 import ParentFolders from "./Content/Folder/ParentFolders";
-import {
-  GET_FOLDER_ID,
-} from "./Content/Folder/FolderQueries";
+import {GET_FOLDER_ID} from "./Content/Folder/FolderQueries";
 const Window = () => {
   console.log("Рендеринг Window");
   // Генерация контента
@@ -21,7 +19,6 @@ const Window = () => {
       return <Content id={(id)} />;
     }
   };
-
   // Генерация слайдера
   const slideCount = 8;
   const SlideShow = () => (
@@ -37,10 +34,8 @@ const Window = () => {
     <div>
       <div className={style.Header}>
         <Slides />    
-      </div>
-      <div className={style.Content}>
-        <DataContent />
-      </div>
+      </div>   
+        <DataContent />     
     </div>
   );
 };

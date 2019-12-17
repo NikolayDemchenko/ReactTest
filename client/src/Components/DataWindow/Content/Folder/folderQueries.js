@@ -39,11 +39,11 @@ export const GET_FOLDER_BY_ID = gql`
         id
         parentId
       }
-      parents {
-        name
-        id
-        parentId
-      }
+      # parents {
+      #   name
+      #   id
+      #   parentId
+      # }
     }
   }
 `;

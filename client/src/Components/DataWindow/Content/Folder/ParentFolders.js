@@ -9,23 +9,24 @@ import {
   NEW_PARENT_FOLDER
 } from "./FolderQueries";
 
-export default function ParentFolders({parentId}) {
-
-    const client = useApolloClient(); 
+export default function ParentFolders({ parentId }) {
+  const client = useApolloClient();
   const handleClick = itemId => {
-    console.log(" --- Получен новый айдишник:",itemId);
+    console.log(" --- Получен новый айдишник:", itemId);
     client.writeData({
       data: {
         FolderId: itemId
       }
-    });   
-  };  
+    });
+  };
   const { loading, error, data } = useQuery(GET_FOLDER_CHILDS, {
     variables: { parentId }
   });
+  // console.log("parentId:", parentId);
+
   // Создание формы для добавления объекта Folder
   const [newParentFolder] = useMutation(NEW_PARENT_FOLDER, {
-    variables: { name: "", parentId}
+    variables: { name: "", parentId }
   });
 
   const [addFolder] = useMutation(ADD_FOLDER, {
@@ -34,7 +35,8 @@ export default function ParentFolders({parentId}) {
         query: GET_FOLDER_CHILDS,
         variables: { parentId }
       }
-    ]});
+    ]
+  });
   const [updateFolder] = useMutation(UPDATE_FOLDER);
   const [deleteFolder] = useMutation(DELETE_FOLDER, {
     refetchQueries: [
@@ -55,7 +57,7 @@ export default function ParentFolders({parentId}) {
         const { name, parentId } = item.variables;
         return { variables: { name, parentId } };
       })();
-      addFolder(newItem)
+      addFolder(newItem);
       // console.log(newItem);
     } else {
       // console.log(item);
@@ -65,12 +67,9 @@ export default function ParentFolders({parentId}) {
 
   const items = data.childFolders.map(({ id, name }) => {
     let input;
-  
-    return (    
-      <div
-        className={style.Item}
-        key={id}
-      >
+
+    return (
+      <div className={style.Item} key={id}>
         <input
           placeholder="Введите наименование"
           ref={node => {
@@ -85,7 +84,7 @@ export default function ParentFolders({parentId}) {
             // console.log(input.value);
             e.preventDefault();
             updateOrCreateFolder({
-              variables: {id, name: input.value, parentId: null }
+              variables: { id, name: input.value, parentId: null }
             });
           }}
         >
