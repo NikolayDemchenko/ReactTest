@@ -1,6 +1,8 @@
 import React from "react";
 import style from "../Content.module.css";
 import { useQuery, useMutation, useApolloClient } from "@apollo/react-hooks";
+import setFolderId from "Function/setFolderId";
+import updateOrCreateFolder from "Function/updateOrCreateFolder";
 import {
   GET_FOLDER_CHILDS,
   ADD_FOLDER,
@@ -11,14 +13,7 @@ import {
 
 export default function ParentFolders({ parentId }) {
   const client = useApolloClient();
-  const handleClick = itemId => {
-    console.log(" --- Получен новый айдишник:", itemId);
-    client.writeData({
-      data: {
-        FolderId: itemId
-      }
-    });
-  };
+
   const { loading, error, data } = useQuery(GET_FOLDER_CHILDS, {
     variables: { parentId }
   });
@@ -29,7 +24,7 @@ export default function ParentFolders({ parentId }) {
     variables: { name: "", parentId }
   });
 
-  const [addFolder] = useMutation(ADD_FOLDER, {
+  const [createFolder] = useMutation(ADD_FOLDER, {
     refetchQueries: [
       {
         query: GET_FOLDER_CHILDS,
@@ -49,22 +44,7 @@ export default function ParentFolders({ parentId }) {
 
   if (loading) return "Loading...";
   if (error) return `Error! ${error.message}`;
-
-  const updateOrCreateFolder = item => {
-    // console.log(item.variables.id);
-    if (item.variables.id === null) {
-      const newItem = (() => {
-        const { name, parentId } = item.variables;
-        return { variables: { name, parentId } };
-      })();
-      addFolder(newItem);
-      // console.log(newItem);
-    } else {
-      // console.log(item);
-      updateFolder(item);
-    }
-  };
-
+  
   const items = data.childFolders.map(({ id, name }) => {
     let input;
 
@@ -83,9 +63,8 @@ export default function ParentFolders({ parentId }) {
             //Проверка
             // console.log(input.value);
             e.preventDefault();
-            updateOrCreateFolder({
-              variables: { id, name: input.value, parentId: null }
-            });
+            updateOrCreateFolder(createFolder,updateFolder,{ id, name: input.value, parentId: null }
+            );
           }}
         >
           Применить
@@ -100,7 +79,7 @@ export default function ParentFolders({ parentId }) {
         >
           Удалить
         </button>
-        <div onClick={() => handleClick(id)} className={style.InnerItem}></div>
+        <div onClick={() => setFolderId(client,id)} className={style.InnerItem}></div>
       </div>
     );
   });

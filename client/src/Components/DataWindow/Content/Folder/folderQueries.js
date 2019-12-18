@@ -61,6 +61,7 @@ export const GET_FOLDER_BY_ID = gql`
 //     }
 //   }
 // `;
+
 // Создание формы для создания объекта Folder с передачей Folder
 export const NEW_FOLDER = gql`
   mutation NewFolder($folder:Folder,$name: String) {

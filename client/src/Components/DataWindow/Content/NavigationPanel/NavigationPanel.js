@@ -1,6 +1,6 @@
 import React from "react";
-import NvigationContent from "./Parents/Parents";
-import UndoArrow from "./UndoArrow/UndoArrow";
+import ParentsContainer from "./Parents/Parents";
+import HomeButton from "./HomeButton/HomeButton";
 import style from "./Navigation.module.css";
 
 const NavigationPanel = ({ folder }) => {
@@ -8,8 +8,8 @@ const NavigationPanel = ({ folder }) => {
   console.log("Рендеринг панели навигации:", folder.id);
   return (
     <div className={style.NavigationPanel}>
-      <UndoArrow folder={folder} />    
-      <NvigationContent folder={folder} />
+      <HomeButton folder={folder} />    
+      <ParentsContainer folder={folder} />
       <div className={style.OpenedItem}>{folder.name}</div>      
     </div>
   );

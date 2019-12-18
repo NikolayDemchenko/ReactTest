@@ -2,6 +2,7 @@ import React from "react";
 import { useApolloClient } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import style from "../../NavigationPanel/Navigation.module.css";
+import setFolderId from "Function/setFolderId";
 export default function NvigationContent({ folder }) {
   // Получение родителя открытой Folder
   const query = gql`
@@ -14,14 +15,6 @@ export default function NvigationContent({ folder }) {
     }
   `;
   const client  = useApolloClient();
-  const handleClick = itemId => {
-    client.writeData({
-      data: {
-        FolderId: itemId
-      }
-    });
-    console.log(" --- Получен новый айдишник:", itemId);
-  };
   const getFolderParents = (parents, folder) => {
     if (folder.parentId == null) {
       return parents;
@@ -41,10 +34,10 @@ export default function NvigationContent({ folder }) {
 
   const items = getFolderParents([], folder).map(({ id, name }) => {
     return (
-      <div onClick={() => handleClick(id)} className={style.Item} key={id}>
+      <div onClick={() => setFolderId(client,id)} className={style.Item} key={id}>
         {name}
       </div>
     );
   });
-  return <div className={style.ContentContainer}>{items}</div>;
+  return <div className={style.ParentsContainer}>{items}</div>;
 }
