@@ -1,7 +1,7 @@
 import React from "react";
 import Icon from "react-icons-kit";
 import { undo2 } from "react-icons-kit/icomoon/undo2";
-import style from "./Arrows.module.css";
+import style from "../Navigation.module.css";
 import {useApolloClient} from "@apollo/react-hooks";
 
 const UndoArrow = ({folder}) => {
@@ -10,7 +10,7 @@ const UndoArrow = ({folder}) => {
     const handleClick = () => {
       client.writeData({
         data: {
-          FolderId: folder.parentId
+          FolderId: null
         }
       });
       console.log("Возврат к:", folder.parentId);

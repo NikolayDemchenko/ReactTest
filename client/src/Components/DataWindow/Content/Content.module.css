@@ -2,6 +2,9 @@
   justify-content: center;
   display: flex;
   flex-wrap: wrap;
+  margin: 0 auto;
+  max-width: 960px;
+  margin-top: 10px;
 }
 .Item {
   cursor: pointer;
@@ -9,6 +12,7 @@
   color: aliceblue;
   background-color: #272e38;
   border-radius: 4px;
+
   margin: 6px;
   width: 460px;
   height: 248px;
@@ -20,14 +24,12 @@
 .Item:hover {
   background-color: #2e3a4be5;
   /* color: rgba(221, 239, 255, 0.5); */
-
 }
 .Item:active {
   /* background-color: #2e3a4b57; */
   color: rgba(221, 239, 255, 0.5);
-
 }
-.Input{
+.Input {
   color: #fff;
   background: transparent;
   border-color: rgba(51, 148, 238, 0.667);

@@ -1,9 +1,14 @@
 .Menu {
   height: 40px;
+  position: sticky;
   color: aliceblue;
   text-align: center;
   line-height: 40px;
-  background-color: #161a22df;
+  background-color: #1b1f27;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 101;
 }
 
 .Slide {

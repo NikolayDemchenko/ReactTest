@@ -33,7 +33,9 @@ const Window = () => {
   }
   return (
     <div>
-      <div className={style.Header}>
+      <div 
+      // className={style.Header}
+      >
         <Slides />    
       </div>   
         <DataContent />     
