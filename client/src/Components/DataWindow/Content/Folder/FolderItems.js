@@ -49,10 +49,9 @@ export default ({ folders, create, update, remove, newFolder }) => {
     );
   });
   return (
-    <div>
-      <div className={style.ContentContainer}>{items}</div>
-      <div className={style.ContentContainer}>
-      <PlusButton onClick={newFolder} /></div>    
+    <div className={style.ContentContainer}>
+      {items}
+      <PlusButton style={style.AddItem} onClick={newFolder} />
     </div>
   );
 };
