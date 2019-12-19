@@ -1,10 +1,10 @@
 import React from "react";
 import Icon from "react-icons-kit";
-import style from "./Buttons.module.css";
+import defaultStyle from "./Buttons.module.css";
 
-export default ({onClick,size,icon}) => { 
+export default ({onClick,size,icon,style=defaultStyle.Button}) => { 
   return (
-    <div onClick={onClick} className={style.Button}>
+    <div onClick={onClick} className={style}>
       <Icon size={size} icon={icon} />
     </div>
   );

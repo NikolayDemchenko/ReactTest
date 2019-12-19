@@ -1,6 +1,6 @@
 const Folders = require("./model");
 const typeDefs = require("./typeDefs");
-const {getParents} = require("./getParents");
+const {cascadeDelete} = require("./cascadeDelete");
 
 const resolvers = {
   Query: {
@@ -17,10 +17,7 @@ const resolvers = {
   Folder: {
     folders: ({ id }) => {
       return Folders.find({ parentId: id });
-    },
-    // parents: ({ parentId }) => {     
-    //   return getParents([], parentId, Folders);
-    // }
+    }
   },
   Mutation: {
     addFolder: async (_, { name, parentId }) => {
@@ -38,7 +35,7 @@ const resolvers = {
     },
     deleteFolder: async (_, { id }) => {
       try {
-        await Folders.findByIdAndDelete(id);
+        await cascadeDelete(id,Folders);
         return true;
       } catch (err) {
         throw err;

@@ -2,17 +2,18 @@
   min-width: 100%;
   display: flex;
   align-items: center;
-  height: 70px;
+  height: 72px;
   position: sticky;
   top: 40px;
   left: 0;
   right: 0;
   z-index: 101;
+  /* margin-top: 6px; */
   background-color: #3b485d;
+  /* border: 1px solid black; */
 }
 .ParentsContainer{ 
   /* background-color: #72777e; */
-  /* border: 1px solid black; */
   /* margin:0 auto; */
   display: flex;
   align-items: center;
@@ -27,17 +28,16 @@
   color: rgba(192, 220 , 255, 0.712); 
   border-radius: 2px;
   /* margin:  0 2px; */
-  width: 180px;
-  height: 58px;
+  width: 180px; 
 }
 .OpenedItem{
+  width: 178px;
   height: 56px;
-  border: 1px solid  rgba(192, 220 , 255, 0.712); 
+  border: 1px solid rgba(192, 220 , 255, 0.712); 
 }
 .Item {
-  border-right-color: #1f1e25e3; /* Цвет линии справа */
-  border-right-style: solid; /* Стиль линии */
-  border-right-width: 2px;
+  height: 58px;
+  border-right:1px solid rgba(192, 220 , 255, 0.712);
   background-color: #272e38;
 }
 
