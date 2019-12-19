@@ -1,22 +1,21 @@
 import React from "react";
 import Slider from "./WindowSlider";
-
 import style from "./Window.module.css";
 import { useQuery } from "@apollo/react-hooks";
 import Content from "./Content/Content";
 import ParentFolders from "./Content/Folder/ParentFolders";
-import {GET_FOLDER_ID} from "./Content/Folder/folderQueries";
+import { GET_FOLDER_ID } from "./Content/Folder/folderQueries";
 const Window = () => {
   console.log("Рендеринг Window");
   // Генерация контента
-  const id = useQuery(GET_FOLDER_ID).data.FolderId; 
+  const id = useQuery(GET_FOLDER_ID).data.FolderId;
   const DataContent = () => {
     if (id == null) {
-      console.log("Загрузка родительских папок:",id);
-      return <ParentFolders parentId={id}/>;
+      console.log("Загрузка родительских папок:", id);
+      return <ParentFolders parentId={id} />;
     } else {
-      console.log("Загрузка контента :",id);
-      return <Content id={(id)} />;
+      console.log("Загрузка контента :", id);
+      return <Content id={id} />;
       // return <ParentFolders parentId={id}/>;
     }
   };
@@ -33,12 +32,10 @@ const Window = () => {
   }
   return (
     <div>
-      <div 
-      // className={style.Header}
-      >
-        <Slides />    
-      </div>   
-        <DataContent />     
+      <div>
+        <Slides />
+      </div>
+      <DataContent />
     </div>
   );
 };

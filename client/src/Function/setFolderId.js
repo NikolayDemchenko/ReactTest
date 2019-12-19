@@ -1,7 +1,4 @@
-export default function setFolderId(client,arg){     client.writeData({
-    data: {
-      FolderId: arg
-    }
-  });
-  console.log("--- В FolderId передан: ", arg);
- };
+export default (client, FolderId)=> {
+  client.writeData({ data: { FolderId } });
+  console.log("--- В FolderId передан: ", FolderId);
+}

@@ -1,28 +1,20 @@
 import React from "react";
-import style from "../Content.module.css";
-import { useMutation, useApolloClient } from "@apollo/react-hooks";
-import setFolderId from "Function/setFolderId";
-import updateOrCreateFolder from "Function/updateOrCreateFolder";
+import { useMutation } from "@apollo/react-hooks";
+import FolderItems from "./FolderItems";
 import {
-  ADD_FOLDER,
+  GET_FOLDER_BY_ID,
   UPDATE_FOLDER,
+  ADD_FOLDER,
   DELETE_FOLDER,
-  NEW_FOLDER,
-  GET_FOLDER_BY_ID
+  NEW_FOLDER
 } from "./folderQueries";
 
-export default function Folders({ folder }) {
-  const client = useApolloClient();
-  console.log("Рендеринг Folders");
+export default function Folders({ folder }) {  
   const id = folder.id;
-  // console.log("Проверяемое:", parentId);
-
-  // Создание формы для добавления объекта Folder
   const [newFolder] = useMutation(NEW_FOLDER, {
-    variables: { folder, name: ""}
+    variables: { folder, name: "" }
   });
-
-  const [addFolder] = useMutation(ADD_FOLDER, {
+  const [createFolder] = useMutation(ADD_FOLDER, {
     refetchQueries: [
       {
         query: GET_FOLDER_BY_ID,
@@ -39,50 +31,14 @@ export default function Folders({ folder }) {
       }
     ]
   });
-  
-  const items = folder.folders.map(({ id, name }) => {
-    let input;
-    return (
-      <div className={style.Item} key={id}>
-        <input
-          placeholder="Введите наименование"
-          ref={node => {
-            input = node;
-          }}
-          className={style.Input}
-          defaultValue={name}
-        />
-        <button
-          onClick={e => {
-            //Проверка
-            console.log("Данные в инпуте:", input.value);
-            e.preventDefault();
-            updateOrCreateFolder(addFolder,updateFolder,{
-               id, name: input.value, parentId: folder.id 
-            });
-          }}
-        >
-          Применить
-        </button>
-        <button
-          onClick={e => {
-            //Проверка
-            console.log(input.value);
-            e.preventDefault();
-            deleteFolder({ variables: { id } });
-          }}
-        >
-          Удалить
-        </button>
-        <div onClick={() => setFolderId(client,id)} className={style.InnerItem}></div>
-      </div>
-    );
-  });
-
+  console.log("Рендеринг Folders");
   return (
-    <div className={style.Content}>
-      {items}
-      <button onClick={newFolder}>Добавить</button>
-    </div>
+    <FolderItems
+      folders={folder.folders}
+      create={createFolder}
+      update={updateFolder}
+      remove={deleteFolder}
+      newFolder={newFolder}
+    />
   );
 }
