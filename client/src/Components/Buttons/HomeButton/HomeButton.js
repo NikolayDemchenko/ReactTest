@@ -1,8 +1,9 @@
 import React from "react";
 import { home } from "react-icons-kit/icomoon/home";
 import Button from "Components/Buttons/Button";
+import style from "Components/Buttons/Buttons.module.css";
 
 
 export default ({ onClick }) => {
-  return <Button onClick={onClick} size={"3em"} icon={home} />;
+  return <Button style={style.Home} onClick={onClick} size={"3em"} icon={home} />;
 };

@@ -6,6 +6,7 @@ import setFolderId from "Function/setFolderId";
 import SaveButton from "Components/Buttons/SaveButton/SaveButton";
 import DeleteButton from "Components/Buttons/DeleteButton/DeleteButton";
 import PlusButton from "Components/Buttons/PlusButton/PlusButton";
+import styleButton from "Components/Buttons/Buttons.module.css";
 
 export default ({ folders, create, update, remove, newFolder }) => {
   const items = folders.map(({ id, name, parentId }) => {
@@ -21,7 +22,7 @@ export default ({ folders, create, update, remove, newFolder }) => {
           className={style.Input}
           defaultValue={name}
         />
-        <SaveButton
+        <SaveButton style={styleButton.Crud}
           onClick={e => {
             //Проверка
             console.log("Сохранено: ", input.value);
@@ -33,7 +34,7 @@ export default ({ folders, create, update, remove, newFolder }) => {
             });
           }}
         />
-        <DeleteButton
+        <DeleteButton style={styleButton.Crud}
           onClick={e => {
             //Проверка
             console.log("Удалено: ", input.value);

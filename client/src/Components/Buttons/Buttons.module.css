@@ -1,15 +1,36 @@
-.Button {
+.Default,.Home,.Crud {
   /* border: 1px solid rgba(192, 220 , 255, 0.712); */
-  margin-right: 10px;
   color: rgba(206, 224, 247, 0.931);
-  /* padding-top: 6px; */
   display: inline-block;
 }
-.Button:hover {
+.Default:hover,.Home:hover,.Crud:hover {
   cursor: pointer;
   color: aliceblue;
 }
-.Button:active {
+.Default:active,.Home:active,.Crud:active {
   transition: 0.1s;
   color: rgba(240, 248, 255, 0.198);
+}
+.Home {  
+  margin-right: 10px;
+  /* color:  #272e38; */
+  color:#616d81;
+}
+.Home:hover {
+  /* color: #2e3a4be5; */
+  color:#8a9ab1;
+}
+.Home:active {
+  /* color: #2e3a4b57; */
+  color:rgb(167, 184, 199);
+}
+.Crud {  
+  margin: 6px;
+  color:#616d81;
+}
+.Crud:hover {
+  color:#8a9ab1;
+}
+.Crud:active {  
+  color:rgb(167, 184, 199);
 }

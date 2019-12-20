@@ -35,7 +35,7 @@
 }
 .Item:active,.AddItem:active {
   background-color: #2e3a4b57;
-  color: rgba(221, 239, 255, 0.5);
+  color:rgb(167, 184, 199);
 }
 .Input {
   color: #fff;
