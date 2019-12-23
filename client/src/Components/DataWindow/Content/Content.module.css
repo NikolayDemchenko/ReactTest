@@ -1,12 +1,20 @@
 .ContentContainer{
-  /* border: 1px solid black; */
-  display: flex;
+  border: 1px solid black;
+  /* display: flex;
   flex-flow: row wrap;
-  justify-content: flex-start;
+  justify-content: center; */
   margin: 0 auto;
-  width: 960px;
+  display:grid;
+  justify-items: center;
+  grid-template-columns: 1fr 1fr;  
+  max-width: 800px;
   margin-top: 6px;
 }
+@media all and (max-width: 767px) {
+  .ContentContainer{    
+    grid-template-columns:  1fr;
+    }
+  }
 .Item,.AddItem {
   cursor: pointer;
   text-align: center;
@@ -14,7 +22,7 @@
   background-color: #272e38;
   border-radius: 4px;
   margin: 6px;
-  width: 460px;
+  width: 380px;
   height: 248px;
 }
 .AddItem {

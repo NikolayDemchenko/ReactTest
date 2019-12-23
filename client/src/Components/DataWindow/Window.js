@@ -34,7 +34,7 @@ const Window = () => {
     <div>
       <div>
         <Slides />
-      </div>
+      </div>      
       <DataContent />
     </div>
   );

@@ -14,9 +14,11 @@ export default function Content({ id }) {
   if (error) return `Error! ${error.message}`;
   console.log("Загрузка папок");
   return (
-    <div className={style.ContentContainer}>
+    <div>
       <NavigationPanel folder={data.folder} />
-      <Folders folder={data.folder} />
+      <div className={style.ContentContainer}>
+        <Folders folder={data.folder} />
+      </div>
     </div>
   );
 }

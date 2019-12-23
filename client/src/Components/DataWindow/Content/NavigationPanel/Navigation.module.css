@@ -10,7 +10,7 @@
   z-index: 101;
   /* margin-top: 6px; */
   background-color: #3b485d;
-  /* border: 1px solid black; */
+  border: 1px solid rgb(255, 40, 40);
 }
 .ParentsContainer{ 
   /* background-color: #72777e; */
