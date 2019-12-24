@@ -10,6 +10,13 @@ import styleButton from "Components/Buttons/Buttons.module.css";
 
 export default ({ folders, create, update, remove, newFolder }) => {
   const items = folders.map(({ id, name, parentId }) => {
+    const removeFolder=(id)=>{
+      if(id==null){
+        
+      } else{
+        remove({ variables: { id } });
+      }
+    }
     const client = useApolloClient();
     let input;
     return (
@@ -37,9 +44,9 @@ export default ({ folders, create, update, remove, newFolder }) => {
         <DeleteButton style={styleButton.Crud}
           onClick={e => {
             //Проверка
-            console.log("Удалено: ", input.value);
             e.preventDefault();
-            remove({ variables: { id } });
+            removeFolder(id)
+            console.log("Удалено: ", input.value);
           }}
         />
         <div

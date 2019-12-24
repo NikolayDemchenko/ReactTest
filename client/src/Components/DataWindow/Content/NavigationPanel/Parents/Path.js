@@ -3,7 +3,7 @@ import { useApolloClient } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import style from "../../NavigationPanel/Navigation.module.css";
 import setFolderId from "Function/setFolderId";
-export default function NvigationContent({ folder }) {
+export default function PathContent({ folder }) {
   // Получение родителя открытой Folder
   const query = gql`
     query GetParentFolderById($id: ID!) {
@@ -14,7 +14,7 @@ export default function NvigationContent({ folder }) {
       }
     }
   `;
-  const client  = useApolloClient();
+  const client = useApolloClient();
   const getFolderParents = (parents, folder) => {
     if (folder.parentId == null) {
       return parents;
@@ -34,10 +34,19 @@ export default function NvigationContent({ folder }) {
 
   const items = getFolderParents([], folder).map(({ id, name }) => {
     return (
-      <div onClick={() => setFolderId(client,id)} className={style.Item} key={id}>
+      <div
+        onClick={() => setFolderId(client, id)}
+        className={style.Item}
+        key={id}
+      >
         {name}
       </div>
     );
   });
-  return <div className={style.ParentsContainer}>{items}</div>;
+  return (
+    <div className={style.PathContainer}>
+      {items}
+      <div className={style.OpenedItem}>{folder.name}</div>
+    </div>
+  );
 }

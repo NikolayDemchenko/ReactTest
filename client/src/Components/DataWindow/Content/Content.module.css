@@ -1,16 +1,19 @@
 .ContentContainer{
-  border: 1px solid black;
-  /* display: flex;
-  flex-flow: row wrap;
-  justify-content: center; */
+  /* border: 1px solid black; */
   margin: 0 auto;
   display:grid;
   justify-items: center;
-  grid-template-columns: 1fr 1fr;  
-  max-width: 800px;
+  grid-template-columns:1fr 1fr 1fr;  
+  max-width: 1176px;
   margin-top: 6px;
 }
-@media all and (max-width: 767px) {
+@media all and (max-width: 1180px) {
+  .ContentContainer{    
+    max-width: 784px;
+    grid-template-columns: 1fr 1fr;
+    }
+  }
+@media all and (max-width: 784px) {
   .ContentContainer{    
     grid-template-columns:  1fr;
     }

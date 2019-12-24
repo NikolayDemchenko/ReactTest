@@ -1,50 +1,55 @@
-.NavigationPanel{
-  min-width: 100%;
+.NavigationPanel {
+  margin: 0 auto;
   display: flex;
   align-items: center;
   height: 72px;
+  max-width: 1176px;
+  justify-content: flex-start;
   position: sticky;
   top: 40px;
-  left: 0;
-  right: 0;
   z-index: 101;
-  /* margin-top: 6px; */
   background-color: #3b485d;
-  border: 1px solid rgb(255, 40, 40);
+  /* border: 1px solid rgb(255, 40, 40); */
 }
-.ParentsContainer{ 
-  /* background-color: #72777e; */
-  /* margin:0 auto; */
+@media all and (max-width: 1180px) {
+  .NavigationPanel {
+    max-width: 784px;
+  }
+}
+.PathContainer {
+  width: 100%;
   display: flex;
   align-items: center;
-  height:62px;
+  height: 62px;
+  /* border: 1px solid rgb(72, 40, 255); */
 }
-.OpenedItem,.Item{
+.OpenedItem,
+.Item {
   display: flex;
+  flex: 1;
+  max-width: 180px;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  text-align: center;
-  color: rgba(192, 220 , 255, 0.712); 
+  color: rgba(192, 220, 255, 0.712);
   border-radius: 2px;
-  /* margin:  0 2px; */
-  width: 180px; 
+  cursor: pointer;
+  min-width: 80px;
+  height: 58px;
 }
-.OpenedItem{
-  width: 178px;
+.OpenedItem {
+  min-width: 120px;
   height: 56px;
-  border: 1px solid rgba(192, 220 , 255, 0.712); 
+  border: 1px solid rgba(192, 220, 255, 0.712);
 }
 .Item {
-  height: 58px;
-  border-right:1px solid rgba(192, 220 , 255, 0.712);
+  border-right: 1px solid rgba(192, 220, 255, 0.712);
   background-color: #272e38;
 }
 
 .Item:hover {
   /* color: aliceblue;  */
-   background-color: #2e3a4be5;
-  }
+  background-color: #2e3a4be5;
+}
 .Item:active {
   background-color: rgba(240, 248, 255, 0.103);
   transition: 0.1s;

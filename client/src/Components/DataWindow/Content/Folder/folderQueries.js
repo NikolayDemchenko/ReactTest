@@ -41,26 +41,9 @@ export const GET_FOLDER_BY_ID = gql`
         id
         parentId
       }
-      # parents 
-      # {
-      #   name
-      #   id
-      #   parentId
-      # }
     }
   }
 `;
-
-// Создание формы для создания объекта Folder
-// export const NEW_FOLDER = gql`
-//   mutation NewFolder($id:ID,$name: String, $parentId: ID) {
-//     newFolder(id:$id, name: $name, parentId: $parentId) @client {
-//       id
-//       name
-//       parentId
-//     }
-//   }
-// `;
 
 // Создание формы для создания объекта Folder с передачей Folder
 export const NEW_FOLDER = gql`
