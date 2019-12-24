@@ -12,7 +12,7 @@ import {
 export default function Folders({ folder }) {  
   const id = folder.id;
   const [newFolder] = useMutation(NEW_FOLDER, {
-    variables: { folder, name: "" }
+    variables: { folder}
   });
   const [createFolder] = useMutation(ADD_FOLDER, {
     refetchQueries: [

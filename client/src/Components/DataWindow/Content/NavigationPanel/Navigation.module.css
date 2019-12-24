@@ -28,11 +28,11 @@
   display: flex;
   flex: 1;
   max-width: 180px;
+  text-align: center;
   align-items: center;
   justify-content: center;
   color: rgba(192, 220, 255, 0.712);
   border-radius: 2px;
-  cursor: pointer;
   min-width: 80px;
   height: 58px;
 }
@@ -42,15 +42,13 @@
   border: 1px solid rgba(192, 220, 255, 0.712);
 }
 .Item {
+  cursor: pointer;
   border-right: 1px solid rgba(192, 220, 255, 0.712);
   background-color: #272e38;
 }
-
-.Item:hover {
-  /* color: aliceblue;  */
-  background-color: #2e3a4be5;
-}
 .Item:active {
-  background-color: rgba(240, 248, 255, 0.103);
+  max-width: 179px;
+  height: 56px;
+  border: 1px solid rgba(192, 220, 255, 0.712);
   transition: 0.1s;
 }

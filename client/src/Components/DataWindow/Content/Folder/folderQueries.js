@@ -47,10 +47,9 @@ export const GET_FOLDER_BY_ID = gql`
 
 // Создание формы для создания объекта Folder с передачей Folder
 export const NEW_FOLDER = gql`
-  mutation NewFolder($folder:Folder,$name: String) {
-    newFolder(folder:$folder, name: $name) @client {
-      id
-      name
+  mutation NewFolder($folder:Folder) {
+    newFolder(folder:$folder) @client {
+      id    
       parentId
     }
   }
