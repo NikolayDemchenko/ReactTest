@@ -1,5 +1,5 @@
 import React from "react";
-import PathContainer from "./Parents/Path";
+import Path from "./Parents/Path";
 import HomeButton from "Components/Buttons/HomeButton/HomeButton";
 import style from "./Navigation.module.css";
 import { useApolloClient } from "@apollo/react-hooks";
@@ -11,7 +11,7 @@ const NavigationPanel = ({ folder }) => {
   return (
     <div className={style.NavigationPanel}>
       <HomeButton onClick={() => setFolderId(client, null)}/>    
-      <PathContainer folder={folder} />
+      <Path folder={folder} />
     </div>
   );
 };

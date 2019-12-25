@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import style from "../Content.module.css";
 import updateOrCreateFolder from "Function/updateOrCreateFolder";
 import setFolderId from "Function/setFolderId";
@@ -14,8 +14,11 @@ export default ({
   update,
   remove,
   newFolder,
-  removeNewFolder
+  refetchFolder
 }) => {
+  useEffect(() => {
+    return refetchFolder;
+  },[]);
   const AddButton = () => {
     const itemId = folders.length !== 0 ? folders[folders.length - 1].id : 1;
     if (itemId !== null) {
@@ -35,7 +38,7 @@ export default ({
   const items = folders.map(({ id, name, parentId }) => {
     const removeFolder = id => {
       if (id == null) {
-        removeNewFolder({ variables: { id } });
+        refetchFolder();
       } else {
         remove({ variables: { id } });
       }
@@ -45,6 +48,7 @@ export default ({
     return (
       <div className={style.Item} key={id}>
         <input
+        // onChange={}
           placeholder="Введите наименование"
           ref={node => {
             input = node;     
@@ -76,7 +80,8 @@ export default ({
           }}
         />
         <div
-          onClick={() => setFolderId(client, id)}
+          onClick={() => {         
+            return setFolderId(client, id)}}
           className={style.InnerItem}
         ></div>
       </div>

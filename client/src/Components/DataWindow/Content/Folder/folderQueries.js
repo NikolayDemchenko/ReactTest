@@ -20,9 +20,9 @@ export const GET_ALL_FOLDERS = gql`
   }
 `;
 // Получить все дочерние Folders
-export const GET_FOLDER_CHILDS = gql`
-  query ChildFolders($parentId: ID) {
-    childFolders(parentId: $parentId) {
+export const GET_PARENT_FOLDERS = gql`
+  query ParentFolders($parentId: ID) {
+    parentFolders(parentId: $parentId) {
       id
       name
       parentId
@@ -88,9 +88,9 @@ export const DELETE_FOLDER = gql`
   }
 `;
 // Фейковый запрос для рефетча мутации, при удалении не сохраненного объекта
-export const REMOVE_NEW_FOLDER = gql`
-  mutation RemoveNewFolder{
-    removeNewFolder @client
+export const REFETCH_FOLDER = gql`
+  mutation RefetchFolder{
+    refetchFolder @client
   }
 `;
 

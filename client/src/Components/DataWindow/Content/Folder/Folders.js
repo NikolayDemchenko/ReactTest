@@ -2,7 +2,7 @@ import React from "react";
 import { useMutation, useApolloClient} from "@apollo/react-hooks";
 import FolderItems from "./FolderItems";
 import {
-  REMOVE_NEW_FOLDER,
+  REFETCH_FOLDER,
   GET_FOLDER_BY_ID,
   UPDATE_FOLDER,
   ADD_FOLDER,
@@ -34,7 +34,7 @@ export default function Folders({ folder }) {
       }
     ]
   });
-  const [removeNewFolder] = useMutation(REMOVE_NEW_FOLDER, {
+  const [refetchFolder] = useMutation(REFETCH_FOLDER, {
     refetchQueries: [
       {
         query: GET_FOLDER_BY_ID,
@@ -51,7 +51,7 @@ export default function Folders({ folder }) {
       update={updateFolder}
       remove={deleteFolder}
       newFolder={newFolder}
-      removeNewFolder={removeNewFolder}
+      refetchFolder={refetchFolder}
     />
   );
 }

@@ -4,7 +4,7 @@ module.exports = gql`
   type Query {
     allFolders: [Folder]!
     folder(id: ID!): Folder
-    childFolders(parentId: ID): [Folder]!
+    parentFolders(parentId: ID): [Folder]!
   }
   type Folder {
     id: ID!

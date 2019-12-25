@@ -1,11 +1,11 @@
-import { GET_FOLDER_CHILDS as query  } from "./folderQueries";
+import { GET_PARENT_FOLDERS as query  } from "./folderQueries";
 
 export default {
   Mutation: {
     newParentFolder: (_root, { name, parentId }, { cache }) => {
       console.log("parentId:", parentId);
 
-      let { childFolders } = cache.readQuery({
+      let { parentFolders } = cache.readQuery({
         query,
         variables: { parentId }
       });
@@ -18,7 +18,7 @@ export default {
       cache.writeQuery({ query,
         variables: { parentId },
         data:{
-        childFolders: [...childFolders, newFolder]
+          parentFolders: [...parentFolders, newFolder]
       } });
       return newFolder;
     }

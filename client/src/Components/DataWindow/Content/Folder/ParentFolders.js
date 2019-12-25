@@ -2,8 +2,8 @@ import React from "react";
 import { useQuery, useMutation, useApolloClient} from "@apollo/react-hooks";
 import FolderItems from "./FolderItems";
 import {
-  REMOVE_NEW_FOLDER,
-  GET_FOLDER_CHILDS,
+  REFETCH_FOLDER,
+  GET_PARENT_FOLDERS,
   UPDATE_FOLDER,
   ADD_FOLDER,
   DELETE_FOLDER,
@@ -12,7 +12,7 @@ import {
 
 export default function ParentFolders({ parentId }) {
   const client = useApolloClient();
-  const { loading, error, data } = useQuery(GET_FOLDER_CHILDS, {
+  const { loading, error, data } = useQuery(GET_PARENT_FOLDERS, {
     variables: { parentId }
   });
   const [newParentFolder] = useMutation(NEW_PARENT_FOLDER, {
@@ -21,7 +21,7 @@ export default function ParentFolders({ parentId }) {
   const [createFolder] = useMutation(ADD_FOLDER, {
     refetchQueries: [
       {
-        query: GET_FOLDER_CHILDS,
+        query: GET_PARENT_FOLDERS,
         variables: { parentId }
       }
     ]
@@ -30,15 +30,15 @@ export default function ParentFolders({ parentId }) {
   const [deleteFolder] = useMutation(DELETE_FOLDER, {
     refetchQueries: [
       {
-        query: GET_FOLDER_CHILDS,
+        query: GET_PARENT_FOLDERS,
         variables: { parentId }
       }
     ]
   });
-  const [removeNewFolder] = useMutation(REMOVE_NEW_FOLDER, {
+  const [refetchFolder] = useMutation(REFETCH_FOLDER, {
     refetchQueries: [
       {
-        query: GET_FOLDER_CHILDS,
+        query: GET_PARENT_FOLDERS,
         variables: { parentId }
       }
     ]
@@ -50,12 +50,12 @@ export default function ParentFolders({ parentId }) {
   return (
     <FolderItems
     client={client}
-      folders={data.childFolders}
+      folders={data.parentFolders}
       create={createFolder}
       update={updateFolder}
       remove={deleteFolder}
       newFolder={newParentFolder}
-      removeNewFolder={removeNewFolder}
+      refetchFolder={refetchFolder}
     />
   );
 }

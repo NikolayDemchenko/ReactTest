@@ -10,7 +10,7 @@ const resolvers = {
     folder: (_, { id }) => {
       return Folders.findById(id);
     },
-    childFolders: (_, { parentId }) => {
+    parentFolders: (_, { parentId }) => {
       return Folders.find({ parentId });
     }
   },
