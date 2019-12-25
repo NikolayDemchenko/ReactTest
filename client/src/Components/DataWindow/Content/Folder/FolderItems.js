@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import style from "../Content.module.css";
 import updateOrCreateFolder from "Function/updateOrCreateFolder";
 import setFolderId from "Function/setFolderId";
@@ -18,7 +18,7 @@ export default ({
 }) => {
   useEffect(() => {
     return refetchFolder;
-  },[]);
+  }, [refetchFolder]);
   const AddButton = () => {
     const itemId = folders.length !== 0 ? folders[folders.length - 1].id : 1;
     if (itemId !== null) {
@@ -43,15 +43,27 @@ export default ({
         remove({ variables: { id } });
       }
     };
-    let input;    
+    const ClickedDiv = () => {
+      if (id !== null) {
+        return (
+          <div
+            onClick={() => setFolderId(client, id)}
+            className={style.InnerItem}
+          ></div>
+        );
+      } else {
+        return <div />;
+      }
+    };
+    let input;
     console.log("Имя: ", name);
     return (
       <div className={style.Item} key={id}>
         <input
-        // onChange={}
+          // onChange={}
           placeholder="Введите наименование"
           ref={node => {
-            input = node;     
+            input = node;
           }}
           className={style.Input}
           defaultValue={name}
@@ -61,7 +73,7 @@ export default ({
           style={styleButton.Crud}
           onClick={e => {
             //Проверка
-            console.log("Сохранено: ", input.value);
+            console.log("Нажата кнопка сохранить: ", input.value);
             e.preventDefault();
             updateOrCreateFolder(create, update, {
               id,
@@ -79,11 +91,7 @@ export default ({
             console.log("Удалено: ", input.value);
           }}
         />
-        <div
-          onClick={() => {         
-            return setFolderId(client, id)}}
-          className={style.InnerItem}
-        ></div>
+        <ClickedDiv />
       </div>
     );
   });
