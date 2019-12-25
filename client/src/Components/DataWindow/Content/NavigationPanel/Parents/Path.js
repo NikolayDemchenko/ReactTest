@@ -27,7 +27,6 @@ export default function PathContent({ folder }) {
       return getFolderParents(parents, data.folder);
     }
   };
-  const parents = getFolderParents([], folder);
 
   // console.log("Открыта папка:", folder.name);
   // console.log("Родители:", parents);

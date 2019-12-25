@@ -1,7 +1,8 @@
 import React from "react";
-import { useQuery, useMutation} from "@apollo/react-hooks";
+import { useQuery, useMutation, useApolloClient} from "@apollo/react-hooks";
 import FolderItems from "./FolderItems";
 import {
+  REMOVE_NEW_FOLDER,
   GET_FOLDER_CHILDS,
   UPDATE_FOLDER,
   ADD_FOLDER,
@@ -10,6 +11,7 @@ import {
 } from "./folderQueries";
 
 export default function ParentFolders({ parentId }) {
+  const client = useApolloClient();
   const { loading, error, data } = useQuery(GET_FOLDER_CHILDS, {
     variables: { parentId }
   });
@@ -33,17 +35,27 @@ export default function ParentFolders({ parentId }) {
       }
     ]
   });
+  const [removeNewFolder] = useMutation(REMOVE_NEW_FOLDER, {
+    refetchQueries: [
+      {
+        query: GET_FOLDER_CHILDS,
+        variables: { parentId }
+      }
+    ]
+  });
   if (loading) return "Loading...";
   if (error) return `Error! ${error.message}`;
 
   console.log("Рендеринг ParentFolders");
   return (
     <FolderItems
+    client={client}
       folders={data.childFolders}
       create={createFolder}
       update={updateFolder}
       remove={deleteFolder}
       newFolder={newParentFolder}
+      removeNewFolder={removeNewFolder}
     />
   );
 }

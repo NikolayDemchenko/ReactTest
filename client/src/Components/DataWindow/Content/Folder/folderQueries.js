@@ -25,7 +25,7 @@ export const GET_FOLDER_CHILDS = gql`
     childFolders(parentId: $parentId) {
       id
       name
-      parentId     
+      parentId
     }
   }
 `;
@@ -47,11 +47,8 @@ export const GET_FOLDER_BY_ID = gql`
 
 // Создание формы для создания объекта Folder с передачей Folder
 export const NEW_FOLDER = gql`
-  mutation NewFolder($folder:Folder) {
-    newFolder(folder:$folder) @client {
-      id    
-      parentId
-    }
+  mutation NewFolder($folder: Folder) {
+    newFolder(folder: $folder) @client 
   }
 `;
 // Создание формы для создания объекта ParentFolder
@@ -88,6 +85,12 @@ export const UPDATE_FOLDER = gql`
 export const DELETE_FOLDER = gql`
   mutation DeleteFolder($id: ID!) {
     deleteFolder(id: $id)
+  }
+`;
+// Фейковый запрос для рефетча мутации, при удалении не сохраненного объекта
+export const REMOVE_NEW_FOLDER = gql`
+  mutation RemoveNewFolder{
+    removeNewFolder @client
   }
 `;
 

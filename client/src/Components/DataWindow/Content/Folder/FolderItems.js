@@ -1,35 +1,60 @@
 import React from "react";
 import style from "../Content.module.css";
 import updateOrCreateFolder from "Function/updateOrCreateFolder";
-import { useApolloClient } from "@apollo/react-hooks";
 import setFolderId from "Function/setFolderId";
 import SaveButton from "Components/Buttons/SaveButton/SaveButton";
 import DeleteButton from "Components/Buttons/DeleteButton/DeleteButton";
 import PlusButton from "Components/Buttons/PlusButton/PlusButton";
 import styleButton from "Components/Buttons/Buttons.module.css";
 
-export default ({ folders, create, update, remove, newFolder }) => {
+export default ({
+  client,
+  folders,
+  create,
+  update,
+  remove,
+  newFolder,
+  removeNewFolder
+}) => {
+  const AddButton = () => {
+    const itemId = folders.length !== 0 ? folders[folders.length - 1].id : 1;
+    if (itemId !== null) {
+      return (
+        <PlusButton
+          style={style.AddItem}
+          onClick={e => {
+            e.preventDefault();
+            newFolder();
+          }}
+        />
+      );
+    } else {
+      return <div />;
+    }
+  };
   const items = folders.map(({ id, name, parentId }) => {
-    const removeFolder=(id)=>{
-      if(id==null){
-        
-      } else{
+    const removeFolder = id => {
+      if (id == null) {
+        removeNewFolder({ variables: { id } });
+      } else {
         remove({ variables: { id } });
       }
-    }
-    const client = useApolloClient();
-    let input;
+    };
+    let input;    
+    console.log("Имя: ", name);
     return (
       <div className={style.Item} key={id}>
         <input
           placeholder="Введите наименование"
           ref={node => {
-            input = node;
+            input = node;     
           }}
           className={style.Input}
           defaultValue={name}
         />
-        <SaveButton style={styleButton.Crud}
+        <SaveButton
+          value={name}
+          style={styleButton.Crud}
           onClick={e => {
             //Проверка
             console.log("Сохранено: ", input.value);
@@ -41,11 +66,12 @@ export default ({ folders, create, update, remove, newFolder }) => {
             });
           }}
         />
-        <DeleteButton style={styleButton.Crud}
+        <DeleteButton
+          style={styleButton.Crud}
           onClick={e => {
             //Проверка
             e.preventDefault();
-            removeFolder(id)
+            removeFolder(id);
             console.log("Удалено: ", input.value);
           }}
         />
@@ -59,7 +85,7 @@ export default ({ folders, create, update, remove, newFolder }) => {
   return (
     <div className={style.ContentContainer}>
       {items}
-      <PlusButton style={style.AddItem} onClick={newFolder} />
+      <AddButton />
     </div>
   );
 };
