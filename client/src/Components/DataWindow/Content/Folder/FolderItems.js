@@ -7,15 +7,14 @@ import DeleteButton from "Components/Buttons/DeleteButton/DeleteButton";
 import PlusButton from "Components/Buttons/PlusButton/PlusButton";
 import styleButton from "Components/Buttons/Buttons.module.css";
 
-export default ({
-  client,
-  folders,
-  create,
-  update,
-  remove,
-  newFolder,
-  refetchFolder
-}) => {
+export default ({ client, folders, templates, folderFunctions }) => {
+  const {
+    createFolder,
+    updateFolder,
+    deleteFolder,
+    newFolder,
+    refetchFolder
+  } = folderFunctions;
   useEffect(() => {
     return refetchFolder;
   }, [refetchFolder]);
@@ -35,12 +34,13 @@ export default ({
       return <div />;
     }
   };
-  const items = folders.map(({ id, name, parentId }) => {
+
+  const folderItems = folders.map(({ id, name, parentId }) => {
     const removeFolder = id => {
       if (id == null) {
         refetchFolder();
       } else {
-        remove({ variables: { id } });
+        deleteFolder({ variables: { id } });
       }
     };
     const ClickedDiv = () => {
@@ -75,7 +75,7 @@ export default ({
             //Проверка
             console.log("Нажата кнопка сохранить: ", input.value);
             e.preventDefault();
-            updateOrCreateFolder(create, update, {
+            updateOrCreateFolder(createFolder, updateFolder, {
               id,
               name: input.value,
               parentId
@@ -95,8 +95,25 @@ export default ({
       </div>
     );
   });
+  const templateItems =templates!==undefined? templates.map(({ id, name, folderId }) => {
+    return (
+      <div className={style.Item} key={id}>
+        <input    
+          placeholder="Введите наименование"   
+          className={style.Input}
+          defaultValue={name}
+        />
+      </div>
+    );
+  }):[];
+const items=[...folderItems,...templateItems]
+items.sort((prev, next) => {
+  if ( prev.key < next.key ) return -1;
+  if ( prev.key < next.key ) return 1;
+})
+console.log("items:",items[0]);
   return (
-    <div className={style.ContentContainer}>
+    <div className={style.ContentContainer}>    
       {items}
       <AddButton />
     </div>

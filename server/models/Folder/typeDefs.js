@@ -11,6 +11,7 @@ module.exports = gql`
     name: String!
     parentId: ID
     folders: [Folder]
+    templates:[Template]
     # parents:[Folder]
   }
   type Mutation {

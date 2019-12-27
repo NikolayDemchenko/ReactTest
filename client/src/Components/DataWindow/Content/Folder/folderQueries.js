@@ -40,7 +40,12 @@ export const GET_FOLDER_BY_ID = gql`
         name
         id
         parentId
-      }
+      },
+      templates{
+      name
+      id
+      folderId
+    }
     }
   }
 `;

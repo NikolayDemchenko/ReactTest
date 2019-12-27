@@ -45,17 +45,19 @@ export default function ParentFolders({ parentId }) {
   });
   if (loading) return "Loading...";
   if (error) return `Error! ${error.message}`;
-
+  const folderFunctions = {
+    createFolder,
+    updateFolder,
+    deleteFolder,
+    newFolder:newParentFolder,
+    refetchFolder
+  };
   console.log("Рендеринг ParentFolders");
   return (
     <FolderItems
     client={client}
       folders={data.parentFolders}
-      create={createFolder}
-      update={updateFolder}
-      remove={deleteFolder}
-      newFolder={newParentFolder}
-      refetchFolder={refetchFolder}
+      folderFunctions={folderFunctions}
     />
   );
 }

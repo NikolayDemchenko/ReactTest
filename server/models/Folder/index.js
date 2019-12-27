@@ -1,4 +1,5 @@
 const Folders = require("./model");
+const Templates = require("../Template/model");
 const typeDefs = require("./typeDefs");
 const {cascadeDelete} = require("./cascadeDelete");
 
@@ -17,6 +18,9 @@ const resolvers = {
   Folder: {
     folders: ({ id }) => {
       return Folders.find({ parentId: id });
+    },
+    templates:({ id })=>{
+      return Templates.find({ folderId: id });
     }
   },
   Mutation: {

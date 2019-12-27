@@ -15,7 +15,7 @@ const startServer = async () => {
     ]
   });
   server.applyMiddleware({ app, path: "/graphql" });
- 
+ const cloudURI="mongodb+srv://MainAdmin:123454321@clustermongodb-vzdz7.mongodb.net/test?retryWrites=true&w=majority"
   const localURI = "mongodb://localhost:27017/LocalMongoBase";
 
   await mongoose.connect(localURI, { useUnifiedTopology: true, useNewUrlParser: true, useFindAndModify: false }, function (err) {
