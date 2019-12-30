@@ -1,5 +1,5 @@
 import React from "react";
-import { useQuery, useMutation, useApolloClient} from "@apollo/react-hooks";
+import { useQuery, useMutation} from "@apollo/react-hooks";
 import FolderItems from "./FolderItems";
 import {
   REFETCH_FOLDER,
@@ -10,9 +10,8 @@ import {
   NEW_PARENT_FOLDER
 } from "./folderQueries";
 
-export default function ParentFolders({ parentId }) {
-  const client = useApolloClient();
-  const { loading, error, data } = useQuery(GET_PARENT_FOLDERS, {
+export default ({ parentId,style })=> { 
+  const { loading, error, data, client } = useQuery(GET_PARENT_FOLDERS, {
     variables: { parentId }
   });
   const [newParentFolder] = useMutation(NEW_PARENT_FOLDER, {
@@ -55,6 +54,7 @@ export default function ParentFolders({ parentId }) {
   console.log("Рендеринг ParentFolders");
   return (
     <FolderItems
+    styles={style}
     client={client}
       folders={data.parentFolders}
       folderFunctions={folderFunctions}

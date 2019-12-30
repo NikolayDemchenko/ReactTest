@@ -1,5 +1,5 @@
 import React from "react";
-import { useMutation, useApolloClient } from "@apollo/react-hooks";
+import { useMutation} from "@apollo/react-hooks";
 import FolderItems from "./FolderItems";
 import {
   REFETCH_FOLDER,
@@ -10,12 +10,11 @@ import {
   NEW_FOLDER
 } from "./folderQueries";
 
-export default function Folders({ folder }) {
+export default({ folder,client })=> {
   const id = folder.id;
   const [newFolder] = useMutation(NEW_FOLDER, {
     variables: { folder }
-  });
-  const client = useApolloClient();
+  }); 
   const [createFolder] = useMutation(ADD_FOLDER, {
     refetchQueries: [
       {

@@ -1,13 +1,19 @@
 import React, { useEffect } from "react";
-import style from "../Content.module.css";
+import styles from "./Folder.module.css";
 import updateOrCreateFolder from "Function/updateOrCreateFolder";
-import setFolderId from "Function/setFolderId";
+import setItemId from "Function/setItemId";
 import SaveButton from "Components/Buttons/SaveButton/SaveButton";
 import DeleteButton from "Components/Buttons/DeleteButton/DeleteButton";
 import PlusButton from "Components/Buttons/PlusButton/PlusButton";
 import styleButton from "Components/Buttons/Buttons.module.css";
 
-export default ({ client, folders, templates, folderFunctions }) => {
+export default ({
+  style = styles,
+  client,
+  folders,
+  templates,
+  folderFunctions
+}) => {
   const {
     createFolder,
     updateFolder,
@@ -15,6 +21,7 @@ export default ({ client, folders, templates, folderFunctions }) => {
     newFolder,
     refetchFolder
   } = folderFunctions;
+
   useEffect(() => {
     return refetchFolder;
   }, [refetchFolder]);
@@ -47,7 +54,7 @@ export default ({ client, folders, templates, folderFunctions }) => {
       if (id !== null) {
         return (
           <div
-            onClick={() => setFolderId(client, id)}
+            onClick={() => setItemId(client, id)}
             className={style.InnerItem}
           ></div>
         );
@@ -60,7 +67,6 @@ export default ({ client, folders, templates, folderFunctions }) => {
     return (
       <div className={style.Item} key={id}>
         <input
-          // onChange={}
           placeholder="Введите наименование"
           ref={node => {
             input = node;
@@ -95,25 +101,29 @@ export default ({ client, folders, templates, folderFunctions }) => {
       </div>
     );
   });
-  const templateItems =templates!==undefined? templates.map(({ id, name, folderId }) => {
-    return (
-      <div className={style.Item} key={id}>
-        <input    
-          placeholder="Введите наименование"   
-          className={style.Input}
-          defaultValue={name}
-        />
-      </div>
-    );
-  }):[];
-const items=[...folderItems,...templateItems]
-items.sort((prev, next) => {
-  if ( prev.key < next.key ) return -1;
-  if ( prev.key < next.key ) return 1;
-})
-console.log("items:",items[0]);
+  const templateItems =
+    templates !== undefined
+      ? templates.map(({ id, name, folderId }) => {
+          return (
+            <div className={style.Item} key={id}>
+              <input
+                placeholder="Введите наименование"
+                className={style.Input}
+                defaultValue={name}
+              />
+            </div>
+          );
+        })
+      : [];
+  const items = [...folderItems, ...templateItems];
+  // Сортировка
+  // items.sort((prev, next) => {
+  //   if ( prev.key < next.key ) return -1;
+  //   if ( prev.key < next.key ) return 1;
+  // })
+  console.log("items:", items[0]);
   return (
-    <div className={style.ContentContainer}>    
+    <div className={style.ContentContainer}>
       {items}
       <AddButton />
     </div>

@@ -16,7 +16,8 @@ const client = new ApolloClient({
 });
 cache.writeData({
   data: {
-    FolderId: null
+    ItemType:"Folder",
+    ItemId: null
   }
 });
 

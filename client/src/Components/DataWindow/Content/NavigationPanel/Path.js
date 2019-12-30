@@ -1,8 +1,9 @@
 import React from "react";
 import { useApolloClient } from "@apollo/react-hooks";
 import gql from "graphql-tag";
-import style from "../../NavigationPanel/Navigation.module.css";
-import setFolderId from "Function/setFolderId";
+import style from "./Navigation.module.css";
+import setItemId from "Function/setItemId";
+import HomeButton from "Components/Buttons/HomeButton/HomeButton";
 export default function PathContent({ folder }) {
   // Получение родителя открытой Folder
   const query = gql`
@@ -33,7 +34,7 @@ export default function PathContent({ folder }) {
   const items = getFolderParents([], folder).map(({ id, name }) => {
     return (
       <div
-        onClick={() => setFolderId(client, id)}
+        onClick={() => setItemId(client, id)}
         className={style.Item}
         key={id}
       >
@@ -43,6 +44,7 @@ export default function PathContent({ folder }) {
   });
   return (
     <div className={style.PathContainer}>
+      <HomeButton onClick={() => setItemId(client, null)}/> 
       {items}
       <div className={style.OpenedItem}>{folder.name}</div>
     </div>
