@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import styles from "./Folder.module.css";
 import updateOrCreateFolder from "Function/updateOrCreateFolder";
-import setItemId from "Function/setItemId";
+import setItem from "Function/setItem";
 import SaveButton from "Components/Buttons/SaveButton/SaveButton";
 import DeleteButton from "Components/Buttons/DeleteButton/DeleteButton";
-import PlusButton from "Components/Buttons/PlusButton/PlusButton";
+import AddButton from "Components/Buttons/PlusButton/AddButton";
+import ClickedDiv from "Components/ClickedDiv";
 import styleButton from "Components/Buttons/Buttons.module.css";
 
 export default ({
@@ -12,36 +13,19 @@ export default ({
   client,
   folders,
   templates,
-  folderFunctions
-}) => {
-  const {
+  folderFunctions:{
     createFolder,
     updateFolder,
     deleteFolder,
     newFolder,
     refetchFolder
-  } = folderFunctions;
+  }
+}) => {  
 
   useEffect(() => {
     return refetchFolder;
   }, [refetchFolder]);
-  const AddButton = () => {
-    const itemId = folders.length !== 0 ? folders[folders.length - 1].id : 1;
-    if (itemId !== null) {
-      return (
-        <PlusButton
-          style={style.AddItem}
-          onClick={e => {
-            e.preventDefault();
-            newFolder();
-          }}
-        />
-      );
-    } else {
-      return <div />;
-    }
-  };
-
+  
   const folderItems = folders.map(({ id, name, parentId }) => {
     const removeFolder = id => {
       if (id == null) {
@@ -50,18 +34,10 @@ export default ({
         deleteFolder({ variables: { id } });
       }
     };
-    const ClickedDiv = () => {
-      if (id !== null) {
-        return (
-          <div
-            onClick={() => setItemId(client, id)}
-            className={style.InnerItem}
-          ></div>
-        );
-      } else {
-        return <div />;
-      }
-    };
+    const FolderClick=(id,type)=>{
+      setItem(client, id,type)
+    }
+
     let input;
     console.log("Имя: ", name);
     return (
@@ -97,7 +73,7 @@ export default ({
             console.log("Удалено: ", input.value);
           }}
         />
-        <ClickedDiv />
+        <ClickedDiv ClickHandler={FolderClick} arg={id} style={style.InnerItem}/>
       </div>
     );
   });
@@ -125,7 +101,10 @@ export default ({
   return (
     <div className={style.ContentContainer}>
       {items}
-      <AddButton />
+      <AddButton items={folders} style={style.AddItem} onClick={e => {
+            e.preventDefault();
+            newFolder();
+          }} />
     </div>
   );
 };

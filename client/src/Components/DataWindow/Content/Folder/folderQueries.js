@@ -21,7 +21,7 @@ export const GET_ALL_FOLDERS = gql`
   }
 `;
 // Получить все дочерние Folders
-export const GET_PARENT_FOLDERS = gql`
+export const GET_FOLDERS_BY_PARENTID = gql`
   query ParentFolders($parentId: ID) {
     parentFolders(parentId: $parentId) {
       id

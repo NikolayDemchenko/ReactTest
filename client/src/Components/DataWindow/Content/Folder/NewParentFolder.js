@@ -1,4 +1,4 @@
-import { GET_PARENT_FOLDERS as query  } from "./folderQueries";
+import { GET_FOLDERS_BY_PARENTID as query  } from "./folderQueries";
 
 export default {
   Mutation: {
@@ -20,7 +20,7 @@ export default {
         data:{
           parentFolders: [...parentFolders, newFolder]
       } });
-      return newFolder;
+      // return newFolder;
     }
   }
 };
