@@ -1,6 +1,7 @@
 import React from "react";
-import { useMutation } from "@apollo/react-hooks";
-import FolderItems from "./FolderItems";
+import { useQuery ,useMutation} from "@apollo/react-hooks";
+import NavigationPanel from "../../NavigationPanel/NavigationPanel";
+import FolderContainer from "./FolderItems/FolderContainer";
 import {
   REFETCH_FOLDER,
   GET_FOLDER_BY_ID as query,
@@ -8,9 +9,25 @@ import {
   ADD_FOLDER,
   DELETE_FOLDER,
   NEW_FOLDER
-} from "./folderQueries";
+} from "../FolderQueries";
 
-export default ({ folder, client }) => {
+export default ({ id }) => {
+  const { loading, error, data, client } = useQuery(query, {
+    variables: { id }
+  });
+  if (loading) return "Loading...";
+  if (error) return `Error! ${error.message}`;
+  console.log("data:",data);
+  console.log("Загрузка папок");
+  return (
+    <div>
+      <NavigationPanel folder={data.folder} />
+      <Folders folder={data.folder} client={client} />
+    </div>
+  );
+};
+
+const Folders = ({ folder, client }) => {
   const variables = { id: folder.id };
   const [newFolder] = useMutation(NEW_FOLDER, {
     variables: { folder }
@@ -28,7 +45,7 @@ export default ({ folder, client }) => {
   console.log("Рендеринг Folders");
 
   return (
-    <FolderItems
+    <FolderContainer
       client={client}
       folders={folder.folders}
       templates={folder.templates}

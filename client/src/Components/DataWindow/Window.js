@@ -2,9 +2,9 @@ import React from "react";
 import Slider from "./WindowSlider";
 import style from "./Window.module.css";
 import { useQuery } from "@apollo/react-hooks";
-import Folder from "./Content/Folder/Folder";
-import ParentFolders from "./Content/Folder/ParentFolders";
-import { GET_ITEM } from "./Content/Folder/folderQueries";
+import Folder from "Components/DataWindow/Content/Folder/DataContainer/Folder";
+import ParentFolders from "Components/DataWindow/Content/Folder/DataContainer/ParentFolders";
+import { GET_ITEM } from "./Content/Folder/FolderQueries";
 
 export default () => {
   console.log("Рендеринг Window");

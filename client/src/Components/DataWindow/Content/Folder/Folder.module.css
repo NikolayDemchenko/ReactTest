@@ -27,6 +27,15 @@
   width: 380px;
   height: 248px;
 }
+.TemplateItem {
+  text-align: center;
+  color: aliceblue;
+  background-color: #4c5f7a;
+  border-radius: 4px;
+  margin: 6px;
+  width: 380px;
+  height:448px;
+}
 .AddItem {
   cursor: pointer;
   display: flex;
@@ -44,7 +53,7 @@
   background-color: #293241;
   /* color: rgba(221, 239, 255, 0.5); */
 }
-.Item:active,.AddItem:active {
+.Item:active,.AddItem:active,.TemplateItem:active {
   background-color: #2e3a4b00;
   color:rgb(167, 184, 199);
 }

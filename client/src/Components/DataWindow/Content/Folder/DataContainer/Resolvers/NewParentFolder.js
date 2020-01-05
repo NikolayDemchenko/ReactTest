@@ -1,4 +1,4 @@
-import { GET_FOLDERS_BY_PARENTID as query  } from "./folderQueries";
+import { GET_FOLDERS_BY_PARENTID as query  } from "../../FolderQueries";
 
 export default {
   Mutation: {

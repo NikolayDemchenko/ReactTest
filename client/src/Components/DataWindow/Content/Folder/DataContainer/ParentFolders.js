@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery, useMutation } from "@apollo/react-hooks";
-import FolderItems from "./FolderItems";
+import FolderContainer from "./FolderItems/FolderContainer";
 import {
   REFETCH_FOLDER,
   GET_FOLDERS_BY_PARENTID as query,
@@ -8,7 +8,7 @@ import {
   ADD_FOLDER,
   DELETE_FOLDER,
   NEW_PARENT_FOLDER
-} from "./folderQueries";
+} from "../FolderQueries";
 
 export default ({ parentId, style }) => {
   const variables = { parentId };
@@ -33,7 +33,7 @@ export default ({ parentId, style }) => {
 
   console.log("Рендеринг ParentFolders");
   return (
-    <FolderItems
+    <FolderContainer
       styles={style}
       client={client}
       folders={data.parentFolders}

@@ -1,5 +1,4 @@
-import { GET_FOLDER_BY_ID as query } from "./folderQueries";
-
+import { GET_FOLDER_BY_ID as query } from "../../FolderQueries";
 export default {
   Mutation: {
     newFolder: (_root, { folder }, { cache }) => {
