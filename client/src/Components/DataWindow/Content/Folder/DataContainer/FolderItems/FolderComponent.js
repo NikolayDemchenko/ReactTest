@@ -2,7 +2,7 @@ import React from "react";
 import style from "../../../Folder/Folder.module.css";
 import SaveButton from "Components/Buttons/SaveButton/SaveButton";
 import DeleteButton from "Components/Buttons/DeleteButton/DeleteButton";
-import ClickedDiv from "Components/ClickedDiv";
+import ClickedContainer from "Components/ClickedContainer";
 import buttonStyle from "Components/Buttons/Buttons.module.css";
 
 export default ({
@@ -24,7 +24,6 @@ export default ({
         defaultValue={name}
       />
       <SaveButton
-        value={name}
         style={buttonStyle.Crud}
         onClick={e => {
           //Проверка
@@ -45,7 +44,18 @@ export default ({
           console.log("Удалено: ", input.value);
         }}
       />
-      <ClickedDiv ClickHandler={FolderClick} arg={id} style={style.InnerItem} />
+      {id !== null ? (
+        <ClickedContainer
+          ClickHandler={FolderClick}
+          style={{
+            border: "1px solid black",
+            width: "100%",
+            height: "200px"
+          }}
+        />
+      ) : (
+        <div />
+      )}
     </div>
   );
 };

@@ -1,12 +1,26 @@
-import React from 'react'
-export default ({name,style})=>{
+import React from "react";
+import ClickedContainer from "Components/ClickedContainer";
+export default ({ Click, name, style }) => {
+  const Component = () => {
+    return (
+      <div className={style.Item}>
+        <input
+          placeholder="Введите наименование"
+          className={style.Input}
+          defaultValue={name}
+        />    
+      </div>
+    );
+  };
   return (
-    <div className={style.TemplateItem}>
-      <input
-        placeholder="Введите наименование"
-        className={style.Input}
-        defaultValue={name}
-      />
-    </div>
+    <ClickedContainer
+      Component={<Component />}
+      ClickHandler={Click}
+      style={{
+        border: "1px solid black",
+        width: "100%",
+        height: "100%"
+      }}
+    />
   );
-}
+};

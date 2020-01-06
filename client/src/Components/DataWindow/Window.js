@@ -2,24 +2,25 @@ import React from "react";
 import Slider from "./WindowSlider";
 import style from "./Window.module.css";
 import { useQuery } from "@apollo/react-hooks";
-import Folder from "Components/DataWindow/Content/Folder/DataContainer/Folder";
-import ParentFolders from "Components/DataWindow/Content/Folder/DataContainer/ParentFolders";
+import FolderSwitch from "./Content/Folder/FolderSwitch";
+import Template from "./Content/Template/Template";
 import { GET_ITEM } from "./Content/Folder/FolderQueries";
 
 export default () => {
   console.log("Рендеринг Window");
   // Генерация контента
-  const {ItemType,ItemId} = useQuery(GET_ITEM).data;
-  const DataContent = () => {
-    if (ItemType=="Folder"&& ItemId == null) {
-      console.log("Загрузка родительских папок:", ItemId);
-      return <ParentFolders parentId={ItemId} />;
-    } else if (ItemType=="Folder"){
-      console.log("Загрузка содержимого папки :", ItemId);
-      return <Folder id={ItemId} />;
-      // return <ParentFolders parentId={id}/>;
-    }
-  };
+  const { ItemType, ItemId} = useQuery(GET_ITEM).data;
+
+  let DataContent;
+  switch (ItemType) {
+    case "Template":
+      DataContent = () => Template(ItemId);
+      break;
+    case "Instance":
+      break;
+    default:
+      DataContent = () => FolderSwitch(ItemId);
+  }
   // Генерация слайдера
   const slideCount = 8;
   const SlideShow = () => (
@@ -34,9 +35,9 @@ export default () => {
   return (
     <div>
       <div>
-      {/* <ParentFolders  style={style.Slider} parentId={null} /> */}
-      <Slides/>
-      </div>      
+        {/* <ParentFolders  style={style.Slider} parentId={null} /> */}
+        <Slides />
+      </div>
       <DataContent />
     </div>
   );

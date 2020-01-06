@@ -42,14 +42,19 @@ export default ({
       name={folder.name}
       updateOrCreateFolder={updateCreate}
       removeFolder={removeFolder}
-      FolderClick={FolderClick}
+      FolderClick={() => FolderClick(folder.id)}
       folder={folder}
     />
   ));
   const templateItems =
     templates !== undefined
       ? templates.map(({ id, name }) => (
-          <TemplateFolderComponent key={id} name={name} style={style} />
+          <TemplateFolderComponent
+            Click={() => FolderClick(id, "Template")}
+            key={id}
+            name={name}
+            style={style}
+          />
         ))
       : [];
 
@@ -58,8 +63,9 @@ export default ({
   items.sort((prev, next) => {
     if (prev.props.name < next.props.name) return -1;
     if (prev.props.name > next.props.name) return 1;
+    return null;
   });
-
+  // Проверка
   items.forEach(item => console.log("item name:", item.props.name));
 
   return (
