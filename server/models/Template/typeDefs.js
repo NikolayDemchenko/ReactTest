@@ -25,11 +25,11 @@ module.exports = gql`
   type Spec {
     id: ID!
     name: String!  
-    unitId: ID!    
+    unitId: ID    
   }
   input SpecInput {   
     name: String!  
-    unitId: ID!    
+    unitId: ID   
   }
 
   extend type Mutation {
