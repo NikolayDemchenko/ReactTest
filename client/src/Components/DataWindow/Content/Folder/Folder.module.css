@@ -40,7 +40,6 @@
   height: 448px;
 }
 .AddItem {
-  cursor: pointer;
   display: flex;
   cursor: pointer;
   align-items: center;
