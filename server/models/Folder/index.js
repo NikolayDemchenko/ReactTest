@@ -20,7 +20,7 @@ const resolvers = {
       return Folders.find({ parentId: id });
     },
     templates:({ id })=>{
-      return Templates.find({ folderId: id });
+      return Templates.find({ parentId: id });
     }
   },
   Mutation: {

@@ -9,8 +9,8 @@ const resolvers = {
     template: (_, { id }) => {
       return Templates.findById(id);
     },
-    folderTemplates: (_, { folderId }) => {
-      return Templates.find({ folderId });
+    folderTemplates: (_, { parentId }) => {
+      return Templates.find({ parentId });
     },
   },
   // Template: {
@@ -19,10 +19,10 @@ const resolvers = {
   //   }
   // },
   Mutation: {
-    addTemplate: async (_, { name, folderId, specsSheets }) => {
+    addTemplate: async (_, { name, parentId, specsSheets }) => {
       const item = new Templates({
         name,
-        folderId,
+        parentId,
         specsSheets,
         updated: new Date()
       });
@@ -41,9 +41,9 @@ const resolvers = {
         throw err;
       }
     },
-    updateTemplate: async (_, { id, name, folderId, specsSheets }) => {
+    updateTemplate: async (_, { id, name, parentId, specsSheets }) => {
       try {
-        const item = await Templates.findByIdAndUpdate(id, { name, folderId, specsSheets, updated: new Date() }, { new: true });
+        const item = await Templates.findByIdAndUpdate(id, { name, parentId, specsSheets, updated: new Date() }, { new: true });
         return item;
       } catch (err) {
         throw err;

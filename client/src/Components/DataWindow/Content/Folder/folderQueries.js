@@ -45,7 +45,7 @@ export const GET_FOLDER_BY_ID = gql`
       templates{
       name
       id
-      folderId
+      parentId
     }
     }
   }
