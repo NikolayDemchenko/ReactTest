@@ -1,7 +1,8 @@
 import React from "react";
-import { useQuery ,useMutation} from "@apollo/react-hooks";
+import { useQuery, useMutation } from "@apollo/react-hooks";
 import NavigationPanel from "../../NavigationPanel/NavigationPanel";
 import FolderContainer from "./FolderItems/FolderContainer";
+
 import {
   REFETCH_FOLDER,
   GET_FOLDER_BY_ID as query,
@@ -11,23 +12,23 @@ import {
   NEW_FOLDER
 } from "../FolderQueries";
 
-export default ({ id }) => {
+export default ({ id, style }) => {
   const { loading, error, data, client } = useQuery(query, {
     variables: { id }
   });
   if (loading) return "Loading...";
   if (error) return `Error! ${error.message}`;
-  console.log("data:",data);
+  console.log("data:", data);
   console.log("Загрузка папок");
   return (
     <div>
       <NavigationPanel folder={data.folder} />
-      <Folders folder={data.folder} client={client} />
+      <Folders style={style} folder={data.folder} client={client} />
     </div>
   );
 };
 
-const Folders = ({ folder, client }) => {
+const Folders = ({ folder, client, style }) => {
   const variables = { id: folder.id };
   const [newFolder] = useMutation(NEW_FOLDER, {
     variables: { folder }
@@ -40,12 +41,13 @@ const Folders = ({ folder, client }) => {
     refetchQueries: [{ query, variables }]
   });
   const [refetchFolder] = useMutation(REFETCH_FOLDER, {
-    refetchQueries: [{ query, variables }]    
+    refetchQueries: [{ query, variables }]
   });
   console.log("Рендеринг Folders");
 
   return (
     <FolderContainer
+      style={style}
       client={client}
       folders={folder.folders}
       templates={folder.templates}

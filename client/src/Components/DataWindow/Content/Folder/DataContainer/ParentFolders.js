@@ -34,7 +34,7 @@ export default ({ parentId, style }) => {
   console.log("Рендеринг ParentFolders");
   return (
     <FolderContainer
-      styles={style}
+      style={style}
       client={client}
       folders={data.parentFolders}
       folderFunctions={{

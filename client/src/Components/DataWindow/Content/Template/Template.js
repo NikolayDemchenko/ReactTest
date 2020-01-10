@@ -44,32 +44,10 @@ export default id => {
           <strong>Удалить</strong>
         </button>
       </div>
-      {specsSheet.specs.map(spec => {
-        let select;
+      {specsSheet.specs.map(spec => {   
         return (
           <div key={spec.id}>
-            <input className="specs" defaultValue={spec.name} />
-            <select
-              onClick={() =>
-                console.log("Нажата кнопка выбора: ", select.value)
-              }
-              ref={node => {
-                select = node;
-              }}
-              className="specs"
-            >
-              <optgroup label="Apple">
-                <option value="iphone 6s">iPhone 6S</option>
-                <option value="iphone 6s plus">iPhone 6S Plus</option>
-                <option value="iphone 5se">iPhone 5SE</option>
-              </optgroup>
-              <optgroup label="Microsoft">
-                <option value="lumia 950">Lumia 950</option>
-                <option value="lumia 950 xl">Lumia 950 XL</option>
-                <option value="lumia 650">Lumia 650</option>
-              </optgroup>
-            </select>
-          </div>
+            <input className="specs" defaultValue={spec.name} />         </div>
         );
       })}
     </div>

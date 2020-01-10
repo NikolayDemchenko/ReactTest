@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import styles from "../../../Folder/Folder.module.css";
 import updateOrCreateFolder from "Function/updateOrCreateFolder";
 import setItem from "Function/setItem";
 import AddButton from "Components/Buttons/PlusButton/AddButton";
@@ -7,7 +6,7 @@ import FolderComponent from "./FolderComponent";
 import TemplateFolderComponent from "Components/DataWindow/Content/Template/TemplateFolderComponent";
 
 export default ({
-  style = styles,
+  style,
   client,
   folders,
   templates,
@@ -36,24 +35,27 @@ export default ({
   const FolderClick = (id, type) => {
     setItem(client, id, type);
   };
-  const folderItems = folders.map(folder => (
+  const folderItems = folders.map(({ id, name, parentId }) => (
     <FolderComponent
-      key={folder.id}
-      name={folder.name}
-      updateOrCreateFolder={updateCreate}
-      removeFolder={removeFolder}
-      FolderClick={() => FolderClick(folder.id)}
-      folder={folder}
+      key={id}
+      id={id}
+      name={name}
+      parentId={parentId}
+      style={style}
+      save={updateCreate}
+      remove={removeFolder}
+      onClick={() => FolderClick(id)}
     />
   ));
   const templateItems =
     templates !== undefined
       ? templates.map(({ id, name }) => (
-          <TemplateFolderComponent
-            Click={() => FolderClick(id, "Template")}
+          <FolderComponent
             key={id}
+            id={id}
             name={name}
             style={style}
+            onClick={() => FolderClick(id, "Template")}
           />
         ))
       : [];
