@@ -16,4 +16,13 @@
   background-color: #243a5d;
   color: rgba(192, 220 , 255, 0.712);
 }
+.BaseName,.FolderName{
+  display: flex;
+  align-items: center;
+  border: 1px solid rgb(134, 100, 100)
+}
 
+.FolderName{
+  justify-content: center;
+  border: 1px solid rgb(98, 156, 134)
+}

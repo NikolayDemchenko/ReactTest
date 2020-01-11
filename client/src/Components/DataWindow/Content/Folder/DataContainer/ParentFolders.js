@@ -10,7 +10,7 @@ import {
   NEW_PARENT_FOLDER
 } from "../FolderQueries";
 
-export default ({ parentId, style }) => {
+export default ({ parentId }) => {
   const variables = { parentId };
   const { loading, error, data, client } = useQuery(query, {
     variables: { parentId }
@@ -34,7 +34,6 @@ export default ({ parentId, style }) => {
   console.log("Рендеринг ParentFolders");
   return (
     <FolderContainer
-      style={style}
       client={client}
       folders={data.parentFolders}
       folderFunctions={{

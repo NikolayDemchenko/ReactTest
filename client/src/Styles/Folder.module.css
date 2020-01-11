@@ -1,4 +1,4 @@
-.ContentContainer {
+.FolderContainer {
   /* border: 1px solid black; */
   margin: 0 auto;
   display: grid;
@@ -8,13 +8,13 @@
   /* margin-top: 6px; */
 }
 @media all and (max-width: 1180px) {
-  .ContentContainer {
+  .FolderContainer {
     max-width: 784px;
     grid-template-columns: 1fr 1fr;
   }
 }
 @media all and (max-width: 784px) {
-  .ContentContainer {
+  .FolderContainer {
     grid-template-columns: 1fr;
   }
 }

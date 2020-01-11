@@ -1,6 +1,6 @@
 import React from "react";
 import Slider from "./WindowSlider";
-import style from "./Window.module.css";
+import container from "../../Styles/Container.module.css";
 import { useQuery } from "@apollo/react-hooks";
 import FolderSwitch from "./Content/Folder/FolderSwitch";
 import Template from "./Content/Template/Template";
@@ -24,7 +24,7 @@ export default () => {
   // Генерация слайдера
   const slideCount = 8;
   const SlideShow = () => (
-    <div className={style.Slider}>
+    <div className={container.Slider}>
       <Slider count={slideCount} name="Баобоаб" />
     </div>
   );

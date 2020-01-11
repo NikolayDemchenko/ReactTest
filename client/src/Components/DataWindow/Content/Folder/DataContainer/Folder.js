@@ -12,7 +12,7 @@ import {
   NEW_FOLDER
 } from "../FolderQueries";
 
-export default ({ id, style }) => {
+export default ({ id }) => {
   const { loading, error, data, client } = useQuery(query, {
     variables: { id }
   });
@@ -23,12 +23,12 @@ export default ({ id, style }) => {
   return (
     <div>
       <NavigationPanel folder={data.folder} />
-      <Folders style={style} folder={data.folder} client={client} />
+      <Folders  folder={data.folder} client={client} />
     </div>
   );
 };
 
-const Folders = ({ folder, client, style }) => {
+const Folders = ({ folder, client }) => {
   const variables = { id: folder.id };
   const [newFolder] = useMutation(NEW_FOLDER, {
     variables: { folder }
@@ -46,8 +46,7 @@ const Folders = ({ folder, client, style }) => {
   console.log("Рендеринг Folders");
 
   return (
-    <FolderContainer
-      style={style}
+    <FolderContainer     
       client={client}
       folders={folder.folders}
       templates={folder.templates}

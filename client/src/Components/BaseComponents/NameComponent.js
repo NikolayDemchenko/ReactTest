@@ -1,16 +1,11 @@
 import React from "react";
 import SaveButton from "Components/Buttons/SaveButton/SaveButton";
 import DeleteButton from "Components/Buttons/DeleteButton/DeleteButton";
-export default ({ btnStyle, inputStyle, save, remove, name }) => {
+export default ({containerStyle, btnStyle, inputStyle, save, remove, name }) => {
   let input;
   return (
     <div
-      style={{
-        alignItems: "center",
-        justifyContent: "center",
-        display: "flex",
-        border: "1px solid red"
-      }}
+      className={containerStyle}
     >
       <input
         placeholder="Введите наименование"

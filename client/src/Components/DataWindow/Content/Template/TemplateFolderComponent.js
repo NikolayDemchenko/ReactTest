@@ -1,5 +1,5 @@
 import React from "react";
-import ClickedContainer from "Components/ClickedContainer";
+import ClickedContainer from "../../../BaseComponents/ClickedContainer";
 export default ({ Click, name, style }) => {
   const Component = () => {
     return (

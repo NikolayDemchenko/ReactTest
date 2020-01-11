@@ -1,11 +1,10 @@
 import React from "react";
 import { useApolloClient } from "@apollo/react-hooks";
 import gql from "graphql-tag";
-import style from "./Navigation.module.css";
 import setItem from "Function/setItem";
 import HomeButton from "Components/Buttons/HomeButton/HomeButton";
 
-export default ({ folder }) => {
+export default ({style, folder }) => {
   // Получение родителя открытой Folder
   const query = gql`
     query GetFolderById($id: ID!) {

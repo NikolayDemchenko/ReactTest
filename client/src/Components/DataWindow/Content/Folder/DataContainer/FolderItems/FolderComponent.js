@@ -1,16 +1,17 @@
 import React from "react";
-import ClickedContainer from "Components/ClickedContainer";
-import buttonStyle from "Components/Buttons/Buttons.module.css";
-import BaseComponent from "../../../../../BaseComponents/BaseComponent";
+import ClickedContainer from "../../../../../BaseComponents/ClickedContainer";
+import NameComponent from "../../../../../BaseComponents/NameComponent";
+import container from '../../../../../../Styles/Container.module.css'
+import buttonStyle from "../../../../../../Styles/Buttons.module.css";
 export default ({ style, save, remove, onClick, id, name, parentId }) => {
-  let input;
-  console.log("id объекта: ", id);
+  // console.log("id объекта: ", id);
   return (
     <div className={style.Item}>
-      <BaseComponent
+      <NameComponent
         name={name}
         btnStyle={buttonStyle.Crud}
         inputStyle={style.Input}
+        containerStyle={container.FolderName}
         save={name =>
           save({
             id,

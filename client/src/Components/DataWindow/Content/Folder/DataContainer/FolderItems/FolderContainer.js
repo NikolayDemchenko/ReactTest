@@ -1,12 +1,10 @@
 import React, { useEffect } from "react";
 import updateOrCreateFolder from "Function/updateOrCreateFolder";
 import setItem from "Function/setItem";
-import AddButton from "Components/Buttons/PlusButton/AddButton";
+import AddFolderButton from "Components/Buttons/PlusButton/AddFolderButton";
 import FolderComponent from "./FolderComponent";
-import TemplateFolderComponent from "Components/DataWindow/Content/Template/TemplateFolderComponent";
-
+import style from "../../../../../../Styles/Folder.module.css";
 export default ({
-  style,
   client,
   folders,
   templates,
@@ -68,19 +66,21 @@ export default ({
     return null;
   });
   // Проверка
-  items.forEach(item => console.log("item name:", item.props.name));
+  // items.forEach(item => console.log("item name:", item.props.name));
 
   return (
-    <div className={style.ContentContainer}>
-      {items}
-      <AddButton
-        items={folders}
+    <div className={style.FolderContainer}>
+      <AddFolderButton
+        value={items.find(i => i.props.id == null) == undefined
+          ? 1
+          : items.find(i => i.props.id == null).props.id}
         style={style.AddItem}
         onClick={e => {
           e.preventDefault();
           newFolder();
         }}
       />
+      {items}
     </div>
   );
 };
