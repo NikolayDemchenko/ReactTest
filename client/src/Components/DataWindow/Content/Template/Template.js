@@ -3,6 +3,8 @@ import { useQuery, useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import NavigationPanel from "../NavigationPanel/NavigationPanel";
 import style from "../Template/Template.module.css";
+import BaseComponent from "../../../BaseComponents/BaseComponent";
+import buttonStyle from "Components/Buttons/Buttons.module.css";
 
 export const GET_TEMPLATE_BY_ID = gql`
   query GetTemplateById($id: ID!) {
@@ -35,26 +37,46 @@ export default id => {
 
   const specsSheets = data.template.specsSheets.map(specsSheet => (
     <div key={specsSheet.id} className={style.ColumnGroup}>
-      <div  className={style.RowGroup}>Группа :
-        <input defaultValue={specsSheet.name} />      
-        <button>
-          <strong>Сохранить</strong>
-        </button>
-        <button>
-          <strong>Удалить</strong>
-        </button>
+      <div className={style.RowGroup}>
+        Группа :
+        <BaseComponent
+              name={specsSheet.name}
+              btnStyle={buttonStyle.Crud}
+              // inputStyle={style.Input}
+              // save={name =>
+              //   save({
+              //     id,
+              //     name,
+              //     parentId
+              //   })
+              // }
+              // remove={() => remove(id)}
+            />      
       </div>
-      {specsSheet.specs.map(spec => {   
+      {specsSheet.specs.map(spec => {
         return (
           <div key={spec.id}>
-            <input className="specs" defaultValue={spec.name} />         </div>
+            <BaseComponent
+              name={spec.name}
+              btnStyle={buttonStyle.Crud}
+              // inputStyle={style.Input}
+              // save={name =>
+              //   save({
+              //     id,
+              //     name,
+              //     parentId
+              //   })
+              // }
+              // remove={() => remove(id)}
+            />           
+          </div>
         );
       })}
     </div>
   ));
 
   return (
-    <div >
+    <div>
       <NavigationPanel folder={data.template} />
       <div className={style.ContentContainer}>
         {/* <input defaultValue={data.template.name} /> */}
@@ -63,7 +85,6 @@ export default id => {
           <strong>Добавить</strong>
         </button>
       </div>
-
     </div>
   );
 };
