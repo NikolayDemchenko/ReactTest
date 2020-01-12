@@ -1,22 +1,23 @@
 import React from "react";
 import SaveButton from "Components/Buttons/SaveButton/SaveButton";
 import DeleteButton from "Components/Buttons/DeleteButton/DeleteButton";
-export default ({containerStyle, btnStyle, inputStyle, save, remove, name }) => {
+import controlStyle from '../../Styles/ControlStyle.module.css'
+export default ({style,save, remove, name }) => {
   let input;
   return (
     <div
-      className={containerStyle}
+      className={style}
     >
       <input
         placeholder="Введите наименование"
         ref={node => {
           input = node;
         }}
-        className={inputStyle}
+        className={controlStyle.Input}
         defaultValue={name}
       />
       <SaveButton
-        style={btnStyle}
+        style={controlStyle.Crud}
         onClick={e => {
           //Проверка
           console.log("Сохранено: ", input.value);
@@ -25,7 +26,7 @@ export default ({containerStyle, btnStyle, inputStyle, save, remove, name }) => 
         }}
       />
       <DeleteButton
-        style={btnStyle}
+        style={controlStyle.Crud}
         onClick={e => {
           e.preventDefault();
           remove();

@@ -1,38 +1,26 @@
 import React from "react";
 import ClickedContainer from "../../../../../BaseComponents/ClickedContainer";
 import NameComponent from "../../../../../BaseComponents/NameComponent";
-import container from '../../../../../../Styles/Container.module.css'
-import buttonStyle from "../../../../../../Styles/Buttons.module.css";
-export default ({ style, save, remove, onClick, id, name, parentId }) => {
+import container from "../../../../../../Styles/Container.module.css";
+
+export default (props) => {
   // console.log("id объекта: ", id);
   return (
-    <div className={style.Item}>
+    <div className={props.style.Item}>
       <NameComponent
-        name={name}
-        btnStyle={buttonStyle.Crud}
-        inputStyle={style.Input}
-        containerStyle={container.FolderName}
-        save={name =>
-          save({
-            id,
-            name,
-            parentId
-          })
-        }
-        remove={() => remove(id)}
+        {...props}
+        style={container.FolderName}       
       />
-      {id !== null ? (
+      {props.id !== null ? (
         <ClickedContainer
-          ClickHandler={onClick}
+        onClick={props.onClick}
           style={{
             border: "1px solid black",
             width: "100%",
             height: "200px"
           }}
         />
-      ) : (
-        <div />
-      )}
+      ) : (null)}
     </div>
   );
 };

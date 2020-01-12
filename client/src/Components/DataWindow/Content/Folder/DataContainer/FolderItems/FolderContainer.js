@@ -21,7 +21,7 @@ export default ({
     return refetchFolder;
   }, [refetchFolder]);
 
-  const updateCreate = item => {
+  const save = item => {
     updateOrCreateFolder(createFolder, updateFolder, item);
   };
   const removeFolder = id => {
@@ -31,19 +31,18 @@ export default ({
       deleteFolder({ variables: { id } });
     }
   };
-  const FolderClick = (id, type) => {
+  const Click = (id, type) => {
     setItem(client, id, type);
   };
   const folderItems = folders.map(({ id, name, parentId }) => (
     <FolderComponent
       key={id}
       id={id}
-      name={name}
-      parentId={parentId}
+      name={name}     
       style={style}
-      save={updateCreate}
-      remove={removeFolder}
-      onClick={() => FolderClick(id)}
+      save={name => save({ id, name, parentId })}
+      remove={() => removeFolder(id)}
+      onClick={() => Click(id)}
     />
   ));
   const templateItems =
@@ -54,7 +53,7 @@ export default ({
             id={id}
             name={name}
             style={style}
-            onClick={() => FolderClick(id, "Template")}
+            onClick={() => Click(id, "Template")}
           />
         ))
       : [];
@@ -76,7 +75,7 @@ export default ({
         e.preventDefault();
         newFolder();
       }
-    })(items.find(item => item.props.id == null) == undefined ? true : false);
+    })(!items.find(item => item.props.id == null));
 
   return (
     <div className={style.FolderContainer}>

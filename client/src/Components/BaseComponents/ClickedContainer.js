@@ -1,7 +1,7 @@
 import React from "react";
-export default ({ Component, ClickHandler, style }) => {
+export default ({ Component, onClick, style }) => {
   return (
-    <div onClick={ClickHandler} style={style}>
+    <div onClick={onClick} style={style}>
       {Component}
     </div>
   );

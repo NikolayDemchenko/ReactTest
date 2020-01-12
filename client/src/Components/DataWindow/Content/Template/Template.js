@@ -2,9 +2,8 @@ import React from "react";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import NavigationPanel from "../NavigationPanel/NavigationPanel";
 import style from "../../../../Styles/Template.module.css";
-import inputStyle from "../../../../Styles/Input.module.css";
 import NameComponent from "../../../BaseComponents/NameComponent";
-import buttonStyle from "../../../../Styles/Buttons.module.css";
+import controlStyle from "../../../../Styles/ControlStyle.module.css";
 import container from "../../../../Styles/Container.module.css";
 import Plus from "../../../Buttons/PlusButton/Plus";
 import IsVisibleHOC from "../../../hoc/IsVisibleHOC";
@@ -21,7 +20,7 @@ export default id => {
 
   const Add = () =>
     IsVisibleHOC(Plus)({
-      style: buttonStyle.Crud,
+      style: controlStyle.Crud,
       onClick: e => {
         e.preventDefault();
         // newFolder();
@@ -30,13 +29,11 @@ export default id => {
     
   const specsSheets = data.template.specsSheets.map(specsSheet => (
     <div key={specsSheet.id} className={style.ColumnGroup}>
-      <div className={style.RowGroup}>
+      {/* <div className={style.RowGroup}> */}
         Имя группы :
         <NameComponent
-          name={specsSheet.name}
-          btnStyle={buttonStyle.Crud}
-          inputStyle={inputStyle.Input}
-          containerStyle={container.FolderName}
+          name={specsSheet.name}              
+          style={container.FolderName}
           // save={name =>
           //   save({
           //     id,
@@ -46,15 +43,14 @@ export default id => {
           // }
           // remove={() => remove(id)}
         />
-      </div> <Add />
+      {/* </div>  */}
+      <Add />
       {specsSheet.specs.map(spec => {
         return (
           <div key={spec.id}>
             <NameComponent
-              name={spec.name}
-              btnStyle={buttonStyle.Crud}
-              inputStyle={inputStyle.Input}
-              containerStyle={container.BaseName}
+              name={spec.name}         
+              style={container.BaseName}
               // save={name =>
               //   save({
               //     id,

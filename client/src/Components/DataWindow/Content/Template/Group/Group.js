@@ -1,25 +1,43 @@
 import React from "react";
-import { useQuery, useMutation } from "@apollo/react-hooks";
 
-export default ({style,item}) => {
+export default ({name,elements}) => {
   return (
-
-    <div className={style.ColumnGroup}>
-      <div className={style.RowGroup}>
-        Группа :
-        <input defaultValue={item.name} />
-        <button>
-          <strong>Сохранить</strong>
-        </button>
-        <button>
-          <strong>Удалить</strong>
-        </button>
-      </div>
-      
-      {specsSheet.specs.map(spec => {
+    <div key={specsSheet.id} className={style.ColumnGroup}>
+      {/* <div className={style.RowGroup}> */}
+      Имя группы :
+      <NameComponent
+        name={name}
+        btnStyle={buttonStyle.Crud}
+        inputStyle={inputStyle.Input}
+        containerStyle={container.FolderName}
+        // save={name =>
+        //   save({
+        //     id,
+        //     name,
+        //     parentId
+        //   })
+        // }
+        // remove={() => remove(id)}
+      />
+      {/* </div>  */}
+      <Add />
+      {elements.map(spec => {
         return (
           <div key={spec.id}>
-            <input className="specs" defaultValue={spec.name} />
+            <NameComponent
+              name={spec.name}
+              btnStyle={buttonStyle.Crud}
+              inputStyle={inputStyle.Input}
+              containerStyle={container.BaseName}
+              // save={name =>
+              //   save({
+              //     id,
+              //     name,
+              //     parentId
+              //   })
+              // }
+              // remove={() => remove(id)}
+            />
           </div>
         );
       })}
