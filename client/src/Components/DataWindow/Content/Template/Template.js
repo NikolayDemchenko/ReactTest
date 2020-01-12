@@ -6,8 +6,9 @@ import style from "../../../../Styles/Template.module.css";
 import inputStyle from "../../../../Styles/Input.module.css";
 import NameComponent from "../../../BaseComponents/NameComponent";
 import buttonStyle from "../../../../Styles/Buttons.module.css";
-import container from '../../../../Styles/Container.module.css'
-import AddButton from '../../../Buttons/PlusButton/AddFolderButton'
+import container from "../../../../Styles/Container.module.css";
+import FolderPlus from "../../../Buttons/PlusButton/FolderPlus";
+import IsVisibleHOC from "../../../hoc/IsVisibleHOC";
 export const GET_TEMPLATE_BY_ID = gql`
   query GetTemplateById($id: ID!) {
     template(id: $id) {
@@ -42,20 +43,19 @@ export default id => {
       <div className={style.RowGroup}>
         Имя группы :
         <NameComponent
-              name={specsSheet.name}
-              btnStyle={buttonStyle.Crud}
-              inputStyle={inputStyle.Input}
-              containerStyle={container.FolderName}
-              // save={name =>
-              //   save({
-              //     id,
-              //     name,
-              //     parentId
-              //   })
-              // }
-              // remove={() => remove(id)}
-            /> 
-      
+          name={specsSheet.name}
+          btnStyle={buttonStyle.Crud}
+          inputStyle={inputStyle.Input}
+          containerStyle={container.FolderName}
+          // save={name =>
+          //   save({
+          //     id,
+          //     name,
+          //     parentId
+          //   })
+          // }
+          // remove={() => remove(id)}
+        />
       </div>
       {specsSheet.specs.map(spec => {
         return (
@@ -73,25 +73,25 @@ export default id => {
               //   })
               // }
               // remove={() => remove(id)}
-            />           
+            />
           </div>
         );
       })}
     </div>
   ));
-
+  const AddFolder = () =>
+    IsVisibleHOC(FolderPlus)({
+      style: style.AddItem,
+      onClick: e => {
+        e.preventDefault();
+        // newFolder();
+      }
+    })(data.template.specsSheets);
   return (
     <div>
       <NavigationPanel folder={data.template} />
       <div className={style.ContentContainer}>
-      <AddButton
-            items={data.template.specsSheets}
-            style={style.AddItem}
-            onClick={e => {
-              e.preventDefault();
-              // newFolder();
-            }}
-          />
+        <AddFolder />
         {specsSheets}
         <button>
           <strong>Добавить</strong>

@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import updateOrCreateFolder from "Function/updateOrCreateFolder";
 import setItem from "Function/setItem";
-import AddFolderButton from "Components/Buttons/PlusButton/AddFolderButton";
+import FolderPlus from "../../../../../Buttons/PlusButton/FolderPlus";
+import IsVisibleHOC from "../../../../../hoc/IsVisibleHOC";
 import FolderComponent from "./FolderComponent";
 import style from "../../../../../../Styles/Folder.module.css";
 export default ({
@@ -68,18 +69,22 @@ export default ({
   // Проверка
   // items.forEach(item => console.log("item name:", item.props.name));
 
+  const AddFolder = () =>
+    IsVisibleHOC(FolderPlus)({
+      style: style.AddItem,
+      onClick: e => {
+        e.preventDefault();
+        newFolder();
+      }
+    })(
+      items.find(i => i.props.id == null) == undefined
+        ? 1
+        : items.find(i => i.props.id == null).props.id
+    );
+
   return (
     <div className={style.FolderContainer}>
-      <AddFolderButton
-        value={items.find(i => i.props.id == null) == undefined
-          ? 1
-          : items.find(i => i.props.id == null).props.id}
-        style={style.AddItem}
-        onClick={e => {
-          e.preventDefault();
-          newFolder();
-        }}
-      />
+      <AddFolder />
       {items}
     </div>
   );
