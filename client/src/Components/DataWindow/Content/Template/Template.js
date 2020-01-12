@@ -1,33 +1,14 @@
 import React from "react";
 import { useQuery, useMutation } from "@apollo/react-hooks";
-import gql from "graphql-tag";
 import NavigationPanel from "../NavigationPanel/NavigationPanel";
 import style from "../../../../Styles/Template.module.css";
 import inputStyle from "../../../../Styles/Input.module.css";
 import NameComponent from "../../../BaseComponents/NameComponent";
 import buttonStyle from "../../../../Styles/Buttons.module.css";
 import container from "../../../../Styles/Container.module.css";
-import FolderPlus from "../../../Buttons/PlusButton/FolderPlus";
+import Plus from "../../../Buttons/PlusButton/Plus";
 import IsVisibleHOC from "../../../hoc/IsVisibleHOC";
-export const GET_TEMPLATE_BY_ID = gql`
-  query GetTemplateById($id: ID!) {
-    template(id: $id) {
-      name
-      id
-      parentId
-      updated
-      specsSheets {
-        id
-        name
-        specs {
-          id
-          name
-          unitId
-        }
-      }
-    }
-  }
-`;
+import {GET_TEMPLATE_BY_ID} from './TemplateQueries'
 
 export default id => {
   const { loading, error, data, client } = useQuery(GET_TEMPLATE_BY_ID, {
@@ -38,6 +19,15 @@ export default id => {
   console.log("data:", data.template.specsSheets);
   console.log("Загрузка шаблона");
 
+  const Add = () =>
+    IsVisibleHOC(Plus)({
+      style: buttonStyle.Crud,
+      onClick: e => {
+        e.preventDefault();
+        // newFolder();
+      }
+    })(true);
+    
   const specsSheets = data.template.specsSheets.map(specsSheet => (
     <div key={specsSheet.id} className={style.ColumnGroup}>
       <div className={style.RowGroup}>
@@ -56,7 +46,7 @@ export default id => {
           // }
           // remove={() => remove(id)}
         />
-      </div>
+      </div> <Add />
       {specsSheet.specs.map(spec => {
         return (
           <div key={spec.id}>
@@ -79,23 +69,13 @@ export default id => {
       })}
     </div>
   ));
-  const AddFolder = () =>
-    IsVisibleHOC(FolderPlus)({
-      style: style.AddItem,
-      onClick: e => {
-        e.preventDefault();
-        // newFolder();
-      }
-    })(data.template.specsSheets);
+
   return (
     <div>
       <NavigationPanel folder={data.template} />
       <div className={style.ContentContainer}>
-        <AddFolder />
+        <Add />
         {specsSheets}
-        <button>
-          <strong>Добавить</strong>
-        </button>
       </div>
     </div>
   );

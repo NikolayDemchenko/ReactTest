@@ -76,11 +76,7 @@ export default ({
         e.preventDefault();
         newFolder();
       }
-    })(
-      items.find(i => i.props.id == null) == undefined
-        ? 1
-        : items.find(i => i.props.id == null).props.id
-    );
+    })(items.find(item => item.props.id == null) == undefined ? true : false);
 
   return (
     <div className={style.FolderContainer}>
