@@ -28,22 +28,10 @@ export default id => {
     })(true);
     
   const specsSheets = data.template.specsSheets.map(specsSheet => (
-    <div key={specsSheet.id} className={style.ColumnGroup}>
-      {/* <div className={style.RowGroup}> */}
+    <div key={specsSheet.id} className={style.ColumnGroup}>   
         Имя группы :
-        <NameComponent
-          name={specsSheet.name}              
-          style={container.FolderName}
-          // save={name =>
-          //   save({
-          //     id,
-          //     name,
-          //     parentId
-          //   })
-          // }
-          // remove={() => remove(id)}
-        />
-      {/* </div>  */}
+        <input className={controlStyle.Input}
+          defaultValue={specsSheet.name} />         
       <Add />
       {specsSheet.specs.map(spec => {
         return (
