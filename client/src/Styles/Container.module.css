@@ -26,3 +26,19 @@
   justify-content: center;
   border: 1px solid rgb(98, 156, 134)
 }
+.TemplateGrid {
+  border: 1px solid black;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  max-width: 1176px;
+}
+.FlexRow {
+  display: flex;
+  border: 1px solid rgb(35, 52, 151);
+}
+.FlexColumn {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgb(35, 52, 151);
+}

@@ -3,7 +3,7 @@ import Slider from "./WindowSlider";
 import container from "../../Styles/Container.module.css";
 import { useQuery } from "@apollo/react-hooks";
 import FolderSwitch from "./Content/Folder/FolderSwitch";
-import Template from "./Content/Template/Template";
+import Template from "./Content/Template/DataTemplate";
 import { GET_ITEM } from "./Content/Folder/FolderQueries";
 
 export default () => {

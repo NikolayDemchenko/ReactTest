@@ -6,15 +6,25 @@ export const GET_TEMPLATE_BY_ID = gql`
       id
       parentId
       updated
-      specsSheets {
+      groups {
         id
         name
-        specs {
+        elements {
           id
           name
           unitId
         }
       }
     }
+  }
+`;
+export const NEW_GROUP = gql`
+  mutation NewGroup($template: Template) {
+    newGroup(template: $template) @client 
+  }
+`;
+export const NEW_ELEMENT = gql`
+  mutation NewElement($template: Template,$group:Group) {
+    newElement(template: $template,group:$group) @client 
   }
 `;

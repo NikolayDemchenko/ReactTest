@@ -10,24 +10,24 @@ module.exports = gql`
     id: ID!
     name: String!
     parentId: ID!
-    specsSheets: [SpecsSheet]
+    groups: [Group]
     updated:String!
   }
-  type SpecsSheet {
+  type Group {
     id: ID!
     name: String!  
-    specs: [Spec]    
+    elements: [Element]    
   }
-  input SpecsSheetInput {    
+  input GroupInput {    
     name: String!  
-    specs: [SpecInput]    
+    Elements: [ElementInput]    
   }
-  type Spec {
+  type Element {
     id: ID!
     name: String!  
     unitId: ID    
   }
-  input SpecInput {   
+  input ElementInput {   
     name: String!  
     unitId: ID   
   }
@@ -36,8 +36,8 @@ module.exports = gql`
     addTemplate(
       name: String!,
       parentId: ID, 
-       specsSheets: [SpecsSheetInput]): Template
+       Groups: [GroupInput]): Template
     deleteTemplate(id: ID!): Boolean
-    updateTemplate(id: ID!, name: String!, parentId: ID, specsSheets: [SpecsSheetInput]):Template
+    updateTemplate(id: ID!, name: String!, parentId: ID, Groups: [GroupInput]):Template
   }
 `;

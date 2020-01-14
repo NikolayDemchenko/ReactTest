@@ -16,8 +16,7 @@ export default ({style,save, remove, name }) => {
         className={controlStyle.Input}
         defaultValue={name}
       />
-      <SaveButton
-        style={controlStyle.Crud}
+      <SaveButton       
         onClick={e => {
           //Проверка
           console.log("Сохранено: ", input.value);
@@ -25,8 +24,7 @@ export default ({style,save, remove, name }) => {
           save(input.value);
         }}
       />
-      <DeleteButton
-        style={controlStyle.Crud}
+      <DeleteButton     
         onClick={e => {
           e.preventDefault();
           remove();

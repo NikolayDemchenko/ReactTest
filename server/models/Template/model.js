@@ -4,10 +4,10 @@ const ObjectId=mongoose.Schema.Types.ObjectId;
 const scheme = new mongoose.Schema({
     name:String,
     parentId: ObjectId,
-    specsSheets: [
+    groups: [
         {
             name: String,
-            specs: [
+            elements: [
                 {
                     name: String,
                     unitId: ObjectId

@@ -19,11 +19,11 @@ const resolvers = {
   //   }
   // },
   Mutation: {
-    addTemplate: async (_, { name, parentId, specsSheets }) => {
+    addTemplate: async (_, { name, parentId, groups }) => {
       const item = new Templates({
         name,
         parentId,
-        specsSheets,
+        groups,
         updated: new Date()
       });
       try {
@@ -41,9 +41,9 @@ const resolvers = {
         throw err;
       }
     },
-    updateTemplate: async (_, { id, name, parentId, specsSheets }) => {
+    updateTemplate: async (_, { id, name, parentId, groups }) => {
       try {
-        const item = await Templates.findByIdAndUpdate(id, { name, parentId, specsSheets, updated: new Date() }, { new: true });
+        const item = await Templates.findByIdAndUpdate(id, { name, parentId, groups, updated: new Date() }, { new: true });
         return item;
       } catch (err) {
         throw err;
