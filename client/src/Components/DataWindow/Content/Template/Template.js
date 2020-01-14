@@ -5,8 +5,8 @@ import container from "../../../../Styles/Container.module.css";
 import Add from "../../../Buttons/PlusButton/TemplateItemPlus";
 import Save from "../../../Buttons/SaveButton/SaveButton";
 import Delete from "../../../Buttons/DeleteButton/DeleteButton";
-import Groups from "./Group/Groups";
-import { NEW_GROUP, NEW_ELEMENT } from "./TemplateQueries";
+import DataGroups from "./Group/DataGroups";
+import { NEW_GROUP} from "./TemplateQueries";
 export default ({ template }) => {
   console.log("data:", template.groups);
   console.log("Загрузка шаблона");
@@ -35,7 +35,4 @@ export default ({ template }) => {
     </div>
   );
 };
-const DataGroups = ({ template }) => {
-  const [newElement] = useMutation(NEW_ELEMENT);
-  return <Groups newElement={newElement} template={template} />;
-};
+

@@ -4,17 +4,16 @@ import control from "../../../../../Styles/ControlStyle.module.css";
 import Element from "../../../../BaseComponents/BaseInput";
 import Add from "../../../../Buttons/PlusButton/TemplateItemPlus";
 import Delete from "../../../../Buttons/DeleteButton/DeleteButton";
-export default ({ template, newElement }) =>{
-
-  return template.groups.map(group => (
+export default ({ group, template, newElement }) => {
+  return (
     <div key={group.id} className={container.FlexColumn}>
       Имя группы :
       <input className={control.Input} defaultValue={group.name} />
       <div className={container.FlexRow}>
-              <Add
+        <Add
           onClick={e => {
-            e.preventDefault();       
-            newElement({variables:{template,group}});
+            e.preventDefault();
+            newElement({ variables: { template, group } });
           }}
           isVisible={!group.elements.find(item => item.name == "")}
         />
@@ -28,5 +27,5 @@ export default ({ template, newElement }) =>{
         );
       })}
     </div>
-  ));
-}
+  );
+};
