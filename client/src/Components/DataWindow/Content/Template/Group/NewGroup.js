@@ -10,12 +10,12 @@ export default {
         __typename: "Group"
       };
       template.groups = [...template.groups, newGroup];
-      cache.writeQuery({
-        query,
-        variables: { id: template.id },
-        data: { template }
-      });
-      console.log("Конец мутации");   
+      // cache.writeQuery({
+      //   query,
+      //   variables: { id: template.id },
+      //   data: { template }
+      // });
+      console.log("Хуяк!!! Конец мутации");   
     }
   }
 };
