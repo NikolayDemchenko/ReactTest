@@ -12,7 +12,9 @@ export default ({ group, template}) => {
   return (
     <div key={group.id} className={container.FlexColumn}>
       Имя группы :
+      <div className={container.FlexRow}>
       <input className={control.Input} defaultValue={group.name} />
+      <Delete /></div>
       <div className={container.FlexRow}>
         <Add
           onClick={e => {
@@ -21,7 +23,7 @@ export default ({ group, template}) => {
           }}
           isVisible={!group.elements.find(item => item.name == "")}
         />
-        <Delete />
+        
       </div>
       {group.elements.map(el => {
         return (
