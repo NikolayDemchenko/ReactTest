@@ -1,20 +1,34 @@
 import React from "react";
-import { useMutation } from "@apollo/react-hooks";
+import gql from "graphql-tag";
+import { useQuery, useMutation } from "@apollo/react-hooks";
 import NavigationPanel from "../NavigationPanel/NavigationPanel";
 import container from "../../../../Styles/Container.module.css";
 import Add from "../../../Buttons/PlusButton/TemplateItemPlus";
 import Save from "../../../Buttons/SaveButton/SaveButton";
 import Delete from "../../../Buttons/DeleteButton/DeleteButton";
 import control from "../../../../Styles/ControlStyle.module.css";
-import DataGroups from "./Group/Groups";
-import { NEW_GROUP } from "./TemplateQueries";
-export default ({ template }) => {
-  console.log("Загрузка шаблона");
-
+import Groups from "./Group/Groups";
+import { NEW_GROUP, UPDATE_GROUP_NAME } from "./TemplateQueries";
+export default ({ template, client }) => {
   const [newGroup] = useMutation(NEW_GROUP, {
     variables: { template }
   });
-  console.log("Groups:", template.groups);
+
+  const [updateGroupName] = useMutation(UPDATE_GROUP_NAME);
+  const changeName = (name,group) => {
+    group.name=name
+    updateGroupName({ variables: { template, group } });
+  };
+
+  const {AddGroup} = client.readQuery({
+    query: gql`
+      query GetItem {
+        AddGroup @client
+      }
+    `
+  });
+  console.log("Загрузка шаблона, AddGroup:", AddGroup);
+
   return (
     <div>
       <NavigationPanel folder={template} />
@@ -29,10 +43,12 @@ export default ({ template }) => {
           onClick={e => {
             e.preventDefault();
             newGroup();
+            console.log("New Group2:", template.groups);
           }}
-          isVisible={!template.groups.find(item => item.name == "")}
+          isVisible={AddGroup}
+          // isVisible={!template.groups.find(item => item.name == "")}
         />
-        <DataGroups template={template} />
+        <Groups changeName={changeName} template={template} />
       </div>
     </div>
   );

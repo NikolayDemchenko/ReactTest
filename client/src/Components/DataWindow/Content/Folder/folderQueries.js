@@ -1,12 +1,5 @@
 import gql from "graphql-tag";
 
-// Запрос на получение FolderId
-export const GET_ITEM = gql`
-  query GetId {
-    ItemType @client
-    ItemId @client
-  }
-`;
 
 export const GET_ALL_FOLDERS = gql`
   {

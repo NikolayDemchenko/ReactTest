@@ -4,12 +4,11 @@ import container from "../../Styles/Container.module.css";
 import { useQuery } from "@apollo/react-hooks";
 import FolderSwitch from "./Content/Folder/FolderSwitch";
 import Template from "./Content/Template/DataTemplate";
-import { GET_ITEM } from "./Content/Folder/FolderQueries";
-
+import {GET_DATA} from './Queries'
 export default () => {
   console.log("Рендеринг Window");
   // Генерация контента
-  const { ItemType, ItemId} = useQuery(GET_ITEM).data;
+  const { ItemType, ItemId} = useQuery(GET_DATA).data;
 
   let DataContent;
   switch (ItemType) {

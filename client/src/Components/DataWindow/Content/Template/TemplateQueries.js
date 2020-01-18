@@ -23,6 +23,11 @@ export const NEW_GROUP = gql`
     newGroup(template: $template) @client 
   }
 `;
+export const UPDATE_GROUP_NAME = gql`
+  mutation UpdateGroupName($template: Template,$group:Group) {
+    updateGroupName(template: $template,group:$group) @client 
+  }
+`;
 export const NEW_ELEMENT = gql`
   mutation NewElement($template: Template,$group:Group) {
     newElement(template: $template,group:$group) @client 

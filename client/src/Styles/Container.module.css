@@ -14,17 +14,18 @@
   overflow: hidden;
   /* background-color: #3b485d; */
   background-color: #243a5d;
-  color: rgba(192, 220 , 255, 0.712);
+  color: rgba(192, 220, 255, 0.712);
 }
-.BaseName,.FolderName{
+.BaseName,
+.FolderName {
   display: flex;
   align-items: center;
-  border: 1px solid rgb(134, 100, 100)
+  border: 1px solid rgb(134, 100, 100);
 }
 
-.FolderName{
+.FolderName {
   justify-content: center;
-  border: 1px solid rgb(98, 156, 134)
+  border: 1px solid rgb(98, 156, 134);
 }
 .TemplateGrid {
   border: 1px solid black;
@@ -41,5 +42,13 @@
 .FlexColumn {
   display: flex;
   flex-direction: column;
+  border: 1px solid rgb(35, 52, 151);
+}
+.Group {
+  display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+  margin: 4px;
+  background-color: #243a5d;
   border: 1px solid rgb(35, 52, 151);
 }
