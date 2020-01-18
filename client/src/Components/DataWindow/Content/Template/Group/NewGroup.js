@@ -1,26 +1,20 @@
 import { GET_TEMPLATE_BY_ID as query } from "../TemplateQueries";
 import { merge } from "lodash";
+import SetAddGroup from '../Function/SetAddGroup'
 
-const isVisible = (cache, value) => {
-  cache.writeData({
-    data: {
-      AddGroup: value
-    }
-  });
-};
 
 const NewGroup = {
   Mutation: {
     newGroup: (_root, { template }, { cache }) => {
       console.log("newTemplate: ", template);
       const newGroup = {
-        id: Math.random(),
+        id: new Date(),
         name: "",
         elements: [],
         __typename: "Group"
       };
 
-      isVisible(cache, false);
+      SetAddGroup(cache, false);
 
       template.groups = [...template.groups, newGroup];
       cache.writeQuery({
@@ -47,8 +41,7 @@ const UpdateGroupName = {
         query,
         variables: { id: template.id },
         data: { template }
-      });    
-        isVisible(cache, true);  
+      });           
       console.log("Хуяк!!! Конец мутации: ");
     }
   }

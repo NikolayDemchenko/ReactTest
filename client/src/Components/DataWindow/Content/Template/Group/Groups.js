@@ -1,6 +1,4 @@
 import React from "react";
-import { NEW_ELEMENT } from "../TemplateQueries";
-import {useMutation } from "@apollo/react-hooks";
 import Group from "./Group";
 export default ({ template,changeName }) => {
  const{groups}=template
