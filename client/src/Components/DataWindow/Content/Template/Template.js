@@ -1,6 +1,6 @@
 import React from "react";
 import gql from "graphql-tag";
-import { useQuery, useMutation } from "@apollo/react-hooks";
+import {useMutation } from "@apollo/react-hooks";
 import NavigationPanel from "../NavigationPanel/NavigationPanel";
 import container from "../../../../Styles/Container.module.css";
 import Add from "../../../Buttons/PlusButton/TemplateItemPlus";
@@ -46,7 +46,7 @@ export default ({ template, client }) => {
             console.log("New Group2:", template.groups);
           }}
           isVisible={AddGroup}
-          // isVisible={!template.groups.find(item => item.name == "")}
+        
         />
         <Groups changeName={changeName} template={template} />
       </div>

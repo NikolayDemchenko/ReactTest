@@ -33,3 +33,8 @@ export const NEW_ELEMENT = gql`
     newElement(template: $template,group:$group) @client 
   }
 `;
+export const UPDATE_ELEMENT_NAME = gql`
+  mutation UpdateElementName($template: Template,$group:Group,$element:Element) {
+    updateElementName(template: $template,group:$group,element:$element) @client 
+  }
+`;

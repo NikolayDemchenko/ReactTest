@@ -1,0 +1,20 @@
+.Group {
+  display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+  margin: 4px;
+  background-color: #243a5d;
+  border: 1px solid rgb(35, 52, 151);
+}
+.FlexRow {
+  display: flex;
+  align-items: center;
+  border: 1px solid rgb(35, 52, 151);
+}
+.Element {
+  display: flex;
+  align-items: center;
+  background-color: #455164;
+  margin: 2px;
+  border: 1px solid rgb(134, 100, 100);
+}
