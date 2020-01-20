@@ -2,26 +2,24 @@ import React,{useEffect,useState} from "react";
 import DeleteButton from "Components/Buttons/DeleteButton/DeleteButton";
 import controlStyle from "../../../../../../Styles/ControlStyle.module.css";
 import style from "../../Styles/Template.module.css";
-import CheckButton from "../../../../../Buttons/CheckButton/IsVisibleCheckBtn";
-import { SetAddElement } from "../../Function/SetAdd";
-import { useApolloClient } from "@apollo/react-hooks";
+import CheckBtn from "../../../../../Buttons/CheckButton/VisibleCheckBtn";
 
-export default ({  onClick, name,changeName }) => {
-  const client = useApolloClient();
+export default ({ checkBtnTrue, onClick, name, changeName }) => {
+
   const [isVisibleCheckBtn, setVisibleCheckBtn] = useState(false);
 
-  const setName = input => {
+  const checkBtnClick = input => {
     if (input.value !== "") {
       changeName(input.value);
       input.blur();
-      SetAddElement(client, true);
+      checkBtnTrue();
       setVisibleCheckBtn(false);
     }
   };
   const keyPressEnter = (event, input) => {
     if (event.key == "Enter") {
       console.log("enter press here! ");
-      setName(input);
+      checkBtnClick(input);
     }
   };
 
@@ -48,9 +46,9 @@ export default ({  onClick, name,changeName }) => {
         className={controlStyle.Input}
         defaultValue={name}
       />
-        <CheckButton
-          isVisible={isVisibleCheckBtn}
-          onClick={() => setName(input)}
+        <CheckBtn
+          visible={isVisibleCheckBtn}
+          onClick={() => checkBtnClick(input)}
         />
       <DeleteButton onClick={onClick} />
     </div>

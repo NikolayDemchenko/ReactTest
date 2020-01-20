@@ -1,11 +1,10 @@
-import React from "react";
+import React,{useState} from "react";
 import gql from "graphql-tag";
 import {useMutation } from "@apollo/react-hooks";
 import NavigationPanel from "../NavigationPanel/NavigationPanel";
 import container from "../../../../Styles/Container.module.css";
 import Add from "../../../Buttons/PlusButton/TemplateItemPlus";
 import Save from "../../../Buttons/SaveButton/SaveButton";
-import Delete from "../../../Buttons/DeleteButton/DeleteButton";
 import control from "../../../../Styles/ControlStyle.module.css";
 import Groups from "./Group/Groups";
 import { NEW_GROUP, UPDATE_GROUP_NAME } from "./TemplateQueries";
@@ -18,16 +17,19 @@ export default ({ template, client }) => {
   const changeName = (name,group) => {
     group.name=name
     updateGroupName({ variables: { template, group } });
+    setAddGroup(false)
   };
+  const [addGroup, setAddGroup] = useState(true);
 
-  const {AddGroup} = client.readQuery({
-    query: gql`
-      query GetItem {
-        AddGroup @client
-      }
-    `
-  });
-  console.log("Загрузка шаблона, AddGroup:", AddGroup);
+  // const {AddGroup} = client.readQuery({
+  //   query: gql`
+  //     query GetItem {
+  //       AddGroup @client
+  //     }
+  //   `
+  // });
+
+  console.log("Загрузка шаблона, AddGroup:", addGroup);
 
   return (
     <div>
@@ -36,19 +38,19 @@ export default ({ template, client }) => {
         <div className={container.FlexRow}>
           Имя шаблона :
           <input className={control.Input} defaultValue={template.name} />
-          <Save />
-          <Delete />
+          <Save />        
         </div>
         <Add
           onClick={e => {
             e.preventDefault();
             newGroup();
+            setAddGroup(false)
             console.log("New Group2:", template.groups);
           }}
-          isVisible={AddGroup}
+          isVisible={addGroup}
         
         />
-        <Groups changeName={changeName} template={template} />
+        <Groups setAddState={setAddGroup} changeName={changeName} template={template} />
       </div>
     </div>
   );

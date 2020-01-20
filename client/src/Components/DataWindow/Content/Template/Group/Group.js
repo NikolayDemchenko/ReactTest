@@ -3,55 +3,56 @@ import gql from "graphql-tag";
 import style from "../Styles/Template.module.css";
 import control from "../../../../../Styles/ControlStyle.module.css";
 import Elements from "./Element/Elements";
-import Add from "../../../../Buttons/PlusButton/TemplateItemPlus";
+import AddBtn from "../../../../Buttons/PlusButton/TemplateItemPlus";
 import Delete from "../../../../Buttons/DeleteButton/DeleteButton";
 import { useMutation } from "@apollo/react-hooks";
-import { NEW_ELEMENT,UPDATE_ELEMENT_NAME } from "../../Template/TemplateQueries";
-import CheckButton from "../../../../Buttons/CheckButton/IsVisibleCheckBtn";
-import {SetAddGroup} from "../Function/SetAdd";
+import {
+  NEW_ELEMENT,
+  UPDATE_ELEMENT_NAME
+} from "../../Template/TemplateQueries";
+import CheckBtn from "../../../../Buttons/CheckButton/VisibleCheckBtn";
+import { setAddGroup } from "../Function/SetAdd";
 import { useApolloClient } from "@apollo/react-hooks";
-export default ({ group, template, changeName }) => {
-
-  const [updateElementName] = useMutation(UPDATE_ELEMENT_NAME);
-  const changeElementName = (name,element) => {
-    element.name=name
-    updateElementName({ variables: { template, group, element } });
-  };
-
+export default ({setAddState, group, template, changeName }) => {
   const [newElement] = useMutation(NEW_ELEMENT, {
     variables: { template, group }
   });
-  const client = useApolloClient();
-  const { AddElement } = client.readQuery({
-    query: gql`
-      query GetItem {
-        AddElement @client
-      }
-    `
-  });
 
-  const [isVisibleCheckBtn, setVisibleCheckBtn] = useState(false);
+  const [updateElementName] = useMutation(UPDATE_ELEMENT_NAME);
+  const changeElementName = (name, element) => {
+    element.name = name;
+    updateElementName({ variables: { template, group, element } });
+    setAddElement(false);
+  };
+  
+  const [visibleCheckBtn, setVisibleCheckBtn] = useState(false);
 
-  const setName = input => {
+  const [addElement, setAddElement] = useState(group.name!==""?true:false);
+ 
+
+  const CheckBtnClick = input => {
     if (input.value !== "") {
       changeName(input.value);
       input.blur();
-      SetAddGroup(client, true);
+      setAddState(true);
+      setAddElement(true);
       setVisibleCheckBtn(false);
     }
   };
+
   const keyPressEnter = (event, input) => {
     if (event.key == "Enter") {
       console.log("enter press here! ");
-      setName(input);
+      CheckBtnClick(input);
     }
   };
 
   const inputChange = name => {
     changeName(name);
+    setAddElement(false);
     name !== "" ? setVisibleCheckBtn(true) : setVisibleCheckBtn(false);
   };
-  console.log("isVisibleCheckBtn", isVisibleCheckBtn);
+  console.log("isVisibleCheckBtn", visibleCheckBtn);
 
   useEffect(() => {
     if (group.name == "") {
@@ -67,25 +68,34 @@ export default ({ group, template, changeName }) => {
           ref={node => {
             input = node;
           }}
-          onChange={() => inputChange(input.value)}
+          onChange={() => {
+            inputChange(input.value);
+          }}
           onKeyPress={e => keyPressEnter(e, input)}
           className={control.Input}
           defaultValue={group.name}
         />
-        <CheckButton
-          isVisible={isVisibleCheckBtn}
-          onClick={() => setName(input)}
+        <CheckBtn
+          visible={visibleCheckBtn}
+          onClick={() => {
+            CheckBtnClick(input);
+          }}
         />
         <Delete />
       </div>
-      <Add
+      <AddBtn
         onClick={e => {
           e.preventDefault();
           newElement();
+          setAddElement(false);
         }}
-        isVisible={AddElement}      
+        isVisible={addElement}
       />
-      <Elements elements={group.elements} changeName={changeElementName} />
+      <Elements
+        elements={group.elements}
+        changeName={changeElementName}
+        checkBtnTrue={() => setAddElement(true)}
+      />
     </div>
   );
 };

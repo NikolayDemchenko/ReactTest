@@ -1,6 +1,6 @@
 import { GET_TEMPLATE_BY_ID as query } from "../TemplateQueries";
 import { merge } from "lodash";
-import { SetAddGroup } from "../Function/SetAdd";
+// import { setAddGroup } from "../Function/SetAdd";
 
 export default {
   Mutation: {
@@ -13,7 +13,7 @@ export default {
         __typename: "Group"
       };
 
-      SetAddGroup(cache, false);
+      // setAddGroup(cache, false);
       template.groups.unshift(newGroup);
       cache.writeQuery({
         query,

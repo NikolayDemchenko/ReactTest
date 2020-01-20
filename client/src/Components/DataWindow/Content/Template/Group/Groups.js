@@ -1,6 +1,6 @@
 import React from "react";
 import Group from "./Group";
-export default ({ template, changeName }) => {
+export default ({setAddState, template, changeName }) => {
   const { groups } = template;
   // Сортировка
   // groups.sort((prev, next) => {
@@ -13,6 +13,7 @@ export default ({ template, changeName }) => {
       key={group.id}
       group={group}
       template={template}
+      setAddState={setAddState}
       changeName={name => changeName(name, group)}
     />
   ));

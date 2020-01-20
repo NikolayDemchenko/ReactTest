@@ -1,5 +1,5 @@
 import { GET_TEMPLATE_BY_ID as query } from "../../TemplateQueries";
-import { SetAddElement } from "../../Function/SetAdd";
+import { setAddElement } from "../../Function/SetAdd";
 export default {
   Mutation: {
     newElement: (_root, { template, group }, { cache }) => {
@@ -24,7 +24,7 @@ export default {
         data: { template }
       });
 
-      SetAddElement(cache, false);
+      setAddElement(cache, false);
       console.log("Конец мутации");
     }
   },

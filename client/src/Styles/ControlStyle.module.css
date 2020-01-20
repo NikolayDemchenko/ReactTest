@@ -40,7 +40,8 @@
   color: rgb(167, 184, 199);
 }
 .Input {
-  color: #fff;
+  font-size: large;
+  color: rgb(202, 202, 202);
   background: transparent;
   border-color: rgba(51, 148, 238, 0.667);
   /* border: none;
