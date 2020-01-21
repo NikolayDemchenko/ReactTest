@@ -12,7 +12,7 @@ import {
 
 export default ({ parentId }) => {
   const variables = { parentId };
-  const { loading, error, data, client } = useQuery(query, {
+  const { loading, error, data, client} = useQuery(query, {
     variables: { parentId }
   });  
   const [newParentFolder] = useMutation(NEW_PARENT_FOLDER, {

@@ -1,6 +1,5 @@
 import { GET_TEMPLATE_BY_ID as query } from "../TemplateQueries";
-import { merge } from "lodash";
-// import { setAddGroup } from "../Function/SetAdd";
+
 
 export default {
   Mutation: {
@@ -13,7 +12,6 @@ export default {
         __typename: "Group"
       };
 
-      // setAddGroup(cache, false);
       template.groups.unshift(newGroup);
       cache.writeQuery({
         query,
@@ -37,6 +35,20 @@ export default {
         data: { template }
       });
       console.log("Хуяк!!! Конец мутации: ");
+    },
+    deleteGroup: (_root, { template, group }, { cache }) => {
+      console.log("deleteGroup: ", group.name);
+      template.groups = template.groups.filter(_group => {
+        if (_group.id !== group.id) {
+          return true;
+        }
+      });      
+      cache.writeQuery({
+        query,
+        variables: { id: template.id },
+        data: { template }
+      });
+      console.log("Хуяк!!! Конец мутации: ", template.groups);
     }
   }
 };

@@ -18,6 +18,7 @@ export const GET_TEMPLATE_BY_ID = gql`
     }
   }
 `;
+
 export const NEW_GROUP = gql`
   mutation NewGroup($template: Template) {
     newGroup(template: $template) @client 
@@ -28,6 +29,11 @@ export const UPDATE_GROUP_NAME = gql`
     updateGroupName(template: $template,group:$group) @client 
   }
 `;
+export const DELETE_GROUP = gql`
+  mutation DeleteGroup($template: Template,$group:Group) {
+    deleteGroup(template: $template,group:$group) @client 
+  }
+`;
 export const NEW_ELEMENT = gql`
   mutation NewElement($template: Template,$group:Group) {
     newElement(template: $template,group:$group) @client 
@@ -36,5 +42,15 @@ export const NEW_ELEMENT = gql`
 export const UPDATE_ELEMENT_NAME = gql`
   mutation UpdateElementName($template: Template,$group:Group,$element:Element) {
     updateElementName(template: $template,group:$group,element:$element) @client 
+  }
+`;
+export const DELETE_ELEMENT = gql`
+  mutation DeleteElement($template: Template,$group:Group,$element:Element) {
+    deleteElement(template: $template,group:$group,element:$element) @client 
+  }
+`;
+export const REFETCH_TEMPLATE = gql`
+  mutation RefetchTemplate{
+    refetchTemplate @client
   }
 `;

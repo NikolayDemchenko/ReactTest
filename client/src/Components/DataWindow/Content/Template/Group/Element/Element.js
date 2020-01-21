@@ -1,10 +1,10 @@
 import React,{useEffect,useState} from "react";
-import DeleteButton from "Components/Buttons/DeleteButton/DeleteButton";
+import Delete from "Components/Buttons/Delete/Delete";
 import controlStyle from "../../../../../../Styles/ControlStyle.module.css";
 import style from "../../Styles/Template.module.css";
 import CheckBtn from "../../../../../Buttons/CheckButton/VisibleCheckBtn";
 
-export default ({ checkBtnTrue, onClick, name, changeName }) => {
+export default ({ checkBtnTrue, remove, name, changeName }) => {
 
   const [isVisibleCheckBtn, setVisibleCheckBtn] = useState(false);
 
@@ -50,7 +50,7 @@ export default ({ checkBtnTrue, onClick, name, changeName }) => {
           visible={isVisibleCheckBtn}
           onClick={() => checkBtnClick(input)}
         />
-      <DeleteButton onClick={onClick} />
+      <Delete onClick={remove} />
     </div>
   );
 };

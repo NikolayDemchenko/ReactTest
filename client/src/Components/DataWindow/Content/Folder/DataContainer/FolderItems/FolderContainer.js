@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import updateOrCreateFolder from "Function/updateOrCreateFolder";
 import setItem from "Function/setItem";
-import FolderPlus from "../../../../../Buttons/PlusButton/FolderPlus";
+import FolderPlus from "../../../../../Buttons/Plus/FolderPlus";
 import IsVisibleHOC from "../../../../../hoc/IsVisibleHOC";
 import FolderComponent from "./FolderComponent";
 import style from "../../../../../../Styles/Folder.module.css";

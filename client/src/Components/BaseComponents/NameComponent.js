@@ -1,6 +1,6 @@
 import React from "react";
-import SaveButton from "Components/Buttons/SaveButton/SaveButton";
-import DeleteButton from "Components/Buttons/DeleteButton/DeleteButton";
+import Save from "Components/Buttons/Save/Save";
+import Delete from "Components/Buttons/Delete/Delete";
 import controlStyle from '../../Styles/ControlStyle.module.css'
 export default ({style,save, remove, name }) => {
   let input;
@@ -16,7 +16,7 @@ export default ({style,save, remove, name }) => {
         className={controlStyle.Input}
         defaultValue={name}
       />
-      <SaveButton       
+      <Save       
         onClick={e => {
           //Проверка
           console.log("Сохранено: ", input.value);
@@ -24,7 +24,7 @@ export default ({style,save, remove, name }) => {
           save(input.value);
         }}
       />
-      <DeleteButton     
+      <Delete     
         onClick={e => {
           e.preventDefault();
           remove();

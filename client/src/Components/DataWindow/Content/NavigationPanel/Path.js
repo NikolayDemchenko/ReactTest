@@ -2,7 +2,7 @@ import React from "react";
 import { useApolloClient } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import setItem from "Function/setItem";
-import HomeButton from "Components/Buttons/HomeButton/HomeButton";
+import Home from "Components/Buttons/Home/Home";
 
 export default ({style, folder }) => {
   // Получение родителя открытой Folder
@@ -40,7 +40,7 @@ export default ({style, folder }) => {
   });
   return (
     <div className={style.PathContainer}>
-      <HomeButton onClick={() => setItem(client, null)} />
+      <Home onClick={() => setItem(client, null)} />
       {items}
       <div className={style.OpenedItem}>{folder.name}</div>
     </div>
