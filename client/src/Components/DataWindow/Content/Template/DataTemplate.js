@@ -12,15 +12,15 @@ export default id => {
     variables,
     notifyOnNetworkStatusChange: true
   });
-  // const [updateTemplate] = useMutation(UPDATE_TEMPLATE);
+  const [update] = useMutation(updateTemplate(template));
   if (loading) return "Loading...";
   if (error) return `Error! ${error.message}`;
   const { template } = data;
-  const update = () => {
-    // updateTemplate({ variables: template });
-    updateTemplate(template)
+  // const update = () => {
+  //   // updateTemplate({ variables: template });
     
-  };
+    
+  // };
   // console.log("data.template", template);
   return (
     <Template update={update} undo={() => refetch()} template={template} />
