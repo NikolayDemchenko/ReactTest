@@ -1,6 +1,5 @@
 import { GET_TEMPLATE_BY_ID as query } from "../TemplateQueries";
 
-
 export default {
   Mutation: {
     newGroup: (_root, { template }, { cache }) => {
@@ -24,7 +23,7 @@ export default {
       console.log("updateGroupName: ", group.name);
 
       template.groups = template.groups.map(_group => {
-        if (_group.id == group.id) {
+        if (_group.id === group.id) {
           _group = group;
         }
         return _group;
@@ -38,11 +37,9 @@ export default {
     },
     deleteGroup: (_root, { template, group }, { cache }) => {
       console.log("deleteGroup: ", group.name);
-      template.groups = template.groups.filter(_group => {
-        if (_group.id !== group.id) {
-          return true;
-        }
-      });      
+      template.groups = template.groups.filter(_group =>
+        _group.id !== group.id ? true : false
+      );
       cache.writeQuery({
         query,
         variables: { id: template.id },

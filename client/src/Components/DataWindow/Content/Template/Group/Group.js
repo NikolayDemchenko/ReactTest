@@ -40,7 +40,7 @@ export default ({ remove, add, setAdd, group, template, changeName }) => {
   };
 
   const keyPressEnter = (event, input) => {
-    if (event.key == "Enter") {
+    if (event.key === "Enter") {
       console.log("enter press here! ");
       CheckBtnClick(input);
     }
@@ -54,7 +54,7 @@ export default ({ remove, add, setAdd, group, template, changeName }) => {
   console.log("isVisibleCheckBtn", visibleCheckBtn);
 
   useEffect(() => {
-    if (group.name == "") {
+    if (group.name === "") {
       input.focus();
     }
   });

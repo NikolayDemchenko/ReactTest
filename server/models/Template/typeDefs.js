@@ -12,22 +12,25 @@ module.exports = gql`
     parentId: ID!
     groups: [Group]
     updated:String!
+    instances:[Instance]
   }
   type Group {
     id: ID!
     name: String!  
     elements: [Element]    
   }
-  input GroupInput {    
+  input GroupInput {
+    id: ID    
     name: String!  
-    Elements: [ElementInput]    
+    elements: [ElementInput]    
   }
   type Element {
     id: ID!
     name: String!  
     unitId: ID    
   }
-  input ElementInput {   
+  input ElementInput {
+    id:ID   
     name: String!  
     unitId: ID   
   }
@@ -36,8 +39,8 @@ module.exports = gql`
     addTemplate(
       name: String!,
       parentId: ID, 
-       Groups: [GroupInput]): Template
+      groups: [GroupInput]): Template
     deleteTemplate(id: ID!): Boolean
-    updateTemplate(id: ID!, name: String!, parentId: ID, Groups: [GroupInput]):Template
+    updateTemplate(id: ID!, name: String!, parentId: ID!, groups: [GroupInput]):Template
   }
 `;

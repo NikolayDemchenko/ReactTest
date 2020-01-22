@@ -17,7 +17,7 @@ export default ({ checkBtnTrue, remove, name, changeName }) => {
     }
   };
   const keyPressEnter = (event, input) => {
-    if (event.key == "Enter") {
+    if (event.key === "Enter") {
       console.log("enter press here! ");
       checkBtnClick(input);
     }
@@ -28,7 +28,7 @@ export default ({ checkBtnTrue, remove, name, changeName }) => {
     name !== "" ? setVisibleCheckBtn(true) : setVisibleCheckBtn(false);
   };
   useEffect(() => {
-    if (name == "") {
+    if (name === "") {
       input.focus();
     }
   });
