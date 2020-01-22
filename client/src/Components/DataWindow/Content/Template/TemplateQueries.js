@@ -36,8 +36,7 @@ export const updateTemplate = template => {
        name: "${element.name}"                
      }`}
     )
-  }`;
-  
+  }`;  
   const groups = `${template.groups.map(
     group =>
       `{
@@ -46,7 +45,6 @@ export const updateTemplate = template => {
       elements:[${elements(group)}]        
     }`
   )}`;
-
   const mutation = `
   updateTemplate(
     id: "${template.id}"
@@ -60,6 +58,7 @@ export const updateTemplate = template => {
     groups
   }`;
   console.log("Запрос :", mutation);
+  return  gql`${mutation}`;
 };
 
 export const UPDATE_TEMPLATE = gql`
