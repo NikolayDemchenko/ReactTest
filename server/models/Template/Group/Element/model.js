@@ -4,10 +4,11 @@ const ObjectId = mongoose.Schema.Types.ObjectId;
 const scheme = new mongoose.Schema(
   {
     name: String,
-    parentId: ObjectId,
+    templateId: ObjectId,
+    groupId: ObjectId,
     updated: { type: Date, default: Date.now }
   },
   { versionKey: false }
 );
 
-module.exports = mongoose.model("Template", scheme);
+module.exports = mongoose.model("Element", scheme);

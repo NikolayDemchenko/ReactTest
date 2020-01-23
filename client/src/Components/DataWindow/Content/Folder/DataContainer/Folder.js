@@ -18,8 +18,8 @@ export default ({ id }) => {
   });
   if (loading) return "Loading...";
   if (error) return `Error! ${error.message}`;
-  console.log("data:", data);
-  console.log("Загрузка папок");
+  // console.log("data:", data);
+  // console.log("Загрузка папок");
   return (
     <div>
       <NavigationPanel folder={data.folder} />

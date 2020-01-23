@@ -1,6 +1,8 @@
 const Instances = require("../Instance/model");
 const Templates = require("./model");
-const typeDefs = require('./typeDefs');
+const Groups = require("./Group/model");
+const Elements = require("./Group/Element/model");
+const typeDefs = require("./typeDefs");
 
 const resolvers = {
   Query: {
@@ -9,14 +11,17 @@ const resolvers = {
     },
     template: (_, { id }) => {
       return Templates.findById(id);
-    },
-    folderTemplates: (_, { parentId }) => {
-      return Templates.find({ parentId });
-    },
+    }
   },
   Template: {
     instances: ({ id }) => {
       return Instances.find({ parentId: id });
+    },
+    groups: ({ id }) => {
+      return Groups.find({ parentId: id });
+    },
+    elements: ({ id }) => {
+      return Elements.find({ templateId: id });
     }
   },
   Mutation: {
@@ -44,8 +49,11 @@ const resolvers = {
     },
     updateTemplate: async (_, { id, name, parentId, groups }) => {
       try {
-        console.log("Проблема тут!");
-        const item = await Templates.findByIdAndUpdate(id, { name, parentId, groups, updated: new Date() }, { new: true });
+        const item = await Templates.findByIdAndUpdate(
+          id,
+          { name, parentId, groups, updated: new Date() },
+          { new: true }
+        );
         return item;
       } catch (err) {
         throw err;
@@ -54,4 +62,4 @@ const resolvers = {
   }
 };
 
-module.exports = { typeDefs, resolvers }
+module.exports = { typeDefs, resolvers };

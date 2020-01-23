@@ -11,7 +11,9 @@ const startServer = async () => {
     modules: [
       require("../models/Folder"),
       require("../models/Template"),
-      require("../models/Instance")
+      require("../models/Instance"),
+      require("../models/Template/Group"),
+      require("../models/Template/Group/Element"),
     ]
   });
   server.applyMiddleware({ app, path: "/graphql" });

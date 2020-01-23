@@ -1,4 +1,5 @@
 import { GET_TEMPLATE_BY_ID as query } from "../TemplateQueries";
+import { GET_GROUP_BY_ID } from "./Queries";
 
 export default {
   Mutation: {
@@ -7,7 +8,8 @@ export default {
       const newGroup = {
         id: Date.now(),
         name: "",
-        elements: [],
+        parentId:template.id,
+        // elements: [],
         __typename: "Group"
       };
 
@@ -19,19 +21,14 @@ export default {
       });
       console.log("Хуяк!!! Конец мутации");
     },
-    updateGroupName: (_root, { template, group }, { cache }) => {
-      console.log("updateGroupName: ", group.name);
+    
+    updateGroupName: (_root, { group }, { cache }) => {
+      console.log("updateGroupName: ", group);
 
-      template.groups = template.groups.map(_group => {
-        if (_group.id === group.id) {
-          _group = group;
-        }
-        return _group;
-      });
       cache.writeQuery({
-        query,
-        variables: { id: template.id },
-        data: { template }
+        query:GET_GROUP_BY_ID,
+        variables: { group },
+        data: { group }
       });
       console.log("Хуяк!!! Конец мутации: ");
     },
