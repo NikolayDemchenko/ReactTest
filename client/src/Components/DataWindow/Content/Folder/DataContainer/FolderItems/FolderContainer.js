@@ -1,9 +1,15 @@
 import React, { useEffect } from "react";
-import updateOrCreateFolder from "../../Function/updateOrCreateFolder";
+import { useMutation } from "@apollo/react-hooks";
+import save from "../../../../../../Function/UpdateOrCreate";
 import setItem from "Function/setItem";
 import FolderPlus from "../../../../../Buttons/Plus/FolderPlus";
 import IsVisibleHOC from "../../../../../hoc/IsVisibleHOC";
 import FolderComponent from "./FolderComponent";
+import {
+  ADD_TEMPLATE,
+  UPDATE_TEMPLATE,
+  DELETE_TEMPLATE
+} from "../../../Template/TemplateQueries";
 import style from "../../../../../../Styles/Folder.module.css";
 export default ({
   client,
@@ -17,13 +23,21 @@ export default ({
     refetchFolder
   }
 }) => {
+  // Редактирование Темплейта
+  const [createTemplate] = useMutation(ADD_TEMPLATE);
+  const [updateTemplate] = useMutation(UPDATE_TEMPLATE);
+  const [deleteTemplate] = useMutation(DELETE_TEMPLATE);
+  const removeTemplate = variables => {
+    if (typeof variables.id !== "number") {
+      deleteTemplate({ variables });
+    }
+    refetchFolder();
+  };
+
   useEffect(() => {
     return refetchFolder;
   }, [refetchFolder]);
 
-  const save = item => {
-    updateOrCreateFolder(createFolder, updateFolder, item);
-  };
   const removeFolder = id => {
     if (id == null) {
       refetchFolder();
@@ -38,17 +52,21 @@ export default ({
     <FolderComponent
       key={id}
       id={id}
-      name={name}     
+      name={name}
       style={style}
-      save={name => save({ id, name, parentId })}
+      save={value =>
+        save(createFolder, updateFolder, { id, parentId, name: value })
+      }
       remove={() => removeFolder(id)}
       onClick={() => Click(id)}
     />
   ));
   const templateItems =
     templates !== undefined
-      ? templates.map(({ id, name }) => (
+      ? templates.map(({ id, name,parentId }) => (
           <FolderComponent
+            save={value => save(createTemplate, updateTemplate, { id, parentId, name: value })}
+            remove={() => removeTemplate({ id })}
             key={id}
             id={id}
             name={name}
@@ -65,8 +83,6 @@ export default ({
     if (prev.props.name > next.props.name) return 1;
     return null;
   });
-  // Проверка
-  // items.forEach(item => console.log("item name:", item.props.name));
 
   const AddFolder = () =>
     IsVisibleHOC(FolderPlus)({

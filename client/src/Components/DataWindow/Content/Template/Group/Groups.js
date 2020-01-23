@@ -1,7 +1,7 @@
 import React from "react";
 import { useMutation } from "@apollo/react-hooks";
 import { UPDATE_GROUP, ADD_GROUP, DELETE_GROUP } from "./Queries";
-import upOrCrFolder from "./Function/upOrCrGroup";
+import upOrCrGroup from "../../../../../Function/UpdateOrCreate";
 import Group from "./Group";
 export default ({ refetch, setAdd, template, add, changeName }) => {
   const { groups } = template;
@@ -10,12 +10,14 @@ export default ({ refetch, setAdd, template, add, changeName }) => {
   const [updateGroup] = useMutation(UPDATE_GROUP);
   const [deleteGroup] = useMutation(DELETE_GROUP);
   const removeGroup = variables => {
-    deleteGroup({ variables });
+    if (typeof variables.id !== 'number'){
+      deleteGroup({ variables });
+    }
     setAdd(true);
     refetch();
   };
   const save = item => {
-    upOrCrFolder(createGroup, updateGroup, item);
+    upOrCrGroup(createGroup, updateGroup, item);
     refetch();
     // console.log("!!!!!!!!!!!!!Сейвится",item);
   };

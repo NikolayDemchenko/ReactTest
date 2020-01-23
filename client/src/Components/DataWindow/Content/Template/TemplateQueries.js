@@ -16,12 +16,12 @@ export const GET_TEMPLATE = gql`
       groups {
         id
         name
+      }
         elements {
           id
           name
           unitId
         }
-      }
     }
   }
 `;
@@ -43,6 +43,52 @@ export const GET_TEMPLATE_BY_ID = gql`
         parentId
       }
     }
+  }
+`;
+
+export const ADD_TEMPLATE = gql`
+  mutation addTemplate($name: String!, $parentId: ID!) {
+    addTemplate(name: $name, parentId: $parentId) {
+      id
+      name
+      parentId
+      elements {
+        name
+        id
+        templateId
+        groupId
+      }
+      groups {
+        name
+        id
+        parentId
+      }
+    }
+  }
+`;
+export const UPDATE_TEMPLATE = gql`
+  mutation UpdateTemplate($id: ID!, $name: String!, $parentId: ID!) {
+    updateTemplate(id: $id, name: $name, parentId: $parentId) {
+      id
+      name
+      parentId
+      elements {
+        name
+        id
+        templateId
+        groupId
+      }
+      groups {
+        name
+        id
+        parentId
+      }
+    }
+  }
+`;
+export const DELETE_TEMPLATE = gql`
+  mutation DeleteTemplate($id: ID!) {
+    deleteTemplate(id: $id)
   }
 `;
 // Составной запрос
@@ -97,28 +143,6 @@ export const GET_TEMPLATE_BY_ID = gql`
 //   console.log("Конец мутации :", mutation);
 //   return  mutation;
 // };
-
-export const UPDATE_TEMPLATE = gql`
-  mutation UpdateTemplate($id: ID!, $name: String!, $parentId: ID!) {
-    updateTemplate(id: $id, name: $name, parentId: $parentId) {
-      id
-      name
-      parentId
-      elements {
-        name
-        id
-        templateId
-        groupId
-      }
-      groups {
-        name
-        id
-        parentId
-      }
-    }
-  }
-`;
-
 
 export const NEW_ELEMENT = gql`
   mutation NewElement($template: Template, $group: Group) {

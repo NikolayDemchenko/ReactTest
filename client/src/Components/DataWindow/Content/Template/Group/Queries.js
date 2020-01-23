@@ -5,13 +5,7 @@ export const GET_GROUP_BY_ID = gql`
     group(id: $id) {
       id
       name
-      parentId
-      elements {
-        name
-        id
-        templateId
-        groupId
-      }     
+      parentId     
     }
   }
 `;
