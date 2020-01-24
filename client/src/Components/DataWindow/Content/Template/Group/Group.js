@@ -2,18 +2,17 @@ import React, { useState, useEffect } from "react";
 import style from "../Styles/Template.module.css";
 import control from "../../../../../Styles/ControlStyle.module.css";
 import Elements from "./Element/Elements";
-import AddBtn from "../../../../Buttons/Plus/TemplateItemPlus";
-import Delete from "../../../../Buttons/Delete/Delete";
-import { useMutation,
-  //  useApolloClient 
-  } from "@apollo/react-hooks";
+import { Plus, Delete, Check } from "../../../../Buttons/AllButtons";
+import { List } from "../../../../hoc/AllHocs";
+import {
+  useMutation
+  //  useApolloClient
+} from "@apollo/react-hooks";
 import {
   DELETE_ELEMENT,
   NEW_ELEMENT,
   UPDATE_ELEMENT_NAME
 } from "../../Template/Group/Element/Queries";
-import CheckBtn from "../../../../Buttons/CheckButton/VisibleCheckBtn";
-
 export default ({
   remove,
   add,
@@ -42,14 +41,14 @@ export default ({
     setAdd(false);
   };
 
-  const [visibleCheckBtn, setVisibleCheckBtn] = useState(false);
+  const [checkState, setCheck] = useState(false);
 
   const CheckBtnClick = input => {
     if (input.value !== "") {
       save({ id, parentId, name: input.value });
       input.blur();
       setAdd(true);
-      setVisibleCheckBtn(false);
+      setCheck(false);
       console.log("Сейвится группа");
     }
   };
@@ -64,7 +63,7 @@ export default ({
   const inputChange = name => {
     changeName(name);
     setAdd(false);
-    name !== "" ? setVisibleCheckBtn(true) : setVisibleCheckBtn(false);
+    name !== "" ? setCheck(true) : setCheck(false);
   };
   // console.log("isVisibleCheckBtn", visibleCheckBtn);
 
@@ -76,8 +75,8 @@ export default ({
   let input;
   return (
     <div className={style.Group}>
-      Название группы :
       <div className={style.FlexRow}>
+        Группа:
         <input
           ref={node => {
             input = node;
@@ -89,8 +88,9 @@ export default ({
           className={control.Input}
           defaultValue={group.name}
         />
-        <CheckBtn
-          visible={visibleCheckBtn}
+         <div className={style.FlexRow}>
+        <Check
+          on_off={checkState}
           onClick={() => {
             CheckBtnClick(input);
           }}
@@ -100,23 +100,29 @@ export default ({
             console.log("Удаление");
             remove({ id });
           }}
-        />
+        /></div>
       </div>
-      <AddBtn
-        onClick={e => {
-          e.preventDefault();
-          newElement();
-          setAdd(false);
-        }}
-        isVisible={add}
-      />
-      <Elements
-        setAdd={setAdd}
-        refetch={refetch}
-        remove={removeElement}
-        elements={group.elements}
-        changeName={changeElementName}
-        checkBtnTrue={() => setAdd(true)}
+      <List
+        plus={
+          <Plus
+            onClick={e => {
+              e.preventDefault();
+              newElement();
+              setAdd(false);
+            }}
+            on_off={add}
+          />
+        }
+        items={
+          <Elements
+            setAdd={setAdd}
+            refetch={refetch}
+            remove={removeElement}
+            elements={group.elements}
+            changeName={changeElementName}
+            checkBtnTrue={() => setAdd(true)}
+          />
+        }
       />
     </div>
   );

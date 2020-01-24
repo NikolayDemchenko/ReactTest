@@ -1,6 +1,6 @@
 import React from "react";
 import ClickedContainer from "../../../../../BaseComponents/ClickedContainer";
-import NameComponent from "../../../../../BaseComponents/NameComponent";
+import NameComponent from "./NameComponent";
 import {FolderName} from "../../../../../../Styles/Container.module.css";
 
 export default (props) => {

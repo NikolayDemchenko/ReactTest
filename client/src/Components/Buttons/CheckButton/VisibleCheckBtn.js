@@ -1,8 +1,12 @@
-import CheckButton from './Check'
-import controlStyle from '../../../Styles/ControlStyle.module.css'
-import IsVisibleHOC from "../../hoc/IsVisibleHOC";
-  export default  ({onClick,visible}) =>
-  IsVisibleHOC(CheckButton)({
-    style: controlStyle.Crud,
-    onClick
-  })(visible);
+import React from "react";
+import ActiveButton from "../ActiveButton";
+import CheckButton from "./Check";
+import controlStyle from "../../../Styles/ControlStyle.module.css";
+export default ({ onClick, on_off }) => {
+ return <ActiveButton
+    onClick={onClick}
+    on_off={on_off}
+    activeBtn={<CheckButton style= {controlStyle.Crud} onClick={onClick}/>}
+    inactiveBtn={<CheckButton style= {controlStyle.inactiveCrud}/>}
+  />;
+};

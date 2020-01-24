@@ -11,11 +11,6 @@ export const GET_TEMPLATE = gql`
         id
         name
       }
-      elements {
-        id
-        name
-        unitId
-      }
     }
   }
 `;
@@ -42,19 +37,18 @@ export const GET_TEMPLATE_BY_ID = gql`
 export const ADD_TEMPLATE = gql`
   mutation addTemplate($name: String!, $parentId: ID!) {
     addTemplate(name: $name, parentId: $parentId) {
-      id
       name
+      id
       parentId
-      elements {
-        name
-        id
-        templateId
-        groupId
-      }
       groups {
         name
         id
         parentId
+        elements {
+          name
+          id
+          parentId
+        }
       }
     }
   }

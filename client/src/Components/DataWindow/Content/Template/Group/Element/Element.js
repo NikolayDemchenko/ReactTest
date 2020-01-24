@@ -6,6 +6,7 @@ import CheckBtn from "../../../../../Buttons/CheckButton/VisibleCheckBtn";
 
 export default ({ checkBtnTrue, remove, element, changeName,save }) => {
 const{id,name, parentId}=element;
+const [checkState, setCheck] = useState(false);
   const [isVisibleCheckBtn, setVisibleCheckBtn] = useState(false);
 
   const checkBtnClick = input => {
@@ -14,7 +15,7 @@ const{id,name, parentId}=element;
       save({ id, parentId, name: input.value });
       input.blur();
       checkBtnTrue();
-      setVisibleCheckBtn(false);
+      setCheck(false);
     }
   };
   const keyPressEnter = (event, input) => {
@@ -26,7 +27,7 @@ const{id,name, parentId}=element;
 
   const inputChange = name => {
     changeName(name);
-    name !== "" ? setVisibleCheckBtn(true) : setVisibleCheckBtn(false);
+    name !== "" ? setCheck(true) : setCheck(false);
   };
   useEffect(() => {
     if (name === "") {
@@ -35,8 +36,9 @@ const{id,name, parentId}=element;
   });
   let input;
   return (
-    <div className={style.Element}>
-      Название элемента :
+    
+      <div className={style.Element}>
+      Элемент:
       <input
         placeholder="Введите наименование"
         ref={node => {
@@ -48,10 +50,11 @@ const{id,name, parentId}=element;
         defaultValue={name}
       />
         <CheckBtn
-          visible={isVisibleCheckBtn}
+          on_off={checkState}
           onClick={() => checkBtnClick(input)}
         />
       <Delete onClick={remove} />
     </div>
+   
   );
 };

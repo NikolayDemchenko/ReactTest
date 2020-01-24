@@ -1,13 +1,11 @@
 import React from "react";
-import Save from "../Buttons/Save/Save";
-import Delete from "Components/Buttons/Delete/Delete";
-import controlStyle from '../../Styles/ControlStyle.module.css'
-export default ({style,save, remove, name }) => {
+import Save from "../../../../../Buttons/Save/Save";
+import Delete from "../../../../../Buttons/Delete/Delete";
+import controlStyle from "../../../../../../Styles/ControlStyle.module.css";
+export default ({ style, save, remove, name }) => {
   let input;
   return (
-    <div
-      className={style}
-    >
+    <div className={style}>
       <input
         placeholder="Введите наименование"
         ref={node => {
@@ -16,15 +14,16 @@ export default ({style,save, remove, name }) => {
         className={controlStyle.Input}
         defaultValue={name}
       />
-      <Save       
-        onClick={e => {
-          //Проверка
-          console.log("Сохранено: ", input.value);
+      <Save
+        onClick={e => {        
           e.preventDefault();
-          save(input.value);
+          if (input.value !== "") {
+            save(input.value);
+            console.log("Сохранено: ", input.value);
+          }
         }}
       />
-      <Delete     
+      <Delete
         onClick={e => {
           e.preventDefault();
           remove();

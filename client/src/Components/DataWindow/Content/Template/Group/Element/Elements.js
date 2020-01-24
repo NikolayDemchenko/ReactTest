@@ -3,7 +3,7 @@ import { useMutation } from "@apollo/react-hooks";
 import Element from "./Element";
 import upOrCrGroup from "../../../../../../Function/UpdateOrCreate";
 import { ADD_ELEMENT, UPDATE_ELEMENT, DELETE_ELEMENT } from "./Queries";
-export default ({ checkBtnTrue, elements, changeName, remove,setAdd,refetch }) => {
+export default ({ checkBtnTrue, elements, changeName, setAdd,refetch }) => {
   const [createElement] = useMutation(ADD_ELEMENT);
   const [updateElement] = useMutation(UPDATE_ELEMENT);
   const [deleteElement] = useMutation(DELETE_ELEMENT);
