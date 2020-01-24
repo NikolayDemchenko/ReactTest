@@ -20,12 +20,11 @@
 .FolderName {
   display: flex;
   align-items: center;
-  border: 1px solid rgb(134, 100, 100);
+  /* border: 1px solid rgb(134, 100, 100); */
 }
 
 .FolderName {
   justify-content: center;
-  border: 1px solid rgb(98, 156, 134);
 }
 .TemplateGrid {
   border: 1px solid black;
@@ -51,4 +50,16 @@
   margin: 4px;
   background-color: #243a5d;
   border: 1px solid rgb(35, 52, 151);
+}
+.FourBtnsContainer{
+  display: grid;
+  grid-template-columns:1fr 1fr ;
+  grid-template-rows: 1fr 1fr; 
+  /* background-color: #272e38b2; */
+  border-radius: 4px;
+  margin: 6px;
+  width: 380px;
+  height: 248px;
+  /* border: 1px solid black; */
+  /* margin: 0 auto; */
 }

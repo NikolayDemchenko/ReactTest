@@ -25,12 +25,6 @@ export const ADD_GROUP = gql`
       name
       id
       parentId
-      elements {
-        name
-        id
-        templateId
-        groupId
-      } 
     }
   }
 `;
@@ -43,8 +37,7 @@ export const UPDATE_GROUP = gql`
       elements {
         name
         id
-        templateId
-        groupId
+        parentId     
       } 
     }
   }

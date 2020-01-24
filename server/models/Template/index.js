@@ -19,10 +19,11 @@ const resolvers = {
     },
     groups: ({ id }) => {
       return Groups.find({ parentId: id });
-    },
-    elements: ({ id }) => {
-      return Elements.find({ templateId: id });
     }
+    ,
+    // elements: ({ id }) => {
+    //   return Elements.find({ templateId: id });
+    // }
   },
   Mutation: {
     addTemplate: async (_, { name, parentId, groups }) => {

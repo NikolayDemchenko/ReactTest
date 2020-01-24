@@ -4,8 +4,7 @@ const ObjectId = mongoose.Schema.Types.ObjectId;
 const scheme = new mongoose.Schema(
   {
     name: String,
-    templateId: ObjectId,
-    groupId: ObjectId,
+    parentId: ObjectId, 
     updated: { type: Date, default: Date.now }
   },
   { versionKey: false }

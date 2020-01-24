@@ -7,15 +7,14 @@ module.exports = gql`
   }
   type Element {
     name: String!
-    templateId: ID!
-    groupId: ID
+    parentId: ID!  
     id: ID!
     unitId: ID
   }
 
   extend type Mutation {
-    addElement(name: String!, templateId: ID!, groupId: ID): Element
+    addElement(name: String!, parentId: ID!): Element
     deleteElement(id: ID!): Boolean
-    updateElement(id: ID!, name: String!, templateId: ID!, groupId: ID): Element
+    updateElement(id: ID!, name: String!, parentId: ID!): Element
   }
 `;

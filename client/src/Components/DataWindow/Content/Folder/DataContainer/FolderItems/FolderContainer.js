@@ -1,42 +1,44 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useMutation } from "@apollo/react-hooks";
 import save from "../../../../../../Function/UpdateOrCreate";
 import setItem from "Function/setItem";
-import FolderPlus from "../../../../../Buttons/Plus/FolderPlus";
-import IsVisibleHOC from "../../../../../hoc/IsVisibleHOC";
+import BtnsContainer from "../../ButtonsContainer/VisivleButtonsContainer";
 import FolderComponent from "./FolderComponent";
 import {
   ADD_TEMPLATE,
   UPDATE_TEMPLATE,
   DELETE_TEMPLATE
 } from "../../../Template/TemplateQueries";
-import style from "../../../../../../Styles/Folder.module.css";
+import folderStyle from "../../../../../../Styles/Folder.module.css";
 export default ({
   client,
   folders,
   templates,
+  tempVisible,
   folderFunctions: {
     createFolder,
     updateFolder,
     deleteFolder,
     newFolder,
+    newTemplate,
     refetchFolder
   }
 }) => {
+  const [btnsVisible, setBtnsVisible] = useState(true);
+  useEffect(() => {
+    return refetchFolder;
+  }, [refetchFolder]);
   // Редактирование Темплейта
   const [createTemplate] = useMutation(ADD_TEMPLATE);
   const [updateTemplate] = useMutation(UPDATE_TEMPLATE);
   const [deleteTemplate] = useMutation(DELETE_TEMPLATE);
   const removeTemplate = variables => {
-    if (typeof variables.id !== "number") {
+    if (typeof variables.id === "string") {
       deleteTemplate({ variables });
     }
+    setBtnsVisible(true);
     refetchFolder();
   };
-
-  useEffect(() => {
-    return refetchFolder;
-  }, [refetchFolder]);
 
   const removeFolder = id => {
     if (id == null) {
@@ -44,6 +46,7 @@ export default ({
     } else {
       deleteFolder({ variables: { id } });
     }
+    setBtnsVisible(true);
   };
   const Click = (id, type) => {
     setItem(client, id, type);
@@ -53,24 +56,35 @@ export default ({
       key={id}
       id={id}
       name={name}
-      style={style}
-      save={value =>
-        save(createFolder, updateFolder, { id, parentId, name: value })
-      }
-      remove={() => removeFolder(id)}
+      style={folderStyle}
+      save={value => {
+        save(createFolder, updateFolder, { id, parentId, name: value });
+        setBtnsVisible(true);
+      }}
+      remove={() => {
+        removeFolder(id);
+      }}
       onClick={() => Click(id)}
     />
   ));
   const templateItems =
     templates !== undefined
-      ? templates.map(({ id, name,parentId }) => (
+      ? templates.map(({ id, name, parentId }) => (
           <FolderComponent
-            save={value => save(createTemplate, updateTemplate, { id, parentId, name: value })}
+            save={value => {
+              save(createTemplate, updateTemplate, {
+                id,
+                parentId,
+                name: value
+              });
+              setBtnsVisible(true);
+              refetchFolder();
+            }}
             remove={() => removeTemplate({ id })}
             key={id}
             id={id}
             name={name}
-            style={style}
+            style={folderStyle}
             onClick={() => Click(id, "Template")}
           />
         ))
@@ -84,18 +98,15 @@ export default ({
     return null;
   });
 
-  const AddFolder = () =>
-    IsVisibleHOC(FolderPlus)({
-      style: style.AddItem,
-      onClick: e => {
-        e.preventDefault();
-        newFolder();
-      }
-    })(!items.find(item => item.props.id == null));
-
   return (
-    <div className={style.FolderContainer}>
-      <AddFolder />
+    <div className={folderStyle.FolderContainer}>
+      <BtnsContainer
+        tempVisible={tempVisible}
+        newFolder={newFolder}
+        newTemplate={newTemplate}
+        visible={btnsVisible}
+        setVisible={setBtnsVisible}
+      />
       {items}
     </div>
   );

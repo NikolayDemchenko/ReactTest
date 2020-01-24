@@ -1,16 +1,22 @@
-// import { DELETE_TEMPLATE_LAYOUT as query } from "./TemplateQueries";
+import { GET_FOLDER_BY_ID as query } from "../Folder/FolderQueries";
 
-// export default {
-//   Mutation: {
-//     deleteTemplateLayout: (_root, { template }, { cache }) => {
-//       console.log("newTemplate: ", template);
-     
-//       cache.writeQuery({
-//         query,
-//         variables: { id: template.id },
-//         data: { template }
-//       });
-//       console.log("Хуяк!!! Конец мутации");
-//     }
-//   }
-// };
+export default {
+  Mutation: {
+    newTemplate: (_root, { folder }, { cache }) => {
+      console.log("Старт мутации");
+      const newTemplate = {
+        name: "",
+        id: null,
+        parentId: folder.id,
+        __typename: "Template"
+      };
+      folder.templates = [...folder.templates, newTemplate];
+      cache.writeQuery({
+        query,
+        variables: { id: folder.id },
+        data: { folder }
+      });
+      // console.log("Конец мутации");
+    }
+  }
+};

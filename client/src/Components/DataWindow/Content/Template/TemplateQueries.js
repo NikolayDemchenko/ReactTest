@@ -1,11 +1,5 @@
 import gql from "graphql-tag";
 
-// export const GET_TEMPLATE = gql`
-//   query GetTemplate {
-//     Template @client
-//   }
-// `;
-
 export const GET_TEMPLATE = gql`
   query GetTemplateById($id: ID!) {
     template(id: $id) @client {
@@ -17,11 +11,11 @@ export const GET_TEMPLATE = gql`
         id
         name
       }
-        elements {
-          id
-          name
-          unitId
-        }
+      elements {
+        id
+        name
+        unitId
+      }
     }
   }
 `;
@@ -31,16 +25,15 @@ export const GET_TEMPLATE_BY_ID = gql`
       id
       name
       parentId
-      elements {
-        name
-        id
-        templateId
-        groupId
-      }
       groups {
         name
         id
         parentId
+        elements {
+          name
+          id
+          parentId
+        }
       }
     }
   }
@@ -72,16 +65,15 @@ export const UPDATE_TEMPLATE = gql`
       id
       name
       parentId
-      elements {
-        name
-        id
-        templateId
-        groupId
-      }
       groups {
         name
         id
         parentId
+        elements {
+          name
+          id
+          parentId
+        }
       }
     }
   }
@@ -144,30 +136,6 @@ export const DELETE_TEMPLATE = gql`
 //   return  mutation;
 // };
 
-export const NEW_ELEMENT = gql`
-  mutation NewElement($template: Template, $group: Group) {
-    newElement(template: $template, group: $group) @client
-  }
-`;
-export const UPDATE_ELEMENT_NAME = gql`
-  mutation UpdateElementName(
-    $template: Template
-    $group: Group
-    $element: Element
-  ) {
-    updateElementName(template: $template, group: $group, element: $element)
-      @client
-  }
-`;
-export const DELETE_ELEMENT = gql`
-  mutation DeleteElement(
-    $template: Template
-    $group: Group
-    $element: Element
-  ) {
-    deleteElement(template: $template, group: $group, element: $element) @client
-  }
-`;
 // export const REFETCH_TEMPLATE = gql`
 //   mutation RefetchTemplate {
 //     refetchTemplate @client

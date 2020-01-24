@@ -47,7 +47,7 @@
   color: #3b485d;
 }
 .InnerItem {
-  border: 1px solid black;
+  /* border: 1px solid black; */
   cursor: pointer;
   width: 100%;
   height: 100%;

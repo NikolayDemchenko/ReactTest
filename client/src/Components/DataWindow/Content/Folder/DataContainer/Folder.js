@@ -9,7 +9,8 @@ import {
   UPDATE_FOLDER,
   ADD_FOLDER,
   DELETE_FOLDER,
-  NEW_FOLDER
+  NEW_FOLDER,
+  NEW_TEMPLATE
 } from "../FolderQueries";
 
 export default ({ id }) => {
@@ -29,6 +30,9 @@ export default ({ id }) => {
 };
 
 const Folders = ({ folder, client }) => {
+  const [newTemplate] = useMutation(NEW_TEMPLATE, {
+    variables: { folder }
+  });
   const variables = { id: folder.id };
   const [newFolder] = useMutation(NEW_FOLDER, {
     variables: { folder }
@@ -43,18 +47,20 @@ const Folders = ({ folder, client }) => {
   const [refetchFolder] = useMutation(REFETCH_FOLDER, {
     refetchQueries: [{ query, variables }]
   });
-  console.log("Рендеринг Folders");
+  // console.log("Рендеринг Folders");
 
   return (
     <FolderContainer     
       client={client}
       folders={folder.folders}
       templates={folder.templates}
+      tempVisible={true}
       folderFunctions={{
         createFolder,
         updateFolder,
         deleteFolder,
         newFolder,
+        newTemplate,
         refetchFolder
       }}
     />

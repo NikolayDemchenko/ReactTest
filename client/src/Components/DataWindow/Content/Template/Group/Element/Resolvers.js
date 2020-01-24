@@ -1,17 +1,20 @@
 import { GET_TEMPLATE_BY_ID as query } from "../../TemplateQueries";
-import { setAddElement } from "../../Function/SetAdd";
+
+
 export default {
   Mutation: {
-    newElement: (_root, { template, group }, { cache }) => {
-      console.log("template: ", template);
-      console.log("id: ", group.id);
+    newElement: (_root, {template,group }, { cache }) => {
+    
+      // console.log("id: ", group.id);
       const newElement = {
         id: Date.now(),
-        name: "",
+        name: "",        
+        parentId: group.id,
         __typename: "Element"
-      };
+      };      
+      group.elements=group.elements!==undefined?group.elements:[]
+      group.elements.unshift(newElement);  
 
-      group.elements.unshift(newElement);
       template.groups = template.groups.map(_group => {
         if (_group.id === group.id) {
           _group = group;
@@ -23,14 +26,14 @@ export default {
         variables: { id: template.id },
         data: { template }
       });
-
-      setAddElement(cache, false);
-      console.log("Конец мутации");
+      
+   
+  
     },
-    updateElementName: (_root, { template, group, element }, { cache }) => {
-      console.log("template: ", template);
-      console.log("id: ", group.id);
-
+    updateElementName: (_root, {template,  group, element }, { cache }) => {
+      console.log("Зашли ура!!!!: ", group);
+  
+      console.log("Прошли дальше!!!!: ");
       group.elements = group.elements.map(_element => {
         if (_element.id === element.id) {
           _element = element;

@@ -1,6 +1,5 @@
 import gql from "graphql-tag";
 
-
 export const GET_ALL_FOLDERS = gql`
   {
     allFolders {
@@ -34,12 +33,12 @@ export const GET_FOLDER_BY_ID = gql`
         name
         id
         parentId
-      },
-      templates{
-      name
-      id
-      parentId
-    }
+      }
+      templates {
+        name
+        id
+        parentId
+      }
     }
   }
 `;
@@ -47,7 +46,12 @@ export const GET_FOLDER_BY_ID = gql`
 // Создание формы для создания объекта Folder с передачей Folder
 export const NEW_FOLDER = gql`
   mutation NewFolder($folder: Folder) {
-    newFolder(folder: $folder) @client 
+    newFolder(folder: $folder) @client
+  }
+`;
+export const NEW_TEMPLATE = gql`
+  mutation NewTemplate($folder: Folder) {
+    newTemplate(folder: $folder) @client
   }
 `;
 // Создание формы для создания объекта ParentFolder
@@ -88,7 +92,7 @@ export const DELETE_FOLDER = gql`
 `;
 // Фейковый запрос для рефетча мутации, при удалении не сохраненного объекта
 export const REFETCH_FOLDER = gql`
-  mutation RefetchFolder{
+  mutation RefetchFolder {
     refetchFolder @client
   }
 `;

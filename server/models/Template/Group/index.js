@@ -13,7 +13,7 @@ const resolvers = {
   },
   Group: {
     elements: ({ id }) => {
-      return Element.find({ groupId: id });
+      return Element.find({ parentId: id });
     }
   },
   Mutation: {

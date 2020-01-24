@@ -1,6 +1,5 @@
 import React from "react";
-import gql from "graphql-tag";
-import { useQuery, useMutation } from "@apollo/react-hooks";
+import { useQuery} from "@apollo/react-hooks";
 import { GET_TEMPLATE_BY_ID as query} from "./TemplateQueries";
 
 import Template from "./Template";

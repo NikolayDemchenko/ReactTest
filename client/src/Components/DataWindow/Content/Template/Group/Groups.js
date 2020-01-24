@@ -37,6 +37,7 @@ export default ({ refetch, setAdd, template, add, changeName }) => {
       add={add}
       save={save}
       remove={removeGroup}
+      refetch={refetch}
       changeName={name => changeName(name, group)}
     />
   ));

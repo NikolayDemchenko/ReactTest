@@ -4,13 +4,14 @@ import controlStyle from "../../../../../../Styles/ControlStyle.module.css";
 import style from "../../Styles/Template.module.css";
 import CheckBtn from "../../../../../Buttons/CheckButton/VisibleCheckBtn";
 
-export default ({ checkBtnTrue, remove, name, changeName }) => {
-
+export default ({ checkBtnTrue, remove, element, changeName,save }) => {
+const{id,name, parentId}=element;
   const [isVisibleCheckBtn, setVisibleCheckBtn] = useState(false);
 
   const checkBtnClick = input => {
     if (input.value !== "") {
       changeName(input.value);
+      save({ id, parentId, name: input.value });
       input.blur();
       checkBtnTrue();
       setVisibleCheckBtn(false);

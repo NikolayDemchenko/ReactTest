@@ -1,5 +1,5 @@
 import React from "react";
-import Save from "Components/Buttons/Save/Save";
+import Save from "../Buttons/Save/Save";
 import Delete from "Components/Buttons/Delete/Delete";
 import controlStyle from '../../Styles/ControlStyle.module.css'
 export default ({style,save, remove, name }) => {

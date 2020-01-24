@@ -12,11 +12,10 @@ const resolvers = {
   },
 
   Mutation: {
-    addElement: async (_, { name, templateId, groupId }) => {
+    addElement: async (_, { name, parentId}) => {
       const item = new Element({
         name,
-        templateId,
-        groupId,
+        parentId,      
         updated: new Date()
       });
       try {
@@ -34,11 +33,11 @@ const resolvers = {
         throw err;
       }
     },
-    updateElement: async (_, { id,name, templateId, groupId }) => {
+    updateElement: async (_, { id,name, parentId}) => {
       try {
         const item = await Element.findByIdAndUpdate(
           id,
-          { name, templateId, groupId, updated: new Date() },
+          { name, parentId, updated: new Date() },
           { new: true }
         );
         return item;

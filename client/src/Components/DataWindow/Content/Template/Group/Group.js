@@ -4,15 +4,26 @@ import control from "../../../../../Styles/ControlStyle.module.css";
 import Elements from "./Element/Elements";
 import AddBtn from "../../../../Buttons/Plus/TemplateItemPlus";
 import Delete from "../../../../Buttons/Delete/Delete";
-import { useMutation, useApolloClient } from "@apollo/react-hooks";
+import { useMutation,
+  //  useApolloClient 
+  } from "@apollo/react-hooks";
 import {
   DELETE_ELEMENT,
   NEW_ELEMENT,
   UPDATE_ELEMENT_NAME
-} from "../../Template/TemplateQueries";
+} from "../../Template/Group/Element/Queries";
 import CheckBtn from "../../../../Buttons/CheckButton/VisibleCheckBtn";
 
-export default ({ remove, add, setAdd, group, template, changeName, save }) => {
+export default ({
+  remove,
+  add,
+  setAdd,
+  group,
+  template,
+  changeName,
+  save,
+  refetch
+}) => {
   const { id } = group;
   const parentId = template.id;
   const [newElement] = useMutation(NEW_ELEMENT, {
@@ -99,12 +110,14 @@ export default ({ remove, add, setAdd, group, template, changeName, save }) => {
         }}
         isVisible={add}
       />
-      {/* <Elements
+      <Elements
+        setAdd={setAdd}
+        refetch={refetch}
         remove={removeElement}
         elements={group.elements}
         changeName={changeElementName}
         checkBtnTrue={() => setAdd(true)}
-      /> */}
+      />
     </div>
   );
 };

@@ -38,6 +38,7 @@ export default () => {
         <Slides />
       </div>
       <DataContent />
+      {/* <img src="https://4.downloader.disk.yandex.ru/preview/b6504cff9c2dc4116fb23de6dbfd7c74d2c040962b7b5079c0dda201a3e6818e/inf/qWCWqzuUg4XGQiKby7MhDv-2IxbuGUe9Mp9DM_0JoIxnxvY-X9ZlqWGBwZqO5HydOturmQqfVsa193-slKtIrg==?uid=255982981&filename=2019-12-21+02-03-23.JPG&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&tknv=v2&owner_uid=255982981&size=1280x891"/> */}
     </div>
   );
 };
