@@ -1,7 +1,7 @@
 const Folders = require("./model");
 const Templates = require("../Template/model");
 const typeDefs = require("./typeDefs");
-const {cascadeDelete} = require("./cascadeDelete");
+const {removeFolder  } = require("../../Function/cascadeDelete");
 
 const resolvers = {
   Query: {
@@ -39,7 +39,8 @@ const resolvers = {
     },
     deleteFolder: async (_, { id }) => {
       try {
-        await cascadeDelete(id,Folders);
+        await removeFolder(id);
+        console.log("folder");
         return true;
       } catch (err) {
         throw err;

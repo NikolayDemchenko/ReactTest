@@ -7,7 +7,6 @@ import CheckBtn from "../../../../../Buttons/CheckButton/VisibleCheckBtn";
 export default ({ checkBtnTrue, remove, element, changeName,save }) => {
 const{id,name, parentId}=element;
 const [checkState, setCheck] = useState(false);
-  const [isVisibleCheckBtn, setVisibleCheckBtn] = useState(false);
 
   const checkBtnClick = input => {
     if (input.value !== "") {
