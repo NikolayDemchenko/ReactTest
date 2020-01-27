@@ -39,8 +39,7 @@ const resolvers = {
     },
     deleteFolder: async (_, { id }) => {
       try {
-        await removeFolder(id);
-        console.log("folder");
+        await removeFolder(id);       
         return true;
       } catch (err) {
         throw err;

@@ -29,6 +29,7 @@ export default ({
     return refetchFolder;
   }, [refetchFolder]);
   // Редактирование Темплейта
+
   const [createTemplate] = useMutation(ADD_TEMPLATE);
   const [updateTemplate] = useMutation(UPDATE_TEMPLATE);
   const [deleteTemplate] = useMutation(DELETE_TEMPLATE);

@@ -24,7 +24,7 @@ export default ({ id }) => {
   return (
     <div>
       <NavigationPanel folder={data.folder} />
-      <Folders  folder={data.folder} client={client} />
+      <Folders folder={data.folder} client={client} />
     </div>
   );
 };
@@ -50,7 +50,7 @@ const Folders = ({ folder, client }) => {
   // console.log("Рендеринг Folders");
 
   return (
-    <FolderContainer     
+    <FolderContainer
       client={client}
       folders={folder.folders}
       templates={folder.templates}

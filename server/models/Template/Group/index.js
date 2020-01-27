@@ -1,6 +1,7 @@
 const Group = require("./model");
 const Element = require("./Element/model");
 const typeDefs = require("./typeDefs");
+const {removeGroup} = require("../../../Function/cascadeDelete");
 
 const resolvers = {
   Query: {
@@ -34,7 +35,7 @@ const resolvers = {
     deleteGroup: async (_, { id }) => {
     
       try {
-        await Group.findByIdAndDelete(id);
+        await removeGroup(id);
         return true;
       } catch (err) {
         throw err;

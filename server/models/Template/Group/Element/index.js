@@ -1,5 +1,6 @@
 const Element = require("./model");
 const typeDefs = require("./typeDefs");
+const {removeElement} = require("../../../../Function/cascadeDelete");
 
 const resolvers = {
   Query: {
@@ -27,7 +28,7 @@ const resolvers = {
     },
     deleteElement: async (_, { id }) => {
       try {
-        await Element.findByIdAndDelete(id);
+        await removeElement(id);
         return true;
       } catch (err) {
         throw err;

@@ -4,34 +4,54 @@ const Groups = require("../models/Template/Group/model");
 const Elements = require("../models/Template/Group/Element/model");
 const Instances = require("../models/Instance/model");
 
-const removeFolder = async (id) => {
-  const childrens = await Folders.find({ parentId: id });
+const removeFolder = async parentId => {
+  const childrens = await Folders.find({ parentId });
   if (childrens !== []) {
-    childrens.forEach((folder) => {
-      console.log("remove folder",folder);
+    childrens.forEach(folder => {
       removeFolder(folder.id);
     });
   }
-  await removeTemplates(id)
-  // await items.findByIdAndDelete(id);
+  removeTemplates(parentId);
+  removeItemById(parentId, Folders);
 };
 
-const removeTemplates = async (id) => {
-  const templates = await Templates.find({ parentId: id });
-  if (templates !== []) {
-     templates.forEach(item => {
-      removeTemplate(item)
-       console.log("template:",item);
+
+const removeList = async (parentId, _items, remove) => {
+  const items = await _items.find({ parentId });
+  if (items !== []) {
+    items.forEach(({ id }) => {
+      remove(id);
     });
   }
-  // console.log("template:",templates);
 };
-const removeTemplate = async (item) => {
-  removeGroups(item)
-  // await Templates.findByIdAndDelete(item.id);  
-  console.log("template:",item);
+const removeItemById = async (id, items) => {
+  await items.findByIdAndDelete(id);
+  // const item = await items.findById(id);
+  // console.log("remove item:", item.name);
+};
+// Для удаления каждого списка передается родительский id, список объектов из базы и функция удаления со списком объектов, которая так же нужна для резольверов, чтобы иметь возможность вызвать отдельно каждую
+
+const removeTemplates = parentId => {
+  removeList(parentId, Templates, removeTemplate);
+};
+const removeTemplate = id => {
+  removeGroups(id);
+  removeItemById(id, Templates);
 };
 
+const removeGroups = parentId => {
+  removeList(parentId, Groups, removeGroup);
+};
+const removeGroup = id => {
+  removeElements(id);
+  removeItemById(id, Groups);
+};
 
+const removeElements = parentId => {
+  removeList(parentId, Elements, removeElement);
+};
+const removeElement = id => {
+  removeItemById(id, Elements);
+};
 
-module.exports = { removeFolder };
+module.exports = { removeFolder, removeTemplate, removeGroup, removeElement };

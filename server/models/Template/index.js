@@ -1,8 +1,9 @@
 const Instances = require("../Instance/model");
 const Templates = require("./model");
 const Groups = require("./Group/model");
-const Elements = require("./Group/Element/model");
+// const Elements = require("./Group/Element/model");
 const typeDefs = require("./typeDefs");
+const {removeTemplate} = require("../../Function/cascadeDelete");
 
 const resolvers = {
   Query: {
@@ -40,9 +41,9 @@ const resolvers = {
         throw err;
       }
     },
-    deleteTemplate: async (_, { id }) => {
+    deleteTemplate: async (_, {id}) => {
       try {
-        await Templates.findByIdAndDelete(id);
+        await removeTemplate(id);
         return true;
       } catch (err) {
         throw err;
