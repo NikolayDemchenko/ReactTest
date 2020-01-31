@@ -35,7 +35,7 @@ export default ({ template, undo }) => {
       <NavigationPanel folder={template} />
       <div className={container.TemplateGrid}>
         <div className={container.FlexRow}>
-          Имя шаблона :
+          Шаблон :
           <input
             ref={node => {
               input = node;
