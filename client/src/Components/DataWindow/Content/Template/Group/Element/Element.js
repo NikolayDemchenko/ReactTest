@@ -3,7 +3,7 @@ import Delete from "Components/Buttons/Delete/Delete";
 import controlStyle from "../../../../../../Styles/ControlStyle.module.css";
 import style from "../../Styles/Template.module.css";
 import CheckBtn from "../../../../../Buttons/CheckButton/VisibleCheckBtn";
-
+import BtnContainer from '../../../../../Buttons/ButtonsContainer'
 export default ({ checkBtnTrue, remove, element, changeName,save }) => {
 const{id,name, parentId}=element;
 const [checkState, setCheck] = useState(false);
@@ -33,6 +33,7 @@ const [checkState, setCheck] = useState(false);
       input.focus();
     }
   });
+  // BtnContainer();
   let input;
   return (
     
@@ -53,6 +54,7 @@ const [checkState, setCheck] = useState(false);
           onClick={() => checkBtnClick(input)}
         />
       <Delete onClick={remove} />
+      <BtnContainer/>
     </div>
    
   );
