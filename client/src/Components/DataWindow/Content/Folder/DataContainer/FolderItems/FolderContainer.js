@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useMutation } from "@apollo/react-hooks";
 import save from "../../../../../../Function/UpdateOrCreate";
 import setItem from "Function/setItem";
-import BtnsContainer from "../../ButtonsContainer/VisivleButtonsContainer";
+import BtnsContainer from "../../ButtonsContainer/VisibleButtonsContainer";
 import FolderComponent from "./FolderComponent";
 import {
   ADD_TEMPLATE,

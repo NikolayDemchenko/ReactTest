@@ -15,7 +15,8 @@ export default ({ style, save, remove, name }) => {
         defaultValue={name}
       />
       <Save
-        onClick={e => {        
+        style={controlStyle.Crud}
+        onClick={e => {
           e.preventDefault();
           if (input.value !== "") {
             save(input.value);
@@ -24,6 +25,7 @@ export default ({ style, save, remove, name }) => {
         }}
       />
       <Delete
+        style={controlStyle.Crud}
         onClick={e => {
           e.preventDefault();
           remove();

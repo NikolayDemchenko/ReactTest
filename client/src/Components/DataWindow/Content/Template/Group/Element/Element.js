@@ -1,12 +1,11 @@
-import React,{useEffect,useState} from "react";
-import Delete from "Components/Buttons/Delete/Delete";
-import controlStyle from "../../../../../../Styles/ControlStyle.module.css";
-import style from "../../Styles/Template.module.css";
-import CheckBtn from "../../../../../Buttons/CheckButton/VisibleCheckBtn";
-import BtnContainer from '../../../../../Buttons/ButtonsContainer'
-export default ({ checkBtnTrue, remove, element, changeName,save }) => {
-const{id,name, parentId}=element;
-const [checkState, setCheck] = useState(false);
+import React, { useEffect, useState } from "react";
+import control from "../../../../../../Styles/ControlStyle.module.css";
+import buttonStyle from "./Styles/Button.module.css";
+import style from "./Styles/Element.module.css";
+import BtnContainer from "../../../../../Buttons/ButtonsContainer";
+export default ({ checkBtnTrue, remove, element, changeName, save }) => {
+  const { id, name, parentId } = element;
+  const [checkState, setCheck] = useState("inactive");
 
   const checkBtnClick = input => {
     if (input.value !== "") {
@@ -14,7 +13,7 @@ const [checkState, setCheck] = useState(false);
       save({ id, parentId, name: input.value });
       input.blur();
       checkBtnTrue();
-      setCheck(false);
+      setCheck("inactive");
     }
   };
   const keyPressEnter = (event, input) => {
@@ -26,18 +25,16 @@ const [checkState, setCheck] = useState(false);
 
   const inputChange = name => {
     changeName(name);
-    name !== "" ? setCheck(true) : setCheck(false);
+    name !== "" ? setCheck("active") : setCheck("inactive");
   };
   useEffect(() => {
     if (name === "") {
       input.focus();
     }
   });
-  // BtnContainer();
   let input;
   return (
-    
-      <div className={style.Element}>
+    <div className={style.Element}>
       Элемент:
       <input
         placeholder="Введите наименование"
@@ -46,16 +43,15 @@ const [checkState, setCheck] = useState(false);
         }}
         onKeyPress={e => keyPressEnter(e, input)}
         onChange={() => inputChange(input.value)}
-        className={controlStyle.Input}
+        className={control.Input}
         defaultValue={name}
       />
-        <CheckBtn
-          on_off={checkState}
-          onClick={() => checkBtnClick(input)}
-        />
-      <Delete onClick={remove} />
-      <BtnContainer/>
+      <BtnContainer
+        containerStyle={buttonStyle.Container}
+        buttonStyle={buttonStyle}
+        Save={{ onClick: () => checkBtnClick(input), state: checkState }}
+        Delete={{ onClick: remove, state: "active" }}
+      />
     </div>
-   
   );
 };

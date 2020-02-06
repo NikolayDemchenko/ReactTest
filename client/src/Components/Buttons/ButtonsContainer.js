@@ -1,19 +1,20 @@
-import {Check,Plus,Delete,Undo,Save}   from './AllButtons'
-import ActiveButton from './ActiveButton'
-import React from 'react'
-const buttons =[Check,Plus,Delete,Undo,Save];
-export default function ButtonsContainer() {
-  let btns=[];
-  for (var prop in buttons){
-    let Btn={...buttons[prop]({onClick:null,on_off:true})}
-    // btn.key=prop
-    btns.push(Btn)
-  //  btns.forEach(item=>item.key=prop)
-    console.log(Btn)
+import {StateButton, Check, Plus, Delete, Undo, Save } from "./ClearButtons";
+import React from "react";
+const buttons = { Check, Plus, Delete, Undo, Save };
+export default function ButtonsContainer(props) {
+  const btns = [];
+  for (const prop in props) {
+    for (const btn in buttons) {
+      if (btn === prop) {
+        btns.push(<StateButton
+          key={prop}
+          Component={buttons[btn]}
+          onClick={props[prop].onClick}
+          style={props.buttonStyle}
+          state={props[prop].state}
+        />);     
+      }
+    }
   }
-  return (
-    <div>
-      {btns}
-    </div>
-  )
+  return <div className={props.containerStyle}>{btns}</div>;
 }

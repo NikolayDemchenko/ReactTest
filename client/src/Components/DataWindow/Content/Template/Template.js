@@ -44,6 +44,7 @@ export default ({ template, undo }) => {
             defaultValue={template.name}
           />
           <Save
+          style={control.Crud}
             onClick={() => {
               save(null, updateTemplate, {
                 id,
@@ -53,6 +54,7 @@ export default ({ template, undo }) => {
             }}
           />
           <Undo
+           style={control.Crud}
             onClick={() => {
               undo();
               setAdd(true);
@@ -68,7 +70,7 @@ export default ({ template, undo }) => {
                 setAdd(false);
                 console.log("New Group2:", template.groups);
               }}
-              on_off={add}
+              state={add}
             />
           }
           items={

@@ -90,12 +90,13 @@ export default ({
         />
          <div className={style.FlexRow}>
         <Check
-          on_off={checkState}
+          state={checkState}
           onClick={() => {
             CheckBtnClick(input);
           }}
         />
         <Delete
+         style={control.Crud}
           onClick={() => {
             console.log("Удаление");
             remove({ id });
@@ -110,7 +111,7 @@ export default ({
               newElement();
               setAdd(false);
             }}
-            on_off={add}
+            state={add}
           />
         }
         items={

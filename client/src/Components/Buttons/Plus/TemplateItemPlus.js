@@ -1,16 +1,16 @@
 
 import React from "react";
-import ActiveButton from "../ActiveButton";
+import {ActiveButton} from "../AllButtons";
 import Plus from './Plus'
 import controlStyle from '../../../Styles/ControlStyle.module.css'
 
 
 
-export default ({ onClick, on_off }) => {
+export default ({ onClick, state }) => {
  return <ActiveButton
     // onClick={onClick}
-    on_off={on_off}
-    activeBtn={<Plus style= {controlStyle.Crud} onClick={onClick}/>}
-    inactiveBtn={<Plus style= {controlStyle.inactiveCrud}/>}
+    state={state}
+    active={<Plus style= {controlStyle.Crud} onClick={onClick}/>}
+    inactive={<Plus style= {controlStyle.inactiveCrud}/>}
   />;
 };

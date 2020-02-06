@@ -1,0 +1,37 @@
+
+.Container {
+  display: flex;
+  align-items: center;
+  margin: 2px;
+  border: 1px solid rgb(134, 100, 100);
+}
+.on,
+.active,
+.inactive {
+  color: rgba(46, 52, 61, 0.246);
+  display: flex;
+  text-align: center;
+  align-items: center;
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  margin: 6px;
+  /* border: 1px solid rgba(192, 220, 255, 0.712); */
+}
+.active {
+  /* color: #f60808; */
+  color: #616d81;
+}
+.on {
+  color: #5385db;
+}
+.on,
+.active:hover {
+  cursor: pointer;
+  color: #8a9ab1;
+}
+.on,
+.active:active {
+  transition: 0.1s;
+  color: rgba(240, 248, 255, 0.198);
+}
