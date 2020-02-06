@@ -1,6 +1,5 @@
-import {StateButton, Check, Plus, Delete, Undo, Save } from "./ClearButtons";
+import {StateButton, buttons } from "./ButtonsList";
 import React from "react";
-const buttons = { Check, Plus, Delete, Undo, Save };
 export default function ButtonsContainer(props) {
   const btns = [];
   for (const prop in props) {
