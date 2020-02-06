@@ -1,30 +1,47 @@
 import React, { useState, useEffect } from "react";
+import {
+  CrudButton,
+  ButtonsContainer
+} from "../../../../Buttons/ButtonsContainer";
 import style from "../Styles/Template.module.css";
 import control from "../../../../../Styles/ControlStyle.module.css";
 import Elements from "./Element/Elements";
-import { Plus, Delete, Check } from "../../../../Buttons/AllButtons";
+import { Plus } from "../../../../Buttons/AllButtons";
 import { List } from "../../../../hoc/AllHocs";
+import { UPDATE_GROUP_FIELDS } from "./Queries";
 import {
   useMutation
   //  useApolloClient
 } from "@apollo/react-hooks";
 import {
   DELETE_ELEMENT,
-  NEW_ELEMENT,
-  UPDATE_ELEMENT_NAME
+  NEW_ELEMENT
 } from "../../Template/Group/Element/Queries";
-export default ({
-  remove,
-  add,
-  setAdd,
-  group,
-  template,
-  changeName,
-  save,
-  refetch
-}) => {
-  const { id } = group;
+export default ({ remove, add, setAdd, group, template, save, refetch }) => {
+  const { id, visible, filter } = group;
   const parentId = template.id;
+
+  const [updateGroup] = useMutation(UPDATE_GROUP_FIELDS);
+  const changeName = name => {
+    group.name = name;
+    updateGroup({ variables: { template, group } });
+    setAdd(false);
+  };
+  const VisibleClick = () => {
+    group.visible = !group.visible;
+    group.filter=false
+    updateGroup({ variables: { template, group } });
+    setAdd(false);
+    setCheck("active");
+  };
+  const FilterClick = () => {
+    if(group.visible===false)group.visible = true
+    group.filter = !group.filter;
+    updateGroup({ variables: { template, group } });
+    setAdd(false);
+    setCheck("active");
+  };
+
   const [newElement] = useMutation(NEW_ELEMENT, {
     variables: { template, group }
   });
@@ -34,21 +51,16 @@ export default ({
     setAdd(true);
     // console.log("Тута!!!!!:",template);
   };
-  const [updateElementName] = useMutation(UPDATE_ELEMENT_NAME);
-  const changeElementName = (name, element) => {
-    element.name = name;
-    updateElementName({ variables: { template, group, element } });
-    setAdd(false);
-  };
 
-  const [checkState, setCheck] = useState(false);
+
+  const [checkState, setCheck] = useState("inactive");
 
   const CheckBtnClick = input => {
     if (input.value !== "") {
-      save({ id, parentId, name: input.value });
+      save({ id, parentId, visible, filter, name: input.value });
       input.blur();
       setAdd(true);
-      setCheck(false);
+      setCheck("inactive");
       console.log("Сейвится группа");
     }
   };
@@ -63,7 +75,7 @@ export default ({
   const inputChange = name => {
     changeName(name);
     setAdd(false);
-    name !== "" ? setCheck(true) : setCheck(false);
+    name !== "" ? setCheck("active") : setCheck("inactive");
   };
   // console.log("isVisibleCheckBtn", visibleCheckBtn);
 
@@ -88,20 +100,31 @@ export default ({
           className={control.Input}
           defaultValue={group.name}
         />
-         <div className={style.FlexRow}>
-        <Check
-          state={checkState}
-          onClick={() => {
-            CheckBtnClick(input);
+        <ButtonsContainer
+          containerStyle={CrudButton.Container}
+          buttonStyle={CrudButton}
+          Visible={{
+            onClick: VisibleClick,
+            state: group.visible === true ? "on" : "active"
+          }}
+          Filter={{
+            onClick: FilterClick,
+            state: group.filter === true ? "on" : "active"
+          }}
+          Save={{
+            onClick: () => {
+              CheckBtnClick(input);
+            },
+            state: checkState
+          }}
+          Delete={{
+            onClick: () => {
+              console.log("Удаление");
+              remove({ id });
+            },
+            state: "active"
           }}
         />
-        <Delete
-         style={control.Crud}
-          onClick={() => {
-            console.log("Удаление");
-            remove({ id });
-          }}
-        /></div>
       </div>
       <List
         plus={
@@ -119,8 +142,7 @@ export default ({
             setAdd={setAdd}
             refetch={refetch}
             remove={removeElement}
-            elements={group.elements}
-            changeName={changeElementName}
+            data={{template,group}}           
             checkBtnTrue={() => setAdd(true)}
           />
         }

@@ -1,5 +1,4 @@
 import gql from "graphql-tag";
-
 export const GET_TEMPLATE = gql`
   query GetTemplateById($id: ID!) {
     template(id: $id) @client {
@@ -14,62 +13,41 @@ export const GET_TEMPLATE = gql`
     }
   }
 `;
-export const GET_TEMPLATE_BY_ID = gql`
-  query GetTemplateById($id: ID!) {
-    template(id: $id) {
-      id
+
+const TemplateData = `{
+  id
+  name
+  parentId
+  groups {
+    name
+    visible
+    filter
+    id
+    parentId
+    elements {
       name
+      filter
+      visible
+      id
       parentId
-      groups {
-        name
-        id
-        parentId
-        elements {
-          name
-          id
-          parentId
-        }
-      }
     }
   }
+}
 `;
-
+export const GET_TEMPLATE_BY_ID = gql`
+  query GetTemplateById($id: ID!) {
+    template(id: $id) 
+      ${TemplateData}    
+  }
+`;
 export const ADD_TEMPLATE = gql`
   mutation addTemplate($name: String!, $parentId: ID!) {
-    addTemplate(name: $name, parentId: $parentId) {
-      name
-      id
-      parentId
-      groups {
-        name
-        id
-        parentId
-        elements {
-          name
-          id
-          parentId
-        }
-      }
-    }
+    addTemplate(name: $name, parentId: $parentId)  ${TemplateData}
   }
 `;
 export const UPDATE_TEMPLATE = gql`
   mutation UpdateTemplate($id: ID!, $name: String!, $parentId: ID!) {
-    updateTemplate(id: $id, name: $name, parentId: $parentId) {
-      id
-      name
-      parentId
-      groups {
-        name
-        id
-        parentId
-        elements {
-          name
-          id
-          parentId
-        }
-      }
-    }
+    updateTemplate(id: $id, name: $name, parentId: $parentId) ${TemplateData}
   }
 `;
 export const DELETE_TEMPLATE = gql`

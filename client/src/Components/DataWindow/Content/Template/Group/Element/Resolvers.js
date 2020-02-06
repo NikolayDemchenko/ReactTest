@@ -1,19 +1,19 @@
 import { GET_TEMPLATE_BY_ID as query } from "../../TemplateQueries";
 
-
 export default {
   Mutation: {
-    newElement: (_root, {template,group }, { cache }) => {
-    
+    newElement: (_root, { template, group }, { cache }) => {
       // console.log("id: ", group.id);
       const newElement = {
         id: Date.now(),
-        name: "",        
+        name: "",
+        visible: false,
+        filter: false,
         parentId: group.id,
         __typename: "Element"
-      };      
-      group.elements=group.elements!==undefined?group.elements:[]
-      group.elements.unshift(newElement);  
+      };
+      group.elements = group.elements !== undefined ? group.elements : [];
+      group.elements.unshift(newElement);
 
       template.groups = template.groups.map(_group => {
         if (_group.id === group.id) {
@@ -26,13 +26,10 @@ export default {
         variables: { id: template.id },
         data: { template }
       });
-      
-   
-  
     },
-    updateElementName: (_root, {template,  group, element }, { cache }) => {
+    updateElementFields: (_root, { template, group, element }, { cache }) => {
       console.log("Зашли ура!!!!: ", group);
-  
+
       console.log("Прошли дальше!!!!: ");
       group.elements = group.elements.map(_element => {
         if (_element.id === element.id) {

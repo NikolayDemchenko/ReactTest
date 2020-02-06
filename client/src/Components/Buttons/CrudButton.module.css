@@ -1,4 +1,3 @@
-
 .Container {
   display: flex;
   align-items: center;
@@ -18,19 +17,20 @@
   margin: 6px;
   /* border: 1px solid rgba(192, 220, 255, 0.712); */
 }
+.on {
+  color: #3d84ff;
+}
+.on:hover {
+  cursor: pointer;
+}
 .active {
-  /* color: #f60808; */
   color: #616d81;
 }
-.on {
-  color: #5385db;
-}
-.on,
 .active:hover {
   cursor: pointer;
   color: #8a9ab1;
 }
-.on,
+.on:active,
 .active:active {
   transition: 0.1s;
   color: rgba(240, 248, 255, 0.198);

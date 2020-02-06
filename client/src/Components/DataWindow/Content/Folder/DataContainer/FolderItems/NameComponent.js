@@ -1,6 +1,5 @@
 import React from "react";
-import Save from "../../../../../Buttons/Save/Save";
-import Delete from "../../../../../Buttons/Delete/Delete";
+import {CrudButton,ButtonsContainer} from "../../../../../Buttons/ButtonsContainer";
 import controlStyle from "../../../../../../Styles/ControlStyle.module.css";
 export default ({ style, save, remove, name }) => {
   let input;
@@ -14,23 +13,21 @@ export default ({ style, save, remove, name }) => {
         className={controlStyle.Input}
         defaultValue={name}
       />
-      <Save
-        style={controlStyle.Crud}
-        onClick={e => {
+       <ButtonsContainer
+        containerStyle={CrudButton.Container}
+        buttonStyle={CrudButton}        
+        Save={{ onClick: e => {
           e.preventDefault();
           if (input.value !== "") {
             save(input.value);
             console.log("Сохранено: ", input.value);
           }
-        }}
-      />
-      <Delete
-        style={controlStyle.Crud}
-        onClick={e => {
+        }, state: "active" }}        
+        Delete={{ onClick:e => {
           e.preventDefault();
           remove();
           console.log("Удалено: ", input.value);
-        }}
+        }, state: "active" }}
       />
     </div>
   );

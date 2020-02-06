@@ -5,7 +5,7 @@ export const GET_GROUP_BY_ID = gql`
     group(id: $id) {
       id
       name
-      parentId     
+      parentId
     }
   }
 `;
@@ -14,31 +14,59 @@ export const NEW_GROUP = gql`
     newGroup(template: $template) @client
   }
 `;
-export const UPDATE_GROUP_NAME = gql`
-  mutation UpdateGroupName($group: Group!) {
-    updateGroupName(group: $group) @client
+export const UPDATE_GROUP_FIELDS = gql`
+  mutation UpdateGroupFields($template: Template, $group: Group!) {
+    updateGroupFields(template: $template, group: $group) @client
   }
 `;
 export const ADD_GROUP = gql`
-  mutation addGroup($name: String!, $parentId: ID!) {
-    addGroup(name: $name, parentId: $parentId) {
+  mutation addGroup(
+    $name: String!
+    $parentId: ID!
+    $visible: Boolean!
+    $filter: Boolean!
+  ) {
+    addGroup(
+      name: $name
+      parentId: $parentId
+      visible: $visible
+      filter: $filter
+    ) {
       name
+      filter
+      visible
       id
       parentId
     }
   }
 `;
 export const UPDATE_GROUP = gql`
-  mutation UpdateGroup($id: ID!, $name: String!, $parentId: ID!) {
-    updateGroup(id: $id, name: $name, parentId: $parentId) {
+  mutation UpdateGroup(
+    $id: ID!
+    $name: String!
+    $parentId: ID!
+    $visible: Boolean!
+    $filter: Boolean!
+  ) {
+    updateGroup(
+      id: $id
+      name: $name
+      parentId: $parentId
+      visible: $visible
+      filter: $filter
+    ) {
       name
+      filter
+      visible
       id
       parentId
       elements {
         name
+        filter
+        visible
         id
-        parentId     
-      } 
+        parentId
+      }
     }
   }
 `;

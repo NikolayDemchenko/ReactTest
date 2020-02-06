@@ -10,21 +10,14 @@ import Instances from "./Instance/Instances";
 import save from "../../../../Function/UpdateOrCreate";
 
 import { UPDATE_TEMPLATE } from "./TemplateQueries";
-import { NEW_GROUP, UPDATE_GROUP_NAME } from "./Group/Queries";
+import { NEW_GROUP} from "./Group/Queries";
 export default ({ template, undo }) => {
-  // const [update] = useMutation(upData);
+ 
   const [updateTemplate] = useMutation(UPDATE_TEMPLATE);
   const { id, parentId } = template;
   const [newGroup] = useMutation(NEW_GROUP, {
     variables: { template }
   });
-
-  const [updateGroupName] = useMutation(UPDATE_GROUP_NAME);
-  const changeName = (name, group) => {
-    group.name = name;
-    updateGroupName({ variables: { group } });
-    setAdd(false);
-  };
 
   const [add, setAdd] = useState(true);
 
@@ -76,8 +69,7 @@ export default ({ template, undo }) => {
           items={
             <Groups
               add={add}
-              setAdd={setAdd}
-              changeName={changeName}
+              setAdd={setAdd}          
               template={template}
               refetch={undo}
             />
@@ -85,8 +77,7 @@ export default ({ template, undo }) => {
         />
         <Instances
           add={add}
-          setAdd={setAdd}
-          changeName={changeName}
+          setAdd={setAdd}        
           template={template}
           refetch={undo}
         />

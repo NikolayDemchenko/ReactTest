@@ -1,6 +1,8 @@
 import {StateButton, buttons } from "./ButtonsList";
 import React from "react";
-export default function ButtonsContainer(props) {
+import CrudButton from"./CrudButton.module.css"
+export {CrudButton};
+export  function ButtonsContainer(props) {
   const btns = [];
   for (const prop in props) {
     for (const btn in buttons) {

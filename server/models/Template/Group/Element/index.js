@@ -1,6 +1,6 @@
 const Element = require("./model");
 const typeDefs = require("./typeDefs");
-const {removeElement} = require("../../../../Function/cascadeDelete");
+const { removeElement } = require("../../../../Function/cascadeDelete");
 
 const resolvers = {
   Query: {
@@ -13,11 +13,13 @@ const resolvers = {
   },
 
   Mutation: {
-    addElement: async (_, { name, parentId}) => {
+    addElement: async (_, { name, parentId, visible, filter }) => {
       const item = new Element({
         name,
-        parentId,      
-        updated: new Date()
+        parentId,
+        updated: new Date(),
+        visible,
+        filter
       });
       try {
         await item.save();
@@ -34,11 +36,11 @@ const resolvers = {
         throw err;
       }
     },
-    updateElement: async (_, { id,name, parentId}) => {
+    updateElement: async (_, { id, name, parentId, visible, filter }) => {
       try {
         const item = await Element.findByIdAndUpdate(
           id,
-          { name, parentId, updated: new Date() },
+          { name, parentId, updated: new Date(), visible, filter },
           { new: true }
         );
         return item;

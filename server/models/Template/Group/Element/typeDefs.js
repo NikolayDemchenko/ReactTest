@@ -7,14 +7,27 @@ module.exports = gql`
   }
   type Element {
     name: String!
-    parentId: ID!  
+    parentId: ID!
+    visible: Boolean!
+    filter: Boolean!
     id: ID!
     unitId: ID
   }
 
   extend type Mutation {
-    addElement(name: String!, parentId: ID!): Element
+    addElement(
+      name: String!
+      parentId: ID!
+      visible: Boolean!
+      filter: Boolean!
+    ): Element
     deleteElement(id: ID!): Boolean
-    updateElement(id: ID!, name: String!, parentId: ID!): Element
+    updateElement(
+      id: ID!
+      name: String!
+      parentId: ID!
+      visible: Boolean!
+      filter: Boolean!
+    ): Element
   }
 `;

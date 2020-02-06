@@ -10,17 +10,26 @@ module.exports = gql`
     id: ID!
     parentId: ID!
     name: String!
+    visible: Boolean!
+    filter: Boolean!
     updated: String
     elements: [Element]
   }
 
   extend type Mutation {
-    addGroup(name: String!, parentId: ID!): Group
+    addGroup(
+      name: String!
+      parentId: ID!
+      visible: Boolean!
+      filter: Boolean!
+    ): Group
     deleteGroup(id: ID!): Boolean
     updateGroup(
       id: ID!
       name: String!
-      parentId: ID!     
+      parentId: ID!
+      visible: Boolean!
+      filter: Boolean!
     ): Group
   }
 `;

@@ -1,7 +1,7 @@
 const Group = require("./model");
 const Element = require("./Element/model");
 const typeDefs = require("./typeDefs");
-const {removeGroup} = require("../../../Function/cascadeDelete");
+const { removeGroup } = require("../../../Function/cascadeDelete");
 
 const resolvers = {
   Query: {
@@ -18,10 +18,11 @@ const resolvers = {
     }
   },
   Mutation: {
-    addGroup: async (_, { name, parentId }) => {
-     
+    addGroup: async (_, { name, parentId, visible, filter }) => {
       const item = new Group({
         name,
+        visible,
+        filter,
         parentId,
         updated: new Date()
       });
@@ -33,7 +34,6 @@ const resolvers = {
       }
     },
     deleteGroup: async (_, { id }) => {
-    
       try {
         await removeGroup(id);
         return true;
@@ -41,12 +41,12 @@ const resolvers = {
         throw err;
       }
     },
-    updateGroup: async (_, { id, name, parentId }) => {
+    updateGroup: async (_, { id, name, visible, filter, parentId }) => {
       console.log("!!!!!!!!!!!Сохранено");
       try {
         const item = await Group.findByIdAndUpdate(
           id,
-          { name, parentId, updated: new Date() },
+          { name, visible, filter, parentId, updated: new Date() },
           { new: true }
         );
         return item;
