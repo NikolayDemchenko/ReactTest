@@ -41,13 +41,18 @@ export const GET_TEMPLATE_BY_ID = gql`
   }
 `;
 export const ADD_TEMPLATE = gql`
-  mutation addTemplate($name: String!, $parentId: ID!) {
+  mutation AddTemplate($name: String!, $parentId: ID!) {
     addTemplate(name: $name, parentId: $parentId)  ${TemplateData}
   }
 `;
 export const UPDATE_TEMPLATE = gql`
   mutation UpdateTemplate($id: ID!, $name: String!, $parentId: ID!) {
     updateTemplate(id: $id, name: $name, parentId: $parentId) ${TemplateData}
+  }
+`;
+export const SAVE_TEMPLATE = gql`
+  mutation SaveTemplate($template: Template) {
+    saveTemplate(template: $template)@client ${TemplateData}
   }
 `;
 export const DELETE_TEMPLATE = gql`

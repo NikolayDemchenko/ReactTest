@@ -18,7 +18,7 @@ export default ({ checkBtnTrue, data, changeName, setAdd,refetch }) => {
     upOrCrGroup(createElement, updateElement, item);
     refetch();
   };  
-  console.log("!!!!!!!!!!!!!Сейвится",data.group);
+  // console.log("!!!!!!!!!!!!!Сейвится",data.group);
   return data.group.elements !== undefined
     ? data.group.elements.map(element => (
         <Element

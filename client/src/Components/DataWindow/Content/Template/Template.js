@@ -9,13 +9,16 @@ import Groups from "./Group/Groups";
 import Instances from "./Instance/Instances";
 import save from "../../../../Function/UpdateOrCreate";
 
-import { UPDATE_TEMPLATE } from "./TemplateQueries";
+import { UPDATE_TEMPLATE, SAVE_TEMPLATE } from "./TemplateQueries";
 import { NEW_GROUP} from "./Group/Queries";
 export default ({ template, undo }) => {
  
   const [updateTemplate] = useMutation(UPDATE_TEMPLATE);
   const { id, parentId } = template;
   const [newGroup] = useMutation(NEW_GROUP, {
+    variables: { template }
+  });
+  const [saveTemplate] = useMutation(SAVE_TEMPLATE, {
     variables: { template }
   });
 
@@ -39,6 +42,7 @@ export default ({ template, undo }) => {
           <Save
           style={control.Crud}
             onClick={() => {
+              saveTemplate();
               save(null, updateTemplate, {
                 id,
                 parentId,
