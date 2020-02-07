@@ -107,10 +107,10 @@ export default ({ remove, add, setAdd, group, template, save, refetch }) => {
             onClick: VisibleClick,
             state: group.visible === true ? "on" : "active"
           }}
-          Filter={{
-            onClick: FilterClick,
-            state: group.filter === true ? "on" : "active"
-          }}
+          // Filter={{
+          //   onClick: FilterClick,
+          //   state: group.filter === true ? "on" : "active"
+          // }}
           Save={{
             onClick: () => {
               CheckBtnClick(input);

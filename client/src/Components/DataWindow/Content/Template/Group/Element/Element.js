@@ -7,25 +7,28 @@ import {
   ButtonsContainer
 } from "../../../../../Buttons/ButtonsContainer";
 import { UPDATE_ELEMENT_FIELDS } from "./Queries";
-export default ({data, checkBtnTrue, remove, save,setAdd }) => {
-  const{template,group,element}=data;
+export default ({ data, checkBtnTrue, remove, save, setAdd }) => {
+  const { template, group, element } = data;
   const { id, name, parentId, visible, filter } = element;
-    const [checkState, setCheck] = useState("inactive");
+
+  const [checkState, setCheck] = useState("inactive");
+
   const [updateElement] = useMutation(UPDATE_ELEMENT_FIELDS);
   const changeName = name => {
     element.name = name;
     updateElement({ variables: { template, group, element } });
     setAdd(false);
   };
+
   const VisibleClick = () => {
     element.visible = !element.visible;
-    element.filter=false
+    element.filter = false;
     updateElement({ variables: { template, group, element } });
     setAdd(false);
     setCheck("active");
   };
   const FilterClick = () => {
-    if(element.visible===false)element.visible = true
+    if (element.visible === false) element.visible = true;
     element.filter = !element.filter;
     updateElement({ variables: { template, group, element } });
     setAdd(false);
@@ -53,6 +56,10 @@ export default ({data, checkBtnTrue, remove, save,setAdd }) => {
     name !== "" ? setCheck("active") : setCheck("inactive");
   };
   useEffect(() => {
+    if(group.visible===false){
+      element.visible = false;
+      element.filter = false;     
+    } 
     if (name === "") {
       input.focus();
     }
@@ -74,15 +81,14 @@ export default ({data, checkBtnTrue, remove, save,setAdd }) => {
       <ButtonsContainer
         containerStyle={CrudButton.Container}
         buttonStyle={CrudButton}
-        Visible={{ onClick: () => checkBtnClick(input), state: checkState }}
         Visible={{
           onClick: VisibleClick,
-          state: element.visible === true ? "on" : "active"
+          state: group.visible===true?element.visible === true ? "on" : "active":null
         }}
         Filter={{
           onClick: FilterClick,
-          state: element.filter === true ? "on" : "active"
-        }}
+          state: group.visible===true?element.filter === true ? "on" : "active":null
+        }}      
         Save={{ onClick: () => checkBtnClick(input), state: checkState }}
         Delete={{ onClick: remove, state: "active" }}
       />
