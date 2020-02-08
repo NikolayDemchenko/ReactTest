@@ -13,6 +13,14 @@ module.exports = gql`
     id: ID!
     unitId: ID
   }
+  input ElementInput {
+    name: String!
+    parentId: ID!
+    visible: Boolean!
+    filter: Boolean!
+    id: ID!
+    unitId: ID
+  }
 
   extend type Mutation {
     addElement(

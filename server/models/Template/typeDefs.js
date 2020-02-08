@@ -10,17 +10,22 @@ module.exports = gql`
     name: String!
     parentId: ID!
     groups: [Group]
-    elements: [Element] 
     updated:String!
     instances:[Instance]
   }
-
- 
+  input TemplateInput {
+    id: ID!
+    name: String!
+    parentId: ID!
+    groups: [GroupInput]
+    # __typename:String
+}
 
   extend type Mutation {
     addTemplate(
       name: String!,
       parentId: ID): Template
+    saveTemplate(template:TemplateInput): Template
     deleteTemplate(id: ID!): Boolean
     updateTemplate(id: ID!, name: String!, parentId: ID!):Template
   }

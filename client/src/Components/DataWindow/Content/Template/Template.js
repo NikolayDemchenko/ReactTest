@@ -12,19 +12,27 @@ import save from "../../../../Function/UpdateOrCreate";
 import { UPDATE_TEMPLATE, SAVE_TEMPLATE } from "./TemplateQueries";
 import { NEW_GROUP} from "./Group/Queries";
 export default ({ template, undo }) => {
- 
+  // const [OldTemplate, SetTemplate] = useState({...template});
+  // console.log("OldTemplate",OldTemplate)
   const [updateTemplate] = useMutation(UPDATE_TEMPLATE);
   const { id, parentId } = template;
   const [newGroup] = useMutation(NEW_GROUP, {
     variables: { template }
   });
-  const [saveTemplate] = useMutation(SAVE_TEMPLATE, {
-    variables: { template }
-  });
 
+const DeleteTypename=(obj)=>{
+  delete obj.__typename
+    return obj
+}
+// console.log("DeleteTypename(template)",DeleteTypename(template))
+  const [saveTemplate] = useMutation(SAVE_TEMPLATE);
+const SaveTemp =(name)=>{
+  template.name=name
+  saveTemplate({variables:{template: DeleteTypename(template) }})
+  console.log("template", template);
+}
   const [add, setAdd] = useState(true);
 
-  // console.log("Загрузка шаблона, Add:", add);
   let input;
   return (
     <div>
@@ -42,12 +50,12 @@ export default ({ template, undo }) => {
           <Save
           style={control.Crud}
             onClick={() => {
-              saveTemplate();
-              save(null, updateTemplate, {
-                id,
-                parentId,
-                name: input.value
-              });
+              SaveTemp(input.value);
+              // save(null, updateTemplate, {
+              //   id,
+              //   parentId,
+              //   name: input.value
+              // });
             }}
           />
           <Undo

@@ -15,6 +15,14 @@ module.exports = gql`
     updated: String
     elements: [Element]
   }
+  input GroupInput {
+    id: ID!
+    parentId: ID!
+    name: String!
+    visible: Boolean!
+    filter: Boolean!  
+    elements: [ElementInput]
+  }
 
   extend type Mutation {
     addGroup(

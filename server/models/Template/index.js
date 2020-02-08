@@ -3,7 +3,7 @@ const Templates = require("./model");
 const Groups = require("./Group/model");
 // const Elements = require("./Group/Element/model");
 const typeDefs = require("./typeDefs");
-const {removeTemplate} = require("../../Function/cascadeDelete");
+const { removeTemplate } = require("../../Function/cascadeDelete");
 
 const resolvers = {
   Query: {
@@ -21,7 +21,6 @@ const resolvers = {
     groups: ({ id }) => {
       return Groups.find({ parentId: id });
     }
-    ,
     // elements: ({ id }) => {
     //   return Elements.find({ templateId: id });
     // }
@@ -41,7 +40,7 @@ const resolvers = {
         throw err;
       }
     },
-    deleteTemplate: async (_, {id}) => {
+    deleteTemplate: async (_, { id }) => {
       try {
         await removeTemplate(id);
         return true;
@@ -56,6 +55,25 @@ const resolvers = {
           { name, parentId, groups, updated: new Date() },
           { new: true }
         );
+        return item;
+      } catch (err) {
+        throw err;
+      }
+    },
+    saveTemplate: async (_, { template }) => {
+      try {
+        const { id, name, parentId, groups } = template;
+        const item = await Templates.findByIdAndUpdate(
+          id,
+          {
+            name,
+            parentId,
+            groups,
+            updated: new Date()
+          },
+          { new: true }
+        );
+        console.log(template);
         return item;
       } catch (err) {
         throw err;

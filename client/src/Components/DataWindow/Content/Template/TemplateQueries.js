@@ -51,8 +51,8 @@ export const UPDATE_TEMPLATE = gql`
   }
 `;
 export const SAVE_TEMPLATE = gql`
-  mutation SaveTemplate($template: Template) {
-    saveTemplate(template: $template)@client ${TemplateData}
+  mutation SaveTemplate($template: TemplateInput) {
+    saveTemplate(template: $template) ${TemplateData}
   }
 `;
 export const DELETE_TEMPLATE = gql`

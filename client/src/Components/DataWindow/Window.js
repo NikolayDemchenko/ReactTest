@@ -4,20 +4,22 @@ import container from "../../Styles/Container.module.css";
 import { useQuery } from "@apollo/react-hooks";
 import FolderSwitch from "./Content/Folder/FolderSwitch";
 import Template from "./Content/Template/DataTemplate";
-import {GET_DATA} from './Queries'
+import { GET_DATA } from "./Queries";
 export default () => {
   console.log("Рендеринг Window");
   // Генерация контента
-  const { ItemType, ItemId} = useQuery(GET_DATA).data;
+  const { ItemType, ItemId } = useQuery(GET_DATA).data;
 
   let DataContent;
   switch (ItemType) {
     case "Template":
+      console.log("Рендеринг Template");
       DataContent = () => Template(ItemId);
       break;
     case "Instance":
       break;
     default:
+      console.log("Рендеринг Folder");
       DataContent = () => FolderSwitch(ItemId);
   }
   // Генерация слайдера
