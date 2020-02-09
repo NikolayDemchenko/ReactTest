@@ -23,7 +23,7 @@ export default ({ template, undo }) => {
   const DeleteField = (obj,field) => {
     delete obj[field];
     for (const key in obj) {
-      if (typeof obj[key] === "object") {
+      if (obj[key] instanceof Object) {
         if (Array.isArray(obj[key])) {
           obj[key].forEach(element => {
             if (typeof element === "object") {
@@ -37,13 +37,13 @@ export default ({ template, undo }) => {
     }
     return obj;
   };
-  // console.log("DeleteTypename(template)",DeleteTypename(template))
   const [saveTemplate] = useMutation(SAVE_TEMPLATE);
   const SaveTemp = (name, _item) => {
-    let item = { ..._item };
+    let item =  JSON.parse(JSON.stringify(_item));
     item = DeleteField(item,"__typename");
     item.name = name;
     saveTemplate({ variables: { template: item } });
+    console.log("_item",_item);
     console.log("item", item);
   };
   const [add, setAdd] = useState(true);
