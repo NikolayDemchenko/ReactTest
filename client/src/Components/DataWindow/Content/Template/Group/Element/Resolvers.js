@@ -10,7 +10,7 @@ export default {
         visible: false,
         filter: false,
         parentId: group.id,
-        // __typename: "Element"
+        __typename: "Element"
       };
       group.elements = group.elements !== undefined ? group.elements : [];
       group.elements.unshift(newElement);     

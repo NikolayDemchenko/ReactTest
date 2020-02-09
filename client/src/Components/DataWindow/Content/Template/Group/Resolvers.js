@@ -11,7 +11,7 @@ export default {
         visible: false,
         parentId: template.id,
         elements: [],
-        // __typename: "Group"
+        __typename: "Group"
       };
 
       template.groups.unshift(newGroup);

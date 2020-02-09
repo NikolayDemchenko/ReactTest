@@ -18,7 +18,6 @@ module.exports = gql`
     name: String!
     parentId: ID!
     groups: [GroupInput]
-    # __typename:String
 }
 
   extend type Mutation {

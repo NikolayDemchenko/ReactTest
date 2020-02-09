@@ -10,7 +10,7 @@ export default {
         name: "",
         id: null,
         parentId: folder.id,
-        // __typename: "Template"
+        __typename: "Template"
       };
       folder.templates = [...folder.templates, newTemplate];
       cache.writeQuery({

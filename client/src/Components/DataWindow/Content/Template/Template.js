@@ -10,7 +10,7 @@ import Instances from "./Instance/Instances";
 import save from "../../../../Function/UpdateOrCreate";
 
 import { UPDATE_TEMPLATE, SAVE_TEMPLATE } from "./TemplateQueries";
-import { NEW_GROUP} from "./Group/Queries";
+import { NEW_GROUP } from "./Group/Queries";
 export default ({ template, undo }) => {
   // const [OldTemplate, SetTemplate] = useState({...template});
   // console.log("OldTemplate",OldTemplate)
@@ -20,17 +20,32 @@ export default ({ template, undo }) => {
     variables: { template }
   });
 
-const DeleteTypename=(obj)=>{
-  delete obj.__typename
-    return obj
-}
-// console.log("DeleteTypename(template)",DeleteTypename(template))
+  const DeleteField = (obj,field) => {
+    delete obj[field];
+    for (const key in obj) {
+      if (typeof obj[key] === "object") {
+        if (Array.isArray(obj[key])) {
+          obj[key].forEach(element => {
+            if (typeof element === "object") {
+              DeleteField(element,field);
+            }
+          });
+        } else {
+          DeleteField(obj[key],field);
+        }
+      }
+    }
+    return obj;
+  };
+  // console.log("DeleteTypename(template)",DeleteTypename(template))
   const [saveTemplate] = useMutation(SAVE_TEMPLATE);
-const SaveTemp =(name)=>{
-  template.name=name
-  saveTemplate({variables:{template: DeleteTypename(template) }})
-  console.log("template", template);
-}
+  const SaveTemp = (name, _item) => {
+    let item = { ..._item };
+    item = DeleteField(item,"__typename");
+    item.name = name;
+    saveTemplate({ variables: { template: item } });
+    console.log("item", item);
+  };
   const [add, setAdd] = useState(true);
 
   let input;
@@ -48,9 +63,9 @@ const SaveTemp =(name)=>{
             defaultValue={template.name}
           />
           <Save
-          style={control.Crud}
+            style={control.Crud}
             onClick={() => {
-              SaveTemp(input.value);
+              SaveTemp(input.value, template);
               // save(null, updateTemplate, {
               //   id,
               //   parentId,
@@ -59,7 +74,7 @@ const SaveTemp =(name)=>{
             }}
           />
           <Undo
-           style={control.Crud}
+            style={control.Crud}
             onClick={() => {
               undo();
               setAdd(true);
@@ -81,7 +96,7 @@ const SaveTemp =(name)=>{
           items={
             <Groups
               add={add}
-              setAdd={setAdd}          
+              setAdd={setAdd}
               template={template}
               refetch={undo}
             />
@@ -89,7 +104,7 @@ const SaveTemp =(name)=>{
         />
         <Instances
           add={add}
-          setAdd={setAdd}        
+          setAdd={setAdd}
           template={template}
           refetch={undo}
         />
