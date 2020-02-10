@@ -21,7 +21,7 @@ export default ({ refetch, setAdd, template, add}) => {
       deleteGroup({ variables });
     }
     setAdd(true);
-    refetch();
+    // refetch();
   };
   const save = item => {
     upOrCrGroup(createGroup, updateGroup, item);

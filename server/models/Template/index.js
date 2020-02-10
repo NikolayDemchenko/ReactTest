@@ -68,12 +68,26 @@ const resolvers = {
           {
             name,
             parentId,
-            groups,
             updated: new Date()
           },
           { new: true }
         );
-        console.log(template);
+        // Найти все исходные группы шаблона
+       const _groups= await Groups.find({ parentId: id });
+       let difference = _groups.filter(({name}) => !groups.includes({name}));
+       console.log("difference :",difference);
+        // Сравнить группы
+
+        // const item = await Groups.findByIdAndUpdate(
+        //   id,
+        //   {
+        //     name,
+        //     parentId,
+        //     updated: new Date()
+        //   },
+        //   { new: true }
+        // );
+        console.log("saveTemplate: ", template);
         return item;
       } catch (err) {
         throw err;

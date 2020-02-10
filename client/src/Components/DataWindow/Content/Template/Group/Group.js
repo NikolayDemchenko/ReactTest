@@ -120,7 +120,7 @@ export default ({ remove, add, setAdd, group, template, save, refetch }) => {
           Delete={{
             onClick: () => {
               console.log("Удаление");
-              remove({ id });
+              remove({ template,group });
             },
             state: "active"
           }}

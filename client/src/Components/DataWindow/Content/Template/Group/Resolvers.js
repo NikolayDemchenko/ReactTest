@@ -37,18 +37,18 @@ export default {
         variables: { id: template.id },
         data: { template }
       });
+    },
+    deleteGroup: (_root, { template, group }, { cache }) => {
+      console.log("deleteGroup: ", group.name);
+      template.groups = template.groups.filter(_group =>
+        _group.id !== group.id ? true : false
+      );
+      cache.writeQuery({
+        query,
+        variables: { id: template.id },
+        data: { template }
+      });
+      console.log("Хуяк!!! Конец мутации: ", template.groups);
     }
-    // deleteGroup: (_root, { template, group }, { cache }) => {
-    //   console.log("deleteGroup: ", group.name);
-    //   template.groups = template.groups.filter(_group =>
-    //     _group.id !== group.id ? true : false
-    //   );
-    //   cache.writeQuery({
-    //     query,
-    //     variables: { id: template.id },
-    //     data: { template }
-    //   });
-    //   console.log("Хуяк!!! Конец мутации: ", template.groups);
-    // }
   }
 };
