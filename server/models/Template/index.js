@@ -81,11 +81,14 @@ const resolvers = {
         // Найти все исходные группы шаблона
         const _groups = await Groups.find({ parentId: id });
         // Преобразовать массивы групп в массивы только с id строкового типа для сравнения
-        const _groupsId = _groups.map(_group => String(_group._id));
-        const groupsId = groups.map(group => group.id);
+        const _groupsId = _groups.map(({ _id }) => String(_id));
+        const groupsId = groups.map(({ id }) => id);
         // Сравнить группы
         const groupsDifference = _groupsId.filter(x => !groupsId.includes(x));
         // Удалить разницу
+        // console.log("_groupsId", _groupsId);
+        // console.log("groupsId", groupsId);
+        // console.log("groupsDifference", groupsDifference);
         groupsDifference.forEach(id => removeGroup(id));
         // Удалить элементы каждой группы:
 
@@ -94,16 +97,16 @@ const resolvers = {
           const _elements = await Elements.find({ parentId: group.id });
           console.log("_elements", _elements);
           // Преобразовать массивы элементов в массивы только с id строкового типа для сравнения
-          const _elementsId = _elements.map(element => String(element._id));
-          const elementsId = group.elements.map(element => element.id);
-          console.log('_elementsId', _elementsId)
-          console.log('elementsId', elementsId)
+          const _elementsId = _elements.map(({ _id }) => String(_id));
+          const elementsId = group.elements.map(({ id }) => id);
+          console.log("_elementsId", _elementsId);
+          console.log("elementsId", elementsId);
           // Сравнить элементы
           const elementsDifference = _elementsId.filter(
             x => !elementsId.includes(x)
           );
           // Удалить разницу
-          // elementsDifference.forEach(id => removeElement(id));
+          elementsDifference.forEach(id => removeElement(id));
           console.log("elementsDifference", elementsDifference);
         });
         // const item = await Groups.findByIdAndUpdate(

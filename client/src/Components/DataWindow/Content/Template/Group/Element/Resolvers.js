@@ -47,22 +47,22 @@ export default {
         data: { template }
       });   
     },
-    // deleteElement: (_root, { template, group, element }, { cache }) => {
-    //   console.log("Удаление элемента");
-    //   group.elements = group.elements.filter(_element =>
-    //     _element !== element ? true : false
-    //   );
-    //   template.groups = template.groups.map(_group => {
-    //     if (_group.id === group.id) {
-    //       _group = group;
-    //     }
-    //     return _group;
-    //   });
-    //   cache.writeQuery({
-    //     query,
-    //     variables: { id: template.id },
-    //     data: { template }
-    //   });      
-    // }
+    deleteElement: (_root, { template, group, element }, { cache }) => {
+      console.log("Удаление элемента");
+      group.elements = group.elements.filter(_element =>
+        _element !== element ? true : false
+      );
+      template.groups = template.groups.map(_group => {
+        if (_group.id === group.id) {
+          _group = group;
+        }
+        return _group;
+      });
+      cache.writeQuery({
+        query,
+        variables: { id: template.id },
+        data: { template }
+      });      
+    }
   }
 };

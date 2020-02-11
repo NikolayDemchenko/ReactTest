@@ -71,8 +71,18 @@ export const UPDATE_ELEMENT = gql`
     }
   }
 `;
+// export const DELETE_ELEMENT = gql`
+//   mutation DeleteElement($id: ID!) {
+//     deleteElement(id: $id)
+//   }
+// `;
+
 export const DELETE_ELEMENT = gql`
-  mutation DeleteElement($id: ID!) {
-    deleteElement(id: $id)
+  mutation DeleteElement(
+    $template: Template
+    $group: Group
+    $element: Element
+  ) {
+    deleteElement(template: $template, group: $group, element: $element) @client
   }
 `;
