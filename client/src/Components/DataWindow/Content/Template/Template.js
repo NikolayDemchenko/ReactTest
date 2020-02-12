@@ -38,12 +38,12 @@ export default ({ template, refetch }) => {
     return obj;
   };
   const [saveTemplate] = useMutation(SAVE_TEMPLATE);
-  const save = (name, _item) => {
+  const save =async (name, _item) => {
     let item = JSON.parse(JSON.stringify(_item));
     item = DeleteField(item, "__typename");
     item.name = name;
-    saveTemplate({ variables: { template: item } });
-    setAdd(true);    
+    await saveTemplate({ variables: { template: item } });
+    refetch();
     // console.log("_item",_item);
     // console.log("item", item);
   };
@@ -67,14 +67,13 @@ export default ({ template, refetch }) => {
             style={control.Crud}
             onClick={() => {
               save(input.value, template);
-               
             }}
           />
           <Undo
             style={control.Crud}
             onClick={() => {
               refetch();
-              setAdd(true);
+             
             }}
           />
         </div>

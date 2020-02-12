@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import control from "../../../../../../Styles/ControlStyle.module.css";
 import { useMutation } from "@apollo/react-hooks";
 import style from "./Styles/Element.module.css";
@@ -7,59 +7,40 @@ import {
   ButtonsContainer
 } from "../../../../../Buttons/ButtonsContainer";
 import { UPDATE_ELEMENT_FIELDS } from "./Queries";
-export default ({ data, checkBtnTrue, remove, save, setAdd }) => {
+export default ({ data, remove }) => {
   const { template, group, element } = data;
-  const { id, name, parentId, visible, filter } = element;
-
-  const [checkState, setCheck] = useState("inactive");
+  const { name } = element;
 
   const [updateElement] = useMutation(UPDATE_ELEMENT_FIELDS);
-  const changeName = name => {
+  const changeElement = name => {
     element.name = name;
     updateElement({ variables: { template, group, element } });
-    setAdd(false);
   };
 
   const VisibleClick = () => {
     element.visible = !element.visible;
     element.filter = false;
     updateElement({ variables: { template, group, element } });
-    setAdd(false);
-    setCheck("active");
   };
   const FilterClick = () => {
     if (element.visible === false) element.visible = true;
     element.filter = !element.filter;
     updateElement({ variables: { template, group, element } });
-    setAdd(false);
-    setCheck("active");
-  };
-
-  const checkBtnClick = input => {
-    if (input.value !== "") {
-      changeName(input.value);
-      save({ id, parentId, name: input.value, visible, filter });
-      input.blur();
-      checkBtnTrue();
-      setCheck("inactive");
-    }
   };
   const keyPressEnter = (event, input) => {
     if (event.key === "Enter") {
-      console.log("enter press here! ");
-      checkBtnClick(input);
+      if (name !== "") {
+        input.blur();
+      }
+      
     }
   };
 
-  const inputChange = name => {
-    changeName(name);
-    name !== "" ? setCheck("active") : setCheck("inactive");
-  };
   useEffect(() => {
-    if(group.visible===false){
+    if (group.visible === false) {
       element.visible = false;
-      element.filter = false;     
-    } 
+      element.filter = false;
+    }
     if (name === "") {
       input.focus();
     }
@@ -74,7 +55,7 @@ export default ({ data, checkBtnTrue, remove, save, setAdd }) => {
           input = node;
         }}
         onKeyPress={e => keyPressEnter(e, input)}
-        onChange={() => inputChange(input.value)}
+        onChange={() => changeElement(input.value)}
         className={control.Input}
         defaultValue={name}
       />
@@ -83,13 +64,22 @@ export default ({ data, checkBtnTrue, remove, save, setAdd }) => {
         buttonStyle={CrudButton}
         Visible={{
           onClick: VisibleClick,
-          state: group.visible===true?element.visible === true ? "on" : "active":null
+          state:
+            group.visible === true
+              ? element.visible === true
+                ? "on"
+                : "active"
+              : null
         }}
         Filter={{
           onClick: FilterClick,
-          state: group.visible===true?element.filter === true ? "on" : "active":null
-        }}      
-        Save={{ onClick: () => checkBtnClick(input), state: checkState }}
+          state:
+            group.visible === true
+              ? element.filter === true
+                ? "on"
+                : "active"
+              : null
+        }}
         Delete={{ onClick: remove, state: "active" }}
       />
     </div>

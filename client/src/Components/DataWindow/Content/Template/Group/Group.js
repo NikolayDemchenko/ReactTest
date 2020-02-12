@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import {
   CrudButton,
   ButtonsContainer
@@ -9,38 +9,21 @@ import Elements from "./Element/Elements";
 import { Plus } from "../../../../Buttons/AllButtons";
 import { List } from "../../../../hoc/AllHocs";
 import { UPDATE_GROUP_FIELDS } from "./Queries";
-import {
-  useMutation
-  //  useApolloClient
-} from "@apollo/react-hooks";
+import { useMutation } from "@apollo/react-hooks";
 import {
   DELETE_ELEMENT,
   NEW_ELEMENT
 } from "../../Template/Group/Element/Queries";
-export default ({ remove, add, setAdd, group, template, save, refetch }) => {
-  const { id, visible, filter } = group;
-  const parentId = template.id;
-
-  const [updateGroup] = useMutation(UPDATE_GROUP_FIELDS);
-  const changeName = name => {
+export default ({ remove, add, setAdd, group, template, refetch }) => {
+  const [updateGroup] = useMutation(UPDATE_GROUP_FIELDS,{ variables: { template, group } });
+  const changeGroup = name => {
     group.name = name;
-    updateGroup({ variables: { template, group } });
-    setAdd(false);
+    updateGroup();
   };
   const VisibleClick = () => {
     group.visible = !group.visible;
-    group.filter = false;
-    updateGroup({ variables: { template, group } });
-    setCheck("active");
+    updateGroup();
   };
-  const FilterClick = () => {
-    if (group.visible === false) group.visible = true;
-    group.filter = !group.filter;
-    updateGroup({ variables: { template, group } });
-    setAdd(false);
-    setCheck("active");
-  };
-
   const [newElement] = useMutation(NEW_ELEMENT, {
     variables: { template, group }
   });
@@ -48,34 +31,15 @@ export default ({ remove, add, setAdd, group, template, save, refetch }) => {
   const removeElement = element => {
     deleteElement({ variables: { template, group, element } });
     setAdd(true);
-    // console.log("Тута!!!!!:",template);
   };
-
-  const [checkState, setCheck] = useState("inactive");
-
-  const CheckBtnClick = input => {
-    if (input.value !== "") {
-      save({ id, parentId, visible, filter, name: input.value });
-      input.blur();
-      setAdd(true);
-      setCheck("inactive");
-      console.log("Сейвится группа");
-    }
-  };
-
   const keyPressEnter = (event, input) => {
     if (event.key === "Enter") {
+      if (input.value !== "") {
+        input.blur();
+      }
       console.log("enter press here! ");
-      CheckBtnClick(input);
     }
   };
-
-  const inputChange = name => {
-    changeName(name);
-    name !== "" ? setAdd(true) : setAdd(false);
-  };
-  // console.log("isVisibleCheckBtn", visibleCheckBtn);
-
   useEffect(() => {
     if (group.name === "") {
       input.focus();
@@ -91,7 +55,7 @@ export default ({ remove, add, setAdd, group, template, save, refetch }) => {
             input = node;
           }}
           onChange={() => {
-            inputChange(input.value);
+            changeGroup(input.value);
           }}
           onKeyPress={e => keyPressEnter(e, input)}
           className={control.Input}
@@ -104,16 +68,6 @@ export default ({ remove, add, setAdd, group, template, save, refetch }) => {
             onClick: VisibleClick,
             state: group.visible === true ? "on" : "active"
           }}
-          // Filter={{
-          //   onClick: FilterClick,
-          //   state: group.filter === true ? "on" : "active"
-          // }}
-          // Save={{
-          //   onClick: () => {
-          //     CheckBtnClick(input);
-          //   },
-          //   state: checkState
-          // }}
           Delete={{
             onClick: () => {
               console.log("Удаление");
@@ -129,7 +83,6 @@ export default ({ remove, add, setAdd, group, template, save, refetch }) => {
             onClick={e => {
               e.preventDefault();
               newElement();
-              setAdd(false);
             }}
             state={add}
           />
