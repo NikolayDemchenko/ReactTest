@@ -5,7 +5,7 @@ const scheme = new mongoose.Schema(
   {
     name: String,
     parentId: ObjectId,
-    updated: { type: Date, default: Date.now }
+    updated: { type: Date, default: new Date() }
   },
   { versionKey: false }
 );

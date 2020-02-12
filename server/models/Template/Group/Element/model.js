@@ -7,7 +7,7 @@ const scheme = new mongoose.Schema(
     parentId: ObjectId,
     visible: Boolean,
     filter: Boolean,
-    updated: { type: Date, default: Date.now }
+    updated: { type: Date, default: new Date() }
   },
   { versionKey: false }
 );

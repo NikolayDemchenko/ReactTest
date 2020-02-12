@@ -12,5 +12,5 @@ export default id => {
   if (loading) return "Loading...";
   if (error) return `Error! ${error.message}`;
 
-  return <Template undo={() => refetch()} template={data.template} />;
+  return <Template refetch={refetch} template={data.template} />;
 };

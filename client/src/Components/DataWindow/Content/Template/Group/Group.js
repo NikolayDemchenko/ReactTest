@@ -29,13 +29,12 @@ export default ({ remove, add, setAdd, group, template, save, refetch }) => {
   };
   const VisibleClick = () => {
     group.visible = !group.visible;
-    group.filter=false
+    group.filter = false;
     updateGroup({ variables: { template, group } });
-    setAdd(false);
     setCheck("active");
   };
   const FilterClick = () => {
-    if(group.visible===false)group.visible = true
+    if (group.visible === false) group.visible = true;
     group.filter = !group.filter;
     updateGroup({ variables: { template, group } });
     setAdd(false);
@@ -51,7 +50,6 @@ export default ({ remove, add, setAdd, group, template, save, refetch }) => {
     setAdd(true);
     // console.log("Тута!!!!!:",template);
   };
-
 
   const [checkState, setCheck] = useState("inactive");
 
@@ -74,8 +72,7 @@ export default ({ remove, add, setAdd, group, template, save, refetch }) => {
 
   const inputChange = name => {
     changeName(name);
-    setAdd(false);
-    name !== "" ? setCheck("active") : setCheck("inactive");
+    name !== "" ? setAdd(true) : setAdd(false);
   };
   // console.log("isVisibleCheckBtn", visibleCheckBtn);
 
@@ -111,16 +108,16 @@ export default ({ remove, add, setAdd, group, template, save, refetch }) => {
           //   onClick: FilterClick,
           //   state: group.filter === true ? "on" : "active"
           // }}
-          Save={{
-            onClick: () => {
-              CheckBtnClick(input);
-            },
-            state: checkState
-          }}
+          // Save={{
+          //   onClick: () => {
+          //     CheckBtnClick(input);
+          //   },
+          //   state: checkState
+          // }}
           Delete={{
             onClick: () => {
               console.log("Удаление");
-              remove({ template,group });
+              remove({ template, group });
             },
             state: "active"
           }}
@@ -142,7 +139,7 @@ export default ({ remove, add, setAdd, group, template, save, refetch }) => {
             setAdd={setAdd}
             refetch={refetch}
             remove={removeElement}
-            data={{template,group}}           
+            data={{ template, group }}
             checkBtnTrue={() => setAdd(true)}
           />
         }

@@ -3,6 +3,7 @@ const Templates = require("./model");
 const Groups = require("./Group/model");
 const Elements = require("./Group/Element/model");
 const typeDefs = require("./typeDefs");
+const { saveTemplate } = require("./SaveTemplate");
 const {
   removeTemplate,
   removeGroup,
@@ -64,62 +65,9 @@ const resolvers = {
         throw err;
       }
     },
-    saveTemplate: async (_, { template }) => {
+    saveTemplate: (_, { template }) => {
       try {
-        const { id, name, parentId, groups } = template;
-        // Обновить локальные поля шаблона
-        const item = await Templates.findByIdAndUpdate(
-          id,
-          {
-            name,
-            parentId,
-            updated: new Date()
-          },
-          { new: true }
-        );
-        // Удалить группы:
-        // Найти все исходные группы шаблона
-        const _groups = await Groups.find({ parentId: id });
-        // Преобразовать массивы групп в массивы только с id строкового типа для сравнения
-        const _groupsId = _groups.map(({ _id }) => String(_id));
-        const groupsId = groups.map(({ id }) => id);
-        // Сравнить группы
-        const groupsDifference = _groupsId.filter(x => !groupsId.includes(x));
-        // Удалить разницу
-        // console.log("_groupsId", _groupsId);
-        // console.log("groupsId", groupsId);
-        // console.log("groupsDifference", groupsDifference);
-        groupsDifference.forEach(id => removeGroup(id));
-        // Удалить элементы каждой группы:
-
-        groups.forEach(async group => {
-          // Найти все исходные элементы группы
-          const _elements = await Elements.find({ parentId: group.id });
-          console.log("_elements", _elements);
-          // Преобразовать массивы элементов в массивы только с id строкового типа для сравнения
-          const _elementsId = _elements.map(({ _id }) => String(_id));
-          const elementsId = group.elements.map(({ id }) => id);
-          console.log("_elementsId", _elementsId);
-          console.log("elementsId", elementsId);
-          // Сравнить элементы
-          const elementsDifference = _elementsId.filter(
-            x => !elementsId.includes(x)
-          );
-          // Удалить разницу
-          elementsDifference.forEach(id => removeElement(id));
-          console.log("elementsDifference", elementsDifference);
-        });
-        // const item = await Groups.findByIdAndUpdate(
-        //   id,
-        //   {
-        //     name,
-        //     parentId,
-        //     updated: new Date()
-        //   },
-        //   { new: true }
-        // );
-        // console.log("saveTemplate: ", template);
-        return item;
+      return saveTemplate(template, Templates, Groups, Elements );
       } catch (err) {
         throw err;
       }
