@@ -30,7 +30,10 @@ const saveTemplate = async (template, Templates, Groups, Elements) => {
   groupsAdd.forEach(async group => {
     if (group.name !== "") {
       try {
-        await new Groups({ ...group }).save();
+        const item = await new Groups({ ...group }).save();
+        const newGroup = { ...group, id: item._id };
+        console.log("newGroup", newGroup);
+        CreateElements(newGroup);
       } catch (err) {
         throw err;
       }
@@ -89,6 +92,24 @@ const saveTemplate = async (template, Templates, Groups, Elements) => {
       }
     });
     // console.log("elementsAdd", elementsAdd);
+  };
+  const CreateElements = async ({ id, elements }) => {
+    // // Найти все исходные элементы группы
+    // const _elements = await Elements.find({ parentId: id });
+    // // Сравнить элементы
+    // const elementsAdd = GetDifference(elements, _elements);
+    // Создать элементы
+    elements.forEach(async element => {
+      if (element.name !== "") {
+        try {
+          element.parentId = id;
+          const el = await new Elements({ ...element, parentId: id }).save();
+          console.log("element", el);
+        } catch (err) {
+          throw err;
+        }
+      }
+    });
   };
   // Метод обновления элементов
   const _UpdateElements = (_elements, elements) => {

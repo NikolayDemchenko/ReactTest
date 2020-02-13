@@ -38,7 +38,7 @@ export default ({ template, refetch }) => {
     return obj;
   };
   const [saveTemplate] = useMutation(SAVE_TEMPLATE);
-  const save =async (name, _item) => {
+  const save = async (name, _item) => {
     let item = JSON.parse(JSON.stringify(_item));
     item = DeleteField(item, "__typename");
     item.name = name;
@@ -73,7 +73,6 @@ export default ({ template, refetch }) => {
             style={control.Crud}
             onClick={() => {
               refetch();
-             
             }}
           />
         </div>
@@ -83,7 +82,6 @@ export default ({ template, refetch }) => {
               onClick={e => {
                 e.preventDefault();
                 newGroup();
-                setAdd(false);
                 console.log("New Group2:", template.groups);
               }}
               state={add}
