@@ -18,10 +18,11 @@ export const Element = ({ name, nameVisible }) => {
 };
 
 const Solution = {
-  KeyValue: { key: value },
+  name:String,
+  value: Container || KeyValue || Number || String || Text || Image || Video || Audio ,
+  
+  KeyValue: { name, value }, 
   Container:{ContainerType, value: [KeyValue] },
-
-  value: Container || KeyValue || Row || Text || Image || Video || Audio 
 };
 // 1 Global settings:
 //   1 nameSettings:
