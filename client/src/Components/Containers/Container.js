@@ -1,5 +1,9 @@
 import React from "react";
-
-export default Container => components => {
-  return <Container>{components}</Container>;
-};
+import CrudContainer from './CrudContainer'
+export default function Container() {
+  return (
+    <div>
+      <CrudContainer />
+    </div>
+  );
+}
