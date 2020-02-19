@@ -61,7 +61,7 @@ export default ({ data, remove }) => {
       />
       <ButtonsContainer
         containerStyle={CrudButton.Container}
-        buttonStyle={CrudButton}
+        stateStyle={CrudButton}
         Visible={{
           onClick: VisibleClick,
           state:

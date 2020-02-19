@@ -63,7 +63,7 @@ export default ({ remove, add, setAdd, group, template, refetch }) => {
         />
         <ButtonsContainer
           containerStyle={CrudButton.Container}
-          buttonStyle={CrudButton}
+          stateStyle={CrudButton}
           Visible={{
             onClick: VisibleClick,
             state: group.visible === true ? "on" : "active"

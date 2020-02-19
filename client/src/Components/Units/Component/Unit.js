@@ -1,7 +1,6 @@
 import React from "react";
-
-export default function Unit({
-  unitName,
+import ButtonsContainer from '../Buttons/ButtonsContainer'
+export default function Unit({ 
   unitStyle,
   VisibleClick,
   visible,
@@ -9,6 +8,8 @@ export default function Unit({
   DeleteClick,
   Data
 }) {
+  const unitName="Юнит"
+
   let input;
   return (
     <div className={unitStyle.Unit}>
@@ -24,7 +25,7 @@ export default function Unit({
       />
       <ButtonsContainer
         containerStyle={unitStyle.BtnContainer}
-        buttonStyle={unitStyle}
+        stateStyle={StateStyle}
         Check={{
           onClick: CheckClick,
           state: "active"

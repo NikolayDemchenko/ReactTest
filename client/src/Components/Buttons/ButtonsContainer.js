@@ -11,7 +11,7 @@ export  function ButtonsContainer(props) {
           key={prop}
           Component={buttons[btn]}
           onClick={props[prop].onClick}
-          style={props.buttonStyle}
+          style={props.stateStyle}
           state={props[prop].state}
         />);     
       }
