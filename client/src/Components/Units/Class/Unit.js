@@ -1,31 +1,3 @@
-// const data = {
-//   inputRow,
-//   inputText,
-//   inputNumber,
-//   inputImage,
-//   inputVideo,
-//   inputAudio,
-//   row,
-//   text,
-//   number,
-//   image,
-//   video,
-//   audio
-// };
-
-class InstanceContainer {
-  template;
-  instances;
-}
-// class Data {
-//   value;
-//   visible;
-// }
-
-// class Name {
-//   value;
-//   visible;
-// }
 class Module {
   constructor(name) {
     this.visible = true;
@@ -35,13 +7,13 @@ class Module {
     this.nameVisible = true;
   }
 }
-class Entity extends Module {
-  id;
+class Entity extends Module {  
   constructor(name, image, data) {
     super(name);
     this.image = image;
     this.imageVisible = true;
     this.data = data;
+    this.id;
   }
 }
 class Value extends Module {
@@ -69,9 +41,17 @@ class InstanceContainer extends Container {
   }
 }
 class DataValue extends Value {
-  value;  
+  constructor(name) {
+    super(name) 
+    this.value;
+  }
+  
 }
 class UnitValue extends DataValue {
-  unit;
+  constructor(name) {
+    super(name) 
+    this.unit;
+  }
 }
-const num = new Container();
+const num = new UnitValue();
+console.log('num', num)
