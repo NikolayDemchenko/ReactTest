@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ButtonsContainer, CrudButton } from "../Buttons/ButtonsContainer";
+import { ButtonsContainer, CrudButton } from "../../../Buttons/ButtonsContainer";
 export default function CrudContainer() {
   const [Add, setAdd] = useState(true);
   const Data = () => {
@@ -17,7 +17,7 @@ export default function CrudContainer() {
     } else {
       return (
         <div style={{color:"white"}}>
-          <div>Юнит</div>
+          <div>Контейнер</div>
           <div onClick={() => setAdd(!Add)}>Отмена</div>
         </div>
       );
