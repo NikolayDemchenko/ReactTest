@@ -18,7 +18,7 @@ export default function CrudContainer() {
       return (
         <div style={{color:"white"}}>
           <div>Контейнер</div>
-          <div onClick={() => setAdd(!Add)}>Отмена</div>
+          <div onClick={() => setAdd(!Add) }>Отмена</div>
         </div>
       );
     }
