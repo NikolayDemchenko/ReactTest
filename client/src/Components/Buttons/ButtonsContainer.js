@@ -5,15 +5,15 @@ export {CrudButton};
 export  function ButtonsContainer(props) {
   const btns = [];
   for (const prop in props) {
-    for (const btn in buttons) {
-      if (btn === prop) {
+    for (const btn in buttons) {    
+      if (btn === prop) {         
         btns.push(<StateButton
-          key={prop}
+          key={btns.length}
           Component={buttons[btn]}
           onClick={props[prop].onClick}
           style={props.buttonStyle}
           state={props[prop].state}
-        />);     
+        />);  
       }
     }
   }

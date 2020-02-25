@@ -1,6 +1,44 @@
-.thisDiv1{
-    background-color: #fff;
+.thisDiv1 {
+  background-color: #fff;
 }
-.thisDiv2{
-    background-color: rgb(138, 23, 23);
+.thisDiv2 {
+  background-color: rgb(138, 23, 23);
+}
+.Container {
+  display: inline-flex;
+  align-items: center;
+  margin: 2px;
+  border: 1px solid rgb(134, 100, 100);
+}
+
+.on,
+.active,
+.inactive {
+  color: rgba(46, 52, 61, 0.246);
+  display: flex;
+  text-align: center;
+  align-items: center;
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  margin: 6px;
+  /* border: 1px solid rgba(192, 220, 255, 0.712); */
+}
+.on {
+  color: #3d84ff;
+}
+.on:hover {
+  cursor: pointer;
+}
+.active {
+  color: #616d81;
+}
+.active:hover {
+  cursor: pointer;
+  color: #8a9ab1;
+}
+.on:active,
+.active:active {
+  transition: 0.1s;
+  color: rgba(240, 248, 255, 0.198);
 }

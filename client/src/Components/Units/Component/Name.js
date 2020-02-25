@@ -26,7 +26,7 @@ export default function Name({ style, visible, name }) {
         containerStyle={style.Container}
         buttonStyle={style}
         Visible={{
-          onClick: visible.click,
+          onClick: visible.onClick,
           state: visible.value === true ? "on" : "active"
         }}
       />

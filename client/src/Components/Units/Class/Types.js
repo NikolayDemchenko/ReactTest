@@ -1,4 +1,4 @@
-export default () => [
+export default [
   {type:"row",name: "Cтрока"},
   {type:"doc",name: "Текст"},
   {type:"num",name: "Число"},
