@@ -1,6 +1,6 @@
 import React from "react";
 import { ButtonsContainer, CrudButton } from "../../Buttons/ButtonsContainer";
-export default function Name({ style, visible, name, color }) {
+export default function Name({buttonStyle, containerStyle, visible, name, color }) {
   const keyPressEnter = (event, input ) => {
     if (event.key === "Enter") {
       if (input.value !== "") {
@@ -11,7 +11,7 @@ export default function Name({ style, visible, name, color }) {
   };
   let input;
   return (
-    <div>
+    <div className={containerStyle}>
       <input
         placeholder="Введите наименование"
         ref={node => {
@@ -23,8 +23,8 @@ export default function Name({ style, visible, name, color }) {
         defaultValue={name.value}
       />
       <ButtonsContainer
-        containerStyle={style.Container}
-        buttonStyle={style}
+        containerStyle={containerStyle}
+        buttonStyle={buttonStyle}
         Visible={{
           onClick: visible.onClick,
           state: visible.value === true ? "on" : "active"

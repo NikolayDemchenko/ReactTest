@@ -7,11 +7,10 @@ export default function Unit({ unit }) {
   const defaultUnit = {
     nameVisible: true,
     nameValue: null,
-    type: "container",
+    type: "cont",
     bColor: "grey",
     color: "white",
-    visible: true,
-    value: []
+    visible: true
   };
   const [thisUnit, setThisUnit] = useState(
     unit === !undefined ? unit : defaultUnit
@@ -20,34 +19,30 @@ export default function Unit({ unit }) {
     setThisUnit({ ...thisUnit, nameVisible: !thisUnit.nameVisible });
     console.log("thisUnit.nameVisible", !thisUnit.nameVisible);
   };
-  const nameUpdate = (value) => {
-    setThisUnit({ ...thisUnit, name: value });
-    console.log("thisUnit.name", value);
+  const nameUpdate = name => {
+    setThisUnit({ ...thisUnit, name });
+    console.log("thisUnit.name", name);
   };
   const visibleClick = () => {
     setThisUnit({ ...thisUnit, visible: !thisUnit.visible });
     console.log("thisUnit.visible", !thisUnit.visible);
   };
-  const typeClick = (value) => {
-    setThisUnit({ ...thisUnit, type: value });
-    console.log("thisUnit.type", value);
+  const typeClick = type => {
+    setThisUnit({ ...thisUnit, type:type });
+    console.log("thisUnit.type", type);
   };
-  const addValue = () => {
-    setThisUnit({ ...thisUnit, value:<Unit unit={defaultUnit}/>  });
-    console.log("thisUnit.value",<Unit unit={defaultUnit}/>);
-  };
-
-  // const name = { value: unit.name, update: () => null };
-
-  if (unit === undefined) {
-    unit = defaultUnit;
-  }
+  const addUnit = () => { 
+    const oldValue= thisUnit.value!==undefined?thisUnit.value:[]
+    setThisUnit({ ...thisUnit, value: [ ...oldValue,<Unit key={Date.now()} unit={defaultUnit} />] });
+  }; 
+  console.log("thisUnit",thisUnit);
 
   return (
     <div>
-      <div className={style.Container}>
+      <div className={style.RowContainer}>
         <Name
-          style={style}
+          containerStyle={style.RowContainer}
+          buttonStyle={style}
           visible={{ value: thisUnit.nameVisible, onClick: nameVisibleClick }}
           name={{ value: thisUnit.nameValue, update: nameUpdate }}
           color={{ onClick: null }}
@@ -58,10 +53,13 @@ export default function Unit({ unit }) {
           visible={{ value: thisUnit.visible, onClick: visibleClick }}
           remove={{ onClick: null }}
           check={{ onClick: null }}
-          style={style}
+
+          add={addUnit}
+
+          containerStyle={style.RowContainer}
+          buttonStyle={style}
         />
-      </div>
-      <Container add={addValue} value={thisUnit.value}/>
+      </div>{thisUnit.value}     
     </div>
   );
 }

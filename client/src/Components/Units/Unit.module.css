@@ -4,7 +4,7 @@
 .thisDiv2 {
   background-color: rgb(138, 23, 23);
 }
-.Container {
+.RowContainer {
   display: inline-flex;
   align-items: center;
   margin: 2px;
@@ -18,10 +18,11 @@
   display: flex;
   text-align: center;
   align-items: center;
-  width: 30px;
-  min-width: 30px;
-  height: 30px;
-  margin: 6px;
+  width: 20px;
+  min-width: 20px;
+  height: 20px;
+  /* margin: 4px; */
+  padding: 1px 2px 4px ;
   /* border: 1px solid rgba(192, 220, 255, 0.712); */
 }
 .on {

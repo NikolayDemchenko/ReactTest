@@ -1,17 +1,12 @@
 import React from "react";
 import {
-  ButtonsContainer,
-  CrudButton
+  ButtonsContainer
 } from "../../../Buttons/ButtonsContainer";
 // import CrudContainer from "./CrudContainer";
-export default function Container({value,add}) {
+export default function Container({value }) {
   return (
-    <ButtonsContainer
-      containerStyle={CrudButton.Container}
-      buttonStyle={CrudButton}
-      Plus={{
-        onClick: add     
-      }}
-    >{value}</ButtonsContainer>
+    <div >
+      {value}
+    </div>
   );
 }

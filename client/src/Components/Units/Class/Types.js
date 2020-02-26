@@ -5,6 +5,6 @@ export default [
   {type:"uNum",name: "Еденица"},
   {type:"img",name: "Изображение"},
   {type:"video",name: "Видео"},
-  {type:"container",name: "Блок"},
-  {type:"instanceContainer",name: "Контейнер"},
+  {type:"cont",name: "Блок"},
+  {type:"iCont",name: "Контейнер"},
 ]

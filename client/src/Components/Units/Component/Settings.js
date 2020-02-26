@@ -2,19 +2,19 @@ import React from "react";
 import Select from "./Select";
 import { ButtonsContainer, CrudButton } from "../../Buttons/ButtonsContainer";
 export default function Settings({
+  containerStyle,
+  buttonStyle,
   type,  
   color,
   visible,
   remove,
-  check,
-  style
-}) {
+  check,add}) {
   return (
-    <div>
+    <div className={containerStyle}>
       <Select type={type.value} onClick={type.onClick} />
       <ButtonsContainer
-        containerStyle={style.Container}
-        buttonStyle={style}
+        containerStyle={containerStyle}
+        buttonStyle={buttonStyle}
 
         Color={{
           onClick: color.onClick
@@ -28,6 +28,9 @@ export default function Settings({
         }}
         Check={{
           onClick: check.onClick
+        }}
+        Plus={{
+          onClick: add
         }}
       />
     </div>
