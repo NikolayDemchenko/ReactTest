@@ -11,7 +11,7 @@ export default function Unit({ unit }) {
     bColor: "grey",
     color: "white",
     visible: true,
-    value: null
+    value: []
   };
   const [thisUnit, setThisUnit] = useState(
     unit === !undefined ? unit : defaultUnit
@@ -32,6 +32,10 @@ export default function Unit({ unit }) {
     setThisUnit({ ...thisUnit, type: value });
     console.log("thisUnit.type", value);
   };
+  const addValue = () => {
+    setThisUnit({ ...thisUnit, value:<Unit unit={defaultUnit}/>  });
+    console.log("thisUnit.value",<Unit unit={defaultUnit}/>);
+  };
 
   // const name = { value: unit.name, update: () => null };
 
@@ -41,7 +45,7 @@ export default function Unit({ unit }) {
 
   return (
     <div>
-      <div>
+      <div className={style.Container}>
         <Name
           style={style}
           visible={{ value: thisUnit.nameVisible, onClick: nameVisibleClick }}
@@ -57,7 +61,7 @@ export default function Unit({ unit }) {
           style={style}
         />
       </div>
-      <Container />
+      <Container add={addValue} value={thisUnit.value}/>
     </div>
   );
 }
