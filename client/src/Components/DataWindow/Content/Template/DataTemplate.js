@@ -5,7 +5,9 @@ import { GET_TEMPLATE_BY_ID as query } from "./TemplateQueries";
 import Template from "./Template";
 export default id => {
   const variables = { id };
-  const { loading, error, data, refetch,client } = useQuery(query, {
+  const { loading, error, data, refetch,
+    // client 
+  } = useQuery(query, {
     variables,
     notifyOnNetworkStatusChange: true
   });

@@ -1,9 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { ButtonsContainer } from "../../../Buttons/ButtonsContainer";
 import BaseUnit from "../BaseUnit";
-import Unit from "../Unit";
+import DataUnit from "../DataUnit";
 export default function Container(props) {
-  const { style, dataUnit, setDataUnit } = props;
+  const { style, dataUnit, setDataUnit, getData } = props;
+  const {
+    contStyle,
+    nameContStyle,
+    nameBtnStyle,
+    setsContStyle,
+    setsBtnStyle
+  } = style;
   const defaultUnit = {
     nameVisible: true,
     nameValue: null,
@@ -12,25 +19,32 @@ export default function Container(props) {
     color: "white",
     visible: true
   };
+
+  const container = dataUnit.value !== undefined ? dataUnit.value : [];
   const addUnit = () => {
-    const oldValue = dataUnit.value !== undefined ? dataUnit.value : [];
     setDataUnit({
       ...dataUnit,
-      value: [...oldValue, defaultUnit]
+      value: [...container, defaultUnit]
     });
   };
-  const unitValue = dataUnit.value !== undefined ? dataUnit.value : [];
+  getData(dataUnit);
+  // console.log("dataUnit.value", dataUnit.value);
+
   const Data = () =>
-    unitValue.map(unit => (
-      <Unit key={unitValue.findIndex(i => i == unit)} unit={unit} />
+    container.map(unit => (
+      <DataUnit
+        key={container.findIndex(i => i === unit)}
+        getData={getData}
+        unit={unit}
+      />
     ));
   return (
     <div>
       <div>
         <BaseUnit {...props} />
         <ButtonsContainer
-          containerStyle={style.setsContStyle}
-          buttonStyle={style.setsBtnStyle}
+          containerStyle={setsContStyle}
+          buttonStyle={setsBtnStyle}
           Plus={{
             onClick: addUnit
           }}

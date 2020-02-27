@@ -7,4 +7,5 @@ export default [
   {type:"video",name: "Видео"},
   {type:"cont",name: "Блок"},
   {type:"iCont",name: "Контейнер"},
+  {type:"unit",name: "Элемент"},
 ]

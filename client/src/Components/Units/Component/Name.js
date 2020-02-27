@@ -1,5 +1,5 @@
 import React from "react";
-import { ButtonsContainer, CrudButton } from "../../Buttons/ButtonsContainer";
+import { ButtonsContainer } from "../../Buttons/ButtonsContainer";
 export default function Name({
   buttonStyle,
   containerStyle,

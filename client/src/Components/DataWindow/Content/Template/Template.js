@@ -9,13 +9,15 @@ import Groups from "./Group/Groups";
 import Instances from "./Instance/Instances";
 // import save from "../../../../Function/UpdateOrCreate";
 
-import { UPDATE_TEMPLATE, SAVE_TEMPLATE } from "./TemplateQueries";
+import {
+  //  UPDATE_TEMPLATE,
+    SAVE_TEMPLATE } from "./TemplateQueries";
 import { NEW_GROUP } from "./Group/Queries";
 export default ({ template, refetch }) => {
   // const [OldTemplate, SetTemplate] = useState({...template});
   // console.log("OldTemplate",OldTemplate)
-  const [updateTemplate] = useMutation(UPDATE_TEMPLATE);
-  const { id, parentId } = template;
+  // const [updateTemplate] = useMutation(UPDATE_TEMPLATE);
+  // const { id, parentId } = template;
   const [newGroup] = useMutation(NEW_GROUP, {
     variables: { template }
   });

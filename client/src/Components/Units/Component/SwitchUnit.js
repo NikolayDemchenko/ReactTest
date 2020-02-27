@@ -6,6 +6,8 @@ export default function SwitchUnit(props) {
   switch (props.dataUnit.type) {
     case "row":
       return <Row {...props} />;
+    case "unit":
+      return <Container {...props} />;
     case "doc":
       return <Container {...props} />;
     case "num":
@@ -20,7 +22,7 @@ export default function SwitchUnit(props) {
       return <Container {...props} />;
     case "iCont":
       return <Container {...props} />;
-
+    default:
+      return <Container {...props} />;
   }
-  
 }
