@@ -1,7 +1,13 @@
 import React from "react";
 import { ButtonsContainer, CrudButton } from "../../Buttons/ButtonsContainer";
-export default function Name({buttonStyle, containerStyle, visible, name, color }) {
-  const keyPressEnter = (event, input ) => {
+export default function Name({
+  buttonStyle,
+  containerStyle,
+  visible,
+  name,
+  color
+}) {
+  const keyPressEnter = (event, input) => {
     if (event.key === "Enter") {
       if (input.value !== "") {
         input.blur();
@@ -19,7 +25,6 @@ export default function Name({buttonStyle, containerStyle, visible, name, color 
         }}
         onChange={() => name.update(input.value)}
         onKeyPress={e => keyPressEnter(e, input)}
-        // className={control.Input}
         defaultValue={name.value}
       />
       <ButtonsContainer
