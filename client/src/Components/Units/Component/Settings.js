@@ -8,7 +8,6 @@ export default function Settings({
   color,
   visible,
   remove,
-  check,
   types
 }) {
   return (
@@ -25,11 +24,8 @@ export default function Settings({
           state: visible.value === true ? "on" : "active"
         }}
         Delete={{
-          onClick: remove.onClick
-        }}
-        Check={{
-          onClick: check.onClick
-        }}
+          onClick: remove
+        }} 
       />
     </div>
   );

@@ -2,7 +2,13 @@ import React from "react";
 import Name from "./Name";
 import Settings from "./Settings";
 import Types from "../Class/Types";
-export default function Unit({ style, dataUnit, setDataUnit, updateUnit }) {
+export default function Unit({
+  removeUnit,
+  style,
+  dataUnit,
+  setDataUnit,
+  updateUnit
+}) {
   const nameVisibleClick = () => {
     updateUnit({ ...dataUnit, nameVisible: !dataUnit.nameVisible });
     console.log("dataUnit.nameVisible", !dataUnit.nameVisible);
@@ -10,10 +16,6 @@ export default function Unit({ style, dataUnit, setDataUnit, updateUnit }) {
   const nameUpdate = nameValue => {
     setDataUnit({ ...dataUnit, nameValue });
     console.log("dataUnit.name", { ...dataUnit, nameValue });
-  };
-  const changeName = nameValue => {
-    updateUnit({ ...dataUnit, nameValue });
-    console.log("changeName", { ...dataUnit, nameValue });
   };
   const visibleClick = () => {
     updateUnit({ ...dataUnit, visible: !dataUnit.visible });
@@ -23,10 +25,24 @@ export default function Unit({ style, dataUnit, setDataUnit, updateUnit }) {
     updateUnit({ ...dataUnit, type: type });
     console.log("dataUnit.type", type);
   };
+  const changeValue = nameValue => {
+    updateUnit({ ...dataUnit, nameValue });
+    console.log("changeName", { ...dataUnit, nameValue });
+  };
   return (
     <div className={style.contStyle}>
+      <Settings
+        types={Types}
+        type={{ value: dataUnit.type, onClick: typeClick }}
+        color={{ onClick: null }}
+        visible={{ value: dataUnit.visible, onClick: visibleClick }}
+        remove={() => removeUnit(dataUnit)}
+        containerStyle={style.setsContStyle}
+        buttonStyle={style.setsBtnStyle}
+      />
       <Name
-        changeName={changeName}
+        changeValue={changeValue}
+        dataUnit={dataUnit}
         containerStyle={style.nameContStyle}
         buttonStyle={style.nameBtnStyle}
         visible={{
@@ -35,16 +51,6 @@ export default function Unit({ style, dataUnit, setDataUnit, updateUnit }) {
         }}
         name={{ value: dataUnit.nameValue, update: nameUpdate }}
         color={{ onClick: null }}
-      />
-      <Settings
-        types={Types}
-        type={{ value: dataUnit.type, onClick: typeClick }}
-        color={{ onClick: null }}
-        visible={{ value: dataUnit.visible, onClick: visibleClick }}
-        remove={{ onClick: null }}
-        check={{ onClick: null }}
-        containerStyle={style.setsContStyle}
-        buttonStyle={style.setsBtnStyle}
       />
     </div>
   );

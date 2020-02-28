@@ -6,30 +6,34 @@ export default function Name({
   visible,
   name,
   color,
-  changeName
+  changeValue,
+  dataUnit
 }) {
   const keyPressEnter = (event, input) => {
     if (event.key === "Enter") {
       if (input.value !== "") {
         input.blur();
-        changeName(input.value);
+        changeValue(input.value);
       }
       console.log("enter press here! ");
     }
   };
+
   let input;
   return (
     <div className={containerStyle}>
       <input
-        placeholder="Введите наименование"
+        placeholder="Введите значение"
         ref={node => {
           input = node;
         }}
         onBlur={e => {
           e.preventDefault();
-          changeName(input.value);
+          changeValue(input.value);
         }}
-        onChange={() => name.update(input.value)}
+        onChange={() => {
+          name.update(input.value);
+        }}
         onKeyPress={e => keyPressEnter(e, input)}
         defaultValue={name.value}
       />

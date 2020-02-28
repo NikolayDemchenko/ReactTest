@@ -83,8 +83,7 @@ export default function Unit({ unit }) {
     <div>
       <DataUnit
         unit={Unit}
-        setUnit={setUnit}
-        // parent={Unit} updateParent={setUnit}
+        setUnit={setUnit}      
       />
     </div>
   );
