@@ -2,27 +2,31 @@ import React from "react";
 import Name from "./Name";
 import Settings from "./Settings";
 import Types from "../Class/Types";
-export default function Unit({ style,dataUnit,setDataUnit }) {
-
+export default function Unit({ style, dataUnit, setDataUnit, updateUnit }) {
   const nameVisibleClick = () => {
-    setDataUnit({ ...dataUnit, nameVisible: !dataUnit.nameVisible });
+    updateUnit({ ...dataUnit, nameVisible: !dataUnit.nameVisible });
     console.log("dataUnit.nameVisible", !dataUnit.nameVisible);
   };
   const nameUpdate = nameValue => {
-    setDataUnit({ ...dataUnit, nameValue});
+    setDataUnit({ ...dataUnit, nameValue });
     console.log("dataUnit.name", { ...dataUnit, nameValue });
   };
+  const changeName = nameValue => {
+    updateUnit({ ...dataUnit, nameValue });
+    console.log("changeName", { ...dataUnit, nameValue });
+  };
   const visibleClick = () => {
-    setDataUnit({ ...dataUnit, visible: !dataUnit.visible });
+    updateUnit({ ...dataUnit, visible: !dataUnit.visible });
     console.log("dataUnit.visible", !dataUnit.visible);
   };
   const typeClick = type => {
-    setDataUnit({ ...dataUnit, type: type });
+    updateUnit({ ...dataUnit, type: type });
     console.log("dataUnit.type", type);
   };
-    return (
+  return (
     <div className={style.contStyle}>
       <Name
+        changeName={changeName}
         containerStyle={style.nameContStyle}
         buttonStyle={style.nameBtnStyle}
         visible={{

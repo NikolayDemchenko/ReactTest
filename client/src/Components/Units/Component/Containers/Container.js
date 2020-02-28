@@ -1,13 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import { ButtonsContainer } from "../../../Buttons/ButtonsContainer";
 import BaseUnit from "../BaseUnit";
 import DataUnit from "../DataUnit";
-export default function Container(props) {
-  const { style, dataUnit, setDataUnit, getData } = props;
+export default function Container({
+  style,
+  dataUnit,
+  setDataUnit,
+  parent,
+  updateParent
+}) {
   const {
-    contStyle,
-    nameContStyle,
-    nameBtnStyle,
+    // contStyle,
+    // nameContStyle,
+    // nameBtnStyle,
     setsContStyle,
     setsBtnStyle
   } = style;
@@ -19,29 +24,58 @@ export default function Container(props) {
     color: "white",
     visible: true
   };
-
+  const updateUnit = newUnit => {
+    console.log("newUnit", newUnit);
+    setDataUnit(newUnit);
+    if (parent !== undefined) {
+      const newParentValue = parent.value.map(unit => {
+        console.log("unit.index", unit.index);
+        console.log("unit", unit);
+        console.log("newUnit.index", newUnit.index);
+        if (unit.index === dataUnit.index) {
+          return { ...newUnit };
+        } else {
+          return unit;
+        }
+      });
+      updateParent({
+        ...parent,
+        value: newParentValue
+      });
+    }
+  };
   const container = dataUnit.value !== undefined ? dataUnit.value : [];
   const addUnit = () => {
-    setDataUnit({
+    const index = container === [] ? 0 : container.length;
+    const newUnit = {
       ...dataUnit,
-      value: [...container, defaultUnit]
-    });
+      value: [...container, {...defaultUnit,index}]
+    };
+    updateUnit(newUnit);
   };
-  getData(dataUnit);
-  // console.log("dataUnit.value", dataUnit.value);
+  console.log("Unit", dataUnit);
+  // console.log("parent", parent);
+  // console.log("updateParent", updateParent);
 
   const Data = () =>
     container.map(unit => (
       <DataUnit
-        key={container.findIndex(i => i === unit)}
-        getData={getData}
+        parent={dataUnit}
+        updateParent={setDataUnit}
+        key={unit.index}
+        // key={container.findIndex(i => i === unit)}
         unit={unit}
       />
     ));
   return (
     <div>
       <div>
-        <BaseUnit {...props} />
+        <BaseUnit
+          style={style}
+          dataUnit={dataUnit}
+          setDataUnit={setDataUnit}
+          updateUnit={updateUnit}
+        />
         <ButtonsContainer
           containerStyle={setsContStyle}
           buttonStyle={setsBtnStyle}

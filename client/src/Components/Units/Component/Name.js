@@ -5,12 +5,14 @@ export default function Name({
   containerStyle,
   visible,
   name,
-  color
+  color,
+  changeName
 }) {
   const keyPressEnter = (event, input) => {
     if (event.key === "Enter") {
       if (input.value !== "") {
         input.blur();
+        changeName(input.value);
       }
       console.log("enter press here! ");
     }
@@ -22,6 +24,10 @@ export default function Name({
         placeholder="Введите наименование"
         ref={node => {
           input = node;
+        }}
+        onBlur={e => {
+          e.preventDefault();
+          changeName(input.value);
         }}
         onChange={() => name.update(input.value)}
         onKeyPress={e => keyPressEnter(e, input)}

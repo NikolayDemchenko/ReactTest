@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import style from "../Unit.module.css";
 import SwitchUnit from "./SwitchUnit";
-export default function DataUnit({ unit, getData,setUnit }) {
-  const [dataUnit, setDataUnit] = useState(unit);
+export default function DataUnit({unit, parent,updateParent }) {
+  const [dataUnit, setDataUnit] = useState({...unit});
 
   return (
     <div>
       <SwitchUnit
-        getData={getData}
+        parent={parent}
+        updateParent={updateParent}
         dataUnit={dataUnit}
         setDataUnit={setDataUnit}
         style={{
