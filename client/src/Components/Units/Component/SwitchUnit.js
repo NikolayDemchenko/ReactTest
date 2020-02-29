@@ -3,7 +3,7 @@ import Container from "./Containers/Container";
 import Row from "./Row";
 
 export default function SwitchUnit(props) {
-  if (props.dataUnit !== undefined) {
+  // console.log('props.dataUnit', props.dataUnit)
     switch (props.dataUnit.type) {
       case "row":
         return <Row {...props} />;
@@ -26,7 +26,4 @@ export default function SwitchUnit(props) {
       default:
         return <Container {...props} />;
     }
-  } else {
-    return <Container {...props} />;
-  }
 }

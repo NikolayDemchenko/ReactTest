@@ -9,6 +9,7 @@ export default function Unit({
   setDataUnit,
   updateUnit
 }) {
+  // console.log('dataUnit', dataUnit)
   const nameVisibleClick = () => {
     updateUnit({ ...dataUnit, nameVisible: !dataUnit.nameVisible });
     console.log("dataUnit.nameVisible", !dataUnit.nameVisible);

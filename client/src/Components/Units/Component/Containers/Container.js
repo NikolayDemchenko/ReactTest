@@ -1,11 +1,21 @@
 import React from "react";
+import styles from "../../Unit.module.css";
 import { ButtonsContainer } from "../../../Buttons/ButtonsContainer";
 import BaseUnit from "../BaseUnit";
 import DataUnit from "../DataUnit";
 export default function Container(props) {
-  const { style, defaultUnit, dataUnit, updateUnit } = props;
-  const { setsContStyle, setsBtnStyle } = style;
+  const {  defaultUnit, dataUnit, updateUnit, remove  } = props;
 
+ const removeUnit =props.removeUnit!==undefined?props.removeUnit:remove;
+ const style =props.style!==undefined?props.style:{
+    contStyle: styles.RowContainer,
+    nameContStyle: styles.RowContainer,
+    nameBtnStyle: styles,
+    setsContStyle: styles.RowContainer,
+    setsBtnStyle: styles
+  };
+  // console.log('style', style)
+  const { setsContStyle, setsBtnStyle } = style
   const container =
     dataUnit !== undefined &&
     dataUnit.value !== undefined &&
@@ -23,7 +33,7 @@ export default function Container(props) {
   };
 
   const Data = () =>
-    container.map(unit => {
+    container.map(unit => {     
       return (
         <DataUnit
           parent={dataUnit}
@@ -37,7 +47,7 @@ export default function Container(props) {
   return (
     <div>
       <div className={setsContStyle}>
-        <BaseUnit {...props} />
+        <BaseUnit {...props} removeUnit={removeUnit} style={style} />
         <ButtonsContainer
           containerStyle={setsContStyle}
           buttonStyle={setsBtnStyle}

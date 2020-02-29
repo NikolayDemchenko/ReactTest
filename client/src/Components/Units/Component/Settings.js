@@ -10,9 +10,10 @@ export default function Settings({
   remove,
   types
 }) {
+  // console.log('type', type)
   return (
     <div className={containerStyle}>
-      <Select types={types} type={type.value} onClick={type.onClick} />
+      <Select types={types} type={type} />
       <ButtonsContainer
         containerStyle={containerStyle}
         buttonStyle={buttonStyle}
