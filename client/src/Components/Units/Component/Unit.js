@@ -20,24 +20,7 @@ export default function Unit({ unit }) {
         color: "white",
         visible: true
       },
-      {
-        index: 1,
-        nameVisible: true,
-        nameValue: "Старший ребёнок 2",
-        type: "cont",
-        bColor: "grey",
-        color: "white",
-        visible: true
-      },
-      {
-        index: 2,
-        nameVisible: true,
-        nameValue: "Старший ребёнок 3",
-        type: "cont",
-        bColor: "grey",
-        color: "white",
-        visible: true
-      },
+
       {
         index: 3,
         nameVisible: true,
@@ -64,21 +47,13 @@ export default function Unit({ unit }) {
             bColor: "grey",
             color: "white",
             visible: true
-          },
-          {
-            index: 2,
-            nameVisible: true,
-            nameValue: "Младший ребёнок 3",
-            type: "cont",
-            bColor: "grey",
-            color: "white",
-            visible: true
           }
         ]
       }
     ]
   };
-  const basetUnit = {
+  const baseUnit = {
+    index: 0,
     nameVisible: true,
     nameValue: null,
     type: "cont",
@@ -86,8 +61,8 @@ export default function Unit({ unit }) {
     color: "white",
     visible: true
   };
-  const [Unit, setUnit] = useState(unit === !undefined ? unit : defaultUnit);
+  const [Unit, setUnit] = useState(unit === !undefined ? unit : baseUnit);
   console.log("Unit", Unit);
-  const remove=()=>setUnit(basetUnit);
-  return <Container dataUnit={Unit} updateUnit={setUnit} remove={remove} />;
+  const remove = () => setUnit(baseUnit);
+  return <Container defaultUnit={baseUnit}   dataUnit={Unit} setDataUnit={setUnit} remove={remove} />;
 }

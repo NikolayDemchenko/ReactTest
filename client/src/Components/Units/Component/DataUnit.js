@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import style from "../Unit.module.css";
 import SwitchUnit from "./SwitchUnit";
 export default function DataUnit({ unit, parent, updateParent }) {
-  // const defaultUnit = {
-  //   nameVisible: true,
-  //   nameValue: null,
-  //   type: "cont",
-  //   bColor: "grey",
-  //   color: "white",
-  //   visible: true
-  // };
+  const defaultUnit = {
+    nameVisible: true,
+    nameValue: null,
+    type: "cont",
+    bColor: "grey",
+    color: "white",
+    visible: true
+  };
   const [dataUnit, setDataUnit] = useState(unit);
   const updateUnit = newUnit => {
     console.log("newUnit", newUnit);
@@ -37,7 +37,7 @@ export default function DataUnit({ unit, parent, updateParent }) {
   return (
     <div>
       <SwitchUnit
-        // defaultUnit={defaultUnit}
+        defaultUnit={defaultUnit}
         removeUnit={removeUnit}
         updateUnit={updateUnit}
         parent={parent}

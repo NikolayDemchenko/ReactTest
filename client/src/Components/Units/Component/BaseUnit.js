@@ -2,16 +2,16 @@ import React from "react";
 import Name from "./Name";
 import Settings from "./Settings";
 import Types from "../Class/Types";
-export default function Unit({
+export default function BaseUnit({
   removeUnit,
   style,
   dataUnit,
   setDataUnit,
   updateUnit
 }) {
-  // console.log('dataUnit', dataUnit)
+ const update =updateUnit!==undefined?updateUnit:setDataUnit
   const nameVisibleClick = () => {
-    updateUnit({ ...dataUnit, nameVisible: !dataUnit.nameVisible });
+    update({ ...dataUnit, nameVisible: !dataUnit.nameVisible });
     console.log("dataUnit.nameVisible", !dataUnit.nameVisible);
   };
   const nameUpdate = nameValue => {
@@ -19,15 +19,15 @@ export default function Unit({
     console.log("dataUnit.name", { ...dataUnit, nameValue });
   };
   const visibleClick = () => {
-    updateUnit({ ...dataUnit, visible: !dataUnit.visible });
+    update({ ...dataUnit, visible: !dataUnit.visible });
     console.log("dataUnit.visible", !dataUnit.visible);
   };
   const typeClick = type => {
-    updateUnit({ ...dataUnit, type: type });
+    update({ ...dataUnit, type: type });
     console.log("dataUnit.type", type);
   };
   const changeValue = nameValue => {
-    updateUnit({ ...dataUnit, nameValue });
+    update({ ...dataUnit, nameValue });
     console.log("changeName", { ...dataUnit, nameValue });
   };
   return (

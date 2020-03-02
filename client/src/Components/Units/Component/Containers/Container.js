@@ -4,18 +4,21 @@ import { ButtonsContainer } from "../../../Buttons/ButtonsContainer";
 import BaseUnit from "../BaseUnit";
 import DataUnit from "../DataUnit";
 export default function Container(props) {
-  const {  defaultUnit, dataUnit, updateUnit, remove  } = props;
+  const { defaultUnit, dataUnit, setDataUnit, remove } = props;
 
- const removeUnit =props.removeUnit!==undefined?props.removeUnit:remove;
- const style =props.style!==undefined?props.style:{
-    contStyle: styles.RowContainer,
-    nameContStyle: styles.RowContainer,
-    nameBtnStyle: styles,
-    setsContStyle: styles.RowContainer,
-    setsBtnStyle: styles
-  };
+  const removeUnit = props.removeUnit !== undefined ? props.removeUnit : remove;
+  const style =
+    props.style !== undefined
+      ? props.style
+      : {
+          contStyle: styles.RowContainer,
+          nameContStyle: styles.RowContainer,
+          nameBtnStyle: styles,
+          setsContStyle: styles.RowContainer,
+          setsBtnStyle: styles
+        };
   // console.log('style', style)
-  const { setsContStyle, setsBtnStyle } = style
+  const { setsContStyle, setsBtnStyle } = style;
   const container =
     dataUnit !== undefined &&
     dataUnit.value !== undefined &&
@@ -29,15 +32,17 @@ export default function Container(props) {
       ...dataUnit,
       value: [...container, { ...defaultUnit, index }]
     };
-    updateUnit(newUnit);
+    setDataUnit(newUnit);
   };
-
+  // console.log('dataUnit', dataUnit)
   const Data = () =>
-    container.map(unit => {     
+    container.map(unit => {
+      console.log('container', container)
       return (
         <DataUnit
+          defaultUnit={defaultUnit}
           parent={dataUnit}
-          updateParent={updateUnit}
+          updateParent={setDataUnit}
           key={unit.index}
           unit={unit}
         />
