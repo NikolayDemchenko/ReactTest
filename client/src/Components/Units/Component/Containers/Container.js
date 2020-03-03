@@ -3,10 +3,11 @@ import styles from "../../Unit.module.css";
 import { ButtonsContainer } from "../../../Buttons/ButtonsContainer";
 import BaseUnit from "../BaseUnit";
 import DataUnit from "../DataUnit";
+import SwitchUnit from "../SwitchUnit";
 export default function Container(props) {
-  const { defaultUnit, dataUnit, setDataUnit, remove } = props;
+  const { defaultUnit, dataUnit, setDataUnit, removeUnit } = props;
 
-  const removeUnit = props.removeUnit !== undefined ? props.removeUnit : remove;
+  // const remove = props.removeUnit !== undefined ? props.removeUnit : removeUnit;
   const style =
     props.style !== undefined
       ? props.style
@@ -19,6 +20,7 @@ export default function Container(props) {
         };
   // console.log('style', style)
   const { setsContStyle, setsBtnStyle } = style;
+
   const container =
     dataUnit !== undefined &&
     dataUnit.value !== undefined &&
@@ -34,18 +36,43 @@ export default function Container(props) {
     };
     setDataUnit(newUnit);
   };
+  const updateUnit = newUnit => {
+    console.log("newUnit", newUnit);
+    // // setDataUnit(newUnit);
+    // if (parent !== undefined) {
+    //   const value = parent.value.map(unit =>
+    //     unit.index === newUnit.index ? { ...newUnit } : unit
+    //   );
+    //   updateParent({ ...parent, value });
+    // }
+  };
   // console.log('dataUnit', dataUnit)
   const Data = () =>
     container.map(unit => {
       console.log('container', container)
       return (
-        <DataUnit
-          defaultUnit={defaultUnit}
-          parent={dataUnit}
-          updateParent={setDataUnit}
-          key={unit.index}
-          unit={unit}
-        />
+        <SwitchUnit
+        defaultUnit={defaultUnit}
+        removeUnit={removeUnit}
+        updateUnit={updateUnit}
+        // parent={parent}
+        dataUnit={unit}
+        setDataUnit={setDataUnit}
+        style={{
+          contStyle: style.RowContainer,
+          nameContStyle: style.RowContainer,
+          nameBtnStyle: style,
+          setsContStyle: style.RowContainer,
+          setsBtnStyle: style
+        }}
+      />
+        // <DataUnit    
+        //   defaultUnit={defaultUnit}
+        //   parent={dataUnit}
+        //   updateParent={setDataUnit}
+        //   key={unit.index}
+        //   unit={unit}
+        // />
       );
     });
   console.log("dataUnit.nameValue", dataUnit.nameValue);

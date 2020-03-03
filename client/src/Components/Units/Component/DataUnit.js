@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import style from "../Unit.module.css";
 import SwitchUnit from "./SwitchUnit";
-export default function DataUnit({ unit, parent, updateParent }) {
+export default function DataUnit({dataUnit, unit, parent, updateParent }) {
   const defaultUnit = {
     nameVisible: true,
     nameValue: null,
@@ -10,10 +10,10 @@ export default function DataUnit({ unit, parent, updateParent }) {
     color: "white",
     visible: true
   };
-  const [dataUnit, setDataUnit] = useState(unit);
+  // const [dataUnit, setDataUnit] = useState(unit);
   const updateUnit = newUnit => {
     console.log("newUnit", newUnit);
-    setDataUnit(newUnit);
+    // setDataUnit(newUnit);
     if (parent !== undefined) {
       const value = parent.value.map(unit =>
         unit.index === newUnit.index ? { ...newUnit } : unit
@@ -42,7 +42,7 @@ export default function DataUnit({ unit, parent, updateParent }) {
         updateUnit={updateUnit}
         parent={parent}
         dataUnit={dataUnit}
-        setDataUnit={setDataUnit}
+        // setDataUnit={setDataUnit}
         style={{
           contStyle: style.RowContainer,
           nameContStyle: style.RowContainer,

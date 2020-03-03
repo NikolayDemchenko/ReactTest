@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import DataUnit from "./DataUnit";
 import Container from "./Containers/Container";
 export default function Unit({ unit }) {
-  const defaultUnit = {
+  const testUnit = {
     index: 0,
     nameVisible: true,
     nameValue: "Главный папка",
@@ -52,7 +52,7 @@ export default function Unit({ unit }) {
       }
     ]
   };
-  const baseUnit = {
+  const defaultUnit = {
     index: 0,
     nameVisible: true,
     nameValue: null,
@@ -61,8 +61,8 @@ export default function Unit({ unit }) {
     color: "white",
     visible: true
   };
-  const [Unit, setUnit] = useState(unit === !undefined ? unit : baseUnit);
+  const [dataUnit, setDataUnit] = useState(unit === !undefined ? unit : defaultUnit);
   console.log("Unit", Unit);
-  const remove = () => setUnit(baseUnit);
-  return <Container defaultUnit={baseUnit}   dataUnit={Unit} setDataUnit={setUnit} remove={remove} />;
+  const remove = () => setDataUnit(defaultUnit);
+  return <Container defaultUnit={defaultUnit}   dataUnit={dataUnit} setDataUnit={setDataUnit} remove={remove} />;
 }
