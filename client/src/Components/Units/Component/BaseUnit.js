@@ -24,17 +24,20 @@ export default function BaseUnit({
   };
   const changeValue = nameValue => {
     update({ ...dataUnit, nameValue });
-    console.log("changeName", { ...dataUnit, nameValue });
+    console.log("changeValue", { ...dataUnit, nameValue });
   };
-
+  const [key, resetKey] = useState(Math.random());
   return (
-    <div className={style.contStyle}>
+    <div key={key} className={style.contStyle}>
       <Settings
         types={Types}
         type={{ value: dataUnit.type, onClick: typeClick }}
         color={{ onClick: null }}
         visible={{ value: dataUnit.visible, onClick: visibleClick }}
-        remove={() => removeUnit(dataUnit)}
+        remove={() => {
+          resetKey(Math.random())
+          removeUnit(dataUnit);
+        }}
         containerStyle={style.setsContStyle}
         buttonStyle={style.setsBtnStyle}
       />

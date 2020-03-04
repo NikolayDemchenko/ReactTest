@@ -9,6 +9,7 @@ export default function Name({
   changeValue
 }) {
   value = typeof value !== "string" ? null : value;
+
   const keyPressEnter = (event, input) => {
     if (event.key === "Enter") {
       if (input.value !== "") {
@@ -19,14 +20,13 @@ export default function Name({
     }
   };
   let input; 
-  // console.log('value', input)
   return (
     <div className={containerStyle}>
       <input
         placeholder="Введите значение"
         ref={node => {
           input = node;
-          console.log("value", input);
+          console.log("input", input);
         }}
         onBlur={e => {
           e.preventDefault();
@@ -34,6 +34,7 @@ export default function Name({
         }}
         onKeyPress={e => keyPressEnter(e, input)}
         defaultValue={value}
+
       />
       <ButtonsContainer
         containerStyle={containerStyle}

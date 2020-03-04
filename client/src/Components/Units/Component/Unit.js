@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import DataUnit from "./DataUnit";
 import Container from "./Containers/Container";
 export default function Unit({ unit }) {
   const testUnit = {
@@ -64,15 +63,22 @@ export default function Unit({ unit }) {
   const baseElement = {
     index: 0,
     nameVisible: true,
-    nameValue: "ddd",
+    nameValue: null,
     type: "unit",
     bColor: "grey",
     color: "white",
     visible: true
   };
-  const [dataUnit, setDataUnit] = useState(unit === !undefined ? unit : baseElement);
+  const [dataUnit, setDataUnit] = useState(
+    unit === !undefined ? unit : baseElement
+  );
   console.log("Unit", dataUnit);
-  const reset=()=>setDataUnit(baseElement)
-  // const remove = () => setDataUnit(defaultUnit);
-  return <Container reset={reset} defaultUnit={defaultUnit}   dataUnit={dataUnit} setDataUnit={setDataUnit}  />;
+  return (
+    <Container
+      reset={() => setDataUnit(baseElement)}
+      defaultUnit={defaultUnit}
+      dataUnit={dataUnit}
+      setDataUnit={setDataUnit}
+    />
+  );
 }

@@ -10,12 +10,9 @@ export default function Row(props) {
   };
   const changeValue = value => {
     setDataUnit({ ...dataUnit, value });
-    console.log("changeName", { ...dataUnit, value });
+    console.log("changeValue", { ...dataUnit, value });
   };
-  // const updateValue = value => {
-  //   setDataUnit({ ...dataUnit, value });
-  //   console.log("dataUnit.value", value);
-  // };
+
   return (
     <div>
       <BaseUnit {...props} />

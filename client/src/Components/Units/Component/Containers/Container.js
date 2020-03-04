@@ -17,7 +17,6 @@ export default function Container(props) {
           setsContStyle: styles.RowContainer,
           setsBtnStyle: styles
         };
-  // console.log('style', style)
   const { setsContStyle, setsBtnStyle } = style;
 
   const container =
@@ -47,7 +46,6 @@ export default function Container(props) {
     const value = container.filter(unit => unit.index !== child.index);
     setDataUnit({ ...dataUnit, value });
   };
-  // console.log('dataUnit', dataUnit)
   const Data = () =>
     container.map(unit => {
       console.log("container", container);
