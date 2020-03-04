@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Name from "./Name";
 import Settings from "./Settings";
 import Types from "../Class/Types";
@@ -9,14 +9,10 @@ export default function BaseUnit({
   setDataUnit,
   updateUnit
 }) {
- const update =updateUnit!==undefined?updateUnit:setDataUnit
+  const update = updateUnit !== undefined ? updateUnit : setDataUnit;
   const nameVisibleClick = () => {
     update({ ...dataUnit, nameVisible: !dataUnit.nameVisible });
     console.log("dataUnit.nameVisible", !dataUnit.nameVisible);
-  };
-  const nameUpdate = nameValue => {
-    setDataUnit({ ...dataUnit, nameValue });
-    console.log("dataUnit.name", { ...dataUnit, nameValue });
   };
   const visibleClick = () => {
     update({ ...dataUnit, visible: !dataUnit.visible });
@@ -30,6 +26,7 @@ export default function BaseUnit({
     update({ ...dataUnit, nameValue });
     console.log("changeName", { ...dataUnit, nameValue });
   };
+
   return (
     <div className={style.contStyle}>
       <Settings
@@ -50,7 +47,7 @@ export default function BaseUnit({
           value: dataUnit.nameVisible,
           onClick: nameVisibleClick
         }}
-        name={{ value: dataUnit.nameValue, update: nameUpdate }}
+        value={dataUnit.nameValue}
         color={{ onClick: null }}
       />
     </div>

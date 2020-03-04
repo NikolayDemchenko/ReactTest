@@ -61,8 +61,18 @@ export default function Unit({ unit }) {
     color: "white",
     visible: true
   };
-  const [dataUnit, setDataUnit] = useState(unit === !undefined ? unit : defaultUnit);
-  console.log("Unit", Unit);
-  const remove = () => setDataUnit(defaultUnit);
-  return <Container defaultUnit={defaultUnit}   dataUnit={dataUnit} setDataUnit={setDataUnit} remove={remove} />;
+  const baseElement = {
+    index: 0,
+    nameVisible: true,
+    nameValue: "ddd",
+    type: "unit",
+    bColor: "grey",
+    color: "white",
+    visible: true
+  };
+  const [dataUnit, setDataUnit] = useState(unit === !undefined ? unit : baseElement);
+  console.log("Unit", dataUnit);
+  const reset=()=>setDataUnit(baseElement)
+  // const remove = () => setDataUnit(defaultUnit);
+  return <Container reset={reset} defaultUnit={defaultUnit}   dataUnit={dataUnit} setDataUnit={setDataUnit}  />;
 }

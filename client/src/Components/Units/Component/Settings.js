@@ -1,5 +1,5 @@
 import React from "react";
-import Select from "./Select";
+import Switch from "./Select";
 import { ButtonsContainer } from "../../Buttons/ButtonsContainer";
 export default function Settings({
   containerStyle,
@@ -10,6 +10,7 @@ export default function Settings({
   remove,
   types
 }) {
+  const Select=props=>type.value==="unit"?null:<Switch {...props}/>
   // console.log('type', type)
   return (
     <div className={containerStyle}>

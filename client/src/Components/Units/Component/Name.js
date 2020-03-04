@@ -4,11 +4,11 @@ export default function Name({
   buttonStyle,
   containerStyle,
   visible,
-  name,
+  value,
   color,
-  changeValue,
-  dataUnit
+  changeValue
 }) {
+  value = typeof value !== "string" ? null : value;
   const keyPressEnter = (event, input) => {
     if (event.key === "Enter") {
       if (input.value !== "") {
@@ -18,24 +18,22 @@ export default function Name({
       console.log("enter press here! ");
     }
   };
-
-  let input;
+  let input; 
+  // console.log('value', input)
   return (
     <div className={containerStyle}>
       <input
         placeholder="Введите значение"
         ref={node => {
           input = node;
+          console.log("value", input);
         }}
         onBlur={e => {
           e.preventDefault();
           changeValue(input.value);
         }}
-        onChange={() => {
-          name.update(input.value);
-        }}
         onKeyPress={e => keyPressEnter(e, input)}
-        defaultValue={name.value}
+        defaultValue={value}
       />
       <ButtonsContainer
         containerStyle={containerStyle}

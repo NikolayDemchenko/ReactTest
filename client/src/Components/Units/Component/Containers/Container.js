@@ -2,12 +2,11 @@ import React from "react";
 import styles from "../../Unit.module.css";
 import { ButtonsContainer } from "../../../Buttons/ButtonsContainer";
 import BaseUnit from "../BaseUnit";
-import DataUnit from "../DataUnit";
 import SwitchUnit from "../SwitchUnit";
 export default function Container(props) {
-  const { defaultUnit, dataUnit, setDataUnit, removeUnit } = props;
+  const {reset, defaultUnit, dataUnit, setDataUnit, removeUnit } = props;
 
-  // const remove = props.removeUnit !== undefined ? props.removeUnit : removeUnit;
+  const remove = removeUnit !== undefined ? removeUnit : reset;
   const style =
     props.style !== undefined
       ? props.style
@@ -28,63 +27,51 @@ export default function Container(props) {
       ? dataUnit.value
       : [];
 
-  const addUnit = () => {
+  const addChild = () => {
     const index = container === [] ? 0 : container.length;
-    const newUnit = {
+    const unit = {
       ...dataUnit,
       value: [...container, { ...defaultUnit, index }]
     };
-    setDataUnit(newUnit);
+    setDataUnit(unit);
   };
-  const updateUnit = newUnit => {
-    console.log("newUnit", newUnit);
-    // // setDataUnit(newUnit);
-    // if (parent !== undefined) {
-    //   const value = parent.value.map(unit =>
-    //     unit.index === newUnit.index ? { ...newUnit } : unit
-    //   );
-    //   updateParent({ ...parent, value });
-    // }
+  const setChild = child => {
+    console.log("setChild", child);
+    const value = container.map(unit =>
+      unit.index === child.index ? { ...child } : unit
+    );
+    setDataUnit({ ...dataUnit, value });
+  };
+  const removeChild = child => {
+    console.log("removeChild", child);
+    const value = container.filter(unit => unit.index !== child.index);
+    setDataUnit({ ...dataUnit, value });
   };
   // console.log('dataUnit', dataUnit)
   const Data = () =>
     container.map(unit => {
-      console.log('container', container)
+      console.log("container", container);
       return (
         <SwitchUnit
-        defaultUnit={defaultUnit}
-        removeUnit={removeUnit}
-        updateUnit={updateUnit}
-        // parent={parent}
-        dataUnit={unit}
-        setDataUnit={setDataUnit}
-        style={{
-          contStyle: style.RowContainer,
-          nameContStyle: style.RowContainer,
-          nameBtnStyle: style,
-          setsContStyle: style.RowContainer,
-          setsBtnStyle: style
-        }}
-      />
-        // <DataUnit    
-        //   defaultUnit={defaultUnit}
-        //   parent={dataUnit}
-        //   updateParent={setDataUnit}
-        //   key={unit.index}
-        //   unit={unit}
-        // />
+          key={unit.index}
+          defaultUnit={defaultUnit}
+          removeUnit={removeChild}
+          dataUnit={unit}
+          setDataUnit={setChild}
+          style={style}
+        />
       );
     });
   console.log("dataUnit.nameValue", dataUnit.nameValue);
   return (
     <div>
       <div className={setsContStyle}>
-        <BaseUnit {...props} removeUnit={removeUnit} style={style} />
+        <BaseUnit {...props} removeUnit={remove} style={style} />
         <ButtonsContainer
           containerStyle={setsContStyle}
           buttonStyle={setsBtnStyle}
           Plus={{
-            onClick: addUnit
+            onClick: addChild
           }}
         />
       </div>
