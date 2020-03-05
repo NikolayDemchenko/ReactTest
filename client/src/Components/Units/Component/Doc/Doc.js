@@ -14,7 +14,7 @@ export default function Doc(props) {
   };
 
   return (
-    <div>
+    <div >
       <BaseUnit {...props} />
       <DocInput
         changeValue={changeValue}

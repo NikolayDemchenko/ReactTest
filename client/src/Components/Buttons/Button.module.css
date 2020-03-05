@@ -1,0 +1,29 @@
+:root {
+  --btn-color: #ffffff;
+  --btn-hover: #1827f1ec;
+  --btn-active: #18f147ec;
+}
+
+.button {
+  color: var(--btn-color);
+  mix-blend-mode: multiply;
+  mix-blend-mode: darken;
+  cursor: pointer;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  width: 20px;
+  min-width: 20px;
+  height: 20px;
+  padding: 1px 2px 4px;
+}
+/* .color {
+    color:var(--btn-color);
+  } */
+.button:hover {
+  color: var(--btn-hover);
+}
+.button:active {
+  transition: 0.1s;
+  color: var(--btn-active);
+}

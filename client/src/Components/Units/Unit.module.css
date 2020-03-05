@@ -27,7 +27,9 @@
   cursor: pointer;
 }
 .active {
-  color: #616d81;
+  --btn-color: #616d81;
+  /* --btn-color: #a13d24; */
+  color: var(--btn-color);
 }
 .active:hover {
   cursor: pointer;

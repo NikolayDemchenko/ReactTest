@@ -2,9 +2,9 @@ import React from "react";
 import styles from "../../Unit.module.css";
 import { ButtonsContainer } from "../../../Buttons/ButtonsContainer";
 import BaseUnit from "../BaseUnit";
-import SwitchUnit from "../SwitchUnit";
+import Value from "./ContainerInput";
 export default function Container(props) {
-  const {reset, defaultUnit, dataUnit, setDataUnit, removeUnit } = props;
+  const {reset, defaultUnit, dataUnit, setDataUnit, removeUnit, on, active } = props;
 
   const remove = removeUnit !== undefined ? removeUnit : reset;
   const style =
@@ -33,47 +33,21 @@ export default function Container(props) {
       value: [...container, { ...defaultUnit, index }]
     };
     setDataUnit(unit);
-  };
-  const setChild = child => {
-    console.log("setChild", child);
-    const value = container.map(unit =>
-      unit.index === child.index ? { ...child } : unit
-    );
-    setDataUnit({ ...dataUnit, value });
-  };
-  const removeChild = child => {
-    console.log("removeChild", child);
-    const value = container.filter(unit => unit.index !== child.index);
-    setDataUnit({ ...dataUnit, value });
-  };
-  const Data = () =>
-    container.map(unit => {
-      console.log("container", container);
-      return (
-        <SwitchUnit
-          key={unit.index}
-          defaultUnit={defaultUnit}
-          removeUnit={removeChild}
-          dataUnit={unit}
-          setDataUnit={setChild}
-          style={style}
-        />
-      );
-    });
+  };  
   console.log("dataUnit.nameValue", dataUnit.nameValue);
   return (
     <div>
       <div className={setsContStyle}>
-        <BaseUnit {...props} removeUnit={remove} style={style} />
+        <BaseUnit {...props} removeUnit={remove} style={style}  buttonColor={{ on, active}} />
         <ButtonsContainer
-          containerStyle={setsContStyle}
-          buttonStyle={setsBtnStyle}
+          containerStyle={setsContStyle}        
           Plus={{
-            onClick: addChild
+            onClick: addChild,
+            color: [235, 115, 210] 
           }}
         />
       </div>
-      <Data />
+      <Value {...props} units={container} style={style}/>
     </div>
   );
 }

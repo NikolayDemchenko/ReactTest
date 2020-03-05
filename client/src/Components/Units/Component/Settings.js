@@ -3,31 +3,33 @@ import Switch from "./Select";
 import { ButtonsContainer } from "../../Buttons/ButtonsContainer";
 export default function Settings({
   containerStyle,
-  buttonStyle,
+  buttonColor,
   type,
   color,
   visible,
   remove,
   types
 }) {
-  const Select=props=>type.value==="unit"?null:<Switch {...props}/>
+  const Select = props =>
+    type.value === "unit" ? null : <Switch {...props} />;
   // console.log('type', type)
   return (
     <div className={containerStyle}>
       <Select types={types} type={type} />
       <ButtonsContainer
-        containerStyle={containerStyle}
-        buttonStyle={buttonStyle}
+        containerStyle={containerStyle}        
         Color={{
-          onClick: color.onClick
+          onClick: color.onClick,
+          color: buttonColor.active
         }}
         Visible={{
           onClick: visible.onClick,
-          state: visible.value === true ? "on" : "active"
+          color: visible.value === true ? buttonColor.on : buttonColor.active
         }}
         Delete={{
-          onClick: remove
-        }} 
+          onClick: remove,
+          color: buttonColor.active
+        }}
       />
     </div>
   );

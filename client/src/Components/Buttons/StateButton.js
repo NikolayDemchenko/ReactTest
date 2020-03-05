@@ -1,17 +1,7 @@
 import React from "react";
-export const StateButton = ({ Component, state, style, onClick }) => {
-  switch (state) {
-    case "active":  
-      return <Component onClick={onClick} style={style.active} />;
-    case "inactive":
-      return <Component style={style.inactive} />;
-    case "on":
-      return <Component onClick={onClick} style={style.on} />;
-    case "off":
-      return null;
-    default:
-      return <Component onClick={onClick} style={style.active} />;
-  }
+export const StateButton = ({ Component, color, onClick }) => {
+  return <Component onClick={onClick} color={color} />;
 };
+
 export const OldState = ({ active, inactive, state }) =>
   state === true ? active : state === false ? inactive : null;

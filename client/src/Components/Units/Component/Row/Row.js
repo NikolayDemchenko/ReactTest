@@ -1,6 +1,6 @@
 import React from "react";
 import BaseUnit from "../BaseUnit";
-import RowInput from "./RowInput";
+import Value from "./RowInput";
 export default function Row(props) {
   const { style, dataUnit, setDataUnit } = props;
 
@@ -16,7 +16,7 @@ export default function Row(props) {
   return (
     <div>
       <BaseUnit {...props} />
-      <RowInput
+      <Value
         changeValue={changeValue}
         dataUnit={dataUnit}
         containerStyle={style.nameContStyle}

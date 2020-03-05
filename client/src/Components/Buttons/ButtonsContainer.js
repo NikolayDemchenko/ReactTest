@@ -11,8 +11,7 @@ export  function ButtonsContainer(props) {
           key={btns.length}
           Component={buttons[btn]}
           onClick={props[prop].onClick}
-          style={props.buttonStyle}
-          state={props[prop].state}
+          color={props[prop].color}         
         />);  
       }
     }

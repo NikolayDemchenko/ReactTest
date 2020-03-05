@@ -1,7 +1,7 @@
 import React from "react";
 import { ButtonsContainer } from "../../../Buttons/ButtonsContainer";
 export default function RowInput({
-  buttonStyle,
+  buttonColor,
   containerStyle,
   visible,
   value,
@@ -37,14 +37,14 @@ export default function RowInput({
 
       />
       <ButtonsContainer
-        containerStyle={containerStyle}
-        buttonStyle={buttonStyle}
+        containerStyle={containerStyle}  
         Visible={{
           onClick: visible.onClick,
-          state: visible.value === true ? "on" : "active"
+          color: visible.value === true ? buttonColor.on : buttonColor.active
         }}
         Color={{
-          onClick: color.onClick
+          onClick: color.onClick,
+          color: buttonColor.active
         }}
       />
     </div>
