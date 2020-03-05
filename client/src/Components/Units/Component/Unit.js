@@ -67,7 +67,8 @@ export default function Unit({ unit }) {
     type: "unit",
     bColor: "grey",
     color: "white",
-    visible: true
+    visible: true,
+    btnColor: { on: [135, 115, 210], active: [235, 115, 210] }
   };
   const [dataUnit, setDataUnit] = useState(
     unit === !undefined ? unit : baseElement
@@ -79,7 +80,7 @@ export default function Unit({ unit }) {
       defaultUnit={defaultUnit}
       dataUnit={dataUnit}
       setDataUnit={setDataUnit}
-      on={[135, 115, 210]} active={ [235, 115, 210]} 
+      buttonColor={dataUnit.btnColor}
     />
   );
 }

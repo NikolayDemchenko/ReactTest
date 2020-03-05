@@ -2,7 +2,7 @@ import React from "react";
 import BaseUnit from "../BaseUnit";
 import Value from "./RowInput";
 export default function Row(props) {
-  const { style, dataUnit, setDataUnit } = props;
+  const { style, dataUnit, setDataUnit,buttonColor } = props;
 
   const valueVisibleClick = () => {
     setDataUnit({ ...dataUnit, valueVisible: !dataUnit.valueVisible });
@@ -20,7 +20,7 @@ export default function Row(props) {
         changeValue={changeValue}
         dataUnit={dataUnit}
         containerStyle={style.nameContStyle}
-        buttonStyle={style.nameBtnStyle}
+        buttonColor={buttonColor}
         visible={{
           value:
             dataUnit.valueVisible !== undefined ? dataUnit.valueVisible : true,

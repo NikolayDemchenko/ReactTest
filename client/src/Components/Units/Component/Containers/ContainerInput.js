@@ -5,8 +5,9 @@ export default function ContainerInput({
   defaultUnit,
   dataUnit,
   setDataUnit,
-  style
-}){
+  style,
+  buttonColor
+}) {
   const setThisUnit = child => {
     console.log("setChild", child);
     const value = units.map(unit =>
@@ -20,9 +21,11 @@ export default function ContainerInput({
     const value = units.filter(unit => unit.index !== child.index);
     setDataUnit({ ...dataUnit, value });
   };
+  console.log('buttonColor', buttonColor)
   return units.map(unit => (
     <SwitchUnit
       key={unit.index}
+      buttonColor={buttonColor}
       defaultUnit={defaultUnit}
       removeUnit={removeThisUnit}
       dataUnit={unit}
@@ -30,4 +33,4 @@ export default function ContainerInput({
       style={style}
     />
   ));
-};
+}

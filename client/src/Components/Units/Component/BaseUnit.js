@@ -10,7 +10,8 @@ export default function BaseUnit({
   updateUnit,
   buttonColor
 }) {
-  console.log('buttonColor', buttonColor)
+  console.log("dataUnit.btnColor", dataUnit.btnColor);
+   
   const update = updateUnit !== undefined ? updateUnit : setDataUnit;
   const nameVisibleClick = () => {
     update({ ...dataUnit, nameVisible: !dataUnit.nameVisible });
@@ -45,7 +46,6 @@ export default function BaseUnit({
       />
       <RowInput
         changeValue={changeValue}
-        dataUnit={dataUnit}
         containerStyle={style.nameContStyle}
         buttonColor={buttonColor}
         visible={{

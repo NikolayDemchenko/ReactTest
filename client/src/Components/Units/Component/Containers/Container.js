@@ -4,8 +4,8 @@ import { ButtonsContainer } from "../../../Buttons/ButtonsContainer";
 import BaseUnit from "../BaseUnit";
 import Value from "./ContainerInput";
 export default function Container(props) {
-  const {reset, defaultUnit, dataUnit, setDataUnit, removeUnit, on, active } = props;
-
+  const {reset, defaultUnit, dataUnit, setDataUnit, removeUnit, buttonColor} = props;
+console.log('buttonColor', buttonColor)
   const remove = removeUnit !== undefined ? removeUnit : reset;
   const style =
     props.style !== undefined
@@ -34,20 +34,20 @@ export default function Container(props) {
     };
     setDataUnit(unit);
   };  
-  console.log("dataUnit.nameValue", dataUnit.nameValue);
+
   return (
     <div>
       <div className={setsContStyle}>
-        <BaseUnit {...props} removeUnit={remove} style={style}  buttonColor={{ on, active}} />
+        <BaseUnit {...props} removeUnit={remove} style={style} />
         <ButtonsContainer
           containerStyle={setsContStyle}        
           Plus={{
             onClick: addChild,
-            color: [235, 115, 210] 
+            color:dataUnit.btnColor? dataUnit.btnColor.active: buttonColor.active 
           }}
         />
       </div>
-      <Value {...props} units={container} style={style}/>
+      <Value {...props} buttonColor={dataUnit.btnColor? dataUnit.btnColor: buttonColor} units={container} style={style}/>
     </div>
   );
 }
