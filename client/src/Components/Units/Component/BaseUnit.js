@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Name from "./Name";
+import RowInput from "./Row/RowInput";
 import Settings from "./Settings";
 import Types from "../Class/Types";
 export default function BaseUnit({
@@ -41,7 +41,7 @@ export default function BaseUnit({
         containerStyle={style.setsContStyle}
         buttonStyle={style.setsBtnStyle}
       />
-      <Name
+      <RowInput
         changeValue={changeValue}
         dataUnit={dataUnit}
         containerStyle={style.nameContStyle}

@@ -1,6 +1,7 @@
 import React from "react";
 import Container from "./Containers/Container";
-import Row from "./Row";
+import Row from "./Row/Row";
+import Doc from './Doc/Doc'
 
 export default function SwitchUnit(props) {
   // console.log('props.dataUnit', props.dataUnit)
@@ -10,7 +11,7 @@ export default function SwitchUnit(props) {
       case "unit":
         return <Container {...props} />;
       case "doc":
-        return <Container {...props} />;
+        return <Doc {...props} />;
       case "num":
         return <Container {...props} />;
       case "uNum":

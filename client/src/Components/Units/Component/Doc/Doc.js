@@ -1,7 +1,7 @@
 import React from "react";
-import BaseUnit from "./BaseUnit";
-import Name from "./Name";
-export default function Row(props) {
+import BaseUnit from "../BaseUnit";
+import DocInput from "./DocInput";
+export default function Doc(props) {
   const { style, dataUnit, setDataUnit } = props;
 
   const valueVisibleClick = () => {
@@ -16,7 +16,7 @@ export default function Row(props) {
   return (
     <div>
       <BaseUnit {...props} />
-      <Name
+      <DocInput
         changeValue={changeValue}
         dataUnit={dataUnit}
         containerStyle={style.nameContStyle}

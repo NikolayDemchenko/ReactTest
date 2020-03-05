@@ -1,6 +1,6 @@
 import React from "react";
-import { ButtonsContainer } from "../../Buttons/ButtonsContainer";
-export default function Name({
+import { ButtonsContainer } from "../../../Buttons/ButtonsContainer";
+export default function RowInput({
   buttonStyle,
   containerStyle,
   visible,
