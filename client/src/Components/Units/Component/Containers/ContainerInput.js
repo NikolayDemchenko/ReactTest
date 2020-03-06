@@ -4,8 +4,7 @@ export default function ContainerInput({
   units,
   defaultUnit,
   dataUnit,
-  setDataUnit,
-  style,
+  setDataUnit, 
   buttonColor
 }) {
   const setThisUnit = child => {
@@ -30,7 +29,7 @@ export default function ContainerInput({
       removeUnit={removeThisUnit}
       dataUnit={unit}
       setDataUnit={setThisUnit}
-      style={style}
+     
     />
   ));
 }

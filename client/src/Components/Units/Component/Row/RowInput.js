@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { ButtonsContainer } from "../../../Buttons/ButtonsContainer";
 export default function RowInput({
   buttonColor,
-  containerStyle,
   visible,
   value,
   color,
@@ -19,14 +18,26 @@ export default function RowInput({
       console.log("enter press here! ");
     }
   };
-  let input; 
+
+  const [state, setstate] = useState(false);
+
+  let Switch = () => <div />;
+  if (state) {
+    Switch = props => <ButtonsContainer {...props} />;
+  }
+ 
+  let input;
   return (
-    <div className={containerStyle}>
+    <div
+      onClick={() => {
+        console.log("Клик бля!");
+        setstate(true);
+      }}
+    >
       <input
         placeholder="Введите значение"
         ref={node => {
-          input = node;
-          console.log("input", input);
+          input = node;     
         }}
         onBlur={e => {
           e.preventDefault();
@@ -34,20 +45,18 @@ export default function RowInput({
         }}
         onKeyPress={e => keyPressEnter(e, input)}
         defaultValue={value}
-
       />
-      <ButtonsContainer
-        containerStyle={containerStyle}
+      <Switch
         color={buttonColor}
         Visible={{
           onClick: visible.onClick,
-          color: visible.value === true ? buttonColor.on : buttonColor.active
+          color: visible.value === true ? buttonColor.on : buttonColor.off
         }}
         Color={{
           onClick: color.onClick,
           color: buttonColor.active
         }}
-      />
+      />      
     </div>
   );
 }

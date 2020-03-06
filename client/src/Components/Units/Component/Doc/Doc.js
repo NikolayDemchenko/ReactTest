@@ -2,7 +2,7 @@ import React from "react";
 import BaseUnit from "../BaseUnit";
 import DocInput from "./DocInput";
 export default function Doc(props) {
-  const { style, dataUnit, setDataUnit,buttonColor } = props;
+  const {dataUnit, setDataUnit,buttonColor } = props;
 
   const valueVisibleClick = () => {
     setDataUnit({ ...dataUnit, valueVisible: !dataUnit.valueVisible });
@@ -18,8 +18,7 @@ export default function Doc(props) {
       <BaseUnit {...props} />
       <DocInput
         changeValue={changeValue}
-        dataUnit={dataUnit}
-        containerStyle={style.nameContStyle}
+        dataUnit={dataUnit}    
         buttonColor={buttonColor}
         visible={{
           value:

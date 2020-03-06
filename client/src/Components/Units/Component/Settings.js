@@ -24,7 +24,7 @@ export default function Settings({
         }}
         Visible={{
           onClick: visible.onClick,
-          color: visible.value === true ? buttonColor.on : buttonColor.active
+          color: visible.value === true ? buttonColor.on : buttonColor.off
         }}
         Delete={{
           onClick: remove,

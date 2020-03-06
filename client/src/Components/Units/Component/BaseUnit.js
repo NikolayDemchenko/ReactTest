@@ -4,7 +4,6 @@ import Settings from "./Settings";
 import Types from "../Class/Types";
 export default function BaseUnit({
   removeUnit,
-  style,
   dataUnit,
   setDataUnit,
   updateUnit,
@@ -14,7 +13,7 @@ export default function BaseUnit({
    
   const update = updateUnit !== undefined ? updateUnit : setDataUnit;
   const nameVisibleClick = () => {
-    update({ ...dataUnit, nameVisible: !dataUnit.nameVisible });
+    update({ ...dataUnit, name:{...dataUnit.name,visible:!dataUnit.name.visible}});
     console.log("dataUnit.nameVisible", !dataUnit.nameVisible);
   };
   const visibleClick = () => {
@@ -30,8 +29,10 @@ export default function BaseUnit({
     console.log("changeValue", { ...dataUnit, nameValue });
   };
   const [key, resetKey] = useState(Math.random());
+  console.log(' dataUnit.name.visible',  dataUnit.name.visible)
   return (
-    <div key={key} className={style.contStyle}>
+    <div key={key}    
+     >
       <Settings
         types={Types}
         type={{ value: dataUnit.type, onClick: typeClick }}
@@ -41,18 +42,17 @@ export default function BaseUnit({
           resetKey(Math.random());
           removeUnit(dataUnit);
         }}
-        containerStyle={style.setsContStyle}
+       
         buttonColor={buttonColor}
       />
       <RowInput
-        changeValue={changeValue}
-        containerStyle={style.nameContStyle}
+        changeValue={changeValue}      
         buttonColor={buttonColor}
         visible={{
-          value: dataUnit.nameVisible,
+          value: dataUnit.name.visible,
           onClick: nameVisibleClick
         }}
-        value={dataUnit.nameValue}
+        value={dataUnit.name.value}
         color={{ onClick: null }}
       />
     </div>
