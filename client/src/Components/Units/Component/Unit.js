@@ -60,26 +60,15 @@ export default function Unit({ unit }) {
     color: "white",
     visible: true
   };
-  const _on =250
-  const _off =120
-  const _active =180
-  const baseElement = {
-    index: 0,
-    name: { visible: true, value: null },
-    type: "unit",
-    bColor: "grey",
-    color: "white",
-    visible: true,
-    btnColor: { on: [_on, _on, _on], active: [_active, _active, _active],off: [_off, _off, _off] }
-  };
-  const [dataUnit, setDataUnit] = useState(
-    unit === !undefined ? unit : baseElement
-  );
+
+  const [dataUnit, setDataUnit] = useState(unit);
   console.log("Unit", dataUnit);
   return (
-    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
+    <div 
+    // style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}
+    >
       <Container
-        reset={() => setDataUnit(baseElement)}
+        reset={() => setDataUnit(unit)}
         defaultUnit={defaultUnit}
         dataUnit={dataUnit}
         setDataUnit={setDataUnit}

@@ -1,15 +1,15 @@
 import React from "react";
-export default function Select({ types, type }) {
-  const items = types.map(item => <option key={item.name}>{item.name}</option>);
-  // console.log('type',type)
+export default function Select({ list, selected }) {
+  const items = list.map(item => <option key={item.name}>{item.name}</option>);
+  // console.log('selected',selected)
   let select;
   return (
     <select
       ref={node => (select = node)}
       onChange={() =>
-        type.onClick(types.find(item => item.name === select.value).type)
+        selected.onClick(list.find(item => item.name === select.value).selected)
       }
-      defaultValue={types.find(item => item.type === type.value).name}
+      defaultValue={list.find(item => item.selected === selected.value).name}
     >
       {items}
     </select>
