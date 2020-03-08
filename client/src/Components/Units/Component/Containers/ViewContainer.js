@@ -2,7 +2,7 @@ import React, { useState } from "react";
 // import { ButtonsContainer } from "../../../Buttons/ButtonsContainer";
 // import BaseUnit from "../BaseUnit";
 import Value from "./ContainerInput";
-import StringInput from "../Row/StringInput";
+import StringInput from "../../ControlPanel/StringInput";
 export default function ViewContainer(props) {
   const {   
       dataUnit,
@@ -44,7 +44,7 @@ export default function ViewContainer(props) {
           console.log("!!!!!!!!!!onBlur");
         }}
       >
-        <StringInput value={dataUnit.name.value} getValue={getNameValue} />
+        <StringInput value={dataUnit.name.value} setValue={getNameValue} />
         <Value {...props}  units={container} />
       </div>
   

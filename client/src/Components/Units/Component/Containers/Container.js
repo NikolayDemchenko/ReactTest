@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ButtonsContainer } from "../../../Buttons/ButtonsContainer";
 import BaseUnit from "../BaseUnit";
 import Value from "./ContainerInput";
-import StringInput from "../Row/StringInput";
+import StringInput from "../../ControlPanel/StringInput";
 export default function Container(props) {
   const {
     reset,

@@ -1,12 +1,12 @@
 import React from "react";
-export default function StringInput({ value, getValue }) {
+export default function StringInput({ value, setValue }) {
   value = typeof value !== "string" ? null : value;
 
   const keyPressEnter = (event, input) => {
     if (event.key === "Enter") {
       if (input.value !== "") {
         input.blur();
-        getValue(input.value);
+        setValue(input.value);
       }
       console.log("enter press here! ");
     }
@@ -22,7 +22,7 @@ export default function StringInput({ value, getValue }) {
         }}
         onBlur={e => {
           e.preventDefault();
-          getValue(input.value);
+          setValue(input.value);
         }}
         onKeyPress={e => keyPressEnter(e, input)}
         defaultValue={value}
