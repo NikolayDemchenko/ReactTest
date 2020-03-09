@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 export default function ColorInput({ color, setColor }) {
   function componentToHex(c) {
@@ -39,7 +39,7 @@ export default function ColorInput({ color, setColor }) {
   };
   const setAlpha = alpha => {
     const newColor = [...color];
-    newColor[3] = alpha / 100;
+    newColor[3] = alpha;
     setColor(newColor);
   };
 
@@ -69,7 +69,7 @@ export default function ColorInput({ color, setColor }) {
         }}
         min="0"
         max="100"
-        defaultValue={color[3] * 100}
+        defaultValue={color[3]}
       />
     </div>
   );

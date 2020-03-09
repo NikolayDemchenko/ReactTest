@@ -45,7 +45,7 @@ export default function UnitInput({ unit, setUnit, btnColor }) {
   return (
     <div>
       {/* Выбор типа - реализован Select*/}
-      <TypeInput list={Types} item={unit.type} setItem={setType} />
+      <TypeInput listItems={Types} defaultItem={unit.type} setItem={type=>setType(type.value)} />
       {/* Выбор цвета - реализован ColorInput*/}
       <ColorInput color={unit.color} setColor={setColor} />
       {/* Видимость - реализован кнопка Visible */}

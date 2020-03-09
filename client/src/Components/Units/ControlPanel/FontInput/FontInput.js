@@ -1,25 +1,46 @@
 import React from "react";
-export default FontInput = ({ font, setFont, btnColor }) => {
+import FamilyInput from '../../Component/Select'
+import Fonts from '../../Class/Fonts'
+import ColorInput from '../ColorInput'
+export default function FontInput ({ font, setFont, btnColor })  {
+  const setFamily = family => {
+    setFont({ ...font, family });
+    console.log("font.family", family);
+  };
   const setColor = color => {
     setFont({ ...font, color });
     console.log("font.color", color);
   };
+  const setFontSize = size => {
+    setFont({ ...font, size });
+    console.log("font.size", size);
+  };
+  let input;
   return (
     <div>
       {/* Выбор шрифта */}
-      <FamilyInput />
+      <FamilyInput listItems={Fonts} defaultItem={font.family} setItem={type=>setFamily(type.value)} />
       {/* Размер шрифта */}
-      <SizeInput />
+      <input
+        type={"number"}
+        ref={node => {
+          input = node;
+        }}
+        onChange={() => {
+          setFontSize(input.value); 
+        }}     
+        defaultValue={font.size}
+      />
       {/* Выбор цвета */}
-      <ColorInput onClick={setColor} color={color} />
+      <ColorInput setColor={setColor} color={font.color} />
       {/* Жирность */}
-      <WeightInput />
+      {/* <WeightInput /> */}
       {/* Наклон */}
-      <StyleInput />
+      {/* <StyleInput /> */}
       {/* Выравнивание */}
-      <AlignInput />
+      {/* <AlignInput /> */}
       {/* Подчёркивание */}
-      <DecorationInput />
+      {/* <DecorationInput /> */}
     </div>
   );
 };

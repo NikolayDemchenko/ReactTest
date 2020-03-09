@@ -1,6 +1,7 @@
 import React from "react";
 import VisibleInput from '../../Buttons/Visible/Visible'
 import ValueInput from './StringInput'
+import FontInput from './FontInput/FontInput'
 export default function RowInput  ({row,setRow,btnColor}) {
   const setVisible = () => {
     setRow({ ...row,visible:!row.visible});
@@ -21,7 +22,7 @@ export default function RowInput  ({row,setRow,btnColor}) {
       {/* Видимость - реализован кнопка Visible */}
       <VisibleInput onClick={setVisible} color={row.visible?btnColor.on:btnColor.off}/>
       {/* Тип шрифта */}
-      {/* <FontInput font={font} setFont={setFont} btnColor={btnColor}/> */}
+      <FontInput font={row.font} setFont={setFont} btnColor={btnColor}/>
     </div>
   );
 };
