@@ -1,8 +1,11 @@
 import React from "react";
-import FamilyInput from '../../Component/Select'
-import Fonts from '../../Class/Fonts'
-import ColorInput from '../ColorInput'
-export default function FontInput ({ font, setFont, btnColor })  {
+import FamilyInput from "../../Component/Select";
+import Fonts from "../../Class/Fonts";
+import ColorInput from "../ColorInput";
+import AlignInput from "./AlignInput";
+import StyleInput from "./StyleInput";
+export default function FontInput({ font, setFont, btnColor }) {
+  const { family, size, color, align,style } = font;
   const setFamily = family => {
     setFont({ ...font, family });
     console.log("font.family", family);
@@ -15,11 +18,24 @@ export default function FontInput ({ font, setFont, btnColor })  {
     setFont({ ...font, size });
     console.log("font.size", size);
   };
+  const setStyle = style => {
+    setFont({ ...font, style });
+    console.log("font.style", style);
+  };
+  
+  const setAlign = align => {
+    setFont({ ...font, align });
+    console.log("font.align", align);
+  };
   let input;
   return (
     <div>
       {/* Выбор шрифта */}
-      <FamilyInput listItems={Fonts} defaultItem={font.family} setItem={type=>setFamily(type.value)} />
+      <FamilyInput
+        listItems={Fonts}
+        defaultItem={family}
+        setItem={type => setFamily(type.value)}
+      />
       {/* Размер шрифта */}
       <input
         type={"number"}
@@ -27,20 +43,13 @@ export default function FontInput ({ font, setFont, btnColor })  {
           input = node;
         }}
         onChange={() => {
-          setFontSize(input.value); 
-        }}     
-        defaultValue={font.size}
-      />
-      {/* Выбор цвета */}
-      <ColorInput setColor={setColor} color={font.color} />
-      {/* Жирность */}
-      {/* <WeightInput /> */}
-      {/* Наклон */}
-      {/* <StyleInput /> */}
-      {/* Выравнивание */}
-      {/* <AlignInput /> */}
-      {/* Подчёркивание */}
-      {/* <DecorationInput /> */}
+          setFontSize(input.value);
+        }}
+        defaultValue={size}
+      />   
+      <StyleInput setStyle={setStyle} style={style} btnColor={btnColor} />    
+      <ColorInput setColor={setColor} color={color} />    
+      <AlignInput setAlign={setAlign} align={align} btnColor={btnColor} />
     </div>
   );
-};
+}

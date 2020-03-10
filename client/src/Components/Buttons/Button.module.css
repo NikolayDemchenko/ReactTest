@@ -6,20 +6,12 @@
 
 .button {
   color: var(--btn-color);
-  mix-blend-mode: multiply;
-  mix-blend-mode: darken;
   cursor: pointer;
-  display: flex;
-  text-align: center;
-  align-items: center;
+  display: flex; 
   width: 20px;
-  min-width: 20px;
   height: 20px;
   padding: 1px 2px 4px;
 }
-/* .color {
-    color:var(--btn-color);
-  } */
 .button:hover {
   color: var(--btn-hover);
 }

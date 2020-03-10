@@ -3,7 +3,7 @@ import Icon from "react-icons-kit";
 import Style from "./Button.module.css";
 
 export default ({ onClick, icon, color}) => {
-  const [red,green,blue]=color||[240,240,240]
+  const [red,green,blue]=color||[240,240,240,100]
   const styles ={   
        "--btn-color":  `rgba(${red}, ${green},${blue}, 0.75)`,
        "--btn-hover":  `rgba(${red}, ${green},${blue}, 1)`,

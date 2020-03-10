@@ -13,10 +13,12 @@ const baseElement = {
       family: "Verdana",
       size: 50,
       color: [150, 170, 230, 100],
-      weight: "bold",
-      style: "italic",
-      textAlign: "center",
-      textDecoration: "underline"
+      style:{
+        italic: true,
+        weight: true,
+        decoration: false
+      },
+      align: "center",
     }
   },
   type: "unit",
@@ -24,46 +26,55 @@ const baseElement = {
   visible: true
 };
 const NewApp = () => {
+
   const _on = 255;
-  const _off = 80;
-  const _active = 40;
+  const _off = 120;
+  const _active = 180;
+
   const btnColor = {
-    on: [_on, 40, 250],
-    active: [_active, 80, _active],
+    on: [_on, _on, _on],
+    active: [_active, _active, _active],
     off: [_off, _off, _off]
   };
   const [unit, setUnit] = useState(baseElement);
 
   const parseColor = array =>
-    `rgba(${array[0]}, ${array[1]},${array[2]}, ${array[3]/100})`;
-  const parseNumberToPX = num =>
-    `${num}px`;
+    `rgba(${array[0]}, ${array[1]},${array[2]}, ${array[3] / 100})`;
+  const parseNumberToPX = num => `${num}px`;
 
-  const fontSize =parseNumberToPX(unit.name.font.size)
-  const fontColor =parseColor(unit.name.font.color)
-  const unitColor = parseColor(unit.color)
-
+  const fontSize = parseNumberToPX(unit.name.font.size);
+  const fontColor = parseColor(unit.name.font.color);
+  const unitColor = parseColor(unit.color);
 
   console.log("unit", unit);
   return (
-    <div>
-      <div 
+    
+      <div
       // style={{ display: "grid", gridTemplateRows: "1fr " }}
       >
         <UnitInput unit={unit} setUnit={setUnit} btnColor={btnColor} />
-        <div
+        <input   
           style={{
+            width: "100%",
             fontFamily: unit.name.font.family,
+            fontWeight: unit.name.font.style.weight?7*100:4*100,
+            fontStyle:unit.name.font.style.italic?'italic':'normal',
+            textDecoration:unit.name.font.style.decoration?'underline':'none',
+            textAlign: unit.name.font.align,
             fontSize: fontSize,
             color: fontColor,
             backgroundColor: unitColor
           }}
-        >
-          {/* {unit.name.font.family} */}
-          {unit.name.value}
-        </div>
+          value={unit.name.value||''}
+          onChange={event =>
+            setUnit({
+              ...unit,
+              name: { ...unit.name, value: event.target.value }
+            })
+          }
+        />
       </div>
-    </div>
+    
   );
 };
 export default NewApp;
