@@ -1,5 +1,6 @@
 import React from "react";
-import FamilyInput from "../../Component/Select";
+import VerticalSlider from '../Sliders/VerticalSlider'
+import FamilyInput from "../Select";
 import Fonts from "../../Class/Fonts";
 import ColorInput from "../ColorInput";
 import AlignInput from "./AlignInput";
@@ -35,8 +36,10 @@ export default function FontInput({ font, setFont, btnColor }) {
         listItems={Fonts}
         defaultItem={family}
         setItem={type => setFamily(type.value)}
+        btnColor={btnColor}
       />
       {/* Размер шрифта */}
+      <VerticalSlider btnColor={btnColor}/>
       <input
         type={"number"}
         ref={node => {
@@ -45,6 +48,7 @@ export default function FontInput({ font, setFont, btnColor }) {
         onChange={() => {
           setFontSize(input.value);
         }}
+        style={{width:"40px"}}
         defaultValue={size}
       />   
       <StyleInput setStyle={setStyle} style={style} btnColor={btnColor} />    

@@ -39,7 +39,7 @@ const NewApp = () => {
   const [unit, setUnit] = useState(baseElement);
 
   const parseColor = array =>
-    `rgba(${array[0]}, ${array[1]},${array[2]}, ${array[3] / 100})`;
+    `rgba(${array[0]}, ${array[1]},${array[2]}, ${array[3]})`;
   const parseNumberToPX = num => `${num}px`;
 
   const fontSize = parseNumberToPX(unit.name.font.size);

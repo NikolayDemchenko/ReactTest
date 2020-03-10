@@ -1,5 +1,5 @@
 import React from "react";
-import TypeInput from "../Component/Select";
+import TypeInput from "./Select";
 import VisibleInput from "../../Buttons/Visible/Visible";
 import Types from "../Class/Types";
 import Name from './RowInput'
@@ -45,7 +45,7 @@ export default function UnitInput({ unit, setUnit, btnColor }) {
   return (
     <div>
       {/* Выбор типа - реализован Select*/}
-      <TypeInput listItems={Types} defaultItem={unit.type} setItem={type=>setType(type.value)} />
+      <TypeInput btnColor={btnColor} listItems={Types} defaultItem={unit.type} setItem={type=>setType(type.value)} />
       {/* Выбор цвета - реализован ColorInput*/}
       <ColorInput color={unit.color} setColor={setColor} />
       {/* Видимость - реализован кнопка Visible */}
