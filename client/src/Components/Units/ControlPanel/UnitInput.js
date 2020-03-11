@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ControlsContext } from "./ControlsContext";
 import TypeInput from "./Select";
 import VisibleInput from "../../Buttons/Visible/Visible";
 import Types from "../Class/Types";
@@ -25,14 +26,11 @@ const unit = {
   value: null
 };
 
-export default function UnitInput({ unit, setUnit, btnColor }) {
+export default function UnitInput({ unit, setUnit, panel, setPanel }) {
+  const { btnColor, backgroundColor } = useContext(ControlsContext);
   const setType = type => {
     setUnit({ ...unit, type });
     console.log("setType", type);
-  };
-  const setName = name => {
-    setUnit({ ...unit, name });
-    console.log("setName", name);
   };
   const setVisible = () => {
     setUnit({ ...unit, visible: !unit.visible });
@@ -42,30 +40,40 @@ export default function UnitInput({ unit, setUnit, btnColor }) {
     setUnit({ ...unit, color });
     console.log("setColor", color);
   };
+  const setName = name => {
+    panel.setText(name);
+    setPanel({ ...panel, text: name });
+    console.log("setName", name);
+  };
+  console.log("panel.text", panel.text);
   return (
     <div style={{ display: "inline-flex" }}>
-      <div style={{ display: "inline-flex", backgroundColor:"#d8d8dad8", margin:'2px', padding:'4px' }}>
-        {/* Выбор типа - реализован Select*/}
+      <div
+        style={{
+          display: "inline-flex",
+          backgroundColor,
+          margin: "2px",
+          padding: "4px"
+        }}
+      >
         <TypeInput
-          btnColor={btnColor}
           listItems={Types}
           defaultItem={unit.type}
           setItem={type => setType(type.value)}
         />
-        {/* Выбор цвета - реализован ColorInput*/}
-        <ColorInput color={unit.color} setColor={setColor} />
-        {/* Видимость - реализован кнопка Visible */}
+
         <VisibleInput
           onClick={setVisible}
           color={unit.visible ? btnColor.on : btnColor.off}
         />
+
+        <ColorInput color={unit.color} setColor={setColor} />
       </div>
       {/* Заголовок - реализован RowInput */}
       <Name
-        label={"Заголовок :"}
-        row={unit.name}
+        label={"Текст :"}
+        row={panel.text}
         setRow={setName}
-        btnColor={btnColor}
       />
     </div>
   );

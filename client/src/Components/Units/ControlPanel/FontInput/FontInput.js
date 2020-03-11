@@ -1,11 +1,13 @@
-import React from "react";
-import VerticalSlider from "../Sliders/VerticalSlider";
-import FamilyInput from "../Select";
+import React, { useContext } from "react";
+import { ControlsContext } from "../ControlsContext";
+import Size from "../Sliders/VerticalSlider";
+import Family from "../Select";
 import Fonts from "../../Class/Fonts";
-import ColorInput from "../ColorInput";
-import AlignInput from "./AlignInput";
-import StyleInput from "./StyleInput";
-export default function FontInput({ font, setFont, btnColor }) {
+import Color from "../ColorInput";
+import Align from "./AlignInput";
+import Style from "./StyleInput";
+export default function FontInput({ font, setFont }) {
+  const { btnColor } = useContext(ControlsContext);
   const { family, size, color, align, style } = font;
   const setFamily = family => {
     setFont({ ...font, family });
@@ -30,18 +32,17 @@ export default function FontInput({ font, setFont, btnColor }) {
   };
   let input;
   return (
-    <div style={{ display: "inline-flex"}}>
+    <div style={{ display: "inline-flex" }}>
       {/* Выбор шрифта */}
-      <FamilyInput
+      <Family
         listItems={Fonts}
         defaultItem={family}
         setItem={type => setFamily(type.value)}
-        btnColor={btnColor}
-      />     
-      <VerticalSlider setValue={setFontSize} value={size} btnColor={btnColor} />
-      <ColorInput setColor={setColor} color={color} />
-      <StyleInput setStyle={setStyle} style={style} btnColor={btnColor} />
-      <AlignInput setAlign={setAlign} align={align} btnColor={btnColor} />
+      />
+      <Size setValue={setFontSize} value={size} btnColor={btnColor} />
+      <Color setColor={setColor} color={color} />
+      <Style setStyle={setStyle} style={style} btnColor={btnColor} />
+      <Align setAlign={setAlign} align={align} btnColor={btnColor} />
     </div>
   );
 }

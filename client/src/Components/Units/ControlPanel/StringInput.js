@@ -1,6 +1,6 @@
 import React from "react";
 export default function StringInput({ value, setValue }) {
-  value = typeof value !== "string" ? null : value;
+  // value = typeof value !== "string" ? null : value;
 
   const keyPressEnter = (event, input) => {
     if (event.key === "Enter") {
@@ -8,7 +8,7 @@ export default function StringInput({ value, setValue }) {
         input.blur();
         setValue(input.value);
       }
-      console.log("enter press here! ");
+      console.log("enter press here! ",input.value);
     }
   };
 

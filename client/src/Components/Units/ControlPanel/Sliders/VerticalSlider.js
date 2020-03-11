@@ -24,8 +24,7 @@ export default function CustomizedSlider({ setValue, value, btnColor }) {
         <VerticalArrows color={btnColor.active} />
 
         <div style={{ height: "200px", padding: "25px 10px" }}>
-          <Slider
-            // getAriaValueText={setValue}
+          <Slider            
             onChange={(_, val) => setValue(val)}
             orientation="vertical"
             value={value}
