@@ -2,7 +2,7 @@ import React from "react";
 import Popover from "@material-ui/core/Popover";
 import PopupState, { bindTrigger, bindPopover } from "material-ui-popup-state";
 export default function PopoverPopupState({ children }) {
-  const Btn=children[0]
+ 
   return (
     <PopupState variant="popover" popupId="demo-popup-popover">
       {popupState => (
@@ -12,7 +12,7 @@ export default function PopoverPopupState({ children }) {
             {...bindPopover(popupState)}
             anchorOrigin={{
               vertical: "bottom",
-              // horizontal: "center"
+              horizontal: "center"
             }}
             transformOrigin={{
               vertical: "top",

@@ -16,7 +16,7 @@ export default function CustomizedSelects({ defaultItem, setItem, listItems }) {
       backgroundColor: theme.palette.background.paper,
       border: "1px solid #ced4da",
       fontSize: 16,
-      padding: "2px",
+      padding: "2px ",
       transition: theme.transitions.create(["border-color", "box-shadow"]),
       // Use the system font instead of the default Roboto font.
       fontFamily: [

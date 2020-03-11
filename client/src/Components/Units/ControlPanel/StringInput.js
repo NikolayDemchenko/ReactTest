@@ -22,10 +22,14 @@ export default function StringInput({ value, setValue }) {
         }}
         onBlur={e => {
           e.preventDefault();
-          setValue(input.value);
+          setValue(e.target.value);
+        }}
+        onChange={e => {
+          e.preventDefault();
+          setValue(e.target.value);
         }}
         onKeyPress={e => keyPressEnter(e, input)}
-        defaultValue={value}
+        value={value}
       />
     </div>
   );

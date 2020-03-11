@@ -1,55 +1,37 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Slider from "@material-ui/core/Slider";
-import Tooltip from "@material-ui/core/Tooltip";
-import VerticalArrows from '../../../Buttons/VerticalArrows/VerticalArrows'
+import VerticalArrows from "../../../Buttons/VerticalArrows/VerticalArrows";
 import Popover from "../Popover/PopoverPopupState";
 
-const PrettoSlider = withStyles({
-  root: {
-    color: "#52af77",
-    height: 300
-  },
-  thumb: {
-    height: 24,
-    width: 24,
-    backgroundColor: "#fff",
-    border: "2px solid currentColor",
-    marginTop: -8,
-    marginLeft: -12,
-    "&:focus,&:hover,&$active": {
-      boxShadow: "inherit"
-    }
-  },
-  active: {},
-  valueLabel: {
-    left: "calc(-50% + 4px)"
-  },
-  track: {
-    height: 200,
-    borderRadius: 4
-  },
-  rail: {
-    height: 200,
-    borderRadius: 4
-  }
-})(Slider);
-
-export default function CustomizedSlider({btnColor}) {
-    function valuetext(value) {
-        return `${value}°C`;
-      }
+export default function CustomizedSlider({ setValue, value, btnColor }) {
+  let input;
   return (
-    <div >
+    <div style={{ display: "inline-flex", 
+    // border: "2px solid currentColor"
+     }}>
+      <input
+        type={"number"}
+        ref={node => {
+          input = node;
+        }}
+        onChange={() => {
+          setValue(input.value);
+        }}
+        style={{ width: "40px", borderRadius: '4px', border: '0px'}}
+        value={value}
+      />
       <Popover>
-      <VerticalArrows  color={btnColor.active}/>
-        <PrettoSlider
-        //  orientation="vertical"
-        //  getAriaValueText={valuetext}
-         defaultValue={30}
-        //  aria-labelledby="vertical-slider"
-        />
+        <VerticalArrows color={btnColor.active} />
+
+        <div style={{ height: "200px", padding: "25px 10px" }}>
+          <Slider
+            // getAriaValueText={setValue}
+            onChange={(_, val) => setValue(val)}
+            orientation="vertical"
+            value={value}
+            aria-labelledby="vertical-slider"
+          />
+        </div>
       </Popover>
     </div>
   );

@@ -23,6 +23,9 @@
 .on {
   color: #3d84ff;
 }
+.on {
+  color: #d8d8dad8;
+}
 .on:hover {
   cursor: pointer;
 }

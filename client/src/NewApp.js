@@ -27,9 +27,9 @@ const baseElement = {
 };
 const NewApp = () => {
 
-  const _on = 255;
-  const _off = 120;
-  const _active = 180;
+  const _on = 10;
+  const _off = 100;
+  const _active = 80;
 
   const btnColor = {
     on: [_on, _on, _on],
