@@ -42,6 +42,7 @@ export default function CustomizedSelects({ defaultItem, setItem, listItems }) {
       {list.name}
     </MenuItem>
   ));
+  console.log('SelectItem', defaultItem)
   return (
     <div>
       <Select

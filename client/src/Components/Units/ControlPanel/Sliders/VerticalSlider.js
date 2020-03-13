@@ -1,13 +1,13 @@
 import React from "react";
 import Slider from "@material-ui/core/Slider";
-import VerticalArrows from "../../../Buttons/VerticalArrows/VerticalArrows";
+import VerticalArrows from "../../../Buttons/Arrows/VerticalArrows";
 import Popover from "../Popover/PopoverPopupState";
+export default function VerticalSlider({ setValue, value, children }) {
 
-export default function CustomizedSlider({ setValue, value, btnColor }) {
+  const newVal=value||''
   let input;
   return (
-    <div style={{ display: "inline-flex", 
-    // border: "2px solid currentColor"
+    <div style={{ display: "inline-flex",  
      }}>
       <input
         type={"number"}
@@ -15,20 +15,18 @@ export default function CustomizedSlider({ setValue, value, btnColor }) {
           input = node;
         }}
         onChange={() => {
-          setValue(input.value);
+          setValue(input.value);   
         }}
-        style={{ width: "40px", borderRadius: '4px', border: '0px'}}
-        value={value}
+        style={{ width: "46px", borderRadius: '4px', border: '0px'}}
+        value={newVal}
       />
-      <Popover>
-        <VerticalArrows color={btnColor.active} />
-
+      <Popover> 
+        {children}
         <div style={{ height: "200px", padding: "25px 10px" }}>
           <Slider            
             onChange={(_, val) => setValue(val)}
             orientation="vertical"
-            value={value}
-            aria-labelledby="vertical-slider"
+            value={newVal}  
           />
         </div>
       </Popover>

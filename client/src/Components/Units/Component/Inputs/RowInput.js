@@ -9,6 +9,8 @@ export default function RowInput({ text, setText }) {
   return (
     <input
       style={{
+        border:0,
+        outline:'none',
         width: "100%",
         fontFamily: family,
         fontWeight: style.weight ? 7 * 100 : 4 * 100,

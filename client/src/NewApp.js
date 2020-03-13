@@ -23,12 +23,18 @@ const text = {
 };
 const baseElement = {
   settings: {
+    align: true,
+    size: {
+      height: "140px",
+      width: "70%"
+    },
     index: 0,
     type: "unit",
     color: [70, 99, 100, 100],
     visible: true
   },
-  name: text
+  name: text,
+  value:text
 };
 const NewApp = () => {
   const _on = 10;
@@ -55,11 +61,7 @@ const NewApp = () => {
             setControlPanel={setControlPanel}
           />
         ) : null}
-        <Unit
-          unit={unit}
-          setUnit={setUnit}
-          setControlPanel={setControlPanel}
-        />
+        <Unit unit={unit} setUnit={setUnit} setControlPanel={setControlPanel} />
       </div>
     </ControlsContext.Provider>
   );

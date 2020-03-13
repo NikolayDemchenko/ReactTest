@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import { ControlsContext } from "../ControlsContext";
+import VerticalArrows from "../../../Buttons/Arrows/VerticalArrows";
 import Size from "../Sliders/VerticalSlider";
 import Family from "../Select";
 import Fonts from "../../Class/Fonts";
 import Color from "../ColorInput";
-// import Align from "./AlignInput";
 import Style from "./StyleInput";
 export default function FontInput({ font, setFont }) {
   const { btnColor } = useContext(ControlsContext);
@@ -34,7 +34,9 @@ export default function FontInput({ font, setFont }) {
         defaultItem={family}
         setItem={type => setFamily(type.value)}
       />
-      <Size setValue={setFontSize} value={size} btnColor={btnColor} />
+      <Size setValue={setFontSize} value={size} btnColor={btnColor} >
+      <VerticalArrows color={btnColor.active} />
+      </Size>
       <Color setColor={setColor} color={color} />
       <Style setStyle={setStyle} style={style} btnColor={btnColor} />
     </div>
