@@ -1,33 +1,28 @@
 import React from "react";
-// import Container from "./Containers/Container";
-export default function Unit({ text, setText, setPanel }) {
+export default function RowInput({ text, setText }) {
   const parseColor = array =>
     `rgba(${array[0]}, ${array[1]},${array[2]}, ${array[3]})`;
   const parseNumberToPX = num => `${num}px`;
 
-  const fontSize = parseNumberToPX(text.font.size);
-  const fontColor = parseColor(text.font.color);
-  const backColor = parseColor(text.color);
+  const { size, color, family, style } = text.font;
 
   return (
     <input
-      onClick={() => setPanel({ text, setText })}
       style={{
         width: "100%",
-        fontFamily: text.font.family,
-        fontWeight: text.font.style.weight ? 7 * 100 : 4 * 100,
-        fontStyle: text.font.style.italic ? "italic" : "normal",
-        textDecoration: text.font.style.decoration ? "underline" : "none",
+        fontFamily: family,
+        fontWeight: style.weight ? 7 * 100 : 4 * 100,
+        fontStyle: style.italic ? "italic" : "normal",
+        textDecoration: style.decoration ? "underline" : "none",
         textAlign: text.align,
-        fontSize: fontSize,
-        color: fontColor,
-        backgroundColor: backColor
+        fontSize: parseNumberToPX(size),
+        color: parseColor(color),
+        backgroundColor: parseColor(text.color)
       }}
-      value={text.value}
+      value={text.value || ""}
       onChange={event => {
-        setText({ ...text, value: event.target.value });
         console.log("!!!!!!unit.name", event.target.value);
-        setPanel({ text: { ...text, value: event.target.value }, setText });
+        setText({ ...text, value: event.target.value });
       }}
     />
   );

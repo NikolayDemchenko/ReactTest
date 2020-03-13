@@ -29,7 +29,7 @@ export default function StringInput({ value, setValue }) {
           setValue(e.target.value);
         }}
         onKeyPress={e => keyPressEnter(e, input)}
-        value={value}
+        value={value||''}
       />
     </div>
   );

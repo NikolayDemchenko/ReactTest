@@ -3,7 +3,6 @@ import { ControlsContext } from "./ControlsContext";
 import TypeInput from "./Select";
 import VisibleInput from "../../Buttons/Visible/Visible";
 import Types from "../Class/Types";
-// import Name from "./TextInput";
 import ColorInput from "./ColorInput";
 
 export default function SettingsPanel({ settings, setSettings }) {

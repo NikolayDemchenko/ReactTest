@@ -41,27 +41,24 @@ const NewApp = () => {
     off: [_off, _off, _off]
   };
   const backgroundColor = "#d8d8dad8";
+
   const [unit, setUnit] = useState(baseElement);
-  const [textPanel, setTextPanel] = useState();
-  const [settingsPanel, setSettingsPanel] = useState();
+  const [controlPanel, setControlPanel] = useState();
   console.log("unit", unit);
-  console.log("panel.text", textPanel ? textPanel.text : textPanel);
+
   return (
     <ControlsContext.Provider value={{ btnColor, backgroundColor }}>
       <div>
-        <ControlPanel
-          textPanel={textPanel}
-          setTextPanel={setTextPanel}
-          settingsPanel={settingsPanel}
-          setSettingsPanel={setSettingsPanel}
-          unit={unit}
-          setUnit={setUnit}
-        />
+        {controlPanel ? (
+          <ControlPanel
+            controlPanel={controlPanel}
+            setControlPanel={setControlPanel}
+          />
+        ) : null}
         <Unit
           unit={unit}
           setUnit={setUnit}
-          setTextPanel={setTextPanel}
-          setSettingsPanel={setSettingsPanel}
+          setControlPanel={setControlPanel}
         />
       </div>
     </ControlsContext.Provider>
