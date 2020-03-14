@@ -4,7 +4,7 @@ import VisibleInput from "../../Buttons/Visible/Visible";
 import Align from "./Align/TextAlign";
 import Color from "./ColorInput";
 import ValueInput from "./StringInput";
-import FontInput from "./FontInput/FontPanel";
+import FontInput from "./FontPanel/FontPanel";
 export default function TextInput({ label, text, setText }) {
   const { btnColor, backgroundColor } = useContext(ControlsContext);
   const setVisible = () => {

@@ -1,7 +1,7 @@
 import React from "react";
 import Slider from "@material-ui/core/Slider";
 import VerticalArrows from "../../../Buttons/Arrows/VerticalArrows";
-import Popover from "../Popover/PopoverPopupState";
+import Popover from "./PopoverPopupState";
 export default function VerticalSlider({ setValue, value, children }) {
 
   const newVal=value||''

@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { ControlsContext } from "../ControlsContext";
 import VerticalArrows from "../../../Buttons/Arrows/VerticalArrows";
-import Size from "../Sliders/VerticalSlider";
-import Family from "../Select";
+import Size from "../ModalWindows/VerticalSlider";
+import Family from "../ModalWindows/Select";
 import Fonts from "../../Class/Fonts";
 import Color from "../ColorInput";
 import Style from "./StyleInput";

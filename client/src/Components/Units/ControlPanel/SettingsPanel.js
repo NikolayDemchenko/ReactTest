@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { ControlsContext } from "./ControlsContext";
-import TypeInput from "./Select";
+import TypeInput from "./ModalWindows/Select";
 import VisibleInput from "../../Buttons/Visible/Visible";
 import Types from "../Class/Types";
 import ColorInput from "./ColorInput";

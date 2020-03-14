@@ -1,5 +1,5 @@
 import React from "react";
-import { ButtonsContainer } from "../../../Buttons/ButtonsContainer";
+import { ButtonsContainer } from "../../Buttons/ButtonsContainer";
 export default function RowInput({
   buttonColor,
   containerStyle,

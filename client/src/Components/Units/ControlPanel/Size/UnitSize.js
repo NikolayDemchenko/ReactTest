@@ -1,6 +1,6 @@
 import React,{useState} from "react";
-import Size from "../Sliders/VerticalSlider";
-import Select from "../Select";
+import Size from "../ModalWindows/VerticalSlider";
+import Select from "../ModalWindows/Select";
 import cssUnits from '../../Class/CssUnits'
 export default function UnitSize({ setValue, value, btnColor, children }) {
   const parseNumber = value => {

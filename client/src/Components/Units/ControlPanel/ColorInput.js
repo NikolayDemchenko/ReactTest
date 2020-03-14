@@ -1,6 +1,6 @@
 import React from "react";
 import { ChromePicker } from "react-color";
-import Popover from "./Popover/PopoverPopupState";
+import Popover from "./ModalWindows/PopoverPopupState";
 export default function PopoverPopupState({ color, setColor }) {
   const _setColor = rgb => {
     setColor([rgb.r, rgb.g, rgb.b, rgb.a]);

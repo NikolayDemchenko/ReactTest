@@ -42,12 +42,10 @@ export default function CustomizedSelects({ defaultItem, setItem, listItems }) {
       {list.name}
     </MenuItem>
   ));
-  console.log('SelectItem', defaultItem)
+  // console.log('SelectItem', defaultItem)
   return (
     <div>
       <Select
-        // labelId="demo-customized-select-label"
-        // id="demo-customized-select"
         value={listItems.find(list => list.value === defaultItem).name}
         onChange={e => {
           setItem(listItems.find(list => list.name === e.target.value));

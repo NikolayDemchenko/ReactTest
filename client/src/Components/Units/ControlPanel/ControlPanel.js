@@ -1,9 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 import Row from "./TextPanel";
 import Settings from "./SettingsPanel";
-export default function UnitInput({
+export default function ControlPanel({
   controlPanel,
-  setControlPanel
+  setControlPanel,
+  children
 }) {
   const { unit, setUnit } = controlPanel;
   const setName = name => {
@@ -22,10 +23,11 @@ export default function UnitInput({
     console.log("setSettings", settings);
   };
   return (
-    <div style={{ display: "inline-flex" }}>
+    <div style={{ display: "inline-flex", position: "sticky", top: 0 }}>
       <Settings settings={unit.settings} setSettings={setSettings} />
       <Row label={"Заголовок :"} text={unit.name} setText={setName} />
-      <Row label={"Содержимое :"} text={unit.value} setText={setValue} />
+      {children}
+      {/* <Row label={"Содержимое :"} text={unit.value} setText={setValue} /> */}
     </div>
   );
 }

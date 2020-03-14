@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import "./App.css";
 import { ControlsContext } from "./Components/Units/ControlPanel/ControlsContext";
-import Unit from "./Components/Units/Component/Unit";
-// import ViewUnit from "./Components/Units/Component/ViewUnit";
-import ControlPanel from "./Components/Units/ControlPanel/ControlPanel";
-// import Fonts from "./Components/Units/Class/Fonts";
+import SwitchTypes from "./Components/Units/Component/SwitchTypes";
+import SwitchPanel from "./Components/Units/ControlPanel/SwitchPanel";
+
 const text = {
   visible: true,
   value: null,
@@ -29,7 +28,7 @@ const baseElement = {
       width: "70%"
     },
     index: 0,
-    type: "unit",
+    type: "row",
     color: [70, 99, 100, 100],
     visible: true
   },
@@ -54,15 +53,15 @@ const NewApp = () => {
 
   return (
     <ControlsContext.Provider value={{ btnColor, backgroundColor }}>
-      <div>
+     
         {controlPanel ? (
-          <ControlPanel
+          <SwitchPanel
             controlPanel={controlPanel}
             setControlPanel={setControlPanel}
           />
         ) : null}
-        <Unit unit={unit} setUnit={setUnit} setControlPanel={setControlPanel} />
-      </div>
+        <SwitchTypes unit={unit} setUnit={setUnit} setControlPanel={setControlPanel} />
+   
     </ControlsContext.Provider>
   );
 };
