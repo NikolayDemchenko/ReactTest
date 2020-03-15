@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
-import { ControlsContext } from "./ControlsContext";
-import TypeInput from "./ModalWindows/Select";
-import VisibleInput from "../../Buttons/Visible/Visible";
-import Types from "../Class/Types";
-import ColorInput from "./ColorInput";
-import BlockSize from "./Size/BlockSize";
-import BlockAlign from './Align/BlockAlign'
+import { ControlsContext } from "../ControlsContext";
+import TypeInput from "../ModalWindows/Select";
+import VisibleInput from "../../../Buttons/Visible/Visible";
+import Types from "../../Class/Types";
+import ColorInput from "../Color/ColorPicker";
+import BlockSize from "../Size/BlockSize";
+import BlockAlign from '../Align/BlockAlign'
 export default function SettingsPanel({ settings, setSettings }) {
   const { btnColor, backgroundColor } = useContext(ControlsContext);
   const setType = type => {

@@ -20,7 +20,7 @@ export default function Unit({ unit, setUnit, setControlPanel, children }) {
   const row = { display: "flex", alignItems: "center" };
   const doc = {};
   
-  let style = type === "row" ?row:doc
+  let style = type !== "doc" ?row:doc
 
   align = align !== undefined ? (align ? "0" : "0 0 0 auto") : "0 auto";
   return (

@@ -2,11 +2,28 @@ import React, { useState } from "react";
 import "./App.css";
 import { ControlsContext } from "./Components/Units/ControlPanel/ControlsContext";
 import SwitchTypes from "./Components/Units/Component/SwitchTypes";
-import SwitchPanel from "./Components/Units/ControlPanel/SwitchPanel";
+import SwitchPanel from "./Components/Units/ControlPanel/SwitchPanels";
 
 const text = {
   visible: true,
   value: null,
+  align: "center",
+  color: [70, 80, 100, 100],
+  font: {
+    family: "Verdana",
+    size: 50,
+    color: [150, 170, 230, 100],
+    style: {
+      italic: true,
+      weight: true,
+      decoration: false
+    }
+  }
+};
+const num = {
+  visible: true,
+  value: null,
+  unit: text,
   align: "center",
   color: [70, 80, 100, 100],
   font: {
@@ -33,7 +50,7 @@ const baseElement = {
     visible: true
   },
   name: text,
-  value:text
+  value: num
 };
 const NewApp = () => {
   const _on = 10;
@@ -53,15 +70,17 @@ const NewApp = () => {
 
   return (
     <ControlsContext.Provider value={{ btnColor, backgroundColor }}>
-     
-        {controlPanel ? (
-          <SwitchPanel
-            controlPanel={controlPanel}
-            setControlPanel={setControlPanel}
-          />
-        ) : null}
-        <SwitchTypes unit={unit} setUnit={setUnit} setControlPanel={setControlPanel} />
-   
+      {controlPanel ? (
+        <SwitchPanel
+          controlPanel={controlPanel}
+          setControlPanel={setControlPanel}
+        />
+      ) : null}
+      <SwitchTypes
+        unit={unit}
+        setUnit={setUnit}
+        setControlPanel={setControlPanel}
+      />
     </ControlsContext.Provider>
   );
 };

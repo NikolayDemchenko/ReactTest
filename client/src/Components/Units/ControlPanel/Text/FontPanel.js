@@ -4,7 +4,7 @@ import VerticalArrows from "../../../Buttons/Arrows/VerticalArrows";
 import Size from "../ModalWindows/VerticalSlider";
 import Family from "../ModalWindows/Select";
 import Fonts from "../../Class/Fonts";
-import Color from "../ColorInput";
+import Color from "../Color/ColorPicker";
 import Style from "./StyleInput";
 export default function FontInput({ font, setFont }) {
   const { btnColor } = useContext(ControlsContext);

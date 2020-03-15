@@ -1,5 +1,5 @@
 import React from "react";
-export default function RowInput({ type, text, setText }) {
+export default function RowInput({text, setText }) {
   const parseColor = array =>
     `rgba(${array[0]}, ${array[1]},${array[2]}, ${array[3]})`;
   const parseNumberToPX = num => `${num}px`;
@@ -21,6 +21,7 @@ export default function RowInput({ type, text, setText }) {
         color: parseColor(color),
         backgroundColor: parseColor(text.color)
       }}
+      type={'number'}
         value={text.value || ""}
       onChange={event => {
         console.log("!!!!!!unit.name", event.target.value);

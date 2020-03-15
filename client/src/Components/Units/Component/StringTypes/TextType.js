@@ -1,7 +1,7 @@
 import React from "react";
-import RowInput from "../Inputs/RowInput";
+import TextInput from "../Inputs/TextInput";
 import BaseType from "../BaseType";
-export default function Unit({ unit, setUnit, setControlPanel }) {
+export default function RowType({ unit, setUnit, setControlPanel }) {
   const setValue = value => {
     setUnit({ ...unit, value });
     setControlPanel({ unit: { ...unit, value }, setUnit });
@@ -9,7 +9,7 @@ export default function Unit({ unit, setUnit, setControlPanel }) {
   };
   return (
     <BaseType unit={unit} setUnit={setUnit} setControlPanel={setControlPanel}>
-       <RowInput text={unit.value} setText={setValue} />
+       <TextInput text={unit.value} setText={setValue} />
     </BaseType>
   );
 }

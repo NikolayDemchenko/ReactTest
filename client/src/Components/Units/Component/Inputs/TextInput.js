@@ -9,9 +9,11 @@ export default function RowInput({ text, setText }) {
   return (
     <textarea
       style={{
-        border:0,
-        outline:'none',
+        border: 0,
+        outline: "none",
         width: "100%",
+        height: "100%",
+        resize: "none",
         fontFamily: family,
         fontWeight: style.weight ? 7 * 100 : 4 * 100,
         fontStyle: style.italic ? "italic" : "normal",

@@ -1,7 +1,9 @@
 import React from "react";
 
-import RowType from './String/RowType'
-import TextType from './String/TextType'
+import RowType from './StringTypes/RowType'
+import TextType from './StringTypes/TextType'
+import NumberType from './NumberTypes/NumberType'
+import WithUnitType from './NumberTypes/WithUnitType'
 
 export default function SwitchTypes(props) {
 
@@ -13,9 +15,9 @@ export default function SwitchTypes(props) {
       case "doc":
         return <TextType {...props} />;
       case "num":
-        return <RowType {...props} />;
+        return <NumberType {...props} />;
       case "uNum":
-        return <RowType {...props} />;
+        return <WithUnitType {...props} />;
       case "img":
         return <RowType {...props} />;
       case "video":

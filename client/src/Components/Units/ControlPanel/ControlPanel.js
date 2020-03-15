@@ -1,6 +1,6 @@
 import React from "react";
-import Row from "./TextPanel";
-import Settings from "./SettingsPanel";
+import Row from "./Text/TextPanel";
+import Settings from "./BlockSettings/SettingsPanel";
 export default function ControlPanel({
   controlPanel,
   setControlPanel,
