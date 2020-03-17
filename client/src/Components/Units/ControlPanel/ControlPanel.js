@@ -23,7 +23,7 @@ export default function ControlPanel({
     console.log("setSettings", settings);
   };
   return (
-    <div style={{ display: "inline-flex", position: "sticky", top: 0 }}>
+    <div style={{ display: "flex",flexWrap: 'wrap', position: "sticky", top: 0 }}>
       <Settings settings={unit.settings} setSettings={setSettings} />
       <Row label={"Заголовок :"} text={unit.name} setText={setName} />
       {children}

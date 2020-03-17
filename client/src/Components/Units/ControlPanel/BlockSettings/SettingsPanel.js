@@ -5,7 +5,7 @@ import VisibleInput from "../../../Buttons/Visible/Visible";
 import Types from "../../Class/Types";
 import ColorInput from "../Color/ColorPicker";
 import BlockSize from "../Size/BlockSize";
-import BlockAlign from '../Align/BlockAlign'
+import BlockAlign from "../Align/BlockAlign";
 export default function SettingsPanel({ settings, setSettings }) {
   const { btnColor, backgroundColor } = useContext(ControlsContext);
   const setType = type => {
@@ -21,8 +21,12 @@ export default function SettingsPanel({ settings, setSettings }) {
     console.log("setColor", color);
   };
   const setSize = size => {
-    setSettings({ ...settings, size});
+    setSettings({ ...settings, size });
     console.log("setSize", size);
+  };
+  const setImage = async e => {
+    setSettings({ ...settings, image: e.target.files[0] });
+    console.log("setImage", e.target.files[0]);
   };
 
   return (
@@ -45,16 +49,13 @@ export default function SettingsPanel({ settings, setSettings }) {
         color={settings.visible ? btnColor.on : btnColor.off}
       />
       <ColorInput color={settings.color} setColor={setColor} />
+      <input type="file" onChange={setImage} />
       <BlockAlign
         setSettings={setSettings}
         settings={settings}
         btnColor={btnColor}
       />
-      <BlockSize
-        setSize={setSize}
-        size={settings.size}
-        btnColor={btnColor}
-      />
+      <BlockSize setSize={setSize} size={settings.size} btnColor={btnColor} />
     </div>
   );
 }

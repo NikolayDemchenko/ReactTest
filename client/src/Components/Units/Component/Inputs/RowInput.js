@@ -1,5 +1,5 @@
 import React from "react";
-export default function RowInput({ type, text, setText }) {
+export default function RowInput({text, setText }) {
   const parseColor = array =>
     `rgba(${array[0]}, ${array[1]},${array[2]}, ${array[3]})`;
   const parseNumberToPX = num => `${num}px`;
@@ -12,6 +12,7 @@ export default function RowInput({ type, text, setText }) {
         border: 0,
         outline: "none",
         width: "100%",
+        padding: "0 0.18em ",
         fontFamily: family,
         fontWeight: style.weight ? 7 * 100 : 4 * 100,
         fontStyle: style.italic ? "italic" : "normal",

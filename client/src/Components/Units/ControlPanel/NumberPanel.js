@@ -16,7 +16,7 @@ export default function NumberPanel({ controlPanel, setControlPanel }) {
   return (
     <ControlPanel controlPanel={controlPanel} setControlPanel={setControlPanel}>
       <Row label={"Содержимое :"} text={unit.value} setText={setValue} />
-      <Row label={"Содержимое :"} text={unit.value.unit} setText={setUnitValue} />
+      <Row label={"Ед. изм :"} text={unit.value.unit} setText={setUnitValue} />
     </ControlPanel>
   );
 }
