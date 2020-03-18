@@ -1,8 +1,8 @@
 import React,{useState} from "react";
-import Size from "../ModalWindows/VerticalSlider";
+import VerticalSlider from "../ModalWindows/VerticalSlider";
 import Select from "../ModalWindows/Select";
 import cssUnits from '../../Class/CssUnits'
-export default function UnitSize({ setValue, value, btnColor, children }) {
+export default function UnitSize({ setValue, value, btnColor, children,reload }) {
   const parseNumber = value => {
     const newVal = value.match(/\d/gm);
     return newVal ? newVal.join("") : "";
@@ -27,9 +27,9 @@ export default function UnitSize({ setValue, value, btnColor, children }) {
         display: "inline-flex"
       }}
     >
-      <Size setValue={setVal} value={parseNumber(value)} btnColor={btnColor}>
+      <VerticalSlider reload={reload} setValue={setVal} value={parseNumber(value)} btnColor={btnColor}>
         {children}
-      </Size>
+      </VerticalSlider>
       <Select defaultItem={parseString(value)} setItem={setUnit} listItems={cssUnits}/>
     </div>
   );

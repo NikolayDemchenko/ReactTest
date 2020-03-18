@@ -14,6 +14,7 @@ export default function RowInput({ text, setText }) {
         width: "100%",
         height: "100%",
         resize: "none",
+        padding: "0 0.18em ",
         fontFamily: family,
         fontWeight: style.weight ? 7 * 100 : 4 * 100,
         fontStyle: style.italic ? "italic" : "normal",

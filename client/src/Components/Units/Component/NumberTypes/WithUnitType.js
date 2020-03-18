@@ -16,7 +16,9 @@ export default function WithUnitType({ unit, setUnit, setControlPanel }) {
   return (
     <BaseType unit={unit} setUnit={setUnit} setControlPanel={setControlPanel}>
        <NumberInput text={unit.value} setText={setValue} />
-       <RowInput text={unit.value.unit} setText={setUnitValue} />
+       <RowInput text={unit.value.unit} 
+       parent={unit.value}
+       setText={setUnitValue} />
     </BaseType>
   );
 }

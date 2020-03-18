@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext,useState } from "react";
 import { ControlsContext } from "../ControlsContext";
 import TypeInput from "../ModalWindows/Select";
 import VisibleInput from "../../../Buttons/Visible/Visible";
 import Types from "../../Class/Types";
 import ColorInput from "../Color/ColorPicker";
-import BlockSize from "../Size/BlockSize";
+import BlockSize from "../Size/SizeBlock";
 import BlockAlign from "../Align/BlockAlign";
 export default function SettingsPanel({ settings, setSettings }) {
   const { btnColor, backgroundColor } = useContext(ControlsContext);
@@ -28,9 +28,14 @@ export default function SettingsPanel({ settings, setSettings }) {
     setSettings({ ...settings, image: e.target.files[0] });
     console.log("setImage", e.target.files[0]);
   };
-
+  const [key, setkey] = useState(Math.random())
+  const reload=()=>{
+    setkey(Math.random())
+    console.log('key', key)
+  }
   return (
     <div
+    key={key}
       style={{
         display: "inline-flex",
         backgroundColor,
@@ -55,7 +60,7 @@ export default function SettingsPanel({ settings, setSettings }) {
         settings={settings}
         btnColor={btnColor}
       />
-      <BlockSize setSize={setSize} size={settings.size} btnColor={btnColor} />
+      <BlockSize reload={reload} setSize={setSize} size={settings.size} btnColor={btnColor} />
     </div>
   );
 }

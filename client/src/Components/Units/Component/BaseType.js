@@ -1,12 +1,6 @@
-import React, { useEffect } from "react";
-import RowInput from "./Inputs/RowInput";
-export default function Unit({ unit, setUnit, setControlPanel, children }) {
-  const setName = name => {
-    setUnit({ ...unit, name });
-    setControlPanel({ unit: { ...unit, name }, setUnit });
-    console.log("setName", name);
-  };
+import React from "react";
 
+export default function Unit({ unit, setUnit, setControlPanel, children }) {
   let {
     color,
     align,
@@ -16,14 +10,12 @@ export default function Unit({ unit, setUnit, setControlPanel, children }) {
     `rgba(${array[0]}, ${array[1]},${array[2]}, ${array[3]})`;
   const backColor = parseColor(color);
 
-  const { type,image } = unit.settings;
+  const { type } = unit.settings;
   const row = { display: "flex", alignItems: "center" };
   const doc = {};
-  
-  let style = type !== "doc" ?row:doc
-const backgroundImage=image?image:'none'
-console.log('backgroundImage', backgroundImage)
- const margin = align !== undefined ? (align ? "0" : "0 0 0 auto") : "0 auto";
+
+  let style = type !== "doc" ? row : doc;
+  const margin = align !== undefined ? (align ? "0" : "0 0 0 auto") : "0 auto";
   return (
     <div
       style={{
@@ -32,11 +24,11 @@ console.log('backgroundImage', backgroundImage)
         height,
         width,
         backgroundColor: backColor,
-        backgroundImage
+        backgroundSize: "cover",
+        backgroundImage: `url(${unit.value})`
       }}
       onClick={() => setControlPanel({ unit, setUnit })}
     >
-      <RowInput text={unit.name} setText={setName} />
       {children}
     </div>
   );

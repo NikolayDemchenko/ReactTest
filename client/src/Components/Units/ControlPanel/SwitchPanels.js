@@ -1,6 +1,7 @@
 import React from "react";
 import RowPanel from './RowPanel'
 import NumberPanel from './NumberPanel'
+import ControlPanel from './ControlPanel'
 export default function SwitchPanel(props) {
   // console.log('props.unit.settings', props.unit)
     switch (props.controlPanel.unit.settings.type) {
@@ -15,7 +16,7 @@ export default function SwitchPanel(props) {
       case "uNum":
         return <NumberPanel {...props} />;
       case "img":
-        return <RowPanel {...props} />;
+        return <ControlPanel {...props} />;
       case "video":
         return <RowPanel {...props} />;
       case "cont":

@@ -1,5 +1,5 @@
 import React from "react";
-import Row from "./Text/TextPanel";
+import TextPanel from "./Text/TextPanel";
 import ControlPanel from "./ControlPanel";
 export default function RowPanel({ controlPanel, setControlPanel }) {
   const { unit, setUnit } = controlPanel;
@@ -10,7 +10,7 @@ export default function RowPanel({ controlPanel, setControlPanel }) {
   };
   return (
     <ControlPanel controlPanel={controlPanel} setControlPanel={setControlPanel}>
-      <Row label={"Содержимое :"} text={unit.value} setText={setValue} />
+      <TextPanel label={"Содержимое :"} text={unit.value} setText={setValue} />
     </ControlPanel>
   );
 }

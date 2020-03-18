@@ -5,7 +5,7 @@ import Align from "../Align/TextAlign";
 import Color from "../Color/ColorPicker";
 import ValueInput from "./StringInput";
 import FontInput from "./FontPanel";
-export default function TextInput({ label, text, setText }) {
+export default function TextPanel({ label, text, setText }) {
   const { btnColor, backgroundColor } = useContext(ControlsContext);
   const setVisible = () => {
     setText({ ...text, visible: !text.visible });

@@ -3,7 +3,7 @@ import React from "react";
 import Size from "./UnitSize";
 import VerticalArrows from "../../../Buttons/Arrows/VerticalArrows";
 import HorisontalArrows from "../../../Buttons/Arrows/HorisontalArrows";
-export default function BlockSize({ setSize, size, btnColor }) {
+export default function BlockSize({ setSize, size, btnColor,reload }) {
   const setHeight = height => {
     setSize({ ...size, height });
     console.log("setHeight", height);
@@ -23,10 +23,10 @@ export default function BlockSize({ setSize, size, btnColor }) {
         }
       }
     >
-      <Size setValue={setHeight} value={size.height} btnColor={btnColor}>
+      <Size reload={reload}setValue={setHeight} value={size.height} btnColor={btnColor}>
         <VerticalArrows color={btnColor.active} />
       </Size>
-      <Size setValue={setWidth} value={size.width} btnColor={btnColor}>
+      <Size reload={reload} setValue={setWidth} value={size.width} btnColor={btnColor}>
         <HorisontalArrows color={btnColor.active} />
       </Size>
     </div>
