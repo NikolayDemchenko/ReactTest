@@ -1,11 +1,11 @@
 export default [
+  {name: "Пара",value:"keyValue"},
   {name: "Cтрока",value:"row"},
   {name: "Текст",value:"doc"},
   {name: "Число",value:"num"},
-  {name: "Еденица",value:"uNum"},
   {name: "Изображение",value:"img"},
   {name: "Видео",value:"video"},
-  {name: "Блок",value:"cont"},
-  {name: "Контейнер",value:"iCont"},
+  {name: "Контейнер",value:"cont"},
+  {name: "Инстансный контейнер",value:"iCont"},
   {name: "Элемент",value:"unit"},
 ]

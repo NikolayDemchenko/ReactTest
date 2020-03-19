@@ -8,13 +8,14 @@ export default function RowInput({ text, setText }) {
 
   return (
     <textarea
+      readOnly={false}
       style={{
         border: 0,
-        outline: "none",
+        outline: "none",  
         width: "100%",
         height: "100%",
         resize: "none",
-        padding: "0 0.18em ",
+        padding: "0 0.18em  ",
         fontFamily: family,
         fontWeight: style.weight ? 7 * 100 : 4 * 100,
         fontStyle: style.italic ? "italic" : "normal",
@@ -22,7 +23,7 @@ export default function RowInput({ text, setText }) {
         textAlign: text.align,
         fontSize: parseNumberToPX(size),
         color: parseColor(color),
-        backgroundColor: parseColor(text.color)
+        backgroundColor: "transparent "
       }}
       value={text.value || ""}
       onChange={event => {

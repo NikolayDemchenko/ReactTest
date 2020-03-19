@@ -3,7 +3,7 @@ import { ControlsContext } from "../ControlsContext";
 import TypeInput from "../ModalWindows/Select";
 import VisibleInput from "../../../Buttons/Visible/Visible";
 import Types from "../../Class/Types";
-import ColorInput from "../Color/ColorPicker";
+import ColorInput from "../ColorPicker/ColorPicker";
 import BlockSize from "../Size/SizeBlock";
 import BlockAlign from "../Align/BlockAlign";
 export default function SettingsPanel({ settings, setSettings }) {

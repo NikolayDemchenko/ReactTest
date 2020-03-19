@@ -22,9 +22,7 @@ const text = {
 };
 
 const rowElement = {
-  settings: {
-    // name: text,
-    align: true,
+  settings: { 
     size: {
       height: "140px",
       width: "70%"
@@ -34,7 +32,19 @@ const rowElement = {
     color: [70, 99, 100, 100],
     visible: true
   },
-
+  value: text
+};
+const docElement = {
+  settings: { 
+    size: {
+      height: "340px",
+      width: "70%"
+    },
+    index: 0,
+    type: "doc",
+    color: [70, 99, 100, 100],
+    visible: true
+  },
   value: text
 };
 const imageElement = {
@@ -49,7 +59,7 @@ const imageElement = {
     color: [70, 99, 100, 100],
     visible: true
   },
-  value: "https://1.downloader.disk.yandex.ru/preview/4cc7724c7312fce9f3236733b8f6b0824789547cbcb0e4ed5ef7b1252af81e1d/inf/0OeqJ0KSMb2Z6KUr_bhlMTar4xH-ZRBkZO4oQEso57n8mWP5hpGHhoHM94lSoM-qkhXG_8T3RRbPqn0wZsLUUQ==?uid=28927031&filename=%D0%95%D0%B2%D1%80%D0%BE%D0%BF%D0%B0_01.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&tknv=v2&owner_uid=28927031&size=1263x923"
+  value: 'https://avatars.mds.yandex.net/get-pdb/245485/4f6cb872-2c1d-4ad9-9e51-6f2334f8f074/s1200'
 };
 const NewApp = () => {
   const _on = 10;
@@ -63,7 +73,7 @@ const NewApp = () => {
   };
   const backgroundColor = "#d8d8dad8";
 
-  const [unit, setUnit] = useState(imageElement);
+  const [unit, setUnit] = useState(docElement);
   const [controlPanel, setControlPanel] = useState();
   console.log("unit", unit);
 

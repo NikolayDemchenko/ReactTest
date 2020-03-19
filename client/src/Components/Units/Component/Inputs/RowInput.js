@@ -19,8 +19,8 @@ export default function RowInput({text, setText }) {
         textDecoration: style.decoration ? "underline" : "none",
         textAlign: text.align,
         fontSize: parseNumberToPX(size),
-        color: parseColor(color),
-        backgroundColor: parseColor(text.color)
+        color: parseColor(color),   
+        backgroundColor: 'transparent '
       }}
         value={text.value || ""}
       onChange={event => {

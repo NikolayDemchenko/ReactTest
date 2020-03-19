@@ -11,11 +11,13 @@ export default function Unit({ unit, setUnit, setControlPanel, children }) {
   const backColor = parseColor(color);
 
   const { type } = unit.settings;
-  const row = { display: "flex", alignItems: "center" };
-  const doc = {};
+  // const row = { display: "flex", alignItems: "center" };
+  // const doc = { display: "flex", alignItems: "center"};
+  // let style = type !== "doc" ? row : doc;
+  let style = { display: "flex", alignItems: "center"};
 
-  let style = type !== "doc" ? row : doc;
   const margin = align !== undefined ? (align ? "0" : "0 0 0 auto") : "0 auto";
+  const backgroundImage = type==='img'?`url(${unit.value})`:'none'
   return (
     <div
       style={{
@@ -25,7 +27,7 @@ export default function Unit({ unit, setUnit, setControlPanel, children }) {
         width,
         backgroundColor: backColor,
         backgroundSize: "cover",
-        backgroundImage: `url(${unit.value})`
+        backgroundImage
       }}
       onClick={() => setControlPanel({ unit, setUnit })}
     >

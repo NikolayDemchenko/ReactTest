@@ -2,9 +2,8 @@ import React, { useContext } from "react";
 import { ControlsContext } from "../ControlsContext";
 import VisibleInput from "../../../Buttons/Visible/Visible";
 import Align from "../Align/TextAlign";
-import Color from "../Color/ColorPicker";
 import ValueInput from "./StringInput";
-import FontInput from "./FontPanel";
+import FontPanel from "./FontPanel";
 export default function TextPanel({ label, text, setText }) {
   const { btnColor, backgroundColor } = useContext(ControlsContext);
   const setVisible = () => {
@@ -18,10 +17,6 @@ export default function TextPanel({ label, text, setText }) {
   const setFont = font => {
     setText({ ...text, font });
     console.log("setFont", font);
-  };
-  const setColor = color => {
-    setText({ ...text, color });
-    console.log("font.color", color);
   };
   const setAlign = align => {
     setText({ ...text, align });
@@ -39,16 +34,15 @@ export default function TextPanel({ label, text, setText }) {
     >
       <div style={{ display: "inline-flex" }}>
         {label}
-        {/* Ввод текста - реализован StringInput */}
+        {/* Ввод текста*/}
         <ValueInput value={text.value} setValue={setValue} />
         <VisibleInput
           onClick={setVisible}
           color={text.visible ? btnColor.on : btnColor.off}
         />
-        <Color setColor={setColor} color={text.color} />
         <Align setAlign={setAlign} align={text.align} btnColor={btnColor} />
       </div>
-      <FontInput font={text.font} setFont={setFont} />
+      <FontPanel font={text.font} setFont={setFont} />
     </div>
   );
 }

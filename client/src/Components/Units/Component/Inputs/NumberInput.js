@@ -19,7 +19,7 @@ export default function RowInput({text, setText }) {
         textAlign: text.align,
         fontSize: parseNumberToPX(size),
         color: parseColor(color),
-        backgroundColor: parseColor(text.color)
+        backgroundColor: 'transparent '
       }}
       type={'number'}
         value={text.value || ""}
