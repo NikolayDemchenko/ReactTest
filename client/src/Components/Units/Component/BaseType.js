@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Unit({ unit, setUnit, setControlPanel, children }) {
+export default function BaseType({ unit, setUnit, setControlPanel, children }) {
   let {
     color,
     align,
@@ -11,9 +11,6 @@ export default function Unit({ unit, setUnit, setControlPanel, children }) {
   const backColor = parseColor(color);
 
   const { type } = unit.settings;
-  // const row = { display: "flex", alignItems: "center" };
-  // const doc = { display: "flex", alignItems: "center"};
-  // let style = type !== "doc" ? row : doc;
   let style = { display: "flex", alignItems: "center"};
 
   const margin = align !== undefined ? (align ? "0" : "0 0 0 auto") : "0 auto";
@@ -27,7 +24,8 @@ export default function Unit({ unit, setUnit, setControlPanel, children }) {
         width,
         backgroundColor: backColor,
         backgroundSize: "cover",
-        backgroundImage
+        backgroundImage,
+        border: "1px solid black" 
       }}
       onClick={() => setControlPanel({ unit, setUnit })}
     >

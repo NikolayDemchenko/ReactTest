@@ -1,5 +1,5 @@
 import React from "react";
-import TextPanel from "./Text/TextPanel";
+import TextPanel from "./TextSettings/TextPanel";
 import ControlPanel from "./ControlPanel";
 export default function RowPanel({ controlPanel, setControlPanel }) {
   const { unit, setUnit } = controlPanel;

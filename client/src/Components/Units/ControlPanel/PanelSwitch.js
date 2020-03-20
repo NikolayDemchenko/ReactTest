@@ -13,8 +13,8 @@ export default function SwitchPanel(props) {
         return <RowPanel {...props} />;
       case "num":
         return <RowPanel {...props} />;
-      case "uNum":
-        return <NumberPanel {...props} />;
+      case "kv":
+        return <ControlPanel {...props} />;
       case "img":
         return <ControlPanel {...props} />;
       case "video":

@@ -1,10 +1,10 @@
 import React from "react";
-import Settings from "./BlockSettings/SettingsPanel";
+import Settings from "./BaseSettings/SettingsPanel";
 export default function ControlPanel({
   controlPanel,
   setControlPanel,
   children
-}) {
+}) {console.log("...ControlPanel...");
   const { unit, setUnit } = controlPanel;
 
   const setSettings = settings => {

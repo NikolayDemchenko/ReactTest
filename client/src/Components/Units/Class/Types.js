@@ -1,5 +1,5 @@
 export default [
-  {name: "Пара",value:"keyValue"},
+  {name: "Пара",value:"kv"},
   {name: "Cтрока",value:"row"},
   {name: "Текст",value:"doc"},
   {name: "Число",value:"num"},

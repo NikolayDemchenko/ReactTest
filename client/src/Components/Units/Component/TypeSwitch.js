@@ -1,14 +1,19 @@
 import React from "react";
 
-import RowType from './StringTypes/RowType'
-import TextType from './StringTypes/TextType'
-import NumberType from './NumberTypes/NumberType'
+import RowType from './Types/Row'
+import TextType from './Types/Text'
+import NumberType from './Types/Number'
+import KeyValue from './Types/KeyValue'
 import BaseType from './BaseType'
-import WithUnitType from './NumberTypes/WithUnitType'
 
-export default function SwitchTypes(props) {
 
+export default function TypeSwitch(props) {
+  console.log("---TypeSwitch---");
+console.log('props.unit', props.unit)
+console.log('props.unit.settings', props.unit.settings)
     switch (props.unit.settings.type) {
+      case "kv":
+        return <KeyValue {...props} />;
       case "row":
         return <RowType {...props} />;
       case "unit":
@@ -17,8 +22,6 @@ export default function SwitchTypes(props) {
         return <TextType {...props} />;
       case "num":
         return <NumberType {...props} />;
-      case "uNum":
-        return <WithUnitType {...props} />;
       case "img":
         return <BaseType {...props} />;
       case "video":

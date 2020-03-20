@@ -1,5 +1,6 @@
 import React from "react";
-export default function RowInput({ text, setText }) {
+export default function TextInput({ text, setText }) {
+  console.log("_TextInput_");
   const parseColor = array =>
     `rgba(${array[0]}, ${array[1]},${array[2]}, ${array[3]})`;
   const parseNumberToPX = num => `${num}px`;
