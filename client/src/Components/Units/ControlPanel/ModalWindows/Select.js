@@ -3,7 +3,10 @@ import { withStyles } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import InputBase from "@material-ui/core/InputBase";
-export default function CustomizedSelects({ defaultItem, setItem, listItems }) {
+export default function Selects({ defaultItem, setItem, listItems }) {
+
+  // console.log('listItems', listItems)
+  // console.log('defaultItem', defaultItem)
   const BootstrapInput = withStyles(theme => ({
     root: {
       "label + &": {
@@ -37,18 +40,18 @@ export default function CustomizedSelects({ defaultItem, setItem, listItems }) {
       }
     }
   }))(InputBase);
-  const items = listItems.map(list => (
-    <MenuItem key={list.name} value={list.name}>
-      {list.name}
+  const items = listItems.map(item => (
+    <MenuItem key={item.name} value={item.name}>
+      {item.name}
     </MenuItem>
   ));
   // console.log('SelectItem', defaultItem)
   return (
     <div>
       <Select
-        value={listItems.find(list => list.value === defaultItem).name}
+        value={listItems.find(item => item.value === defaultItem).name}
         onChange={e => {
-          setItem(listItems.find(list => list.name === e.target.value));
+          setItem(listItems.find(item => item.name === e.target.value));
         }}
         input={<BootstrapInput />}
       >

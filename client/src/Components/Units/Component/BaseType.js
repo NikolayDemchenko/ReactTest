@@ -10,11 +10,11 @@ export default function BaseType({ unit, setUnit, setControlPanel, children }) {
     `rgba(${array[0]}, ${array[1]},${array[2]}, ${array[3]})`;
   const backColor = parseColor(color);
 
-  const { type } = unit.settings;
-  let style = { display: "flex", alignItems: "center"};
+  const { type } = unit;
+  let style = { display: "flex", alignItems: "center" };
 
   const margin = align !== undefined ? (align ? "0" : "0 0 0 auto") : "0 auto";
-  const backgroundImage = type==='img'?`url(${unit.value})`:'none'
+  const backgroundImage = type === "img" ? `url(${unit.value})` : "none";
   return (
     <div
       style={{
@@ -25,9 +25,12 @@ export default function BaseType({ unit, setUnit, setControlPanel, children }) {
         backgroundColor: backColor,
         backgroundSize: "cover",
         backgroundImage,
-        border: "1px solid black" 
+        border: "1px solid black"
       }}
-      onClick={() => setControlPanel({ unit, setUnit })}
+      onClick={() => {
+        console.log("Клик бля!!!!!!!",Date.now(),unit)
+        setControlPanel({ unit, setUnit });
+      }}
     >
       {children}
     </div>

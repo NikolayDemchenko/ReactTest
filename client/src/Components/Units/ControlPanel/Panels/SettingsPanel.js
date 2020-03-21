@@ -1,4 +1,4 @@
-import React, { useContext,useState } from "react";
+import React, { useContext, useState } from "react";
 import { ControlsContext } from "../ControlsContext";
 import TypeInput from "../ModalWindows/Select";
 import VisibleInput from "../../../Buttons/Visible/Visible";
@@ -6,10 +6,21 @@ import Types from "../../Class/Types";
 import ColorInput from "../ColorPicker/ColorPicker";
 import BlockSize from "../Size/SizeBlock";
 import BlockAlign from "../Align/BlockAlign";
-export default function SettingsPanel({ settings, setSettings }) {
+export default function SettingsPanel({ controlPanel, setControlPanel }) {
   const { btnColor, backgroundColor } = useContext(ControlsContext);
+  const { unit, setUnit } = controlPanel;
+  const { settings } = unit;
+
+  console.log("/// SettingsPanel")
+  console.log('unit', unit)
+  console.log('settings', settings)
+  const setSettings = settings => {
+    setUnit({ ...unit, settings });
+    setControlPanel({ ...controlPanel, unit: { ...unit, settings } });
+  };
+
   const setType = type => {
-    setSettings({ ...settings, type });
+    setUnit({ ...unit, type });
     console.log("setType", type);
   };
   const setVisible = () => {
@@ -28,14 +39,14 @@ export default function SettingsPanel({ settings, setSettings }) {
     setSettings({ ...settings, image: e.target.files[0] });
     console.log("setImage", e.target.files[0]);
   };
-  const [key, setkey] = useState(Math.random())
-  const reload=()=>{
-    setkey(Math.random())
-    console.log('key', key)
-  }
+  const [key, setkey] = useState(Math.random());
+  const reload = () => {
+    setkey(Math.random());
+    console.log("key", key);
+  };
   return (
     <div
-    key={key}
+      key={key}
       style={{
         display: "inline-flex",
         backgroundColor,
@@ -45,7 +56,7 @@ export default function SettingsPanel({ settings, setSettings }) {
     >
       <TypeInput
         listItems={Types}
-        defaultItem={settings.type}
+        defaultItem={unit.type}
         setItem={type => setType(type.value)}
       />
 
@@ -60,7 +71,12 @@ export default function SettingsPanel({ settings, setSettings }) {
         settings={settings}
         btnColor={btnColor}
       />
-      <BlockSize reload={reload} setSize={setSize} size={settings.size} btnColor={btnColor} />
+      <BlockSize
+        reload={reload}
+        setSize={setSize}
+        size={settings.size}
+        btnColor={btnColor}
+      />
     </div>
   );
 }

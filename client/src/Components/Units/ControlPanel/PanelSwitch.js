@@ -1,10 +1,10 @@
 import React from "react";
-import RowPanel from './RowPanel'
-import NumberPanel from './NumberPanel'
-import ControlPanel from './ControlPanel'
+import RowPanel from './Panels/RowPanel'
+import NumberPanel from './Panels/NumberPanel'
+import ControlPanel from './Panels/BasePanel'
 export default function SwitchPanel(props) {
   // console.log('props.unit.settings', props.unit)
-    switch (props.controlPanel.unit.settings.type) {
+    switch (props.controlPanel.unit.type) {
       case "row":
         return <RowPanel {...props} />;
       case "unit":
