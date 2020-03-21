@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import PropTypes from 'prop-types';
 import { ControlsContext } from "../ControlsContext";
 import TypeInput from "../ModalWindows/Select";
 import VisibleInput from "../../../Buttons/Visible/Visible";
@@ -6,14 +7,14 @@ import Types from "../../Class/Types";
 import ColorInput from "../ColorPicker/ColorPicker";
 import BlockSize from "../Size/SizeBlock";
 import BlockAlign from "../Align/BlockAlign";
-export default function SettingsPanel({ controlPanel, setControlPanel }) {
+function SettingsPanel({ controlPanel, setControlPanel }) {
   const { btnColor, backgroundColor } = useContext(ControlsContext);
   const { unit, setUnit } = controlPanel;
   const { settings } = unit;
 
-  console.log("/// SettingsPanel")
-  console.log('unit', unit)
-  console.log('settings', settings)
+  console.log("/// SettingsPanel");
+  console.log("unit", unit);
+  console.log("settings", settings);
   const setSettings = settings => {
     setUnit({ ...unit, settings });
     setControlPanel({ ...controlPanel, unit: { ...unit, settings } });
@@ -80,3 +81,22 @@ export default function SettingsPanel({ controlPanel, setControlPanel }) {
     </div>
   );
 }
+SettingsPanel.propTypes = {
+  controlPanel: PropTypes.shape({
+    unit: PropTypes.shape({
+      type: PropTypes.string,
+      settings: {
+        size: {
+          height: PropTypes.string,
+          width: PropTypes.string
+        },
+        index: PropTypes.number,
+        color: PropTypes.array,
+        visible: PropTypes.bool
+      },
+      value: PropTypes.object
+    }),
+    setUnit: PropTypes.func
+  }),
+};
+export default SettingsPanel;
