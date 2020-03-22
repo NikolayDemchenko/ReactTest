@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import "./App.css";
 import { ControlsContext } from "./Components/Units/ControlPanel/ControlsContext";
-import TypeSwitch from "./Components/Units/Component/TypeSwitch";
-import PanelSwitch from "./Components/Units/ControlPanel/PanelSwitch";
-import {keyValue,rowElement,docElement,imageElement,keyValueElement} from './Components/Units/Component/Types/Classes'
+import TypeSwitch from "./Components/Units/Component/Types/TypeSwitch";
+import PanelSwitch from "./Components/Units/ControlPanel/Panels/PanelSwitch";
+import {baseType, rowType, docType, imageType, keyValueType} from './Components/Units/Component/Types/Classes'
 
 const NewApp = () => {
   console.log("!!!NewApp!!!");
@@ -18,16 +18,14 @@ const NewApp = () => {
   };
   const backgroundColor = "#d8d8dad8";
 
-  const [unit, setUnit] = useState(keyValue);
+  const [unit, setUnit] = useState(keyValueType);
   const [controlPanel, setControlPanel] = useState();
 const setPanel=(panel)=>{
   console.log('panel', panel)
   setControlPanel(panel)
 }
-
-
   console.log("unit", unit);
-  console.log("controlPanel", controlPanel);
+  // console.log("controlPanel", controlPanel);
 
 
   return (
@@ -46,4 +44,5 @@ const setPanel=(panel)=>{
     </ControlsContext.Provider>
   );
 };
+
 export default NewApp;

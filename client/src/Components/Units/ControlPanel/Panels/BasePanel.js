@@ -5,7 +5,7 @@ export default function BasePanel({
   setControlPanel,
   children
 }) {
-  console.log("...BasePanel...",controlPanel);
+  // console.log("...BasePanel...",controlPanel);
   return (
     <div style={{ display: "flex",flexWrap: 'wrap', position: "sticky", top: 0 }}>
       <Settings controlPanel={controlPanel} setControlPanel={setControlPanel} />

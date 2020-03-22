@@ -1,10 +1,10 @@
 const text = {
   visible: true,
-  value: "Хуйпыжня",
+  // value: "Хня",
   align: "center",
   font: {
     family: "Verdana",
-    size: 50,
+    size: 16,
     color: [150, 170, 230, 100],
     style: {
       italic: true,
@@ -13,69 +13,78 @@ const text = {
     }
   }
 };
-const rowElement = {
+const settings = {
+  flexDirection:"row",
+  alignSelf:"center",
+  size: {
+    height: "100%",
+    width: "100%"
+  },
+  index: 0,
+  color: [70, 99, 100, 100],
+  visible: true
+};
+const baseType = {
+  type: "cont",
+  settings
+};
+const rowType = {
   type: "row",
-  settings: {
-    size: {
-      height: "140px",
-      width: "70%"
-    },
-    index: 0,
-    color: [70, 99, 100, 100],
-    visible: true
-  },
+  settings,
   value: text
 };
-const docElement = {
+const docType = {
   type: "doc",
-  settings: {
-    size: {
-      height: "340px",
-      width: "70%"
-    },
-    index: 0,
-    color: [70, 99, 100, 100],
-    visible: true
-  },
+  settings,
   value: text
 };
-const imageElement = {
+const imageType = {
   type: "img",
-  settings: {
-    align: true,
-    size: {
-      height: "140px",
-      width: "70%"
-    },
-    index: 0,
-    color: [70, 99, 100, 100],
-    visible: true
-  },
-  value:
-    "https://avatars.mds.yandex.net/get-pdb/245485/4f6cb872-2c1d-4ad9-9e51-6f2334f8f074/s1200"
+  settings,
+  value: {
+    reference:
+      "https://avatars.mds.yandex.net/get-pdb/245485/4f6cb872-2c1d-4ad9-9e51-6f2334f8f074/s1200"
+  }
 };
 
-const keyValue2 = {
+const keyValueType = {
   type: "kv",
-  key: rowElement,
-  value: docElement
+  settings: {
+    flexDirection:"row",
+    alignSelf:"center",
+    size: {
+      height: "160px",
+      width: "320px"
+    },
+    index: 0,
+    color: [70, 99, 100, 100],
+    visible: true
+  },
+  key: baseType,
+  value: baseType
 };
-const keyValue = {
-  type: "kv",
-  key: rowElement,
-  value: keyValue2
+const newType = type => {
+  switch (type) {
+    case "kv":
+      return keyValueType;
+    case "row":
+      return rowType;
+    case "unit":
+      return;
+    case "doc":
+      return docType;
+    case "num":
+      return { rowType };
+    case "img":
+      return;
+    case "video":
+      return;
+    case "cont":
+      return baseType;
+    case "iCont":
+      return;
+    default:
+      return;
+  }
 };
-// const keyValueElement = {
-//   type: "kv",
-//     settings: {
-//       size: {
-//         height: "140px",
-//         width: "70%"
-//       },
-//       index: 0,
-//       color: [70, 99, 100, 100],
-//       visible: true
-//     },
-//     value: keyValue
-//   };
-export { keyValue, rowElement, docElement, imageElement };
+export { newType, baseType, rowType, docType, imageType, keyValueType };

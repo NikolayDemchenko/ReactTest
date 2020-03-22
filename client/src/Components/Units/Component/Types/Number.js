@@ -1,8 +1,8 @@
 import React from "react";
 import NumberInput from "../Inputs/NumberInput";
-import BaseType from "../BaseType";
+import BaseType from "./BaseType";
 export default function NumberType({ unit, setUnit, setControlPanel }) {
-  console.log("...NumberType...");
+  // console.log("...NumberType...");
   const setValue = value => {
     setUnit({ ...unit, value });
     setControlPanel({ unit: { ...unit, value }, setUnit });

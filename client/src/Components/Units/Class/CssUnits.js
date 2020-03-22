@@ -1,6 +1,12 @@
 const _units = [
     { name: "px" },
     { name: "%" },
+    { name: "em" },
+    { name: "rem" },
+    { name: "vw" },
+    { name: "vh" },
+    { name: "vmin" },
+    { name: "vmax" },
 
   ];
   

@@ -1,9 +1,12 @@
 import React, { useContext, useState } from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
+import { newType } from "../../Component/Types/Classes";
 import { ControlsContext } from "../ControlsContext";
-import TypeInput from "../ModalWindows/Select";
+import SelectModal from "../ModalWindows/SelectModal";
 import VisibleInput from "../../../Buttons/Visible/Visible";
 import Types from "../../Class/Types";
+import FlexDirections from "../../Class/FlexDirections";
+import AlignSelfs from "../../Class/AlignSelfs";
 import ColorInput from "../ColorPicker/ColorPicker";
 import BlockSize from "../Size/SizeBlock";
 import BlockAlign from "../Align/BlockAlign";
@@ -12,17 +15,27 @@ function SettingsPanel({ controlPanel, setControlPanel }) {
   const { unit, setUnit } = controlPanel;
   const { settings } = unit;
 
-  console.log("/// SettingsPanel");
-  console.log("unit", unit);
-  console.log("settings", settings);
+  // console.log("/// SettingsPanel");
+  // console.log("unit", unit);
+  // console.log("settings", settings);
+
+  const setType = type => {
+    setUnit(newType(type));
+    console.log(".........setType", newType(type));
+  };
+
   const setSettings = settings => {
     setUnit({ ...unit, settings });
     setControlPanel({ ...controlPanel, unit: { ...unit, settings } });
   };
 
-  const setType = type => {
-    setUnit({ ...unit, type });
-    console.log("setType", type);
+  const setFlexDirections = flexDirection => {
+    setSettings({ ...settings, flexDirection });
+    console.log("setFlexDirections", flexDirection);
+  };
+  const setAlignSelfs = alignSelf => {
+    setSettings({ ...settings, alignSelf });
+    console.log("setAlignSelfs", alignSelf);
   };
   const setVisible = () => {
     setSettings({ ...settings, visible: !settings.visible });
@@ -36,10 +49,10 @@ function SettingsPanel({ controlPanel, setControlPanel }) {
     setSettings({ ...settings, size });
     console.log("setSize", size);
   };
-  const setImage = async e => {
-    setSettings({ ...settings, image: e.target.files[0] });
-    console.log("setImage", e.target.files[0]);
-  };
+  // const setImage = async e => {
+  //   setSettings({ ...settings, image: e.target.files[0] });
+  //   console.log("setImage", e.target.files[0]);
+  // };
   const [key, setkey] = useState(Math.random());
   const reload = () => {
     setkey(Math.random());
@@ -55,7 +68,7 @@ function SettingsPanel({ controlPanel, setControlPanel }) {
         padding: "4px"
       }}
     >
-      <TypeInput
+      <SelectModal
         listItems={Types}
         defaultItem={unit.type}
         setItem={type => setType(type.value)}
@@ -66,7 +79,17 @@ function SettingsPanel({ controlPanel, setControlPanel }) {
         color={settings.visible ? btnColor.on : btnColor.off}
       />
       <ColorInput color={settings.color} setColor={setColor} />
-      <input type="file" onChange={setImage} />
+      {/* <input type="file" onChange={setImage} /> */}
+      <SelectModal
+        listItems={FlexDirections}
+        defaultItem={unit.settings.flexDirection}
+        setItem={type => setFlexDirections(type.value)}
+      />
+      <SelectModal
+        listItems={AlignSelfs}
+        defaultItem={unit.settings.alignSelf}
+        setItem={type => setAlignSelfs(type.value)}
+      />
       <BlockAlign
         setSettings={setSettings}
         settings={settings}
@@ -85,18 +108,18 @@ SettingsPanel.propTypes = {
   controlPanel: PropTypes.shape({
     unit: PropTypes.shape({
       type: PropTypes.string,
-      settings: {
-        size: {
+      settings: PropTypes.shape({
+        size: PropTypes.shape({
           height: PropTypes.string,
           width: PropTypes.string
-        },
+        }),
         index: PropTypes.number,
         color: PropTypes.array,
         visible: PropTypes.bool
-      },
+      }),
       value: PropTypes.object
     }),
     setUnit: PropTypes.func
-  }),
+  })
 };
 export default SettingsPanel;

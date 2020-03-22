@@ -1,10 +1,11 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import InputBase from "@material-ui/core/InputBase";
-export default function Selects({ defaultItem, setItem, listItems }) {
 
+function SelectModal({ defaultItem, setItem, listItems }) {
   // console.log('listItems', listItems)
   // console.log('defaultItem', defaultItem)
   const BootstrapInput = withStyles(theme => ({
@@ -16,7 +17,7 @@ export default function Selects({ defaultItem, setItem, listItems }) {
     input: {
       borderRadius: 4,
       position: "relative",
-      backgroundColor: theme.palette.background.paper,
+      // backgroundColor: theme.palette.background.paper,
       border: "1px solid #ced4da",
       fontSize: 16,
       padding: "2px ",
@@ -60,3 +61,10 @@ export default function Selects({ defaultItem, setItem, listItems }) {
     </div>
   );
 }
+
+SelectModal.propTypes = {
+  defaultItem: PropTypes.string,
+  listItems: PropTypes.array,
+  setItem: PropTypes.func
+};
+export default SelectModal;

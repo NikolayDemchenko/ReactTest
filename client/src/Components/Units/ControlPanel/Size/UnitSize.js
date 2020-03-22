@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import VerticalSlider from "../ModalWindows/VerticalSlider";
-import Select from "../ModalWindows/Select";
+import Select from "../ModalWindows/SelectModal";
 import cssUnits from "../../Class/CssUnits";
 export default function UnitSize({
   setValue,

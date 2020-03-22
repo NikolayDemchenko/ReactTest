@@ -1,46 +1,56 @@
 import React from "react";
-import TypeSwitch from "../TypeSwitch";
-import { keyValue, keyValueElement } from "./Classes";
-import BaseType from "../BaseType";
-export default function KeyValue({ unit, setUnit, setControlPanel }) {
+import PropTypes from "prop-types";
+import TypeSwitch from "./TypeSwitch";
+import {keyValueType } from "./Classes";
+import BaseType from "./BaseType";
+
+ function KeyValue({ unit, setUnit, setControlPanel }) {
   console.log("...KeyValue...");
-  console.log("!!!!!!keyValue", keyValue);
-  unit = unit.key !== undefined? unit : keyValue;
+  
+  unit = unit.type === "kv"? unit : keyValueType;
 
   const setKey = key => {
     setUnit({ ...unit, key });
     console.log("setKey", key);
   };
-  const setKeyPanel = () => {
-    console.log('setKeyPanel', { unit: unit.key, setUnit: setKey })
-    setControlPanel("Хуйпыжня");
-  };
   const setValue = value => {
     setUnit({ ...unit, value });
     console.log("setValue", value);
-  };
-  const setValuePanel = () => {
-    setControlPanel({ unit: unit.value, setUnit: setValue });
-  };
-  console.log("unit", unit);
+  };  
+  // console.log("unit", unit);
   console.log("unit.key", unit.key);
   console.log("unit.value", unit.value);
 
   return (
-    // <BaseType unit={unit} setUnit={setUnit} setControlPanel={setControlPanel}>
-    <div>
-      Пара
+    <BaseType unit={unit} setUnit={setUnit} setControlPanel={setControlPanel}>    
+      ...
       <TypeSwitch
         unit={unit.key}
         setUnit={setKey}
-        setControlPanel={setKeyPanel}
+        setControlPanel={setControlPanel}
       />
       <TypeSwitch
         unit={unit.value}
         setUnit={setValue}
-        setControlPanel={setValuePanel}
-      />
-    </div>
-    // </BaseType>
+        setControlPanel={setControlPanel}
+      />    
+    </BaseType>
   );
 }
+KeyValue.propTypes = {
+  unit: PropTypes.shape({
+    type: PropTypes.string,
+    settings: PropTypes.shape({
+      size: PropTypes.shape({
+        height: PropTypes.string,
+        width: PropTypes.string
+      }),
+      index: PropTypes.number,
+      color: PropTypes.array,
+      visible: PropTypes.bool
+    }),
+    value: PropTypes.object
+  }),
+  setUnit: PropTypes.func
+};
+export default KeyValue;

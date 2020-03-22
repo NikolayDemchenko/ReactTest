@@ -1,8 +1,8 @@
 import React from "react";
 import TextInput from "../Inputs/TextInput";
-import BaseType from "../BaseType";
+import BaseType from "./BaseType";
 export default function TextType({ unit, setUnit, setControlPanel }) {
-  console.log("...TextType...");
+  // console.log("...TextType...");
   const setValue = value => {
     setUnit({ ...unit, value });
     setControlPanel({ unit: { ...unit, value }, setUnit });
