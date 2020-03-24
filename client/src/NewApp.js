@@ -40,7 +40,7 @@ const setPanel=(panel)=>{
         unit={unit}
         setUnit={setUnit}
         setControlPanel={setPanel}
-      />
+      />{JSON.stringify(unit)}
     </ControlsContext.Provider>
   );
 };
