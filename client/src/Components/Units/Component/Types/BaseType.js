@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 function BaseType({ unit, setUnit, setControlPanel, children }) {
@@ -24,6 +24,14 @@ function BaseType({ unit, setUnit, setControlPanel, children }) {
 
   const margin = align !== undefined ? (align ? "0" : "0 0 0 auto") : "0 auto";
   const backgroundImage = type === "img" ? `url(${unit.value})` : "none";
+
+  const [shadow, setshadow] = useState(
+    "0px 5px 6px 0px rgba(34, 60, 80, 0.51) "
+  );
+const setselect=(selected)=>{
+  setUnit({...unit,service:{selected}})
+}
+console.log('unit.service', unit.service)
   return (
     <div
       style={{
@@ -34,13 +42,21 @@ function BaseType({ unit, setUnit, setControlPanel, children }) {
         backgroundColor: backColor,
         backgroundSize: "cover",
         backgroundImage,
-        border: "1px solid rgba(0,0,50,.5)",
-        boxShadow: "0px 5px 6px 0px rgba(34, 60, 80, 0.51)"
+        border: unit.service!==undefined&&unit.service.selected? "1.3px solid rgba(200,200,200,.5)" : "none",
+        boxShadow: `${shadow}`
       }}
+      onMouseOver={() =>
+        setshadow(
+          "0px 5px 6px 0px rgba(34, 60, 80, 0.51) , 0px 0px 80px -60px #ffffff inset"
+        )
+      }
+      onMouseOut={() => setshadow("0px 5px 6px 0px rgba(34, 60, 80, 0.51)")}
+      onBlur={()=>setselect(false)}
       onClick={event => {
         event.stopPropagation();
         console.log("Клик бля!!!!!!!", Date.now(), unit);
         // alert('Клик бля!!!!!!!')
+        setselect(true);
         setControlPanel({ unit, setUnit });
       }}
     >

@@ -18,7 +18,7 @@ const NewApp = () => {
   };
   const backgroundColor = "#d8d8dad8";
 
-  const [unit, setUnit] = useState(keyValueType);
+  const [unit, setUnit] = useState(keyValueType); 
   const [controlPanel, setControlPanel] = useState();
 const setPanel=(panel)=>{
   console.log('panel', panel)
@@ -27,7 +27,7 @@ const setPanel=(panel)=>{
   console.log("unit", unit);
   // console.log("controlPanel", controlPanel);
 
-
+console.log('JSON.stringify(unit)', JSON.stringify(unit).match(/[service:{selected:true}]/))
   return (
     <ControlsContext.Provider value={{ btnColor, backgroundColor }}>
       {controlPanel ? (
@@ -40,6 +40,7 @@ const setPanel=(panel)=>{
         unit={unit}
         setUnit={setUnit}
         setControlPanel={setPanel}
+        controlPanel={controlPanel}
       />{JSON.stringify(unit)}
     </ControlsContext.Provider>
   );
