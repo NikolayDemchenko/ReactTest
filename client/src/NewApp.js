@@ -24,12 +24,11 @@ const setPanel=(panel)=>{
   console.log('panel', panel)
   setControlPanel(panel)
 }
-  console.log("unit", unit);
-  // console.log("controlPanel", controlPanel);
 
-console.log('JSON.stringify(unit)', JSON.stringify(unit).match(/[service:{selected:true}]/))
+console.log("!!!!!unit", unit);
+
   return (
-    <ControlsContext.Provider value={{ btnColor, backgroundColor }}>
+    <ControlsContext.Provider  value={{ btnColor, backgroundColor }}>
       {controlPanel ? (
         <PanelSwitch
           controlPanel={controlPanel}
@@ -39,8 +38,7 @@ console.log('JSON.stringify(unit)', JSON.stringify(unit).match(/[service:{select
       <TypeSwitch
         unit={unit}
         setUnit={setUnit}
-        setControlPanel={setPanel}
-        controlPanel={controlPanel}
+        setControlPanel={setPanel}      
       />{JSON.stringify(unit)}
     </ControlsContext.Provider>
   );

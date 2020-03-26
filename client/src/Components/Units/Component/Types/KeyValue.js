@@ -4,7 +4,8 @@ import TypeSwitch from "./TypeSwitch";
 import {keyValueType } from "./Classes";
 import BaseType from "./BaseType";
 
- function KeyValue({ unit, setUnit, setControlPanel }) {
+ function KeyValue(props) {
+   let { unit, setUnit, setControlPanel}=props
   console.log("...KeyValue...");
   
   unit = unit.type === "kv"? unit : keyValueType;
@@ -22,17 +23,17 @@ import BaseType from "./BaseType";
   console.log("unit.value", unit.value);
 
   return (
-    <BaseType unit={unit} setUnit={setUnit} setControlPanel={setControlPanel}>    
+    <BaseType {...props}>    
       ...
       <TypeSwitch
         unit={unit.key}
         setUnit={setKey}
-        setControlPanel={setControlPanel}
+        setControlPanel={setControlPanel}      
       />
       <TypeSwitch
         unit={unit.value}
         setUnit={setValue}
-        setControlPanel={setControlPanel}
+        setControlPanel={setControlPanel}   
       />    
     </BaseType>
   );
