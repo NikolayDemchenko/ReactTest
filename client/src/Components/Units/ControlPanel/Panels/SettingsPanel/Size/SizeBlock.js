@@ -1,8 +1,7 @@
 import React from "react";
-// import Size from "../Sliders/VerticalSlider";
 import Size from "./UnitSize";
-import VerticalArrows from "../../../Buttons/Arrows/VerticalArrows";
-import HorisontalArrows from "../../../Buttons/Arrows/HorisontalArrows";
+import VerticalArrows from "../../../../../Buttons/Arrows/VerticalArrows";
+import HorisontalArrows from "../../../../../Buttons/Arrows/HorisontalArrows";
 export default function BlockSize({ setSize, size, btnColor,reload }) {
   const setHeight = height => {
     setSize({ ...size, height });

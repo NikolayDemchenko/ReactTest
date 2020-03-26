@@ -8,7 +8,7 @@ import KeyValue from "./KeyValue";
 import BaseType from "./BaseType";
 
 function TypeSwitch(props) {
-  console.log("---TypeSwitch---");
+  // console.log("---TypeSwitch---");
   // console.log("......props.unit.type", props.unit.type);
   switch (props.unit.type) {
     case "kv":

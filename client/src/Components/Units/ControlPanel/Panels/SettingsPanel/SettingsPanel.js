@@ -1,15 +1,15 @@
 import React, { useContext, useState } from "react";
 import PropTypes from "prop-types";
-import { newType } from "../../Component/Types/Classes";
-import { ControlsContext } from "../ControlsContext";
-import SelectModal from "../ModalWindows/SelectModal";
-import VisibleInput from "../../../Buttons/Visible/Visible";
-import Types from "../../Class/Types";
-import FlexDirections from "../../Class/FlexDirections";
-import AlignSelfs from "../../Class/AlignSelfs";
-import ColorInput from "../ColorPicker/ColorPicker";
-import BlockSize from "../Size/SizeBlock";
-import BlockAlign from "../Align/BlockAlign";
+import { newType } from "../../../Component/Types/Classes";
+import { ControlsContext } from "../../ControlsContext";
+import SelectModal from "../../ModalWindows/SelectModal";
+import VisibleInput from "../../../../Buttons/Visible/Visible";
+import Types from "../../../Class/Types";
+import FlexDirections from "../../../Class/FlexDirections";
+import AlignSelfs from "../../../Class/AlignSelfs";
+import ColorInput from "../../ColorPicker/ColorPicker";
+import SizeBlock from "./Size/SizeBlock";
+import BlockAlign from "../../Align/BlockAlign";
 function SettingsPanel({ controlPanel, setControlPanel }) {
   const { btnColor, backgroundColor } = useContext(ControlsContext);
   const { unit, setUnit } = controlPanel;
@@ -95,7 +95,7 @@ function SettingsPanel({ controlPanel, setControlPanel }) {
         settings={settings}
         btnColor={btnColor}
       />
-      <BlockSize
+      <SizeBlock
         reload={reload}
         setSize={setSize}
         size={settings.size}

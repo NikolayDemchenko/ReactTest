@@ -1,5 +1,5 @@
 import React from "react";
-import Settings from "./SettingsPanel";
+import Settings from "./SettingsPanel/SettingsPanel";
 export default function BasePanel({
   controlPanel,
   setControlPanel,

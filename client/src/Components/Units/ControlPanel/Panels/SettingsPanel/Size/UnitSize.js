@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import VerticalSlider from "../ModalWindows/VerticalSlider";
-import Select from "../ModalWindows/SelectModal";
-import cssUnits from "../../Class/CssUnits";
+import React, { useState, useEffect } from "react";
+import VerticalSlider from "../../../ModalWindows/VerticalSlider";
+import Select from "../../../ModalWindows/SelectModal";
+import cssUnits from "../../../../Class/CssUnits";
 export default function UnitSize({
   setValue,
   value,
@@ -18,15 +18,14 @@ export default function UnitSize({
     return newVal ? newVal.join("") : "";
   };
 
-  const [state, setstate] = useState(parseString(value));
+  const setVal = item => {
+    setValue(item + parseString(value));
+    // console.log("Еденица измерения", state);
+  };
+  const setUnit = item => {  
+    setValue(parseNumber(value) + item.value);
+  };
 
-  const setVal = value => {
-    setValue(value + state);
-  };
-  const setUnit = state => {
-    setstate(state.value);
-    setValue(parseNumber(value) + state.value);
-  };
   return (
     <div
       style={{

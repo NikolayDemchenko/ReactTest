@@ -6,7 +6,7 @@ import BaseType from "./BaseType";
 
  function KeyValue(props) {
    let { unit, setUnit, setControlPanel}=props
-  console.log("...KeyValue...");
+  // console.log("...KeyValue...");
   
   unit = unit.type === "kv"? unit : keyValueType;
 
@@ -19,8 +19,8 @@ import BaseType from "./BaseType";
     console.log("setValue", value);
   };  
   // console.log("unit", unit);
-  console.log("unit.key", unit.key);
-  console.log("unit.value", unit.value);
+  // console.log("unit.key", unit.key);
+  // console.log("unit.value", unit.value);
 
   return (
     <BaseType {...props}>    

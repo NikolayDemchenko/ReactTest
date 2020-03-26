@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import _style from "./BaseType.module.css";
 function BaseType({ unit, setUnit, setControlPanel, children }) {
-  console.log("...BaseType...");
+  // console.log("...BaseType...");
   const {
     type,
     settings: {
@@ -43,7 +43,6 @@ function BaseType({ unit, setUnit, setControlPanel, children }) {
     backgroundImage
   };
 
-  console.log("unit.service", unit.service);
   return (
     <div
       tabIndex="0"
