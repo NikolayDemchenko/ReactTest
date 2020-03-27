@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
-import { ControlsContext } from "../ControlsContext";
-import VerticalArrows from "../../../Buttons/Arrows/VerticalArrows";
-import Size from "../ModalWindows/VerticalSlider";
-import Family from "../ModalWindows/SelectModal";
-import Fonts from "../../Class/Fonts";
-import Color from "../ColorPicker/ColorPicker";
+import { ControlsContext } from "../../../ControlsContext";
+import VerticalArrows from "../../../../../Buttons/Arrows/VerticalArrows";
+import Size from "../../../ModalWindows/VerticalSlider";
+import Family from "../../../ModalWindows/SelectModal";
+import Fonts from "../../../../Class/Fonts";
+import Color from "../../../ColorPicker/ColorPicker";
 import Style from "./StyleInput";
 export default function FontPanel({ font, setFont }) {
   const { btnColor } = useContext(ControlsContext);

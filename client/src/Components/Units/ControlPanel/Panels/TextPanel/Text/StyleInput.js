@@ -2,7 +2,7 @@ import React from "react";
 import { bold } from "react-icons-kit/fa/bold";
 import { italic } from "react-icons-kit/fa/italic";
 import { underline } from "react-icons-kit/fa/underline";
-import Button from "../../../Buttons/Button";
+import Button from "../../../../../Buttons/Button";
 export default ({style, setStyle, btnColor }) => {
   const{weight, italic :_italic, decoration}=style
   const setWeight = () => {

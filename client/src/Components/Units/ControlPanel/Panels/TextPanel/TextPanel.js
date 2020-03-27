@@ -2,8 +2,8 @@ import React, { useContext } from "react";
 import { ControlsContext } from "../../ControlsContext";
 import VisibleInput from "../../../../Buttons/Visible/Visible";
 import Align from "../../Align/TextAlign";
-import ValueInput from "../../Text/StringInput";
-import FontPanel from "../../Text/FontPanel";
+import ValueInput from "./Text/StringInput";
+import FontPanel from "./Text/FontPanel";
 export default function TextPanel({ label, text, setText }) {
   const { btnColor, backgroundColor } = useContext(ControlsContext);
   const setVisible = () => {

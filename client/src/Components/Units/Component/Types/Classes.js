@@ -60,6 +60,17 @@ const keyValueType = {
     color: [70, 99, 100, 100],
     visible: true
   },
+  _____style: {
+    flexDirection:"row",
+    alignSelf:"center",
+    size: {
+      height: "160px",
+      width: "320px"
+    },
+    index: 0,
+    color: [70, 99, 100, 100],
+    visible: true
+  },
   key: baseType,
   value: baseType
 };
