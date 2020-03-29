@@ -14,8 +14,8 @@ const text = {
   }
 };
 const settings = {
-  flexDirection:"row",
-  alignSelf:"center",
+  flexDirection: "row",
+  alignSelf: "center",
   size: {
     height: "100%",
     width: "100%"
@@ -50,26 +50,23 @@ const imageType = {
 const keyValueType = {
   type: "kv",
   settings: {
-    flexDirection:"row",
-    alignSelf:"center",
+    flexDirection: "row",
+    alignSelf: "center",
     size: {
-      height: "160px",
-      width: "320px"
+      height: "9000px",
+      width: "110%"
     },
     index: 0,
     color: [70, 99, 100, 100],
     visible: true
   },
-  _____style: {
-    flexDirection:"row",
-    alignSelf:"center",
-    size: {
-      height: "160px",
-      width: "320px"
-    },
-    index: 0,
-    color: [70, 99, 100, 100],
-    visible: true
+  style: {
+    display:"flex",
+    flexDirection: "row",
+    alignSelf: "center",
+    height: "160px",
+    width: "320px",    
+    background: "rgba(70, 99, 100, 100)" 
   },
   key: baseType,
   value: baseType

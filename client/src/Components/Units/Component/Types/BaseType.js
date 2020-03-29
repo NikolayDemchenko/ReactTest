@@ -19,17 +19,17 @@ function BaseType({ unit, setUnit, setControlPanel, children }) {
   const backColor = parseColor(color);
 
   const margin = align !== undefined ? (align ? "0" : "0 0 0 auto") : "0 auto";
-  const backgroundImage = type === "img" ? `url(${unit.value})` : "none";
 
   const [border, setBorder] = useState();
 
   const setBorderStyle = array => {
-    const value=240
-    const color = array[0] > value || array[1] > value || array[2] > value ? 0 : 255;
-    return `1px double rgba(${color}, ${color},${color}, 0.9)`;
+    const value = 240;
+    const color =
+      array[0] > value || array[1] > value || array[2] > value ? 0 : 255;
+    return `solid 1px  rgba(${color}, ${color},${color}, 0.9)`;
   };
 
-  let style = {
+  const style = {
     "--div-focusBorder": setBorderStyle(color),
     display: "flex",
     flexDirection,
@@ -38,9 +38,9 @@ function BaseType({ unit, setUnit, setControlPanel, children }) {
     margin,
     height,
     width,
-    backgroundColor: backColor,
-    backgroundSize: "cover",
-    backgroundImage
+    background: backColor
+    // backgroundSize: "cover",
+    // backgroundImage
   };
 
   return (
@@ -52,7 +52,7 @@ function BaseType({ unit, setUnit, setControlPanel, children }) {
       }}
       onMouseOver={event => {
         event.stopPropagation();
-        setBorder(` ${setBorderStyle(color)}`);
+        setBorder(setBorderStyle(color));
       }}
       onMouseOut={() => setBorder()}
       onClick={event => {
