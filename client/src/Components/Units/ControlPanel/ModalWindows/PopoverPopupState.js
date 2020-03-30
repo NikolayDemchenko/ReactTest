@@ -6,7 +6,7 @@ export default function PopoverPopupState({ children, reload }) {
   return (
     <PopupState variant="popover" popupId="demo-popup-popover">
       {popupState => (
-        <div onClick={reload}>
+        <div onMouseUp={reload}>
           <div {...bindTrigger(popupState)}>{children[0]}</div>
           <Popover 
             {...bindPopover(popupState)}

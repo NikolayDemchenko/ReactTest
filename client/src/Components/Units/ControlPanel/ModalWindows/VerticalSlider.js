@@ -32,7 +32,6 @@ export default function VerticalSlider({
     } else {
       return "";
     }
-
   };
   const [maxValue, setMaxValue] = useState(
     parseNumber(value) < 5 ? 10 : parseNumber(value) * 2
@@ -63,14 +62,22 @@ export default function VerticalSlider({
         >
           <div style={{ display: "flex" }}>
             <input
+              style={{
+                width: "40px",
+                appearance: "none",
+                border: "0px",
+                textAlign: "right"
+              }}
               type={"text"}
               ref={node => {
                 input = node;
               }}
               onChange={() => {
-                setValue(input.value + parseString(value));
+                setValue(
+                  (input.value =
+                    input.value.replace(/[^\d]/g, "") + parseString(value))
+                );
               }}
-              style={{ width: "40px", appearance: "none", border: "0px" }}
               value={parseNumber(value)}
             />
             <Select

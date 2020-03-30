@@ -7,7 +7,7 @@ import InputBase from "@material-ui/core/InputBase";
 
 function SelectModal({ defaultItem, setItem, listItems }) {
   // console.log('listItems', listItems)
-  // console.log('defaultItem', defaultItem)
+  console.log('defaultItem', defaultItem)
   const BootstrapInput = withStyles(theme => ({
     root: {
       "label + &": {
