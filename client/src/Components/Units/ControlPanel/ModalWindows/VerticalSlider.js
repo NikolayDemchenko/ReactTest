@@ -3,51 +3,99 @@ import AngleUp from "../../../Buttons/Angle/AngleUp";
 import AngleDown from "../../../Buttons/Angle/AngleDown";
 import Slider from "@material-ui/core/Slider";
 import Popover from "./PopoverPopupState";
+import cssUnits from "../../Class/CssUnits";
+import Select from "../ModalWindows/Select";
+
 export default function VerticalSlider({
   setValue,
   value,
   children,
   btnColor
 }) {
-  const [maxValue, setMaxValue] = useState(value < 5 ? 10 : value * 2);
+  const setUnit = item => {
+    setValue(parseNumber(value) + item.value);
+  };
+
+  const parseNumber = value => {
+    console.log("value", typeof value);
+    if (typeof value === "string") {
+      const newVal = value.match(/\d/gm);
+      return newVal ? Number(newVal.join("")) : 0;
+    } else {
+      return value;
+    }
+  };
+  const parseString = value => {
+    if (typeof value === "string") {
+      const newVal = value.match(/\D/gm);
+      return newVal ? newVal.join("") : "";
+    } else {
+      return "";
+    }
+
+  };
+  const [maxValue, setMaxValue] = useState(
+    parseNumber(value) < 5 ? 10 : parseNumber(value) * 2
+  );
 
   let input;
   return (
     <div style={{ display: "inline-flex" }}>
-      <input
-        type={"number"}
-        ref={node => {
-          input = node;
-        }}
-        onChange={() => {
-          setValue(input.value);
-        }}
-        style={{ width: "46px", borderRadius: "4px", border: "0px" }}
-        value={value}
-      />
-      <Popover reload={() => setMaxValue(value < 5 ? 10 : value * 2)}>
-        {children}
+      <Popover
+        reload={() =>
+          setMaxValue(parseNumber(value) < 5 ? 10 : parseNumber(value) * 2)
+        }
+      >
+        <div style={{ padding: "0px 5px", cursor: "pointer" }}>{value}</div>
         <div
-          onWheel={e =>e.deltaY < 0 ? setValue(value + 1) : setValue(value - 1)}
+          onWheel={e =>
+            e.deltaY < 0
+              ? setValue(parseNumber(value) + 1 + parseString(value))
+              : setValue(parseNumber(value) - 1 + parseString(value))
+          }
           style={{
             display: "flex",
             flexDirection: "column",
             height: "200px",
+            width: "100%",
             padding: "5px 10px"
           }}
         >
+          <div style={{ display: "flex" }}>
+            <input
+              type={"text"}
+              ref={node => {
+                input = node;
+              }}
+              onChange={() => {
+                setValue(input.value + parseString(value));
+              }}
+              style={{ width: "40px", appearance: "none", border: "0px" }}
+              value={parseNumber(value)}
+            />
+            <Select
+              defaultItem={parseString(value)}
+              setItem={setUnit}
+              listItems={cssUnits}
+            />
+          </div>
           <AngleUp
-            onClick={() => setValue(value + 1)}
+            onClick={() =>
+              setValue(parseNumber(value) + 1 + parseString(value))
+            }
             color={btnColor.active}
           />
           <Slider
-            onChange={(_, val) => setValue(val)}
+            style={{ margin: "0 auto" }}
+            onChange={(_, val) => setValue(val + parseString(value))}
             max={maxValue}
             orientation="vertical"
-            value={value}
+            value={parseNumber(value)}
           />
           <AngleDown
-            onClick={() => setValue(value - 1)}
+            onClick={() =>
+              setValue(parseNumber(value) - 1 + parseString(value))
+            }
             color={btnColor.active}
           />
         </div>

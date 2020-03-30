@@ -7,16 +7,24 @@ export default function BasePanel({ controlPanel, setControlPanel }) {
     if (style) {
       const settings = [];
       for (var key in style) {
-        settings.push(<div>{key} {style[key]}</div>);   
+        settings.push(
+          <div>
+            {key} {style[key]}
+          </div>
+        );
       }
       return settings;
     } else {
       return <div />;
     }
   };
+  let div;
 
   return (
     <div
+      ref={node => {
+        div = node;
+      }}
       style={{
         display: "flex",
         flexDirection: "column",
@@ -32,8 +40,9 @@ export default function BasePanel({ controlPanel, setControlPanel }) {
         color: "#eee",
         padding: "20px 10px"
       }}
+      onClick={() => console.log("div", getComputedStyle(div))}
     >
-      <Settings />
+      <Settings />  
       {/* {JSON.stringify(
         controlPanel !== undefined ? controlPanel.unit.style : controlPanel
       )} */}

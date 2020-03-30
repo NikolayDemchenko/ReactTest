@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import VerticalSlider from "../../../ModalWindows/VerticalSlider";
-import Select from "../../../ModalWindows/SelectModal";
-import cssUnits from "../../../../Class/CssUnits";
+// import Select from "../../../ModalWindows/Select";
+// import cssUnits from "../../../../Class/CssUnits";
 export default function UnitSize({
   setValue,
   value,
@@ -22,9 +22,9 @@ export default function UnitSize({
     setValue(item + parseString(value));
     // console.log("Еденица измерения", state);
   };
-  const setUnit = item => {  
-    setValue(parseNumber(value) + item.value);
-  };
+  // const setUnit = item => {  
+  //   setValue(parseNumber(value) + item.value);
+  // };
 
   return (
     <div
@@ -34,17 +34,19 @@ export default function UnitSize({
     >
       <VerticalSlider
         reload={reload}
-        setValue={setVal}
-        value={parseNumber(value)}
+        setValue={setValue}
+        value={value}
         btnColor={btnColor}
       >
         {children}
       </VerticalSlider>
-      <Select
+
+
+      {/* <Select
         defaultItem={parseString(value)}
         setItem={setUnit}
         listItems={cssUnits}
-      />
+      /> */}
     </div>
   );
 }

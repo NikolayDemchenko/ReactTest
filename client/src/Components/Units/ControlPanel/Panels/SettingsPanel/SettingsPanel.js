@@ -2,12 +2,12 @@ import React, { useContext, useState } from "react";
 import PropTypes from "prop-types";
 import { newType } from "../../../Component/Types/Classes";
 import { ControlsContext } from "../../ControlsContext";
-import SelectModal from "../../ModalWindows/SelectModal";
+import SelectModal from "../../ModalWindows/Select";
 import VisibleInput from "../../../../Buttons/Visible/Visible";
 import Types from "../../../Class/Types";
 import FlexDirections from "../../../Class/FlexDirections";
 import AlignSelfs from "../../../Class/AlignSelfs";
-import ColorInput from "../../ColorPicker/ColorPicker";
+import ColorPicker from "../../ModalWindows/ColorPicker";
 import SizeBlock from "./Size/SizeBlock";
 import BlockAlign from "../../Align/BlockAlign";
 function SettingsPanel({ controlPanel, setControlPanel }) {
@@ -78,7 +78,7 @@ function SettingsPanel({ controlPanel, setControlPanel }) {
         onClick={setVisible}
         color={settings.visible ? btnColor.on : btnColor.off}
       />
-      <ColorInput color={settings.color} setColor={setColor} />
+      <ColorPicker color={settings.color} setColor={setColor} />
       {/* <input type="file" onChange={setImage} /> */}
       <SelectModal
         listItems={FlexDirections}

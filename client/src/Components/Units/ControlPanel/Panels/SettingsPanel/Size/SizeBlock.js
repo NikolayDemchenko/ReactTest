@@ -23,10 +23,10 @@ export default function BlockSize({ setSize, size, btnColor,reload }) {
       }
     >
       <Size reload={reload}setValue={setHeight} value={size.height} btnColor={btnColor}>
-        <VerticalArrows color={btnColor.active} />
+        {/* <VerticalArrows color={btnColor.active} /> */}
       </Size>
       <Size reload={reload} setValue={setWidth} value={size.width} btnColor={btnColor}>
-        <HorisontalArrows color={btnColor.active} />
+        {/* <HorisontalArrows color={btnColor.active} /> */}
       </Size>
     </div>
   );

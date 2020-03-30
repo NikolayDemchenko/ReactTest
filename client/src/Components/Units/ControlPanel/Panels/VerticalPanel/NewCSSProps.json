@@ -1,0 +1,22 @@
+[
+  {
+    "property": "height",
+    "values": ["auto", "length", "%", "initial", "inherit"]
+  },
+  {
+    "property": "width",
+    "values": ["auto", "length", "%", "initial", "inherit"]
+  },
+  {
+    "property": "position",
+    "values": [
+      "sticky ",
+      "static",
+      "absolute",
+      "fixed",
+      "relative",
+      "initial",
+      "inherit"
+    ]
+  }
+]
