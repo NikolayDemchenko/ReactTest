@@ -9,7 +9,6 @@ import Select from "../ModalWindows/Select";
 export default function VerticalSlider({
   setValue,
   value,
-  children,
   btnColor
 }) {
   const setUnit = item => {
@@ -55,9 +54,10 @@ export default function VerticalSlider({
           style={{
             display: "flex",
             flexDirection: "column",
-            height: "200px",
-            width: "100%",
-            padding: "5px 10px"
+            height: "300px",
+            width: "100%"
+            // padding: "5px 0px",
+            // border: "1px solid red"
           }}
         >
           <div style={{ display: "flex" }}>
@@ -79,6 +79,7 @@ export default function VerticalSlider({
                 );
               }}
               value={parseNumber(value)}
+              onClick={e=>e.target.select()}
             />
             <Select
               defaultItem={parseString(value)}

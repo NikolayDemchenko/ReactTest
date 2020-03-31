@@ -53,8 +53,8 @@ const keyValueType = {
     flexDirection: "row",
     alignSelf: "center",
     size: {
-      height: "9000px",
-      width: "110%"
+      height: "900px",
+      width: "80%"
     },
     index: 0,
     color: [70, 99, 100, 100],

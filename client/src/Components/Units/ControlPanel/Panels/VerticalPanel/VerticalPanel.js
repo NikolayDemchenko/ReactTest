@@ -1,5 +1,4 @@
 import React from "react";
-import Settings from "../SettingsPanel/SettingsPanel";
 export default function BasePanel({ controlPanel, setControlPanel }) {
   const { style } = controlPanel !== undefined ? controlPanel.unit : false;
 

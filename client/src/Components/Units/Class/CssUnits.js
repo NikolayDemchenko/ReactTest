@@ -1,5 +1,4 @@
-const _units = [
-    { name: "" },
+const _units = [    
     { name: "px" },
     { name: "%" },
     { name: "em" },
@@ -15,4 +14,5 @@ const _units = [
     item.value = item.name;
     return item;
   });
+  units.unshift({ name: "none",value:"" })
   export default units;
