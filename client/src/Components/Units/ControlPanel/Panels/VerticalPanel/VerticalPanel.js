@@ -1,6 +1,6 @@
 import React from "react";
 export default function BasePanel({ controlPanel, setControlPanel }) {
-  const { style } = controlPanel !== undefined ? controlPanel.unit : false;
+  const { style } = controlPanel !== undefined ? controlPanel.unit.tagProps : false;
 
   const Settings = () => {
     if (style) {
@@ -9,6 +9,7 @@ export default function BasePanel({ controlPanel, setControlPanel }) {
         settings.push(
           <div>
             {key} {style[key]}
+            {/* {getComputedStyle(div)} */}
           </div>
         );
       }
@@ -41,7 +42,7 @@ export default function BasePanel({ controlPanel, setControlPanel }) {
       }}
       onClick={() => console.log("div", getComputedStyle(div))}
     >
-      <Settings />  
+      <Settings />
       {/* {JSON.stringify(
         controlPanel !== undefined ? controlPanel.unit.style : controlPanel
       )} */}

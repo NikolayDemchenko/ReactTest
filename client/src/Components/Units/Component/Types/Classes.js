@@ -4,7 +4,7 @@ const text = {
   align: "center",
   font: {
     family: "Verdana",
-    size: 16,
+    size: "16px",
     color: [150, 170, 230, 100],
     style: {
       italic: true,
@@ -60,19 +60,51 @@ const keyValueType = {
     color: [70, 99, 100, 100],
     visible: true
   },
+  tagProps: {
   style: {
-    display:"flex",
+    display: "flex",
     flexDirection: "row",
     alignSelf: "center",
     height: "160px",
-    width: "320px",    
-    background: "rgba(70, 99, 100, 100)" 
-  },
+    width: "320px",
+    background: "rgba(70, 99, 100, 100)"
+  }},
   key: baseType,
   value: baseType
 };
+const div = {
+  type: "div",
+  index: 0,
+  visible: true,
+  children: [],
+  tagProps: {
+    style: {
+      display: "flex",
+      flexDirection: "row",
+      alignSelf: "center",  
+      height: "700px",
+      width: "40%",
+      backgroundColor: "rgba(70, 99, 80, 100)",
+      margin:"auto",
+      marginTop:"60px",
+      marginBottom:"60px",
+      // color,
+      // border,
+      // outline,
+      // fontFamily,
+      // fontWeight,
+      // fontStyle,
+      // fontSize,
+      // textDecoration,
+      // textAlign
+    }
+  }
+};
+
 const newType = type => {
   switch (type) {
+    case "div":
+      return div;
     case "kv":
       return keyValueType;
     case "row":
@@ -95,4 +127,4 @@ const newType = type => {
       return;
   }
 };
-export { newType, baseType, rowType, docType, imageType, keyValueType };
+export { div, newType, baseType, rowType, docType, imageType, keyValueType };

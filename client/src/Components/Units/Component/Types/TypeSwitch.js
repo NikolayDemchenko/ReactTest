@@ -6,11 +6,14 @@ import TextType from "./Text";
 import NumberType from "./Number";
 import KeyValue from "./KeyValue";
 import BaseType from "./BaseType";
+import Div from "./Div";
 
 function TypeSwitch(props) {
   // console.log("---TypeSwitch---");
   // console.log("......props.unit.type", props.unit.type);
   switch (props.unit.type) {
+    case "div":
+      return <Div {...props} />;
     case "kv":
       return <KeyValue {...props} />;
     case "row":

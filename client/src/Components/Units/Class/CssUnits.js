@@ -14,5 +14,5 @@ const _units = [
     item.value = item.name;
     return item;
   });
-  units.unshift({ name: "none",value:"" })
+  // units.unshift({ name: "none",value:"" })
   export default units;

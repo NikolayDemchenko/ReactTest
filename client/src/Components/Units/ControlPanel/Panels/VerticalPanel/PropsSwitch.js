@@ -7,23 +7,23 @@ function PropsSwitch(props) {
   // console.log('props.controlPanel', props.controlPanel)
   // console.log('props.controlPanel.unit', props.controlPanel.unit)
   switch (props.value) {
-    case "row":
+    case "display":
       return <RowPanel {...props} />;
-    case "unit":
+    case "flexDirection":
       return <RowPanel {...props} />;
-    case "doc":
+    case "alignSelf":
       return <RowPanel {...props} />;
-    case "num":
+    case "height":
       return <RowPanel {...props} />;
-    case "kv":
+    case "width":
       return <BasePanel {...props} />;
-    case "img":
+    case "backgroundColor":
       return <BasePanel {...props} />;
-    case "video":
+    case "margin":
       return <BasePanel {...props} />;
-    case "cont":
+    case "marginTop":
       return <BasePanel {...props} />;
-    case "iCont":
+    case "marginBottom":
       return <RowPanel {...props} />;
     default:
       return <RowPanel {...props} />;

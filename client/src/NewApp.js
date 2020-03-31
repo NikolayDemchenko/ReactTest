@@ -8,7 +8,8 @@ import {
   rowType,
   docType,
   imageType,
-  keyValueType
+  keyValueType,
+  div
 } from "./Components/Units/Component/Types/Classes";
 import VerticalPanel from "./Components/Units/ControlPanel/Panels/VerticalPanel/VerticalPanel";
 const NewApp = () => {
@@ -39,11 +40,10 @@ const NewApp = () => {
         <PanelSwitch controlPanel={controlPanel} setControlPanel={setPanel} />
       ) : null}
       <div style={{ display: "flex" }}>
-        <VerticalPanel controlPanel={controlPanel} setControlPanel={setPanel} />
+        {/* <VerticalPanel controlPanel={controlPanel} setControlPanel={setPanel} /> */}
         <TypeSwitch unit={unit} setUnit={setUnit} setControlPanel={setPanel} />
       </div>
       {JSON.stringify(unit)}
-    
     </ControlsContext.Provider>
   );
 };
