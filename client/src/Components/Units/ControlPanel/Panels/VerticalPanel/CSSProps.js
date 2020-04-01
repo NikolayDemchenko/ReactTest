@@ -1,7 +1,27 @@
-const margin = {};
-
-const input = {
-  style: {
+const cssProps = {  
+    display: [
+      "inline",
+      "block",
+      "flex",
+      "grid",
+      "inline-block",
+      "inline-flex",
+      "initial",
+      "inherit",
+      "inline-table",
+      "list-item",
+      "none",
+      "run-in",
+      "table",
+      "table-caption",
+      "table-cell",
+      "table-column-group",
+      "table-column",
+      "table-footer-group",
+      "table-header-group",
+      "table-row",
+      "table-row-group"
+    ],
     margin: ["lenght"],
     padding: ["lenght"],
     height: ["lenght"],
@@ -87,19 +107,6 @@ const input = {
       "inherit"
     ],
     textAlign: ["center", "justify", "left", "right", "start", "end"]
-  }
+  
 };
-
-const style = {
-  "--div-focusBorder": setBorderStyle(color),
-  border,
-  display: "flex",
-  flexDirection,
-  alignSelf,
-  margin,
-  height,
-  width,
-  background: backColor
-  // backgroundSize: "cover",
-  // backgroundImage
-};
+export {cssProps}

@@ -8,7 +8,7 @@ export default function BasePanel({ controlPanel, setControlPanel }) {
       const settings = [];
       for (var key in style) {
         settings.push(
-          <div style={{ display: "flex",flexWrap:"wrap" }}>
+          <div key={key} style={{ display: "flex",flexWrap:"wrap" }}>
             <div style={{ marginLeft: "2px" }}>{key} : </div>
             <div style={{ margin: "0 0 2px auto" }}> {style[key]}</div>
           </div>
@@ -41,7 +41,7 @@ export default function BasePanel({ controlPanel, setControlPanel }) {
         color: "#eee",
         padding: "20px 10px"
       }}
-      // onClick={() => console.log("div", getComputedStyle(div))}
+      onClick={() => console.log("div", getComputedStyle(div).getPropertyValue("color"))}
     >
       <Settings />
       {/* {JSON.stringify(
