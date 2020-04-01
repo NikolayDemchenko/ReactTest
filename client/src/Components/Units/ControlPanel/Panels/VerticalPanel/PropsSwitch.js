@@ -6,10 +6,10 @@ import PropTypes from 'prop-types';
 function PropsSwitch(props) {
   // console.log('props.controlPanel', props.controlPanel)
   // console.log('props.controlPanel.unit', props.controlPanel.unit)
-  switch (props.value) {
-    case "display":
+  switch (props.prop) {
+    case "lenght":
       return <RowPanel {...props} />;
-    case "flexDirection":
+    case "color":
       return <RowPanel {...props} />;
     case "alignSelf":
       return <RowPanel {...props} />;

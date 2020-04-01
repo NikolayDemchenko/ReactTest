@@ -25,7 +25,7 @@ const NewApp = () => {
   };
   const backgroundColor = "#d8d8dad8";
 
-  const [unit, setUnit] = useState(keyValueType);
+  const [unit, setUnit] = useState(div);
   const [controlPanel, setControlPanel] = useState();
   const setPanel = panel => {
     console.log("panel", panel);
@@ -36,11 +36,11 @@ const NewApp = () => {
 
   return (
     <ControlsContext.Provider value={{ btnColor, backgroundColor }}>
-      {controlPanel ? (
+      {/* {controlPanel ? (
         <PanelSwitch controlPanel={controlPanel} setControlPanel={setPanel} />
-      ) : null}
+      ) : null} */}
       <div style={{ display: "flex" }}>
-        {/* <VerticalPanel controlPanel={controlPanel} setControlPanel={setPanel} /> */}
+        <VerticalPanel controlPanel={controlPanel} setControlPanel={setPanel} />
         <TypeSwitch unit={unit} setUnit={setUnit} setControlPanel={setPanel} />
       </div>
       {JSON.stringify(unit)}

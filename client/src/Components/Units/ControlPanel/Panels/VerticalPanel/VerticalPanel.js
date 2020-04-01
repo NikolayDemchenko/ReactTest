@@ -1,15 +1,16 @@
 import React from "react";
 export default function BasePanel({ controlPanel, setControlPanel }) {
-  const { style } = controlPanel !== undefined ? controlPanel.unit.tagProps : false;
+  const { style } =
+    controlPanel !== undefined ? controlPanel.unit.tagProps : false;
 
   const Settings = () => {
     if (style) {
       const settings = [];
       for (var key in style) {
         settings.push(
-          <div>
-            {key} {style[key]}
-            {/* {getComputedStyle(div)} */}
+          <div style={{ display: "flex",flexWrap:"wrap" }}>
+            <div style={{ marginLeft: "2px" }}>{key} : </div>
+            <div style={{ margin: "0 0 2px auto" }}> {style[key]}</div>
           </div>
         );
       }
@@ -40,7 +41,7 @@ export default function BasePanel({ controlPanel, setControlPanel }) {
         color: "#eee",
         padding: "20px 10px"
       }}
-      onClick={() => console.log("div", getComputedStyle(div))}
+      // onClick={() => console.log("div", getComputedStyle(div))}
     >
       <Settings />
       {/* {JSON.stringify(
