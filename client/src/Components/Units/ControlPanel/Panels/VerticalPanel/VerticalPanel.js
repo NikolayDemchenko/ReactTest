@@ -41,7 +41,7 @@ export default function BasePanel({ controlPanel, setControlPanel }) {
         color: "#eee",
         padding: "20px 10px"
       }}
-      onClick={() => console.log("div", getComputedStyle(div).getPropertyValue("color"))}
+      onClick={() => console.log("div", getComputedStyle(div,null).flexDirection)}
     >
       <Settings />
       {/* {JSON.stringify(

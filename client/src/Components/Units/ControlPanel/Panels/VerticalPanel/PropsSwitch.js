@@ -11,20 +11,8 @@ function PropsSwitch(props) {
       return <RowPanel {...props} />;
     case "color":
       return <RowPanel {...props} />;
-    case "alignSelf":
-      return <RowPanel {...props} />;
-    case "height":
-      return <RowPanel {...props} />;
-    case "width":
-      return <BasePanel {...props} />;
-    case "backgroundColor":
-      return <BasePanel {...props} />;
-    case "margin":
-      return <BasePanel {...props} />;
-    case "marginTop":
-      return <BasePanel {...props} />;
-    case "marginBottom":
-      return <RowPanel {...props} />;
+    case "link":
+      return <RowPanel {...props} />;   
     default:
       return <RowPanel {...props} />;
   }
