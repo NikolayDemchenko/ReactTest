@@ -1,31 +1,21 @@
 import React from "react";
-export default function BasePanel({ controlPanel, setControlPanel }) {
-  const { style } =
-    controlPanel !== undefined ? controlPanel.unit.tagProps : false;
+import Style from './Style'
+export default function VerticalPanel({ controlPanel, setControlPanel }) {
+  const { style } = controlPanel.unit.tagProps;
 
-  const Settings = () => {
-    if (style) {
-      const settings = [];
-      for (var key in style) {
-        settings.push(
-          <div key={key} style={{ display: "flex",flexWrap:"wrap" }}>
-            <div style={{ marginLeft: "2px" }}>{key} : </div>
-            <div style={{ margin: "0 0 2px auto" }}> {style[key]}</div>
-          </div>
-        );
-      }
-      return settings;
-    } else {
-      return <div />;
-    }
+  const { unit, setUnit } = controlPanel;
+  const setStyle = style => {
+    setUnit({ ...unit, tagProps: { ...unit.tagProps, style } });
+    setControlPanel({
+      ...controlPanel,
+      unit: { ...unit, tagProps: { ...unit.tagProps, style } }
+    });
   };
+  
   let div;
-
   return (
     <div
-      ref={node => {
-        div = node;
-      }}
+      ref={n => (div = n)}
       style={{
         display: "flex",
         flexDirection: "column",
@@ -41,12 +31,11 @@ export default function BasePanel({ controlPanel, setControlPanel }) {
         color: "#eee",
         padding: "20px 10px"
       }}
-      onClick={() => console.log("div", getComputedStyle(div,null).flexDirection)}
+      // onClick={() =>
+      //   console.log("div", getComputedStyle(div, null).flexDirection)
+      // }
     >
-      <Settings />
-      {/* {JSON.stringify(
-        controlPanel !== undefined ? controlPanel.unit.style : controlPanel
-      )} */}
+      <Style style={style} setStyle={setStyle} />
     </div>
   );
 }

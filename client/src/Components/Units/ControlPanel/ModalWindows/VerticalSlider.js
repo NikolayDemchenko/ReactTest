@@ -19,7 +19,8 @@ export default function VerticalSlider({
     console.log("value", typeof value);
     if (typeof value === "string") {
       const newVal = value.match(/\d/gm);
-      return newVal ? Number(newVal.join("")) : 0;
+      console.log('newValNumber', newVal)
+      return newVal ? Number(newVal.join("")) : null;
     } else {
       return value;
     }
@@ -27,6 +28,7 @@ export default function VerticalSlider({
   const parseString = value => {
     if (typeof value === "string") {
       const newVal = value.match(/\D/gm);
+      console.log('newVal', newVal)
       return newVal ? newVal.join("") : "";
     } else {
       return "";

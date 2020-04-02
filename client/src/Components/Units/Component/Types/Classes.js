@@ -67,7 +67,7 @@ const keyValueType = {
     alignSelf: "center",
     height: "160px",
     width: "320px",
-    background: "rgba(70, 99, 100, 100)"
+    background: "rgba(70, 99, 100, 1)"
   }},
   key: baseType,
   value: baseType
@@ -84,7 +84,7 @@ const div = {
       alignSelf: "center",  
       height: "700px",
       width: "40%",
-      backgroundColor: "rgba(70, 99, 80, 100)",
+      backgroundColor: "#678",
       margin:"auto",
       marginTop:"60px",
       marginBottom:"60px",

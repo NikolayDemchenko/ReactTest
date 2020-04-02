@@ -40,7 +40,7 @@ const NewApp = () => {
         <PanelSwitch controlPanel={controlPanel} setControlPanel={setPanel} />
       ) : null} */}
       <div style={{ display: "flex" }}>
-        <VerticalPanel controlPanel={controlPanel} setControlPanel={setPanel} />
+      {controlPanel ? (<VerticalPanel controlPanel={controlPanel} setControlPanel={setPanel} /> ) : null}
         <TypeSwitch unit={unit} setUnit={setUnit} setControlPanel={setPanel} />
       </div>
       {JSON.stringify(unit)}
