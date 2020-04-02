@@ -1,28 +1,23 @@
-import React, { useState } from "react";
+import React from "react";
+import { ChromePicker } from "react-color";
 import Popover from "../../../ModalWindows/PopoverPopupState";
-
-export default function VerticalSlider({ setValue, value }) {
-  const handleKeyPress = event => {
-    if (event.key === "Enter") {
-      setValue(input.value);
-    }
-  };
-  let input;
+export default function ColorPicker({ value, setValue }) {
   return (
     <div style={{ display: "inline-flex" }}>
       <Popover>
-        <div style={{ padding: "0px 5px", cursor: "pointer", minWidth:"10px" }}>: {value}</div>
-        <input
+        <div
           style={{
-            width: "100%", 
-            paddingLeft:"4px",      
-            border: "0px",           
+            width: "20px",
+            height: "20px",
+            border: "2px outset grey",
+            backgroundColor: value
           }}
-          type={"text"}
-          ref={n => (input = n)}
-          onKeyPress={handleKeyPress}
-          onBlur={() => setValue(input.value)}
-         defaultValue={value}   
+        ></div>
+        <ChromePicker
+          color={value}
+          onChange={color => {
+            setValue(`rgba(${Object.values(color.rgb).join(",")})`);
+          }}
         />
       </Popover>
     </div>

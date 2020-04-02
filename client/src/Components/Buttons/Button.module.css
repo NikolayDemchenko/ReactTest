@@ -1,7 +1,7 @@
 :root {
-  --btn-color: #ffffff;
-  --btn-hover: #1827f1ec;
-  --btn-active: #18f147ec;
+  --btn-color: #000000b6;
+  --btn-hover: #000000;
+  --btn-active: #00000098;
 }
 
 .button {

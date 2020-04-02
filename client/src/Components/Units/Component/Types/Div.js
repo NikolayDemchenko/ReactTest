@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import _style from "./BaseType.module.css";
 function Div({ unit, setUnit, setControlPanel, children }) {
   // console.log("...BaseType...");
@@ -37,20 +36,4 @@ function Div({ unit, setUnit, setControlPanel, children }) {
     </div>
   );
 }
-Div.propTypes = {
-  unit: PropTypes.shape({
-    type: PropTypes.string,
-    settings: PropTypes.shape({
-      size: PropTypes.shape({
-        height: PropTypes.string,
-        width: PropTypes.string
-      }),
-      index: PropTypes.number,
-      color: PropTypes.array,
-      visible: PropTypes.bool
-    }),
-    value: PropTypes.object
-  }),
-  setUnit: PropTypes.func
-};
 export default Div;

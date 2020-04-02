@@ -11,15 +11,16 @@ export default function VerticalSlider({
   value,
   btnColor
 }) {
+  const btnActiv=btnColor?btnColor.active:"";
   const setUnit = item => {
     setValue(parseNumber(value) + item.value);
   };
 
   const parseNumber = value => {
-    console.log("value", typeof value);
+    // console.log("value", typeof value);
     if (typeof value === "string") {
       const newVal = value.match(/\d/gm);
-      console.log('newValNumber', newVal)
+      // console.log('newValNumber', newVal)
       return newVal ? Number(newVal.join("")) : null;
     } else {
       return value;
@@ -28,7 +29,7 @@ export default function VerticalSlider({
   const parseString = value => {
     if (typeof value === "string") {
       const newVal = value.match(/\D/gm);
-      console.log('newVal', newVal)
+      // console.log('newVal', newVal)
       return newVal ? newVal.join("") : "";
     } else {
       return "";
@@ -93,7 +94,7 @@ export default function VerticalSlider({
             onClick={() =>
               setValue(parseNumber(value) + 1 + parseString(value))
             }
-            color={btnColor.active}
+            color={btnActiv}
           />
           <Slider
             style={{ margin: "0 auto" }}
@@ -106,7 +107,7 @@ export default function VerticalSlider({
             onClick={() =>
               setValue(parseNumber(value) - 1 + parseString(value))
             }
-            color={btnColor.active}
+            color={btnActiv}
           />
         </div>
       </Popover>

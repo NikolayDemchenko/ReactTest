@@ -45,10 +45,12 @@ function SelectModal({ defaultItem, setItem, listItems }) {
     </MenuItem>
   ));
   // console.log('SelectItem', defaultItem)
+  const itemName = listItems.find(item => item.value === defaultItem);
+  const firstName = listItems[0].value.name;
   return (
     <div>
       <Select
-        value={listItems.find(item => item.value === defaultItem).name}
+        value={itemName !== undefined ? itemName.name : firstName}
         onChange={e => {
           setItem(listItems.find(item => item.name === e.target.value));
         }}
@@ -59,8 +61,6 @@ function SelectModal({ defaultItem, setItem, listItems }) {
     </div>
   );
 }
-
-
 
 SelectModal.propTypes = {
   defaultItem: PropTypes.string,

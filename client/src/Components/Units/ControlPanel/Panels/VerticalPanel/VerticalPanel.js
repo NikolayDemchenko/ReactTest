@@ -1,5 +1,5 @@
 import React from "react";
-import Style from './Style'
+import Style from "./Style";
 export default function VerticalPanel({ controlPanel, setControlPanel }) {
   const { style } = controlPanel.unit.tagProps;
 
@@ -11,7 +11,7 @@ export default function VerticalPanel({ controlPanel, setControlPanel }) {
       unit: { ...unit, tagProps: { ...unit.tagProps, style } }
     });
   };
-  
+
   let div;
   return (
     <div
@@ -21,9 +21,9 @@ export default function VerticalPanel({ controlPanel, setControlPanel }) {
         flexDirection: "column",
         flexWrap: "wrap",
         height: "100%",
-        minWidth: "180px",
-        maxWidth: "180px",
-        position: "sticky ",
+        minWidth: "240px",
+        maxWidth: "240px",
+        position: "fixed ",
         zIndex: 1,
         top: "70px",
         left: 0,
@@ -36,6 +36,11 @@ export default function VerticalPanel({ controlPanel, setControlPanel }) {
       // }
     >
       <Style style={style} setStyle={setStyle} />
+      <div style={{ display: "flex", flexWrap: "wrap" }}>
+        <input style={{ width:"145px"}}></input>
+        <input style={{ width:"60px", margin: "0 0 0 auto" }}></input>
+        <button>+</button>
+      </div>
     </div>
   );
 }

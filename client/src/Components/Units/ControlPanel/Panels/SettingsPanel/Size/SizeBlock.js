@@ -1,7 +1,5 @@
 import React from "react";
 import Size from "./UnitSize";
-import VerticalArrows from "../../../../../Buttons/Arrows/VerticalArrows";
-import HorisontalArrows from "../../../../../Buttons/Arrows/HorisontalArrows";
 export default function BlockSize({ setSize, size, btnColor,reload }) {
   const setHeight = height => {
     setSize({ ...size, height });
@@ -23,10 +21,10 @@ export default function BlockSize({ setSize, size, btnColor,reload }) {
       }
     >
       <Size reload={reload}setValue={setHeight} value={size.height} btnColor={btnColor}>
-        {/* <VerticalArrows color={btnColor.active} /> */}
+
       </Size>
       <Size reload={reload} setValue={setWidth} value={size.width} btnColor={btnColor}>
-        {/* <HorisontalArrows color={btnColor.active} /> */}
+ 
       </Size>
     </div>
   );

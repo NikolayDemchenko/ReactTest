@@ -3,7 +3,6 @@ export default function TextInput({ text, setText }) {
   // console.log("_TextInput_");
   const parseColor = array =>
     `rgba(${array[0]}, ${array[1]},${array[2]}, ${array[3]})`;
-  const parseNumberToPX = num => `${num}px`;
 
   const { size, color, family, style } = text.font;
 
@@ -18,11 +17,11 @@ export default function TextInput({ text, setText }) {
         resize: "none",
         padding: "0 0.18em  ",
         fontFamily: family,
-        fontWeight: style.weight ? 7 * 100 : 4 * 100,
+        fontWeight: style.weight ? 700 : 400,
         fontStyle: style.italic ? "italic" : "normal",
         textDecoration: style.decoration ? "underline" : "none",
         textAlign: text.align,
-        fontSize: parseNumberToPX(size),
+        fontSize: size,
         color: parseColor(color),
         backgroundColor: "transparent "
       }}
