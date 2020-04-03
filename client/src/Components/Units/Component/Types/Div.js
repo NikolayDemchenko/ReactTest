@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import _style from "./BaseType.module.css";
 function Div({ unit, setUnit, setControlPanel, children }) {
   // console.log("...BaseType...");
-  const { style } = unit.tagProps;
-
+  let {style, style:{backgroundColor} } = unit.tagProps;
+  backgroundColor=backgroundColor?backgroundColor:"#fff"
+  console.log('backgroundColor', backgroundColor)
   const [border, setBorder] = useState();
   const setBorderStyle = array => {
     const value = 240;
@@ -18,12 +19,12 @@ function Div({ unit, setUnit, setControlPanel, children }) {
       className={_style.BaseType}
       style={{
         ...style,
-        "--div-focusBorder": setBorderStyle(style.backgroundColor),
+        "--div-focusBorder": setBorderStyle(backgroundColor),
         border
       }}
       onMouseOver={event => {
         event.stopPropagation();
-        setBorder(setBorderStyle(style.backgroundColor));
+        setBorder(setBorderStyle(backgroundColor));
       }}
       onMouseOut={setBorder}
       onClick={event => {

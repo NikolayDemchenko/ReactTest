@@ -11,13 +11,13 @@ export default function PopoverInput({ value, setValue }) {
     <div style={{ display: "inline-flex" }}>
       <Popover>
         <div
-          style={{ padding: "0px 5px", cursor: "pointer", minWidth: "10px" }}
+          style={{ overflow: 'hidden', padding: "0px 5px", cursor: "pointer", minWidth: "10px",maxWidth: "80px", height:"20px"}}
         >
-          {value}
+          {value ? value : "none"}
         </div>
-        <input
+        <input     
           style={{
-            width: "100%",
+            width: "200px",
             paddingLeft: "4px",
             border: "0px"
           }}

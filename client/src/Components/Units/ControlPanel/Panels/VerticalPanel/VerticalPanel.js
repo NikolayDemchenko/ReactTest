@@ -11,8 +11,20 @@ export default function VerticalPanel({ controlPanel, setControlPanel }) {
       unit: { ...unit, tagProps: { ...unit.tagProps, style } }
     });
   };
-
+  const newStyle = () => {
+    setStyle({ ...style, [inputName.value]: inputValue.value });
+    inputName.value = "";
+    inputValue.value = "";
+  };
+  const handleKeyPress = event => {
+    if (event.key === "Enter") {
+      newStyle();
+    }
+  };
   let div;
+  let inputName;
+  let inputValue;
+
   return (
     <div
       ref={n => (div = n)}
@@ -21,8 +33,8 @@ export default function VerticalPanel({ controlPanel, setControlPanel }) {
         flexDirection: "column",
         flexWrap: "wrap",
         height: "100%",
-        minWidth: "240px",
-        maxWidth: "240px",
+        minWidth: "280px",
+        maxWidth: "280px",
         position: "fixed ",
         zIndex: 1,
         top: "70px",
@@ -35,12 +47,20 @@ export default function VerticalPanel({ controlPanel, setControlPanel }) {
       //   console.log("div", getComputedStyle(div, null).flexDirection)
       // }
     >
-      <Style style={style} setStyle={setStyle} />
       <div style={{ display: "flex", flexWrap: "wrap" }}>
-        <input style={{ width:"145px"}}></input>
-        <input style={{ width:"60px", margin: "0 0 0 auto" }}></input>
-        <button>+</button>
+        <input
+          onKeyPress={handleKeyPress}
+          ref={n => (inputName = n)}
+          style={{ width: "140px" }}
+        ></input>
+        <input
+          ref={n => (inputValue = n)}
+          style={{ width: "90px", margin: "0 0 0 auto" }}
+          onKeyPress={handleKeyPress}
+        ></input>
+        <button onClick={newStyle}>+</button>
       </div>
+      <Style style={style} setStyle={setStyle} />
     </div>
   );
 }
