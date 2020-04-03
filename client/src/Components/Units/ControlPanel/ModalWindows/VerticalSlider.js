@@ -6,17 +6,13 @@ import Popover from "./PopoverPopupState";
 import cssUnits from "../../Class/CssUnits";
 import Select from "../ModalWindows/Select";
 
-export default function VerticalSlider({
-  setValue,
-  value,
-  btnColor
-}) {
-  const btnActiv=btnColor?btnColor.active:"";
-  const setUnit = item => {
+export default function VerticalSlider({ setValue, value, btnColor }) {
+  const btnActiv = btnColor ? btnColor.active : "";
+  const setUnit = (item) => {
     setValue(parseNumber(value) + item.value);
   };
 
-  const parseNumber = value => {
+  const parseNumber = (value) => {
     // console.log("value", typeof value);
     if (typeof value === "string") {
       const newVal = value.match(/\d/gm);
@@ -26,7 +22,7 @@ export default function VerticalSlider({
       return value;
     }
   };
-  const parseString = value => {
+  const parseString = (value) => {
     if (typeof value === "string") {
       const newVal = value.match(/\D/gm);
       // console.log('newVal', newVal)
@@ -43,13 +39,16 @@ export default function VerticalSlider({
   return (
     <div style={{ display: "inline-flex" }}>
       <Popover
+        PaperProps={{
+          style: { background: "rgba(43,50,66,.95)", border: "1px solid #abc" },
+        }}
         reload={() =>
           setMaxValue(parseNumber(value) < 5 ? 10 : parseNumber(value) * 2)
         }
       >
         <div style={{ padding: "0px 5px", cursor: "pointer" }}>{value}</div>
         <div
-          onWheel={e =>
+          onWheel={(e) =>
             e.deltaY < 0
               ? setValue(parseNumber(value) + 1 + parseString(value))
               : setValue(parseNumber(value) - 1 + parseString(value))
@@ -58,7 +57,7 @@ export default function VerticalSlider({
             display: "flex",
             flexDirection: "column",
             height: "300px",
-            width: "100%"
+            width: "100%",
             // padding: "5px 0px",
             // border: "1px solid red"
           }}
@@ -66,13 +65,17 @@ export default function VerticalSlider({
           <div style={{ display: "flex" }}>
             <input
               style={{
+                backgroundColor: "transparent",
                 width: "40px",
                 appearance: "none",
                 border: "0px",
-                textAlign: "right"
+                textAlign: "right",
+                color: "#eee",
+                outline: "none",
+                border: 0,
               }}
               type={"text"}
-              ref={node => {
+              ref={(node) => {
                 input = node;
               }}
               onChange={() => {
@@ -82,7 +85,7 @@ export default function VerticalSlider({
                 );
               }}
               value={parseNumber(value)}
-              onClick={e=>e.target.select()}
+              onClick={(e) => e.target.select()}
             />
             <Select
               defaultItem={parseString(value)}
@@ -97,7 +100,7 @@ export default function VerticalSlider({
             color={btnActiv}
           />
           <Slider
-            style={{ margin: "0 auto" }}
+            style={{ margin: "0 auto", color: "#acf" }}
             onChange={(_, val) => setValue(val + parseString(value))}
             max={maxValue}
             orientation="vertical"

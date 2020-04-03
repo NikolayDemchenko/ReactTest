@@ -11,7 +11,7 @@ import {
   keyValueType,
   div
 } from "./Components/Units/Component/Types/Classes";
-import VerticalPanel from "./Components/Units/ControlPanel/Panels/VerticalPanel/VerticalPanel";
+import VerticalPanel from "./Components/Units/ControlPanel/VerticalPanel/VerticalPanel";
 const NewApp = () => {
   console.log("!!!NewApp!!!");
   const _on = 10;

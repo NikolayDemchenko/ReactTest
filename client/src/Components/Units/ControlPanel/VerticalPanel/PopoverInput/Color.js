@@ -1,15 +1,15 @@
 import React from "react";
 import { ChromePicker } from "react-color";
-import Popover from "../../../ModalWindows/PopoverPopupState";
+import Popover from "../../ModalWindows/PopoverPopupState";
 export default function ColorPicker({ value, setValue }) {
   return (
     <div style={{ display: "inline-flex" }}>
-      <Popover>
+      <Popover >
         <div
           style={{
-            width: "20px",
-            height: "20px",
-            border: "2px outset grey",
+            width: "18px",
+            height: "18px",
+            border: "1px outset grey",
             backgroundColor: value
           }}
         ></div>

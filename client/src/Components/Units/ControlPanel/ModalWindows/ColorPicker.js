@@ -8,7 +8,7 @@ export default function ColorPicker({ color, setColor }) {
   const rgb = { r: color[0], g: color[1], b: color[2], a: color[3] };
   return (
     <div style={{ display: "inline-flex" }}>
-      <Popover>
+      <Popover PaperProps={{style:{ background: 'rgba(43,50,66,.95)'}}}>
         <div
           style={{
             width: "20px",

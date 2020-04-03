@@ -8,11 +8,11 @@ import InputBase from "@material-ui/core/InputBase";
 function SelectModal({ defaultItem, setItem, listItems }) {
   // console.log('listItems', listItems)
   console.log("defaultItem", defaultItem);
-  const BootstrapInput = withStyles(theme => ({
+  const BootstrapInput = withStyles((theme) => ({
     root: {
       "label + &": {
-        marginTop: theme.spacing(3)
-      }
+        marginTop: theme.spacing(3),
+      },
     },
     input: {
       borderRadius: 4,
@@ -31,28 +31,29 @@ function SelectModal({ defaultItem, setItem, listItems }) {
         "sans-serif",
         '"Apple Color Emoji"',
         '"Segoe UI Emoji"',
-        '"Segoe UI Symbol"'
+        '"Segoe UI Symbol"',
       ].join(","),
       "&:focus": {
         borderColor: "#80bdff",
-        boxShadow: "0 0 0 0.2rem rgba(0,123,255,.25)"
-      }
-    }
+        boxShadow: "0 0 0 0.2rem rgba(0,123,255,.25)",
+      },
+    },
   }))(InputBase);
-  const items = listItems.map(item => (
+  const items = listItems.map((item) => (
     <MenuItem key={item.name} value={item.name}>
       {item.name}
     </MenuItem>
   ));
   // console.log('SelectItem', defaultItem)
-  const itemName = listItems.find(item => item.value === defaultItem);
+  const itemName = listItems.find((item) => item.value === defaultItem);
   const firstName = listItems[0].value.name;
   return (
     <div>
       <Select
+        style={{ color: "#fff" }}
         value={itemName !== undefined ? itemName.name : firstName}
-        onChange={e => {
-          setItem(listItems.find(item => item.name === e.target.value));
+        onChange={(e) => {
+          setItem(listItems.find((item) => item.name === e.target.value));
         }}
         input={<BootstrapInput />}
       >
@@ -65,6 +66,6 @@ function SelectModal({ defaultItem, setItem, listItems }) {
 SelectModal.propTypes = {
   defaultItem: PropTypes.string,
   listItems: PropTypes.array,
-  setItem: PropTypes.func
+  setItem: PropTypes.func,
 };
 export default SelectModal;

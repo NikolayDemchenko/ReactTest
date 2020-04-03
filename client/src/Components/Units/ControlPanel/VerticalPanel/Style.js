@@ -16,7 +16,7 @@ export default function Style({ style, setStyle }) {
       return (
         <div
           key={settings.indexOf(el)}
-          style={{ display: "flex", flexWrap: "wrap" }}
+          style={{ display: "flex", flexWrap: "wrap",borderBottom:".5px solid #345" }}
         >
           <div style={{ display: "flex", flexWrap: "wrap", width: "250px" }}>
             <div>{Object.keys(el)[0]}:</div>
@@ -29,7 +29,7 @@ export default function Style({ style, setStyle }) {
               />
             </div>
           </div>
-          <button style={{ margin: "0 0 2px auto" }} onClick={()=>deleteProperty(Object.keys(el)[0],style)}>X</button>
+          <div style={{cursor:"pointer", margin: "0 0 2px auto" }} onClick={()=>deleteProperty(Object.keys(el)[0],style)}>X</div>
         </div>
       );
     });
