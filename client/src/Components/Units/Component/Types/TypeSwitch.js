@@ -12,28 +12,28 @@ function TypeSwitch(props) {
   // console.log("---TypeSwitch---");
   // console.log("......props.unit.type", props.unit.type);
   switch (props.unit.type) {
-    case "div":
-      return <Div {...props} />;
-    case "kv":
-      return <KeyValue {...props} />;
-    case "row":
-      return <RowType {...props} />;
-    case "unit":
-      return <RowType {...props} />;
-    case "doc":
-      return <TextType {...props} />;
-    case "num":
-      return <NumberType {...props} />;
-    case "img":
-      return <BaseType {...props} />;
-    case "video":
-      return <RowType {...props} />;
-    case "cont":
-      return <BaseType {...props} />;
-    case "iCont":
-      return <RowType {...props} />;
+    // case "div":
+    //   return <Div {...props} />;
+    // case "kv":
+    //   return <KeyValue {...props} />;
+    // case "row":
+    //   return <RowType {...props} />;
+    // case "unit":
+    //   return <RowType {...props} />;
+    // case "doc":
+    //   return <TextType {...props} />;
+    // case "num":
+    //   return <NumberType {...props} />;
+    // case "img":
+    //   return <BaseType {...props} />;
+    // case "video":
+    //   return <RowType {...props} />;
+    // case "cont":
+    //   return <BaseType {...props} />;
+    // case "iCont":
+    //   return <RowType {...props} />;
     default:
-      return <RowType {...props} />;
+      return <Div {...props} />;
   }
 }
 TypeSwitch.propTypes = {

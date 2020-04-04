@@ -61,34 +61,36 @@ const keyValueType = {
     visible: true
   },
   tagProps: {
-  style: {
-    display: "flex",
-    flexDirection: "row",
-    alignSelf: "center",
-    height: "160px",
-    width: "320px",
-    background: "rgba(70, 99, 100, 1)"
-  }},
+    style: {
+      display: "flex",
+      flexDirection: "row",
+      alignSelf: "center",
+      height: "160px",
+      width: "320px",
+      background: "rgba(70, 99, 100, 1)"
+    }
+  },
   key: baseType,
   value: baseType
 };
 const div = {
-  type: "div",
   index: 0,
   visible: true,
   children: [],
+  tag: "input",
   tagProps: {
     style: {
       display: "flex",
       flexDirection: "row",
-      alignSelf: "center",  
+      alignSelf: "center",
       height: "700px",
-      width: "40%",
+      width: "90%",
       backgroundColor: "#678",
-      backgroundImage: "url(https://avatars.mds.yandex.net/get-pdb/1366512/fd5d003c-7bc3-4f0d-9af2-2e57c88be5f9/s1200)",
-      margin:"auto",
-      marginTop:"60px",
-      marginBottom:"60px",
+      backgroundImage:
+        "url(https://avatars.mds.yandex.net/get-pdb/1366512/fd5d003c-7bc3-4f0d-9af2-2e57c88be5f9/s1200)",
+      margin: "auto",
+      marginTop: "60px",
+      marginBottom: "60px"
       // color,
       // border,
       // outline,

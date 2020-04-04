@@ -29,7 +29,8 @@ export default function PopoverInput({ value, setValue }) {
         <input
           style={{
             background: "transparent",
-            width: "200px",
+            width: `${value.length }ex`,
+            minWidth: "160px",
             paddingLeft: "4px",
             outline: "none",
             border: 0,

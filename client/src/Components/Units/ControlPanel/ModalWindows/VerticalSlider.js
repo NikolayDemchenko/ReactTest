@@ -3,16 +3,16 @@ import AngleUp from "../../../Buttons/Angle/AngleUp";
 import AngleDown from "../../../Buttons/Angle/AngleDown";
 import Slider from "@material-ui/core/Slider";
 import Popover from "./PopoverPopupState";
-import cssUnits from "../../Class/CssUnits";
+import {cssUnits} from "../../Class/Css";
 import Select from "../ModalWindows/Select";
 
 export default function VerticalSlider({ setValue, value, btnColor }) {
   const btnActiv = btnColor ? btnColor.active : "";
-  const setUnit = (item) => {
+  const setUnit = item => {
     setValue(parseNumber(value) + item.value);
   };
 
-  const parseNumber = (value) => {
+  const parseNumber = value => {
     // console.log("value", typeof value);
     if (typeof value === "string") {
       const newVal = value.match(/\d/gm);
@@ -22,7 +22,7 @@ export default function VerticalSlider({ setValue, value, btnColor }) {
       return value;
     }
   };
-  const parseString = (value) => {
+  const parseString = value => {
     if (typeof value === "string") {
       const newVal = value.match(/\D/gm);
       // console.log('newVal', newVal)
@@ -40,7 +40,10 @@ export default function VerticalSlider({ setValue, value, btnColor }) {
     <div style={{ display: "inline-flex" }}>
       <Popover
         PaperProps={{
-          style: { background: "rgba(43,50,66,.95)", border: "1px solid #abc" },
+          style: {
+            background: "rgba(30,40,57,.85)",
+            border: "1px solid #abc"       
+          }
         }}
         reload={() =>
           setMaxValue(parseNumber(value) < 5 ? 10 : parseNumber(value) * 2)
@@ -48,7 +51,7 @@ export default function VerticalSlider({ setValue, value, btnColor }) {
       >
         <div style={{ padding: "0px 5px", cursor: "pointer" }}>{value}</div>
         <div
-          onWheel={(e) =>
+          onWheel={e =>
             e.deltaY < 0
               ? setValue(parseNumber(value) + 1 + parseString(value))
               : setValue(parseNumber(value) - 1 + parseString(value))
@@ -57,7 +60,7 @@ export default function VerticalSlider({ setValue, value, btnColor }) {
             display: "flex",
             flexDirection: "column",
             height: "300px",
-            width: "100%",
+            width: "100%"
             // padding: "5px 0px",
             // border: "1px solid red"
           }}
@@ -72,10 +75,10 @@ export default function VerticalSlider({ setValue, value, btnColor }) {
                 textAlign: "right",
                 color: "#eee",
                 outline: "none",
-                border: 0,
+                border: 0
               }}
               type={"text"}
-              ref={(node) => {
+              ref={node => {
                 input = node;
               }}
               onChange={() => {
@@ -85,7 +88,7 @@ export default function VerticalSlider({ setValue, value, btnColor }) {
                 );
               }}
               value={parseNumber(value)}
-              onClick={(e) => e.target.select()}
+              onClick={e => e.target.select()}
             />
             <Select
               defaultItem={parseString(value)}

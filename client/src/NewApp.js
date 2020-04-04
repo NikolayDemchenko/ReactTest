@@ -13,7 +13,7 @@ import {
 } from "./Components/Units/Component/Types/Classes";
 import VerticalPanel from "./Components/Units/ControlPanel/VerticalPanel/VerticalPanel";
 const NewApp = () => {
-  console.log("!!!NewApp!!!");
+  // console.log("!!!NewApp!!!");
   const _on = 10;
   const _off = 100;
   const _active = 80;
@@ -28,11 +28,11 @@ const NewApp = () => {
   const [unit, setUnit] = useState(div);
   const [controlPanel, setControlPanel] = useState();
   const setPanel = panel => {
-    console.log("panel", panel);
+    // console.log("panel", panel);
     setControlPanel(panel);
   };
 
-  console.log("!!!!!unit", unit);
+  // console.log("!!!!!unit", unit);
 
   return (
     <ControlsContext.Provider value={{ btnColor, backgroundColor }}>

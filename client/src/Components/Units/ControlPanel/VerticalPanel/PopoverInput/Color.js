@@ -7,8 +7,10 @@ export default function ColorPicker({ value, setValue }) {
       <Popover >
         <div
           style={{
-            width: "18px",
-            height: "18px",
+            cursor:"pointer",
+            marginTop:".3rem",
+            width: "30px",
+            height: "16px",
             border: "1px outset grey",
             backgroundColor: value
           }}
