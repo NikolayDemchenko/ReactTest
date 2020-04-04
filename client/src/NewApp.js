@@ -43,7 +43,7 @@ const NewApp = () => {
       {controlPanel ? (<VerticalPanel controlPanel={controlPanel} setControlPanel={setPanel} /> ) : null}
         <TypeSwitch unit={unit} setUnit={setUnit} setControlPanel={setPanel} />
       </div>
-      {JSON.stringify(unit)}
+      {/* {JSON.stringify(unit)} */}
     </ControlsContext.Provider>
   );
 };

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import InputSwitch from "../PopoverInput/InputSwitch";
+import PopoverInput from "../PopoverInput/PopoverInput";
+import RenameObjectProperty from '../../../Function/RenameObjectProperty'
 export default function Styles({ style, setStyle }) {
   const deleteProperty = (prop, style) => {
     delete style[prop];
@@ -19,14 +21,14 @@ export default function Styles({ style, setStyle }) {
             display: "flex",
             flexWrap: "wrap",
             padding:"0px 10px",
-            marginTop:"4px"
+            marginTop:"2px"
             ,
-            borderBottom: "4px solid #33445500",
+            borderBottom: "1px solid #556677bb",
             background: "rgba(30,40,57,.4)"
           }}
         >
           <div style={{ display: "flex", flexWrap: "wrap", width: "250px" }}>
-            <div>{Object.keys(el)[0]}{" :"}</div>
+            <div onClick={()=>RenameObjectProperty(style)}>{Object.keys(el)[0]}{" :"}</div>
             <div style={{ margin: "0 0 0 auto" }}>
               <InputSwitch
                 value={Object.values(el)[0]}

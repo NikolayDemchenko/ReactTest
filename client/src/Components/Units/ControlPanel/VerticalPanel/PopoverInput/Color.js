@@ -9,6 +9,7 @@ export default function ColorPicker({ value, setValue }) {
           style={{
             cursor:"pointer",
             marginTop:".3rem",
+            marginRight:".3rem",
             width: "30px",
             height: "16px",
             border: "1px outset grey",
