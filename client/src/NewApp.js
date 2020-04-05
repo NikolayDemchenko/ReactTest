@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./App.css";
 import { ControlsContext } from "./Components/Units/ControlPanel/ControlsContext";
 import TypeSwitch from "./Components/Units/Component/Types/TypeSwitch";
-import PanelSwitch from "./Components/Units/ControlPanel/Panels/PanelSwitch";
 import {
   baseType,
   rowType,
@@ -36,9 +35,6 @@ const NewApp = () => {
 
   return (
     <ControlsContext.Provider value={{ btnColor, backgroundColor }}>
-      {/* {controlPanel ? (
-        <PanelSwitch controlPanel={controlPanel} setControlPanel={setPanel} />
-      ) : null} */}
       <div style={{ display: "flex" }}>
       {controlPanel ? (<VerticalPanel controlPanel={controlPanel} setControlPanel={setPanel} /> ) : null}
         <TypeSwitch unit={unit} setUnit={setUnit} setControlPanel={setPanel} />

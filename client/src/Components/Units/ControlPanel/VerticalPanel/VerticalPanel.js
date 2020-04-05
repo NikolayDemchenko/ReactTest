@@ -23,17 +23,17 @@ export default function VerticalPanel(props) {
         display: "flex",
         flexDirection: "column",
         flexWrap: "wrap",
-        // height: "100%",
+    
         minWidth: "280px",
         maxWidth: "280px",
         position: "fixed ",
         zIndex: 1,
         top: "70px",
-        left: 0,
-        // background: "rgba(30,40,57,.9)",
+        left: 0,     
         backgroundColor: "transparent",
-        color: "#eee",
-        // padding: "20px 0px"
+        color: "#acd",
+        boxShadow:"0 5px 15px 1px #00000099"
+      
       }}
       // onClick={() =>
       //   console.log("div", getComputedStyle(div, null).flexDirection)
