@@ -1,45 +1,54 @@
 import React, { useState } from "react";
-// import _style from "./BaseType.module.css";
+import jss from "jss";
+import preset from "jss-preset-default";
 function Div({ unit, setUnit, setControlPanel, children }) {
-  // console.log("...BaseType...");
   let {
     style,
-    style: { backgroundColor }
+    style: { backgroundColor },
   } = unit.tagProps;
-
   backgroundColor = backgroundColor ? backgroundColor : "#fff";
-  // console.log("backgroundColor", backgroundColor);
+
   const [border, setBorder] = useState();
 
-  const setBorderStyle = array => {
+  const setBorderStyle = (array) => {
     const value = 240;
     const color =
       array[0] > value || array[1] > value || array[2] > value ? 0 : 255;
     return `solid 1px  rgba(${color}, ${color},${color}, 0.9)`;
   };
-  const TagType = `${unit.tag}`;
+
+  jss.setup(preset());
+  const { classes } = jss.createStyleSheet({
+    style
+  }).attach(); 
+
   return (
-    <TagType
+    <unit.tag
       tabIndex="0"
-      // className={_style.BaseType}
+      className={classes.style}
       style={{
-        ...style,
+        // ...style,
         "--div-focusBorder": setBorderStyle(backgroundColor),
-        border
+        border,
       }}
-      onMouseOver={event => {
-        event.stopPropagation();
-        setBorder(setBorderStyle(backgroundColor));
-      }}
-      onMouseOut={setBorder}
-      onClick={event => {
+      // onMouseOver={(event) => {
+      //   event.stopPropagation();
+      //   setBorder(setBorderStyle(backgroundColor));
+      // }}
+      // onMouseOut={setBorder}
+      onClick={(event) => {
         event.stopPropagation();
         console.log("Клик !!!!!!!", Date.now(), unit);
+        // console.log("event.target.style", event.target.style);
+        console.log(
+          "getComputedStyle",
+          getComputedStyle(event.target, null).margin
+        );
         setControlPanel({ unit, setUnit });
       }}
     >
       {children}
-    </TagType>
+    </unit.tag>
   );
 }
 export default Div;

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import AngleUp from "../../../Buttons/Angle/AngleUp";
-import AngleDown from "../../../Buttons/Angle/AngleDown";
+import AngleUp from "../../../../Buttons/Angle/AngleUp";
+import AngleDown from "../../../../Buttons/Angle/AngleDown";
 import Slider from "@material-ui/core/Slider";
-import Popover from "./PopoverPopupState";
-import {cssUnits} from "../../Class/Css";
-import Select from "../ModalWindows/Select";
+import Popover from "../../ModalWindows/PopoverPopupState";
+import {cssUnits} from "../../../Class/Css";
+import Select from "../../ModalWindows/Select";
 
 export default function VerticalSlider({ setValue, value, btnColor }) {
   const btnActiv = btnColor ? btnColor.active : "";
@@ -49,7 +49,7 @@ export default function VerticalSlider({ setValue, value, btnColor }) {
           setMaxValue(parseNumber(value) < 5 ? 10 : parseNumber(value) * 2)
         }
       >
-        <div style={{ padding: "0px 5px", cursor: "pointer" }}>{value}</div>
+        <div style={{ cursor: "pointer" }}>{value}</div>
         <div
           onWheel={e =>
             e.deltaY < 0

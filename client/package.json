@@ -34,6 +34,7 @@
     "apollo-boost": "^0.4.4",
     "apollo-cache-inmemory": "^1.6.3",
     "graphql": "^14.5.8",
+    "jss-preset-default": "^10.1.1",
     "lodash": "^4.17.15",
     "material-ui-popup-state": "^1.5.3",
     "react": "^16.11.0",

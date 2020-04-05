@@ -1,7 +1,7 @@
 import React from "react";
 import PopoverInput from "./PopoverInput";
 import Color from "./Color";
-import VerticalSlider from "../../ModalWindows/VerticalSlider";
+import VerticalSlider from "./VerticalSlider";
 function InputSwitch(props) {
   const { value } = props;
   // Если есть пробел, то Строка
