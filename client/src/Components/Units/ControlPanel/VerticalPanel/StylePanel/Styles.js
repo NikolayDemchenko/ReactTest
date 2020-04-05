@@ -1,7 +1,7 @@
 import React from "react";
 import Icon from "react-icons-kit";
 import { cross } from "react-icons-kit/icomoon/cross";
-import InputSwitch from "../Inputs/InputSwitch";
+import StyleSwitch from "./StyleInputSwitch";
 import PopoverInput from "../Inputs/PopoverInput";
 import RenameObjectProperty from "../../../Function/RenameObjectProperty";
 export default function Styles({ style, setStyle }) {
@@ -11,15 +11,15 @@ export default function Styles({ style, setStyle }) {
   };
 
   if (style) {
-    const settings = [];
+    const styles = [];
     for (let key in style) {
-      settings.push({ [key]: style[key] });
+      styles.push({ [key]: style[key] });
     }
-    return settings.map((el) => {
+    return styles.map((el) => {
       // console.log("!!!!!!!!el", el);
       return (
         <div
-          key={settings.indexOf(el)}
+          key={styles.indexOf(el)}
           style={{
             // border: "1px solid #fff",
             display: "grid",
@@ -52,7 +52,7 @@ export default function Styles({ style, setStyle }) {
               width: "80px",
             }}
           >
-            <InputSwitch
+            <StyleSwitch
               value={Object.values(el)[0]}
               setValue={(value) => {
                 setStyle({ ...style, ...{ [Object.keys(el)[0]]: value } });

@@ -1,5 +1,5 @@
 import React from "react";
-import StylePanel from "./StylePanel/StylePanel";
+import StylePanel from "./StylePanel/MainPanel";
 import Select from "../ModalWindows/Select";
 import { cssTags } from "../../Class/Css";
 export default function VerticalPanel(props) {
@@ -31,15 +31,18 @@ export default function VerticalPanel(props) {
         top: "70px",
         left: 0,     
         backgroundColor: "transparent",
-        color: "#acd",
-        boxShadow:"0 5px 15px 1px #00000099"
+        color: "#acdc",
+        boxShadow:"2px 15px 10px 2px #00000055"
       
       }}
       // onClick={() =>
       //   console.log("div", getComputedStyle(div, null).flexDirection)
       // }
-    >
+    ><div  style={{     
+      backgroundColor: "#456a"    
+    }}>
       <Select defaultItem={tag} setItem={setTag} listItems={cssTags} />
+    </div>
       <StylePanel {...props} />
     </div>
   );

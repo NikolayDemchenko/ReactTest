@@ -1,7 +1,7 @@
 import React from "react";
 import Icon from "react-icons-kit";
 import { plus } from "react-icons-kit/icomoon/plus";
-import Styles from "./Styles";
+import StyleClassPanels from "./StylePanels";
 export default function StylePanel({ controlPanel, setControlPanel }) {
   const { style } = controlPanel.unit.tagProps;
 
@@ -25,11 +25,12 @@ export default function StylePanel({ controlPanel, setControlPanel }) {
   return (
     <div
       style={{
-        borderTop: "6px solid #152535cc",
+        borderTop: "6px solid rgba(30,40,57,.4)",
+       
         background: "rgba(30,40,57,.8)",
       }}
     >
-      <div style={{ display: "flex", flexWrap: "wrap", paddingLeft: "1em" }}>
+      <div style={{ color: "#bdef", display: "flex", flexWrap: "wrap", paddingLeft: "1em" }}>
         JSS Стили
         <div
           style={{
@@ -43,7 +44,7 @@ export default function StylePanel({ controlPanel, setControlPanel }) {
           <Icon size={"100%"} icon={plus} />
         </div>
       </div>
-      <Styles style={style} setStyle={setStyle} />
+      <StyleClassPanels style={style} setStyle={setStyle} />
     </div>
   );
 }

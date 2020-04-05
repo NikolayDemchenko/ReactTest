@@ -9,42 +9,42 @@ const text = {
     style: {
       italic: true,
       weight: true,
-      decoration: false
-    }
-  }
+      decoration: false,
+    },
+  },
 };
 const settings = {
   flexDirection: "row",
   alignSelf: "center",
   size: {
     height: "100%",
-    width: "100%"
+    width: "100%",
   },
   index: 0,
   color: [70, 99, 100, 100],
-  visible: true
+  visible: true,
 };
 const baseType = {
   type: "cont",
-  settings
+  settings,
 };
 const rowType = {
   type: "row",
   settings,
-  value: text
+  value: text,
 };
 const docType = {
   type: "doc",
   settings,
-  value: text
+  value: text,
 };
 const imageType = {
   type: "img",
   settings,
   value: {
     reference:
-      "https://avatars.mds.yandex.net/get-pdb/245485/4f6cb872-2c1d-4ad9-9e51-6f2334f8f074/s1200"
-  }
+      "https://avatars.mds.yandex.net/get-pdb/245485/4f6cb872-2c1d-4ad9-9e51-6f2334f8f074/s1200",
+  },
 };
 
 const keyValueType = {
@@ -54,11 +54,11 @@ const keyValueType = {
     alignSelf: "center",
     size: {
       height: "900px",
-      width: "80%"
+      width: "80%",
     },
     index: 0,
     color: [70, 99, 100, 100],
-    visible: true
+    visible: true,
   },
   tagProps: {
     style: {
@@ -67,11 +67,11 @@ const keyValueType = {
       alignSelf: "center",
       height: "160px",
       width: "320px",
-      background: "rgba(70, 99, 100, 1)"
-    }
+      background: "rgba(70, 99, 100, 1)",
+    },
   },
   key: baseType,
-  value: baseType
+  value: baseType,
 };
 const div = {
   index: 0,
@@ -90,7 +90,13 @@ const div = {
         "url(https://avatars.mds.yandex.net/get-pdb/1366512/fd5d003c-7bc3-4f0d-9af2-2e57c88be5f9/s1200)",
       margin: "auto",
       marginTop: "60px",
-      marginBottom: "60px"
+      marginBottom: "60px",
+      "&:hover": {
+        background: "#456",
+      },
+      "&:active": {
+        margin: "200px",
+      },
       // color,
       // border,
       // outline,
@@ -100,11 +106,11 @@ const div = {
       // fontSize,
       // textDecoration,
       // textAlign
-    }
-  }
+    },
+  },
 };
 
-const newType = type => {
+const newType = (type) => {
   switch (type) {
     case "div":
       return div;
