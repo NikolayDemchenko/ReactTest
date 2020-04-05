@@ -25,7 +25,11 @@ export default function Styles({ style, setStyle }) {
             display: "grid",
             gridTemplateColumns: "47% 47% 6%",
             marginTop: "2px",
+<<<<<<< HEAD
             borderBottom: "1px solid #55667766",
+=======
+            borderBottom: "1px solid #556677bb",
+>>>>>>> 1b2e508d605efc0c85a2a48195edeebc196b7da3
             background: "rgba(30,40,57,.4)",
           }}
         >
