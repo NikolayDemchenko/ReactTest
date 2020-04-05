@@ -25,11 +25,7 @@ export default function Styles({ style, setStyle }) {
             display: "grid",
             gridTemplateColumns: "47% 47% 6%",
             marginTop: "2px",
-<<<<<<< HEAD
             borderBottom: "1px solid #55667766",
-=======
-       
->>>>>>> 1b2e508d605efc0c85a2a48195edeebc196b7da3
             background: "rgba(30,40,57,.4)",
           }}
         >
@@ -50,7 +46,7 @@ export default function Styles({ style, setStyle }) {
             />
           </div>
           <div
-            style={{ 
+            style={{
               justifySelf: "end",
               overflow: "hidden",
               width: "80px",
