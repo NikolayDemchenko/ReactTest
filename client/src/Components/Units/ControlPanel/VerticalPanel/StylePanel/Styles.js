@@ -28,7 +28,7 @@ export default function Styles({ style, setStyle }) {
 <<<<<<< HEAD
             borderBottom: "1px solid #55667766",
 =======
-            borderBottom: "1px solid #556677bb",
+       
 >>>>>>> 1b2e508d605efc0c85a2a48195edeebc196b7da3
             background: "rgba(30,40,57,.4)",
           }}
