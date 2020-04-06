@@ -1,18 +1,19 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import AngleUp from "../../../../Buttons/Angle/AngleUp";
 import AngleDown from "../../../../Buttons/Angle/AngleDown";
 import Slider from "@material-ui/core/Slider";
 import Popover from "../../ModalWindows/PopoverPopupState";
-import {cssUnits} from "../../../Class/Css";
+import { cssUnits } from "../../../Class/Css";
 import Select from "../../ModalWindows/Select";
 
-export default function VerticalSlider({ setValue, value, btnColor }) {
+export default function NumberSlider({ setValue, value, btnColor }) {
+  // console.log('NumberSlider')
   const btnActiv = btnColor ? btnColor.active : "";
-  const setUnit = item => {
+  const setUnit = (item) => {
     setValue(parseNumber(value) + item.value);
   };
 
-  const parseNumber = value => {
+  const parseNumber = (value) => {
     // console.log("value", typeof value);
     if (typeof value === "string") {
       const newVal = value.match(/\d/gm);
@@ -22,7 +23,7 @@ export default function VerticalSlider({ setValue, value, btnColor }) {
       return value;
     }
   };
-  const parseString = value => {
+  const parseString = (value) => {
     if (typeof value === "string") {
       const newVal = value.match(/\D/gm);
       // console.log('newVal', newVal)
@@ -31,10 +32,14 @@ export default function VerticalSlider({ setValue, value, btnColor }) {
       return "";
     }
   };
-  const [maxValue, setMaxValue] = useState(
-    parseNumber(value) < 5 ? 10 : parseNumber(value) * 2
-  );
+  const [_value, _setValue] = useState(parseNumber(value));
 
+  const handleChange = (event, newValue) => {
+    // console.log("newValue", newValue);
+    _setValue(newValue);
+  };
+  const [maxValue, setMaxValue] = useState(_value < 5 ? 10 : _value * 2);
+// console.log('maxValue', maxValue)
   let input;
   return (
     <div style={{ display: "inline-flex" }}>
@@ -42,16 +47,16 @@ export default function VerticalSlider({ setValue, value, btnColor }) {
         PaperProps={{
           style: {
             background: "rgba(30,40,57,.85)",
-            border: "1px solid #abc"       
-          }
+            border: "1px solid #abc",
+          },
         }}
-        reload={() =>
-          setMaxValue(parseNumber(value) < 5 ? 10 : parseNumber(value) * 2)
-        }
+        // reload={() =>
+        //   setMaxValue(_value < 5 ? 10 : _value * 2)
+        // }
       >
         <div style={{ cursor: "pointer" }}>{value}</div>
         <div
-          onWheel={e =>
+          onWheel={(e) =>
             e.deltaY < 0
               ? setValue(parseNumber(value) + 1 + parseString(value))
               : setValue(parseNumber(value) - 1 + parseString(value))
@@ -60,7 +65,7 @@ export default function VerticalSlider({ setValue, value, btnColor }) {
             display: "flex",
             flexDirection: "column",
             height: "300px",
-            width: "100%"
+            width: "100%",
             // padding: "5px 0px",
             // border: "1px solid red"
           }}
@@ -75,10 +80,10 @@ export default function VerticalSlider({ setValue, value, btnColor }) {
                 textAlign: "right",
                 color: "#eee",
                 outline: "none",
-                border: 0
+                border: 0,
               }}
               type={"text"}
-              ref={node => {
+              ref={(node) => {
                 input = node;
               }}
               onChange={() => {
@@ -87,8 +92,8 @@ export default function VerticalSlider({ setValue, value, btnColor }) {
                     input.value.replace(/[^\d]/g, "") + parseString(value))
                 );
               }}
-              value={parseNumber(value)}
-              onClick={e => e.target.select()}
+              value={_value}
+              onClick={(e) => e.target.select()}
             />
             <Select
               defaultItem={parseString(value)}
@@ -104,10 +109,19 @@ export default function VerticalSlider({ setValue, value, btnColor }) {
           />
           <Slider
             style={{ margin: "0 auto", color: "#acf" }}
-            onChange={(_, val) => setValue(val + parseString(value))}
+            onChange={(_, val) => {
+              handleChange(_, val);
+              setValue(val + parseString(value));      
+            }}
+            onChangeCommitted={(_, val) => {
+              // handleChange(_, val);
+              // setValue(val + parseString(value));
+              // console.log('val', val)
+              setMaxValue(val < 5 ? 10 : val * 2)
+            }}
             max={maxValue}
             orientation="vertical"
-            value={parseNumber(value)}
+            value={_value}
           />
           <AngleDown
             onClick={() =>

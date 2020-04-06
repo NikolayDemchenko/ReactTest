@@ -1,8 +1,10 @@
 import React from "react";
 import Icon from "react-icons-kit";
 import { plus } from "react-icons-kit/icomoon/plus";
-import StyleClassPanels from "./StylePanels";
-export default function StylePanel({ controlPanel, setControlPanel }) {
+import Styles from "./Styles";
+import StylePanels from "./StylePanels";
+export default function MainPanel({ controlPanel, setControlPanel }) {
+
   const { style } = controlPanel.unit.tagProps;
 
   const { unit, setUnit } = controlPanel;
@@ -44,7 +46,8 @@ export default function StylePanel({ controlPanel, setControlPanel }) {
           <Icon size={"100%"} icon={plus} />
         </div>
       </div>
-      <StyleClassPanels style={style} setStyle={setStyle} />
+      {/* <StylePanels style={style} setStyle={setStyle} /> */}
+      <Styles style={style} setStyle={setStyle} />
     </div>
   );
 }

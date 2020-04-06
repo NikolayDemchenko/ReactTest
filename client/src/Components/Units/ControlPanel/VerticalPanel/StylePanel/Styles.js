@@ -1,10 +1,11 @@
 import React from "react";
 import Icon from "react-icons-kit";
 import { cross } from "react-icons-kit/icomoon/cross";
-import StyleSwitch from "./StyleInputSwitch";
-import PopoverInput from "../Inputs/PopoverInput";
+import StyleInputSwitch from "./StyleInputSwitch";
+import PopoverInput from "../Inputs/StringInput";
 import RenameObjectProperty from "../../../Function/RenameObjectProperty";
-export default function Styles({ style, setStyle }) {
+export default function Styles(props) {
+  const { style, setStyle } = props;
   const deleteProperty = (prop, style) => {
     delete style[prop];
     setStyle(style);
@@ -52,7 +53,8 @@ export default function Styles({ style, setStyle }) {
               width: "80px",
             }}
           >
-            <StyleSwitch
+            <StyleInputSwitch
+              {...props}
               value={Object.values(el)[0]}
               setValue={(value) => {
                 setStyle({ ...style, ...{ [Object.keys(el)[0]]: value } });

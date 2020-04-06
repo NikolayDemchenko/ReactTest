@@ -3,6 +3,7 @@ import StylePanel from "./StylePanel/MainPanel";
 import Select from "../ModalWindows/Select";
 import { cssTags } from "../../Class/Css";
 export default function VerticalPanel(props) {
+  // console.log("---VerticalPanel---");
   const { controlPanel, setControlPanel } = props;
   const { setUnit, unit } = controlPanel;
   const { tag } = unit;

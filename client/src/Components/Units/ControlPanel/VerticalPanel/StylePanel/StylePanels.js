@@ -17,14 +17,18 @@ function StylePanelGenerator(props) {
   };
   // console.log("getClasses(style)", getClasses(style));
   
+  // return (
+  //   <div >
+  //     <Styles style={style} setStyle={setStyle} />
+  //   </div>
+  // );
 
   return getClasses(style).map((_style) => {
-    console.log("_style", _style);
-
+    // console.log("_style", _style);
     for (let key in _style) {
-      console.log("key", key);
+      // console.log("key", key);
       return (
-        <div key={Math.random()}>
+        <div key={[key]}>
           <Styles style={_style[key]} setStyle={setStyle} />
         </div>
       );

@@ -1,28 +1,24 @@
 import React from "react";
-import PopoverInput from "../Inputs/PopoverInput";
+import Styles from './Styles'
+import StylePropValueSelector from './StylePropValueSelector'
+import StringInput from "../Inputs/StringInput";
 import Color from "../Inputs/Color";
-import VerticalSlider from "../Inputs/VerticalSlider";
+import NumberSlider from "../Inputs/NumberSlider";
 function InputSwitch(props) {
-  const { value } = props;
-  // Если есть пробел, то Строка
-  if (value.match(/\s.|\//gm)) {
-    // console.log("Строка", value);
-    return <PopoverInput {...props} />;
-  } else {
-    // Если есть
-    if (value.match(/\d/gm)) {
-      if (value.match(/#\w+|rgba|rgb/gm)) {
-        // console.log("Цвет", value);
-        return <Color {...props} />;
-      } else {
-        // console.log("Слайдер", value);
-        return <VerticalSlider {...props} />;
-      }
-    } else {
-      // console.log("Строка", value);
-      return <PopoverInput {...props} />;
-    }
-  }  
+  // const { value } = props;
+
+  switch (StylePropValueSelector(props.value)) {
+    case "object":
+      return <Styles style={props.style} setStyle={props.setStyle} />;
+    case "string":
+      return <StringInput {...props} />;
+    case "color":
+      return <Color {...props} />;
+    case "number":
+      return <NumberSlider {...props} />;
+    default:
+      return <StringInput {...props} />;
+  } 
 }
 
 export default InputSwitch;
