@@ -1,5 +1,5 @@
 import React from "react";
-import Styles from './Styles'
+import MainPanel from './MainPanel'
 import StylePropValueSelector from './StylePropValueSelector'
 import StringInput from "../Inputs/StringInput";
 import Color from "../Inputs/Color";
@@ -9,7 +9,7 @@ function InputSwitch(props) {
 
   switch (StylePropValueSelector(props.value)) {
     case "object":
-      return <Styles style={props.style} setStyle={props.setStyle} />;
+      return <MainPanel style={props.style} setStyle={props.setStyle} />;
     case "string":
       return <StringInput {...props} />;
     case "color":

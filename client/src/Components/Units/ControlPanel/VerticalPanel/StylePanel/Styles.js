@@ -53,8 +53,7 @@ export default function Styles(props) {
               width: "80px",
             }}
           >
-            <StyleInputSwitch
-              {...props}
+            <StyleInputSwitch           
               value={Object.values(el)[0]}
               setValue={(value) => {
                 setStyle({ ...style, ...{ [Object.keys(el)[0]]: value } });
