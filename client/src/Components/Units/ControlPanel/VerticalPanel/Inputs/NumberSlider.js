@@ -3,7 +3,7 @@ import AngleUp from "../../../../Buttons/Angle/AngleUp";
 import AngleDown from "../../../../Buttons/Angle/AngleDown";
 import Slider from "@material-ui/core/Slider";
 import Popover from "../../ModalWindows/PopoverPopupState";
-import { cssUnits } from "../../../Class/Css";
+import { cssUnits } from "../../../Class/HtmlCss";
 import Select from "../../ModalWindows/Select";
 
 export default function NumberSlider({ setValue, value, btnColor }) {
@@ -48,18 +48,15 @@ export default function NumberSlider({ setValue, value, btnColor }) {
           style: {
             background: "rgba(30,40,57,.85)",
             border: "1px solid #abc",
-          },
+          }
         }}
-        // reload={() =>
-        //   setMaxValue(_value < 5 ? 10 : _value * 2)
-        // }
       >
         <div style={{ cursor: "pointer" }}>{value}</div>
         <div
           onWheel={(e) =>
             e.deltaY < 0
-              ? setValue(parseNumber(value) + 1 + parseString(value))
-              : setValue(parseNumber(value) - 1 + parseString(value))
+              ? setValue(_value + 1 + parseString(value))&handleChange(null, _value + 1)
+              : setValue(parseNumber(value) - 1 + parseString(value))&handleChange(null, _value - 1)
           }
           style={{
             display: "flex",
@@ -113,8 +110,7 @@ export default function NumberSlider({ setValue, value, btnColor }) {
               handleChange(_, val);
               setValue(val + parseString(value));      
             }}
-            onChangeCommitted={(_, val) => {
-              // handleChange(_, val);
+            onChangeCommitted={(_, val) => {         
               // setValue(val + parseString(value));
               // console.log('val', val)
               setMaxValue(val < 5 ? 10 : val * 2)

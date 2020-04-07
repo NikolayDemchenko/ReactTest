@@ -91,12 +91,12 @@ const div = {
       margin: "auto",
       marginTop: "60px",
       marginBottom: "60px",
-      // "&:hover": {
-      //   background: "#456",
-      // },
-      // "&:active": {
-      //   margin: "200px",
-      // },
+      "&:hover": {
+        background: "#456",
+      },
+      "&:active": {
+        margin: "200px",
+      },
       // color,
       // border,
       // outline,

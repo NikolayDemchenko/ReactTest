@@ -1,7 +1,7 @@
 import React from "react";
 import StylePanel from "./StylePanel/MainPanel";
 import Select from "../ModalWindows/Select";
-import { cssTags } from "../../Class/Css";
+import { cssTags } from "../../Class/HtmlCss";
 export default function VerticalPanel(props) {
   // console.log("---VerticalPanel---");
   const { controlPanel, setControlPanel } = props;
