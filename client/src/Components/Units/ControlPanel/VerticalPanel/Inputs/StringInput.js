@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import Popover from "../../ModalWindows/PopoverPopupState";
 export default function PopoverInput({ value, setValue }) {
   const handleKeyPress = (event) => {

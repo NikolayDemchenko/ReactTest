@@ -3,11 +3,11 @@ import "./App.css";
 import { ControlsContext } from "./Components/Units/ControlPanel/ControlsContext";
 import TypeSwitch from "./Components/Units/Component/Types/TypeSwitch";
 import {
-  baseType,
-  rowType,
-  docType,
-  imageType,
-  keyValueType,
+  // baseType,
+  // rowType,
+  // docType,
+  // imageType,
+  // keyValueType,
   div
 } from "./Components/Units/Component/Types/Classes";
 import VerticalPanel from "./Components/Units/ControlPanel/VerticalPanel/VerticalPanel";
@@ -24,6 +24,8 @@ const NewApp = () => {
   };
   const backgroundColor = "#d8d8dad8";
 
+  const [preview, setPreview] = useState();
+  // console.log('preview', preview)
   const [unit, setUnit] = useState(div);
   const [controlPanel, setControlPanel] = useState();
   const setPanel = panel => {
@@ -36,10 +38,10 @@ const NewApp = () => {
   return (
     <ControlsContext.Provider value={{ btnColor, backgroundColor }}>
       <div style={{ display: "flex" }}>
-      {controlPanel ? (<VerticalPanel controlPanel={controlPanel} setControlPanel={setPanel} /> ) : null}
-        <TypeSwitch unit={unit} setUnit={setUnit} setControlPanel={setPanel} />
+      {controlPanel ? (<VerticalPanel controlPanel={controlPanel} setControlPanel={setPanel} setPreview={setPreview} /> ) : null}
+        <TypeSwitch unit={preview?preview:div} setUnit={setUnit} setControlPanel={setPanel} />
       </div>
-      {/* {JSON.stringify(unit)} */}
+      {JSON.stringify(unit)}
     </ControlsContext.Provider>
   );
 };

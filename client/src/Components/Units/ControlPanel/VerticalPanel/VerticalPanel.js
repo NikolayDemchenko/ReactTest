@@ -1,5 +1,5 @@
 import React from "react";
-import StylePanel from "./StylePanel/MainPanel";
+import StylePanel from "./StylePanel/StylePanel";
 import Select from "../ModalWindows/Select";
 import { cssTags } from "../../Class/HtmlCss";
 export default function VerticalPanel(props) {

@@ -1,11 +1,10 @@
 import React from "react";
 import Icon from "react-icons-kit";
 import { cross } from "react-icons-kit/icomoon/cross";
-import StyleInputSwitch from "./StyleInputSwitch";
+import PropertyInputSwitch from "./PropertyInputSwitch";
 import PopoverInput from "../Inputs/StringInput";
-import RenameObjectProperty from "../../../Function/RenameObjectProperty";
-export default function Styles({property,setProperty:{setName,setValue},deleteProperty}) {
-
+export default function Property({property,setProperty:{setName,setValue},deleteProperty,setPreview}) {
+// console.log('property', property)
   return (
     <div      
       style={{
@@ -36,9 +35,10 @@ export default function Styles({property,setProperty:{setName,setValue},deletePr
           width: "80px",
         }}
       >
-        <StyleInputSwitch
+        <PropertyInputSwitch
           value={Object.values(property)[0]}
           setValue={setValue}
+          setPreview={setPreview}
         />
       </div>
       <div

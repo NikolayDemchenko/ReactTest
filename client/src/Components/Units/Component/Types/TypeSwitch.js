@@ -1,17 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import RowType from "./Row";
-import TextType from "./Text";
-import NumberType from "./Number";
-import KeyValue from "./KeyValue";
-import BaseType from "./BaseType";
+// import RowType from "./Row";
+// import TextType from "./Text";
+// import NumberType from "./Number";
+// import KeyValue from "./KeyValue";
+// import BaseType from "./BaseType";
 import Div from "./Div";
 
 function TypeSwitch(props) {
   // console.log("---TypeSwitch---");
-  // console.log("......props.unit.type", props.unit.type);
-  switch (props.unit.type) {
+  // console.log("......props.unit", props.unit);
+  switch (props.unit) {
     // case "div":
     //   return <Div {...props} />;
     // case "kv":

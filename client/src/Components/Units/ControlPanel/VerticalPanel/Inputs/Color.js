@@ -1,7 +1,7 @@
 import React from "react";
 import { ChromePicker } from "react-color";
 import Popover from "../../ModalWindows/PopoverPopupState";
-export default function ColorPicker({ value, setValue }) {
+export default function ColorPicker({ value, setValue,setPreview }) {
   return (
     <div style={{ display: "inline-flex" }}>
       <Popover >
@@ -19,6 +19,9 @@ export default function ColorPicker({ value, setValue }) {
         <ChromePicker
           color={value}
           onChange={color => {
+            setPreview(`rgba(${Object.values(color.rgb).join(",")})`);
+          }}
+          onChangeComplete={color => {
             setValue(`rgba(${Object.values(color.rgb).join(",")})`);
           }}
         />

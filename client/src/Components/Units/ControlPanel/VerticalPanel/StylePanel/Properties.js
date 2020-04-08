@@ -1,8 +1,8 @@
 import React from "react";
 import Property from "./Property";
-import StylePanel from "./StylePanel";
+import PropertiesPanel from "./PropertiesPanel";
 import RenameObjectProperty from "../../../Function/RenameObjectProperty";
-export default function Styles({ style, setStyle }) {
+export default function Styles({ style, setStyle,setPreview,setLabel }) {
   const properties = [];
   const stylePanels = [];
   for (let key in style) {
@@ -15,19 +15,22 @@ export default function Styles({ style, setStyle }) {
 
   // console.log('properties', properties)
   // console.log('style', style)
-  console.log("stylePanels", stylePanels);
+  // console.log("stylePanels", stylePanels);
   const panels = stylePanels.map((panel) => {
     const setValue = (value) => {
       setStyle({ ...style, [Object.keys(panel)[0]]: value });
     };
-    console.log("panel", Object.keys(panel)[0]);
-    console.log("panel", Object.values(panel)[0]);
+    // console.log("panel", Object.keys(panel)[0]);
+    // console.log("panel", Object.values(panel)[0]);
     return (
-      <StylePanel
+      <PropertiesPanel
         name={Object.keys(panel)[0]}
         key={stylePanels.indexOf(panel)}
         style={Object.values(panel)[0]}
         setStyle={setValue}
+        baseStyle={style}
+        setPreviewStyle={setPreview}
+        setLabel={setLabel}
       />
     );
   });
@@ -40,6 +43,10 @@ export default function Styles({ style, setStyle }) {
     const setValue = (value) => {
       setStyle({ ...style, [Object.keys(property)[0]]: value });
     };
+    const setPreviewValue = (value) => {
+      setPreview({ ...style, [Object.keys(property)[0]]: value });
+    };
+
     const deleteProperty = () => {
       delete style[Object.keys(property)[0]];
       setStyle(style);
@@ -48,6 +55,7 @@ export default function Styles({ style, setStyle }) {
       <Property
         key={properties.indexOf(property)}
         property={property}
+        setPreview={setPreviewValue}
         setProperty={{ setName, setValue }}
         deleteProperty={deleteProperty}
       />

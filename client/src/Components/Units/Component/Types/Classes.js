@@ -86,7 +86,7 @@ const div = {
       height: "700px",
       width: "90%",
       backgroundColor: "#678",
-      backgroundImage:
+      background:
         "url(https://avatars.mds.yandex.net/get-pdb/1366512/fd5d003c-7bc3-4f0d-9af2-2e57c88be5f9/s1200)",
       margin: "auto",
       marginTop: "60px",
