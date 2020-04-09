@@ -1,50 +1,51 @@
-import React from "react";
+import React,{useState} from "react";
 import StylePanel from "./StylePanel/StylePanel";
 import Select from "../ModalWindows/Select";
 import { cssTags } from "../../Class/HtmlCss";
 export default function VerticalPanel(props) {
   // console.log("---VerticalPanel---");
-  const { controlPanel, setControlPanel } = props;
+  const { controlPanel, setControlPanel, setPreview } = props;
   const { setUnit, unit } = controlPanel;
-  const { tag } = unit;
-
-  const setTag = ({ value }) => {
-    setUnit({ ...unit, tag: value });
+  const [selected, setSelected] = useState("All style");
+  const setTag = ({ value: tag }) => {
+    setUnit({ ...unit, tag });
+    setPreview({ ...unit, tag });
     setControlPanel({
       ...controlPanel,
-      unit: { ...unit, tag: value }
+      unit: { ...unit, tag },
     });
-    console.log("tag", value);
+    console.log("tag", tag);
   };
 
-
   return (
-    <div     
+    <div
       style={{
         display: "flex",
         flexDirection: "column",
         flexWrap: "wrap",
-    
+
         minWidth: "280px",
         maxWidth: "280px",
         position: "fixed ",
         zIndex: 1,
         top: "70px",
-        left: 0,     
+        left: 0,
         backgroundColor: "transparent",
         color: "#acdc",
-        boxShadow:"2px 15px 10px 2px #00000055"
-      
+        boxShadow: "2px 15px 10px 2px #00000055",
       }}
       // onClick={() =>
       //   console.log("div", getComputedStyle(div, null).flexDirection)
       // }
-    ><div  style={{     
-      backgroundColor: "#456a"    
-    }}>
-      <Select defaultItem={tag} setItem={setTag} listItems={cssTags} />
-    </div>
-      <StylePanel {...props} />
+    >
+      <div
+        style={{
+          backgroundColor: "#456a",
+        }}
+      >
+        <Select defaultItem={unit.tag} setItem={setTag} listItems={cssTags} />
+      </div>
+      <StylePanel {...props} selected={selected} setSelected={setSelected} />
     </div>
   );
 }

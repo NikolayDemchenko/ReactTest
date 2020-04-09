@@ -3,7 +3,7 @@ import PropertiesPanel from "./PropertiesPanel";
 export default function StylePanel({
   controlPanel,
   setControlPanel,
-  setPreview,
+  setPreview,selected, setSelected
 }) {
   const { style } = controlPanel.unit.tagProps;
 
@@ -18,19 +18,20 @@ export default function StylePanel({
   const setPreviewStyle = (style) => {
     setPreview({ ...unit, tagProps: { ...unit.tagProps, style } });
   };
-const [label, setLabel] = useState("All style")
+
 
   return (
     <div style={{ background: "rgba(30,40,57,.8)" }}>
       <div style={{ textAlign: "center" }} title="CSS (JSS) Стили">
-        Стили : {label==="Base style"?"All style":label}
+        Стили : {selected==="Base style"?"All style":selected}
       </div>
       <PropertiesPanel
         name={"Base style"}
+        baseStyle={style}
         style={style}
         setStyle={setStyle}
-        baseStyle={style}
-        setLabel={setLabel}
+        selected={selected}
+        setSelected={setSelected}
         setPreviewStyle={setPreviewStyle}
       />
     </div>

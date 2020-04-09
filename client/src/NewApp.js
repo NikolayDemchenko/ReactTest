@@ -11,8 +11,17 @@ import {
   div
 } from "./Components/Units/Component/Types/Classes";
 import VerticalPanel from "./Components/Units/ControlPanel/VerticalPanel/VerticalPanel";
+
+
+
+
+
+
+
 const NewApp = () => {
   // console.log("!!!NewApp!!!");
+console.log('div', div)
+
   const _on = 10;
   const _off = 100;
   const _active = 80;
@@ -34,12 +43,12 @@ const NewApp = () => {
   };
 
   // console.log("!!!!!unit", unit);
-
+console.log('controlPanel.unit',controlPanel? controlPanel.unit:null)
   return (
     <ControlsContext.Provider value={{ btnColor, backgroundColor }}>
       <div style={{ display: "flex" }}>
       {controlPanel ? (<VerticalPanel controlPanel={controlPanel} setControlPanel={setPanel} setPreview={setPreview} /> ) : null}
-        <TypeSwitch unit={preview?preview:div} setUnit={setUnit} setControlPanel={setPanel} />
+        <TypeSwitch unit={preview?preview:unit} setUnit={setUnit} setControlPanel={setPanel} />
       </div>
       {JSON.stringify(unit)}
     </ControlsContext.Provider>

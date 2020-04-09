@@ -4,11 +4,13 @@ import { plus } from "react-icons-kit/icomoon/plus";
 import Properties from "./Properties";
 export default function PropertiesPanel({
   name,
-  setLabel,
   style,
   setStyle,
   baseStyle,
   setPreviewStyle,
+  setSelected,
+  selected
+  
 }) {
   const newStyle = () => {
     const newName = "property";
@@ -24,10 +26,11 @@ export default function PropertiesPanel({
       onClick={(e) => {
         e.stopPropagation();
         setPreviewStyle({ ...baseStyle, ...style });
-        setLabel(name);
+        setSelected(name);
       }}
       style={{
         borderTop: "6px solid rgba(30,40,57,.4)",
+  
       }}
     >
       <div
@@ -35,7 +38,7 @@ export default function PropertiesPanel({
           color: "#bdef",
           display: "flex",
           flexWrap: "wrap",
-          paddingLeft: "0.5em",
+          paddingLeft: "0.5em",      backgroundColor:selected===name?"#5677":"none"
         }}
       >
         {name}
@@ -53,7 +56,8 @@ export default function PropertiesPanel({
       </div>
       <Properties
         style={style}
-        setLabel={setLabel}
+        selected={selected}
+        setSelected={setSelected}
         setStyle={setStyle}
         setPreview={setPreview}
       />

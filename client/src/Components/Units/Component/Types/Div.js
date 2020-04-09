@@ -12,8 +12,8 @@ function Div({ unit, setUnit, setControlPanel, children }) {
     .attach();
 const setPanel=()=>{
   if(!unit.selected){  
-    console.log("Передача данных в панель управления", new Date(), {...unit,selected:true});  
     setControlPanel({ unit:{...unit,selected:true}, setUnit });
+    console.log("Передача данных в панель управления", new Date(), {...unit,selected:true});  
   }
 }
   return (
@@ -22,7 +22,7 @@ const setPanel=()=>{
       className={classes.style}
       onClick={(event) => {
         event.stopPropagation();
-
+console.log('Клик')
         // Должна быть вызвана функция очищения предыдущего компонента от интерфейсных полей таких как "selected"
         setPanel();
       }}

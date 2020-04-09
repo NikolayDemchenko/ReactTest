@@ -2,7 +2,13 @@ import React from "react";
 import Property from "./Property";
 import PropertiesPanel from "./PropertiesPanel";
 import RenameObjectProperty from "../../../Function/RenameObjectProperty";
-export default function Styles({ style, setStyle,setPreview,setLabel }) {
+export default function Styles({
+  style,
+  setStyle,
+  setPreview,
+  setSelected,
+  selected,
+}) {
   const properties = [];
   const stylePanels = [];
   for (let key in style) {
@@ -30,7 +36,8 @@ export default function Styles({ style, setStyle,setPreview,setLabel }) {
         setStyle={setValue}
         baseStyle={style}
         setPreviewStyle={setPreview}
-        setLabel={setLabel}
+        selected={selected}
+        setSelected={setSelected}
       />
     );
   });
