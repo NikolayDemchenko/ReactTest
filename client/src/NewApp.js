@@ -20,7 +20,7 @@ import VerticalPanel from "./Components/Units/ControlPanel/VerticalPanel/Vertica
 
 const NewApp = () => {
   // console.log("!!!NewApp!!!");
-console.log('div', div)
+// console.log('div', div)
 
   const _on = 10;
   const _off = 100;
@@ -37,19 +37,20 @@ console.log('div', div)
   // console.log('preview', preview)
   const [unit, setUnit] = useState(div);
   const [controlPanel, setControlPanel] = useState();
+  const [selected, setSelected] = useState("All style");
+  // console.log('selected', selected)
   const setPanel = panel => {
     // console.log("panel", panel);
     setControlPanel(panel);
   };
 
   // console.log("!!!!!unit", unit);
-console.log('controlPanel.unit',controlPanel? controlPanel.unit:null)
+// console.log('controlPanel.unit',controlPanel? controlPanel.unit:null)
   return (
-    <ControlsContext.Provider value={{ btnColor, backgroundColor }}>
-      <div style={{ display: "flex" }}>
-      {controlPanel ? (<VerticalPanel controlPanel={controlPanel} setControlPanel={setPanel} setPreview={setPreview} /> ) : null}
-        <TypeSwitch unit={preview?preview:unit} setUnit={setUnit} setControlPanel={setPanel} />
-      </div>
+    <ControlsContext.Provider value={{ btnColor, backgroundColor }}>    
+      {controlPanel ? (<VerticalPanel controlPanel={controlPanel} setControlPanel={setPanel} setPreview={setPreview}
+      selected={selected} setSelected={setSelected} /> ) : null}
+        <TypeSwitch unit={preview?preview:unit} setUnit={setUnit} setControlPanel={setPanel} />  
       {JSON.stringify(unit)}
     </ControlsContext.Provider>
   );

@@ -1,12 +1,12 @@
-import React,{useState} from "react";
+import React from "react";
 import StylePanel from "./StylePanel/StylePanel";
 import Select from "../ModalWindows/Select";
 import { cssTags } from "../../Class/HtmlCss";
 export default function VerticalPanel(props) {
   // console.log("---VerticalPanel---");
-  const { controlPanel, setControlPanel, setPreview } = props;
+  const { controlPanel, setControlPanel, setPreview,selected, setSelected } = props;
   const { setUnit, unit } = controlPanel;
-  const [selected, setSelected] = useState("All style");
+
   const setTag = ({ value: tag }) => {
     setUnit({ ...unit, tag });
     setPreview({ ...unit, tag });
@@ -31,7 +31,8 @@ export default function VerticalPanel(props) {
         top: "70px",
         left: 0,
         backgroundColor: "transparent",
-        color: "#acdc",
+        // color: "#acdc",
+        color: "rgba(140, 200, 255, 0.8)",
         boxShadow: "2px 15px 10px 2px #00000055",
       }}
       // onClick={() =>

@@ -16,19 +16,22 @@ const setPanel=()=>{
     console.log("Передача данных в панель управления", new Date(), {...unit,selected:true});  
   }
 }
-  return (
+  return (<>
+
     <unit.tag
       tabIndex="0"
       className={classes.style}
       onClick={(event) => {
         event.stopPropagation();
-console.log('Клик')
+        console.log('Клик')
         // Должна быть вызвана функция очищения предыдущего компонента от интерфейсных полей таких как "selected"
         setPanel();
       }}
-    >
+      >
       {children}
     </unit.tag>
+    <div style={{height:"500px", width:"100%", background:"#458"}}></div>
+      </>
   );
 }
 export default Div;

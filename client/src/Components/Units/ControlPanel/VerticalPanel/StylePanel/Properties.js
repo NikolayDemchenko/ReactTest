@@ -18,16 +18,15 @@ export default function Styles({
       stylePanels.push({ [key]: style[key] });
     }
   }
-
-  // console.log('properties', properties)
-  // console.log('style', style)
-  // console.log("stylePanels", stylePanels);
+  
   const panels = stylePanels.map((panel) => {
     const setValue = (value) => {
       setStyle({ ...style, [Object.keys(panel)[0]]: value });
     };
-    // console.log("panel", Object.keys(panel)[0]);
-    // console.log("panel", Object.values(panel)[0]);
+    const deletePanel = () => {
+      delete style[Object.keys(panel)[0]];
+      setStyle(style);
+    };
     return (
       <PropertiesPanel
         name={Object.keys(panel)[0]}
@@ -35,9 +34,10 @@ export default function Styles({
         style={Object.values(panel)[0]}
         setStyle={setValue}
         baseStyle={style}
-        setPreviewStyle={setPreview}
+        setPreview={setPreview}
         selected={selected}
         setSelected={setSelected}
+        deletePanel={deletePanel}
       />
     );
   });

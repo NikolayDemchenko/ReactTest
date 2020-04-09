@@ -3,10 +3,15 @@ import Icon from "react-icons-kit";
 import { cross } from "react-icons-kit/icomoon/cross";
 import PropertyInputSwitch from "./PropertyInputSwitch";
 import PopoverInput from "../Inputs/StringInput";
-export default function Property({property,setProperty:{setName,setValue},deleteProperty,setPreview}) {
-// console.log('property', property)
+export default function Property({
+  property,
+  setProperty: { setName, setValue },
+  deleteProperty,
+  setPreview,
+}) {
+  // console.log('property', property)
   return (
-    <div      
+    <div
       style={{
         // border: "1px solid #fff",
         display: "grid",
@@ -17,18 +22,17 @@ export default function Property({property,setProperty:{setName,setValue},delete
       }}
     >
       <div
+        title={"CSS свойство"}
         style={{
           justifySpropertyf: "start",
           padding: "0px 0.5em",
           // border: "1px solid #fff",
         }}
       >
-        <PopoverInput
-          value={Object.keys(property)[0]}
-          setValue={setName}
-        />
+        <PopoverInput value={Object.keys(property)[0]} setValue={setName} />
       </div>
       <div
+        title={"Значение свойства"}
         style={{
           justifySpropertyf: "end",
           overflow: "hidden",
@@ -42,12 +46,12 @@ export default function Property({property,setProperty:{setName,setValue},delete
         />
       </div>
       <div
+        title={"Удалить свойство"}
         style={{
           cursor: "pointer",
           margin: "0 5px 0 auto",
-          color: "#9ab",
         }}
-        onClick={ deleteProperty}
+        onClick={deleteProperty}
       >
         <Icon size={"100%"} icon={cross} />
       </div>
