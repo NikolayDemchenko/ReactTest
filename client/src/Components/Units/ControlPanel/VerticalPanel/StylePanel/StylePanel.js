@@ -50,8 +50,13 @@ export default function StylePanel({
           borderColor,
           color: "#bdef",
           paddingLeft: "0.5em",
+<<<<<<< HEAD
           // height: "26px",
           cursor: "pointer",
+=======
+          height: "26px",
+          // cursor: "pointer",
+>>>>>>> e8de469e4d4b74d87fd57a27904548c8d6d22fa0
           background:
             selected === "All style" ? "rgba(134, 186, 250, 0.15)" : "none",
         }}
