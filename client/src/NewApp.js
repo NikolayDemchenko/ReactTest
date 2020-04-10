@@ -51,7 +51,7 @@ const NewApp = () => {
       {controlPanel ? (<VerticalPanel controlPanel={controlPanel} setControlPanel={setPanel} setPreview={setPreview}
       selected={selected} setSelected={setSelected} /> ) : null}
         <TypeSwitch unit={preview?preview:unit} setUnit={setUnit} setControlPanel={setPanel} />  
-      {JSON.stringify(unit)}
+      {/* {JSON.stringify(unit)} */}
     </ControlsContext.Provider>
   );
 };

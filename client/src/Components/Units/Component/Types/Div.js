@@ -30,7 +30,7 @@ const setPanel=()=>{
       >
       {children}
     </unit.tag>
-    <div style={{height:"500px", width:"100%", background:"#458"}}></div>
+    <div style={{height:"300px", width:"100%", background:"#457"}}></div>
       </>
   );
 }

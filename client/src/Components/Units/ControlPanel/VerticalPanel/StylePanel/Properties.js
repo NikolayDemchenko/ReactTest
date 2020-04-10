@@ -20,9 +20,15 @@ export default function Styles({
   }
   
   const panels = stylePanels.map((panel) => {
+    
+    const setName = (value) => {
+      setStyle(RenameObjectProperty(style, Object.keys(panel)[0], value));
+    };
     const setValue = (value) => {
       setStyle({ ...style, [Object.keys(panel)[0]]: value });
     };
+
+
     const deletePanel = () => {
       delete style[Object.keys(panel)[0]];
       setStyle(style);
@@ -32,6 +38,7 @@ export default function Styles({
         name={Object.keys(panel)[0]}
         key={stylePanels.indexOf(panel)}
         style={Object.values(panel)[0]}
+        setName={setName}
         setStyle={setValue}
         baseStyle={style}
         setPreview={setPreview}

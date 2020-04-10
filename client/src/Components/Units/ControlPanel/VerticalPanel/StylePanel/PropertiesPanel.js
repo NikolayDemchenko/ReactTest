@@ -2,23 +2,25 @@ import React from "react";
 import Icon from "react-icons-kit";
 import { plus } from "react-icons-kit/icomoon/plus";
 import { cross } from "react-icons-kit/icomoon/cross";
+import StringInput from "../Inputs/StringInput";
 import Properties from "./Properties";
 export default function PropertiesPanel({
   name,
+  setName,
   style,
   setStyle,
   baseStyle,
   setPreview,
-  setSelected,
   selected,
+  setSelected,
   deletePanel,
 }) {
   // console.log("name", name);
   // console.log("selected", selected);
   const newStyle = () => {
-    const newName = "property";
-    setStyle({ [newName]: "value", ...style });
+    setStyle({ ["property"]: "value", ...style });
   };
+
   const setPreviewProperty = (style) => {
     setPreview({ ...baseStyle, ...style });
   };
@@ -52,16 +54,20 @@ export default function PropertiesPanel({
     >
       <div
         style={{
-          color:"#bdec",
+          color: "#bdec",
           display: "flex",
           flexWrap: "wrap",
           paddingLeft: "0.5em",
           background: selected === name ? "rgba(134, 186, 250, 0.1)" : "none",
         }}
       >
-        {name}
+        {name === "Base style" ? (
+          name
+        ) : (
+          <StringInput value={name} setValue={setName} />
+        )}     
         <div
-        title={"Добавить свойство"}
+          title={"Добавить свойство"}
           style={{
             cursor: "pointer",
             width: "16px",
@@ -72,7 +78,8 @@ export default function PropertiesPanel({
           <Icon size={"100%"} icon={plus} />
         </div>
         {name === "Base style" ? null : (
-          <div title={"Удалить панель"}
+          <div
+            title={"Удалить панель"}
             style={{
               cursor: "pointer",
               margin: "0 5px 0 auto",

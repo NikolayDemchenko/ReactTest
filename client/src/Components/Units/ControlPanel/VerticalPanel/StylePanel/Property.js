@@ -2,7 +2,7 @@ import React from "react";
 import Icon from "react-icons-kit";
 import { cross } from "react-icons-kit/icomoon/cross";
 import PropertyInputSwitch from "./PropertyInputSwitch";
-import PopoverInput from "../Inputs/StringInput";
+import StringInput from "../Inputs/StringInput";
 export default function Property({
   property,
   setProperty: { setName, setValue },
@@ -29,7 +29,7 @@ export default function Property({
           // border: "1px solid #fff",
         }}
       >
-        <PopoverInput value={Object.keys(property)[0]} setValue={setName} />
+        <StringInput value={Object.keys(property)[0]} setValue={setName} />
       </div>
       <div
         title={"Значение свойства"}
