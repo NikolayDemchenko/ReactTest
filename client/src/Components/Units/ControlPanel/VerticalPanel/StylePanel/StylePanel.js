@@ -26,7 +26,7 @@ export default function StylePanel({
         delete style[key];
       }
     }
-    console.log("style", style);
+    // console.log("style", style);
     setPreview({ ...unit, tagProps: { ...unit.tagProps, style } });
   };
 
@@ -42,7 +42,7 @@ export default function StylePanel({
           color: "#bdef",
           paddingLeft: "0.5em",
           height: "26px",
-          cursor: "pointer",
+          // cursor: "pointer",
           background:
             selected === "All style" ? "rgba(134, 186, 250, 0.15)" : "none",
         }}
