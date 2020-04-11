@@ -8,6 +8,7 @@ export default function Styles({
   setPreview,
   setSelected,
   selected,
+  parentName,
 }) {
   const properties = [];
   const stylePanels = [];
@@ -18,9 +19,8 @@ export default function Styles({
       stylePanels.push({ [key]: style[key] });
     }
   }
-  
+
   const panels = stylePanels.map((panel) => {
-    
     const setName = (value) => {
       setStyle(RenameObjectProperty(style, Object.keys(panel)[0], value));
     };
@@ -28,13 +28,13 @@ export default function Styles({
       setStyle({ ...style, [Object.keys(panel)[0]]: value });
     };
 
-
     const deletePanel = () => {
       delete style[Object.keys(panel)[0]];
       setStyle(style);
     };
     return (
       <PropertiesPanel
+        parentName={parentName}
         name={Object.keys(panel)[0]}
         key={stylePanels.indexOf(panel)}
         style={Object.values(panel)[0]}

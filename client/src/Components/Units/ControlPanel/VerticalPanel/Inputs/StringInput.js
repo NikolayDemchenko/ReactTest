@@ -7,9 +7,12 @@ export default function PopoverInput({ value, setValue }) {
     }
   };
 
-
   return (
-    <div style={{ display: "inline-flex" }}>
+    <div
+      style={{
+        display: "inline-flex",     
+      }}
+    >
       <Popover
         PaperProps={{
           style: { background: "rgba(43,50,66,.95)", border: "1px solid #abc" },
@@ -37,7 +40,7 @@ export default function PopoverInput({ value, setValue }) {
             border: 0,
             color: "#eee",
           }}
-          type={"text"}     
+          type={"text"}
           onKeyPress={handleKeyPress}
           onBlur={(e) => setValue(e.target.value)}
           defaultValue={value}

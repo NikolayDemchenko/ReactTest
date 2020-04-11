@@ -13,7 +13,7 @@ const cssUnits = units.map(item => {
   item.value = item.name;
   return item;
 });
-const tags = [
+const _tags = [
   { name: "div" },
   { name: "input" },
   { name: "textarea" },
@@ -26,8 +26,8 @@ const tags = [
   { name: "p" }
 ];
 
-const cssTags = tags.map(item => {
+const tags = _tags.map(item => {
   item.value = item.name;
   return item;
 });
-export { cssUnits, cssTags };
+export { cssUnits, tags };

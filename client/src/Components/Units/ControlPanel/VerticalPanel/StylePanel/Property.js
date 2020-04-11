@@ -1,7 +1,7 @@
 import React from "react";
 import Icon from "react-icons-kit";
 import { cross } from "react-icons-kit/icomoon/cross";
-import PropertyInputSwitch from "./PropertyInputSwitch";
+import PropertyInputSwitch from "./Switch/PropertyInputSwitch";
 import StringInput from "../Inputs/StringInput";
 export default function Property({
   property,

@@ -1,7 +1,6 @@
 import React from "react";
 import Icon from "react-icons-kit";
-import { ic_library_add } from "react-icons-kit/md/ic_library_add";
-import { ic_note_add } from "react-icons-kit/md/ic_note_add";
+// import { ic_library_add } from "react-icons-kit/md/ic_library_add";
 import PropertiesPanel from "./PropertiesPanel";
 export default function StylePanel({
   controlPanel,
@@ -20,9 +19,7 @@ export default function StylePanel({
       unit: { ...unit, tagProps: { ...unit.tagProps, style } },
     });
   };
-  const newPanel = () => {
-    setStyle({ ...style, ["&:"]: {} });
-  };
+
   const setPreviewAllStyle = (style) => {
     setPreview({ ...unit, tagProps: { ...unit.tagProps, style } });
   };
@@ -50,9 +47,6 @@ export default function StylePanel({
           borderColor,
           color: "#bdef",
           paddingLeft: "0.5em",
-          // height: "26px",
-          cursor: "pointer",
-
           height: "26px",
           background:
             selected === "All style" ? "rgba(134, 186, 250, 0.15)" : "none",
@@ -71,19 +65,7 @@ export default function StylePanel({
             // border: "1px solid #fff",
           }}
         >
-          <div
-            title={"Добавить псевдокласс"}
-            style={{
-              cursor: "pointer",
-              width: "22px",
-              margin: "0 1px",
-              // border: "1px solid #fff",
-            }}
-            onClick={newPanel}
-          >
-            <Icon size={"100%"} icon={ic_note_add} />
-          </div>
-          <div
+          {/* <div
             title={"Добавить @media"}
             style={{
               cursor: "pointer",
@@ -94,7 +76,7 @@ export default function StylePanel({
             // onClick={newPanel}
           >
             <Icon size={"100%"} icon={ic_library_add} />
-          </div>
+          </div> */}
         </div>
       </div>
       <PropertiesPanel

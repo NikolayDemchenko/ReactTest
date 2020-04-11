@@ -1,10 +1,18 @@
 import React from "react";
 import StylePanel from "./StylePanel/StylePanel";
+import jss from "jss";
+import preset from "jss-preset-default";
 import Select from "../ModalWindows/Select";
-import { cssTags } from "../../Class/HtmlCss";
+import { tags } from "../../Class/HtmlCss";
 export default function VerticalPanel(props) {
   // console.log("---VerticalPanel---");
-  const { controlPanel, setControlPanel, setPreview,selected, setSelected } = props;
+  const {
+    controlPanel,
+    setControlPanel,
+    setPreview,
+    selected,
+    setSelected,
+  } = props;
   const { setUnit, unit } = controlPanel;
 
   const setTag = ({ value: tag }) => {
@@ -16,25 +24,31 @@ export default function VerticalPanel(props) {
     });
     console.log("tag", tag);
   };
-
+  const style = {
+    flexWrap: "wrap",
+    height: "100vh",
+    minWidth: "280px",
+    maxWidth: "280px",
+    position: "fixed",
+    zIndex: 1,
+    top: 0,
+    // left: 0,  
+    overflowX: "auto",
+    backgroundColor: "#456c",
+    color: "rgba(140, 200, 255, 0.8)",
+    boxShadow: "2px 10px 5px 2px #00000055",
+    "&::-webkit-scrollbar": { width: "4px" },
+    "&::-webkit-scrollbar-thumb": { backgroundColor: "#567" },
+  };
+  jss.setup(preset());
+  const { classes } = jss
+    .createStyleSheet({
+      style,
+    })
+    .attach();
   return (
     <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        flexWrap: "wrap",
-
-        minWidth: "280px",
-        maxWidth: "280px",
-        position: "fixed ",
-        zIndex: 1,
-        top: "70px",
-        left: 0,
-        backgroundColor: "transparent",
-        // color: "#acdc",
-        color: "rgba(140, 200, 255, 0.8)",
-        boxShadow: "2px 15px 10px 2px #00000055",
-      }}
+      className={classes.style}
       // onClick={() =>
       //   console.log("div", getComputedStyle(div, null).flexDirection)
       // }
@@ -44,9 +58,10 @@ export default function VerticalPanel(props) {
           backgroundColor: "#456a",
         }}
       >
-        <Select defaultItem={unit.tag} setItem={setTag} listItems={cssTags} />
+        <Select defaultItem={unit.tag} setItem={setTag} listItems={tags} />
       </div>
       <StylePanel {...props} selected={selected} setSelected={setSelected} />
+      <div style={{height:"10vh"}}> Панель для настройки стиля элемента</div>
     </div>
   );
 }

@@ -94,12 +94,18 @@ const baseDiv = {
       margin: "auto",
       marginTop: "60px",
       marginBottom: "60px",
+      '@media (max-width: 800px)': {       
+          width: "200px",     
+      },
       "&:hover": {
         height: "702px",
         width: "702px",
         boxShadow: "0 8px 5px 2px #0005",
         transition: "0.2s",
         marginBottom: "58px",
+        '@media (max-width: 800px)': {       
+            width: "200px",     
+        }
       },
       "&:active": {
         height: "700px",
@@ -107,10 +113,8 @@ const baseDiv = {
         transition: "0s",
         boxShadow: "none",
         marginBottom: "60px",
-      },
-      '@media (max-width: 800px)': {
-        style: {
-          width: "200px"
+        '@media (max-width: 800px)': {       
+            width: "200px",     
         }
       }
       // color,
@@ -126,8 +130,8 @@ const baseDiv = {
   },
 };
 
-// const div =baseDiv
-const div = JSON.parse(str);
+const div =baseDiv
+// const div = JSON.parse(str);
 
 const newType = (type) => {
   switch (type) {
