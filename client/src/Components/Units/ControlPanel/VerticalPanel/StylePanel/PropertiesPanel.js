@@ -66,6 +66,7 @@ export default function PropertiesPanel({
         setSelected(fullName);
       }}
       style={{ borderTop, color }}
+      draggable="true"
     >
       <div style={{
           color: "#bdec",

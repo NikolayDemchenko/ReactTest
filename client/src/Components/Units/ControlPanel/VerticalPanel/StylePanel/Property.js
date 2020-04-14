@@ -11,7 +11,7 @@ export default function Property({
 }) {
   // console.log('property', property)
   return (
-    <div
+    <div draggable="true"
       style={{
         // border: "1px solid #fff",
         display: "grid",
