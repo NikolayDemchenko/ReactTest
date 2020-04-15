@@ -59,23 +59,28 @@ export default function PropertiesPanel({
 
   return (
     <div
-      // tabIndex="0"
       onClick={(e) => {
         e.stopPropagation();
         setPreview({ ...baseStyle, ...style });
         setSelected(fullName);
       }}
       style={{ borderTop, color }}
-      draggable="true"
+      onDragOver={(e) => e.preventDefault()}
+      // onDrop={(event) => {
+      //   event.preventDefault();
+      // }}
+      draggable={name === "Base style" ? false : true}
     >
-      <div style={{
+      <div
+        style={{
           color: "#bdec",
           display: "flex",
           flexWrap: "wrap",
           paddingLeft: "0.5em",
           background:
             selected === fullName ? "rgba(134, 186, 250, 0.1)" : "none",
-        }}>
+        }}
+      >
         {name === "Base style" ? (
           name
         ) : (
@@ -100,18 +105,20 @@ export default function PropertiesPanel({
               style={{
                 cursor: "pointer",
                 width: "22px",
-                margin: "0 1px",   
+                margin: "0 1px",
               }}
               onClick={addPseudoClass}
             >
-              <Icon size={"100%"} icon={ic_note_add} /></div>) : null}
+              <Icon size={"100%"} icon={ic_note_add} />
+            </div>
+          ) : null}
           {!name.indexOf("@media") ? null : (
             <div
               title={"Добавить @media"}
               style={{
                 cursor: "pointer",
                 width: "22px",
-                margin: "0 1px",            
+                margin: "0 1px",
               }}
               onClick={addMedia}
             >
