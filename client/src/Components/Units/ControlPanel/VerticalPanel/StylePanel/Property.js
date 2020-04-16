@@ -9,26 +9,16 @@ export default function Property({
   deleteProperty,
   setPreview,
 }) {
- const  block= <div
- onDragOver={(e) => {
-   // e.stopPropagation();
-  //  setstyle({ ...style, height: "2em" });
-  setDiv(block);
- }}
- onDragLeave={(e) => {
-   // e.preventDefault()
-  //  setstyle({height: "0em" });
-  setDiv();
-
- }}
- style={{height: "2em"}}
-/>
   // console.log('property', property)
-  const [style, setstyle] = useState({transition:".3s"});
+  const [style, setstyle] = useState({ transition: "0.5s" });
+  const [Y, setY] = useState();
+  const [block, setblock] = useState();
+
   const [prop, setProp] = useState(true);
-  const [div, setDiv] = useState();
-  return (
-   prop===true? <div
+  // console.log('style', style)
+  let div;
+  return prop === true ? (
+    <div
       draggable
       // onDragStart={(e) => {
       //   // e.persist();
@@ -36,39 +26,53 @@ export default function Property({
       //   console.log("property", property);
       // }}
       onDragOver={(e) => {
-        //  setstyle({...style,height: "2em"});
-         setDiv(block);
+        var targetCoords = div.getBoundingClientRect();
+        var yCoord = e.clientY - targetCoords.top;
+        if (Y < e.pageY ) {
+          console.log("Вниз", yCoord);
+          // setstyle({ ...style, paddingTop: 0, paddingBottom: `${div.offsetHeight}px` });
+          setblock('bottom')
+        } else if (Y > e.pageY) {
+          console.log("Вверх", yCoord);
+          setblock('top')
+          // setstyle({ ...style, paddingTop: `${div.offsetHeight}px`, paddingBottom: 0 });
+        }
+        setY(e.pageY);
       }}
       onDrop={(e) => {
-        setDiv();
         // e.stopPropagation();
-        // setstyle({ ...style, height: "0em" });
+        setstyle({ ...style, paddingTop: 0, paddingBottom: 0 });
       }}
       // onDrag={()=>{
       //   setProp(false);
       //   console.log("Seychas");
       // }}
-      onDragLeave={(e) => {
-        // e.stopPropagation()
-        // setstyle({transition:"0.3s",height: "0px"});
-        // setDiv();
-      }}
-      // style={{border: "1px solid #fff",}}
+      // onDragLeave={(e) => {
+      //   e.stopPropagation();
+      //   console.log("onDragLeave")
+      //   // setstyle({ ...style, paddingTop: 0, paddingBottom: 0 });
+      //   setblock()
+      // }}
+      style={style}
     >
-     {div}
+      {block==='top'?<div style={{height:"23px"}}  onDragLeave={(e) => {
+        e.stopPropagation();
+        console.log("onDragLeave")      
+        setblock()
+      }}/>:null}
       <div
+        ref={(n) => (div = n)}
         style={{
           // border: "1px solid #fff",
           display: "grid",
           gridTemplateColumns: "60% 35% 1em",
-          // marginTop: "2px",
           borderBottom: "2px solid #55667766",
           background: "rgba(30,40,57,.4)",
         }}
       >
         <div
           title={"CSS свойство"}
-          style={{          
+          style={{
             padding: "0px 0.5em",
             // border: "1px solid #fff",
           }}
@@ -99,6 +103,11 @@ export default function Property({
           <Icon size={"100%"} icon={cross} />
         </div>
       </div>
-    </div>:null
-  );
+      {block==='bottom'?<div style={{height:"23px"}}onDragLeave={(e) => {
+        e.stopPropagation();
+        console.log("onDragLeave")      
+        setblock()
+      }}/>:null}
+    </div>
+  ) : null;
 }
