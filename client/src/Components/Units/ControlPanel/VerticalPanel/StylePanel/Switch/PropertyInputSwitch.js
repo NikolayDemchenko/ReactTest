@@ -1,5 +1,5 @@
 import React from "react";
-import PropertiesPanel from '../PropertiesPanel'
+import PropertiesPanel from '../Panel'
 import StylePropValueSelector from './StylePropValueSelector'
 import StringInput from "../../Inputs/StringInput";
 import Color from "../../Inputs/Color";

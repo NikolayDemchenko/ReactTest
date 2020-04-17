@@ -1,6 +1,6 @@
 import React from "react";
 import Property from "./Property";
-import PropertiesPanel from "./PropertiesPanel";
+import PropertiesPanel from "./Panel";
 import RenameObjectProperty from "../../../Function/RenameObjectProperty";
 export default function Styles({
   style,
@@ -11,16 +11,16 @@ export default function Styles({
   parentName,
 }) {
   const properties = [];
-  const stylePanels = [];
+  const propPanels = [];
   for (let key in style) {
     if (typeof style[key] !== "object") {
       properties.push({ [key]: style[key] });
     } else {
-      stylePanels.push({ [key]: style[key] });
+      propPanels.push({ [key]: style[key] });
     }
   }
 
-  const panels = stylePanels.map((panel) => {
+  const panels = propPanels.map((panel) => {
     const setName = (value) => {
       setStyle(RenameObjectProperty(style, Object.keys(panel)[0], value));
     };
@@ -36,7 +36,7 @@ export default function Styles({
       <PropertiesPanel
         parentName={parentName}
         name={Object.keys(panel)[0]}
-        key={stylePanels.indexOf(panel)}
+        key={propPanels.indexOf(panel)}
         style={Object.values(panel)[0]}
         setName={setName}
         setStyle={setValue}
@@ -59,7 +59,29 @@ export default function Styles({
     };
     const setPreviewValue = (value) => {
       setPreview({ ...style, [Object.keys(property)[0]]: value });
+      console.log('getTopDataWithProp(style, property)', getTopDataWithProp(style, property))
+      console.log('getTopDataWithinProp(style, property)', getTopDataWithinProp(style, property))
     };
+
+    const getTopData = (style, property) => {
+      let newObject;
+      for (let key in style) {
+        if (key !== Object.keys(property)[0]) {
+          newObject = { ...newObject, [key]: style[key] };
+        } else {
+          console.log("newObject", newObject);
+          return newObject;
+        }
+      }
+    };
+    const getTopDataWithProp = (style, property) => ({
+      ...getTopData(style, property),
+      ...property,_field:"Пустое поле",...style
+    });
+    const getTopDataWithinProp = (style, property) => ({
+      ...getTopData(style, property),
+      _field:"Пустое поле",...style
+    });
 
     const deleteProperty = () => {
       delete style[Object.keys(property)[0]];

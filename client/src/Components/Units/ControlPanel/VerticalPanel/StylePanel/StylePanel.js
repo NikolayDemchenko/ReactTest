@@ -1,7 +1,7 @@
 import React from "react";
 import Icon from "react-icons-kit";
 // import { ic_library_add } from "react-icons-kit/md/ic_library_add";
-import PropertiesPanel from "./PropertiesPanel";
+import PropertiesPanel from "./Panel";
 export default function StylePanel({
   controlPanel,
   setControlPanel,
@@ -30,7 +30,7 @@ export default function StylePanel({
       }
     }
     // console.log("style", style);
-    setPreview({ ...unit, tagProps: { ...unit.tagProps, style } });
+    setPreviewAllStyle(style)
   };
 
   const borderColor =

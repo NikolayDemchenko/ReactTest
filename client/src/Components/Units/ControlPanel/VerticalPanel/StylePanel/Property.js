@@ -21,7 +21,7 @@ export default function Property({
   let div;
   const DropDiv = () => (
     <div
-      style={{ height: "15px" }}
+      style={{ height: "25px" }}
       onDragLeave={(e) => {
         e.stopPropagation();
         console.log("onDragLeave");
@@ -35,9 +35,11 @@ export default function Property({
       }}
     />
   );
+
   return prop ? (
     <div
       tabIndex="0"
+      // onClick={() => getTopData()}
       onKeyUp={(e) => {
         setcopy(!copy);
         console.log("e.key", e.key);
@@ -58,9 +60,9 @@ export default function Property({
           borderBottom: "2px solid #55667766",
           background: "rgba(30,40,57,.4)",
         }}
-        onDrag={(e) => {
-          if (!copy) setProp(false);
-        }}
+        // onDrag={(e) => {
+        //   if (!copy) setProp(false);
+        // }}
         onDragEnter={(e) => {
           if (Y < e.pageY) {
             console.log("Вниз");
