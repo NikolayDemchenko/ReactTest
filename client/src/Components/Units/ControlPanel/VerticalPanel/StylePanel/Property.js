@@ -3,12 +3,16 @@ import Icon from "react-icons-kit";
 import { cross } from "react-icons-kit/icomoon/cross";
 import PropertyInputSwitch from "./Switch/PropertyInputSwitch";
 import StringInput from "../Inputs/StringInput";
+import Transition from "react-transition-group/Transition";
 
 export default function Property({
   property,
   setProperty: { setName, setValue },
   deleteProperty,
   setPreview,
+  addNewPropUp,
+  addNewPropDown,
+  dragLeave,
 }) {
   // console.log('property', property)
   const [style, setstyle] = useState({ transition: "0.5s" });
@@ -25,21 +29,22 @@ export default function Property({
       onDragLeave={(e) => {
         e.stopPropagation();
         console.log("onDragLeave");
-        setdrop();
+        dragLeave();
+        // setdrop();
       }}
       // onDragOver={(e) => e.preventDefault()}
       onDrop={(e) => {
         e.stopPropagation();
         console.log("onDragLeave");
-        setdrop();
+        dragLeave();
+        // setdrop();
       }}
     />
   );
 
-  return prop ? (
+  return Object.keys(property)[0] !== "field" ? (
     <div
       tabIndex="0"
-      // onClick={() => getTopData()}
       onKeyUp={(e) => {
         setcopy(!copy);
         console.log("e.key", e.key);
@@ -49,7 +54,6 @@ export default function Property({
         console.log("e.key", e.key);
       }}
     >
-      {drop === "top" ? <DropDiv /> : null}
       <div
         draggable
         ref={(n) => (div = n)}
@@ -66,10 +70,12 @@ export default function Property({
         onDragEnter={(e) => {
           if (Y < e.pageY) {
             console.log("Вниз");
-            setdrop("bottom");
+            // setdrop("bottom");
+            addNewPropDown();
           } else if (Y > e.pageY) {
             console.log("Вверх");
-            setdrop("top");
+            // setdrop("top");
+            addNewPropUp();
           }
           setY(e.pageY);
         }}
@@ -107,7 +113,8 @@ export default function Property({
           <Icon size={"100%"} icon={cross} />
         </div>
       </div>
-      {drop === "bottom" ? <DropDiv /> : null}
     </div>
-  ) : null;
+  ) : (
+    <DropDiv />
+  );
 }
