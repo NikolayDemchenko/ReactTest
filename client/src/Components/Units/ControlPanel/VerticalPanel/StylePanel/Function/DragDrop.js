@@ -30,6 +30,6 @@ export const addNewPropUp = (object, property, name, value) => {
         [name]: value,
         ...object,
       };
-      console.log('item', item)
+      // console.log('item', item)
   return item
 };

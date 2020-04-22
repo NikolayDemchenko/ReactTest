@@ -3,13 +3,14 @@ import Property from "./Property";
 import PropertiesPanel from "./Panel";
 import RenameObjectProperty from "../../../Function/RenameObjectProperty";
 import { addNewPropUp, addNewPropDown } from "./Function/DragDrop";
+import {removePropByName} from './Function/ObjectManager'
 export default function Styles({
   style,
   setStyle,
   setPreview,
   setSelected,
   selected,
-  parentName,
+  parentName,dragLeave
 }) {
   const properties = [];
   const propPanels = [];
@@ -54,23 +55,15 @@ export default function Styles({
       setPreview({ ...style, [Object.keys(property)[0]]: value });
     };
 
-    const removePropByKey = (obj, name) => {
-      for (let key in obj) {
-        if (key === name) {
-          delete obj[key];
-        }
-      }
-      console.log("obj", obj);
-      return obj;
-    };
+
     const newProp = (foo) => {
       const item = foo(
-        removePropByKey(style, "field"),
+        removePropByName(style, "field"),
         property,
         "field",
         "field"
       );
-      console.log(foo.name, item);
+      // console.log(foo.name, item);
       setStyle(item);
     };
 
@@ -86,12 +79,13 @@ export default function Styles({
         deleteProperty={() => remove(property)}
         addNewPropUp={() => newProp(addNewPropUp)}
         addNewPropDown={() => newProp(addNewPropDown)}
-        dragLeave={()=>setStyle(removePropByKey(style, "field"))}
+        dragLeave={dragLeave}
       />
     );
   });
   return (
-    <div>
+    <div 
+    >
       {props}
       {panels}
     </div>

@@ -6,6 +6,7 @@ import { ic_note_add } from "react-icons-kit/md/ic_note_add";
 import { ic_library_add } from "react-icons-kit/md/ic_library_add";
 import StringInput from "../Inputs/StringInput";
 import Properties from "./Properties";
+import { removePropByName } from "./Function/ObjectManager";
 export default function PropertiesPanel({
   name,
   parentName,
@@ -57,6 +58,8 @@ export default function PropertiesPanel({
 
   borderTop = !fullName.indexOf("@media") ? "none" : borderTop;
 
+  const dragLeave = () => setStyle(removePropByName(style, "field"));
+
   return (
     <div
       onClick={(e) => {
@@ -65,6 +68,11 @@ export default function PropertiesPanel({
         setSelected(fullName);
       }}
       style={{ borderTop, color }}
+      // onDragLeave={(e) => {
+      //   // e.stopPropagation();
+      //   console.log("PanelLeave");
+      //   // dragLeave();
+      // }}
       onDragOver={(e) => e.preventDefault()}
       // onDrop={(event) => {
       //   event.preventDefault();
@@ -147,6 +155,7 @@ export default function PropertiesPanel({
         setSelected={setSelected}
         setStyle={setStyle}
         setPreview={setPreviewProperty}
+        dragLeave={dragLeave}
       />
     </div>
   );

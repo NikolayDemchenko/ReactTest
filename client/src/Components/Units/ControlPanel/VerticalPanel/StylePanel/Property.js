@@ -28,14 +28,14 @@ export default function Property({
       style={{ height: "25px" }}
       onDragLeave={(e) => {
         e.stopPropagation();
-        console.log("onDragLeave");
-        dragLeave();
+        // console.log("onDragLeave");
+        // dragLeave();
         // setdrop();
       }}
       // onDragOver={(e) => e.preventDefault()}
       onDrop={(e) => {
         e.stopPropagation();
-        console.log("onDragLeave");
+        console.log("onDrop");
         dragLeave();
         // setdrop();
       }}
@@ -67,7 +67,7 @@ export default function Property({
         // onDrag={(e) => {
         //   if (!copy) setProp(false);
         // }}
-        onDragEnter={(e) => {
+        onDragOver={(e) => {
           if (Y < e.pageY) {
             console.log("Вниз");
             // setdrop("bottom");
