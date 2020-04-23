@@ -1,14 +1,16 @@
 import React from "react";
 import Icon from "react-icons-kit";
-// import { ic_library_add } from "react-icons-kit/md/ic_library_add";
+import { StyleContext } from "../../ControlsContext";
 import PropertiesPanel from "./Panel";
-export default function StylePanel({
-  controlPanel,
-  setControlPanel,
-  setPreview,
-  selected,
-  setSelected,
-}) {
+export default function StylePanel() {
+  const {
+    controlPanel,
+    setControlPanel,
+    setPreview,
+    selected,
+    setSelected,
+  } = React.useContext(StyleContext);
+  console.log("React.useContext(StyleContext)", React.useContext(StyleContext));
   const { style } = controlPanel.unit.tagProps;
   const baseStyle = style;
   const { unit, setUnit } = controlPanel;
@@ -30,7 +32,7 @@ export default function StylePanel({
       }
     }
     // console.log("style", style);
-    setPreviewAllStyle(style)
+    setPreviewAllStyle(style);
   };
 
   const borderColor =
@@ -64,20 +66,7 @@ export default function StylePanel({
             margin: "0px 0px 5px 100px",
             // border: "1px solid #fff",
           }}
-        >
-          {/* <div
-            title={"Добавить @media"}
-            style={{
-              cursor: "pointer",
-              width: "22px",
-              margin: "0 1px",
-              // border: "1px solid #fff",
-            }}
-            // onClick={newPanel}
-          >
-            <Icon size={"100%"} icon={ic_library_add} />
-          </div> */}
-        </div>
+        ></div>
       </div>
       <PropertiesPanel
         name={"Base style"}

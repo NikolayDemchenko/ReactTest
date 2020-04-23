@@ -1,16 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import Property from "./Property";
 import PropertiesPanel from "./Panel";
 import RenameObjectProperty from "../../../Function/RenameObjectProperty";
-import { addNewPropUp, addNewPropDown } from "./Function/DragDrop";
-import {removePropByName} from './Function/ObjectManager'
+import {
+  removePropByName,
+  addNewPropUp,
+  addNewPropDown,
+} from "./Function/ObjectManager";
 export default function Styles({
   style,
   setStyle,
   setPreview,
   setSelected,
   selected,
-  parentName,dragLeave
+  parentName,
+  dragLeave,
 }) {
   const properties = [];
   const propPanels = [];
@@ -50,43 +54,44 @@ export default function Styles({
     );
   });
 
-  const props = properties.map((property) => {
-    const setPreviewValue = (value) => {
-      setPreview({ ...style, [Object.keys(property)[0]]: value });
-    };
+  const Props = () => {
+    const [props, setprops] = useState(properties);
+    
+    return props.map((property) => {
+      const setPreviewValue = (value) => {
+        setPreview({ ...style, [Object.keys(property)[0]]: value });
+      };
 
-
-    const newProp = (foo) => {
-      const item = foo(
-        removePropByName(style, "field"),
-        property,
-        "field",
-        "field"
+      const newProp = (foo) => {
+        const item = foo(
+          removePropByName(style, "field"),
+          property,
+          "field",
+          "field"
+        );
+        // console.log(foo.name, item);
+        // setstate(item);
+      };
+      return (
+        <Property
+          key={properties.indexOf(property)}
+          property={property}
+          setPreview={setPreviewValue}
+          setProperty={{
+            setName: (v) => setName(property, v),
+            setValue: (v) => setValue(property, v),
+          }}
+          deleteProperty={() => remove(property)}
+          addNewPropUp={() => newProp(addNewPropUp)}
+          addNewPropDown={() => newProp(addNewPropDown)}
+          dragLeave={dragLeave}
+        />
       );
-      // console.log(foo.name, item);
-      setStyle(item);
-    };
-
-    return (
-      <Property
-        key={properties.indexOf(property)}
-        property={property}
-        setPreview={setPreviewValue}
-        setProperty={{
-          setName: (v) => setName(property, v),
-          setValue: (v) => setValue(property, v),
-        }}
-        deleteProperty={() => remove(property)}
-        addNewPropUp={() => newProp(addNewPropUp)}
-        addNewPropDown={() => newProp(addNewPropDown)}
-        dragLeave={dragLeave}
-      />
-    );
-  });
+    });
+  };
   return (
-    <div 
-    >
-      {props}
+    <div>
+      <Props />
       {panels}
     </div>
   );

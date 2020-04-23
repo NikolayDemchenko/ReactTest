@@ -1,18 +1,14 @@
 import React from "react";
 import StylePanel from "./StylePanel/StylePanel";
+import { StyleContext } from "../ControlsContext";
 import jss from "jss";
 import preset from "jss-preset-default";
 import Select from "../ModalWindows/Select";
 import { tags } from "../../Class/HtmlCss";
-export default function VerticalPanel(props) {
-  // console.log("---VerticalPanel---");
-  const {
-    controlPanel,
-    setControlPanel,
-    setPreview,
-    selected,
-    setSelected,
-  } = props;
+export default function VerticalPanel() {
+  const { controlPanel, setControlPanel, setPreview } = React.useContext(
+    StyleContext
+  );
   const { setUnit, unit } = controlPanel;
 
   const setTag = ({ value: tag }) => {
@@ -32,7 +28,6 @@ export default function VerticalPanel(props) {
     position: "fixed",
     zIndex: 1,
     top: 0,
-    // left: 0,  
     overflowX: "auto",
     backgroundColor: "#456c",
     color: "rgba(140, 200, 255, 0.8)",
@@ -47,12 +42,7 @@ export default function VerticalPanel(props) {
     })
     .attach();
   return (
-    <div
-      className={classes.style}
-      // onClick={() =>
-      //   console.log("div", getComputedStyle(div, null).flexDirection)
-      // }
-    >
+    <div className={classes.style}>
       <div
         style={{
           backgroundColor: "#456a",
@@ -60,8 +50,8 @@ export default function VerticalPanel(props) {
       >
         <Select defaultItem={unit.tag} setItem={setTag} listItems={tags} />
       </div>
-      <StylePanel {...props} selected={selected} setSelected={setSelected} />
-      <div style={{height:"10vh"}}> Панель для настройки стиля элемента</div>
+      <StylePanel />
+      <div> Панель для настройки стиля элемента</div>
     </div>
   );
 }

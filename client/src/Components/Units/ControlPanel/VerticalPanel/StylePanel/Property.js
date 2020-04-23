@@ -3,7 +3,6 @@ import Icon from "react-icons-kit";
 import { cross } from "react-icons-kit/icomoon/cross";
 import PropertyInputSwitch from "./Switch/PropertyInputSwitch";
 import StringInput from "../Inputs/StringInput";
-import Transition from "react-transition-group/Transition";
 
 export default function Property({
   property,
@@ -14,30 +13,31 @@ export default function Property({
   addNewPropDown,
   dragLeave,
 }) {
-  // console.log('property', property)
-  const [style, setstyle] = useState({ transition: "0.5s" });
   const [Y, setY] = useState();
-  const [drop, setdrop] = useState();
   const [copy, setcopy] = useState(false);
-
-  const [prop, setProp] = useState(true);
-  // console.log('style', style)
+  const [targetPosition, setTargetPosition] = useState();
+// const addNewPropUp=()=>{
+//   setTargetPosition("top")
+// }
+// const addNewPropDown=()=>{
+//   setTargetPosition("bot")
+// }
+// const dragLeave=()=>{
+//   setTargetPosition()
+// }
   let div;
   const DropDiv = () => (
     <div
       style={{ height: "25px" }}
-      onDragLeave={(e) => {
-        e.stopPropagation();
-        // console.log("onDragLeave");
-        // dragLeave();
-        // setdrop();
-      }}
-      // onDragOver={(e) => e.preventDefault()}
       onDrop={(e) => {
         e.stopPropagation();
         console.log("onDrop");
         dragLeave();
-        // setdrop();
+      }}
+      onDragLeave={(e) => {
+        // e.stopPropagation();
+        console.log("onDrop");
+        dragLeave();
       }}
     />
   );
@@ -54,9 +54,10 @@ export default function Property({
         console.log("e.key", e.key);
       }}
     >
+      {targetPosition==="top"?  <DropDiv />:null}
       <div
         draggable
-        ref={(n) => (div = n)}
+        ref={(ref) => (div = ref)}
         style={{
           // border: "1px solid #fff",
           display: "grid",
@@ -64,17 +65,16 @@ export default function Property({
           borderBottom: "2px solid #55667766",
           background: "rgba(30,40,57,.4)",
         }}
-        // onDrag={(e) => {
-        //   if (!copy) setProp(false);
-        // }}
+
+        onDragEnd={(e) => {
+
+        }}
         onDragOver={(e) => {
           if (Y < e.pageY) {
             console.log("Вниз");
-            // setdrop("bottom");
             addNewPropDown();
           } else if (Y > e.pageY) {
             console.log("Вверх");
-            // setdrop("top");
             addNewPropUp();
           }
           setY(e.pageY);
@@ -113,6 +113,7 @@ export default function Property({
           <Icon size={"100%"} icon={cross} />
         </div>
       </div>
+      {targetPosition==="bot"?  <DropDiv />:null}
     </div>
   ) : (
     <DropDiv />
