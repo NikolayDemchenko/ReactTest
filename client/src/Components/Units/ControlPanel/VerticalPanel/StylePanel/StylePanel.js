@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Icon from "react-icons-kit";
 import { StyleContext } from "../../ControlsContext";
 import PropertiesPanel from "./Panel";
@@ -10,7 +10,7 @@ export default function StylePanel() {
     selected,
     setSelected,
   } = React.useContext(StyleContext);
-  console.log("React.useContext(StyleContext)", React.useContext(StyleContext));
+
   const { style } = controlPanel.unit.tagProps;
   const baseStyle = style;
   const { unit, setUnit } = controlPanel;
@@ -20,6 +20,7 @@ export default function StylePanel() {
       ...controlPanel,
       unit: { ...unit, tagProps: { ...unit.tagProps, style } },
     });
+    // console.log('style', style)
   };
 
   const setPreviewAllStyle = (style) => {
@@ -41,7 +42,11 @@ export default function StylePanel() {
       : "rgba(140, 200, 255, 0.4)";
 
   return (
-    <div style={{ background: "rgba(30,40,57,.6)" }} title="CSS (JSS) Стили">
+    <div
+    
+      style={{ background: "rgba(30,40,57,.6)" }}
+      title="CSS (JSS) Стили"
+    >
       <div
         style={{
           display: "flex",

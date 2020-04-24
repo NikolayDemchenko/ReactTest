@@ -16,23 +16,45 @@ export const getTopDataWithProp = (object, property) => ({
   ...property,
 });
 
-// Добавить в объект новое поле ниже указанного поля
-export const addNewPropDown = (object, property, name, value) => ({
-  ...getTopData(object, property),
-  ...property,
-  [name]: value,
-  ...object,
-});
-// Добавить в объект новое поле выше указанного поля
-export const addNewPropUp = (object, property, name, value) => {
-    const item={
-        ...getTopData(object, property),
-        [name]: value,
-        ...object,
-      };
-      // console.log('item', item)
-  return item
+const getArray = (obj) => {
+  const arr = [];
+  for (let key in obj) {
+    arr.push({ [key]: obj[key] });
+  }
+  return arr;
 };
+// Добавить в объект новое поле ниже указанного поля
+export const addNewPropDown = (object, targetProp, draggedProp) => {
+  const obj = {
+    ...getTopData(object, targetProp),
+    ...targetProp,
+    ...draggedProp,
+    ...object,
+  };
+  const arr = getArray(obj);
+  return { obj, arr };
+};
+// Добавить в объект новое поле выше указанного поля
+export const addNewPropUp = (object, targetProp, draggedProp) => {
+  const obj = {
+    ...getTopData(object, targetProp),
+    ...draggedProp,
+    ...object,
+  };
+
+  const arr = getArray(obj);
+  return { obj, arr };
+};
+
+// const properties = [];
+// const propPanels = [];
+// for (let key in style) {
+//   if (typeof style[key] !== "object") {
+//     properties.push({ [key]: style[key] });
+//   } else {
+//     propPanels.push({ [key]: style[key] });
+//   }
+// }
 
 export const removePropByName = (obj, name) => {
   for (let key in obj) {
@@ -40,16 +62,8 @@ export const removePropByName = (obj, name) => {
       delete obj[key];
     }
     if (typeof obj[key] === "object") {
-      removePropByName(obj[key],name)
+      removePropByName(obj[key], name);
     }
   }
   return obj;
 };
-// export const removePropByName = (obj, name) => {
-//     for (let key in obj) {
-//       if (key === name) {
-//         delete obj[key];
-//       }
-//     }
-//     return obj;
-//   };

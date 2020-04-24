@@ -32,14 +32,15 @@ const NewApp = () => {
   const [unit, setUnit] = useState(div);
   const [controlPanel, setPanel] = useState();
   const [selected, setSelected] = useState("All style");
+  const [draggedProp, setDraggedProp] = useState();
   // console.log('selected', selected)
   const setControlPanel = (panel) => {
     // console.log("panel", panel);
     setPanel(panel);
   };
-
+  console.log("draggedProp", draggedProp);
   // console.log("!!!!!unit", unit);
-  // console.log('controlPanel.unit',controlPanel? controlPanel.unit:null)
+  console.log('controlPanel.unit',controlPanel? controlPanel.unit:null)
   return (
     <div>
       {controlPanel ? (
@@ -50,6 +51,8 @@ const NewApp = () => {
             setPreview,
             selected,
             setSelected,
+            draggedProp,
+            setDraggedProp,
           }}
         >
           <VerticalPanel />

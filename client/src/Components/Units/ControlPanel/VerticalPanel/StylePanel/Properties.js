@@ -1,20 +1,15 @@
 import React, { useState } from "react";
 import Property from "./Property";
 import PropertiesPanel from "./Panel";
-import RenameObjectProperty from "../../../Function/RenameObjectProperty";
-import {
-  removePropByName,
-  addNewPropUp,
-  addNewPropDown,
-} from "./Function/ObjectManager";
-export default function Styles({
+import RenameObjectProperty from "./Function/RenameObjectProperty";
+import { addNewPropUp, addNewPropDown } from "./Function/ObjectManager";
+export default function Properties({
   style,
   setStyle,
   setPreview,
   setSelected,
   selected,
   parentName,
-  dragLeave,
 }) {
   const properties = [];
   const propPanels = [];
@@ -25,6 +20,7 @@ export default function Styles({
       propPanels.push({ [key]: style[key] });
     }
   }
+
   const setName = (item, value) => {
     setStyle(RenameObjectProperty(style, Object.keys(item)[0], value));
   };
@@ -54,27 +50,46 @@ export default function Styles({
     );
   });
 
-  const Props = () => {
+  const Props = ({ properties }) => {
     const [props, setprops] = useState(properties);
-    
+
     return props.map((property) => {
       const setPreviewValue = (value) => {
         setPreview({ ...style, [Object.keys(property)[0]]: value });
       };
 
-      const newProp = (foo) => {
-        const item = foo(
-          removePropByName(style, "field"),
-          property,
-          "field",
-          "field"
-        );
-        // console.log(foo.name, item);
-        // setstate(item);
+      const addDropProp = (target) => {
+        const newProps = [...props];
+        const propIndex = newProps.indexOf(property);
+        newProps.forEach((prop) => delete prop.target);
+        newProps.splice(propIndex, 1, { ...property, target });
+        setprops(newProps);
       };
+
+      const onDrop = (targetProp, draggedProp) => {
+        const target = targetProp.target;
+        delete targetProp.target;
+        if (target === "up") {
+          const newUp = addNewPropUp(style, targetProp, draggedProp);
+          console.log("newUp.arr", newUp.arr);
+          setStyle(newUp.obj);
+          console.log("props", props);
+          // setprops([...newUp.arr])
+        } else if (target === "down") {
+          const newDown = addNewPropDown(style, targetProp, draggedProp);
+          console.log("newDown.arr", newDown.arr);
+          console.log("props", props);
+          setStyle(newDown.obj);
+          // setprops([...newDown.arr]);
+        }
+
+        console.log("targetProp", targetProp);
+        console.log("draggedProp", draggedProp);
+      };
+
       return (
         <Property
-          key={properties.indexOf(property)}
+          key={props.indexOf(property)}
           property={property}
           setPreview={setPreviewValue}
           setProperty={{
@@ -82,16 +97,15 @@ export default function Styles({
             setValue: (v) => setValue(property, v),
           }}
           deleteProperty={() => remove(property)}
-          addNewPropUp={() => newProp(addNewPropUp)}
-          addNewPropDown={() => newProp(addNewPropDown)}
-          dragLeave={dragLeave}
+          onDrop={onDrop}
+          addDropProp={addDropProp}
         />
       );
     });
   };
   return (
     <div>
-      <Props />
+      {Props({ properties })}
       {panels}
     </div>
   );

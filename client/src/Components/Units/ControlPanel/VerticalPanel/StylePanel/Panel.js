@@ -6,7 +6,7 @@ import { ic_note_add } from "react-icons-kit/md/ic_note_add";
 import { ic_library_add } from "react-icons-kit/md/ic_library_add";
 import StringInput from "../Inputs/StringInput";
 import Properties from "./Properties";
-import { removePropByName } from "./Function/ObjectManager";
+
 export default function PropertiesPanel({
   name,
   parentName,
@@ -40,6 +40,7 @@ export default function PropertiesPanel({
     setPreview({ ...baseStyle, ...style });
   };
   const fullName = name + parentName;
+  console.log('fullName', fullName)
   let color;
   switch (selected) {
     case fullName:
@@ -58,25 +59,17 @@ export default function PropertiesPanel({
 
   borderTop = !fullName.indexOf("@media") ? "none" : borderTop;
 
-  const dragLeave = () => setStyle(removePropByName(style, "field"));
 
   return (
-    <div
+    <div    
       onClick={(e) => {
         e.stopPropagation();
         setPreview({ ...baseStyle, ...style });
         setSelected(fullName);
       }}
       style={{ borderTop, color }}
-      // onDragLeave={(e) => {
-      //   // e.stopPropagation();
-      //   console.log("PanelLeave");
-      //   // dragLeave();
-      // }}
+ 
       onDragOver={(e) => e.preventDefault()}
-      // onDrop={(event) => {
-      //   event.preventDefault();
-      // }}
       draggable={name === "Base style" ? false : true}
     >
       <div
@@ -149,13 +142,13 @@ export default function PropertiesPanel({
         </div>
       </div>
       <Properties
+     
         parentName={name}
         style={style}
         selected={selected}
         setSelected={setSelected}
         setStyle={setStyle}
         setPreview={setPreviewProperty}
-        dragLeave={dragLeave}
       />
     </div>
   );
