@@ -19,7 +19,7 @@ const setPanel=()=>{
   return (<>
 
     <unit.tag
-      tabIndex="0"
+      // tabIndex="0" 
       className={classes.style}
       onClick={(event) => {
         event.stopPropagation();

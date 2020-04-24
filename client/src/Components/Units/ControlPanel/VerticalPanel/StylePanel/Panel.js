@@ -40,7 +40,7 @@ export default function PropertiesPanel({
     setPreview({ ...baseStyle, ...style });
   };
   const fullName = name + parentName;
-  console.log('fullName', fullName)
+  // console.log('fullName', fullName)
   let color;
   switch (selected) {
     case fullName:
@@ -59,17 +59,20 @@ export default function PropertiesPanel({
 
   borderTop = !fullName.indexOf("@media") ? "none" : borderTop;
 
-
+  let div;
   return (
-    <div    
+    <div
+      ref={(ref) => (div = ref)}
       onClick={(e) => {
         e.stopPropagation();
         setPreview({ ...baseStyle, ...style });
         setSelected(fullName);
       }}
       style={{ borderTop, color }}
- 
-      onDragOver={(e) => e.preventDefault()}
+      onDragOver={(e) => {
+        // console.log('div', div)
+        e.preventDefault();
+      }}
       draggable={name === "Base style" ? false : true}
     >
       <div
@@ -142,7 +145,6 @@ export default function PropertiesPanel({
         </div>
       </div>
       <Properties
-     
         parentName={name}
         style={style}
         selected={selected}

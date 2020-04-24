@@ -4,13 +4,13 @@ export default function StylePropValueSelector(value) {
   } else {
     // Если есть пробел, то Строка
     if (value.match(/\s.|\//gm)) {
-      return "string";
+      return "string";      
     } else {
       // Если есть цифры
-      if (value.match(/\d/gm)) {
-        if (value.match(/#\w+|rgba|rgb/gm)) {
-          return "color";
-        } else {
+      if (value.match(/#\w+|rgba|rgb/gm)) {
+        return "color";
+      } else if (value.match(/\d/gm)) {
+        {
           return "number";
         }
       } else {

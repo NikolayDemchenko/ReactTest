@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import Property from "./Property";
 import PropertiesPanel from "./Panel";
 import RenameObjectProperty from "./Function/RenameObjectProperty";
-import { addNewPropUp, addNewPropDown } from "./Function/ObjectManager";
+import { StyleContext } from "../../ControlsContext";
+import {
+  addNewPropUp,
+  addNewPropDown,
+  removePropByName,
+} from "./Function/ObjectManager";
 export default function Properties({
   style,
   setStyle,
@@ -10,7 +15,7 @@ export default function Properties({
   setSelected,
   selected,
   parentName,
-}) {
+}) {  
   const properties = [];
   const propPanels = [];
   for (let key in style) {
@@ -50,62 +55,56 @@ export default function Properties({
     );
   });
 
-  const Props = ({ properties }) => {
-    const [props, setprops] = useState(properties);
+  const props = properties.map((property) => {
+    const setPreviewValue = (value) => {
+      setPreview({ ...style, [Object.keys(property)[0]]: value });
+    };
 
-    return props.map((property) => {
-      const setPreviewValue = (value) => {
-        setPreview({ ...style, [Object.keys(property)[0]]: value });
-      };
+    // const addDropProp = (target) => {
+    //   const newProps = [...props];
+    //   const propIndex = newProps.indexOf(property);
+    //   newProps.forEach((prop) => delete prop.target);
+    //   newProps.splice(propIndex, 1, { ...property, target });
+    //   setprops(newProps);
+    // };
 
-      const addDropProp = (target) => {
-        const newProps = [...props];
-        const propIndex = newProps.indexOf(property);
-        newProps.forEach((prop) => delete prop.target);
-        newProps.splice(propIndex, 1, { ...property, target });
-        setprops(newProps);
-      };
+    const onDrop = (targetProp, draggedProp,target) => {
+      if (target === "up") {
+        const newUp = addNewPropUp(style, targetProp, draggedProp);
+        console.log("newUp.arr", newUp.arr);
+        setStyle(newUp.obj);
+        // console.log("props", props);      
+      } else if (target === "down") {
+        const newDown = addNewPropDown(style, targetProp, draggedProp);
+        console.log("newDown.arr", newDown.arr);
+        // console.log("props", props);
+        setStyle(newDown.obj);
+       
+      }
 
-      const onDrop = (targetProp, draggedProp) => {
-        const target = targetProp.target;
-        delete targetProp.target;
-        if (target === "up") {
-          const newUp = addNewPropUp(style, targetProp, draggedProp);
-          console.log("newUp.arr", newUp.arr);
-          setStyle(newUp.obj);
-          console.log("props", props);
-          // setprops([...newUp.arr])
-        } else if (target === "down") {
-          const newDown = addNewPropDown(style, targetProp, draggedProp);
-          console.log("newDown.arr", newDown.arr);
-          console.log("props", props);
-          setStyle(newDown.obj);
-          // setprops([...newDown.arr]);
-        }
+      console.log("targetProp", targetProp);
+      console.log("draggedProp", draggedProp);
+    };
 
-        console.log("targetProp", targetProp);
-        console.log("draggedProp", draggedProp);
-      };
+    return (
+      <Property
+        key={properties.indexOf(property)}
+        tabIndex={properties.indexOf(property)}
+        property={property}
+        setPreview={setPreviewValue}
+        setProperty={{
+          setName: (v) => setName(property, v),
+          setValue: (v) => setValue(property, v),
+        }}
+        deleteProperty={() => remove(property)}
+        onDrop={onDrop}    
+      />
+    );
+  });
 
-      return (
-        <Property
-          key={props.indexOf(property)}
-          property={property}
-          setPreview={setPreviewValue}
-          setProperty={{
-            setName: (v) => setName(property, v),
-            setValue: (v) => setValue(property, v),
-          }}
-          deleteProperty={() => remove(property)}
-          onDrop={onDrop}
-          addDropProp={addDropProp}
-        />
-      );
-    });
-  };
   return (
-    <div>
-      {Props({ properties })}
+    <div >
+      {props}
       {panels}
     </div>
   );
