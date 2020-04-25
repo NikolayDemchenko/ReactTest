@@ -73,7 +73,7 @@ export default function PropertiesPanel({
         // console.log('div', div)
         e.preventDefault();
       }}
-      draggable={name === "Base style" ? false : true}
+      // draggable={name === "Base style" ? false : true}
     >
       <div
         style={{

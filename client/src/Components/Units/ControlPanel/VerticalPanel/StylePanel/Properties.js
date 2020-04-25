@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import Property from "./Property";
 import PropertiesPanel from "./Panel";
 import RenameObjectProperty from "./Function/RenameObjectProperty";
-import { StyleContext } from "../../ControlsContext";
+// import { StyleContext } from "../../ControlsContext";
 import {
   addNewPropUp,
   addNewPropDown,
-  removePropByName,
+  removeThisLevelPropByName as removeProp,
 } from "./Function/ObjectManager";
 export default function Properties({
   style,
@@ -15,7 +15,7 @@ export default function Properties({
   setSelected,
   selected,
   parentName,
-}) {  
+}) {
   const properties = [];
   const propPanels = [];
   for (let key in style) {
@@ -56,34 +56,23 @@ export default function Properties({
   });
 
   const props = properties.map((property) => {
+    
     const setPreviewValue = (value) => {
       setPreview({ ...style, [Object.keys(property)[0]]: value });
     };
 
-    // const addDropProp = (target) => {
-    //   const newProps = [...props];
-    //   const propIndex = newProps.indexOf(property);
-    //   newProps.forEach((prop) => delete prop.target);
-    //   newProps.splice(propIndex, 1, { ...property, target });
-    //   setprops(newProps);
-    // };
-
-    const onDrop = (targetProp, draggedProp,target) => {
+    const onDrop = (targetProp, draggedProp, target) => {
+      const addNewProp = (foo) =>
+        foo(
+          removeProp(style, Object.keys(draggedProp)[0]),
+          targetProp,
+          draggedProp
+        ).obj;
       if (target === "up") {
-        const newUp = addNewPropUp(style, targetProp, draggedProp);
-        console.log("newUp.arr", newUp.arr);
-        setStyle(newUp.obj);
-        // console.log("props", props);      
+        setStyle(addNewProp(addNewPropUp));
       } else if (target === "down") {
-        const newDown = addNewPropDown(style, targetProp, draggedProp);
-        console.log("newDown.arr", newDown.arr);
-        // console.log("props", props);
-        setStyle(newDown.obj);
-       
+        setStyle(addNewProp(addNewPropDown));
       }
-
-      console.log("targetProp", targetProp);
-      console.log("draggedProp", draggedProp);
     };
 
     return (
@@ -97,13 +86,13 @@ export default function Properties({
           setValue: (v) => setValue(property, v),
         }}
         deleteProperty={() => remove(property)}
-        onDrop={onDrop}    
+        onDrop={onDrop}
       />
     );
   });
 
   return (
-    <div >
+    <div>
       {props}
       {panels}
     </div>

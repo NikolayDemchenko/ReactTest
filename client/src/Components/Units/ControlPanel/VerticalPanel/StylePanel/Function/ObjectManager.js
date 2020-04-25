@@ -46,15 +46,6 @@ export const addNewPropUp = (object, targetProp, draggedProp) => {
   return { obj, arr };
 };
 
-// const properties = [];
-// const propPanels = [];
-// for (let key in style) {
-//   if (typeof style[key] !== "object") {
-//     properties.push({ [key]: style[key] });
-//   } else {
-//     propPanels.push({ [key]: style[key] });
-//   }
-// }
 
 export const removePropByName = (obj, name) => {
   for (let key in obj) {
@@ -64,6 +55,14 @@ export const removePropByName = (obj, name) => {
     if (typeof obj[key] === "object") {
       removePropByName(obj[key], name);
     }
+  }
+  return obj;
+};
+export const removeThisLevelPropByName = (obj, name) => {
+  for (let key in obj) {
+    if (key === name) {
+      delete obj[key];
+    }   
   }
   return obj;
 };

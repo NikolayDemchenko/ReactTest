@@ -4,7 +4,9 @@ import { cross } from "react-icons-kit/icomoon/cross";
 import PropertyInputSwitch from "./Switch/PropertyInputSwitch";
 import { StyleContext } from "../../ControlsContext";
 import StringInput from "../Inputs/StringInput";
-
+import {
+  removeThisLevelPropByName as removeProp
+} from "./Function/ObjectManager";
 export default function Property({
   property,
   setProperty: { setName, setValue },
@@ -70,7 +72,7 @@ export default function Property({
             background: "rgba(30,40,57,.4)",
           }}
           onDragStart={() => {
-            setDraggedProp(property);
+            setDraggedProp(property);       
           }}
           onDragOver={(e) => {
             if (Y < e.pageY) {

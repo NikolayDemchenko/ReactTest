@@ -40,7 +40,7 @@ const NewApp = () => {
   };
   console.log("draggedProp", draggedProp);
   // console.log("!!!!!unit", unit);
-  console.log("controlPanel.unit", controlPanel ? controlPanel.unit : null);
+  // console.log("controlPanel.unit", controlPanel ? controlPanel.unit : null);
   return (
     <div>
       {controlPanel ? (
