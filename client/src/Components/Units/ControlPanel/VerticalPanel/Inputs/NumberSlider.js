@@ -12,7 +12,7 @@ export default function NumberSlider({
   value,
   btnColor,
 }) {
-  // console.log('NumberSlider')
+  // console.log("Render NumberSlider");
   const btnActiv = btnColor ? btnColor.active : "";
   const setUnit = (item) => {
     setValue(parseNumber(value) + item.value);

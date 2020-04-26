@@ -14,7 +14,7 @@ function InputSwitch(props) {
       return <StringInput {...props} />;
     case "color":
       return <Color {...props} />;
-    case "number":
+    case "number":   
       return <NumberSlider {...props} />;
     default:
       return <StringInput {...props} />;

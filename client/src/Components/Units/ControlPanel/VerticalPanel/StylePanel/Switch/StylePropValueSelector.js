@@ -6,9 +6,11 @@ export default function StylePropValueSelector(value) {
     if (value.match(/\s.|\//gm)) {
       return "string";      
     } else {
-      // Если есть цифры
-      if (value.match(/#\w+|rgba|rgb/gm)) {
+      // Если есть обозначение цвета
+      const rgba="rgba"     
+      if (value.match(new RegExp('#\\w+|'+rgba+'|rgb','gm'))) {
         return "color";
+        // Если есть цифры
       } else if (value.match(/\d/gm)) {
         {
           return "number";

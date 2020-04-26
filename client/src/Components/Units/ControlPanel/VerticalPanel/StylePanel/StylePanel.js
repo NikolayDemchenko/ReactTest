@@ -60,7 +60,7 @@ export default function StylePanel() {
         }}
         onClick={() => {
           setSelected("All style");
-          setPreviewAllStyle(baseStyle);
+          setPreviewAllStyle(style);
         }}
       >
         {"All styles"}
@@ -75,7 +75,7 @@ export default function StylePanel() {
       </div>
       <PropertiesPanel
         name={"Base style"}
-        baseStyle={baseStyle}
+        baseStyle={style}
         style={style}
         setStyle={setStyle}
         selected={selected}

@@ -38,7 +38,7 @@ const NewApp = () => {
     // console.log("panel", panel);
     setPanel(panel);
   };
-  console.log("draggedProp", draggedProp);
+  // console.log("draggedProp", draggedProp);
   // console.log("!!!!!unit", unit);
   // console.log("controlPanel.unit", controlPanel ? controlPanel.unit : null);
   return (

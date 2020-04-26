@@ -3,10 +3,8 @@ import Icon from "react-icons-kit";
 import { cross } from "react-icons-kit/icomoon/cross";
 import PropertyInputSwitch from "./Switch/PropertyInputSwitch";
 import { StyleContext } from "../../ControlsContext";
+import Input from "../Inputs/Input";
 import StringInput from "../Inputs/StringInput";
-import {
-  removeThisLevelPropByName as removeProp
-} from "./Function/ObjectManager";
 export default function Property({
   property,
   setProperty: { setName, setValue },
@@ -51,11 +49,11 @@ export default function Property({
         tabIndex={tabIndex}
         onKeyUp={(e) => {
           setcopy(!copy);
-          console.log("e.key", e.key);
+          console.log("onKeyUp", e.key);
         }}
         onKeyDown={(e) => {
           setcopy(!copy);
-          console.log("e.key", e.key);
+          console.log("onKeyDown", e.key);
         }}
         onDrop={(e) => {
           e.stopPropagation();
@@ -106,11 +104,16 @@ export default function Property({
               width: "80px",
             }}
           >
-            <PropertyInputSwitch
+            <Input
               value={Object.values(property)[0]}
               setValue={setValue}
               setPreview={setPreview}
             />
+            {/* <PropertyInputSwitch
+              value={Object.values(property)[0]}
+              setValue={setValue}
+              setPreview={setPreview}
+            /> */}
           </div>
           <div
             title={"Удалить свойство"}

@@ -9,7 +9,9 @@ export default function PopoverPopupState({ children, reload,PaperProps}) {
   return (
     <PopupState variant="popover" popupId="demo-popup-popover">
       {popupState => (
-        <div onMouseUp={reload}>
+        <div
+        //  onMouseUp={reload}
+         >
           <div {...bindTrigger(popupState)}>{children[0]}</div>
           <Popover 
             {...bindPopover(popupState)}

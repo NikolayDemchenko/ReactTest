@@ -2,7 +2,7 @@ import React,{useState} from "react";
 import { ChromePicker } from "react-color";
 import Popover from "../../ModalWindows/PopoverPopupState";
 export default function ColorPicker({ value, setValue,setPreview }) {
-
+// console.log("Render ColorPicker");
   const [color, setColor] = useState(value)
   return (
     <div style={{ display: "inline-flex" }}>
