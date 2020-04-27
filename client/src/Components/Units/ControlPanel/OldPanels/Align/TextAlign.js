@@ -3,7 +3,7 @@ import { alignLeft } from "react-icons-kit/fa/alignLeft";
 import { alignCenter } from "react-icons-kit/fa/alignCenter";
 import { alignRight } from "react-icons-kit/fa/alignRight";
 import { alignJustify } from "react-icons-kit/fa/alignJustify";
-import Button from "../../../Buttons/Button";
+import Button from "../../../../Buttons/Button";
 export default ({ setAlign, align, btnColor }) => {
   const getColor = value => {
     return align === value ? btnColor.on : btnColor.active;

@@ -1,6 +1,6 @@
 import React from "react";
 import Property from "./Property";
-import PropertiesPanel from "./Panel";
+import PropertiesPanel from "./PropertiesPanel";
 import RenameObjectProperty from "./Function/RenameObjectProperty";
 // import { StyleContext } from "../../ControlsContext";
 import {

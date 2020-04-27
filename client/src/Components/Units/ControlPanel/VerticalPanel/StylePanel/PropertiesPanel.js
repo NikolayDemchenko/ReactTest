@@ -13,7 +13,6 @@ export default function PropertiesPanel({
   setName,
   style,
   setStyle,
-  baseStyle,
   setPreview,
   selected,
   setSelected,
@@ -36,8 +35,8 @@ export default function PropertiesPanel({
     }
     setStyle({ ..._style, ["@media"]: {}, ...style });
   };
-  const setPreviewProperty = (style) => {
-    setPreview({ ...baseStyle, ...style });
+  const setPreviewProperty = (value) => {
+    setPreview({ ...style, ...value });
   };
   const fullName = name + parentName;
   // console.log('fullName', fullName)
@@ -59,13 +58,11 @@ export default function PropertiesPanel({
 
   borderTop = !fullName.indexOf("@media") ? "none" : borderTop;
 
-  let div;
   return (
     <div
-      ref={(ref) => (div = ref)}
       onClick={(e) => {
         e.stopPropagation();
-        setPreview({ ...baseStyle, ...style });
+        // setPreview({ ...baseStyle, ...style });
         setSelected(fullName);
       }}
       style={{ borderTop, color }}

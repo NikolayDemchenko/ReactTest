@@ -1,12 +1,12 @@
 import React from "react";
-import PropertiesPanel from '../../../StylePanel/Panel'
+import PropertiesPanel from '../../../StylePanel/PropertiesPanel'
 import StylePropValueSelector from './StylePropValueSelector'
 import StringInput from "../../StringInput";
 import Color from "../Color";
 import NumberSlider from "../NumberSlider";
 function InputSwitch(props) {
   // const { value } = props;
-console.log('inputType', StylePropValueSelector(props.value))
+// console.log('inputType', StylePropValueSelector(props.value))
   switch (StylePropValueSelector(props.value)) {
     case "object":
       return <PropertiesPanel {...props} />;

@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleContext } from "../../ControlsContext";
-import PropertiesPanel from "./Panel";
+import PropertiesPanel from "./PropertiesPanel";
 export default function StylePanel() {
   const {
     controlPanel,
@@ -9,21 +9,21 @@ export default function StylePanel() {
     selected,
     setSelected,
   } = React.useContext(StyleContext);
+console.log('setPreview', setPreview)
+  const { style } = controlPanel.tag.tagProps;
 
-  const { style } = controlPanel.unit.tagProps;
-  const baseStyle = style;
-  const { unit, setUnit } = controlPanel;
+  const { tag, setTag } = controlPanel;
   const setStyle = (style) => {
-    setUnit({ ...unit, tagProps: { ...unit.tagProps, style } });
+    setTag({ ...tag, tagProps: { ...tag.tagProps, style } });
     setControlPanel({
       ...controlPanel,
-      unit: { ...unit, tagProps: { ...unit.tagProps, style } },
+      tag: { ...tag, tagProps: { ...tag.tagProps, style } },
     });
     // console.log('style', style)
   };
 
   const setPreviewAllStyle = (style) => {
-    setPreview({ ...unit, tagProps: { ...unit.tagProps, style } });
+    setPreview({ ...tag, tagProps: { ...tag.tagProps, style } });
   };
   const setPreviewStyle = (style) => {
     for (let key in style) {
@@ -73,8 +73,7 @@ export default function StylePanel() {
         ></div>
       </div>
       <PropertiesPanel
-        name={"Base style"}
-        baseStyle={style}
+        name={"Base style"}       
         style={style}
         setStyle={setStyle}
         selected={selected}

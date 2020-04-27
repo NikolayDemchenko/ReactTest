@@ -1,29 +1,28 @@
 import React from "react";
 import Popover from "@material-ui/core/Popover";
 import PopupState, { bindTrigger, bindPopover } from "material-ui-popup-state";
-export default function PopoverPopupState({ children, paper,PaperProps}) { 
-  paper=paper===undefined?true:paper
+export default function PopoverPopupState({ children, paper, PaperProps }) {
+  paper = paper === undefined ? true : paper;
   return (
     <PopupState variant="popover" popupId="demo-popup-popover">
-      {popupState => (
+      {(popupState) => (
         <div
         //  onMouseUp={reload}
-         >
+        >
           <div {...bindTrigger(popupState)}>{children[0]}</div>
-          <Popover 
+          <Popover
             {...bindPopover(popupState)}
             anchorOrigin={{
               vertical: "bottom",
-              horizontal: "center"
+              horizontal: "center",
             }}
             transformOrigin={{
               vertical: "top",
-              horizontal: "center"
+              horizontal: "center",
             }}
-            PaperProps={PaperProps} 
-        
+            PaperProps={PaperProps}
           >
-         {paper?children[1]:null}
+            {paper && children[1]}
           </Popover>
         </div>
       )}

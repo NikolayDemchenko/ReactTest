@@ -6,19 +6,19 @@ import preset from "jss-preset-default";
 import Select from "../ModalWindows/Select";
 import { tags } from "../../Class/HtmlCss";
 export default function VerticalPanel() {
-  const { controlPanel, setControlPanel, setPreview } = React.useContext(
+  const { controlPanel, setControlPanel,  } = React.useContext(
     StyleContext
   );
-  const { setUnit, unit } = controlPanel;
+  const {tag, setTag, setPreview } = controlPanel;
 
-  const setTag = ({ value: tag }) => {
-    setUnit({ ...unit, tag });
-    setPreview({ ...unit, tag });
+  const setTagType = ({ value: tagType }) => {
+    setTag({ ...tag, tagType });
+    setPreview({ ...tag, tagType });
     setControlPanel({
       ...controlPanel,
-      unit: { ...unit, tag },
+      tag: { ...tag, tagType },
     });
-    console.log("tag", tag);
+    console.log("tagType", tagType);
   };
   const style = {
     flexWrap: "wrap",
@@ -48,10 +48,10 @@ export default function VerticalPanel() {
           backgroundColor: "#456a",
         }}
       >
-        <Select defaultItem={unit.tag} setItem={setTag} listItems={tags} />
+        <Select defaultItem={tag.tagType} setItem={setTagType} listItems={tags} />
       </div>
       <StylePanel />
-      <div> Панель для настройки стиля элемента</div>
+      <div> Панель для настройки стиля тега</div>
     </div>
   );
 }

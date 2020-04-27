@@ -1,8 +1,11 @@
 import React from "react";
 import jss from "jss";
 import preset from "jss-preset-default";
-export default function Tag({ unit, setUnit, setControlPanel, children }) {
-  let { style } = unit.tagProps;
+export default function Tag({ tag, setTag,setPreview, setControlPanel, children }) {
+  let { style } = tag.tagProps;
+
+  // tag={ tag}
+  // setTag={setTag} 
 
   jss.setup(preset());
   const { classes } = jss
@@ -11,17 +14,18 @@ export default function Tag({ unit, setUnit, setControlPanel, children }) {
     })
     .attach();
   const setPanel = () => {
-    if (!unit.selected) {
-      setControlPanel({ unit: { ...unit, selected: true }, setUnit });
+    if (!tag.selected) {
+      setControlPanel({ tag: { ...tag, selected: true }, setTag, setPreview });     
       console.log("Передача данных в панель управления", new Date(), {
-        ...unit,
+        ...tag,
         selected: true,
       });
     }
   };
+
   return (
     <>
-      <unit.tag
+      <tag.tag
         // tabIndex="0"
         className={classes.style}
         onClick={(event) => {
@@ -32,7 +36,7 @@ export default function Tag({ unit, setUnit, setControlPanel, children }) {
         }}
       >
         {children}
-      </unit.tag>
+      </tag.tag>
       <div style={{ height: "300px", width: "100%", background: "#457" }}></div>
     </>
   );
