@@ -1,7 +1,7 @@
 import React from "react";
-import NumberInput from "../Inputs/NumberInput";
+import RowInput from "../../Inputs/RowInput";
 import BaseType from "./BaseType";
-export default function NumberType(props) {
+export default function Row(props) {
   const { unit, setUnit, setControlPanel }=props
   const setValue = value => {
     setUnit({ ...unit, value });
@@ -10,7 +10,7 @@ export default function NumberType(props) {
   };
   return (
     <BaseType {...props}>
-       <NumberInput text={unit.value} setText={setValue} />
+       <RowInput  text={unit.value} setText={setValue} />
     </BaseType>
   );
 }

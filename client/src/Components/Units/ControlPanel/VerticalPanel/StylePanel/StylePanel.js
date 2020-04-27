@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import Icon from "react-icons-kit";
+import React from "react";
 import { StyleContext } from "../../ControlsContext";
 import PropertiesPanel from "./Panel";
 export default function StylePanel() {

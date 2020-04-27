@@ -1,9 +1,9 @@
 import React from "react";
-import PropertiesPanel from '../Panel'
+import PropertiesPanel from '../../StylePanel/Panel'
 import StylePropValueSelector from './StylePropValueSelector'
-import StringInput from "../../Inputs/StringInput";
-import Color from "../../Inputs/Color";
-import NumberSlider from "../../Inputs/NumberSlider";
+import StringInput from "../StringInput";
+import Color from "../Color";
+import NumberSlider from "../NumberSlider";
 function InputSwitch(props) {
   // const { value } = props;
 

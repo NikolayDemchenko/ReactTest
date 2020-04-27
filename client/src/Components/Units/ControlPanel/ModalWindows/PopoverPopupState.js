@@ -1,11 +1,8 @@
 import React from "react";
 import Popover from "@material-ui/core/Popover";
 import PopupState, { bindTrigger, bindPopover } from "material-ui-popup-state";
-
-
-
-export default function PopoverPopupState({ children, reload,PaperProps}) {
- 
+export default function PopoverPopupState({ children, paper,PaperProps}) { 
+  paper=paper===undefined?true:paper
   return (
     <PopupState variant="popover" popupId="demo-popup-popover">
       {popupState => (
@@ -26,7 +23,7 @@ export default function PopoverPopupState({ children, reload,PaperProps}) {
             PaperProps={PaperProps} 
         
           >
-         {children[1]}
+         {paper?children[1]:null}
           </Popover>
         </div>
       )}

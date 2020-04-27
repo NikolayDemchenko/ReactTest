@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import TypeSwitch from "./TypeSwitch";
-import {keyValueType } from "./Classes";
+import {keyValueType } from "../Classes";
 import BaseType from "./BaseType";
 
  function KeyValue(props) {

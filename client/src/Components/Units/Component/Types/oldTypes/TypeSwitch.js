@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 // import NumberType from "./Number";
 // import KeyValue from "./KeyValue";
 // import BaseType from "./BaseType";
-import Div from "./Div";
+import Div from "../Tag";
 
 function TypeSwitch(props) {
   // console.log("---TypeSwitch---");

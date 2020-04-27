@@ -1,5 +1,5 @@
 import React from "react";
-import TextInput from "../Inputs/TextInput";
+import TextInput from "../../Inputs/TextInput";
 import BaseType from "./BaseType";
 export default function TextType(props) {
   const { unit, setUnit, setControlPanel }=props
