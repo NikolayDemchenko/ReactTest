@@ -4,12 +4,11 @@ import PropertiesPanel from "./PropertiesPanel";
 export default function StylePanel() {
   const {
     controlPanel,
-    setControlPanel,
-    setPreview,
+    setControlPanel,   
     selected,
     setSelected,
   } = React.useContext(StyleContext);
-console.log('setPreview', setPreview)
+console.log('setPreview', controlPanel.setPreview)
   const { style } = controlPanel.tag.tagProps;
 
   const { tag, setTag } = controlPanel;
@@ -23,7 +22,7 @@ console.log('setPreview', setPreview)
   };
 
   const setPreviewAllStyle = (style) => {
-    setPreview({ ...tag, tagProps: { ...tag.tagProps, style } });
+    controlPanel.setPreview({ ...tag, tagProps: { ...tag.tagProps, style } });
   };
   const setPreviewStyle = (style) => {
     for (let key in style) {

@@ -7,6 +7,9 @@ import { ic_library_add } from "react-icons-kit/md/ic_library_add";
 import StringInput from "../Inputs/OldInputs/StringInput";
 import Properties from "./Properties";
 
+import { StyleContext } from "../../ControlsContext";
+
+  
 export default function PropertiesPanel({
   name,
   parentName,
@@ -14,12 +17,15 @@ export default function PropertiesPanel({
   style,
   setStyle,
   setPreview,
-  selected,
-  setSelected,
   deletePanel,
 }) {
   // console.log("name", name);
   // console.log("selected", selected);
+  const {
+    controlPanel,    
+    selected,
+    setSelected,
+  } = React.useContext(StyleContext);
   const addProperty = () => {
     setStyle({ ["property"]: "value", ...style });
   };
@@ -62,7 +68,7 @@ export default function PropertiesPanel({
     <div
       onClick={(e) => {
         e.stopPropagation();
-        // setPreview({ ...baseStyle, ...style });
+        setPreview({ ...controlPanel.tag.tagProps.style, ...style });
         setSelected(fullName);
       }}
       style={{ borderTop, color }}

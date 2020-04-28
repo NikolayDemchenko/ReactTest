@@ -41,7 +41,7 @@ export default function VerticalPanel() {
       style,
     })
     .attach();
-    console.log('tag', tag)
+    // console.log('tag', tag)
   return (
     <div className={classes.style}>
       <div

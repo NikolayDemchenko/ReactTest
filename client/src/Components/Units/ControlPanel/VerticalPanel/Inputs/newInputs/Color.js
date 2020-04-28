@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ChromePicker } from "react-color";
 export default function ColorPicker({ value, setValue, setPreview }) {
   const [color, setColor] = useState(value);
-  // console.log('color')
+  console.log('color',color)
   return (
     <ChromePicker
       color={color}

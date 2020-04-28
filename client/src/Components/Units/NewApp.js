@@ -13,14 +13,14 @@ const NewApp = () => {
   const [controlPanel, setPanel] = useState();
   const [selected, setSelected] = useState("All style");
   const [draggedProp, setDraggedProp] = useState();
-  const setControlPanel = (style) => {
-    console.log("style", style);
-    setPanel(style);
+  const setControlPanel = (tag) => {
+    console.log("tag", tag);
+    setPanel(tag);
   };
-  console.log(
-    "controlPanel.setPreview",
-    controlPanel && controlPanel.setPreview
-  );
+  // console.log(
+  //   "controlPanel.setPreview",
+  //   controlPanel && controlPanel.setPreview
+  // );
   return (
     <div>
       {/* {controlPanel && (
@@ -50,7 +50,7 @@ const NewApp = () => {
             controlPanel,
             setControlPanel,
             selected,
-            setPreview: controlPanel.setPreview,
+            // setPreview: controlPanel.setPreview,
             setSelected,
             draggedProp,
             setDraggedProp,

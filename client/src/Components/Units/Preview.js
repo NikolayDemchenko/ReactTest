@@ -5,7 +5,7 @@ export default  function Preview  ({ tag, setTag, setControlPanel }) {
   // console.log("!!!Preview!!!");
 
   const [preview, setPreview] = useState();
-  // console.log('preview', preview)
+  console.log('preview', preview)
 
   return (
     <div>
