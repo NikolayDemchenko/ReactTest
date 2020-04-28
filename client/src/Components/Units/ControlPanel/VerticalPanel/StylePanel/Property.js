@@ -3,7 +3,7 @@ import Icon from "react-icons-kit";
 import { cross } from "react-icons-kit/icomoon/cross";
 import { StyleContext } from "../../ControlsContext";
 import Input from "../Inputs/newInputs/Input";
-import StringInput from "../Inputs/StringInput";
+import StringInput from "../Inputs/OldInputs/StringInput";
 export default function Property({
   property,
   setProperty: { setName, setValue },

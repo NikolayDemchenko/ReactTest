@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import AngleUp from "../../../../Buttons/Angle/AngleUp";
-import AngleDown from "../../../../Buttons/Angle/AngleDown";
+import AngleUp from "../../../../../Buttons/Angle/AngleUp";
+import AngleDown from "../../../../../Buttons/Angle/AngleDown";
 import Slider from "@material-ui/core/Slider";
-import Popover from "../../ModalWindows/PopoverPopupState";
-import { cssUnits } from "../../../Class/HtmlCss";
-import Select from "../../ModalWindows/Select";
+import Popover from "../../../ModalWindows/PopoverPopupState";
+import { cssUnits } from "../../../../Class/HtmlCss";
+import Select from "../../../ModalWindows/Select";
 
 export default function NumberSlider({
   setValue,

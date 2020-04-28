@@ -4,9 +4,6 @@ import preset from "jss-preset-default";
 export default function Tag({ tag, setTag,setPreview, setControlPanel, children }) {
   let { style } = tag.tagProps;
 
-  // tag={ tag}
-  // setTag={setTag} 
-
   jss.setup(preset());
   const { classes } = jss
     .createStyleSheet({
@@ -25,7 +22,7 @@ export default function Tag({ tag, setTag,setPreview, setControlPanel, children 
 
   return (
     <>
-      <tag.tag
+      <tag.tagType
         // tabIndex="0"
         className={classes.style}
         onClick={(event) => {
@@ -36,7 +33,7 @@ export default function Tag({ tag, setTag,setPreview, setControlPanel, children 
         }}
       >
         {children}
-      </tag.tag>
+      </tag.tagType>
       <div style={{ height: "300px", width: "100%", background: "#457" }}></div>
     </>
   );

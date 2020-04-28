@@ -4,7 +4,7 @@ import { plus } from "react-icons-kit/icomoon/plus";
 import { cross } from "react-icons-kit/icomoon/cross";
 import { ic_note_add } from "react-icons-kit/md/ic_note_add";
 import { ic_library_add } from "react-icons-kit/md/ic_library_add";
-import StringInput from "../Inputs/StringInput";
+import StringInput from "../Inputs/OldInputs/StringInput";
 import Properties from "./Properties";
 
 export default function PropertiesPanel({

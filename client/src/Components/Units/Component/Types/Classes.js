@@ -80,7 +80,7 @@ const baseDiv = {
   index: 0,
   visible: true,
   children: [],
-  tag: "input",
+  tagType: "div",
   tagProps: {
     style: {
       display: "flex",
