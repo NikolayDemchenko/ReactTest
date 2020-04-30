@@ -5,9 +5,11 @@ const portalRoot = document.getElementById("portal");
 
 
 export default class ModalWindow extends Component {
-  constructor() {
-    super();
+ 
+  constructor(props) {
+    super(props);
     this.el = document.createElement("div");
+
   }
   componentDidMount() {
     portalRoot.appendChild(this.el);
@@ -16,8 +18,7 @@ export default class ModalWindow extends Component {
     portalRoot.removeChild(this.el);
   }
 
-  render() {
-    const { children } = this.props;
-    return ReactDOM.createPortal(children, this.el);
+  render() {   
+    return ReactDOM.createPortal(this.props.children, this.el);
   }
 }

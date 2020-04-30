@@ -14,7 +14,7 @@ const NewApp = () => {
   const [selected, setSelected] = useState("All style");
   const [draggedProp, setDraggedProp] = useState();
   const setControlPanel = (tag) => {
-    console.log("tag", tag);
+    // console.log("tag", tag);
     setPanel(tag);
   };
   // console.log(

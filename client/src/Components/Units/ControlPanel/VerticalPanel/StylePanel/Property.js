@@ -12,7 +12,7 @@ export default function Property({
   onDrop,
   tabIndex,
 }) {
-  console.log("Property")
+  // console.log("Property")
   const { draggedProp, setDraggedProp } = React.useContext(StyleContext);
   const [Y, setY] = useState();
   const [copy, setcopy] = useState(false);

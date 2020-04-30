@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Popover from "../../../ModalWindows/PopoverPopupState";
 import ModalWindow from "../../../ModalWindows/ModalWindow";
 import PropertyInputSwitch from "./Switch/PropertyInputSwitch";
@@ -12,41 +12,42 @@ export default function Input({ value, setValue, setPreview }) {
     settisVal(value);
     setValue(value);
   };
-  const [val, settisVal] = React.useState(value);
-
+  const [val, settisVal] = useState(value);
+  const [modal, setmodal] = useState(false);
   return (
     <>
-      <ModalWindow>
-        <div
-          style={{
-            cursor: "pointer",
-            height: "1em",
-          }}
-          onClick={() => {}}
-        >
-          {value ? value : "none"}
-        </div>
-      </ModalWindow>
-      <Popover
+      {/* <Popover
         PaperProps={{
           style: { background: "rgba(43,50,66,.95)", border: "1px solid #abc" },
         }}
+      > */}
+      <div
+        style={{
+          cursor: "pointer",
+          height: "1em",
+        }}
+        onClick={() => setmodal(true)}
+        onBlur={() => {
+          console.log("onBlur");
+          setmodal(false);
+        }}
       >
+        {value ? value : "none"}
+      </div>
+      <ModalWindow>
+      {modal && (
         <div
           style={{
-            cursor: "pointer",
-            height: "1em",
-          }}
-          onClick={() => {}}
-        >
-          {value ? value : "none"}
-        </div>
-        <div
-          style={{
+            border: "1px solid #ccc",
+            position: "absolute",
+            top:'200px',
+            boxShadow: "0 8px 5px 2px #0005",
             display: "flex",
             flexDirection: "column",
             color: "#eee",
+            zIndex:"999"
           }}
+          onBlur={() => setmodal(false)}
         >
           <input
             style={{
@@ -73,7 +74,9 @@ export default function Input({ value, setValue, setPreview }) {
             />
           </div>
         </div>
-      </Popover>
+      )}
+      </ModalWindow>
+      {/* </Popover> */}
     </>
   );
 }

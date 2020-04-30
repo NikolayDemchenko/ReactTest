@@ -8,7 +8,7 @@ export default function StylePanel() {
     selected,
     setSelected,
   } = React.useContext(StyleContext);
-console.log('setPreview', controlPanel.setPreview)
+// console.log('setPreview', controlPanel.setPreview)
   const { style } = controlPanel.tag.tagProps;
 
   const { tag, setTag } = controlPanel;

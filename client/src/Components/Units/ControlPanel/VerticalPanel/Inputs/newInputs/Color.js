@@ -11,8 +11,8 @@ export default function ColorPicker({ value, setValue, setPreview }) {
         setPreview(`rgba(${Object.values(color.rgb).join(",")})`);
       }}
       onChangeComplete={() => {
-        setValue(`rgba(${Object.values(color.rgb).join(",")})`);
-      }}
+        {color&&setValue(`rgba(${Object.values(color.rgb).join(",")})`);
+      }}}
     />
   );
 }
