@@ -13,7 +13,8 @@ export default function Input({ value, setValue, setPreview }) {
     setValue(value);
   };
   const [val, settisVal] = useState(value);
-  const [modal, setmodal] = useState(false);
+  const [modal, setmodal] = useState();
+  console.log('modal.clientX', (modal && modal.clientX))
   return (
     <>
       {/* <Popover
@@ -26,55 +27,59 @@ export default function Input({ value, setValue, setPreview }) {
           cursor: "pointer",
           height: "1em",
         }}
-        onClick={() => setmodal(true)}
+        onClick={(e) => {
+          console.log("e.clientY", e.clientY);
+          setmodal({...e});
+        }}
         onBlur={() => {
           console.log("onBlur");
-          setmodal(false);
+          setmodal();
         }}
       >
         {value ? value : "none"}
       </div>
       <ModalWindow>
-      {modal && (
-        <div
-          style={{
-            border: "1px solid #ccc",
-            position: "absolute",
-            top:'200px',
-            boxShadow: "0 8px 5px 2px #0005",
-            display: "flex",
-            flexDirection: "column",
-            color: "#eee",
-            zIndex:"999"
-          }}
-          onBlur={() => setmodal(false)}
-        >
-          <input
+        {modal && (
+          <div
             style={{
-              background: "transparent",
-              width: `${value.length}ex`,
-              minWidth: "80px",
-              paddingLeft: "4px",
-              outline: "none",
-              border: 0,
+              border: "1px solid #ccc",
+              position: "absolute",
+              top: `${modal.clientY}px`,
+              left: `${modal.clientX}px`,
+              boxShadow: "0 8px 5px 2px #0005",
+              display: "flex",
+              flexDirection: "column",
               color: "#eee",
+              zIndex: "999",
             }}
-            type={"text"}
-            onKeyPress={handleKeyPress}
-            onBlur={(e) => setValue(e.target.value)}
-            value={val}
-            onChange={(e) => settisVal(e.target.value)}
-            // defaultValue={value}
-          />
-          <div style={{ backgroundColor: "#123" }}>
-            <PropertyInputSwitch
-              value={value}
-              setValue={setVal}
-              setPreview={setPreview}
+            onBlur={() => setmodal()}
+          >
+            <input
+              style={{
+                background: "transparent",
+                width: `${value.length}ex`,
+                minWidth: "80px",
+                paddingLeft: "4px",
+                outline: "none",
+                border: 0,
+                color: "#eee",
+              }}
+              type={"text"}
+              onKeyPress={handleKeyPress}
+              onBlur={(e) => setValue(e.target.value)}
+              value={val}
+              onChange={(e) => settisVal(e.target.value)}
+              // defaultValue={value}
             />
+            <div style={{ backgroundColor: "#123" }}>
+              <PropertyInputSwitch
+                value={value}
+                setValue={setVal}
+                setPreview={setPreview}
+              />
+            </div>
           </div>
-        </div>
-      )}
+        )}
       </ModalWindow>
       {/* </Popover> */}
     </>
