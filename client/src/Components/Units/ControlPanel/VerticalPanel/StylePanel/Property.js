@@ -63,7 +63,7 @@ export default function Property({
           // border: "1px solid #fff",
         }}
       >
-        <StringInput value={Object.keys(property)[0]} setValue={setName} />
+        <Input value={Object.keys(property)[0]} setValue={setName} />
       </div>
       <div
         title={"Значение свойства"}

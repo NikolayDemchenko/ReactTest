@@ -13,8 +13,9 @@ export default function Input({ value, setValue, setPreview }) {
     setValue(value);
   };
   const [val, settisVal] = useState(value);
-  const [modal, setmodal] = useState();
-  console.log("modal.clientX", modal && modal.clientX);
+  const [coordinates, setcoordinates] = useState();
+  console.log("modal.clientX", coordinates && coordinates);
+  let div;
   return (
     <>
       {/* <Popover
@@ -27,27 +28,31 @@ export default function Input({ value, setValue, setPreview }) {
           cursor: "pointer",
           height: "1em",
         }}
+        ref={(ref) => (div = ref)}
         onClick={(e) => {
+          console.log("div", div.getBoundingClientRect());
           console.log("e.clientY", e.clientY);
-          setmodal({ ...e });
+          setcoordinates(div.getBoundingClientRect());
         }}
         onBlur={() => {
           console.log("onBlur");
-          setmodal();
+          setcoordinates();
         }}
       >
         {value ? value : "none"}
       </div>
       <ModalWindow>
-        {modal && (
+        {coordinates && (
           <div
             style={{
-              background: "#234c",
-              border: "1px solid #ccc",
+              padding: " 2px 0",
+              background: "rgba(43,50,66,.95)",
+              //  border: "1px solid #abc",
+              borderRadius: "4px",
               position: "fixed",
-              top: `${modal.clientY-5}px`,
-              left: `${modal.clientX-15}px`,
-              boxShadow: "0 8px 5px 2px #0005",
+              top: `${coordinates.y}px`,
+              left: `${coordinates.x}px`,
+              boxShadow: "0 0 2px 1px #ccc",
               display: "flex",
               flexDirection: "column",
               color: "#eee",

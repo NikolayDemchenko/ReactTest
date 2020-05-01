@@ -6,11 +6,10 @@ import ReactDOM from "react-dom";
 
 export default class ModalWindow extends Component {
  
-  constructor(props) {
-    super(props);
-    this.el = document.createElement("div");
+  
+  el = document.createElement("div");
 
-  }
+ 
   componentDidMount() {
     document.body.appendChild(this.el);
   }
