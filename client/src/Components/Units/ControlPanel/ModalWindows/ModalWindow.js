@@ -1,7 +1,7 @@
 import { Component } from "react";
 import ReactDOM from "react-dom";
 
-const portalRoot = document.getElementById("portal");
+// const portalRoot = document.getElementById("portal");
 
 
 export default class ModalWindow extends Component {
@@ -12,10 +12,10 @@ export default class ModalWindow extends Component {
 
   }
   componentDidMount() {
-    portalRoot.appendChild(this.el);
+    document.body.appendChild(this.el);
   }
   componentWillUnmount() {
-    portalRoot.removeChild(this.el);
+    document.body.removeChild(this.el);
   }
 
   render() {   

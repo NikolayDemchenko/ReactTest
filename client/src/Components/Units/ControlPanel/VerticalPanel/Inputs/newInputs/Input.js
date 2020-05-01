@@ -14,7 +14,7 @@ export default function Input({ value, setValue, setPreview }) {
   };
   const [val, settisVal] = useState(value);
   const [modal, setmodal] = useState();
-  console.log('modal.clientX', (modal && modal.clientX))
+  console.log("modal.clientX", modal && modal.clientX);
   return (
     <>
       {/* <Popover
@@ -29,7 +29,7 @@ export default function Input({ value, setValue, setPreview }) {
         }}
         onClick={(e) => {
           console.log("e.clientY", e.clientY);
-          setmodal({...e});
+          setmodal({ ...e });
         }}
         onBlur={() => {
           console.log("onBlur");
@@ -42,17 +42,19 @@ export default function Input({ value, setValue, setPreview }) {
         {modal && (
           <div
             style={{
+              background: "#234c",
               border: "1px solid #ccc",
-              position: "absolute",
-              top: `${modal.clientY}px`,
-              left: `${modal.clientX}px`,
+              position: "fixed",
+              top: `${modal.clientY-5}px`,
+              left: `${modal.clientX-15}px`,
               boxShadow: "0 8px 5px 2px #0005",
               display: "flex",
               flexDirection: "column",
               color: "#eee",
               zIndex: "999",
             }}
-            onBlur={() => setmodal()}
+            // onBlur={() => setmodal()}
+            // onMouseOut={() => setmodal()}
           >
             <input
               style={{
@@ -71,7 +73,7 @@ export default function Input({ value, setValue, setPreview }) {
               onChange={(e) => settisVal(e.target.value)}
               // defaultValue={value}
             />
-            <div style={{ backgroundColor: "#123" }}>
+            <div style={{ backgroundColor: "#234c" }}>
               <PropertyInputSwitch
                 value={value}
                 setValue={setVal}

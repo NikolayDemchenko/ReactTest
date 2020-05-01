@@ -11,7 +11,7 @@ function InputSwitch(props) {
     case "object":
       return <PropertiesPanel {...props} />;
     case "string":
-      return <StringInput {...props} />;
+      return null;
     case "color":
       return <Color {...props} />;
     case "number":   
