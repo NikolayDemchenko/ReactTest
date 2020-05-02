@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import Icon from "react-icons-kit";
 import { cross } from "react-icons-kit/icomoon/cross";
 import { StyleContext } from "../../ControlsContext";
-import Input from "../Inputs/newInputs/Input";
-import StringInput from "../Inputs/OldInputs/StringInput";
+import PopupInput from "../Inputs/PopupInput";
+
 export default function Property({
   property,
   setProperty: { setName, setValue },
@@ -56,14 +56,14 @@ export default function Property({
       }}
     >
       <div
-        onClick={() => console.log("Click!!!!")}
+        // onClick={() => console.log("Click!!!!")}
         title={"CSS свойство"}
         style={{
           padding: "0px 0.5em",
           // border: "1px solid #fff",
         }}
       >
-        <Input value={Object.keys(property)[0]} setValue={setName} />
+        <PopupInput value={Object.keys(property)[0]} setValue={setName} />
       </div>
       <div
         title={"Значение свойства"}
@@ -72,7 +72,7 @@ export default function Property({
           width: "80px",
         }}
       >
-        <Input
+        <PopupInput
           value={Object.values(property)[0]}
           setValue={setValue}
           setPreview={setPreview}

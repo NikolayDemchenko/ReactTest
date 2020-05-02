@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import AngleUp from "../../../../../Buttons/Angle/AngleUp";
-import AngleDown from "../../../../../Buttons/Angle/AngleDown";
+import AngleUp from "../../../../Buttons/Angle/AngleUp";
+import AngleDown from "../../../../Buttons/Angle/AngleDown";
 import Slider from "@material-ui/core/Slider";
-import { cssUnits } from "../../../../Class/HtmlCss";
-import Select from "../../../ModalWindows/Select";
+import { cssUnits } from "../../../Class/HtmlCss";
+import Select from "../../ModalWindows/Select";
 
 export default function NumberSlider(props) {
   // console.log("Render NumberSlider");
@@ -71,6 +71,7 @@ const ThisSlider = ({ value, unit, setPreview, setValue }) => {
             backgroundColor: "transparent",
             appearance: "none",
             textAlign: "right",
+            paddingLeft: "6px",
           }}
         >
           {_value}
