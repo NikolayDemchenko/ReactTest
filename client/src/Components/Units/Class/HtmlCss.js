@@ -1,4 +1,5 @@
 const units = [
+  { name: "none" },
   { name: "px" },
   { name: "%" },
   { name: "em" },
@@ -6,11 +7,15 @@ const units = [
   { name: "vw" },
   { name: "vh" },
   { name: "vmin" },
-  { name: "vmax" }
+  { name: "vmax" },
 ];
 
-const cssUnits = units.map(item => {
-  item.value = item.name;
+const cssUnits = units.map((item) => {
+  if (item.name === "none") {
+    item.value = "";
+  } else {
+    item.value = item.name;
+  }
   return item;
 });
 const _tags = [
@@ -23,10 +28,10 @@ const _tags = [
   { name: "h3" },
   { name: "h4" },
   { name: "h5" },
-  { name: "p" }
+  { name: "p" },
 ];
 
-const tags = _tags.map(item => {
+const tags = _tags.map((item) => {
   item.value = item.name;
   return item;
 });

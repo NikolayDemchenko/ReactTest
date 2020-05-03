@@ -3,8 +3,7 @@ export default function StylePropValueSelector(value) {
     return "object";
   } else {
     // Если есть пробел, то Строка
-    if (value.match(/\s./gm)) {
-      console.log("value.split(' ')", value.split(" "));
+    if (value.match(/\s./gm)) { 
       return "multi";
     } else {
       if (value.match(/url.+/gm)) { 

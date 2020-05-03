@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Popover from "../../ModalWindows/PopoverPopupState";
-import ModalInput from './Papaer'
+import Paper from './Paper'
 export default function PopupInput(props) {
 
 
@@ -13,12 +13,12 @@ export default function PopupInput(props) {
       <div
         style={{
           cursor: "pointer",
-          height: "1em",
+          height:props.height,        
         }}
       >
         {props.value ? props.value : "none"}
       </div>
-      <ModalInput {...props}/>
+      <Paper {...props}/>
     </Popover>
   );
 }

@@ -73,6 +73,7 @@ export default function Property({
         }}
       >
         <PopupInput
+          height="1em"
           value={Object.values(property)[0]}
           setValue={setValue}
           setPreview={setPreview}
