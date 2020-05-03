@@ -1,56 +1,38 @@
 import React, { useState } from "react";
 import { StyleContext } from "./ControlPanel/ControlsContext";
-import Tag from "./Component/Types/Tag";
 import { div } from "./Component/Types/Classes";
 import VerticalPanel from "./ControlPanel/VerticalPanel/VerticalPanel";
 import Preview from "./Preview";
 const NewApp = () => {
-  console.log("!!!NewApp!!!");
 
-  // const [preview, setPreview] = useState();
-  // console.log('preview', preview)
   const [tag, setTag] = useState(div);
   const [controlPanel, setPanel] = useState();
-  const [selected, setSelected] = useState("All style");
-  const [draggedProp, setDraggedProp] = useState();
-  const setControlPanel = (tag) => {
-    // console.log("tag", tag);
-    setPanel(tag);
+  const [selected, setSel] = useState("All style");
+  const [draggedProp, setDragProp] = useState();
+  const setControlPanel = (item) => {
+    // console.log("setControlPanel!!!");
+    setPanel(item);
   };
-  // console.log(
-  //   "controlPanel.setPreview",
-  //   controlPanel && controlPanel.setPreview
-  // );
+  const setSelected = (item) => {
+    // console.log("setSelected!!!");
+    setSel(item);
+  };
+  const setDraggedProp = (item) => {
+    // console.log("setDraggedProp!!!");
+    setDragProp(item);
+  };
+
+
+  console.log("!!!NewApp!!!");
   return (
     <div>
-      {/* {controlPanel && (
-        <StyleContext.Provider
-          value={{
-            controlPanel,
-            setControlPanel,
-            setPreview,
-            selected,
-            setSelected,
-            draggedProp,
-            setDraggedProp,
-          }}
-        >
-          <VerticalPanel />
-        </StyleContext.Provider>
-      )}
-      <Tag
-        unit={preview ? preview : unit}
-        setUnit={setUnit}
-        setControlPanel={setControlPanel}
-      />
-      {JSON.stringify(unit)} */}
+      {/* {JSON.stringify(unit)} */}
       {controlPanel && (
         <StyleContext.Provider
           value={{
             controlPanel,
             setControlPanel,
             selected,
-            // setPreview: controlPanel.setPreview,
             setSelected,
             draggedProp,
             setDraggedProp,
@@ -59,11 +41,7 @@ const NewApp = () => {
           <VerticalPanel />
         </StyleContext.Provider>
       )}
-      <Preview
-        tag={tag}
-        setTag={setTag}
-        setControlPanel={setControlPanel}
-      />
+      <Preview tag={tag} setTag={setTag} setControlPanel={setControlPanel} />
     </div>
   );
 };

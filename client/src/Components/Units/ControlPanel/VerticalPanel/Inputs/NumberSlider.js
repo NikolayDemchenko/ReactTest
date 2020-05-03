@@ -40,6 +40,7 @@ export default function NumberSlider(props) {
 const ThisSlider = ({ value, unit, setPreview, setValue }) => {
   const changeValue = (val) => {
     setValue(val + _unit);
+    _setValue(val)
   };
   const setUnit = (item) => {
     console.log("setUnit", item);

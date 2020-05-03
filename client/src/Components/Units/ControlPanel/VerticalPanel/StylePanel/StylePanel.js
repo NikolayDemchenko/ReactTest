@@ -4,21 +4,24 @@ import PropertiesPanel from "./PropertiesPanel";
 export default function StylePanel() {
   const {
     controlPanel,
-    setControlPanel,   
+    setControlPanel,
     selected,
     setSelected,
   } = React.useContext(StyleContext);
-// console.log('setPreview', controlPanel.setPreview)
   const { style } = controlPanel.tag.tagProps;
 
-  const { tag, setTag } = controlPanel;
+  const { tag, 
+    // setTag 
+  } = controlPanel;
   const setStyle = (style) => {
-    setTag({ ...tag, tagProps: { ...tag.tagProps, style } });
+    // console.log("setTag!!!");
+     // Временно отключено, должно быть выше уровнем чем NewApp
+    // setTag({ ...tag, tagProps: { ...tag.tagProps, style } });
+    // console.log("setControlPanel!!!");
     setControlPanel({
       ...controlPanel,
       tag: { ...tag, tagProps: { ...tag.tagProps, style } },
     });
-    // console.log('style', style)
   };
 
   const setPreviewAllStyle = (style) => {
@@ -40,11 +43,7 @@ export default function StylePanel() {
       : "rgba(140, 200, 255, 0.4)";
 
   return (
-    <div
-    
-      style={{ background: "rgba(30,40,57,.6)" }}
-      title="CSS (JSS) Стили"
-    >
+    <div style={{ background: "rgba(30,40,57,.6)" }} title="CSS (JSS) Стили">
       <div
         style={{
           display: "flex",
@@ -72,7 +71,7 @@ export default function StylePanel() {
         ></div>
       </div>
       <PropertiesPanel
-        name={"Base style"}       
+        name={"Base style"}
         style={style}
         setStyle={setStyle}
         selected={selected}

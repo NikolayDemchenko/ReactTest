@@ -1,3 +1,4 @@
+// CSS
 const units = [
   { name: "none" },
   { name: "px" },
@@ -8,6 +9,8 @@ const units = [
   { name: "vh" },
   { name: "vmin" },
   { name: "vmax" },
+  { name: "s" },
+  { name: "deg" },
 ];
 
 const cssUnits = units.map((item) => {
@@ -18,7 +21,50 @@ const cssUnits = units.map((item) => {
   }
   return item;
 });
-const _tags = [
+
+const cssfunc = [
+  { name: "attr" },
+  { name: "blur" },
+  { name: "brightness" },
+  { name: "calc" },
+  { name: "contrast" },
+  { name: "drop-shadow" },
+  { name: "grayscale" },
+  { name: "hue-rotate" },
+  { name: "invert" },
+  { name: "linear-gradient" },
+  { name: "opacity" },
+  { name: "perspective" },
+  { name: "radial-gradient" },
+  { name: "repeating-linear-gradient" },
+  { name: "repeating-radial-gradient" },
+  { name: "rotate" },
+  { name: "rotateX" },
+  { name: "rotateY" },
+  { name: "rotateZ" },
+  { name: "saturate" },
+  { name: "scale" },
+  { name: "scaleX" },
+  { name: "scaleY" },
+  { name: "scaleZ" },
+  { name: "sepia" },
+  { name: "skew" },
+  { name: "skewX" },
+  { name: "skewY" },
+  { name: "translate" },
+  { name: "translateX" },
+  { name: "translateY" },
+  { name: "translateZ" },
+  { name: "url" },
+];
+
+const cssFunc = cssfunc.map((item) => {
+    item.value = item.name;
+  return item;
+});
+
+// Html
+const tags = [
   { name: "div" },
   { name: "input" },
   { name: "textarea" },
@@ -31,8 +77,8 @@ const _tags = [
   { name: "p" },
 ];
 
-const tags = _tags.map((item) => {
+const htmlTags = tags.map((item) => {
   item.value = item.name;
   return item;
 });
-export { cssUnits, tags };
+export { cssUnits, htmlTags , cssFunc};

@@ -18,7 +18,8 @@ export default function PropertiesPanel({
   setStyle,
   setPreview,
   deletePanel,
-}) {
+}) { 
+
   // console.log("name", name);
   // console.log("selected", selected);
   const {
@@ -27,10 +28,10 @@ export default function PropertiesPanel({
     setSelected,
   } = React.useContext(StyleContext);
   const addProperty = () => {
-    setStyle({ ["property"]: "value", ...style });
+    setStyle({ property: "value", ...style });
   };
   const addPseudoClass = () => {
-    setStyle({ ...style, ["&:"]: {} });
+    setStyle({ ...style, "&:": {} });
   };
   const addMedia = () => {
     let _style = { ...style };
@@ -39,7 +40,7 @@ export default function PropertiesPanel({
         delete _style[key];
       }
     }
-    setStyle({ ..._style, ["@media"]: {}, ...style });
+    setStyle({ ..._style, "@media": {}, ...style });
   };
   const setPreviewProperty = (value) => {
     setPreview({ ...style, ...value });

@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import Popover from "../../ModalWindows/PopoverPopupState";
-import Paper from './Paper'
+import Paper from "./Paper";
 export default function PopupInput(props) {
-
-
   return (
     <Popover
       PaperProps={{
@@ -13,12 +11,13 @@ export default function PopupInput(props) {
       <div
         style={{
           cursor: "pointer",
-          height:props.height,        
+          height: props.height,
+          width: props.width,
         }}
       >
         {props.value ? props.value : "none"}
       </div>
-      <Paper {...props}/>
+      <Paper {...props} />
     </Popover>
   );
 }

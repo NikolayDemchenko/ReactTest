@@ -4,16 +4,18 @@ import { StyleContext } from "../ControlsContext";
 import jss from "jss";
 import preset from "jss-preset-default";
 import Select from "../ModalWindows/Select";
-import { tags } from "../../Class/HtmlCss";
+import { htmlTags } from "../../Class/HtmlCss";
 export default function VerticalPanel() {
-  const { controlPanel, setControlPanel,  } = React.useContext(
-    StyleContext
-  );
-  const {tag, setTag, setPreview } = controlPanel;
+  const { controlPanel, setControlPanel } = React.useContext(StyleContext);
+  const {
+    tag,
+    setTag,
+    // , setPreview
+  } = controlPanel;
 
   const setTagType = ({ value: tagType }) => {
     setTag({ ...tag, tagType });
-    setPreview({ ...tag, tagType });
+    // setPreview({ ...tag, tagType });
     setControlPanel({
       ...controlPanel,
       tag: { ...tag, tagType },
@@ -28,7 +30,7 @@ export default function VerticalPanel() {
     position: "fixed",
     zIndex: 1,
     top: 0,
-    // overflowX: "auto",
+    overflowX: "auto",
     backgroundColor: "#456c",
     color: "rgba(140, 200, 255, 0.8)",
     boxShadow: "2px 10px 5px 2px #00000055",
@@ -41,7 +43,7 @@ export default function VerticalPanel() {
       style,
     })
     .attach();
-    // console.log('tag', tag)
+  // console.log('tag', tag)
   return (
     <div className={classes.style}>
       <div
@@ -49,11 +51,14 @@ export default function VerticalPanel() {
           backgroundColor: "#456a",
         }}
       >
-        <Select defaultItem={tag.tagType} setItem={setTagType} listItems={tags} />
+        <Select
+          defaultItem={tag.tagType}
+          setItem={setTagType}
+          listItems={htmlTags}
+        />
       </div>
       <StylePanel />
-      <div> Панель для настройки стиля тега</div>
+      <div style={{paddingBottom:"4em"}}/> 
     </div>
   );
 }
-
