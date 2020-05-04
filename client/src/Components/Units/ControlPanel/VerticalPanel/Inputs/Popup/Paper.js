@@ -27,6 +27,7 @@ export default function Paper({ value, setValue, setPreview }) {
           outline: "none",
           border: 0,
           color: "#eee",
+          fontSize:"16px"
         }}
         type={"text"}
         onKeyPress={handleKeyPress}
