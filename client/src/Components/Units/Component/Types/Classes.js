@@ -88,24 +88,26 @@ const baseDiv = {
       alignSelf: "center",
       height: "700px",
       width: "700px",
-      backgroundColor: "#678",
       background:
-        "url(https://avatars.mds.yandex.net/get-pdb/1366512/fd5d003c-7bc3-4f0d-9af2-2e57c88be5f9/s1200)",
+        "repeating-linear-gradient(-45deg, #fff, #fff 25px, #e2edc1 25px, #e2edc1 50px) fixed",
+      backgroundColor: "#678",
+      // background:
+      //   "url(https://avatars.mds.yandex.net/get-pdb/1366512/fd5d003c-7bc3-4f0d-9af2-2e57c88be5f9/s1200)",
       margin: "auto",
       marginTop: "60px",
       marginBottom: "60px",
-      '@media (max-width: 800px)': {       
-          width: "200px",     
+      "@media (max-width: 800px)": {
+        width: "200px",
       },
       "&:hover": {
         height: "702px",
         width: "702px",
-        boxShadow: "0 8px 5px 2px #0005",
+        boxShadow: "0 8px 5px 2px #0005, inset 0 8px 5px 2px #ffffff",
         transition: "0.2s",
         marginBottom: "58px",
-        '@media (max-width: 800px)': {       
-            width: "200px",     
-        }
+        "@media (max-width: 800px)": {
+          width: "200px",
+        },
       },
       "&:active": {
         height: "700px",
@@ -113,10 +115,10 @@ const baseDiv = {
         transition: "0s",
         boxShadow: "none",
         marginBottom: "60px",
-        '@media (max-width: 800px)': {       
-            width: "200px",     
-        }
-      }
+        "@media (max-width: 800px)": {
+          width: "200px",
+        },
+      },
       // color,
       // border,
       // outline,
@@ -130,7 +132,7 @@ const baseDiv = {
   },
 };
 
-const div =baseDiv
+const div = baseDiv;
 // const div = JSON.parse(str);
 
 const newType = (type) => {

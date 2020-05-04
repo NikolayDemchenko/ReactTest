@@ -1,5 +1,5 @@
 import React from "react";
-import PopupInput from "../Inputs/PopupInput";
+import PopupInput from "./Popup/PopupInput";
 
 export default function MultiInput({ value, setValue, setPreview }) {
   const arr = value.split(" ");

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Icon from "react-icons-kit";
 import { cross } from "react-icons-kit/icomoon/cross";
 import { StyleContext } from "../../ControlsContext";
-import PopupInput from "../Inputs/PopupInput";
+import PopupInput from "../Inputs/Popup/PopupInput";
 
 export default function Property({
   property,

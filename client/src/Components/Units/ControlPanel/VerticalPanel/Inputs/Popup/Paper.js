@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import PropertyInputSwitch from "./Switch/PropertyInputSwitch";
+import PropertyInputSwitch from "../Switch/PropertyInputSwitch";
 export default function Paper({ value, setValue, setPreview }) {
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
