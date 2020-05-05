@@ -3,7 +3,12 @@ import PopupInput from "./Popup/PopupInput";
 
 export default function MultiInput({ value, setValue, setPreview }) {
   const arr = value.split(" ");
-
+  console.log("arr", arr);
+  arr.forEach((item) => {
+    if (item.match(/,$/)) {
+      console.log("item", item);
+    }
+  });
   return arr.map((val, index) => {
     const setVal = (newValue) => {
       if (index !== -1) {
