@@ -30,7 +30,7 @@ export default function VerticalPanel() {
     position: "fixed",
     zIndex: 1,
     top: 0,
-    fontSize:"16px",
+    // fontSize:"16px",
     overflowX: "auto",
     backgroundColor: "#456c",
     color: "rgba(140, 200, 255, 0.8)",

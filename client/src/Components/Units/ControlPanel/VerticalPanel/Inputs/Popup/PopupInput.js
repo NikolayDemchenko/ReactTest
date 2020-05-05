@@ -7,7 +7,7 @@ export default function PopupInput(props) {
       PaperProps={{
         style: { background: "rgba(43,50,66,.95)", border: "1px solid #abc" },
       }}
-      // anchorPosition =	{{ left: 10, top: 10 }}
+      anchorPosition =	{{ left: 10, top: 10 }}
       // anchorOrigin={{ vertical: "top", horizontal: "left" }}
     >
       <div

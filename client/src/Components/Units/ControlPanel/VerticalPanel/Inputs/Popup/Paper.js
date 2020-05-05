@@ -19,21 +19,22 @@ export default function Paper({ value, setValue, setPreview }) {
       }}
     >
       <input
+        size={value.length>10?value.length-5:value.length}
         style={{
           background: "transparent",
-          width: `${value.length}ex`,
+          // width: `${value.length}ch`,
           minWidth: "80px",
           paddingLeft: "4px",
           outline: "none",
           border: 0,
           color: "#eee",
-          fontSize:"16px"
+          fontSize: "15px",
         }}
         type={"text"}
         onKeyPress={handleKeyPress}
-        onBlur={(e) => setValue(e.target.value)}      
+        onBlur={(e) => setValue(e.target.value)}
         value={val}
-        onChange={(e) => settisVal(e.target.value)}       
+        onChange={(e) => settisVal(e.target.value)}
       />
       <div style={{ backgroundColor: "#234c" }}>
         <PropertyInputSwitch
