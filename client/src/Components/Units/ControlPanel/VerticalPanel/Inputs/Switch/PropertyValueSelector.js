@@ -14,7 +14,8 @@ export default function StylePropValueSelector(value) {
         if (value.match(/^#\w+|^rgba|^rgb/gm)) {
           return "color";
           // Если есть цифры
-        } else if (value.match(/^\d/gm)) {
+        // } else if (value.match(/^\d/gm)) {
+        } else if (value.match(/^\d+|^-\d+/gm)) {
           return "number";
         } else {
           return "string";

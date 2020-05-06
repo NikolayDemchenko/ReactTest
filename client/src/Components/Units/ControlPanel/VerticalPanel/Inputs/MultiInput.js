@@ -25,10 +25,10 @@ export default function MultiInput({ value, setValue, setPreview }) {
       }
       setPreview(arr.join(" "));
     };
-    let width;
+    let padding = "2px 6px";
     // Если есть обозначение цвета
     if (val.match(/#\w+|rgba|rgb/gm)) {
-      width = "10em";
+      padding = "0px 6px 6px";
     }
 
     return (
@@ -39,11 +39,11 @@ export default function MultiInput({ value, setValue, setPreview }) {
           border: "1px solid #ccc3",
           // margin: "2px",
           textAlign: "center",
-          padding: "2px 6px",
+          padding,
         }}
       >
         <PopupInput
-          width={width}
+          // width={width}
           value={val}
           setValue={setVal}
           setPreview={setPrew}
