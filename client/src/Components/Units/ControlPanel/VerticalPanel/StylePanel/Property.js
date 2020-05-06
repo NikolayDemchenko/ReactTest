@@ -17,7 +17,8 @@ export default function Property({
   const [Y, setY] = useState();
   const [copy, setcopy] = useState(false);
   const [target, setTarget] = useState();
-
+const propKey=Object.keys(property)[0]
+const propValue=Object.values(property)[0]
   return (
     <div
       draggable
@@ -56,17 +57,17 @@ export default function Property({
       }}
     >
       <div
-        // onClick={() => console.log("Click!!!!")}
         title={"CSS свойство"}
         style={{
           padding: "0px 0.5em",
           // border: "1px solid #fff",
+          width:`${propKey.length/2}em`
         }}
       >
-        <PopupInput value={Object.keys(property)[0]} setValue={setName} />
+        <PopupInput value={propKey} setValue={setName} />
       </div>
       <div
-        title={"Значение свойства"}
+        title={propValue}
         style={{
           overflow: "hidden",
           width: "80px",
@@ -74,7 +75,7 @@ export default function Property({
       >
         <PopupInput
           height="1em"
-          value={Object.values(property)[0]}
+          value={propValue}
           setValue={setValue}
           setPreview={setPreview}
         />

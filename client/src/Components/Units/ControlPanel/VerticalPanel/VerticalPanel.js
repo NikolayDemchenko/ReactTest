@@ -33,7 +33,7 @@ export default function VerticalPanel() {
     // fontSize:"16px",
     overflowX: "auto",
     backgroundColor: "#456c",
-    color: "rgba(140, 200, 255, 0.8)",
+    // color: "rgba(140, 200, 255, 0.8)",
     boxShadow: "2px 10px 5px 2px #00000055",
     "&::-webkit-scrollbar": { width: "4px" },
     "&::-webkit-scrollbar-thumb": { backgroundColor: "#567" },

@@ -6,25 +6,27 @@ import { cssUnits } from "../../../Class/HtmlCss";
 import Select from "../../ModalWindows/Select";
 
 export default function NumberSlider(props) {
-  // console.log("Render NumberSlider");
+  // console.log("Render NumberSlider", props.value.match(/\-/gm)[0]);
+
+  const value = props.value.replace(/\-/gm, "");
 
   const parseNumber = (value) => {
-    // console.log("value", typeof value);
     if (typeof value === "string") {
-      const newVal = value.match(/\d/gm);
-      // console.log("parseNumber", newVal);
-      return newVal ? Number(newVal.join("")) : null;
+      const newVal = value.match(/\d+/gm);
+      // console.log("parseNumber", Number(newVal));
+      return newVal ? Number(newVal.join('')) : null;
     } else {
-      console.log("parseNumber@2", value);
+      console.log("parseNumber2", value);
       return value;
     }
   };
   const parseString = (value) => {
     if (typeof value === "string") {
-      const newVal = value.match(/\D/gm);
-      // console.log('newVal', newVal)
-      return newVal ? newVal.join("") : "";
+      const newVal = value.match(/\D+/gm);
+      // console.log("newVal", newVal);
+      return newVal ? newVal.join('') : "";
     } else {
+      console.log("parseString2", value);
       return "";
     }
   };
@@ -32,18 +34,20 @@ export default function NumberSlider(props) {
   return (
     <ThisSlider
       {...props}
-      value={parseNumber(props.value)}
-      unit={parseString(props.value)}
+      value={parseNumber(value)}
+      unit={parseString(value)}
     />
   );
 }
+
+// Слайдер
 const ThisSlider = ({ value, unit, setPreview, setValue }) => {
   const changeValue = (val) => {
     setValue(val + _unit);
-    _setValue(val)
+    _setValue(val);
   };
   const setUnit = (item) => {
-    console.log("setUnit", item);
+    // console.log("setUnit", item);
     setunit(item.value);
     setValue(_value + item.value);
   };
@@ -91,6 +95,7 @@ const ThisSlider = ({ value, unit, setPreview, setValue }) => {
           changeValue(val);
           setMaxValue(val < 5 ? 10 : val * 2);
         }}
+        min={0}
         max={maxValue}
         orientation="vertical"
         value={_value}

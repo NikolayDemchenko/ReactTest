@@ -13,18 +13,15 @@ export default function MultiInput({ value, setValue, setPreview }) {
       val = val.replace(/,$/, "");
     }
 
-    const setVal = (newValue) => {
-      if (index !== -1) {
-        arr[index] = newValue + comma;
-      }
-      setValue(arr.join(" "));
+    const updateValue = (foo) => {
+      return (newValue) => {
+        if (index !== -1) {
+          arr[index] = newValue + comma;
+        }
+        foo(arr.join(" "));
+      };
     };
-    const setPrew = (newValue) => {
-      if (index !== -1) {
-        arr[index] = newValue + comma;
-      }
-      setPreview(arr.join(" "));
-    };
+   
     let padding = "2px 6px";
     // Если есть обозначение цвета
     if (val.match(/#\w+|rgba|rgb/gm)) {
@@ -45,8 +42,8 @@ export default function MultiInput({ value, setValue, setPreview }) {
         <PopupInput
           // width={width}
           value={val}
-          setValue={setVal}
-          setPreview={setPrew}
+          setValue={updateValue(setValue)}
+          setPreview={updateValue(setPreview)}
         />
       </div>
     );
