@@ -7,18 +7,33 @@ export default function PopupInput(props) {
       PaperProps={{
         style: { background: "rgba(43,50,66,.95)", border: "1px solid #abc" },
       }}
-      anchorPosition =	{{ left: 10, top: 10 }}
-      // anchorOrigin={{ vertical: "top", horizontal: "left" }}
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "center",
+      }}
+      anchorOrigin={{ vertical: "top", horizontal: "center" }}
     >
-      <div
-        style={{
-          cursor: "pointer",
-          height: props.height,
-          width: props.width,
-        }}
-      >
-        {props.value ? props.value : "none"}
-      </div>
+      {!props.value.match(/^#\w+|^rgba|^rgb/gm) ? (
+        <div
+          style={{
+            cursor: "pointer",
+            height: props.height,
+            width: props.width,
+          }}
+        >
+          {props.value ? props.value : "none"}
+        </div>
+      ) : (
+        <div
+          style={{
+            cursor: "pointer",
+            marginTop:"0.2em",
+            height: "1em",
+            width: "1.2em",
+            backgroundColor:props.value
+          }}
+        />
+      )}
       <Paper {...props} />
     </Popover>
   );

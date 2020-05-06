@@ -3,15 +3,12 @@ import Select from "../../ModalWindows/Select";
 import PopupInput from "./Popup/PopupInput";
 import { cssFunc } from "../../../Class/HtmlCss";
 export default function FuncInput({ value, setValue, setPreview }) {
-  console.log("FuncInput");
+  // console.log("FuncInput");
+  
   const funcType = /^(?!\(.*\))[\w,\-]+/gm.exec(value)[0];
   const funcInnerValue =/\(.*\)/gm.exec(value)&& /\(.*\)/gm.exec(value)[0].replace(/[\(\)]/gm, "");
   const funcOuterValue =/(?!.*\)).+$/gm.exec(value)&& /(?!.*\)).+$/gm.exec(value)[0].replace(/^\s/gm, "")
 
-  // console.log("funcType", funcType);
-  console.log("funcInnerValue", funcInnerValue);
-  // console.log("funcOuterValue", funcOuterValue);
-  //   console.log("value", value);
 
   const updateFunc = (foo, oldvalue) => {
     return function (newvalue) {

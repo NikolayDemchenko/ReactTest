@@ -3,22 +3,25 @@ import PopupInput from "./Popup/PopupInput";
 
 export default function MultiInput({ value, setValue, setPreview }) {
   const arr = value.split(" ");
-  console.log("arr", arr);
-  arr.forEach((item) => {
-    if (item.match(/,$/)) {
-      console.log("item", item);
-    }
-  });
+  // console.log("arr", arr);
+
   return arr.map((val, index) => {
+    // Забота с запятой
+    let comma = "";
+    if (val.match(/,$/)) {
+      comma = val.match(/,$/)[0];
+      val = val.replace(/,$/, "");
+    }
+
     const setVal = (newValue) => {
       if (index !== -1) {
-        arr[index] = newValue;
+        arr[index] = newValue + comma;
       }
       setValue(arr.join(" "));
     };
     const setPrew = (newValue) => {
       if (index !== -1) {
-        arr[index] = newValue;
+        arr[index] = newValue + comma;
       }
       setPreview(arr.join(" "));
     };

@@ -10,8 +10,8 @@ export default function StylePropValueSelector(value) {
         return "multi";
       } else {
         // Если есть обозначение цвета
-        const rgba = "rgba";
-        if (value.match(new RegExp("#\\w+|" + rgba + "|rgb", "gm"))) {
+        // const rgba = "rgba";
+        if (value.match(/^#\w+|^rgba|^rgb/gm)) {
           return "color";
           // Если есть цифры
         } else if (value.match(/^\d/gm)) {

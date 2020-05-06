@@ -19,10 +19,10 @@ export default function Paper({ value, setValue, setPreview }) {
       }}
     >
       <input
-        size={value.length>10?value.length-5:value.length}
+        // size={value.length>10?value.length:value.length}
         style={{
           background: "transparent",
-          // width: `${value.length}ch`,
+          width: `${value.length*0.5}em`,
           minWidth: "80px",
           paddingLeft: "4px",
           outline: "none",

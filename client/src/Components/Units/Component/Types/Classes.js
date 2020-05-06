@@ -119,15 +119,6 @@ const baseDiv = {
           width: "200px",
         },
       },
-      // color,
-      // border,
-      // outline,
-      // fontFamily,
-      // fontWeight,
-      // fontStyle,
-      // fontSize,
-      // textDecoration,
-      // textAlign
     },
   },
 };
