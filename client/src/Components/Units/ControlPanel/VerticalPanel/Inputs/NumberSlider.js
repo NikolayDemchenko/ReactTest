@@ -6,15 +6,20 @@ import { cssUnits } from "../../../Class/HtmlCss";
 import Select from "../../ModalWindows/Select";
 
 export default function NumberSlider(props) {
-  // console.log("Render NumberSlider", props.value.match(/\-/gm)[0]);
+  // console.log(
+  //   "Render NumberSlider",
+  //   /\W/gm.exec(props.value) && /\W/gm.exec(props.value)[0]
+  // );
 
-  const value = props.value.replace(/\-/gm, "");
-
+  const value = props.value.replace(/\W/gm, "");
+  const sing = props.value.replace(/\w/gm, "");
+  // console.log("props.value", props.value);
+  // console.log("sing", sing);
   const parseNumber = (value) => {
     if (typeof value === "string") {
       const newVal = value.match(/\d+/gm);
       // console.log("parseNumber", Number(newVal));
-      return newVal ? Number(newVal.join('')) : null;
+      return newVal ? Number(newVal.join("")) : null;
     } else {
       console.log("parseNumber2", value);
       return value;
@@ -24,7 +29,7 @@ export default function NumberSlider(props) {
     if (typeof value === "string") {
       const newVal = value.match(/\D+/gm);
       // console.log("newVal", newVal);
-      return newVal ? newVal.join('') : "";
+      return newVal ? newVal.join("") : "";
     } else {
       console.log("parseString2", value);
       return "";
@@ -34,6 +39,7 @@ export default function NumberSlider(props) {
   return (
     <ThisSlider
       {...props}
+      sing={sing}
       value={parseNumber(value)}
       unit={parseString(value)}
     />
@@ -41,15 +47,22 @@ export default function NumberSlider(props) {
 }
 
 // Слайдер
-const ThisSlider = ({ value, unit, setPreview, setValue }) => {
+const ThisSlider = ({ value, unit, sing, setPreview, setValue }) => {
   const changeValue = (val) => {
-    setValue(val + _unit);
+    console.log("val", val);
+    setValue(sing + val + _unit);
     _setValue(val);
+  };
+  const oneChangeValue = (val) => {
+    const newVal = _value + val;
+    console.log("newVal", newVal);
+    setValue(sing + newVal + _unit);
+    _setValue(newVal);
   };
   const setUnit = (item) => {
     // console.log("setUnit", item);
     setunit(item.value);
-    setValue(_value + item.value);
+    setValue(sing + _value + item.value);
   };
   const [_unit, setunit] = useState(unit);
   // console.log("unit", _unit);
@@ -59,9 +72,7 @@ const ThisSlider = ({ value, unit, setPreview, setValue }) => {
   // console.log("maxValue", maxValue);
   return (
     <div
-      onWheel={(e) =>
-        e.deltaY < 0 ? changeValue(_value + 1) : changeValue(_value - 1)
-      }
+      onWheel={(e) => (e.deltaY < 0 ? oneChangeValue(+1) : oneChangeValue(-1))}
       style={{
         display: "flex",
         flexDirection: "column",
@@ -79,13 +90,17 @@ const ThisSlider = ({ value, unit, setPreview, setValue }) => {
             paddingLeft: "6px",
           }}
         >
+          {sing}
           {_value}
         </div>
         <Select defaultItem={_unit} setItem={setUnit} listItems={cssUnits} />
       </div>
       <AngleUp onClick={() => changeValue(_value + 1)} />
       <Slider
-        style={{ margin: "0 auto", color: "#acf" }}
+        style={{
+          margin: "0 auto",
+          color: "#acf",
+        }}
         onChange={(_, val) => {
           // console.log("val", val);
           _setValue(val);
@@ -95,7 +110,6 @@ const ThisSlider = ({ value, unit, setPreview, setValue }) => {
           changeValue(val);
           setMaxValue(val < 5 ? 10 : val * 2);
         }}
-        min={0}
         max={maxValue}
         orientation="vertical"
         value={_value}
