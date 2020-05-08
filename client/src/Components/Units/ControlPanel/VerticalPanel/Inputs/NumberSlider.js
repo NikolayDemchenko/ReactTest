@@ -110,7 +110,7 @@ const ThisSlider = ({ value, unit, sign, setPreview, setValue }) => {
   // console.log("unit", _unit);
   const [_value, _setValue] = useState(value);
   // console.log("value", _value);
-  const [maxValue, setMaxValue] = useState(value < 5 ? 10 : value * 2);
+  const [maxValue, setMaxValue] = useState(value < 25 ? 50 : value * 2);
   // console.log("maxValue", maxValue);
   return (
     <div
@@ -151,7 +151,7 @@ const ThisSlider = ({ value, unit, sign, setPreview, setValue }) => {
         }}
         onChangeCommitted={(_, val) => {
           changeValue(val);
-          setMaxValue(val < 5 ? 10 : val * 2);
+          setMaxValue(val < 25 ? 50 : val * 2);
         }}
         max={maxValue}
         orientation="vertical"
