@@ -11,14 +11,13 @@ export default function NumberSlider(props) {
   //   /\W/gm.exec(props.value) && /\W/gm.exec(props.value)[0]
   // );
 
-  const value = props.value.replace(/\W/gm, "");
-  const sing = props.value.replace(/\w/gm, "");
-  // console.log("props.value", props.value);
+  const value = props.value.replace(/\-/gm, "");
+  const sign = props.value.replace(/[^-].+/gm, "");
   // console.log("sing", sing);
   const parseNumber = (value) => {
     if (typeof value === "string") {
-      const newVal = value.match(/\d+/gm);
-      // console.log("parseNumber", Number(newVal));
+      const newVal = value.match(/[^-]\d*\.?\d+/gm);
+      console.log("parseNumber", Number(newVal));
       return newVal ? Number(newVal.join("")) : null;
     } else {
       console.log("parseNumber2", value);
@@ -27,7 +26,7 @@ export default function NumberSlider(props) {
   };
   const parseString = (value) => {
     if (typeof value === "string") {
-      const newVal = value.match(/\D+/gm);
+      const newVal = value.match(/[^-\d+\.?\d+]\w*/gm);
       // console.log("newVal", newVal);
       return newVal ? newVal.join("") : "";
     } else {
@@ -39,7 +38,7 @@ export default function NumberSlider(props) {
   return (
     <ThisSlider
       {...props}
-      sing={sing}
+      sign={sign}
       value={parseNumber(value)}
       unit={parseString(value)}
     />
@@ -47,22 +46,65 @@ export default function NumberSlider(props) {
 }
 
 // Слайдер
-const ThisSlider = ({ value, unit, sing, setPreview, setValue }) => {
+const ThisSlider = ({ value, unit, sign, setPreview, setValue }) => {
+
+  console.log("value", value);
+
+  const getNumberSign = (x) => {
+    if (x !== null) {
+      return x.toString().includes(".")
+        ? x.toString().split(".").pop().length
+        : 0;
+    } else {
+      return 0;
+    }
+  };
+  // value = Number(value.toFixed(2));
+  // console.log("newVal", newVal);
+  const [numberSign, setnumberSign] = useState(getNumberSign(value));
+
+  const setStep = () => {
+    let step = 1;
+    for (let i = 0; i < numberSign; i++) {
+      step = step / 10;
+    }
+    return step;
+  };
+
+  const [step, setstep] = useState(setStep());
+
   const changeValue = (val) => {
-    console.log("val", val);
-    setValue(sing + val + _unit);
-    _setValue(val);
+    if (String(val).match(/^\-/gm)) {
+      const _sign = String(val).replace(/\w/gm, "");
+      const value = String(val).replace(/^\-/gm, "");
+      if (sign === _sign) {
+        const val1 = Number(value) + _unit;
+        setValue(val1);
+        setPreview(val1);
+        console.log("val1", val1);
+      } else {
+        const val2 = "-" + Number(value) + _unit;
+        setValue(val2);
+        setPreview(val2);
+        console.log("val2", val2);
+      }
+      _setValue(Number(value));
+      console.log("Number(value)", Number(value));
+    } else {
+      const roundVal = Number(val.toFixed(numberSign));
+      const val3 = sign + roundVal + _unit;
+      setValue(val3);
+      setPreview(val3);
+      _setValue(roundVal);
+      console.log("val3", val3);
+      console.log("val", roundVal);
+    }
   };
-  const oneChangeValue = (val) => {
-    const newVal = _value + val;
-    console.log("newVal", newVal);
-    setValue(sing + newVal + _unit);
-    _setValue(newVal);
-  };
+
   const setUnit = (item) => {
     // console.log("setUnit", item);
     setunit(item.value);
-    setValue(sing + _value + item.value);
+    setValue(sign + _value + item.value);
   };
   const [_unit, setunit] = useState(unit);
   // console.log("unit", _unit);
@@ -72,7 +114,9 @@ const ThisSlider = ({ value, unit, sing, setPreview, setValue }) => {
   // console.log("maxValue", maxValue);
   return (
     <div
-      onWheel={(e) => (e.deltaY < 0 ? oneChangeValue(+1) : oneChangeValue(-1))}
+      onWheel={(e) =>
+        e.deltaY < 0 ? changeValue(_value + step) : changeValue(_value - step)
+      }
       style={{
         display: "flex",
         flexDirection: "column",
@@ -90,21 +134,20 @@ const ThisSlider = ({ value, unit, sing, setPreview, setValue }) => {
             paddingLeft: "6px",
           }}
         >
-          {sing}
+          {sign}
           {_value}
         </div>
         <Select defaultItem={_unit} setItem={setUnit} listItems={cssUnits} />
       </div>
-      <AngleUp onClick={() => changeValue(_value + 1)} />
+      <AngleUp onClick={() => changeValue(_value + step)} />
       <Slider
         style={{
           margin: "0 auto",
           color: "#acf",
         }}
         onChange={(_, val) => {
-          // console.log("val", val);
           _setValue(val);
-          setPreview(val + _unit);
+          setPreview(sign + val + _unit);
         }}
         onChangeCommitted={(_, val) => {
           changeValue(val);
@@ -113,8 +156,9 @@ const ThisSlider = ({ value, unit, sing, setPreview, setValue }) => {
         max={maxValue}
         orientation="vertical"
         value={_value}
+        step={step}
       />
-      <AngleDown onClick={() => changeValue(_value - 1)} />
+      <AngleDown onClick={() => changeValue(_value - step)} />
     </div>
   );
 };

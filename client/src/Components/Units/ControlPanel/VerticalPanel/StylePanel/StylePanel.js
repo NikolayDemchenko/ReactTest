@@ -11,12 +11,12 @@ export default function StylePanel() {
   const { style } = controlPanel.tag.tagProps;
 
   const { tag, 
-    // setTag 
+    setTag 
   } = controlPanel;
   const setStyle = (style) => {
     // console.log("setTag!!!");
      // Временно отключено, должно быть выше уровнем чем NewApp
-    // setTag({ ...tag, tagProps: { ...tag.tagProps, style } });
+    setTag({ ...tag, tagProps: { ...tag.tagProps, style } });
     // console.log("setControlPanel!!!");
     setControlPanel({
       ...controlPanel,

@@ -86,7 +86,7 @@ const baseDiv = {
       display: "flex",
       flexDirection: "row",
       alignSelf: "center",
-      height: "700px",
+      height: "700.55px",
       width: "700px",
       background:
         "repeating-linear-gradient(-45deg, #fff, #fff 25px, #e2edc1 25px, #e2edc1 50px) fixed",
