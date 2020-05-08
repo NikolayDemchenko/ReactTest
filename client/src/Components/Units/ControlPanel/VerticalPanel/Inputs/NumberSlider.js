@@ -17,7 +17,7 @@ export default function NumberSlider(props) {
   const parseNumber = (value) => {
     if (typeof value === "string") {
       const newVal = value.match(/[^-]\d*\.?\d+/gm);
-      console.log("parseNumber", Number(newVal));
+      // console.log("parseNumber", Number(newVal));
       return newVal ? Number(newVal.join("")) : null;
     } else {
       console.log("parseNumber2", value);
@@ -59,8 +59,8 @@ const ThisSlider = ({ value, unit, sign, setPreview, setValue }) => {
       return 0;
     }
   };
-  // value = Number(value.toFixed(2));
-  // console.log("newVal", newVal);
+
+  // Количество знаков после запятой
   const [numberSign, setnumberSign] = useState(getNumberSign(value));
 
   const setStep = () => {
@@ -75,7 +75,7 @@ const ThisSlider = ({ value, unit, sign, setPreview, setValue }) => {
 
   const changeValue = (val) => {
     if (String(val).match(/^\-/gm)) {
-      const _sign = String(val).replace(/\w/gm, "");
+      const _sign = String(val).replace(/[\w\.]+/gm, "");
       const value = String(val).replace(/^\-/gm, "");
       if (sign === _sign) {
         const val1 = Number(value) + _unit;
@@ -89,7 +89,7 @@ const ThisSlider = ({ value, unit, sign, setPreview, setValue }) => {
         console.log("val2", val2);
       }
       _setValue(Number(value));
-      console.log("Number(value)", Number(value));
+      // console.log("Number(value)", Number(value));
     } else {
       const roundVal = Number(val.toFixed(numberSign));
       const val3 = sign + roundVal + _unit;
@@ -97,7 +97,7 @@ const ThisSlider = ({ value, unit, sign, setPreview, setValue }) => {
       setPreview(val3);
       _setValue(roundVal);
       console.log("val3", val3);
-      console.log("val", roundVal);
+      // console.log("roundVal3", roundVal);
     }
   };
 
