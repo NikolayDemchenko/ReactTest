@@ -7,7 +7,7 @@ export default function FuncInput({ value, setValue, setPreview }) {
   
   const funcType = /^(?!\(.*\))[\w,\-]+/gm.exec(value)[0];
 
-  const funcInnerValue =/\(.*\)/gm.exec(value)&& /\(.*\)/gm.exec(value)[0].replace(/[\(\)]/gm, "");
+  const funcInnerValue =/\(.*\)/gm.exec(value)&& /\(.*\)/gm.exec(value)[0].replace(/^\(|\)$/gm, "");
 
   const funcOuterValue =/(?!.*\)).+$/gm.exec(value)&& /(?!.*\)).+$/gm.exec(value)[0].replace(/^\s/gm, "")
 

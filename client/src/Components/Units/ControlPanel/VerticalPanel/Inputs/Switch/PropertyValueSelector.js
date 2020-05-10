@@ -2,7 +2,7 @@ export default function StylePropValueSelector(value) {
   if (typeof value === "object") {
     return "object";
   } else {
-    if (value.match(/^(?!^rgba\(.*\)|\d|@).*\(.*\).*$/gm)) {
+    if (value.match(/^(?!^rgba\(.*\)|\d|@|\W).*\(.*\).*$/gm)) {
       return "func";
     } else {
       // Если есть пробел, то мультиинпут
