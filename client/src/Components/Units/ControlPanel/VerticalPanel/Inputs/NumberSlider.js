@@ -1,19 +1,15 @@
 import React, { useState } from "react";
-import AngleUp from "../../../../Buttons/Angle/AngleUp";
-import AngleDown from "../../../../Buttons/Angle/AngleDown";
+import Icon from "react-icons-kit";
+import { angleDown } from "react-icons-kit/fa/angleDown";
+import { angleUp } from "react-icons-kit/fa/angleUp";
 import Slider from "@material-ui/core/Slider";
 import { cssUnits } from "../../../Class/HtmlCss";
 import Select from "../../ModalWindows/Select";
 
 export default function NumberSlider(props) {
-  // console.log(
-  //   "Render NumberSlider",
-  //   /\W/gm.exec(props.value) && /\W/gm.exec(props.value)[0]
-  // );
-
   const value = props.value.replace(/\-/gm, "");
-  const sign = props.value.replace(/[^-].+/gm, "");
-  // console.log("sing", sing);
+  const sign = props.value.replace(/[^-]\d*/gm, "");
+  console.log("sign1", sign);
   const parseNumber = (value) => {
     if (typeof value === "string") {
       const newVal = value.match(/[^-]\d*\.?\d+/gm);
@@ -24,10 +20,11 @@ export default function NumberSlider(props) {
       return value;
     }
   };
+
   const parseString = (value) => {
     if (typeof value === "string") {
       const newVal = value.match(/[^-\d+\.?\d+]\w*/gm);
-      // console.log("newVal", newVal);
+      // console.log("parseString", newVal);
       return newVal ? newVal.join("") : "";
     } else {
       console.log("parseString2", value);
@@ -47,9 +44,9 @@ export default function NumberSlider(props) {
 
 // Слайдер
 const ThisSlider = ({ value, unit, sign, setPreview, setValue }) => {
-
   console.log("value", value);
 
+  // Количество знаков после запятой
   const getNumberSign = (x) => {
     if (x !== null) {
       return x.toString().includes(".")
@@ -59,9 +56,7 @@ const ThisSlider = ({ value, unit, sign, setPreview, setValue }) => {
       return 0;
     }
   };
-
-  // Количество знаков после запятой
-  const [numberSign, setnumberSign] = useState(getNumberSign(value));
+  const [numberSign, setnumSign] = useState(getNumberSign(value));
 
   const setStep = () => {
     let step = 1;
@@ -70,20 +65,19 @@ const ThisSlider = ({ value, unit, sign, setPreview, setValue }) => {
     }
     return step;
   };
-
-  const [step, setstep] = useState(setStep());
+  const step = setStep();
 
   const changeValue = (val) => {
     if (String(val).match(/^\-/gm)) {
       const _sign = String(val).replace(/[\w\.]+/gm, "");
       const value = String(val).replace(/^\-/gm, "");
       if (sign === _sign) {
-        const val1 = Number(value) + _unit;
+        const val1 = Number(value) + unit;
         setValue(val1);
         setPreview(val1);
         console.log("val1", val1);
       } else {
-        const val2 = "-" + Number(value) + _unit;
+        const val2 = "-" + Number(value) + unit;
         setValue(val2);
         setPreview(val2);
         console.log("val2", val2);
@@ -92,26 +86,24 @@ const ThisSlider = ({ value, unit, sign, setPreview, setValue }) => {
       // console.log("Number(value)", Number(value));
     } else {
       const roundVal = Number(val.toFixed(numberSign));
-      const val3 = sign + roundVal + _unit;
+      const val3 = sign + roundVal + unit;
       setValue(val3);
       setPreview(val3);
       _setValue(roundVal);
       console.log("val3", val3);
+      // console.log('sign', sign)
       // console.log("roundVal3", roundVal);
     }
   };
 
   const setUnit = (item) => {
     // console.log("setUnit", item);
-    setunit(item.value);
+    // setunit(item.value);
     setValue(sign + _value + item.value);
   };
-  const [_unit, setunit] = useState(unit);
-  // console.log("unit", _unit);
+
   const [_value, _setValue] = useState(value);
   // console.log("value", _value);
-  const [maxValue, setMaxValue] = useState(value < 25 ? 50 : value * 2);
-  // console.log("maxValue", maxValue);
   return (
     <div
       onWheel={(e) =>
@@ -122,7 +114,6 @@ const ThisSlider = ({ value, unit, sign, setPreview, setValue }) => {
         flexDirection: "column",
         height: "20em",
         width: "100%",
-        // border: "1px solid red"
       }}
     >
       <div style={{ display: "flex" }}>
@@ -137,9 +128,19 @@ const ThisSlider = ({ value, unit, sign, setPreview, setValue }) => {
           {sign}
           {_value}
         </div>
-        <Select defaultItem={_unit} setItem={setUnit} listItems={cssUnits} />
+        <Select defaultItem={unit} setItem={setUnit} listItems={cssUnits} />
       </div>
-      <AngleUp onClick={() => changeValue(_value + step)} />
+      <div
+        style={{
+          cursor: "pointer",
+          width: "20px",
+          margin: "0 auto",
+          paddingBottom: "20px",
+        }}
+        onClick={() => changeValue(_value + step)}
+      >
+        <Icon size={"100%"} icon={angleUp} />
+      </div>
       <Slider
         style={{
           margin: "0 auto",
@@ -147,18 +148,27 @@ const ThisSlider = ({ value, unit, sign, setPreview, setValue }) => {
         }}
         onChange={(_, val) => {
           _setValue(val);
-          setPreview(sign + val + _unit);
+          setPreview(sign + val + unit);
         }}
         onChangeCommitted={(_, val) => {
           changeValue(val);
-          setMaxValue(val < 25 ? 50 : val * 2);
         }}
-        max={maxValue}
+        max={value < 25 ? 50 : value * 2}
         orientation="vertical"
         value={_value}
         step={step}
       />
-      <AngleDown onClick={() => changeValue(_value - step)} />
+      <div
+        style={{
+          cursor: "pointer",
+          width: "20px",
+          margin: "0 auto",
+          paddingTop: "20px",
+        }}
+        onClick={() => changeValue(_value - step)}
+      >
+        <Icon size={"100%"} icon={angleDown} />
+      </div>
     </div>
   );
 };
