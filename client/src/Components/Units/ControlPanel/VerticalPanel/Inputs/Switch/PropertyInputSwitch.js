@@ -8,9 +8,8 @@ import FuncInput from "../FuncInput";
 function InputSwitch(props) {
   // const { value } = props;
   // console.log('inputType', StylePropValueSelector(props.value))
-  switch (StylePropValueSelector(props.value)) {
-    // case "object":
-    //   return <PropertiesPanel {...props} />;
+  switch (StylePropValueSelector(props)) {
+
     case "multi":
       return <MultiInput {...props} />;
     case "color":

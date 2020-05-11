@@ -9,11 +9,12 @@ import Select from "../../ModalWindows/Select";
 export default function NumberSlider(props) {
   const value = props.value.replace(/\-/gm, "");
   const sign = props.value.replace(/[^-]\d*/gm, "");
-  console.log("sign1", sign);
+  // console.log('value', value)
+  // console.log("sign1", sign);
   const parseNumber = (value) => {
     if (typeof value === "string") {
-      const newVal = value.match(/[^-]\d*\.?\d+/gm);
-      // console.log("parseNumber", Number(newVal));
+      const newVal = value.match(/\d+\.?\d*/gm);
+      // console.log("parseNumber",newVal);
       return newVal ? Number(newVal.join("")) : null;
     } else {
       console.log("parseNumber2", value);
@@ -44,7 +45,7 @@ export default function NumberSlider(props) {
 
 // Слайдер
 const ThisSlider = ({ value, unit, sign, setPreview, setValue }) => {
-  console.log("value", value);
+  console.log("inValue", value);
 
   // Количество знаков после запятой
   const getNumberSign = (x) => {

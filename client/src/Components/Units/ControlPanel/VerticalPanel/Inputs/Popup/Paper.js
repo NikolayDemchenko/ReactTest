@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PropertyInputSwitch from "../Switch/PropertyInputSwitch";
-export default function Paper({ value, setValue, setPreview }) {
+export default function Paper(props) {
+  const { value, setValue, setPreview } = props;
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
       setValue(event.target.value);
@@ -22,7 +23,7 @@ export default function Paper({ value, setValue, setPreview }) {
         // size={value.length>10?value.length:value.length}
         style={{
           background: "transparent",
-          width: `${value.length*0.5}em`,
+          width: `${value.length * 0.5}em`,
           minWidth: "80px",
           paddingLeft: "4px",
           outline: "none",
@@ -38,9 +39,8 @@ export default function Paper({ value, setValue, setPreview }) {
       />
       <div style={{ backgroundColor: "#234c" }}>
         <PropertyInputSwitch
-          value={value}
-          setValue={setVal}
-          setPreview={setPreview}
+          {...props}
+          setValue={setVal}       
         />
       </div>
     </div>
