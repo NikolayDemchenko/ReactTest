@@ -1,6 +1,0 @@
-:root {
-  --div-focusBorder:1px  rgb(3, 5, 7);
-}
-.BaseType:focus{
-  border: var(--div-focusBorder)
-}

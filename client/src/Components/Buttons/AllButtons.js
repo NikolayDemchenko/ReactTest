@@ -1,8 +1,0 @@
-export {StateButton} from './StateButton'
-export {OldState as ActiveButton} from './StateButton'
-export {default as Button} from './Button'
-export {default as Check} from './Check/VisibleCheckBtn'
-export {default as Plus} from './Plus/TemplateItemPlus'
-export {default as Delete} from './Delete/Delete'
-export {default as Undo} from './Undo/Undo'
-export {default as Save} from './Save/Save'
