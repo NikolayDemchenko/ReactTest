@@ -13,14 +13,14 @@ export default function Tag(props) {
       style,
     })
     .attach();
+
   const setPanel = () => {
-    if (!tag.selected) {
-      setControlPanel({ tag: { ...tag, selected: true }, setTag, setPreview });
-      console.log("Передача данных в панель управления", new Date(), {
-        ...tag,
-        selected: true,
-      });
-    }
+    console.log('tag.selected', tag.selected)
+    // if (!tag.selected) {
+      // setControlPanel({ tag: { ...tag, selected: true }, setTag, setPreview });
+      setControlPanel({ tag, setTag, setPreview });
+      console.log("Передача данных в панель управления", new Date(), { tag, setTag, setPreview });
+    // }
   };
 
   return (
@@ -35,7 +35,7 @@ export default function Tag(props) {
           setPanel();
         }}
       >
-        <TagChildrens {...props}/>
+        <TagChildrens {...props} />
       </tag.tagType>
       {/* <div style={{ height: "300px", width: "100%", background: "#457" }}></div> */}
     </>

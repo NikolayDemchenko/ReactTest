@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Tag from "./Types/Tag";
+import Tag from "./Tag";
 
-export default function Preview({ tag, setTag, setControlPanel }) {
+export default function TagView(props) {
   // console.log("!!!Preview!!!");
 
   const [preview, setPreview] = useState();
@@ -10,10 +10,9 @@ export default function Preview({ tag, setTag, setControlPanel }) {
   return (
     <div>
       <Tag
-        tag={preview ? preview : tag}
-        setTag={setTag}
+        {...props}
+        tag={preview ? preview : props.tag}
         setPreview={setPreview}
-        setControlPanel={setControlPanel}
       />
       {/* {JSON.stringify(unit)} */}
     </div>

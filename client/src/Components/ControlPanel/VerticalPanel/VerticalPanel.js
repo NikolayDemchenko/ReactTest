@@ -14,7 +14,7 @@ export default function VerticalPanel() {
   } = controlPanel;
 
   const setTagType = ({ value: tagType }) => {
-    setTag({ ...tag, tagType });
+    // setTag({ ...tag, tagType });
     // setPreview({ ...tag, tagType });
     setControlPanel({
       ...controlPanel,
