@@ -1,5 +1,5 @@
 import React from "react";
-import TagView from "./TagView";
+import Tag from "./Tag";
 export default function TagChildrens({tag, setTag, setPreview, setControlPanel }) {
   // console.log("childrens", tag.childrens);
 const setChildsPreview=(childrens)=>{
@@ -10,11 +10,8 @@ const setChildsPreview=(childrens)=>{
     return (
       <div key={index}>
           {/* {index} */}
-        <TagView
+        <Tag
           tag={ children}
-          setTag={setTag}
-          setPreview={setPreview}
-          setControlPanel={setControlPanel}
         />
       </div>
     );

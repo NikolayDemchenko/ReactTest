@@ -14,11 +14,12 @@ export default function Property({
 }) {
   // console.log("Property")
   const { draggedProp, setDraggedProp } = React.useContext(StyleContext);
+  // console.log('draggedProp', draggedProp)
   const [Y, setY] = useState();
   const [copy, setcopy] = useState(false);
   const [target, setTarget] = useState();
-const propKey=Object.keys(property)[0]
-const propValue=Object.values(property)[0]
+  const propKey = Object.keys(property)[0];
+  const propValue = Object.values(property)[0];
   return (
     <div
       draggable
@@ -61,7 +62,7 @@ const propValue=Object.values(property)[0]
         style={{
           padding: "0px 0.5em",
           // border: "1px solid #fff",
-          width:`${propKey.length/2}em`
+          width: `${propKey.length / 2}em`,
         }}
       >
         <PopupInput value={propKey} setValue={setName} />

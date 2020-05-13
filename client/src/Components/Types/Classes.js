@@ -80,7 +80,7 @@ const innerDiv = {
   index: 0,
   visible: true,
   childrens: [],
-  tagType: "div",
+  type: "div",
   tagProps: {
     style: {
       height: "200px",
@@ -103,7 +103,7 @@ const baseDiv = {
   index: 0,
   visible: true,
   childrens: [innerDiv],
-  tagType: "div",
+  type: "div",
   tagProps: {
     style: {
       display: "flex",

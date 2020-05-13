@@ -1,43 +1,57 @@
-import React from "react";
-import TagChildrens from "./TagChildrens";
-import jss from "jss";
-import preset from "jss-preset-default";
-export default function Tag(props) {
-  // console.log('childrens', tag.childrens)
-  const { tag, setTag, setPreview, setControlPanel } = props;
-  let { style } = tag.tagProps;
+import React, { useState } from "react";
+import ReactDOM from "react-dom";
 
-  jss.setup(preset());
-  const { classes } = jss
-    .createStyleSheet({
-      style,
-    })
-    .attach();
+import { StyleContext } from "../ControlPanel/ControlsContext";
+import { div } from "./Classes";
+import VerticalPanel from "../ControlPanel/VerticalPanel/VerticalPanel";
+import TagView from "./TagView";
 
-  const setPanel = () => {
-    console.log('tag.selected', tag.selected)
-    // if (!tag.selected) {
-      // setControlPanel({ tag: { ...tag, selected: true }, setTag, setPreview });
-      setControlPanel({ tag, setTag, setPreview });
-      console.log("Передача данных в панель управления", new Date(), { tag, setTag, setPreview });
-    // }
+const Tag = (props) => {
+  const [tag, setTag] = useState(props.tag ? props.tag : div);
+  const [controlPanel, setPanel] = useState();
+  const [selected, setSelect] = useState("All style");
+  const [draggedProp, setDragdProp] = useState();
+
+  console.log("controlPanel", controlPanel);
+
+  const setControlPanel = (item) => {
+    // console.log("setControlPanel!!!");
+    setPanel(item);
+  };
+  const setSelected = (item) => {
+    // console.log("setSelected!!!");
+    setSelect(item);
+  };
+  const setDraggedProp = (item) => {
+    // console.log("setDraggedProp!!!");
+    setDragdProp(item);
   };
 
+  console.log("!!!Tag!!!");
   return (
-    <>
-      <tag.tagType
-        // tabIndex="0"
-        className={classes.style}
-        onClick={(event) => {
-          event.stopPropagation();
-          console.log("Клик");
-          // Должна быть вызвана функция очищения предыдущего компонента от интерфейсных полей таких как "selected"
-          setPanel();
-        }}
-      >
-        <TagChildrens {...props} />
-      </tag.tagType>
-      {/* <div style={{ height: "300px", width: "100%", background: "#457" }}></div> */}
-    </>
+    <div>
+      {/* {JSON.stringify(unit)} */}
+      {controlPanel && (
+        // ReactDOM.createPortal
+        <div id="controlPanel">
+          <StyleContext.Provider
+            value={{
+              controlPanel,
+              setControlPanel,
+              selected,
+              setSelected,
+              draggedProp,
+              setDraggedProp,
+            }}
+          >
+            <VerticalPanel />
+          </StyleContext.Provider>
+        </div>
+        // ,document.getElementById("portal")
+      )}
+      <TagView tag={tag} setTag={setTag} setControlPanel={setControlPanel} />
+    </div>
   );
-}
+};
+
+export default Tag;

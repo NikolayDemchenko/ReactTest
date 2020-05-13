@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Icon from "react-icons-kit";
 import { plus } from "react-icons-kit/icomoon/plus";
 import { cross } from "react-icons-kit/icomoon/cross";
@@ -9,7 +9,6 @@ import Properties from "./Properties";
 
 import { StyleContext } from "../../ControlsContext";
 
-  
 export default function PropertiesPanel({
   name,
   parentName,
@@ -18,15 +17,13 @@ export default function PropertiesPanel({
   setStyle,
   setPreview,
   deletePanel,
-}) { 
-
+}) {
   // console.log("name", name);
-  // console.log("selected", selected);
-  const {
-    controlPanel,    
-    selected,
-    setSelected,
-  } = React.useContext(StyleContext);
+
+  const { controlPanel, selected, setSelected } = React.useContext(
+    StyleContext
+  );
+  console.log("selected", selected);
   const addProperty = () => {
     setStyle({ property: "value", ...style });
   };

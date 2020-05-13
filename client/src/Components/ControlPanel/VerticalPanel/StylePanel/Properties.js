@@ -62,6 +62,7 @@ export default function Properties({
     };
 
     const onDrop = (targetProp, draggedProp, target) => {
+      // console.log('draggedProp', draggedProp)
       const addNewProp = (foo) =>
         foo(
           removeProp(style, Object.keys(draggedProp)[0]),
@@ -86,7 +87,7 @@ export default function Properties({
           setValue: (v) => setValue(property, v),
         }}
         deleteProperty={() => remove(property)}
-        onDrop={onDrop}
+        onDrop={onDrop}  
       />
     );
   });

@@ -5,7 +5,8 @@ import jss from "jss";
 import preset from "jss-preset-default";
 import Select from "../ModalWindows/Select";
 import { htmlTags } from "../../Class/HtmlCss";
-export default function VerticalPanel() {
+export default function VerticalPanel() { 
+
   const { controlPanel, setControlPanel } = React.useContext(StyleContext);
   const {
     tag,
@@ -13,14 +14,14 @@ export default function VerticalPanel() {
     // , setPreview
   } = controlPanel;
 
-  const setTagType = ({ value: tagType }) => {
-    // setTag({ ...tag, tagType });
-    // setPreview({ ...tag, tagType });
+  const setTagType = ({ value: type }) => {
+    // setTag({ ...tag, type });
+    // setPreview({ ...tag, type });
     setControlPanel({
       ...controlPanel,
-      tag: { ...tag, tagType },
+      tag: { ...tag, type },
     });
-    console.log("tagType", tagType);
+    console.log("tag.type", type);
   };
   const style = {
     flexWrap: "wrap",
@@ -30,6 +31,7 @@ export default function VerticalPanel() {
     position: "fixed",
     zIndex: 1,
     top: 0,
+    left: 0,
     // fontSize:"16px",
     overflowX: "auto",
     backgroundColor: "#456c",
@@ -53,13 +55,16 @@ export default function VerticalPanel() {
         }}
       >
         <Select
-          defaultItem={tag.tagType}
+          defaultItem={tag.type}
           setItem={setTagType}
           listItems={htmlTags}
-        />
+        /><div  style={{
+         cursor: "pointer",
+        }}
+        onClick={()=>setControlPanel()}>Выкл</div>
       </div>
       <StylePanel />
-      <div style={{paddingBottom:"4em"}}/> 
+      <div style={{ paddingBottom: "4em" }} />
     </div>
   );
 }

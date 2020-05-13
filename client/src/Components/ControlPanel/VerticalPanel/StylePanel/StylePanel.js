@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import { StyleContext } from "../../ControlsContext";
 import PropertiesPanel from "./PropertiesPanel";
 export default function StylePanel() {
@@ -8,6 +8,7 @@ export default function StylePanel() {
     selected,
     setSelected,
   } = React.useContext(StyleContext);
+  // console.log('StyleContext', StyleContext)
   const { style } = controlPanel.tag.tagProps;
 
   const { tag, 
@@ -77,7 +78,7 @@ export default function StylePanel() {
         selected={selected}
         setSelected={setSelected}
         setPreview={setPreviewStyle}
-      />
+        />
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Tag from "./Tag";
+import Tag from "./TagComponent";
 
 export default function TagView(props) {
   // console.log("!!!Preview!!!");
