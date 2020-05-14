@@ -5,18 +5,12 @@ import jss from "jss";
 import preset from "jss-preset-default";
 import Select from "../ModalWindows/Select";
 import { htmlTags } from "../../Class/HtmlCss";
-export default function VerticalPanel() { 
-
+export default function VerticalPanel() {
   const { controlPanel, setControlPanel } = React.useContext(StyleContext);
-  const {
-    tag,
-    setTag,
-    // , setPreview
-  } = controlPanel;
+  const { tag, setTag } = controlPanel;
 
   const setTagType = ({ value: type }) => {
-    // setTag({ ...tag, type });
-    // setPreview({ ...tag, type });
+    setTag({ ...tag, type });   
     setControlPanel({
       ...controlPanel,
       tag: { ...tag, type },
@@ -58,10 +52,15 @@ export default function VerticalPanel() {
           defaultItem={tag.type}
           setItem={setTagType}
           listItems={htmlTags}
-        /><div  style={{
-         cursor: "pointer",
-        }}
-        onClick={()=>setControlPanel()}>Выкл</div>
+        />
+        <div
+          style={{
+            cursor: "pointer",
+          }}
+          onClick={() => setControlPanel()}
+        >
+          Выкл
+        </div>
       </div>
       <StylePanel />
       <div style={{ paddingBottom: "4em" }} />

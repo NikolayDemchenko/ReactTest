@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import { StyleContext } from "../../ControlsContext";
 import PropertiesPanel from "./PropertiesPanel";
 export default function StylePanel() {
@@ -8,25 +8,24 @@ export default function StylePanel() {
     selected,
     setSelected,
   } = React.useContext(StyleContext);
-  // console.log('StyleContext', StyleContext)
-  const { style } = controlPanel.tag.tagProps;
 
-  const { tag, 
-    setTag 
-  } = controlPanel;
+  console.log("controlPanel", controlPanel);
+  
+  const { style } = controlPanel.tag;
+
+  const { tag, setTag } = controlPanel;
   const setStyle = (style) => {
     // console.log("setTag!!!");
-     // Временно отключено, должно быть выше уровнем чем NewApp
-    setTag({ ...tag, tagProps: { ...tag.tagProps, style } });
-    // console.log("setControlPanel!!!");
+    setTag({ ...tag, style });
+
     setControlPanel({
       ...controlPanel,
-      tag: { ...tag, tagProps: { ...tag.tagProps, style } },
+      tag: { ...tag, style },
     });
   };
 
   const setPreviewAllStyle = (style) => {
-    controlPanel.setPreview({ ...tag, tagProps: { ...tag.tagProps, style } });
+    controlPanel.setPreview({ ...tag, style });
   };
   const setPreviewStyle = (style) => {
     for (let key in style) {
@@ -78,7 +77,7 @@ export default function StylePanel() {
         selected={selected}
         setSelected={setSelected}
         setPreview={setPreviewStyle}
-        />
+      />
     </div>
   );
 }

@@ -1,18 +1,16 @@
 import React, { useState } from "react";
-import ReactDOM from "react-dom";
-
 import { StyleContext } from "../ControlPanel/ControlsContext";
 import { div } from "./Classes";
 import VerticalPanel from "../ControlPanel/VerticalPanel/VerticalPanel";
 import TagView from "./TagView";
 
 const Tag = (props) => {
-  const [tag, setTag] = useState(props.tag ? props.tag : div);
+  
   const [controlPanel, setPanel] = useState();
   const [selected, setSelect] = useState("All style");
   const [draggedProp, setDragdProp] = useState();
 
-  console.log("controlPanel", controlPanel);
+  // console.log("controlPanel", controlPanel);
 
   const setControlPanel = (item) => {
     // console.log("setControlPanel!!!");
@@ -27,7 +25,7 @@ const Tag = (props) => {
     setDragdProp(item);
   };
 
-  console.log("!!!Tag!!!");
+  // console.log("!!!Tag!!!");
   return (
     <div>
       {/* {JSON.stringify(unit)} */}
@@ -49,7 +47,10 @@ const Tag = (props) => {
         </div>
         // ,document.getElementById("portal")
       )}
-      <TagView tag={tag} setTag={setTag} setControlPanel={setControlPanel} />
+      <TagView
+      {...props}
+      //  tag={tag} setTag={setTag} 
+       setControlPanel={setControlPanel} />
     </div>
   );
 };

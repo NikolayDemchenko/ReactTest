@@ -7,7 +7,7 @@ import { cssUnits } from "../../../Class/HtmlCss";
 import Select from "../../ModalWindows/Select";
 
 export default function NumberSlider(props) {
-  const value = props.value.replace(/\-/gm, "");
+  const value = props.value.replace(/-/gm, "");
   const sign = props.value.replace(/[^-]\d*/gm, "");
   // console.log('value', value)
   // console.log("sign1", sign);
@@ -57,11 +57,11 @@ const ThisSlider = ({ value, unit, sign, setPreview, setValue }) => {
       return 0;
     }
   };
-  const [numberSign, setnumSign] = useState(getNumberSign(value));
+  const [singQuantity, setQuantity] = useState(getNumberSign(value));
 
   const setStep = () => {
     let step = 1;
-    for (let i = 0; i < numberSign; i++) {
+    for (let i = 0; i < singQuantity; i++) {
       step = step / 10;
     }
     return step;
@@ -86,7 +86,7 @@ const ThisSlider = ({ value, unit, sign, setPreview, setValue }) => {
       _setValue(Number(value));
       // console.log("Number(value)", Number(value));
     } else {
-      const roundVal = Number(val.toFixed(numberSign));
+      const roundVal = Number(val.toFixed(singQuantity));
       const val3 = sign + roundVal + unit;
       setValue(val3);
       setPreview(val3);

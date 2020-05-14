@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
-import Tag from './Components/Types/Tag'
+import Page from './Components/Page'
 const App = () => {
-  return <Tag />;
+  return <Page />;
 };
 export default App;

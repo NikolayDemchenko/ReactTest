@@ -1,15 +1,12 @@
 import React, { useState } from "react";
-import Tag from "./TagComponent";
+import TagComponent from "./TagComponent";
 
 export default function TagView(props) {
-  // console.log("!!!Preview!!!");
-
   const [preview, setPreview] = useState();
   // console.log('preview', preview)
-
   return (
     <div>
-      <Tag
+      <TagComponent
         {...props}
         tag={preview ? preview : props.tag}
         setPreview={setPreview}

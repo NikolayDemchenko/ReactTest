@@ -23,7 +23,7 @@ export default function PropertiesPanel({
   const { controlPanel, selected, setSelected } = React.useContext(
     StyleContext
   );
-  console.log("selected", selected);
+  // console.log("selected", selected);
   const addProperty = () => {
     setStyle({ property: "value", ...style });
   };
@@ -66,7 +66,7 @@ export default function PropertiesPanel({
     <div
       onClick={(e) => {
         e.stopPropagation();
-        setPreview({ ...controlPanel.tag.tagProps.style, ...style });
+        setPreview({ ...controlPanel.tag.style, ...style });
         setSelected(fullName);
       }}
       style={{ borderTop, color }}

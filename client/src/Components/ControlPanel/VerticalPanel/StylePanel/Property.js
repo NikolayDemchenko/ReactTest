@@ -4,7 +4,7 @@ import { cross } from "react-icons-kit/icomoon/cross";
 import { StyleContext } from "../../ControlsContext";
 import PopupInput from "../Inputs/Popup/PopupInput";
 
-export default function Property({
+export default   function Property({
   property,
   setProperty: { setName, setValue },
   deleteProperty,
