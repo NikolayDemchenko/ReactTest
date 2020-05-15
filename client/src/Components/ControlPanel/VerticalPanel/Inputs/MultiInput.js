@@ -35,6 +35,7 @@ export default function MultiInput({ value, setValue, setPreview }) {
           display: "inline-flex",
           border: "1px solid #ccc3",
           // margin: "2px",
+          color:  "rgba(140, 200, 255, 0.8)",
           textAlign: "center",
           padding,
         }}

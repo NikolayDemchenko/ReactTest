@@ -34,11 +34,7 @@ export default function FuncInput({ value, setValue, setPreview }) {
   const blockStyle = { border: "1px solid #ccc3", padding: "2px 6px" };
 
   return (
-    <div
-      style={{
-        display: "inline-flex",
-      }}
-    >
+    <div style={{ color: "rgba(140, 200, 255, 0.8)", display: "inline-flex" }}>
       <div style={blockStyle}>
         <Select
           defaultItem={funcType}

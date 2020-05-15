@@ -8,7 +8,8 @@ export default function TagView(props) {
     <div>
       <TagComponent
         {...props}
-        tag={preview ? preview : props.tag}
+        tag={props.tag}
+        preview={preview}
         setPreview={setPreview}
       />
       {/* {JSON.stringify(unit)} */}

@@ -9,8 +9,8 @@ export default function StylePanel() {
     setSelected,
   } = React.useContext(StyleContext);
 
-  console.log("controlPanel", controlPanel);
-  
+  // console.log("controlPanel", controlPanel);
+
   const { style } = controlPanel.tag;
 
   const { tag, setTag } = controlPanel;
@@ -33,7 +33,7 @@ export default function StylePanel() {
         delete style[key];
       }
     }
-    // console.log("style", style);
+
     setPreviewAllStyle(style);
   };
 
@@ -49,13 +49,14 @@ export default function StylePanel() {
           display: "flex",
           borderTop: "4px solid ",
           borderColor,
-          color: "#bdef",
+          // color: "#bdef",
           paddingLeft: "0.5em",
           height: "26px",
           background:
             selected === "All style" ? "rgba(134, 186, 250, 0.15)" : "none",
         }}
-        onClick={() => {
+        onClick={(e) => {
+          e.stopPropagation();      
           setSelected("All style");
           setPreviewAllStyle(style);
         }}

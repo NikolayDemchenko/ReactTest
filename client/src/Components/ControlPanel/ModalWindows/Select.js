@@ -14,8 +14,8 @@ function SelectModal({ defaultItem, setItem, listItems }) {
         marginTop: theme.spacing(3),
       },
     },
-    input: {
-      borderRadius: 4,
+    input: {     
+      // borderRadius: 4,
       position: "relative",
       fontSize: 16,
       padding: "2px ",
@@ -40,7 +40,7 @@ function SelectModal({ defaultItem, setItem, listItems }) {
     },
   }))(InputBase);
   const items = listItems.map((item) => (
-    <MenuItem key={item.name} value={item.name}>
+    <MenuItem key={item.name} value={item.name} style={{ background: "rgb(43,50,66)",color:  "rgba(140, 200, 255, 0.8)"}}>
       {item.name}
     </MenuItem>
   ));
@@ -50,7 +50,10 @@ function SelectModal({ defaultItem, setItem, listItems }) {
   return (
     <div>
       <Select
-        style={{ color: "#fff" }}
+        // SelectDisplayProps={{
+        //   style: { background: "rgba(43,50,66,.95)", border: "1px solid #abc" },
+        // }}
+        style={{ color:  "rgba(140, 200, 255, 0.8)" }}
         value={itemName !== undefined ? itemName.name : firstName}
         onChange={(e) => {
           setItem(listItems.find((item) => item.name === e.target.value));

@@ -8,11 +8,12 @@ export default function TagComponent(props) {
 
   const { clearPanel, setclearPanel } = React.useContext(PageContext);
 
-  const { tag, setTag, setPreview, setControlPanel } = props;
-  let { style } = tag;
+  const { tag, setTag, preview, setPreview, setControlPanel } = props;
+  const view = preview ? preview : tag;
+  const { style } = view;
 
-  console.log('tag.style', tag.style)
-  
+  // console.log("tag.style", tag.style);
+
   jss.setup(preset());
   const { classes } = jss
     .createStyleSheet({
@@ -22,17 +23,17 @@ export default function TagComponent(props) {
 
   const setPanel = () => {
     clearPanel && clearPanel.setControlPanel();
-    console.log("clearPanel", clearPanel);
+    // console.log("clearPanel", clearPanel);
     setclearPanel({ setControlPanel });
     const controlPanel = { tag, setTag, setPreview };
     setControlPanel(controlPanel);
-   
+
     // console.log("Передача данных в панель управления", new Date(), controlPanel);
   };
 
   return (
     <>
-      <tag.type
+      <view.type
         className={classes.style}
         onClick={(event) => {
           event.stopPropagation();
@@ -42,7 +43,7 @@ export default function TagComponent(props) {
         }}
       >
         <TagChildrens {...props} />
-      </tag.type>
+      </view.type>
       {/* <div style={{ height: "300px", width: "100%", background: "#457" }}></div> */}
     </>
   );
