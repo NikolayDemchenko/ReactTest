@@ -1,5 +1,9 @@
 import React from "react";
+import { newDiv } from "../../Tag/Classes";
 import StylePanel from "./StylePanel/StylePanel";
+import Icon from "react-icons-kit";
+import { plus } from "react-icons-kit/icomoon/plus";
+import { cross } from "react-icons-kit/icomoon/cross";
 import { StyleContext } from "../ControlsContext";
 import jss from "jss";
 import preset from "jss-preset-default";
@@ -17,13 +21,25 @@ export default function VerticalPanel() {
     });
     console.log("tag.type", type);
   };
+
+  const addChildren = () => {
+    console.log("tag", tag);
+    // const childs = tag.childrens;
+    tag.childrens.push({...newDiv});
+    setTag({...tag});
+    setControlPanel({...
+      controlPanel,
+      ...tag,
+    });
+  };
+
   const style = {
     flexWrap: "wrap",
     height: "100vh",
     minWidth: "280px",
     maxWidth: "280px",
     position: "fixed",
-    zIndex: 1,
+    zIndex: 999,
     top: 0,
     left: 0,
     // fontSize:"16px",
@@ -43,11 +59,7 @@ export default function VerticalPanel() {
   // console.log('tag', tag)
   return (
     <div className={classes.style}>
-      <div
-        style={{
-          backgroundColor: "#456a",
-        }}
-      >
+      <div style={{ display: "flex" }}>
         <Select
           defaultItem={tag.type}
           setItem={setTagType}
@@ -55,14 +67,39 @@ export default function VerticalPanel() {
         />
         <div
           style={{
-            cursor: "pointer",
-          }}
-          onClick={(e) => {
-            e.stopPropagation();
-            setControlPanel();
+            display: "flex",
+            marginLeft: "auto",
           }}
         >
-          Выкл
+          <div
+            title={"Добавить элемент"}
+            style={{
+              cursor: "pointer",
+              width: "16px",
+              margin: "0px 2px ",
+              // border: "1px solid #fff",
+            }}
+            onClick={(e) => {
+              e.stopPropagation();
+              addChildren();
+            }}
+          >
+            <Icon size={"100%"} icon={plus} />
+          </div>
+          <div
+            title={"Закрыть панель"}
+            style={{
+              margin: "0px 2px ",
+              cursor: "pointer",
+              width: "14px",
+            }}
+            onClick={(e) => {
+              e.stopPropagation();
+              setControlPanel();
+            }}
+          >
+            <Icon size={"100%"} icon={cross} />
+          </div>
         </div>
       </div>
       <StylePanel />

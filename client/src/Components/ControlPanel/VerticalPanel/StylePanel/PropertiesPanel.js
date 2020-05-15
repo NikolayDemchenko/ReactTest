@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Icon from "react-icons-kit";
 import { plus } from "react-icons-kit/icomoon/plus";
 import { cross } from "react-icons-kit/icomoon/cross";
@@ -74,7 +74,6 @@ export default function PropertiesPanel({
         // console.log('div', div)
         e.preventDefault();
       }}
-      // draggable={name === "Base style" ? false : true}
     >
       <div
         style={{
@@ -91,7 +90,12 @@ export default function PropertiesPanel({
         ) : (
           <Input value={name} setValue={setName} />
         )}
-        <div style={{ display: "flex", marginLeft: "auto" }}>
+        <div
+          style={{
+            display: "flex",
+            marginLeft: "auto",
+          }}
+        >
           <div
             title={"Добавить свойство"}
             style={{

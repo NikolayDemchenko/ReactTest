@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+
 import { StyleContext } from "../../ControlsContext";
 import PropertiesPanel from "./PropertiesPanel";
 export default function StylePanel() {
@@ -14,10 +15,10 @@ export default function StylePanel() {
   const { style } = controlPanel.tag;
 
   const { tag, setTag } = controlPanel;
+
   const setStyle = (style) => {
     // console.log("setTag!!!");
     setTag({ ...tag, style });
-
     setControlPanel({
       ...controlPanel,
       tag: { ...tag, style },
@@ -36,6 +37,7 @@ export default function StylePanel() {
 
     setPreviewAllStyle(style);
   };
+
 
   const borderColor =
     selected !== "All style"
@@ -56,20 +58,13 @@ export default function StylePanel() {
             selected === "All style" ? "rgba(134, 186, 250, 0.15)" : "none",
         }}
         onClick={(e) => {
-          e.stopPropagation();      
+          e.stopPropagation();
           setSelected("All style");
           setPreviewAllStyle(style);
         }}
       >
         {"All styles"}
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            margin: "0px 0px 5px 100px",
-            // border: "1px solid #fff",
-          }}
-        ></div>
+
       </div>
       <PropertiesPanel
         name={"Base style"}

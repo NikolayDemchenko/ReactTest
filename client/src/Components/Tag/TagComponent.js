@@ -35,10 +35,9 @@ export default function TagComponent(props) {
     <>
       <view.type
         className={classes.style}
-        onClick={(event) => {
-          event.stopPropagation();
+        onClick={(e) => {
+          e.stopPropagation();
           console.log("Клик");
-
           setPanel();
         }}
       >
