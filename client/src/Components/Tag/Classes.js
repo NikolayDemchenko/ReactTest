@@ -106,27 +106,27 @@ const innerDiv = {
     height: "200px",
     width: "200px",
     backgroundColor: "#678",
-    marginTop: "10px",
-    marginBottom: "10px",
-    "&:hover": {
-      boxShadow: "0 8px 5px 2px #0005, inset 0 8px 5px 2px #00ffff",
-      transition: "0.2s",
-    },
-    "&:active": {
-      transition: "0s",
-      boxShadow: "none",
-    },
+    margin: "10px",
+    // marginBottom: "10px",
+    // "&:hover": {
+    //   boxShadow: "0 8px 5px 2px #0005, inset 0 8px 5px 2px #00ffff",
+    //   transition: "0.2s",
+    // },
+    // "&:active": {
+    //   transition: "0s",
+    //   boxShadow: "none",
+    // },
   },
   attributes: {},
 };
 const baseDiv = {
   index: 0,
   visible: true,
-  childrens: [innerDiv],
+  childrens: [innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,],
   type: "div",
   style: {
     display: "flex",
-    flexDirection: "row",
+    flexWrap: "wrap",
     alignSelf: "center",
     height: "700.55px",
     width: "700px",

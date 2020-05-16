@@ -1,22 +1,26 @@
 import React from "react";
 import Tag from "./Tag";
-export default function TagChildrens(props) {
 
-  const { tag, setTag, setPreview, setControlPanel } = props;
+function TagChildrens(props) {
+  console.log("4-TagChildrens");
+  const { tag, setTag } = props;
   const setChildrens = (childrens) => {
+    console.log("childrens", childrens);
     setTag({ ...tag, childrens });
   };
+
   return tag.childrens.map((children, index) => {
-     const setChildren=(child)=>{
+    const setChildren = (child) => {
       // console.log('child', child)
-      tag.childrens[index]=child
-      setChildrens(tag.childrens)
-    }
+      tag.childrens[index] = child;
+      setChildrens(tag.childrens);
+    };
 
     return (
-      <div key={index}>     
-        <Tag {...props} tag={children} setTag={setChildren}/>
+      <div key={index}>  
+        <Tag {...props} tag={children} setTag={setChildren} />
       </div>
     );
   });
 }
+export default React.memo(TagChildrens);

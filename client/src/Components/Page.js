@@ -6,7 +6,7 @@ export default function Page() {
   const [clearPanel, setclear] = useState();
   const [page, setPage] = useState(div);
 
-  // console.log("page", page);
+  console.log("0-page");
 
   const setclearPanel = (item) => {
     // console.log("setclearPanel", item);

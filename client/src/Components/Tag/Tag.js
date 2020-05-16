@@ -24,7 +24,7 @@ const Tag = (props) => {
     setDragdProp(item);
   };
 
-  // console.log("!!!Tag!!!");
+  console.log("1-Tag!!!");
   return (
     <div 
     // style={{border:"1px solid #eee"}}
@@ -51,4 +51,15 @@ const Tag = (props) => {
   );
 };
 
-export default Tag;
+function areEqual(prevProps, nextProps) {
+  console.log('prevProps', prevProps)
+  console.log('nextProps', nextProps)
+  prevProps.tag===nextProps.tag?console.log("равно"):console.log("не равно")
+  /*
+  возвращает true, если nextProps рендерит
+  тот же результат что и prevProps,
+  иначе возвращает false
+  */
+}
+export default React.memo(Tag,areEqual);
+// export default Tag;

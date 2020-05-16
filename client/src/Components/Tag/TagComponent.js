@@ -3,13 +3,19 @@ import TagChildrens from "./TagChildrens";
 import jss from "jss";
 import preset from "jss-preset-default";
 import { PageContext } from "../ControlPanel/ControlsContext";
-export default function TagComponent(props) {
-  // console.log('childrens', tag.childrens)
+function TagComponent(props) {
+ 
 
   const { clearPanel, setclearPanel } = React.useContext(PageContext);
 
   const { tag, setTag, preview, setPreview, setControlPanel } = props;
   const view = preview ? preview : tag;
+
+  // const _tag = React.useMemo(() => {
+  //   return <Tag {...props} tag={children} setTag={setChildren} />;
+  // }, []);
+
+
   const { style } = view;
 
   // console.log("tag.style", tag.style);
@@ -30,7 +36,8 @@ export default function TagComponent(props) {
 
     // console.log("Передача данных в панель управления", new Date(), controlPanel);
   };
-
+  
+  console.log("3-TagComponent")
   return (
     <>
       <view.type
@@ -47,3 +54,5 @@ export default function TagComponent(props) {
     </>
   );
 }
+export default React.memo(TagComponent)
+// export default TagComponent
