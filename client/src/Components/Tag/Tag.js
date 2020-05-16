@@ -52,14 +52,10 @@ const Tag = (props) => {
 };
 
 function areEqual(prevProps, nextProps) {
-  console.log('prevProps', prevProps)
-  console.log('nextProps', nextProps)
-  prevProps.tag===nextProps.tag?console.log("равно"):console.log("не равно")
-  /*
-  возвращает true, если nextProps рендерит
-  тот же результат что и prevProps,
-  иначе возвращает false
-  */
-}
+  // console.log('prevProps', prevProps)
+  // console.log('nextProps', nextProps)
+  // prevProps.tag===nextProps.tag?console.log("%cравно", 'border:solid 1px #e33; color: #333'):console.log("%cне равно", 'color: #f33')
+ return prevProps.tag===nextProps.tag?true:false
+  }
 export default React.memo(Tag,areEqual);
 // export default Tag;

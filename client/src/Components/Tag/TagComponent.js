@@ -54,5 +54,10 @@ function TagComponent(props) {
     </>
   );
 }
-export default React.memo(TagComponent)
+function areEqual(prevProps, nextProps) {
+  // prevProps.tag===nextProps.tag?console.log("%cравно", 'border:solid 1px #e33; color: #333'):console.log("%cне равно!!!!!!!!!!!!!!!!", 'color: #f33')
+  return prevProps.tag===nextProps.tag&&prevProps.preview===nextProps.preview?true:false
+   }
+ export default React.memo(TagComponent,areEqual);
+// export default React.memo(TagComponent)
 // export default TagComponent

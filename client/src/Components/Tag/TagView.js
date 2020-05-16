@@ -20,4 +20,8 @@ function TagView(props) {
     </div>
   );
 }
-export default React.memo(TagView);
+function areEqual(prevProps, nextProps) {
+  return prevProps.tag===nextProps.tag?true:false
+   }
+ export default React.memo(TagView,areEqual);
+// export default React.memo(TagView);
