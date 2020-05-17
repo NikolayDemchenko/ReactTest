@@ -107,15 +107,15 @@ const innerDiv = {
     width: "200px",
     backgroundColor: "#678",
     margin: "10px",
-    // marginBottom: "10px",
-    // "&:hover": {
-    //   boxShadow: "0 8px 5px 2px #0005, inset 0 8px 5px 2px #00ffff",
-    //   transition: "0.2s",
-    // },
-    // "&:active": {
-    //   transition: "0s",
-    //   boxShadow: "none",
-    // },
+    marginBottom: "10px",
+    "&:hover": {
+      boxShadow: "0 8px 5px 2px #0005, inset 0 8px 5px 2px #00ffff",
+      transition: "0.2s",
+    },
+    "&:active": {
+      transition: "0s",
+      boxShadow: "none",
+    },
   },
   attributes: {},
 };
@@ -123,7 +123,7 @@ const baseDiv = {
   index: 0,
   visible: true,
   // childrens: [],
-  childrens: [innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,],
+  childrens: [innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,],
   type: "div",
   style: {
     display: "flex",

@@ -2,7 +2,7 @@ import React from "react";
 import Tag from "./Tag";
 
 function TagChildrens(props) {
-  console.log("4-TagChildrens");
+  console.log("3-TagChildrens");
   const { tag, setTag } = props;
   const setChildrens = (childrens) => {
     console.log("childrens", childrens);

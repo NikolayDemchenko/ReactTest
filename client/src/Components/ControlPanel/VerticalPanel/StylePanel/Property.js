@@ -1,20 +1,20 @@
 import React, { useState } from "react";
 import Icon from "react-icons-kit";
 import { cross } from "react-icons-kit/icomoon/cross";
-import { StyleContext } from "../../ControlsContext";
 import PopupInput from "../Inputs/Popup/PopupInput";
 
-export default   function Property({
+function Property({
   property,
   setProperty: { setName, setValue },
   deleteProperty,
   setPreview,
   onDrop,
   tabIndex,
+  draggedProp,
+  setDraggedProp,
 }) {
-  // console.log("Property")
-  const { draggedProp, setDraggedProp } = React.useContext(StyleContext);
-  // console.log('draggedProp', draggedProp)
+  console.log("%cProperty", "color:#191");
+
   const [Y, setY] = useState();
   const [copy, setcopy] = useState(false);
   const [target, setTarget] = useState();
@@ -94,3 +94,17 @@ export default   function Property({
     </div>
   );
 }
+
+function areEqual(prevProps, nextProps) {
+  // console.log('prevProps', prevProps)
+  // console.log('nextProps', nextProps)
+  const prev = Object.values(prevProps.property)[0];
+  const next = Object.values(nextProps.property)[0];
+  // console.log(`%cprev ${prev}`,'border:solid 1px #e33; color: #333')
+  // console.log(`%cnext ${next}`,'color: #f33')
+  // prev===next?console.log(`%c${prev} равно ${next}`, 'border:solid 1px #e33; color: #333'):console.log(`%c${prev} не равно ${next}`, 'color: #f33')
+  return prev === next && prevProps.draggedProp === nextProps.draggedProp
+    ? true
+    : false;
+}
+export default React.memo(Property, areEqual);

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { newDiv } from "../../Tag/Classes";
 import StylePanel from "./StylePanel/StylePanel";
 import Icon from "react-icons-kit";
@@ -9,41 +9,29 @@ import jss from "jss";
 import preset from "jss-preset-default";
 import Select from "../ModalWindows/Select";
 import { htmlTags } from "../../Class/HtmlCss";
-export default function VerticalPanel() {
-  const { controlPanel, setControlPanel } = React.useContext(StyleContext);
-  const { tag, setTag } = controlPanel;
+export default function VerticalPanel(props) {
+  console.log("VerticalPanel");
+
+  const { tag, setTag } = props;
+ 
+
 
   const setTagType = ({ value: type }) => {
     setTag({ ...tag, type });
-    setControlPanel({
-      ...controlPanel,
-      tag: { ...tag, type },
-    });
     console.log("tag.type", type);
   };
 
   const addChildren = () => {
     console.log("tag", tag);
-    // const childs = tag.childrens;
-    tag.childrens.push({...newDiv});
-    setTag({...tag});
-    setControlPanel({...
-      controlPanel,
-      ...tag,
-    });
+    tag.childrens.push({ ...newDiv });
+    setTag({ ...tag });
   };
 
   const style = {
     flexWrap: "wrap",
-    height: "100vh",
     minWidth: "280px",
     maxWidth: "280px",
-    position: "fixed",
-    zIndex: 999,
-    top: 0,
-    left: 0,
     // fontSize:"16px",
-    overflowX: "auto",
     backgroundColor: "#456c",
     color: "rgba(140, 200, 255, 0.8)",
     boxShadow: "2px 10px 5px 2px #00000055",
@@ -86,23 +74,11 @@ export default function VerticalPanel() {
           >
             <Icon size={"100%"} icon={plus} />
           </div>
-          <div
-            title={"Закрыть панель"}
-            style={{
-              margin: "0px 2px ",
-              cursor: "pointer",
-              width: "14px",
-            }}
-            onClick={(e) => {
-              e.stopPropagation();
-              setControlPanel();
-            }}
-          >
-            <Icon size={"100%"} icon={cross} />
-          </div>
         </div>
       </div>
-      <StylePanel />
+      <StylePanel
+        {...props}  
+      />
       <div style={{ paddingBottom: "4em" }} />
     </div>
   );

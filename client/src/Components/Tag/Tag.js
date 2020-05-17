@@ -1,61 +1,34 @@
 import React, { useState } from "react";
-import ReactDOM from "react-dom";
-import { StyleContext } from "../ControlPanel/ControlsContext";
 import VerticalPanel from "../ControlPanel/VerticalPanel/VerticalPanel";
-import TagView from "./TagView";
+import Popover from "../ControlPanel/ModalWindows/PopoverPopupState";
+import TagComponent from "./TagComponent";
 
 const Tag = (props) => {
-  const [controlPanel, setPanel] = useState();
-  const [selected, setSelect] = useState("All style");
-  const [draggedProp, setDragdProp] = useState();
+  const [preview, setPrev] = useState();
 
-  // console.log("controlPanel", controlPanel);
-
-  const setControlPanel = (item) => {
-    // console.log("setControlPanel!!!");
-    setPanel(item);
-  };
-  const setSelected = (item) => {
-    // console.log("setSelected!!!");
-    setSelect(item);
-  };
-  const setDraggedProp = (item) => {
-    // console.log("setDraggedProp!!!");
-    setDragdProp(item);
-  };
-
+  const setPreview = React.useCallback(
+    (item) => {
+      setPrev(item);
+    },
+    [setPrev]
+  );
   console.log("1-Tag!!!");
   return (
-    <div 
-    // style={{border:"1px solid #eee"}}
+    <Popover
+      PaperProps={{
+        style: { background: "rgba(43,50,66,.95)" },
+      }}
+      anchorReference="anchorPosition"
+      anchorPosition={{ top: 0, left: 0 }}
     >
-      {/* {JSON.stringify(unit)} */}
-      {controlPanel &&
-        ReactDOM.createPortal(
-          <StyleContext.Provider
-            value={{
-              controlPanel,
-              setControlPanel,
-              selected,
-              setSelected,
-              draggedProp,
-              setDraggedProp,
-            }}
-          >
-            <VerticalPanel />
-          </StyleContext.Provider>,
-          document.getElementById("portal")
-        )}
-      <TagView {...props} setControlPanel={setControlPanel} />
-    </div>
+      <TagComponent {...props} preview={preview} />
+      <VerticalPanel {...props} preview={preview} setPreview={setPreview} />
+    </Popover>
   );
 };
 
 function areEqual(prevProps, nextProps) {
-  // console.log('prevProps', prevProps)
-  // console.log('nextProps', nextProps)
-  // prevProps.tag===nextProps.tag?console.log("%cравно", 'border:solid 1px #e33; color: #333'):console.log("%cне равно", 'color: #f33')
- return prevProps.tag===nextProps.tag?true:false
-  }
-export default React.memo(Tag,areEqual);
+  return prevProps.tag === nextProps.tag ? true : false;
+}
+export default React.memo(Tag, areEqual);
 // export default Tag;

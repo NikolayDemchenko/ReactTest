@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import Icon from "react-icons-kit";
 import { plus } from "react-icons-kit/icomoon/plus";
 import { cross } from "react-icons-kit/icomoon/cross";
@@ -7,23 +7,19 @@ import { ic_library_add } from "react-icons-kit/md/ic_library_add";
 import Input from "../Inputs/Popup/PopupInput";
 import Properties from "./Properties";
 
-import { StyleContext } from "../../ControlsContext";
+export default function PropertiesPanel(props) {
+  const {
+    name,
+    parentName,
+    setName,
+    style,
+    setStyle,
+    setPreview,
+    deletePanel,
+    selected,
+    setSelected,
+  }=props
 
-export default function PropertiesPanel({
-  name,
-  parentName,
-  setName,
-  style,
-  setStyle,
-  setPreview,
-  deletePanel,
-}) {
-  // console.log("name", name);
-
-  const { controlPanel, selected, setSelected } = React.useContext(
-    StyleContext
-  );
-  // console.log("selected", selected);
   const addProperty = () => {
     setStyle({ property: "value", ...style });
   };
@@ -66,7 +62,7 @@ export default function PropertiesPanel({
     <div
       onClick={(e) => {
         e.stopPropagation();
-        setPreview({ ...controlPanel.tag.style, ...style });
+        setPreview({ ...style });
         setSelected(fullName);
       }}
       style={{ borderTop, color }}
@@ -150,12 +146,9 @@ export default function PropertiesPanel({
         </div>
       </div>
       <Properties
+      {...props}
         parentName={name}
-        style={style}
-        selected={selected}
-        setSelected={setSelected}
-        setStyle={setStyle}
-        setPreview={setPreviewProperty}
+        setPreview={setPreviewProperty}   
       />
     </div>
   );

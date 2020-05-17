@@ -2,20 +2,14 @@ import React from "react";
 import Property from "./Property";
 import PropertiesPanel from "./PropertiesPanel";
 import RenameObjectProperty from "./Function/RenameObjectProperty";
-// import { StyleContext } from "../../ControlsContext";
 import {
   addNewPropUp,
   addNewPropDown,
   removeThisLevelPropByName as removeProp,
 } from "./Function/ObjectManager";
-export default function Properties({
-  style,
-  setStyle,
-  setPreview,
-  setSelected,
-  selected,
-  parentName,
-}) {
+export default function Properties(props) {
+  const { style, setStyle, setPreview } = props;
+
   const properties = [];
   const propPanels = [];
   for (let key in style) {
@@ -25,7 +19,6 @@ export default function Properties({
       propPanels.push({ [key]: style[key] });
     }
   }
-
   const setName = (item, value) => {
     setStyle(RenameObjectProperty(style, Object.keys(item)[0], value));
   };
@@ -40,29 +33,25 @@ export default function Properties({
   const panels = propPanels.map((panel) => {
     return (
       <PropertiesPanel
-        parentName={parentName}
+        {...props}    
         name={Object.keys(panel)[0]}
         key={propPanels.indexOf(panel)}
         style={Object.values(panel)[0]}
         setName={(v) => setName(panel, v)}
         setStyle={(v) => setValue(panel, v)}
-        baseStyle={style}
-        setPreview={setPreview}
-        selected={selected}
-        setSelected={setSelected}
+        baseStyle={style} 
         deletePanel={() => remove(panel)}
       />
     );
   });
 
-  const props = properties.map((property,index) => {
-    
+  const thisProps = properties.map((property, index) => {
     const setPreviewValue = (value) => {
       setPreview({ ...style, [Object.keys(property)[0]]: value });
     };
 
     const onDrop = (targetProp, draggedProp, target) => {
-      // console.log('draggedProp', draggedProp)
+      console.log('draggedProp', draggedProp)
       const addNewProp = (foo) =>
         foo(
           removeProp(style, Object.keys(draggedProp)[0]),
@@ -78,6 +67,7 @@ export default function Properties({
 
     return (
       <Property
+        {...props}
         key={index}
         tabIndex={index}
         property={property}
@@ -87,14 +77,14 @@ export default function Properties({
           setValue: (v) => setValue(property, v),
         }}
         deleteProperty={() => remove(property)}
-        onDrop={onDrop}  
+        onDrop={onDrop}
       />
     );
   });
 
   return (
     <div>
-      {props}
+      {thisProps}
       {panels}
     </div>
   );

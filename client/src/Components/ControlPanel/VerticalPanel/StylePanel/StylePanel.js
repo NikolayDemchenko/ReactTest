@@ -1,32 +1,24 @@
-import React from "react";
-
+import React,{useState} from "react";
 import { StyleContext } from "../../ControlsContext";
 import PropertiesPanel from "./PropertiesPanel";
-export default function StylePanel() {
-  const {
-    controlPanel,
-    setControlPanel,
-    selected,
-    setSelected,
-  } = React.useContext(StyleContext);
+export default function StylePanel(props) {
 
-  // console.log("controlPanel", controlPanel);
+ 
+  const [selected, setSelected] = useState("All style");
+  const [draggedProp, setDragged] = useState();
+  const setDraggedProp=(item)=>{
+    console.log('draggedProp', item)
+    setDragged(item)
+  }
+  const { tag, setTag } = props;
+  const { style } = tag;
 
-  const { style } = controlPanel.tag;
-
-  const { tag, setTag } = controlPanel;
-
-  const setStyle = (style) => {
-    // console.log("setTag!!!");
+  const setStyle = (style) => {  
     setTag({ ...tag, style });
-    setControlPanel({
-      ...controlPanel,
-      tag: { ...tag, style },
-    });
   };
 
   const setPreviewAllStyle = (style) => {
-    controlPanel.setPreview({ ...tag, style });
+    props.setPreview({ ...tag, style });
   };
   const setPreviewStyle = (style) => {
     for (let key in style) {
@@ -37,7 +29,6 @@ export default function StylePanel() {
 
     setPreviewAllStyle(style);
   };
-
 
   const borderColor =
     selected !== "All style"
@@ -67,12 +58,15 @@ export default function StylePanel() {
 
       </div>
       <PropertiesPanel
+      {...props}
         name={"Base style"}
         style={style}
         setStyle={setStyle}
         selected={selected}
         setSelected={setSelected}
         setPreview={setPreviewStyle}
+        draggedProp={draggedProp}
+        setDraggedProp={setDraggedProp}
       />
     </div>
   );
