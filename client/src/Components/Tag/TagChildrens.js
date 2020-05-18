@@ -17,7 +17,12 @@ function TagChildrens(props) {
     };
 
     return (
-      <div key={index}>  
+      <div key={index} onClick={(e) => {
+        // e.stopPropagation();
+        // e.preventDefault();
+        // console.log("Клик",e.target);   
+          
+      }}>  
         <Tag {...props} tag={children} setTag={setChildren} />
       </div>
     );

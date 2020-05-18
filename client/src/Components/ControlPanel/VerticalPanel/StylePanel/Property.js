@@ -98,12 +98,16 @@ function Property({
 function areEqual(prevProps, nextProps) {
   // console.log('prevProps', prevProps)
   // console.log('nextProps', nextProps)
-  const prev = Object.values(prevProps.property)[0];
-  const next = Object.values(nextProps.property)[0];
-  // console.log(`%cprev ${prev}`,'border:solid 1px #e33; color: #333')
-  // console.log(`%cnext ${next}`,'color: #f33')
-  // prev===next?console.log(`%c${prev} равно ${next}`, 'border:solid 1px #e33; color: #333'):console.log(`%c${prev} не равно ${next}`, 'color: #f33')
-  return prev === next && prevProps.draggedProp === nextProps.draggedProp
+  const prevKey = Object.keys(prevProps.property)[0];
+  const nextKey = Object.keys(nextProps.property)[0];
+  const prevVal = Object.values(prevProps.property)[0];
+  const nextVal = Object.values(nextProps.property)[0];
+  // console.log(`%cprev ${prevVal}`,'border:solid 1px #e33; color: #333')
+  // console.log(`%cnext ${nextVal}`,'color: #f33')
+  // prevVal===nextVal?console.log(`%c${prevVal} равно ${nextVal}`, 'border:solid 1px #e33; color: #333'):console.log(`%c${prevVal} не равно ${nextVal}`, 'color: #f33')
+  return prevVal === nextVal &&
+    prevProps.draggedProp === nextProps.draggedProp &&
+    prevKey === nextKey
     ? true
     : false;
 }

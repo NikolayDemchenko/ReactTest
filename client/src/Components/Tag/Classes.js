@@ -119,11 +119,16 @@ const innerDiv = {
   },
   attributes: {},
 };
+const childs=[]
+for (let index = 0; index < 50; index++) {
+ 
+  childs.push(innerDiv)
+}
 const baseDiv = {
   index: 0,
   visible: true,
   // childrens: [],
-  childrens: [innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,innerDiv,],
+  childrens:childs ,
   type: "div",
   style: {
     display: "flex",

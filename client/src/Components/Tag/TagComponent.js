@@ -23,8 +23,9 @@ function TagComponent(props) {
       <view.type
         className={classes.style}
         onClick={(e) => {
-          // e.stopPropagation();
-          console.log("Клик");        
+          // console.log("Клик e.target",e.target);   
+          // console.log("Клик e.currentTarget",e.currentTarget);   
+          e.target!=e.currentTarget&&e.stopPropagation()
         }}
       >
         <TagChildrens {...props} />
