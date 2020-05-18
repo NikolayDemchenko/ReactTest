@@ -4,7 +4,7 @@ import Popover from "../ControlPanel/ModalWindows/PopoverPopupState";
 import TagComponent from "./TagComponent";
 
 const Tag = (props) => {
-  const [preview, setPrev] = useState();
+  const [preview, setPrev] = useState(props.tag);
 
   const setPreview = React.useCallback(
     (item) => {
@@ -12,7 +12,7 @@ const Tag = (props) => {
     },
     [setPrev]
   );
-  console.log("1-Tag!!!");
+  console.log("1-Tag!!!",preview);
   return (
     <Popover
       PaperProps={{

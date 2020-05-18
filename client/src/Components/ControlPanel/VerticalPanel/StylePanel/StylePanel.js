@@ -1,23 +1,27 @@
-import React,{useState} from "react";
+import React, { useState, useEffect } from "react";
 import { StyleContext } from "../../ControlsContext";
 import PropertiesPanel from "./PropertiesPanel";
 export default function StylePanel(props) {
-
- 
   const [selected, setSelected] = useState("All style");
   const [draggedProp, setDragged] = useState();
-  const setDraggedProp=(item)=>{
-    console.log('draggedProp', item)
-    setDragged(item)
-  }
+  const setDraggedProp = (item) => {
+    console.log("draggedProp", item);
+    setDragged(item);
+  };
   const { tag, setTag } = props;
   const { style } = tag;
 
-  const setStyle = (style) => {  
+  // useEffect(() => {
+  //   console.log("useEffect");
+  //   return setPreviewAllStyle(style);
+  // }, []);
+
+  const setStyle = (style) => {
     setTag({ ...tag, style });
   };
 
   const setPreviewAllStyle = (style) => {
+    console.log('setPreviewAllStyle')
     props.setPreview({ ...tag, style });
   };
   const setPreviewStyle = (style) => {
@@ -55,10 +59,9 @@ export default function StylePanel(props) {
         }}
       >
         {"All styles"}
-
       </div>
       <PropertiesPanel
-      {...props}
+        {...props}
         name={"Base style"}
         style={style}
         setStyle={setStyle}

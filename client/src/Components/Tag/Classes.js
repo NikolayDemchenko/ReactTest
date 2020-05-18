@@ -120,8 +120,7 @@ const innerDiv = {
   attributes: {},
 };
 const childs=[]
-for (let index = 0; index < 50; index++) {
- 
+for (let i= 0; i < 50; i++) { 
   childs.push(innerDiv)
 }
 const baseDiv = {
