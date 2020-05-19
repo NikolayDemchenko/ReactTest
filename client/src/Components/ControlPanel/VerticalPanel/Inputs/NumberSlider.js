@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Icon from "react-icons-kit";
 import { angleDown } from "react-icons-kit/fa/angleDown";
 import { angleUp } from "react-icons-kit/fa/angleUp";
@@ -57,7 +57,7 @@ const ThisSlider = ({ value, unit, sign, setPreview, setValue }) => {
       return 0;
     }
   };
-  const [singQuantity, setQuantity] = useState(getNumberSign(value));
+  const [singQuantity] = useState(getNumberSign(value));
 
   const setStep = () => {
     let step = 1;
@@ -75,25 +75,17 @@ const ThisSlider = ({ value, unit, sign, setPreview, setValue }) => {
       if (sign === _sign) {
         const val1 = Number(value) + unit;
         setValue(val1);
-        setPreview(val1);
-        console.log("val1", val1);
       } else {
         const val2 = "-" + Number(value) + unit;
         setValue(val2);
-        setPreview(val2);
-        console.log("val2", val2);
       }
       _setValue(Number(value));
-      // console.log("Number(value)", Number(value));
+
     } else {
       const roundVal = Number(val.toFixed(singQuantity));
       const val3 = sign + roundVal + unit;
-      setValue(val3);
-      setPreview(val3);
+      setValue(val3);     
       _setValue(roundVal);
-      console.log("val3", val3);
-      // console.log('sign', sign)
-      // console.log("roundVal3", roundVal);
     }
   };
 
@@ -102,8 +94,11 @@ const ThisSlider = ({ value, unit, sign, setPreview, setValue }) => {
     // setunit(item.value);
     setValue(sign + _value + item.value);
   };
-
+  useEffect(() => {
+    _setValue(value);
+  }, [value]);
   const [_value, _setValue] = useState(value);
+  // console.log("_value", _value);
   // console.log("value", String(value).length);
   return (
     <div
@@ -121,7 +116,7 @@ const ThisSlider = ({ value, unit, sign, setPreview, setValue }) => {
         <div
           style={{
             backgroundColor: "transparent",
-            width:`${String(value).length * 0.5+0.5}em`,
+            width: `${String(value).length * 0.5 + 0.5}em`,
             appearance: "none",
             textAlign: "right",
             paddingLeft: "2px",

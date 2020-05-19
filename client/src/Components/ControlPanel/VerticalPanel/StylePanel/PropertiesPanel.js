@@ -19,7 +19,7 @@ export default function PropertiesPanel(props) {
     selected,
     setSelected,
   }=props
-
+ 
   const addProperty = () => {
     setStyle({ property: "value", ...style });
   };

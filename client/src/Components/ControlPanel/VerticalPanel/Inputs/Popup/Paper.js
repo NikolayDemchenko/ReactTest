@@ -1,17 +1,13 @@
 import React, { useState } from "react";
 import PropertyInputSwitch from "../Switch/PropertyInputSwitch";
 export default function Paper(props) {
-  const { value, setValue, setPreview } = props;
-  const handleKeyPress = (event) => {
-    if (event.key === "Enter") {
-      setValue(event.target.value);
+  const { value, setValue } = props;
+  
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      setValue(e.target.value);
     }
-  };
-  const setVal = (value) => {
-    settisVal(value);
-    setValue(value);
-  };
-  const [val, settisVal] = useState(value);
+  }; 
 
   return (
     <div
@@ -34,13 +30,13 @@ export default function Paper(props) {
         type={"text"}
         onKeyPress={handleKeyPress}
         onBlur={(e) => setValue(e.target.value)}
-        value={val}
-        onChange={(e) => settisVal(e.target.value)}
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
       />
       <div style={{ backgroundColor: "#234c" }}>
         <PropertyInputSwitch
           {...props}
-          setValue={setVal}       
+          setValue={setValue}       
         />
       </div>
     </div>

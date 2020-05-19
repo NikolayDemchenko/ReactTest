@@ -105,7 +105,7 @@ const innerDiv = {
   style: {
     height: "200px",
     width: "200px",
-    backgroundColor: "#678",
+    backgroundColor: "#789",
     margin: "10px",
     marginBottom: "10px",
     "&:hover": {
@@ -135,9 +135,9 @@ const baseDiv = {
     alignSelf: "center",
     height: "700.55px",
     width: "700px",
-    background:
-      "repeating-linear-gradient(-45deg, #fff, #fff 25px, #e2edc1 25px, #e2edc1 50px) fixed",
-    backgroundColor: "#678",
+    // background:
+    //   "repeating-linear-gradient(-45deg, #fff, #fff 25px, #e2edc1 25px, #e2edc1 50px) fixed",
+    backgroundColor: "#567",
     // background:
     //   "url(https://avatars.mds.yandex.net/get-pdb/1366512/fd5d003c-7bc3-4f0d-9af2-2e57c88be5f9/s1200)",
     margin: "auto",

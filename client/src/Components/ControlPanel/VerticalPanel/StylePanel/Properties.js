@@ -9,7 +9,7 @@ import {
 } from "./Function/ObjectManager";
 export default function Properties(props) {
   const { style, setStyle, setPreview } = props;
-
+  
   const properties = [];
   const propPanels = [];
   for (let key in style) {
@@ -22,8 +22,9 @@ export default function Properties(props) {
   const setName = (item, value) => {
     setStyle(RenameObjectProperty(style, Object.keys(item)[0], value));
   };
-  const setValue = (item, value) => {
-    setStyle({ ...style, [Object.keys(item)[0]]: value });
+  const setValue = (name, value) => {
+    style[Object.keys(name)[0]]=value
+    setStyle(style);
   };
   const remove = (item) => {
     delete style[Object.keys(item)[0]];
@@ -33,25 +34,27 @@ export default function Properties(props) {
   const panels = propPanels.map((panel) => {
     return (
       <PropertiesPanel
-        {...props}    
+        {...props}
         name={Object.keys(panel)[0]}
         key={propPanels.indexOf(panel)}
         style={Object.values(panel)[0]}
         setName={(v) => setName(panel, v)}
         setStyle={(v) => setValue(panel, v)}
-        baseStyle={style} 
+        baseStyle={style}
         deletePanel={() => remove(panel)}
       />
     );
   });
-
+  // console.log("properties", properties);
   const thisProps = properties.map((property, index) => {
     const setPreviewValue = (value) => {
+      // console.log('setPreviewValue', value)
+
       setPreview({ ...style, [Object.keys(property)[0]]: value });
     };
 
     const onDrop = (targetProp, draggedProp, target) => {
-      console.log('draggedProp', draggedProp)
+      console.log("draggedProp", draggedProp);
       const addNewProp = (foo) =>
         foo(
           removeProp(style, Object.keys(draggedProp)[0]),

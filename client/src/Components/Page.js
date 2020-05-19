@@ -6,8 +6,8 @@ export default function Page() {
   const [clearPanel, setclear] = useState();
   const [page, setPage] = useState(div);
 
-  console.log("0-page");
-
+  // console.log("0-page",page);
+  // console.log('%cpage.style.backgroundColor',`background-color: ${page.style.backgroundColor}`)
   const setclearPanel = (item) => {
     // console.log("setclearPanel", item);
     setclear(item);

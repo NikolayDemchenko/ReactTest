@@ -1,19 +1,27 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import VerticalPanel from "../ControlPanel/VerticalPanel/VerticalPanel";
 import Popover from "../ControlPanel/ModalWindows/PopoverPopupState";
 import TagComponent from "./TagComponent";
 
 const Tag = (props) => {
-  const [preview, setPrev] = useState(props.tag);
+  const [preview, setPreview] = useState(props.tag);
 
-  const setPreview = React.useCallback(
-    (item) => {
-      setPrev(item);
-    },
-    [setPrev]
-  );
-  console.log("1-Tag!!!");
-  // console.log("1-Tag!!!",preview);
+// useEffect(() => {
+//   setPreview(props.tag)    
+//   return () => {
+//   }
+// }, [props.tag])
+  // console.log('%ctag.style.backgroundColor',`background-color: ${props.tag.style.backgroundColor}`)
+  // console.log('%cpreview.style.backgroundColor',`background-color: ${preview.style.backgroundColor}`)
+
+  // const setPreview = React.useCallback(
+  //   (item) => {
+  //     setPrev(item);
+  //   },
+  //   [setPrev]
+  // );
+  // console.log("1-Tag!!!",props.tag.style);
+  // console.log("Tag preview!!!",preview.style);
   return (
     <Popover
       PaperProps={{

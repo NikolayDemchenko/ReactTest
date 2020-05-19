@@ -7,21 +7,23 @@ export default function StylePanel(props) {
     console.log("draggedProp", item);
     setDragged(item);
   };
+
   const { tag, setTag } = props;
   const { style } = tag;
 
   useEffect(() => {
     return () => {
-      // console.log("useEffect");
-      setPreviewStyle(style);
+      setPreviewTagStyle(style);
     };
-  }, []);
+  }, [style]);
 
-  const setStyle = (style) => {
+  const setTagStyle = (style) => {
+    // console.log('tag', tag.style)
+    // console.log('style', style)
     setTag({ ...tag, style });
   };
 
-  const setPreviewStyle = (style) => {
+  const setPreviewTagStyle = (style) => {
     // console.log("setPreviewAllStyle");
     props.setPreview({ ...tag, style });
   };
@@ -31,7 +33,7 @@ export default function StylePanel(props) {
         delete element[key];
       }
     }
-    setPreviewStyle(element);
+    setPreviewTagStyle(element);
   };
 
   const borderColor =
@@ -55,7 +57,7 @@ export default function StylePanel(props) {
         onClick={(e) => {
           e.stopPropagation();
           setSelected("All style");
-          setPreviewStyle(style);
+          setPreviewTagStyle(style);
         }}
       >
         {"All styles"}
@@ -64,7 +66,7 @@ export default function StylePanel(props) {
         {...props}
         name={"Base style"}
         style={style}
-        setStyle={setStyle}
+        setStyle={setTagStyle}
         selected={selected}
         setSelected={setSelected}
         setPreview={setPreviewStyleElement}

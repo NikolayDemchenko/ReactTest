@@ -10,12 +10,15 @@ import preset from "jss-preset-default";
 import Select from "../ModalWindows/Select";
 import { htmlTags } from "../../Class/HtmlCss";
 export default function VerticalPanel(props) {
-  console.log("VerticalPanel");
+  // console.log("VerticalPanel");
 
   const { tag, setTag } = props;
- 
 
-
+  // console.log(
+  //   "%cVerticalPanel",
+  //   `background-color: ${tag.style.backgroundColor}`
+  // );
+// console.log('tag.style', tag.style)
   const setTagType = ({ value: type }) => {
     setTag({ ...tag, type });
     console.log("tag.type", type);
@@ -76,9 +79,7 @@ export default function VerticalPanel(props) {
           </div>
         </div>
       </div>
-      <StylePanel
-        {...props}  
-      />
+      <StylePanel {...props} />
       <div style={{ paddingBottom: "4em" }} />
     </div>
   );
