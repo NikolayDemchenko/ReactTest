@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { StyleContext } from "../../ControlsContext";
 import PropertiesPanel from "./PropertiesPanel";
 export default function StylePanel(props) {
   const [selected, setSelected] = useState("All style");
@@ -11,27 +10,28 @@ export default function StylePanel(props) {
   const { tag, setTag } = props;
   const { style } = tag;
 
-  // useEffect(() => {
-  //   console.log("useEffect");
-  //   return setPreviewAllStyle(style);
-  // }, []);
+  useEffect(() => {
+    return () => {
+      // console.log("useEffect");
+      setPreviewStyle(style);
+    };
+  }, []);
 
   const setStyle = (style) => {
     setTag({ ...tag, style });
   };
 
-  const setPreviewAllStyle = (style) => {
-    console.log('setPreviewAllStyle')
+  const setPreviewStyle = (style) => {
+    // console.log("setPreviewAllStyle");
     props.setPreview({ ...tag, style });
   };
-  const setPreviewStyle = (style) => {
-    for (let key in style) {
-      if (typeof style[key] === "object") {
-        delete style[key];
+  const setPreviewStyleElement = (element) => {
+    for (let key in element) {
+      if (typeof element[key] === "object") {
+        delete element[key];
       }
     }
-
-    setPreviewAllStyle(style);
+    setPreviewStyle(element);
   };
 
   const borderColor =
@@ -55,7 +55,7 @@ export default function StylePanel(props) {
         onClick={(e) => {
           e.stopPropagation();
           setSelected("All style");
-          setPreviewAllStyle(style);
+          setPreviewStyle(style);
         }}
       >
         {"All styles"}
@@ -67,7 +67,7 @@ export default function StylePanel(props) {
         setStyle={setStyle}
         selected={selected}
         setSelected={setSelected}
-        setPreview={setPreviewStyle}
+        setPreview={setPreviewStyleElement}
         draggedProp={draggedProp}
         setDraggedProp={setDraggedProp}
       />

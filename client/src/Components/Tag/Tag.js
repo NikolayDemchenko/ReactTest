@@ -12,7 +12,8 @@ const Tag = (props) => {
     },
     [setPrev]
   );
-  console.log("1-Tag!!!",preview);
+  console.log("1-Tag!!!");
+  // console.log("1-Tag!!!",preview);
   return (
     <Popover
       PaperProps={{
