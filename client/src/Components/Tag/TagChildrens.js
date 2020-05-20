@@ -14,8 +14,8 @@ function TagChildrens(props) {
   return tag.childrens.map((children, index) => {
 
     const setChildren = (child) => {
-      tag.childrens[index] = child;
-      setChildrens(tag.childrens);
+      tag.childrens[index] = child;     
+      setChildrens([...tag.childrens]);
     };
 
     return (

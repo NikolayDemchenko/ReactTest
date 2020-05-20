@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import Icon from "react-icons-kit";
 import { plus } from "react-icons-kit/icomoon/plus";
 import { cross } from "react-icons-kit/icomoon/cross";
@@ -18,7 +18,7 @@ export default function PropertiesPanel(props) {
     deletePanel,
     selected,
     setSelected,
-  }=props
+  } = props;
  
   const addProperty = () => {
     setStyle({ property: "value", ...style });
@@ -146,9 +146,9 @@ export default function PropertiesPanel(props) {
         </div>
       </div>
       <Properties
-      {...props}
+        {...props}
         parentName={name}
-        setPreview={setPreviewProperty}   
+        setPreview={setPreviewProperty}
       />
     </div>
   );

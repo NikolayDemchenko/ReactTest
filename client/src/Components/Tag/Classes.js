@@ -120,8 +120,8 @@ const innerDiv = {
   attributes: {},
 };
 const childs=[]
-for (let i= 0; i < 50; i++) { 
-  childs.push(innerDiv)
+for (let i= 0; i < 200; i++) { 
+  childs.push(JSON.parse(JSON.stringify(innerDiv)))
 }
 const baseDiv = {
   index: 0,

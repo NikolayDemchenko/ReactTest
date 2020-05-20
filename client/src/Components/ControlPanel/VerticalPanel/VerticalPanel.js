@@ -1,24 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { newDiv } from "../../Tag/Classes";
 import StylePanel from "./StylePanel/StylePanel";
 import Icon from "react-icons-kit";
 import { plus } from "react-icons-kit/icomoon/plus";
 import { cross } from "react-icons-kit/icomoon/cross";
-import { StyleContext } from "../ControlsContext";
 import jss from "jss";
 import preset from "jss-preset-default";
 import Select from "../ModalWindows/Select";
 import { htmlTags } from "../../Class/HtmlCss";
-export default function VerticalPanel(props) {
-  // console.log("VerticalPanel");
+function VerticalPanel(props) {
+   // console.log(
+  //   "%cVerticalPanel",
+  //   `background-color: ${props.tag.style.backgroundColor}`
+  // );
 
   const { tag, setTag } = props;
 
-  // console.log(
-  //   "%cVerticalPanel",
-  //   `background-color: ${tag.style.backgroundColor}`
-  // );
-// console.log('tag.style', tag.style)
   const setTagType = ({ value: type }) => {
     setTag({ ...tag, type });
     console.log("tag.type", type);
@@ -26,7 +23,7 @@ export default function VerticalPanel(props) {
 
   const addChildren = () => {
     console.log("tag", tag);
-    tag.childrens.push({ ...newDiv });
+    tag.childrens.push(JSON.parse(JSON.stringify(newDiv)));
     setTag({ ...tag });
   };
 
@@ -84,3 +81,8 @@ export default function VerticalPanel(props) {
     </div>
   );
 }
+function areEqual(prevProps, nextProps) {
+  // prevProps.tag === nextProps.tag ?  console.log('Равно') : console.log('Не равно');
+  return prevProps.tag === nextProps.tag ? true : false;
+}
+export default React.memo(VerticalPanel, areEqual);

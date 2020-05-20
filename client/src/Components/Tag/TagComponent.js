@@ -8,8 +8,6 @@ function TagComponent(props) {
   const view = preview ? preview : tag;
   const { style } = view;
 
-  // console.log("tag.childrens.length", tag.childrens.length);
-
   jss.setup(preset());
   const { classes } = jss
     .createStyleSheet({
@@ -21,9 +19,7 @@ function TagComponent(props) {
   return (
     <view.type
       className={classes.style}
-      onClick={(e) => {
-        // console.log("Клик e.target",e.target);
-        // console.log("Клик e.currentTarget",e.currentTarget);
+      onClick={(e) => {    
         e.target != e.currentTarget && e.stopPropagation();
       }}
     >

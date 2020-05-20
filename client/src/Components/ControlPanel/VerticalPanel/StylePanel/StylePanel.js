@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PropertiesPanel from "./PropertiesPanel";
-export default function StylePanel(props) {
+function StylePanel(props) {
   const [selected, setSelected] = useState("All style");
   const [draggedProp, setDragged] = useState();
   const setDraggedProp = (item) => {
@@ -10,7 +10,7 @@ export default function StylePanel(props) {
 
   const { tag, setTag } = props;
   const { style } = tag;
-
+  // console.log("style", style);
   useEffect(() => {
     return () => {
       setPreviewTagStyle(style);
@@ -76,3 +76,8 @@ export default function StylePanel(props) {
     </div>
   );
 }
+function areEqual(prevProps, nextProps) {
+  // prevProps.tag === nextProps.tag ?  console.log('Равно') : console.log('Не равно');
+  return prevProps.tag === nextProps.tag ? true : false;
+}
+export default React.memo(StylePanel, areEqual);

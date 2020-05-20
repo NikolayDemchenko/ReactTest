@@ -1,26 +1,15 @@
 import React, { useState } from "react";
 import Tag from "./Tag/Tag";
-import { PageContext } from "./ControlPanel/ControlsContext";
 import { div } from "./Tag/Classes";
 export default function Page() {
-  const [clearPanel, setclear] = useState();
+
   const [page, setPage] = useState(div);
 
-  // console.log("0-page",page);
+  console.log("0-page",page);
   // console.log('%cpage.style.backgroundColor',`background-color: ${page.style.backgroundColor}`)
-  const setclearPanel = (item) => {
-    // console.log("setclearPanel", item);
-    setclear(item);
-  };
+
  
   return (
-    <PageContext.Provider
-      value={{
-        clearPanel,
-        setclearPanel,
-      }}
-    >
-      <Tag tag={page} setTag={setPage} />
-    </PageContext.Provider>
+      <Tag tag={page} setTag={setPage} /> 
   );
 }
