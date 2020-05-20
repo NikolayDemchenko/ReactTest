@@ -81,3 +81,4 @@ function areEqual(prevProps, nextProps) {
   return prevProps.tag === nextProps.tag ? true : false;
 }
 export default React.memo(StylePanel, areEqual);
+// export default StylePanel;

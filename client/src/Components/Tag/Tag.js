@@ -6,17 +6,6 @@ import TagComponent from "./TagComponent";
 const Tag = (props) => {
   const [preview, setPreview] = useState(props.tag);
 
-  // console.log("props.tag.style", props.tag.style);
-  // console.log("preview.style", preview.style);
-
-  // useEffect(() => {
-  //   setPreview(props.tag)
-  //   return () => {
-  //   }
-  // }, [props.tag])
-
-  // console.log('%ctag.style.backgroundColor',`background-color: ${props.tag.style.backgroundColor}`)
-  // console.log('%cpreview.style.backgroundColor',`background-color: ${preview.style.backgroundColor}`)
 
   return (
     <Popover
@@ -26,9 +15,11 @@ const Tag = (props) => {
       anchorReference="anchorPosition"
       anchorPosition={{ top: 0, left: 0 }}
     >
+    {/* // <> */}
       <TagComponent {...props} preview={preview} />
       <VerticalPanel {...props} preview={preview} setPreview={setPreview} />
-    </Popover>
+{/* </> */}
+     </Popover> 
   );
 };
 
@@ -36,3 +27,4 @@ function areEqual(prevProps, nextProps) {
   return prevProps.tag === nextProps.tag ? true : false;
 }
 export default React.memo(Tag, areEqual);
+// export default Tag;

@@ -1,7 +1,12 @@
 import React from "react";
+import ErrorBoundry from "./ErrorBoundry";
 import "./App.css";
-import Page from './Components/Page'
+import Page from "./Components/Page";
 const App = () => {
-  return <Page />;
+  return (
+    <ErrorBoundry>
+      <Page />;
+    </ErrorBoundry>
+  );
 };
 export default App;

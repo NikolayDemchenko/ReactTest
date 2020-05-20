@@ -23,6 +23,7 @@ function VerticalPanel(props) {
 
   const addChildren = () => {
     console.log("tag", tag);
+    tag.childrens=tag.childrens?tag.childrens:[]
     tag.childrens.push(JSON.parse(JSON.stringify(newDiv)));
     setTag({ ...tag });
   };
@@ -86,3 +87,4 @@ function areEqual(prevProps, nextProps) {
   return prevProps.tag === nextProps.tag ? true : false;
 }
 export default React.memo(VerticalPanel, areEqual);
+// export default VerticalPanel;

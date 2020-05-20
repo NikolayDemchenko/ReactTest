@@ -75,9 +75,12 @@ const ThisSlider = ({ value, unit, sign, setPreview, setValue }) => {
       if (sign === _sign) {
         const val1 = Number(value) + unit;
         setValue(val1);
+        setPreview(val1);
+        
       } else {
         const val2 = "-" + Number(value) + unit;
         setValue(val2);
+        setPreview(val2);
       }
       _setValue(Number(value));
 
@@ -85,6 +88,7 @@ const ThisSlider = ({ value, unit, sign, setPreview, setValue }) => {
       const roundVal = Number(val.toFixed(singQuantity));
       const val3 = sign + roundVal + unit;
       setValue(val3);     
+      setPreview(val3);     
       _setValue(roundVal);
     }
   };

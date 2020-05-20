@@ -17,14 +17,16 @@ function TagComponent(props) {
 
   console.log("2-TagComponent");
   return (
-    <view.type
-      className={classes.style}
-      onClick={(e) => {    
-        e.target != e.currentTarget && e.stopPropagation();
-      }}
-    >
-      {tag.childrens.length > 0 && <TagChildrens {...props} />}
-    </view.type>
+    <div style={{border:"1px dashed #5af"}}>
+      <view.type
+        className={classes.style}
+        onClick={(e) => {
+          e.target != e.currentTarget && e.stopPropagation();
+        }}
+      >
+        {tag.childrens&&tag.childrens.length > 0 && <TagChildrens {...props} />}
+      </view.type>
+    </div>
   );
 }
 function areEqual(prevProps, nextProps) {
@@ -34,3 +36,4 @@ function areEqual(prevProps, nextProps) {
     : false;
 }
 export default React.memo(TagComponent, areEqual);
+// export default TagComponent;
