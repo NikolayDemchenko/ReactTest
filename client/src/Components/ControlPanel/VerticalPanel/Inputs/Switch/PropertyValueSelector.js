@@ -1,5 +1,7 @@
-export default function StylePropValueSelector({ value, func }) {
-  if (value.match(/^(?!^rgba\(.*\)|\d|@|\W).*\(.*\).*$/gm) && !func) {
+export default function StylePropValueSelector({ value, func, funcTemplate }) {
+
+  let funcTempl=funcTemplate?funcTemplate:/^(?!^rgba\(.*\)|\d|@|\W|\w+\(-*\w+\)).*\(.*\).*$/mg
+  if (value.match(funcTempl) && !func) {
     return "func";
   } else {
     // Если есть пробел, то мультиинпут

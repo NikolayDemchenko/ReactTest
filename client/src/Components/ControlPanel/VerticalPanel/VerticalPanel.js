@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { newDiv } from "../../Tag/Classes";
 import StylePanel from "./StylePanel/StylePanel";
 import Icon from "react-icons-kit";
 import { plus } from "react-icons-kit/icomoon/plus";
-import { cross } from "react-icons-kit/icomoon/cross";
+// import { cross } from "react-icons-kit/icomoon/cross";
 import jss from "jss";
 import preset from "jss-preset-default";
 import Select from "../ModalWindows/Select";

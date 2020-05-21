@@ -21,10 +21,9 @@ export default function NumberSlider(props) {
       return value;
     }
   };
-
   const parseString = (value) => {
     if (typeof value === "string") {
-      const newVal = value.match(/[^-\d+\.?\d+]\w*/gm);
+      const newVal = value.match(/[^-\d+.?\d+]\w*/gm);
       // console.log("parseString", newVal);
       return newVal ? newVal.join("") : "";
     } else {
@@ -68,10 +67,10 @@ const ThisSlider = ({ value, unit, sign, setPreview, setValue }) => {
   };
   const step = setStep();
 
-  const changeValue = (val) => {
-    if (String(val).match(/^\-/gm)) {
-      const _sign = String(val).replace(/[\w\.]+/gm, "");
-      const value = String(val).replace(/^\-/gm, "");
+    const changeValue = (val) => {
+    if (String(val).match(/^-/gm)) {
+      const _sign = String(val).replace(/[\w.]+/gm, "");
+      const value = String(val).replace(/^-/gm, "");
       if (sign === _sign) {
         const val1 = Number(value) + unit;
         setValue(val1);

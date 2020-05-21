@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import Icon from "react-icons-kit";
 import { plus } from "react-icons-kit/icomoon/plus";
 import { cross } from "react-icons-kit/icomoon/cross";
+
 import { ic_note_add } from "react-icons-kit/md/ic_note_add";
 import { ic_library_add } from "react-icons-kit/md/ic_library_add";
 import Input from "../Inputs/Popup/PopupInput";

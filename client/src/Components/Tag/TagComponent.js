@@ -4,6 +4,7 @@ import jss from "jss";
 import preset from "jss-preset-default";
 
 function TagComponent(props) {
+
   const { tag, preview } = props;
   const view = preview ? preview : tag;
   const { style } = view;
@@ -16,17 +17,15 @@ function TagComponent(props) {
     .attach();
 
   console.log("2-TagComponent");
-  return (
-    <div style={{border:"1px dashed #5af"}}>
+  return (    
       <view.type
         className={classes.style}
-        onClick={(e) => {
-          e.target != e.currentTarget && e.stopPropagation();
+        onClick={(e) => {          
+          e.target !== e.currentTarget && e.stopPropagation();
         }}
       >
         {tag.childrens&&tag.childrens.length > 0 && <TagChildrens {...props} />}
-      </view.type>
-    </div>
+      </view.type> 
   );
 }
 function areEqual(prevProps, nextProps) {

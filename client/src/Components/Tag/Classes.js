@@ -109,6 +109,7 @@ const innerDiv = {
     margin: "10px",
     marginBottom: "10px",
     "&:hover": {
+      transform: "perspective(200px) scaleZ(-0.5) translateZ(-2px)",
       boxShadow: "0 8px 5px 2px #0005, inset 0 8px 5px 2px #00ffff",
       transition: "0.2s",
     },
@@ -119,15 +120,15 @@ const innerDiv = {
   },
   attributes: {},
 };
-const childs=[]
-for (let i= 0; i < 20; i++) { 
-  childs.push(JSON.parse(JSON.stringify(innerDiv)))
+const childs = [];
+for (let i = 0; i < 20; i++) {
+  childs.push(JSON.parse(JSON.stringify(innerDiv)));
 }
 const baseDiv = {
   // index: 0,
   // visible: true,
   // childrens: [],
-  childrens:childs ,
+  childrens: childs,
   type: "div",
   style: {
     display: "flex",
@@ -147,11 +148,10 @@ const baseDiv = {
       width: "200px",
     },
     "&:hover": {
-      height: "702px",
-      width: "702px",
+      transform: "perspective(200px) scaleZ(-0.5) translateZ(-2px)",
       boxShadow: "0 8px 5px 2px #0005, inset 0 8px 5px 2px #00ffff",
       transition: "0.2s",
-      marginBottom: "58px",
+      marginBottom: "60px",
       "@media (max-width: 800px)": {
         width: "200px",
       },
@@ -198,6 +198,7 @@ const newType = (type) => {
       return;
   }
 };
+
 export {
   newDiv,
   div,
@@ -207,4 +208,5 @@ export {
   docType,
   imageType,
   keyValueType,
+  str,
 };

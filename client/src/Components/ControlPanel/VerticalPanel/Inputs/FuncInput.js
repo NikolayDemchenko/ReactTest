@@ -4,8 +4,9 @@ import PopupInput from "./Popup/PopupInput";
 import { cssFunc } from "../../../Class/HtmlCss";
 export default function FuncInput({ value, setValue, setPreview }) {
   // console.log("FuncInput");
-
-  const funcType = /^(?!\(.*\))[\w,\-]+/gm.exec(value)[0];
+  
+  // const funcType = /^(?!\(.*\))[\w,\-]+/gm.exec(value)[0];
+  const funcType = /^(?!\(.*\))[\w,-]+/gm.exec(value)[0];
 
   const funcInnerValue =
     /\(.*\)/gm.exec(value) &&

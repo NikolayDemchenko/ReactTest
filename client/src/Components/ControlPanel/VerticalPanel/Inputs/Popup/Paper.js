@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+
 import PropertyInputSwitch from "../Switch/PropertyInputSwitch";
 export default function Paper(props) {
   const { value, setValue } = props;

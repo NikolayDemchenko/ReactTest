@@ -10,7 +10,7 @@ function StylePanel(props) {
 
   const { tag, setTag } = props;
   const { style,type } = tag;
-  console.log("type", type);
+  // console.log("type", type);
   useEffect(() => {
     setPreviewTagStyle(style);
     return () => {
@@ -26,7 +26,7 @@ function StylePanel(props) {
 
   const setPreviewTagStyle = (style) => {
     // console.log("setPreviewAllStyle");
-    console.log('tag.type', tag.type)
+    // console.log('tag.type', tag.type)
     props.setPreview({ ...tag, style });
   };
   const setPreviewStyleElement = (element) => {
