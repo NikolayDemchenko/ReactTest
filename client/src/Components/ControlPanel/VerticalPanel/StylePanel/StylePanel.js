@@ -9,13 +9,14 @@ function StylePanel(props) {
   };
 
   const { tag, setTag } = props;
-  const { style } = tag;
-  // console.log("style", style);
+  const { style,type } = tag;
+  console.log("type", type);
   useEffect(() => {
+    setPreviewTagStyle(style);
     return () => {
       setPreviewTagStyle(style);
     };
-  }, [style]);
+  }, [style,type]);
 
   const setTagStyle = (style) => {
     // console.log('tag', tag.style)
@@ -25,6 +26,7 @@ function StylePanel(props) {
 
   const setPreviewTagStyle = (style) => {
     // console.log("setPreviewAllStyle");
+    console.log('tag.type', tag.type)
     props.setPreview({ ...tag, style });
   };
   const setPreviewStyleElement = (element) => {

@@ -14,10 +14,12 @@ function VerticalPanel(props) {
   //   `background-color: ${props.tag.style.backgroundColor}`
   // );
 
-  const { tag, setTag } = props;
+  const { tag, setTag, setPreview } = props;
+
 
   const setTagType = ({ value: type }) => {
     setTag({ ...tag, type });
+    setPreview({ ...tag, type });
     console.log("tag.type", type);
   };
 
