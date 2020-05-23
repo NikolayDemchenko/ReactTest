@@ -1,33 +1,29 @@
 import React, { useState } from "react";
-
-import VerticalPanel from "../ControlPanel/VerticalPanel/VerticalPanel";
-import Popover from "../ControlPanel/ModalWindows/PopoverPopupState";
 import TagComponent from "./TagComponent";
 
 const Tag = (props) => {
   const [preview, setPreview] = useState(props.tag);
 
-  const popover = true;
-
+  let index = props.index ? props.index : 0;
+  // const popover = true;
+  const id = preview.type + "_" + index;
+  console.log("id", id);
   return (
-    <>
-      {popover ? (
-        <Popover
-          PaperProps={{
-            style: { background: "rgba(43,50,66,.95)" },
-          }}
-          anchorReference="anchorPosition"
-          anchorPosition={{ top: 0, left: 0 }}
-        >
-          <div style={{ border: "1px dashed #5af" }}>
-            <TagComponent {...props} preview={preview} />
-          </div>
-          <VerticalPanel {...props} preview={preview} setPreview={setPreview} />
-        </Popover>
-      ) : (
-        <TagComponent {...props} preview={preview} />
-      )}
-    </>
+    <div
+      id={id}
+      key={id}
+      onClick={(e) => {
+        props.setSettings({ ...props, preview, setPreview });
+        e.stopPropagation();
+      }}
+      style={{ border: "1px dashed #5af" }}
+    >
+      <TagComponent
+        {...props}
+        tag={preview ? preview : props.tag}
+        index={index}
+      />
+    </div>
   );
 };
 

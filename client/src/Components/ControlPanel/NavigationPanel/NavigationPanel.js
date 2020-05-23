@@ -10,7 +10,7 @@ function NavigationPanel(props) {
   return <Tag {...props} />;
 }
 
-function Tag({ tag: { type, childrens },index }) {
+function Tag({ tag: { type, childrens }, index }) {
   const [showChilds, setshowChilds] = useState(false);
   const changeToggle = () => setshowChilds(!showChilds);
 
@@ -27,6 +27,9 @@ function Tag({ tag: { type, childrens },index }) {
     </div>
   ) : null;
 
+  let thisIndex = index ? index : 0;
+  const id = type + "_" + thisIndex;
+  console.log("nav.id", id);
   return (
     <div>
       <div
@@ -37,17 +40,23 @@ function Tag({ tag: { type, childrens },index }) {
       >
         {toggle}
         <div
+          onClick={(e) => {
+            e.preventDefault();
+            document.getElementById(id).click();
+          }}
           style={{
             cursor: "default",
             borderBottom: "2px solid #55667766",
             background: "rgba(30,40,57,.4)",
           }}
         >
-          {index}{" - "}{type}
+          {id}
         </div>
       </div>
       <div style={{ marginLeft: "30px" }}>
-        {childrens && showChilds && <Childrens childrens={childrens} />}
+        {childrens && showChilds && (
+          <Childrens childrens={childrens} index={thisIndex} />
+        )}
       </div>
     </div>
   );
@@ -57,7 +66,7 @@ function Childrens(props) {
   return props.childrens.map((children, index) => {
     return (
       <div style={{ display: "flex" }} key={index}>
-        <Tag {...props} tag={children} index={index} />
+        <Tag {...props} tag={children} index={props.index + "_" + index} />
       </div>
     );
   });

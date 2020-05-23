@@ -4,33 +4,24 @@ import jss from "jss";
 import preset from "jss-preset-default";
 
 function TagComponent(props) {
-
-  const { tag, preview } = props;
-  const view = preview ? preview : tag;
-  const { style } = view;
+  const { tag } = props;
 
   jss.setup(preset());
   const { classes } = jss
     .createStyleSheet({
-      style,
+      style: tag.style,
     })
     .attach();
 
-  console.log("2-TagComponent");
-  return (    
-      <view.type
-        className={classes.style}
-        onClick={(e) => {          
-          e.target !== e.currentTarget && e.stopPropagation();
-        }}
-      >
-        {tag.childrens&&tag.childrens.length > 0 && <TagChildrens {...props} />}
-      </view.type> 
+  // console.log("2-TagComponent");
+  return (
+    <tag.type className={classes.style}>
+      {tag.childrens && tag.childrens.length > 0 && <TagChildrens {...props} />}
+    </tag.type>
   );
 }
 function areEqual(prevProps, nextProps) {
-  return prevProps.tag === nextProps.tag &&
-    prevProps.preview === nextProps.preview
+  return prevProps.tag === nextProps.tag
     ? true
     : false;
 }

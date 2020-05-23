@@ -19,9 +19,9 @@ function TagChildrens(props) {
     };
 
     return (
-      <div key={index}>
-        <Tag {...props} tag={children} setTag={setChildren} />
-      </div>
+      // <div key={index}>
+        <Tag {...props} tag={children} setTag={setChildren} index={props.index+'_'+index} />
+      // </div>
     );
   });
 }
