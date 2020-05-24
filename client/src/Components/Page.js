@@ -5,7 +5,7 @@ import NavigationPanel from './ControlPanel/NavigationPanel/NavigationPanel'
 export default function Page(props) {
   const [page, setPage] = useState(div);
   
-  console.log("0-page", page);
+  // console.log("0-page", page);
   // console.log('%cpage.style.backgroundColor',`background-color: ${page.style.backgroundColor}`)
 
   return (

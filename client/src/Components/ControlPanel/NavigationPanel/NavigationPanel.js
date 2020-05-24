@@ -6,7 +6,7 @@ import Popover from "../ModalWindows/PopoverPopupState";
 function NavigationPanel(props) {
   // Отобразить тип тега
   // Если у тега есть чилдрены перебрать чилдрены и вывести их тип
-  console.log("props.tag", props.tag);
+  // console.log("props.tag", props.tag);
   return <Tag {...props} />;
 }
 
@@ -25,11 +25,9 @@ function Tag({ tag: { type, childrens }, index }) {
     <div style={{ cursor: "pointer", width: "20px" }} onClick={changeToggle}>
       {icon}
     </div>
-  ) : null;
-
-  let thisIndex = index ? index : 0;
-  const id = type + "_" + thisIndex;
-  console.log("nav.id", id);
+  ) : null;  
+  const id =  index ? index : '0';
+  // console.log("nav.id", id);
   return (
     <div>
       <div
@@ -42,7 +40,10 @@ function Tag({ tag: { type, childrens }, index }) {
         <div
           onClick={(e) => {
             e.preventDefault();
-            document.getElementById(id).click();
+            const element=document.getElementById(id)
+            element.click();
+            // element.style.border= "1px dashed #5af"
+            // console.log('element', element.style)
           }}
           style={{
             cursor: "default",
@@ -50,12 +51,12 @@ function Tag({ tag: { type, childrens }, index }) {
             background: "rgba(30,40,57,.4)",
           }}
         >
-          {id}
+          id: {id} type: {type}
         </div>
       </div>
       <div style={{ marginLeft: "30px" }}>
         {childrens && showChilds && (
-          <Childrens childrens={childrens} index={thisIndex} />
+          <Childrens childrens={childrens} index={id} />
         )}
       </div>
     </div>

@@ -19,7 +19,7 @@ function Property({
   const [target, setTarget] = useState();
   const propKey = Object.keys(property)[0];
   const propValue = Object.values(property)[0];
-  console.log("%cProperty", "color:#191",propKey, propValue);
+  // console.log("%cProperty", "color:#191",propKey, propValue);
 // console.log('property',propKey, propValue)
   return (
     <div

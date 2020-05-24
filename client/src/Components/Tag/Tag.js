@@ -2,26 +2,27 @@ import React, { useState } from "react";
 import TagComponent from "./TagComponent";
 
 const Tag = (props) => {
-  const [preview, setPreview] = useState(props.tag);
+  const { setSettings, tag, setTag, index } = props;
+  const [preview, setPreview] = useState(tag);
 
-  let index = props.index ? props.index : 0;
   // const popover = true;
-  const id = preview.type + "_" + index;
-  console.log("id", id);
+  const id  = index ? index : "0";
+  // console.log("id", id);
+
   return (
     <div
       id={id}
-      key={id}
       onClick={(e) => {
-        props.setSettings({ ...props, preview, setPreview });
+        setSettings({ setTag, tag, preview, setPreview, id, setSettings });
+
         e.stopPropagation();
-      }}
-      style={{ border: "1px dashed #5af" }}
+    
+      }}   
     >
       <TagComponent
         {...props}
-        tag={preview ? preview : props.tag}
-        index={index}
+        tag={preview ? preview : tag}
+        index={id}
       />
     </div>
   );

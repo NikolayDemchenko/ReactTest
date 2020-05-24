@@ -9,25 +9,30 @@ import preset from "jss-preset-default";
 import Select from "../ModalWindows/Select";
 import { htmlTags } from "../../Class/HtmlCss";
 function VerticalPanel(props) {
-   // console.log(
+  //  console.log(
   //   "%cVerticalPanel",
-  //   `background-color: ${props.tag.style.backgroundColor}`
+  //   `background-color: ${props.tag.style.backgroundColor}`,props
   // );
 
-  const { tag, setTag, setPreview } = props;
+  // console.log("props", props);
+  const { tag, setTag, setPreview, id, setSettings } = props;
 
+  const setTagWithPreview = (tag) => {
+    setTag(tag);
+    setPreview(tag);
+  };
 
   const setTagType = ({ value: type }) => {
-    setTag({ ...tag, type });
-    setPreview({ ...tag, type });
-    console.log("tag.type", type);
+    setTagWithPreview({ ...tag, type });  
+    setSettings({ ...props, tag: { ...tag, type } });
+    // console.log("tag.type", type);
   };
 
   const addChildren = () => {
-    console.log("tag", tag);
-    tag.childrens=tag.childrens?tag.childrens:[]
+    // console.log("tag", tag);
+    tag.childrens = tag.childrens ? tag.childrens : [];
     tag.childrens.push(JSON.parse(JSON.stringify(newDiv)));
-    setTag({ ...tag });
+    setTagWithPreview({ ...tag });    
   };
 
   const style = {
@@ -35,9 +40,10 @@ function VerticalPanel(props) {
     minWidth: "280px",
     maxWidth: "280px",
     // fontSize:"16px",
-    position:"fixed",
-    top:0,right:0,
-    zIndex:999,
+    position: "fixed",
+    top: 0,
+    right: 0,
+    zIndex: 999,
     backgroundColor: "#456c",
     color: "rgba(140, 200, 255, 0.8)",
     boxShadow: "2px 10px 5px 2px #00000055",
@@ -54,6 +60,20 @@ function VerticalPanel(props) {
   return (
     <div className={classes.style}>
       <div style={{ display: "flex" }}>
+        <div
+          style={{
+            padding: "0px 0.5em",
+          }}
+        >
+          id: {id}
+        </div>
+        <div
+          style={{
+            padding: "0px 0.5em",
+          }}
+        >
+          type:
+        </div>
         <Select
           defaultItem={tag.type}
           setItem={setTagType}

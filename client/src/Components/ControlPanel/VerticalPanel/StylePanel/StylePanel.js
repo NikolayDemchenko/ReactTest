@@ -8,26 +8,25 @@ function StylePanel(props) {
     setDragged(item);
   };
 
-  const { tag, setTag } = props;
+  const { tag, setTag,setPreview,setSettings } = props;
   const { style,type } = tag;
-  // console.log("type", type);
+  // console.log("props", props);
   useEffect(() => {
+   
     setPreviewTagStyle(style);
     return () => {
+      setSelected("All style")
       setPreviewTagStyle(style);
     };
   }, [style,type]);
 
   const setTagStyle = (style) => {
-    // console.log('tag', tag.style)
-    // console.log('style', style)
     setTag({ ...tag, style });
+    setSettings({...props,tag:{ ...tag, style }})
   };
 
   const setPreviewTagStyle = (style) => {
-    // console.log("setPreviewAllStyle");
-    // console.log('tag.type', tag.type)
-    props.setPreview({ ...tag, style });
+    setPreview({ ...tag, style });
   };
   const setPreviewStyleElement = (element) => {
     for (let key in element) {
