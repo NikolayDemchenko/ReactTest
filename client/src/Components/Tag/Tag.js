@@ -7,13 +7,14 @@ const Tag = (props) => {
 
   // const popover = true;
   const id  = index ? index : "0";
+
   // console.log("id", id);
 
   return (
     <div
       id={id}
       onClick={(e) => {
-        setSettings({ setTag, tag, preview, setPreview, id, setSettings });
+        setSettings({ setTag, tag, preview, setPreview, id });
 
         e.stopPropagation();
     

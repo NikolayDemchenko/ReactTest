@@ -13,7 +13,7 @@ function TagComponent(props) {
     })
     .attach();
   // console.log("index", index);
-  console.log("-TagComponent");
+  // console.log("-TagComponent");
   return (
     <tag.type key={index} className={classes.style}>
       {tag.childrens && tag.childrens.length > 0 && <TagChildrens {...props} />}
@@ -26,5 +26,5 @@ function areEqual(prevProps, nextProps) {
   return prevProps.tag === nextProps.tag ? true : false;
   // return prevProps === nextProps? true : false;
 }
-export default React.memo(TagComponent,areEqual);
-// export default TagComponent;
+// export default React.memo(TagComponent,areEqual);
+export default TagComponent;

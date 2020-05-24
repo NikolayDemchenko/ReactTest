@@ -10,7 +10,7 @@ export default function Page(props) {
 
   return (
     <div>
-      <NavigationPanel tag={page} setTag={setPage}/>
+      <NavigationPanel tag={page} />
       <Tag {...props }tag={page} setTag={setPage} />
     </div>
   );

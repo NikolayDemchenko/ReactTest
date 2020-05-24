@@ -110,5 +110,5 @@ function areEqual(prevProps, nextProps) {
     ? true
     : false;
 }
-export default React.memo(Property, areEqual);
-// export default Property;
+// export default React.memo(Property, areEqual);
+export default Property;

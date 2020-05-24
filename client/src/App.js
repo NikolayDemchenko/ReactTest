@@ -11,23 +11,23 @@ const App = () => {
 
   useEffect(() => {
     if (settings) {
-      // console.log("nextId", settings.id);
-      document.getElementById(settings.id).style.outline = "1px dashed #5af";
+      const style = document.getElementById(settings.id).style;
+      // console.log("nextId", settings.id, style);
+      style.outline = "1px dashed #5af";
     }
     return () => {
       if (settings) {
-        // console.log("prevId", settings.id);
-        document.getElementById(settings.id).style.outline = "";
+        const style = document.getElementById(settings.id).style;
+        // console.log("prevId", settings.id, style);
+        style.outline = "";
       }
     };
   }, [settings]);
 
-
-
   return (
     <ErrorBoundry>
       <Page setSettings={setSettings} />;
-      {settings && <VerticalPanel {...settings} />}
+      {settings && <VerticalPanel {...settings} setSettings={setSettings} />}
     </ErrorBoundry>
   );
 };
@@ -36,5 +36,5 @@ function areEqual(prevProps, nextProps) {
   // console.log("nextProps", nextProps);
   return prevProps === nextProps ? true : false;
 }
-// export default React.memo(App, areEqual);
-export default App;
+export default React.memo(App, areEqual);
+// export default App;

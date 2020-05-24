@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { ic_keyboard_arrow_right } from "react-icons-kit/md/ic_keyboard_arrow_right";
 import Icon from "react-icons-kit";
-import VerticalPanel from "../VerticalPanel/VerticalPanel";
-import Popover from "../ModalWindows/PopoverPopupState";
+
 function NavigationPanel(props) {
   // Отобразить тип тега
   // Если у тега есть чилдрены перебрать чилдрены и вывести их тип

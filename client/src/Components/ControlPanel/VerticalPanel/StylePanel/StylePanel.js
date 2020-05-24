@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PropertiesPanel from "./PropertiesPanel";
 function StylePanel(props) {
+
   const [selected, setSelected] = useState("All style");
   const [draggedProp, setDragged] = useState();
   const setDraggedProp = (item) => {
@@ -8,21 +9,22 @@ function StylePanel(props) {
     setDragged(item);
   };
 
-  const { tag, setTag,setPreview,setSettings } = props;
-  const { style,type } = tag;
+  const {id, tag, setTag, setPreview} = props;
+  const { type,style } = tag;
+
   // console.log("props", props);
+
   useEffect(() => {
-   
-    setPreviewTagStyle(style);
+    document.getElementById("All_styles").click()
     return () => {
-      setSelected("All style")
-      setPreviewTagStyle(style);
+      setPreview();
     };
-  }, [style,type]);
+  }, [style, type]);
 
   const setTagStyle = (style) => {
+    setPreview();
     setTag({ ...tag, style });
-    setSettings({...props,tag:{ ...tag, style }})
+    document.getElementById(id).click();
   };
 
   const setPreviewTagStyle = (style) => {
@@ -44,7 +46,7 @@ function StylePanel(props) {
 
   return (
     <div style={{ background: "rgba(30,40,57,.6)" }} title="CSS (JSS) Стили">
-      <div
+      <div id={"All_styles"}
         style={{
           display: "flex",
           borderTop: "4px solid ",

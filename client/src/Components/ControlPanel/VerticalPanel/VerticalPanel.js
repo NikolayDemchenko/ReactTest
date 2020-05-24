@@ -15,16 +15,19 @@ function VerticalPanel(props) {
   // );
 
   // console.log("props", props);
-  const { tag, setTag, setPreview, id, setSettings } = props;
+  const {tag, setTag, setPreview, id, setSettings } = props;
+
+  const clickElementById=id=> document.getElementById(id).click();
 
   const setTagWithPreview = (tag) => {
     setTag(tag);
     setPreview(tag);
   };
-
+// Получает tag
   const setTagType = ({ value: type }) => {
     setTagWithPreview({ ...tag, type });  
-    setSettings({ ...props, tag: { ...tag, type } });
+    // setSettings({ ...props, tag: { ...tag, type } });
+    clickElementById(id);
     // console.log("tag.type", type);
   };
 
@@ -32,7 +35,8 @@ function VerticalPanel(props) {
     // console.log("tag", tag);
     tag.childrens = tag.childrens ? tag.childrens : [];
     tag.childrens.push(JSON.parse(JSON.stringify(newDiv)));
-    setTagWithPreview({ ...tag });    
+    setTagWithPreview({ ...tag });  
+    clickElementById(id); 
   };
 
   const style = {
