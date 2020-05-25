@@ -19,7 +19,7 @@ function NavigationPanel(props) {
     backgroundColor: "#456c",
     color: "rgba(140, 200, 255, 0.8)",
     boxShadow: "2px 10px 5px 2px #00000055",
-    "&::-webkit-scrollbar": { width: "4px" },
+    "&::-webkit-scrollbar": { width: "20px" },
     "&::-webkit-scrollbar-thumb": { backgroundColor: "#567" },
   };
   jss.setup(preset());
@@ -54,9 +54,7 @@ function NavigationPanel(props) {
       {showPanel && (
         <div className={classes.style}>
           <Tag
-            {...props}
-            // selectedId={selectedId}
-            // setSelectedId={setSelectedId}
+            {...props}    
           />
         </div>
       )}

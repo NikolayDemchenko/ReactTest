@@ -63,7 +63,7 @@ function StylePanel(props) {
           setPreviewTagStyle(style);
         }}
       >
-        {"All styles"}
+        {"Styles"}
       </div>
       <PropertiesPanel
         {...props}
