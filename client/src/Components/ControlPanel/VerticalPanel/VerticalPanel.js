@@ -3,6 +3,7 @@ import { newDiv } from "../../Tag/Classes";
 import StylePanel from "./StylePanel/StylePanel";
 import Icon from "react-icons-kit";
 import { plus } from "react-icons-kit/icomoon/plus";
+import { Link } from "react-scroll";
 // import { cross } from "react-icons-kit/icomoon/cross";
 import jss from "jss";
 import preset from "jss-preset-default";
@@ -15,17 +16,17 @@ function VerticalPanel(props) {
   // );
 
   // console.log("props", props);
-  const {tag, setTag, setPreview, id, setSettings } = props;
+  const { tag, setTag, setPreview, id, setSettings } = props;
 
-  const clickElementById=id=> document.getElementById(id).click();
+  const clickElementById = (id) => document.getElementById(id).click();
 
   const setTagWithPreview = (tag) => {
     setTag(tag);
     setPreview(tag);
   };
-// Получает tag
+  // Получает tag
   const setTagType = ({ value: type }) => {
-    setTagWithPreview({ ...tag, type });  
+    setTagWithPreview({ ...tag, type });
     // setSettings({ ...props, tag: { ...tag, type } });
     clickElementById(id);
     // console.log("tag.type", type);
@@ -35,12 +36,14 @@ function VerticalPanel(props) {
     // console.log("tag", tag);
     tag.childrens = tag.childrens ? tag.childrens : [];
     tag.childrens.push(JSON.parse(JSON.stringify(newDiv)));
-    setTagWithPreview({ ...tag });  
-    clickElementById(id); 
+    setTagWithPreview({ ...tag });
+    clickElementById(id);
   };
 
   const style = {
     flexWrap: "wrap",
+    maxHeight: "95vh",
+    overflowY: "auto",
     minWidth: "280px",
     maxWidth: "280px",
     // fontSize:"16px",
@@ -63,14 +66,23 @@ function VerticalPanel(props) {
   // console.log('tag', tag)
   return (
     <div className={classes.style}>
-      <div style={{ display: "flex" }}>
-        <div
-          style={{
-            padding: "0px 0.5em",
-          }}
+      <div style={{cursor:"default", display: "flex" }}>
+        <Link
+          activeClass="active"
+          to={id}
+          spy={true}
+          smooth={true}
+          offset={-70}
+          duration={500}
         >
-          id: {id}
-        </div>
+          <div
+            style={{
+              padding: "0px 0.5em",
+            }}
+          >
+            id: {id}
+          </div>
+        </Link>
         <div
           style={{
             padding: "0px 0.5em",

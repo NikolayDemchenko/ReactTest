@@ -28,5 +28,4 @@ function TagChildrens(props) {
     );
   });
 }
-// export default React.memo(TagChildrens);
 export default TagChildrens;

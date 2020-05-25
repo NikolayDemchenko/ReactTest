@@ -1,17 +1,71 @@
 import React, { useState } from "react";
 import { ic_keyboard_arrow_right } from "react-icons-kit/md/ic_keyboard_arrow_right";
 import Icon from "react-icons-kit";
-
+import { Link } from "react-scroll";
+import jss from "jss";
+import preset from "jss-preset-default";
 function NavigationPanel(props) {
-  // Отобразить тип тега
-  // Если у тега есть чилдрены перебрать чилдрены и вывести их тип
-  // console.log("props.tag", props.tag);
-  return <Tag {...props} />;
+  const style = {
+    // flexWrap: "wrap",
+    minWidth: "280px",
+    maxWidth: "280px",
+    maxHeight: "95vh",
+    overflowY: "auto",
+    // fontSize:"16px",
+    position: "fixed",
+    top: "20px",
+    left: 0,
+    zIndex: 999,
+    backgroundColor: "#456c",
+    color: "rgba(140, 200, 255, 0.8)",
+    boxShadow: "2px 10px 5px 2px #00000055",
+    "&::-webkit-scrollbar": { width: "4px" },
+    "&::-webkit-scrollbar-thumb": { backgroundColor: "#567" },
+  };
+  jss.setup(preset());
+  const { classes } = jss
+    .createStyleSheet({
+      style,
+    })
+    .attach();
+  // const [selectedId, setSelectedId] = useState();
+  const [showPanel, setShowPanel] = useState(false);
+  return (
+    <div>
+      <div
+        style={{
+          position: "fixed",
+          top: 0,
+          backgroundColor: "#456c",
+          maxWidth: "100px",
+          display: "flex",
+          justifyContent: "center",
+          padding: "0 10px",
+          cursor: "pointer",
+        }}
+        onClick={(e) => {
+          e.stopPropagation();
+          console.log("setShowPanel");
+          setShowPanel(!showPanel);
+        }}
+      >
+        Navigation
+      </div>
+      {showPanel && (
+        <div className={classes.style}>
+          <Tag
+            {...props}
+            // selectedId={selectedId}
+            // setSelectedId={setSelectedId}
+          />
+        </div>
+      )}
+    </div>
+  );
 }
 
-function Tag({ tag: { type, childrens }, index }) {
+function Tag({ tag: { type, childrens }, index, selectedId, setSelectedId }) {
   const [showChilds, setshowChilds] = useState(false);
-  const changeToggle = () => setshowChilds(!showChilds);
 
   const _icon = <Icon size={"100%"} icon={ic_keyboard_arrow_right} />;
 
@@ -21,41 +75,55 @@ function Tag({ tag: { type, childrens }, index }) {
     <div style={{ transform: "rotate(90deg)" }}>{_icon}</div>
   );
   const toggle = childrens ? (
-    <div style={{ cursor: "pointer", width: "20px" }} onClick={changeToggle}>
+    <div
+      style={{ cursor: "pointer", width: "20px" }}
+      onClick={(e) => {
+        e.stopPropagation();
+        setshowChilds(!showChilds);
+      }}
+    >
       {icon}
     </div>
-  ) : null;  
-  const id =  index ? index : '0';
-  // console.log("nav.id", id);
+  ) : null;
+  const id = index ? index : "0";
+  const background =
+    id === selectedId ? "rgba(30,60,97,.4)" : "rgba(30,40,57,.4)";
   return (
     <div>
-      <div
-        style={{
-          display: "flex",
-          color: "rgba(140, 200, 255, 0.8)",
-        }}
+      <Link
+        activeClass="active"
+        to={id}
+        spy={true}
+        smooth={true}
+        offset={-70}
+        duration={500}
       >
-        {toggle}
         <div
           onClick={(e) => {
             e.preventDefault();
-            const element=document.getElementById(id)
-            element.click();
-            // element.style.border= "1px dashed #5af"
-            // console.log('element', element.style)
+            setSelectedId(id);
+            document.getElementById(id).click();
           }}
           style={{
-            cursor: "default",
+            display: "flex",
             borderBottom: "2px solid #55667766",
-            background: "rgba(30,40,57,.4)",
+            background,
+            cursor: "default",
+            // outline: "1px solid white",
           }}
         >
+          {toggle}
           id: {id} type: {type}
         </div>
-      </div>
+      </Link>
       <div style={{ marginLeft: "30px" }}>
         {childrens && showChilds && (
-          <Childrens childrens={childrens} index={id} />
+          <Childrens
+            childrens={childrens}
+            index={id}
+            selectedId={selectedId}
+            setSelectedId={setSelectedId}
+          />
         )}
       </div>
     </div>
@@ -65,9 +133,14 @@ function Tag({ tag: { type, childrens }, index }) {
 function Childrens(props) {
   return props.childrens.map((children, index) => {
     return (
-      <div style={{ display: "flex" }} key={index}>
-        <Tag {...props} tag={children} index={props.index + "_" + index} />
-      </div>
+      // <div style={{ display: "flex" }} key={index}>
+      <Tag
+        {...props}
+        key={index}
+        tag={children}
+        index={props.index + "_" + index}
+      />
+      // </div>
     );
   });
 }

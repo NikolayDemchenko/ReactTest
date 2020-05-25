@@ -25,14 +25,14 @@ function Property({
     <div
       draggable
       tabIndex={tabIndex}
-      onKeyUp={(e) => {
-        setcopy(!copy);
-        console.log("onKeyUp", e.key);
-      }}
-      onKeyDown={(e) => {
-        setcopy(!copy);
-        console.log("onKeyDown", e.key);
-      }}
+      // onKeyUp={(e) => {
+      //   setcopy(!copy);
+      //   console.log("onKeyUp", e.key);
+      // }}
+      // onKeyDown={(e) => {
+      //   setcopy(!copy);
+      //   console.log("onKeyDown", e.key);
+      // }}
       onDrop={(e) => {
         e.stopPropagation();
         onDrop(property, draggedProp, target);

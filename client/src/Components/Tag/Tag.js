@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import TagComponent from "./TagComponent";
 
 const Tag = (props) => {
-  const { setSettings, tag, setTag, index } = props;
+  const { setSettings, tag, setTag, index,setSelectedId } = props;
   const [preview, setPreview] = useState(tag);
 
   // const popover = true;
@@ -15,7 +15,7 @@ const Tag = (props) => {
       id={id}
       onClick={(e) => {
         setSettings({ setTag, tag, preview, setPreview, id });
-
+        setSelectedId(id)
         e.stopPropagation();
     
       }}   

@@ -121,7 +121,7 @@ const innerDiv = {
   attributes: {},
 };
 const childs = [];
-for (let i = 0; i < 1000; i++) {
+for (let i = 0; i < 100; i++) {
   childs.push(JSON.parse(JSON.stringify(innerDiv)));
 }
 const baseDiv = {

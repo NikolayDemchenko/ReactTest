@@ -1,23 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 
 import PropertyInputSwitch from "../Switch/PropertyInputSwitch";
 export default function Paper(props) {
-  const { value, setValue } = props;
+  const [value, setThisValue] = useState(props.value);
+  // console.log("Paper value", value);
   
+  const setValue=(val)=>{
+    setThisValue(val)
+    props.setValue(val);
+  }
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
       setValue(e.target.value);
     }
-  }; 
+  };
 
   return (
-    <div
-      style={{
-        color: "#eee",
-      }}
-    >
+    <div style={{ color: "#eee" }}>
       <input
-        // size={value.length>10?value.length:value.length}
         style={{
           background: "transparent",
           width: `${value.length * 0.5}em`,
@@ -28,17 +28,22 @@ export default function Paper(props) {
           color: "#eee",
           fontSize: "15px",
         }}
-        type={"text"}
+        // type={"text"}
         onKeyPress={handleKeyPress}
-        onBlur={(e) => setValue(e.target.value)}
+        onBlur={(e) => {
+          setValue(e.target.value);
+          // props.setValue(e.target.value);
+        }}
         value={value}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={(e) => {
+          // console.log('e.currentTarget', e.currentTarget)
+          console.log("e.target.value", e.target.value);
+          setValue(e.target.value);
+          // props.setValue(e.target.value);
+        }}
       />
       <div style={{ backgroundColor: "#234c" }}>
-        <PropertyInputSwitch
-          {...props}
-          setValue={setValue}       
-        />
+        <PropertyInputSwitch {...props} setValue={setValue} />
       </div>
     </div>
   );
