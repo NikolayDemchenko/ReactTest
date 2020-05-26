@@ -120,7 +120,8 @@ const baseDiv = {
   },
   attributes: {},
 };
-const page = { styles: [] };
+const page = { styles: [],tags:[{id:"",parentId:"",style:""}] };
+
 const div = baseDiv;
 // const div = JSON.parse(str);
 

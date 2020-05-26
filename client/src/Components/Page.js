@@ -3,6 +3,7 @@ import Tag from "./Tag/Tag";
 import { div } from "./Tag/Classes";
 import NavigationPanel from "./ControlPanel/NavigationPanel/NavigationPanel";
 export default function Page(props) {
+  console.log("Page-App");
   const [page, setPage] = useState(div);
   const [selectedId, setSelectedId] = useState();
   // console.log("0-page", page);

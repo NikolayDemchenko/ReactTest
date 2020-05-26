@@ -5,7 +5,7 @@ import Page from "./Components/Page";
 import VerticalPanel from "./Components/ControlPanel/VerticalPanel/VerticalPanel";
 const App = () => {
   const [settings, setSettings] = useState();
-
+  console.log("App");
   // settings&&console.log('settings.id', settings.id)
   // settings&&console.log('settings.tag.style.backgroundColor', settings.tag.style.backgroundColor)
 
@@ -26,7 +26,7 @@ const App = () => {
 
   return (
     <ErrorBoundry>
-      <Page setSettings={setSettings} />;
+      <Page setSettings={setSettings} />
       {settings && <VerticalPanel {...settings} setSettings={setSettings} />}
     </ErrorBoundry>
   );

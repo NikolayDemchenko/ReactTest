@@ -21,6 +21,10 @@ export default function PropertiesPanel(props) {
     setSelected,
   } = props;
  
+  console.log(
+    "%cPropertiesPanel-StylePanel-VerticalPanel-App",
+    'color: green'); 
+
   const addProperty = () => {
     setStyle({ property: "value", ...style });
   };

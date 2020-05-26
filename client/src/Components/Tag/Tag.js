@@ -1,10 +1,18 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import TagComponent from "./TagComponent";
 
 const Tag = (props) => {
+  console.log("Tag-Page");
+
   const { setSettings, tag, setTag, index,setSelectedId } = props;
   const [preview, setPreview] = useState(tag);
 
+  // useEffect(() => {
+  //   return () => {
+  //     setPreview(tag)
+      
+  //   }
+  // }, [tag])
   // const popover = true;
   const id  = index ? index : "0";
 

@@ -5,17 +5,18 @@ import Icon from "react-icons-kit";
 import { plus } from "react-icons-kit/icomoon/plus";
 import { Link } from "react-scroll";
 // import { cross } from "react-icons-kit/icomoon/cross";
+import { v4 as uuidv4 } from 'uuid';
 import jss from "jss";
 import preset from "jss-preset-default";
 import Select from "../ModalWindows/Select";
 import { htmlTags } from "../../Class/HtmlCss";
 function VerticalPanel(props) {
-  //  console.log(
-  //   "%cVerticalPanel",
-  //   `background-color: ${props.tag.style.backgroundColor}`,props
-  // );
+   console.log(
+    "%cVerticalPanel-App",
+    'color: green');
 
-  // console.log("props", props);
+  // console.log("uuidv4", uuidv4());
+  
   const { tag, setTag, setPreview, id, setSettings } = props;
 
   const clickElementById = (id) => document.getElementById(id).click();

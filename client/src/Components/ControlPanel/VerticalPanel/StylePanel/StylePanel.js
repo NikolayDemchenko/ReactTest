@@ -3,8 +3,12 @@ import PropertiesPanel from "./PropertiesPanel";
 import Icon from "react-icons-kit";
 import { exportIcon } from "react-icons-kit/entypo/exportIcon";
 import FileSaver from "file-saver";
-import jsPDF from "jspdf";
 function StylePanel(props) {
+
+  console.log(
+    "%cStylePanel-VerticalPanel-App",
+    'color: green');
+
   const [selected, setSelected] = useState("All style");
   const [draggedProp, setDragged] = useState();
   const setDraggedProp = (item) => {
@@ -85,29 +89,10 @@ function StylePanel(props) {
             // Сохранение файлов
             onClick={(e) => {
               e.stopPropagation();
-
-              const doc = new jsPDF("p", "pt");
-
-              const elementHandlers = {
-                "#editor": function (element, renderer) {
-                  console.log('element', element)
-                  console.log('renderer', renderer)
-                  return true;
-                },
-              };
-              var source = document.getElementsByTagName("body")[0];
-              console.log('source', source)
-              doc.fromHTML(source, 15, 15, {
-                width: 170,
-                elementHandlers:elementHandlers,
-              });
-
-              doc.save("Test.pdf");
-
-              // const file = new Blob([JSON.stringify(style)], {
-              //   type: "application/json;charset=utf-8",
-              // });
-              // FileSaver.saveAs(file);
+            
+              FileSaver.saveAs(new Blob([JSON.stringify(style)], {
+                type: "application/json;charset=utf-8",
+              }));
             }}
           >
             <Icon size={"100%"} icon={exportIcon} />

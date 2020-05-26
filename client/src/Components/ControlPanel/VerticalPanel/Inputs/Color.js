@@ -4,10 +4,10 @@ export default function ColorPicker({ value, setValue, setPreview }) {
   const [color, setColor] = useState(value);
 
   console.log('%cColorPicker',`background-color:${value}`,value )
-  // useEffect(() => {
-  //   setColor(value);
-  //   return () => {};
-  // }, [value]);
+  useEffect(() => {
+    setColor(value);
+    return () => {};
+  }, [value]);
   const swichColorType = (color) => {
     if (color.rgb.a !== 1) {
       return `rgba(${Object.values(color.rgb).join(",")})`;

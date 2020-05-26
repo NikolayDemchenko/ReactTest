@@ -11,7 +11,7 @@ export default function Paper(props) {
   }
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
-      setValue(e.target.value);
+      setValue(value);
     }
   };
 
@@ -31,19 +31,18 @@ export default function Paper(props) {
         // type={"text"}
         onKeyPress={handleKeyPress}
         onBlur={(e) => {
-          setValue(e.target.value);
+          setValue(value);
           // props.setValue(e.target.value);
         }}
         value={value}
         onChange={(e) => {
           // console.log('e.currentTarget', e.currentTarget)
           console.log("e.target.value", e.target.value);
-          setValue(e.target.value);
-          // props.setValue(e.target.value);
+          setThisValue(e.target.value);       
         }}
       />
       <div style={{ backgroundColor: "#234c" }}>
-        <PropertyInputSwitch {...props} setValue={setValue} />
+        <PropertyInputSwitch {...props} value={value} setValue={setValue} />
       </div>
     </div>
   );

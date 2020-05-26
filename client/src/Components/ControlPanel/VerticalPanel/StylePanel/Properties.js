@@ -8,6 +8,9 @@ import {
   removeThisLevelPropByName as removeProp,
 } from "./Function/ObjectManager";
 export default function Properties(props) {
+  console.log(
+    "%cProperties-PropertiesPanel-StylePanel",
+    'color: green'); 
   const { style, setStyle, setPreview } = props;
   
   const properties = [];
