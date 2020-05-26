@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import PropertiesPanel from "./PropertiesPanel";
+import Icon from "react-icons-kit";
+import { exportIcon } from "react-icons-kit/entypo/exportIcon";
+import FileSaver from "file-saver";
+import jsPDF from "jspdf";
 function StylePanel(props) {
-
   const [selected, setSelected] = useState("All style");
   const [draggedProp, setDragged] = useState();
   const setDraggedProp = (item) => {
@@ -9,13 +12,13 @@ function StylePanel(props) {
     setDragged(item);
   };
 
-  const {id, tag, setTag, setPreview} = props;
-  const { type,style } = tag;
+  const { id, tag, setTag, setPreview } = props;
+  const { type, style } = tag;
 
   // console.log("props", props);
 
   useEffect(() => {
-    document.getElementById("All_styles").click()
+    document.getElementById("All_styles").click();
     return () => {
       setPreview();
     };
@@ -46,7 +49,8 @@ function StylePanel(props) {
 
   return (
     <div style={{ background: "rgba(30,40,57,.6)" }} title="CSS (JSS) Стили">
-      <div id={"All_styles"}
+      <div
+        id={"All_styles"}
         style={{
           display: "flex",
           borderTop: "4px solid ",
@@ -64,6 +68,51 @@ function StylePanel(props) {
         }}
       >
         {"Styles"}
+        <div
+          style={{
+            display: "flex",
+            marginLeft: "auto",
+          }}
+        >
+          <div
+            title={"Экспортировать стиль"}
+            style={{
+              cursor: "pointer",
+              width: "16px",
+              margin: "0px 2px ",
+              // border: "1px solid #fff",
+            }}
+            // Сохранение файлов
+            onClick={(e) => {
+              e.stopPropagation();
+
+              const doc = new jsPDF("p", "pt");
+
+              const elementHandlers = {
+                "#editor": function (element, renderer) {
+                  console.log('element', element)
+                  console.log('renderer', renderer)
+                  return true;
+                },
+              };
+              var source = document.getElementsByTagName("body")[0];
+              console.log('source', source)
+              doc.fromHTML(source, 15, 15, {
+                width: 170,
+                elementHandlers:elementHandlers,
+              });
+
+              doc.save("Test.pdf");
+
+              // const file = new Blob([JSON.stringify(style)], {
+              //   type: "application/json;charset=utf-8",
+              // });
+              // FileSaver.saveAs(file);
+            }}
+          >
+            <Icon size={"100%"} icon={exportIcon} />
+          </div>
+        </div>
       </div>
       <PropertiesPanel
         {...props}

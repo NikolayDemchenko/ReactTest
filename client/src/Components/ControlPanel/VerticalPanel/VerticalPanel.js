@@ -66,7 +66,7 @@ function VerticalPanel(props) {
   // console.log('tag', tag)
   return (
     <div className={classes.style}>
-      <div style={{cursor:"default", display: "flex" }}>
+      <div style={{ cursor: "default", display: "flex" }}>
         <Link
           activeClass="active"
           to={id}
@@ -103,7 +103,7 @@ function VerticalPanel(props) {
         >
           <div
             title={"Добавить элемент"}
-            style={{
+            style={{    marginLeft: "auto",
               cursor: "pointer",
               width: "16px",
               margin: "0px 2px ",

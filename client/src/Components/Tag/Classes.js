@@ -1,5 +1,29 @@
-const str =
-  '{"index":0,"visible":true,"children":[],"tag":"div","style":{"display":"flex","flexDirection":"row","alignSelf":"center","height":"700px","width":"700px","backgroundColor":"#678","margin":"auto","marginTop":"60px","marginBottom":"60px","&:hover":{"height":"702px","width":"702px","boxShadow":"0 8px 5px 2px #0005","transition":"0.2s","marginBottom":"58px"},"&:active":{"height":"700px","width":"700px","boxShadow":"none","marginBottom":"60px"}}"attributes":{}}';
+const str = {
+  style: {
+    display: "flex",
+    flexDirection: "row",
+    alignSelf: "center",
+    height: "700px",
+    width: "700px",
+    backgroundColor: "#678",
+    margin: "auto",
+    marginTop: "60px",
+    marginBottom: "60px",
+    "&:hover": {
+      height: "702px",
+      width: "702px",
+      boxShadow: "0 8px 5px 2px #0005",
+      transition: "0.2s",
+      marginBottom: "58px",
+    },
+    "&:active": {
+      height: "700px",
+      width: "700px",
+      boxShadow: "none",
+      marginBottom: "60px",
+    },
+  },
+};
 
 const newDiv = {
   // index: 0,
@@ -96,7 +120,7 @@ const baseDiv = {
   },
   attributes: {},
 };
-const page = {styles:[],};
+const page = { styles: [] };
 const div = baseDiv;
 // const div = JSON.parse(str);
 
