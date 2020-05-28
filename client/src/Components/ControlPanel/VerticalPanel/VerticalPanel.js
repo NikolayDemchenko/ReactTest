@@ -10,12 +10,16 @@ import jss from "jss";
 import preset from "jss-preset-default";
 import Select from "../ModalWindows/Select";
 import { htmlTags } from "../../Class/HtmlCss";
+import download from './download.json'
 function VerticalPanel(props) {
   //  console.log(
   //   "%cVerticalPanel-App",
   //   'color: green');
 
-  // console.log("props", props);
+
+  // console.log("uuidv4", uuidv4());
+  console.log("download.json", download);
+
   
   const { tag, setTag, setPreview, id, setSettings } = props;
 

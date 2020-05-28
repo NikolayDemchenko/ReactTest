@@ -90,6 +90,7 @@ const baseDiv = {
   attributes: {},
 };
 
+
 const page = { styles: [basePageStyle,innerPageStyle,newPageStyle], tags: [{ id: "", parentId: "", styleId: "" }] };
 
 const div = baseDiv;

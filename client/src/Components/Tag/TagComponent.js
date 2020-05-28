@@ -22,8 +22,8 @@ function TagComponent(props) {
   );
 }
 
-function areEqual(prevProps, nextProps) {
-  return prevProps.tag === nextProps.tag ? true : false;
-}
-export default React.memo(TagComponent, areEqual);
-// export default TagComponent;
+// function areEqual(prevProps, nextProps) {
+//   return prevProps.tag === nextProps.tag ? true : false;
+// }
+// export default React.memo(TagComponent, areEqual);
+export default TagComponent;
