@@ -5,9 +5,9 @@ import { exportIcon } from "react-icons-kit/entypo/exportIcon";
 import FileSaver from "file-saver";
 function StylePanel(props) {
 
-  console.log(
-    "%cStylePanel-VerticalPanel-App",
-    'color: green');
+  // console.log(
+  //   "%cStylePanel-VerticalPanel-App",
+  //   'color: green');
 
   const [selected, setSelected] = useState("All style");
   const [draggedProp, setDragged] = useState();
@@ -29,6 +29,7 @@ function StylePanel(props) {
   }, [style, type]);
 
   const setTagStyle = (style) => {
+    // console.log("setTagStyle",style);
     setPreview();
     setTag({ ...tag, style });
     document.getElementById(id).click();
@@ -113,9 +114,5 @@ function StylePanel(props) {
     </div>
   );
 }
-function areEqual(prevProps, nextProps) {
-  // prevProps.tag === nextProps.tag ?  console.log('Равно') : console.log('Не равно');
-  return prevProps.tag === nextProps.tag ? true : false;
-}
-export default React.memo(StylePanel, areEqual);
-// export default StylePanel;
+
+export default StylePanel;

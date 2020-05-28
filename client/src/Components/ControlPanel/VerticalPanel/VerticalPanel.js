@@ -11,19 +11,20 @@ import preset from "jss-preset-default";
 import Select from "../ModalWindows/Select";
 import { htmlTags } from "../../Class/HtmlCss";
 function VerticalPanel(props) {
-   console.log(
-    "%cVerticalPanel-App",
-    'color: green');
+  //  console.log(
+  //   "%cVerticalPanel-App",
+  //   'color: green');
 
-  // console.log("uuidv4", uuidv4());
+  // console.log("props", props);
   
   const { tag, setTag, setPreview, id, setSettings } = props;
 
   const clickElementById = (id) => document.getElementById(id).click();
 
   const setTagWithPreview = (tag) => {
+    console.log('tag.style', tag.style)
     setTag(tag);
-    setPreview(tag);
+    setPreview(tag);   
   };
   // Получает tag
   const setTagType = ({ value: type }) => {
@@ -124,9 +125,5 @@ function VerticalPanel(props) {
     </div>
   );
 }
-function areEqual(prevProps, nextProps) {
-  // prevProps.tag === nextProps.tag ?  console.log('Равно') : console.log('Не равно');
-  return prevProps.tag === nextProps.tag ? true : false;
-}
-export default React.memo(VerticalPanel, areEqual);
-// export default VerticalPanel;
+
+export default VerticalPanel;

@@ -16,7 +16,7 @@ function NavigationPanel(props) {
     top: "20px",
     left: 0,
     zIndex: 999,
-    backgroundColor: "#456c",
+    // backgroundColor: "#456",
     color: "rgba(140, 200, 255, 0.8)",
     boxShadow: "2px 10px 5px 2px #00000055",
     "&::-webkit-scrollbar": { width: "20px" },
@@ -85,7 +85,7 @@ function Tag({ tag: { type, childrens }, index, selectedId, setSelectedId }) {
   ) : null;
   const id = index ? index : "0";
   const background =
-    id === selectedId ? "rgba(30,60,97,.4)" : "rgba(30,40,57,.4)";
+    id === selectedId ? "rgba(30,60,97,1)" : "rgba(30,40,57,.4)";
   return (
     <div>
       <Link

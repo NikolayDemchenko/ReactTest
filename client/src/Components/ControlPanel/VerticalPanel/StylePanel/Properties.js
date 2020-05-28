@@ -9,7 +9,7 @@ import {
 } from "./Function/ObjectManager";
 export default function Properties(props) {
   console.log(
-    "%cProperties-PropertiesPanel-StylePanel",
+    "%cProperties-PropertiesPanel",
     'color: green'); 
   const { style, setStyle, setPreview } = props;
   
@@ -22,7 +22,7 @@ export default function Properties(props) {
       propPanels.push({ [key]: style[key] });
     }
   }
-  const setName = (item, value) => {
+  const setName = (item, value) => {   
     setStyle(RenameObjectProperty(style, Object.keys(item)[0], value));
   };
   const setValue = (name, value) => {

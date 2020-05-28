@@ -6,7 +6,7 @@ import VerticalPanel from "./Components/ControlPanel/VerticalPanel/VerticalPanel
 const App = () => {
   const [settings, setSettings] = useState();
   console.log("App");
-  // settings&&console.log('settings.id', settings.id)
+  // settings&&console.log('settings.tag.style', settings.tag.style)
   // settings&&console.log('settings.tag.style.backgroundColor', settings.tag.style.backgroundColor)
 
   useEffect(() => {

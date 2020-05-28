@@ -2,7 +2,7 @@ import React, { useState,useEffect } from "react";
 import TagComponent from "./TagComponent";
 
 const Tag = (props) => {
-  console.log("Tag-Page");
+  // console.log("Tag-Page");
 
   const { setSettings, tag, setTag, index,setSelectedId } = props;
   const [preview, setPreview] = useState(tag);

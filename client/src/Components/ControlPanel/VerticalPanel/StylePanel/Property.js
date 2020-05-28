@@ -13,14 +13,13 @@ function Property({
   draggedProp,
   setDraggedProp,
 }) {
-  
   const [Y, setY] = useState();
-  const [copy, setcopy] = useState(false);
+  // const [copy, setcopy] = useState(false);
   const [target, setTarget] = useState();
   const propKey = Object.keys(property)[0];
   const propValue = Object.values(property)[0];
   // console.log("%cProperty", "color:#191",propKey, propValue);
-// console.log('property',propKey, propValue)
+  // console.log('property',propKey, propValue)
   return (
     <div
       draggable
@@ -66,7 +65,13 @@ function Property({
           width: `${propKey.length / 2}em`,
         }}
       >
-        <PopupInput value={propKey} setValue={setName} />
+        <PopupInput
+          value={propKey}
+          setValue={(v) => {
+            console.log("setName",v);
+            setName(v);
+          }}
+        />
       </div>
       <div
         title={propValue}
@@ -97,16 +102,15 @@ function Property({
 }
 
 function areEqual(prevProps, nextProps) {
-  const prev = Object.entries(prevProps.property).join('');
-  const next = Object.entries(nextProps.property).join('');
+  const prev = Object.entries(prevProps.property).join("");
+  const next = Object.entries(nextProps.property).join("");
   // console.log("prevProps.property", prev);
   // console.log("nextProps.property", next);
   // console.log(`%cprev ${prevVal}`,'border:solid 1px #e33; color: #333')
   // console.log(`%cnext ${nextVal}`,'color: #f33')
   // prev===next?console.log(`%c${prev} равно ${next}`, ' color: #248'):console.log(`%c${prev} не равно ${next}`, 'color: #f33')
 
-  return prev === next &&
-    prevProps.draggedProp === nextProps.draggedProp
+  return prev === next && prevProps.draggedProp === nextProps.draggedProp
     ? true
     : false;
 }
