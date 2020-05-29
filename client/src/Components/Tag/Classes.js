@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 
-const newStyle={
+const newStyle = {
   height: "200px",
   width: "200px",
   backgroundColor: "#678",
@@ -14,14 +14,14 @@ const newStyle={
     transition: "0s",
     boxShadow: "none",
   },
-}
-const newPageStyle={style:newStyle,id:uuidv4(),name:"newStyle"}
+};
+const newPageStyle = { style: newStyle, id: uuidv4(), name: "newStyle" };
 const newDiv = {
   type: "div",
-  style:newStyle, 
+  style: newStyle,
   attributes: {},
 };
-const innerStyle={ 
+const innerStyle = {
   height: "200px",
   width: "200px",
   backgroundColor: "#789",
@@ -36,11 +36,11 @@ const innerStyle={
     transition: "0s",
     boxShadow: "none",
   },
-}
-const innerPageStyle={style:innerStyle,id:uuidv4(),name:"innerStyle"}
+};
+const innerPageStyle = { style: innerStyle, id: uuidv4(), name: "innerStyle" };
 const innerDiv = {
   type: "div",
-  style:innerStyle ,
+  style: innerStyle,
   attributes: {},
 };
 const childs = [];
@@ -82,17 +82,41 @@ const baseStyle = {
     },
   },
 };
-const basePageStyle={style:baseStyle,id:uuidv4(),name:"baseStyle"}
+const basePageStyle = { style: baseStyle, id: uuidv4(), name: "baseStyle" };
 const baseDiv = {
-  childrens: childs,
   type: "div",
-  style:baseStyle ,
+  style: baseStyle,
+  childrens: childs,
   attributes: {},
 };
 
+const pageBaseDiv = {
+  id: uuidv4(),
+  index: 0,
+  parentId: null,
+  type: "div",
+  styleId: basePageStyle.id,
+  attributes: {},
+};
 
-const page = { styles: [basePageStyle,innerPageStyle,newPageStyle], tags: [{ id: "", parentId: "", styleId: "" }] };
+const pageInnerDiv = {
+  id: uuidv4(),
+  parentId: pageBaseDiv.id,
+  type: "div",
+  styleId: innerPageStyle.id,
+  attributes: {},
+};
+
+const page = {
+  styles: [basePageStyle, innerPageStyle, newPageStyle],
+  tags: [],
+};
+page.tags.push(pageBaseDiv);
+for (let i = 0; i < 200; i++) {
+  pageInnerDiv.index = i;
+  page.tags.push(JSON.parse(JSON.stringify(pageInnerDiv)));
+}
 
 const div = baseDiv;
 
-export { newDiv, div };
+export { newDiv, div, page };
