@@ -5,7 +5,7 @@ import Icon from "react-icons-kit";
 import { plus } from "react-icons-kit/icomoon/plus";
 import { Link } from "react-scroll";
 // import { cross } from "react-icons-kit/icomoon/cross";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 import jss from "jss";
 import preset from "jss-preset-default";
 import Select from "../ModalWindows/Select";
@@ -16,34 +16,32 @@ function VerticalPanel(props) {
   //   "%cVerticalPanel-App",
   //   'color: green');
 
-
   // console.log("uuidv4", uuidv4());
   // console.log("download.json", download);
 
-  
-  const { tag, setTag, setPreview, id, setSettings } = props;
+  const { preview, setPreview, setSettings } = props;
 
   const clickElementById = (id) => document.getElementById(id).click();
 
-  const setTagWithPreview = (tag) => {
-    console.log('tag.style', tag.style)
-    setTag(tag);
-    setPreview(tag);   
+  const setPanel = () => {
+    console.log("preview.style", preview.style);
+    setSettings({ preview, setPreview });
+    
   };
   // Получает tag
   const setTagType = ({ value: type }) => {
-    setTagWithPreview({ ...tag, type });
-    // setSettings({ ...props, tag: { ...tag, type } });
-    clickElementById(id);
+    setPreview({ ...preview, type });
+    setPanel({ ...preview, type });
+    // clickElementById(preview.id);
     // console.log("tag.type", type);
   };
 
   const addChildren = () => {
     // console.log("tag", tag);
-    tag.childrens = tag.childrens ? tag.childrens : [];
-    tag.childrens.push(JSON.parse(JSON.stringify(newDiv)));
-    setTagWithPreview({ ...tag });
-    clickElementById(id);
+    // preview.childrens = preview.childrens ? preview.childrens : [];
+    // preview.childrens.push(JSON.parse(JSON.stringify(newDiv)));
+    // setPanel({ ...preview });
+    // clickElementById(preview.id);
   };
 
   const style = {
@@ -75,7 +73,7 @@ function VerticalPanel(props) {
       <div style={{ cursor: "default", display: "flex" }}>
         <Link
           activeClass="active"
-          to={id}
+          to={preview.id}
           spy={true}
           smooth={true}
           offset={-70}
@@ -86,7 +84,7 @@ function VerticalPanel(props) {
               padding: "0px 0.5em",
             }}
           >
-            id: {id}
+            id: {preview.id}
           </div>
         </Link>
         <div
@@ -97,7 +95,7 @@ function VerticalPanel(props) {
           type:
         </div>
         <Select
-          defaultItem={tag.type}
+          defaultItem={preview.type}
           setItem={setTagType}
           listItems={htmlTags}
         />
@@ -109,7 +107,8 @@ function VerticalPanel(props) {
         >
           <div
             title={"Добавить элемент"}
-            style={{    marginLeft: "auto",
+            style={{
+              marginLeft: "auto",
               cursor: "pointer",
               width: "16px",
               margin: "0px 2px ",
@@ -124,7 +123,7 @@ function VerticalPanel(props) {
           </div>
         </div>
       </div>
-      <StylePanel {...props} />
+      <StylePanel {...props} setPanel={setPanel} />
       <div style={{ paddingBottom: "4em" }} />
     </div>
   );

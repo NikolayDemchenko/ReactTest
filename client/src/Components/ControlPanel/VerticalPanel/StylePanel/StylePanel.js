@@ -16,8 +16,8 @@ function StylePanel(props) {
     setDragged(item);
   };
 
-  const { id, tag, setTag, setPreview } = props;
-  const { type, style } = tag;
+  const { preview, setPreview } = props;
+  const { type, style } = preview;
 
   // console.log("props", props);
 
@@ -28,23 +28,24 @@ function StylePanel(props) {
     };
   }, [style, type]);
 
-  const setTagStyle = (style) => {
-    // console.log("setTagStyle",style);
-    setPreview();
-    setTag({ ...tag, style });
-    document.getElementById(id).click();
-  };
+  // const setpreviewStyle = (style) => {
+  //   // console.log("setpreviewStyle",style);
+  //   // setPreview();
+  //   setPreview({ ...preview, style });
+  //   // document.getElementById(id).click();
+  // };
 
-  const setPreviewTagStyle = (style) => {
-    setPreview({ ...tag, style });
+  const setPreviewStyle = (style) => {
+    setPreview({ ...preview, style });
   };
-  const setPreviewStyleElement = (element) => {
+  const setPreviewPseudoElement = (element) => {
+    console.log("setPreviewPseudoElement");
     for (let key in element) {
       if (typeof element[key] === "object") {
         delete element[key];
       }
     }
-    setPreviewTagStyle(element);
+    setPreviewStyle(element);
   };
 
   const borderColor =
@@ -69,7 +70,7 @@ function StylePanel(props) {
         onClick={(e) => {
           e.stopPropagation();
           setSelected("All style");
-          setPreviewTagStyle(style);
+          setPreviewStyle(style);
         }}
       >
         {"Styles"}
@@ -104,10 +105,10 @@ function StylePanel(props) {
         {...props}
         name={"Base style"}
         style={style}
-        setStyle={setTagStyle}
+        setStyle={setPreviewStyle}
         selected={selected}
         setSelected={setSelected}
-        setPreview={setPreviewStyleElement}
+        setPreview={setPreviewPseudoElement}
         draggedProp={draggedProp}
         setDraggedProp={setDraggedProp}
       />

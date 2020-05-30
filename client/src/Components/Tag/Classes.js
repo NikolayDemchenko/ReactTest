@@ -100,8 +100,6 @@ const pageBaseDiv = {
 };
 
 const pageInnerDiv = {
-  id: uuidv4(),
-  parentId: pageBaseDiv.id,
   type: "div",
   styleId: innerPageStyle.id,
   attributes: {},
@@ -112,11 +110,24 @@ const page = {
   tags: [],
 };
 page.tags.push(pageBaseDiv);
-for (let i = 0; i < 200; i++) {
+
+for (let i = 0; i < 100; i++) {
   pageInnerDiv.index = i;
+  pageInnerDiv.id = uuidv4();
+  pageInnerDiv.parentId = pageBaseDiv.id;  
   page.tags.push(JSON.parse(JSON.stringify(pageInnerDiv)));
 }
 
+const getTagStructure = (tags, parentId, styles) =>
+tags.filter((item) => {
+    if (item.parentId === parentId) {
+      item.style=styles.find(style=>style.id===item.styleId).style
+      item.childrens = getTagStructure(tags, item.id,styles);
+      return item;
+    }
+  });
+
+const tagStructure = getTagStructure(page.tags, null, page.styles);
 const div = baseDiv;
 
-export { newDiv, div, page };
+export { newDiv, div, page, tagStructure };

@@ -1,37 +1,36 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import TagComponent from "./TagComponent";
 
 const Tag = (props) => {
-  // console.log("Tag-Page");
+  // console.log("Tag-Page props",props);
 
-  const { setSettings, tag, setTag, index,setSelectedId } = props;
+  const { setSettings, tag, setSelectedId } = props;
   const [preview, setPreview] = useState(tag);
 
   // useEffect(() => {
-  //   return () => {
-  //     setPreview(tag)
-      
-  //   }
-  // }, [tag])
+  //   return () => {};
+  //   setSettings({ preview, setPreview });
+  // }, [preview]);
   // const popover = true;
-  const id  = index ? index : "0";
+  // const id  = index ? index : "0";
 
-  // console.log("id", id);
+  // console.log("id", preview.id);
 
   return (
     <div
-      id={id}
+      id={preview.id}
       onClick={(e) => {
-        setSettings({ setTag, tag, preview, setPreview, id });
-        setSelectedId(id)
+        setSettings({ preview, setPreview });
+        setSelectedId(preview.id);
         e.stopPropagation();
-    
-      }}   
+      }}
     >
       <TagComponent
-        {...props}
+        // {...props}
+        setSelectedId={setSelectedId}
+        setSettings={setSettings}
         tag={preview ? preview : tag}
-        index={id}
+        // index={id}
       />
     </div>
   );

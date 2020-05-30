@@ -9,20 +9,21 @@ const App = () => {
   // settings&&console.log('settings.tag.style', settings.tag.style)
   // settings&&console.log('settings.tag.style.backgroundColor', settings.tag.style.backgroundColor)
 
-  useEffect(() => {
-    if (settings) {
-      const style = document.getElementById(settings.id).style;
-      // console.log("nextId", settings.id, style);
-      style.outline = "1px dashed #5af";
-    }
-    return () => {
-      if (settings) {
-        const style = document.getElementById(settings.id).style;
-        // console.log("prevId", settings.id, style);
-        style.outline = "";
-      }
-    };
-  }, [settings]);
+  // useEffect(() => {
+  //   if (settings) {
+  //     const style = document.getElementById(settings.id).style;
+  //     // console.log("nextId", settings.id, style);
+  //     style.outline = "1px dashed #5af";
+  //   }
+
+  //   return () => {
+  //     if (settings) {
+  //       const style = document.getElementById(settings.id).style;
+  //       // console.log("prevId", settings.id, style);
+  //       style.outline = "";
+  //     }
+  //   };
+  // }, [settings]);
 
   return (
     <ErrorBoundry>
