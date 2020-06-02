@@ -5,8 +5,13 @@ const Tag = (props) => {
   // console.log("Tag-Page props",props);
 
   const { setSettings, tag, setSelectedId } = props;
-  const [preview, setPreview] = useState(tag);
-
+  const [preview, setPrev] = useState(tag);
+  // console.log('preview :>> ', preview);
+  const setPreview = (prev) => {
+    // console.log("prev :>> ", prev);
+    setPrev(prev);
+  };
+  // console.log('preview.style', preview.style)
   // useEffect(() => {
   //   return () => {};
   //   setSettings({ preview, setPreview });
@@ -20,6 +25,7 @@ const Tag = (props) => {
     <div
       id={preview.id}
       onClick={(e) => {
+        console.log('preview.style.backgroundColor :>> ', preview.style.backgroundColor);
         setSettings({ preview, setPreview });
         setSelectedId(preview.id);
         e.stopPropagation();

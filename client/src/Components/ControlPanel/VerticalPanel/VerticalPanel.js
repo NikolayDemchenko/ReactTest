@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { newDiv } from "../../Tag/Classes";
 import StylePanel from "./StylePanel/StylePanel";
 import Icon from "react-icons-kit";
@@ -12,26 +12,38 @@ import Select from "../ModalWindows/Select";
 import { htmlTags } from "../../Class/HtmlCss";
 // import download from './download.json'
 function VerticalPanel(props) {
-  //  console.log(
-  //   "%cVerticalPanel-App",
-  //   'color: green');
-
+  //    console.log(
+  //     "%cVerticalPanel-App",
+  //     'color: green');
+  // console.log("props :>> ", props);
   // console.log("uuidv4", uuidv4());
   // console.log("download.json", download);
-
   const { preview, setPreview, setSettings } = props;
 
-  const clickElementById = (id) => document.getElementById(id).click();
+  useEffect(() => {
+    setTag(preview);
+    return () => {
+      console.log(
+        "preview.style.backgroundColor :>> ",
+        preview.style.backgroundColor
+      );
+      // setSettings();
+    };
+  }, [preview]);
 
-  const setPanel = () => {
-    console.log("preview.style", preview.style);
-    setSettings({ preview, setPreview });
-    
-  };
+  const [tag, setTag] = useState(preview);
+
+  // const clickElementById = (id) => document.getElementById(id).click();
+
+  // const setPanel = () => {
+  //   console.log("preview.style", preview.style);
+  //   setSettings({ preview, setPreview });
+  // };
+
   // Получает tag
   const setTagType = ({ value: type }) => {
-    setPreview({ ...preview, type });
-    setPanel({ ...preview, type });
+    setPreview({ ...tag, type });
+    // setPanel({ ...preview, type });
     // clickElementById(preview.id);
     // console.log("tag.type", type);
   };
@@ -73,7 +85,7 @@ function VerticalPanel(props) {
       <div style={{ cursor: "default", display: "flex" }}>
         <Link
           activeClass="active"
-          to={preview.id}
+          to={tag.id}
           spy={true}
           smooth={true}
           offset={-70}
@@ -84,7 +96,7 @@ function VerticalPanel(props) {
               padding: "0px 0.5em",
             }}
           >
-            id: {preview.id}
+            id: {tag.id}
           </div>
         </Link>
         <div
@@ -95,7 +107,7 @@ function VerticalPanel(props) {
           type:
         </div>
         <Select
-          defaultItem={preview.type}
+          defaultItem={tag.type}
           setItem={setTagType}
           listItems={htmlTags}
         />
@@ -123,7 +135,12 @@ function VerticalPanel(props) {
           </div>
         </div>
       </div>
-      <StylePanel {...props} setPanel={setPanel} />
+      <StylePanel
+        {...props}
+        // setPanel={setPanel}
+        tag={tag}
+        setTag={setTag}
+      />
       <div style={{ paddingBottom: "4em" }} />
     </div>
   );

@@ -2,8 +2,8 @@ import React from "react";
 import Tag from "./Tag";
 
 function Tags(props) {
-  console.log("TagChildrens-TagComponent");
-  console.log("props", props);
+  // console.log("TagChildrens-TagComponent");
+  // console.log("props", props);
   const { tags, setSettings,setSelectedId } = props;
   // const { tag, setTag } = props;
 

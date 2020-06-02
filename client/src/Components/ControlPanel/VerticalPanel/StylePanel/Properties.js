@@ -8,11 +8,12 @@ import {
   removeThisLevelPropByName as removeProp,
 } from "./Function/ObjectManager";
 export default function Properties(props) {
-  console.log(
-    "%cProperties-PropertiesPanel",
-    'color: green'); 
+  // console.log(
+  //   "%cProperties-PropertiesPanel",
+  //   'color: green');
+  //   console.log('props :>> ', props);
   const { style, setStyle, setPreview } = props;
-  
+
   const properties = [];
   const propPanels = [];
   for (let key in style) {
@@ -22,15 +23,17 @@ export default function Properties(props) {
       propPanels.push({ [key]: style[key] });
     }
   }
-  const setName = (item, value) => {   
+  const setName = (item, value) => {
     setStyle(RenameObjectProperty(style, Object.keys(item)[0], value));
   };
   const setValue = (name, value) => {
-    style[Object.keys(name)[0]]=value
+    style[Object.keys(name)[0]] = value;
     setStyle(style);
   };
   const remove = (item) => {
+    // console.log('item :>> ', item);
     delete style[Object.keys(item)[0]];
+    // console.log("style :>> ", style);
     setStyle(style);
   };
 
@@ -52,7 +55,6 @@ export default function Properties(props) {
   const thisProps = properties.map((property, index) => {
     const setPreviewValue = (value) => {
       // console.log('setPreviewValue', value)
-
       setPreview({ ...style, [Object.keys(property)[0]]: value });
     };
 

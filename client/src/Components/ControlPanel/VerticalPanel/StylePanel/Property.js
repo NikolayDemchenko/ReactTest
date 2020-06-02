@@ -3,25 +3,31 @@ import Icon from "react-icons-kit";
 import { cross } from "react-icons-kit/icomoon/cross";
 import PopupInput from "../Inputs/Popup/PopupInput";
 
-function Property({
-  property,
-  setProperty: { setName, setValue },
-  deleteProperty,
-  setPreview,
-  onDrop,
-  tabIndex,
-  draggedProp,
-  setDraggedProp,
-}) {
+function Property(props) {
+  const {
+    property,
+    setProperty: { setName, setValue },
+    deleteProperty,
+    setPreview,
+    onDrop,
+    tabIndex,
+    draggedProp,
+    setDraggedProp,
+  } = props;
   const [Y, setY] = useState();
+
   // const [copy, setcopy] = useState(false);
+
   const [target, setTarget] = useState();
   const propKey = Object.keys(property)[0];
   const propValue = Object.values(property)[0];
-  // console.log("%cProperty", "color:#191",propKey, propValue);
+
+  // console.log("%cProperty", "color:#191", propKey, propValue);
+  // console.log('props :>> ', props);
   // console.log('property',propKey, propValue)
   return (
     <div
+      onClick={(e) => e.stopPropagation()}
       draggable
       tabIndex={tabIndex}
       // onKeyUp={(e) => {
@@ -68,7 +74,7 @@ function Property({
         <PopupInput
           value={propKey}
           setValue={(v) => {
-            console.log("setName",v);
+            console.log("setName", v);
             setName(v);
           }}
         />

@@ -26,16 +26,16 @@ const innerStyle = {
   width: "200px",
   backgroundColor: "#789",
   margin: "10px",
-  marginBottom: "10px",
+  // marginBottom: "10px",
   "&:hover": {
-    transform: "perspective(200px) scaleZ(-0.5) translateZ(-2px)",
+    // transform: "perspective(200px) scaleZ(-0.5) translateZ(-2px)",
     boxShadow: "0 8px 5px 2px #0005, inset 0 8px 5px 2px #00ffff",
-    transition: "0.2s",
+    // transition: "0.2s",
   },
-  "&:active": {
-    transition: "0s",
-    boxShadow: "none",
-  },
+  // "&:active": {
+  //   transition: "0s",
+  //   boxShadow: "none",
+  // },
 };
 const innerPageStyle = { style: innerStyle, id: uuidv4(), name: "innerStyle" };
 const innerDiv = {

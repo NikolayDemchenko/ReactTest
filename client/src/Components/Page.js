@@ -5,11 +5,11 @@ import { div, page, tagStructure } from "./Tag/Classes";
 import NavigationPanel from "./ControlPanel/NavigationPanel/NavigationPanel";
 import FileSaver from "file-saver";
 export default function Page(props) {
-  console.log("Page-App");
+  // console.log("Page-App");
   const [_page, _setPage] = useState(div);
   const [selectedId, setSelectedId] = useState();
   // console.log("0-page", page);
-  console.log("%ctagStructure", `color: green`, tagStructure);
+  // console.log("%ctagStructure", `color: green`, tagStructure);
 
   // FileSaver.saveAs(
   //   new Blob([JSON.stringify(page)], {

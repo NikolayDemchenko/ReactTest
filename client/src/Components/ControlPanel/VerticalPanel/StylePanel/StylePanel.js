@@ -4,29 +4,33 @@ import Icon from "react-icons-kit";
 import { exportIcon } from "react-icons-kit/entypo/exportIcon";
 import FileSaver from "file-saver";
 function StylePanel(props) {
-
-  // console.log(
-  //   "%cStylePanel-VerticalPanel-App",
-  //   'color: green');
-
+  // console.log("%cStylePanel-VerticalPanel-App", "color: green");
+  // console.log("props :>> ", props);
   const [selected, setSelected] = useState("All style");
   const [draggedProp, setDragged] = useState();
+
   const setDraggedProp = (item) => {
     console.log("draggedProp", item);
     setDragged(item);
   };
 
-  const { preview, setPreview } = props;
-  const { type, style } = preview;
+  const { tag, setTag, setPreview } = props;
+  // console.log('tag :>> ', tag);
+  const { type, style } = tag;
 
+  // console.log("style", style);
   // console.log("props", props);
 
-  useEffect(() => {
-    document.getElementById("All_styles").click();
-    return () => {
-      setPreview();
-    };
-  }, [style, type]);
+  // useEffect(() => {
+  //   // document.getElementById("All_styles").click();
+  //   // setStyleSettings(style)
+  //   console.log('style', style.backgroundColor)
+  //   return () => {
+  //     console.log('style', style.backgroundColor)
+  //     // setSelected("All style");
+  //     // setPreviewStyle(style);
+  //   };
+  // }, [tag.id, type]);
 
   // const setpreviewStyle = (style) => {
   //   // console.log("setpreviewStyle",style);
@@ -35,17 +39,18 @@ function StylePanel(props) {
   //   // document.getElementById(id).click();
   // };
 
-  const setPreviewStyle = (style) => {
-    setPreview({ ...preview, style });
+  const setStyle = (style) => {
+    setTag({ ...tag, style });
   };
-  const setPreviewPseudoElement = (element) => {
-    console.log("setPreviewPseudoElement");
-    for (let key in element) {
-      if (typeof element[key] === "object") {
-        delete element[key];
+
+  const setPreviewFragment = (style) => {
+    for (let key in style) {
+      if (typeof style[key] === "object") {
+        delete style[key];
       }
     }
-    setPreviewStyle(element);
+    // console.log("element", element);
+    setPreview({ ...tag, style });
   };
 
   const borderColor =
@@ -70,7 +75,8 @@ function StylePanel(props) {
         onClick={(e) => {
           e.stopPropagation();
           setSelected("All style");
-          setPreviewStyle(style);
+          // console.log('style', style)
+          // setStyle(style);
         }}
       >
         {"Styles"}
@@ -91,10 +97,12 @@ function StylePanel(props) {
             // Сохранение файлов
             onClick={(e) => {
               e.stopPropagation();
-            
-              FileSaver.saveAs(new Blob([JSON.stringify(style)], {
-                type: "application/json;charset=utf-8",
-              }));
+
+              FileSaver.saveAs(
+                new Blob([JSON.stringify(style)], {
+                  type: "application/json;charset=utf-8",
+                })
+              );
             }}
           >
             <Icon size={"100%"} icon={exportIcon} />
@@ -102,13 +110,14 @@ function StylePanel(props) {
         </div>
       </div>
       <PropertiesPanel
-        {...props}
+        // {...props}
         name={"Base style"}
         style={style}
-        setStyle={setPreviewStyle}
+        setStyle={setStyle}
         selected={selected}
         setSelected={setSelected}
-        setPreview={setPreviewPseudoElement}
+        setPreview={(style) => setPreview({ ...tag, style })}
+        setPreviewFragment={setPreviewFragment}
         draggedProp={draggedProp}
         setDraggedProp={setDraggedProp}
       />

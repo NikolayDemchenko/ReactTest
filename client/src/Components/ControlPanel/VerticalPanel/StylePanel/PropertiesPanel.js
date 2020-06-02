@@ -16,22 +16,24 @@ export default function PropertiesPanel(props) {
     style,
     setStyle,
     setPreview,
+    setPreviewFragment,
     deletePanel,
     selected,
     setSelected,
   } = props;
- 
-  // console.log(
-  //   "%cPropertiesPanel-StylePanel",
-  //   'color: green'); 
-
-  const addProperty = () => {
+  // console.log("props :>> ", props);
+  // console.log("%cPropertiesPanel-StylePanel", "color: green");
+  // console.log("props :>> ", props);
+  const addProperty = (e) => {
+    e.stopPropagation();
     setStyle({ property: "value", ...style });
   };
-  const addPseudoClass = () => {
+  const addPseudoClass = (e) => {
+    e.stopPropagation();
     setStyle({ ...style, "&:": {} });
   };
-  const addMedia = () => {
+  const addMedia = (e) => {
+    e.stopPropagation();
     let _style = { ...style };
     for (let key in _style) {
       if (typeof _style[key] === "object" && key.indexOf("@media")) {
@@ -66,8 +68,9 @@ export default function PropertiesPanel(props) {
   return (
     <div
       onClick={(e) => {
-        e.stopPropagation();
-        setPreview({ ...style });
+        e.stopPropagation(); 
+        console.log("rrrrrrrrrr");      
+        setStyle({ ...style });
         setSelected(fullName);
       }}
       style={{ borderTop, color }}
