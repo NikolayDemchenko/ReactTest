@@ -11,7 +11,7 @@ export default function Properties(props) {
   // console.log(
   //   "%cProperties-PropertiesPanel",
   //   'color: green');
-  //   console.log('props :>> ', props);
+    // console.log('props :>> ', props);
   const { style, setStyle, setPreview } = props;
 
   const properties = [];

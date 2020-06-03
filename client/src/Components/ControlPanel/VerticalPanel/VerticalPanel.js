@@ -18,21 +18,18 @@ function VerticalPanel(props) {
   // console.log("props :>> ", props);
   // console.log("uuidv4", uuidv4());
   // console.log("download.json", download);
-  const { preview, setPreview, setSettings } = props;
+  const { preview, setPreview } = props;
+  const [tag, setTag] = useState(preview);
+  const [stylePreview, setStylePreview] = useState(tag.style);
 
   useEffect(() => {
-    // setSettings({preview, setPreview});
     setTag(preview);
-    return () => {
-      console.log(
-        "preview.style.backgroundColor :>> ",
-        preview.style.backgroundColor
-        );
-    };
+    return () => {};
   }, [preview]);
 
-  const [tag, setTag] = useState(preview);
+ 
 
+  console.log("stylePreview :>> ", stylePreview);
   // const tag=preview
   // const setTag = setPreview
   // const clickElementById = (id) => document.getElementById(id).click();
@@ -142,6 +139,7 @@ function VerticalPanel(props) {
         // setPanel={setPanel}
         tag={tag}
         setTag={setTag}
+        // setStyleFragment={setStyleFragment}
       />
       <div style={{ paddingBottom: "4em" }} />
     </div>

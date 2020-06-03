@@ -16,7 +16,8 @@ export default function PropertiesPanel(props) {
     style,
     setStyle,
     setPreview,
-    setPreviewFragment,
+    // setPreviewFragment,
+    setStyleFragment,
     deletePanel,
     selected,
     setSelected,
@@ -45,6 +46,9 @@ export default function PropertiesPanel(props) {
   const setPreviewProperty = (value) => {
     setPreview({ ...style, ...value });
   };
+  // const setPreviewFragmentProperty = (value) => {
+  //   setPreviewFragment({ ...style, ...value });
+  // };
   const fullName = name + parentName;
   // console.log('fullName', fullName)
   let color;
@@ -67,10 +71,11 @@ export default function PropertiesPanel(props) {
 
   return (
     <div
-    // Включение частичного превью
+      // Включение частичного превью
       onClick={(e) => {
-        e.stopPropagation();      
-        setPreviewFragment({ ...style });
+        e.stopPropagation();
+        // setPreviewFragment({ ...style });
+        setStyleFragment({ ...style });
         setSelected(fullName);
       }}
       style={{ borderTop, color }}
@@ -160,6 +165,8 @@ export default function PropertiesPanel(props) {
         {...props}
         parentName={name}
         setPreview={setPreviewProperty}
+        // setStyleFragment={setStyleFragment}
+        // setPreviewFragment={setPreviewFragmentProperty}
       />
     </div>
   );

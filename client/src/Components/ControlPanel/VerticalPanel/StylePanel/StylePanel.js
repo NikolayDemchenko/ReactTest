@@ -14,42 +14,52 @@ function StylePanel(props) {
     setDragged(item);
   };
 
-  const { tag, setTag, setPreview } = props;
+  const { tag, setTag, preview, setPreview } = props;
   // console.log('tag :>> ', tag);
   const { type, style } = tag;
 
   // console.log("style", style);
   // console.log("props", props);
 
-  // useEffect(() => {
-  //   // document.getElementById("All_styles").click();
-  //   // setStyleSettings(style)
-  //   console.log('style', style.backgroundColor)
-  //   return () => {
-  //     console.log('style', style.backgroundColor)
-  //     // setSelected("All style");
-  //     // setPreviewStyle(style);
-  //   };
-  // }, [tag.id, type]);
+  useEffect(() => {
+    console.log("style", style.backgroundColor);
+    return () => {
+      console.log("style", style.backgroundColor);
+      // document.getElementById("All_styles").click();
+      setSelected("All style");
+      setStyleFragment()
+    };
+  }, [style]);
 
-  const setPreviewStyle = (style) => {  
+  const clearStyleFragment = (element) => {
+    // console.log("element :>> ", element);
+    for (let key in element) {
+      if (typeof element[key] === "object") {
+        delete element[key];
+      }
+    }
+    // console.log("element :>> ", element);
+    return { ...element };
+  };
+
+  const setStyleFragment = (style) => {
+    style
+      ? setPreview({
+          ...preview,
+          style: {
+            ...clearStyleFragment({ ...tag.style }),
+            ...clearStyleFragment(style),
+          },
+        })
+      : setPreview({ ...preview, style: { ...tag.style } });
+  };
+
+  const setPreviewStyle = (style) => {
     setPreview({ ...tag, style });
   };
 
   const setStyle = (style) => {
     setTag({ ...tag, style });
-  };
-
-  const setPreviewFragment = (element) => {
-    let _style=JSON.parse(JSON.stringify(tag.style))
-    console.log('_style', _style)
-    for (let key in _style) {
-      if (typeof _style[key] === "object") {
-        delete _style[key];
-      }
-    }
-    // console.log("style", { ..._style, ...element });
-    setPreviewStyle({ ..._style, ...element });
   };
 
   const borderColor =
@@ -74,8 +84,7 @@ function StylePanel(props) {
         onClick={(e) => {
           e.stopPropagation();
           setSelected("All style");
-          // console.log('style', style)
-          // setStyle(style);
+          setStyleFragment();
         }}
       >
         {"Styles"}
@@ -109,14 +118,14 @@ function StylePanel(props) {
         </div>
       </div>
       <PropertiesPanel
-        // {...props}
+        {...props}
         name={"Base style"}
         style={style}
         setStyle={setStyle}
         selected={selected}
         setSelected={setSelected}
         setPreview={setPreviewStyle}
-        setPreviewFragment={setPreviewFragment}
+        setStyleFragment={setStyleFragment}
         draggedProp={draggedProp}
         setDraggedProp={setDraggedProp}
       />
