@@ -44,7 +44,7 @@ export default function NumberSlider(props) {
 
 // Слайдер
 const ThisSlider = ({ value, unit, sign, setPreview, setValue }) => {
-  console.log("inValue", value);
+  // console.log("inValue", value);
 
   // Количество знаков после запятой
   const getNumberSign = (x) => {

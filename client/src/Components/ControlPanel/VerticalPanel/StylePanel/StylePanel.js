@@ -32,25 +32,24 @@ function StylePanel(props) {
   //   };
   // }, [tag.id, type]);
 
-  // const setpreviewStyle = (style) => {
-  //   // console.log("setpreviewStyle",style);
-  //   // setPreview();
-  //   setPreview({ ...preview, style });
-  //   // document.getElementById(id).click();
-  // };
+  const setPreviewStyle = (style) => {  
+    setPreview({ ...tag, style });
+  };
 
   const setStyle = (style) => {
     setTag({ ...tag, style });
   };
 
-  const setPreviewFragment = (style) => {
-    for (let key in style) {
-      if (typeof style[key] === "object") {
-        delete style[key];
+  const setPreviewFragment = (element) => {
+    let _style=JSON.parse(JSON.stringify(tag.style))
+    console.log('_style', _style)
+    for (let key in _style) {
+      if (typeof _style[key] === "object") {
+        delete _style[key];
       }
     }
-    // console.log("element", element);
-    setPreview({ ...tag, style });
+    // console.log("style", { ..._style, ...element });
+    setPreviewStyle({ ..._style, ...element });
   };
 
   const borderColor =
@@ -116,7 +115,7 @@ function StylePanel(props) {
         setStyle={setStyle}
         selected={selected}
         setSelected={setSelected}
-        setPreview={(style) => setPreview({ ...tag, style })}
+        setPreview={setPreviewStyle}
         setPreviewFragment={setPreviewFragment}
         draggedProp={draggedProp}
         setDraggedProp={setDraggedProp}

@@ -7,8 +7,8 @@ const Tag = (props) => {
   const { setSettings, tag, setSelectedId } = props;
   const [preview, setPrev] = useState(tag);
   // console.log('preview :>> ', preview);
+  // console.log("preview :>> ", preview.style.backgroundColor);
   const setPreview = (prev) => {
-    // console.log("prev :>> ", prev);
     setPrev(prev);
   };
   // console.log('preview.style', preview.style)

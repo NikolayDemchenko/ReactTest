@@ -67,10 +67,10 @@ export default function PropertiesPanel(props) {
 
   return (
     <div
+    // Включение частичного превью
       onClick={(e) => {
-        e.stopPropagation(); 
-        console.log("rrrrrrrrrr");      
-        setStyle({ ...style });
+        e.stopPropagation();      
+        setPreviewFragment({ ...style });
         setSelected(fullName);
       }}
       style={{ borderTop, color }}
@@ -146,7 +146,10 @@ export default function PropertiesPanel(props) {
                 marginLeft: "10px",
                 width: "14px",
               }}
-              onClick={deletePanel}
+              onClick={(e) => {
+                e.stopPropagation();
+                deletePanel();
+              }}
             >
               <Icon size={"100%"} icon={cross} />
             </div>

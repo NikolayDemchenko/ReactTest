@@ -21,18 +21,20 @@ function VerticalPanel(props) {
   const { preview, setPreview, setSettings } = props;
 
   useEffect(() => {
+    // setSettings({preview, setPreview});
     setTag(preview);
     return () => {
       console.log(
         "preview.style.backgroundColor :>> ",
         preview.style.backgroundColor
-      );
-      // setSettings();
+        );
     };
   }, [preview]);
 
   const [tag, setTag] = useState(preview);
 
+  // const tag=preview
+  // const setTag = setPreview
   // const clickElementById = (id) => document.getElementById(id).click();
 
   // const setPanel = () => {

@@ -53,18 +53,33 @@ function NavigationPanel(props) {
       </div>
       {showPanel && (
         <div className={classes.style}>
-          <Tag
-            {...props}    
-          />
+          <Tags {...props} />
         </div>
       )}
     </div>
   );
 }
-
-function Tag({ tag: { type, childrens }, index, selectedId, setSelectedId }) {
+function Tags(props) {
+  return props.tags.map((tag, index) => {
+    return (
+      // <div style={{ display: "flex" }} key={index}>
+      <Tag
+        {...props}
+        key={index}
+        tag={tag}
+        // index={props.index + "_" + index}
+      />
+      // </div>
+    );
+  });
+}
+function Tag({
+  tag: { type, childrens, id },  
+  selectedId,
+  setSelectedId,
+}) {
   const [showChilds, setshowChilds] = useState(false);
-
+  // console.log("id", id);
   const _icon = <Icon size={"100%"} icon={ic_keyboard_arrow_right} />;
 
   const icon = !showChilds ? (
@@ -72,7 +87,8 @@ function Tag({ tag: { type, childrens }, index, selectedId, setSelectedId }) {
   ) : (
     <div style={{ transform: "rotate(90deg)" }}>{_icon}</div>
   );
-  const toggle = childrens ? (
+  // console.log('childrens', childrens)
+  const toggle = childrens.length>0 ? (
     <div
       style={{ cursor: "pointer", width: "20px" }}
       onClick={(e) => {
@@ -83,7 +99,7 @@ function Tag({ tag: { type, childrens }, index, selectedId, setSelectedId }) {
       {icon}
     </div>
   ) : null;
-  const id = index ? index : "0";
+  // const id = index ? index : "0";
   const background =
     id === selectedId ? "rgba(30,60,97,1)" : "rgba(30,40,57,.4)";
   return (
@@ -111,13 +127,14 @@ function Tag({ tag: { type, childrens }, index, selectedId, setSelectedId }) {
           }}
         >
           {toggle}
-          id: {id} type: {type}
+          {/* id: {id}  */}
+          type: {type}
         </div>
       </Link>
       <div style={{ marginLeft: "30px" }}>
         {childrens && showChilds && (
-          <Childrens
-            childrens={childrens}
+          <Tags
+            tags={childrens}
             index={id}
             selectedId={selectedId}
             setSelectedId={setSelectedId}
@@ -128,18 +145,5 @@ function Tag({ tag: { type, childrens }, index, selectedId, setSelectedId }) {
   );
 }
 
-function Childrens(props) {
-  return props.childrens.map((children, index) => {
-    return (
-      // <div style={{ display: "flex" }} key={index}>
-      <Tag
-        {...props}
-        key={index}
-        tag={children}
-        index={props.index + "_" + index}
-      />
-      // </div>
-    );
-  });
-}
+
 export default NavigationPanel;

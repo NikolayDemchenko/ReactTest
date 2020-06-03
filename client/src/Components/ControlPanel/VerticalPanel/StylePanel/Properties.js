@@ -28,21 +28,22 @@ export default function Properties(props) {
   };
   const setValue = (name, value) => {
     style[Object.keys(name)[0]] = value;
-    setStyle(style);
+    setStyle({...style});
   };
   const remove = (item) => {
-    // console.log('item :>> ', item);
+    console.log('item :>> ', item);
     delete style[Object.keys(item)[0]];
-    // console.log("style :>> ", style);
+    console.log("style :>> ", style);
     setStyle(style);
+    setPreview(style)
   };
 
-  const panels = propPanels.map((panel) => {
+  const panels = propPanels.map((panel,index) => {
     return (
       <PropertiesPanel
         {...props}
         name={Object.keys(panel)[0]}
-        key={propPanels.indexOf(panel)}
+        key={index}
         style={Object.values(panel)[0]}
         setName={(v) => setName(panel, v)}
         setStyle={(v) => setValue(panel, v)}

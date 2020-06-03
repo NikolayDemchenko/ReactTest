@@ -121,7 +121,7 @@ for (let i = 0; i < 100; i++) {
 const getTagStructure = (tags, parentId, styles) =>
 tags.filter((item) => {
     if (item.parentId === parentId) {
-      item.style=styles.find(style=>style.id===item.styleId).style
+      item.style=JSON.parse(JSON.stringify(styles.find(style=>style.id===item.styleId).style))
       item.childrens = getTagStructure(tags, item.id,styles);
       return item;
     }
