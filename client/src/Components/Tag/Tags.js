@@ -4,7 +4,7 @@ import Tag from "./Tag";
 function Tags(props) {
   // console.log("TagChildrens-TagComponent");
   // console.log("props", props);
-  const { tags, setSettings,setSelectedId } = props;
+  const { tags, setSettings, setSelectedId, selectedId } = props;
   // const { tag, setTag } = props;
 
   // const setChildrens = (childrens) => {
@@ -17,18 +17,20 @@ function Tags(props) {
   //     tag.childrens[index] = child;
   //     setChildrens([...tag.childrens]);
   //   };
-  return tags.map((children, index) => {
+  return props.tags.map((tag, index) => {
     // const setChildren = (child) => {
     //   tag.childrens[index] = child;
     //   setChildrens([...tag.childrens]);
     // };
 
+    console.log("tag.id :>> ", tag.id);
+    console.log("selectedId :>> ", selectedId);
+    console.log("equal id :>> ", selectedId === tag.id && true);
     return (
       <Tag
-        setSettings={setSettings}
-        setSelectedId={setSelectedId}
+        {...props}
         key={index}
-        tag={children}
+        tag={tag}
         // setTag={setChildren}
         // index={props.index + "_" + index}
       />

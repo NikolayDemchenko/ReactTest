@@ -29,7 +29,7 @@ function VerticalPanel(props) {
 
  
 
-  console.log("stylePreview :>> ", stylePreview);
+  // console.log("stylePreview :>> ", stylePreview);
   // const tag=preview
   // const setTag = setPreview
   // const clickElementById = (id) => document.getElementById(id).click();

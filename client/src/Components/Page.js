@@ -11,6 +11,8 @@ export default function Page(props) {
   // console.log("0-page", page);
   // console.log("%ctagStructure", `color: green`, tagStructure);
 
+console.log('selectedId :>> ', selectedId);
+
   // FileSaver.saveAs(
   //   new Blob([JSON.stringify(page)], {
   //     type: "application/json;charset=utf-8",
@@ -32,7 +34,12 @@ export default function Page(props) {
         selectedId={selectedId}
         setSelectedId={setSelectedId}
       />
-      <Tags {...props} tags={tagStructure} setSelectedId={setSelectedId} />
+      <Tags
+        {...props}
+        tags={tagStructure}
+        selectedId={selectedId}
+        setSelectedId={setSelectedId}
+      />
 
       {/* <Tag
         {...props}

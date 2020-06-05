@@ -22,9 +22,9 @@ function StylePanel(props) {
   // console.log("props", props);
 
   useEffect(() => {
-    console.log("style", style.backgroundColor);
+    // console.log("style", style.backgroundColor);
     return () => {
-      console.log("style", style.backgroundColor);
+      // console.log("style", style.backgroundColor);
       // document.getElementById("All_styles").click();
       setSelected("All style");
       setStyleFragment()

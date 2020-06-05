@@ -6,7 +6,9 @@ import VerticalPanel from "./Components/ControlPanel/VerticalPanel/VerticalPanel
 const App = () => {
   const [settings, setSettings] = useState();
   // console.log("App");
-  settings&&console.log('settings.preview.style.backgroundColor :>> ', settings.preview.style.backgroundColor);
+  
+  // settings&&console.log('settings.preview.style.backgroundColor :>> ', settings.preview.style.backgroundColor);
+
 // const setStyleSettings=(style)=>{
 //   settings.preview.style=style
 //   setSettings({...settings})
