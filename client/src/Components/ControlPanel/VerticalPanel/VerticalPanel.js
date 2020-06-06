@@ -19,15 +19,20 @@ function VerticalPanel(props) {
   // console.log("uuidv4", uuidv4());
   // console.log("download.json", download);
   const { preview, setPreview } = props;
-  const [tag, setTag] = useState(preview);
-  const [stylePreview, setStylePreview] = useState(tag.style);
+  const [tag, _setTag] = useState(preview);
+  // console.log('tag.style :>> ', tag.style);
+  const setTag = (tag,chain) => {
+    // console.log(`setTag-VerticalPanel ${chain}`);
+    _setTag(tag);
+  };
+  // const tag=preview
+  // const setTag=setPreview
+  // const [stylePreview, setStylePreview] = useState(tag.style);
 
-  useEffect(() => {
-    setTag(preview);
-    return () => {};
-  }, [preview]);
-
- 
+  // useEffect(() => {
+  //   setTag(preview);
+  //   return () => {};
+  // }, [preview]);
 
   // console.log("stylePreview :>> ", stylePreview);
   // const tag=preview
@@ -136,7 +141,6 @@ function VerticalPanel(props) {
       </div>
       <StylePanel
         {...props}
-        // setPanel={setPanel}
         tag={tag}
         setTag={setTag}
         // setStyleFragment={setStyleFragment}

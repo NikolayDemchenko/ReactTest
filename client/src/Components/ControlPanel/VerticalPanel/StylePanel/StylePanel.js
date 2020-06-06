@@ -21,45 +21,48 @@ function StylePanel(props) {
   // console.log("style", style);
   // console.log("props", props);
 
-  useEffect(() => {
-    // console.log("style", style.backgroundColor);
-    return () => {
-      // console.log("style", style.backgroundColor);
-      // document.getElementById("All_styles").click();
-      setSelected("All style");
-      setStyleFragment()
-    };
-  }, [style]);
+  // useEffect(() => {
+  //   // console.log("style", style.backgroundColor);
+  //   return () => {
+  //     // console.log("style", style.backgroundColor);
+  //     // document.getElementById("All_styles").click();
+  //     setSelected("All style");
+  //     // setStyleFragment()
+  //   };
+  // }, [style]);
 
-  const clearStyleFragment = (element) => {
-    // console.log("element :>> ", element);
-    for (let key in element) {
-      if (typeof element[key] === "object") {
-        delete element[key];
-      }
-    }
-    // console.log("element :>> ", element);
-    return { ...element };
-  };
+  // const clearStyleFragment = (element) => {
+  //   // console.log("element :>> ", element);
+  //   for (let key in element) {
+  //     if (typeof element[key] === "object") {
+  //       delete element[key];
+  //     }
+  //   }
+  //   // console.log("element :>> ", element);
+  //   return { ...element };
+  // };
 
-  const setStyleFragment = (style) => {
-    style
-      ? setPreview({
-          ...preview,
-          style: {
-            ...clearStyleFragment({ ...tag.style }),
-            ...clearStyleFragment(style),
-          },
-        })
-      : setPreview({ ...preview, style: { ...tag.style } });
-  };
+  // const setStyleFragment = (style) => {
+  //   style
+  //     ? setPreview({
+  //         ...preview,
+  //         style: {
+  //           ...clearStyleFragment({ ...tag.style }),
+  //           ...clearStyleFragment(style),
+  //         },
+  //       })
+  //     : setPreview({ ...preview, style: { ...tag.style } });
+  // };
 
   const setPreviewStyle = (style) => {
+    // console.log("setPreviewStyle");
+    // console.log("style :>> ", style);
     setPreview({ ...tag, style });
   };
 
-  const setStyle = (style) => {
-    setTag({ ...tag, style });
+  const setStyle = (style, chain) => {
+    // console.log(`setStyle-StylePanel ${chain}`);
+    setTag({ ...tag, style }, `\nsetStyle-StylePanel ${chain}`);
   };
 
   const borderColor =
@@ -84,7 +87,8 @@ function StylePanel(props) {
         onClick={(e) => {
           e.stopPropagation();
           setSelected("All style");
-          setStyleFragment();
+          props.setFunc({ styleFilter: (p) => p });
+          // setStyleFragment();
         }}
       >
         {"Styles"}
@@ -125,7 +129,6 @@ function StylePanel(props) {
         selected={selected}
         setSelected={setSelected}
         setPreview={setPreviewStyle}
-        setStyleFragment={setStyleFragment}
         draggedProp={draggedProp}
         setDraggedProp={setDraggedProp}
       />

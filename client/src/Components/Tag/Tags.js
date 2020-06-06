@@ -22,10 +22,6 @@ function Tags(props) {
     //   tag.childrens[index] = child;
     //   setChildrens([...tag.childrens]);
     // };
-
-    console.log("tag.id :>> ", tag.id);
-    console.log("selectedId :>> ", selectedId);
-    console.log("equal id :>> ", selectedId === tag.id && true);
     return (
       <Tag
         {...props}

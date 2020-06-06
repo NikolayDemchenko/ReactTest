@@ -3,7 +3,8 @@ import { ChromePicker } from "react-color";
 export default function ColorPicker({ value, setValue, setPreview }) {
   const [color, setColor] = useState(value);
 
-  console.log('%cColorPicker',`background-color:${value}`,value )
+  // console.log('%cColorPicker',`background-color:${value}`,value )
+
   useEffect(() => {
     setColor(value);
     return () => {};
@@ -25,7 +26,7 @@ export default function ColorPicker({ value, setValue, setPreview }) {
       color={color}
       onChange={setNewColor}
       onChangeComplete={(color) => {
-        setValue(swichColorType(color));
+        setValue(swichColorType(color),`\nonChangeComplete-ChromePicker`);
       }}
     />
   );

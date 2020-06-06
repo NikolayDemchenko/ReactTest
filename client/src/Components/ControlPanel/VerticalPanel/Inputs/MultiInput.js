@@ -3,7 +3,7 @@ import PopupInput from "./Popup/PopupInput";
 
 export default function MultiInput({ value, setValue, setPreview }) {
   const arr = value.split(" ");
-  console.log("MultiInput", arr);
+  // console.log("MultiInput", arr);
 
   return arr.map((val, index) => {
     // Забота с запятой
@@ -14,11 +14,11 @@ export default function MultiInput({ value, setValue, setPreview }) {
     }
 
     const updateValue = (foo) => {
-      return (newValue) => {
+      return (newValue,chain) => {
         if (index !== -1) {
           arr[index] = newValue + comma;
         }
-        foo(arr.join(" "));
+        foo(arr.join(" "),`\nupdateValue-MultiInput ${chain}`);
       };
     };
 

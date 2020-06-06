@@ -67,18 +67,18 @@ const ThisSlider = ({ value, unit, sign, setPreview, setValue }) => {
   };
   const step = setStep();
 
-    const changeValue = (val) => {
+    const changeValue = (val,chain) => {     
     if (String(val).match(/^-/gm)) {
       const _sign = String(val).replace(/[\w.]+/gm, "");
       const value = String(val).replace(/^-/gm, "");
       if (sign === _sign) {
         const val1 = Number(value) + unit;
-        setValue(val1);
+        setValue(val1,`\nchangeValue-NumberSlider ${chain}`);
         setPreview(val1);
         
       } else {
         const val2 = "-" + Number(value) + unit;
-        setValue(val2);
+        setValue(val2,`\nchangeValue-NumberSlider ${chain}`);
         setPreview(val2);
       }
       _setValue(Number(value));
@@ -86,7 +86,7 @@ const ThisSlider = ({ value, unit, sign, setPreview, setValue }) => {
     } else {
       const roundVal = Number(val.toFixed(singQuantity));
       const val3 = sign + roundVal + unit;
-      setValue(val3);     
+      setValue(val3,`\nchangeValue-NumberSlider ${chain}`);     
       setPreview(val3);     
       _setValue(roundVal);
     }
@@ -106,7 +106,7 @@ const ThisSlider = ({ value, unit, sign, setPreview, setValue }) => {
   return (
     <div
       onWheel={(e) =>
-        e.deltaY < 0 ? changeValue(_value + step) : changeValue(_value - step)
+        e.deltaY < 0 ? changeValue(_value + step,"-onWheelUp") : changeValue(_value - step,"-onWheelDown")
       }
       style={{
         display: "flex",
@@ -137,7 +137,7 @@ const ThisSlider = ({ value, unit, sign, setPreview, setValue }) => {
           margin: "0 auto",
           paddingBottom: "20px",
         }}
-        onClick={() => changeValue(_value + step)}
+        onClick={() => changeValue(_value + step,"-onClickAngleUp")}
       >
         <Icon size={"100%"} icon={angleUp} />
       </div>
@@ -151,7 +151,7 @@ const ThisSlider = ({ value, unit, sign, setPreview, setValue }) => {
           setPreview(sign + val + unit);
         }}
         onChangeCommitted={(_, val) => {
-          changeValue(val);
+          changeValue(val,"\nonChangeCommitted-Slider");
         }}
         max={value < 25 ? 50 : value * 2}
         orientation="vertical"
@@ -165,7 +165,7 @@ const ThisSlider = ({ value, unit, sign, setPreview, setValue }) => {
           margin: "0 auto",
           paddingTop: "20px",
         }}
-        onClick={() => changeValue(_value - step)}
+        onClick={() => changeValue(_value - step,"-onClickAngleDown")}
       >
         <Icon size={"100%"} icon={angleDown} />
       </div>

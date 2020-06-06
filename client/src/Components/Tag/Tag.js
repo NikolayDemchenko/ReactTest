@@ -4,43 +4,45 @@ import TagComponent from "./TagComponent";
 const Tag = (props) => {
   // console.log("Tag-Page props",props);
 
-  const { setSettings, tag, selectedId, setSelectedId } = props;
-
- 
+  const { setSettings, tag, setSelectedId } = props;
 
   const [preview, setPrev] = useState(tag);
+  // console.log("preview.style :>> ", preview.style);
+
+  const [func, setFunc] = useState({ styleFilter: (p) => p });
+
+  // console.log("func :>> ", func);
   // console.log('preview :>> ', preview);
   // console.log("preview :>> ", preview.style.backgroundColor);
   const setPreview = (prev) => {
+    // console.log("preview.style :>> ", prev.style);
     setPrev(prev);
   };
   // console.log('preview.style', preview.style)
   // useEffect(() => {
-  //   setPrev(tag);
-  //   return () => {};
-  // }, [selectedId]);
+  //   return () => {
+  //     // setSettings({ preview, setPreview, setFunc });
+  //   };
+  // }, [preview]);
   // const popover = true;
   // const id  = index ? index : "0";
 
   // console.log("preview.id", preview.id);
   // console.log("tag.id", tag.id);
 
-
   return (
     <div
       id={tag.id}
       onClick={(e) => {
         // console.log('preview.style.backgroundColor :>> ', preview.style.backgroundColor);
-        console.log("tag.id :>> ", tag.id);
-        console.log("selectedId :>> ", selectedId);
-        console.log("equal id :>> ", selectedId === tag.id && true);
         e.stopPropagation();
         setSelectedId(tag.id);
-        setSettings({ preview, setPreview });
+        setSettings({ preview, setPreview, setFunc });
       }}
     >
       <TagComponent
         {...props}
+        // tag={func.styleFilter(preview)}
         tag={preview}
         // index={id}
       />

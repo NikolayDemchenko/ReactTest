@@ -14,7 +14,6 @@ function TagComponent(props) {
     })
     .attach();
 
-    console.log('props.selectedId :>> ', props.selectedId);
   // console.log("1-TagComponent");
   return (
     <tag.type key={index} className={classes.style}>

@@ -16,8 +16,7 @@ export default function PropertiesPanel(props) {
     style,
     setStyle,
     setPreview,
-    // setPreviewFragment,
-    setStyleFragment,
+    setFunc,    
     deletePanel,
     selected,
     setSelected,
@@ -44,7 +43,14 @@ export default function PropertiesPanel(props) {
     setStyle({ ..._style, "@media": {}, ...style });
   };
   const setPreviewProperty = (value) => {
+    // console.log("setPreviewProperty");
+    console.log("value :>> ", value);
+    console.log('{ ...style, ...value } :>> ', { ...style, ...value });  
     setPreview({ ...style, ...value });
+  };
+  const setStyleProperty = (value,chain) => {
+    // console.log("\nsetStyleProperty-PropertiesPanel");
+    setStyle({ ...style, ...value },`\nsetStyleProperty-PropertiesPanel ${chain}`);
   };
   // const setPreviewFragmentProperty = (value) => {
   //   setPreviewFragment({ ...style, ...value });
@@ -69,13 +75,26 @@ export default function PropertiesPanel(props) {
 
   borderTop = !fullName.indexOf("@media") ? "none" : borderTop;
 
+  // Удаляет у объекта все свойства являющиеся объектами
+  const clearObject = (obj) => {  
+    for (let key in obj) {
+      if (typeof obj[key] === "object") {
+        delete obj[key];
+      }
+    }  
+    return { ...obj };
+  };
+
+  const styleFilter = (preview) => {
+    return { ...preview, style: { ...clearObject({...preview.style}), ...clearObject({...style}) } };
+  };
+
   return (
     <div
       // Включение частичного превью
       onClick={(e) => {
         e.stopPropagation();
-        // setPreviewFragment({ ...style });
-        setStyleFragment({ ...style });
+        setFunc({styleFilter});    
         setSelected(fullName);
       }}
       style={{ borderTop, color }}
@@ -165,6 +184,7 @@ export default function PropertiesPanel(props) {
         {...props}
         parentName={name}
         setPreview={setPreviewProperty}
+        setStyle={setStyleProperty}
         // setStyleFragment={setStyleFragment}
         // setPreviewFragment={setPreviewFragmentProperty}
       />

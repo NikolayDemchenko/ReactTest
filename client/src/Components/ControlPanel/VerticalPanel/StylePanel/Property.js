@@ -6,7 +6,8 @@ import PopupInput from "../Inputs/Popup/PopupInput";
 function Property(props) {
   const {
     property,
-    setProperty: { setName, setValue },
+    setName,
+    setValue,
     deleteProperty,
     setPreview,
     onDrop,
