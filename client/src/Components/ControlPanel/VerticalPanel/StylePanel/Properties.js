@@ -43,8 +43,10 @@ export default function Properties(props) {
     setStyle(style, `\nremove-Properties ${chain}`);
     setPreview(style);
   };
-
   const panels = propPanels.map((panel, index) => {
+    const setPreviewPanel = (value) => {   
+      setPreview({ ...style, [Object.keys(panel)[0]]: value });
+    };
     return (
       <PropertiesPanel
         {...props}
@@ -55,6 +57,7 @@ export default function Properties(props) {
         setStyle={(style, chain) => setValue(panel, style, chain)}
         baseStyle={style}
         deletePanel={(chain) => remove(panel, chain)}
+        setPreview={setPreviewPanel}
       />
     );
   });

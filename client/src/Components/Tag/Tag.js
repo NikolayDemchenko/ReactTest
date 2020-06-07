@@ -42,8 +42,8 @@ const Tag = (props) => {
     >
       <TagComponent
         {...props}
-        // tag={func.styleFilter(preview)}
-        tag={preview}
+        tag={func.styleFilter(preview)}
+        // tag={preview}
         // index={id}
       />
     </div>

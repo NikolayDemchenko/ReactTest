@@ -15,7 +15,7 @@ export default function PropertiesPanel(props) {
     setName,
     style,
     setStyle,
-    setPreview,
+    // setPreview,
     setFunc,    
     deletePanel,
     selected,
@@ -42,19 +42,7 @@ export default function PropertiesPanel(props) {
     }
     setStyle({ ..._style, "@media": {}, ...style });
   };
-  const setPreviewProperty = (value) => {
-    // console.log("setPreviewProperty");
-    console.log("value :>> ", value);
-    console.log('{ ...style, ...value } :>> ', { ...style, ...value });  
-    setPreview({ ...style, ...value });
-  };
-  const setStyleProperty = (value,chain) => {
-    // console.log("\nsetStyleProperty-PropertiesPanel");
-    setStyle({ ...style, ...value },`\nsetStyleProperty-PropertiesPanel ${chain}`);
-  };
-  // const setPreviewFragmentProperty = (value) => {
-  //   setPreviewFragment({ ...style, ...value });
-  // };
+  
   const fullName = name + parentName;
   // console.log('fullName', fullName)
   let color;
@@ -85,8 +73,9 @@ export default function PropertiesPanel(props) {
     return { ...obj };
   };
 
+// Не доделано, нужно отправлять не style а имя объекта
   const styleFilter = (preview) => {
-    return { ...preview, style: { ...clearObject({...preview.style}), ...clearObject({...style}) } };
+    return { ...preview, style: { ...clearObject({...preview.style}), ...clearObject({...preview.style[name]}) } };
   };
 
   return (
@@ -182,11 +171,7 @@ export default function PropertiesPanel(props) {
       </div>
       <Properties
         {...props}
-        parentName={name}
-        setPreview={setPreviewProperty}
-        setStyle={setStyleProperty}
-        // setStyleFragment={setStyleFragment}
-        // setPreviewFragment={setPreviewFragmentProperty}
+        parentName={name}  
       />
     </div>
   );

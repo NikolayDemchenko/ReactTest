@@ -28,7 +28,7 @@ function Property(props) {
   // console.log('property',propKey, propValue)
   return (
     <div
-      onClick={(e) => e.stopPropagation()}
+      // onClick={(e) => e.stopPropagation()}
       draggable
       tabIndex={tabIndex}
       // onKeyUp={(e) => {

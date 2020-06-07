@@ -21,15 +21,11 @@ function StylePanel(props) {
   // console.log("style", style);
   // console.log("props", props);
 
-  // useEffect(() => {
-  //   // console.log("style", style.backgroundColor);
-  //   return () => {
-  //     // console.log("style", style.backgroundColor);
-  //     // document.getElementById("All_styles").click();
-  //     setSelected("All style");
-  //     // setStyleFragment()
-  //   };
-  // }, [style]);
+  useEffect(() => {
+    return () => {
+      onAllStyle();   
+    };
+  }, [tag.id]);
 
   // const clearStyleFragment = (element) => {
   //   // console.log("element :>> ", element);
@@ -54,9 +50,11 @@ function StylePanel(props) {
   //     : setPreview({ ...preview, style: { ...tag.style } });
   // };
 
+  const onAllStyle = () => {
+    setSelected("All style");
+    props.setFunc({ styleFilter: (p) => p });
+  };
   const setPreviewStyle = (style) => {
-    // console.log("setPreviewStyle");
-    // console.log("style :>> ", style);
     setPreview({ ...tag, style });
   };
 
@@ -86,9 +84,7 @@ function StylePanel(props) {
         }}
         onClick={(e) => {
           e.stopPropagation();
-          setSelected("All style");
-          props.setFunc({ styleFilter: (p) => p });
-          // setStyleFragment();
+          onAllStyle();
         }}
       >
         {"Styles"}

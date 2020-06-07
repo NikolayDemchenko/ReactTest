@@ -21,7 +21,7 @@ function VerticalPanel(props) {
   const { preview, setPreview } = props;
   const [tag, _setTag] = useState(preview);
   // console.log('tag.style :>> ', tag.style);
-  const setTag = (tag,chain) => {
+  const setTag = (tag, chain) => {
     // console.log(`setTag-VerticalPanel ${chain}`);
     _setTag(tag);
   };
@@ -29,10 +29,11 @@ function VerticalPanel(props) {
   // const setTag=setPreview
   // const [stylePreview, setStylePreview] = useState(tag.style);
 
-  // useEffect(() => {
-  //   setTag(preview);
-  //   return () => {};
-  // }, [preview]);
+  useEffect(() => {
+    setTag(preview);
+    return () => {   
+    };
+  }, [preview]);
 
   // console.log("stylePreview :>> ", stylePreview);
   // const tag=preview
@@ -47,9 +48,7 @@ function VerticalPanel(props) {
   // Получает tag
   const setTagType = ({ value: type }) => {
     setPreview({ ...tag, type });
-    // setPanel({ ...preview, type });
-    // clickElementById(preview.id);
-    // console.log("tag.type", type);
+    setTag({ ...tag, type });
   };
 
   const addChildren = () => {
@@ -96,8 +95,12 @@ function VerticalPanel(props) {
           duration={500}
         >
           <div
+            title={tag.id}
             style={{
+              display: "inline-flex",
+              height: "1.5em",
               padding: "0px 0.5em",
+              overflow: "hidden",
             }}
           >
             id: {tag.id}

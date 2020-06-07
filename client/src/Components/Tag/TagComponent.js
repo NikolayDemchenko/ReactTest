@@ -17,9 +17,9 @@ function TagComponent(props) {
   // console.log("1-TagComponent");
   return (
     <tag.type key={index} className={classes.style}>
-      {tag.childrens && tag.childrens.length > 0 && (
+      {tag.childrens && tag.childrens.length > 0 ? (
         <Tags {...props} tags={tag.childrens} />
-      )}
+      ):null}
     </tag.type>
   );
 }
