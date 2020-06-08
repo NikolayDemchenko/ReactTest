@@ -62,7 +62,7 @@ function VerticalPanel(props) {
   const style = {
     flexWrap: "wrap",
     maxHeight: "95vh",
-    overflowY: "auto",
+    // overflowY: "auto",
     minWidth: "280px",
     maxWidth: "280px",
     // fontSize:"16px",

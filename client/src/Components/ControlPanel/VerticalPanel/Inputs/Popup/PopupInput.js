@@ -1,11 +1,24 @@
 import React from "react";
 import Popover from "../../../ModalWindows/PopoverPopupState";
 import Paper from "./Paper";
+import PropertyValueSelector from "../Switch/PropertyValueSelector";
 export default function PopupInput(props) {
+  console.log('props.value :>> ',typeof props.value);
+  // const type ="number"
+  const type = PropertyValueSelector({value:props.value});
+  const width = type!="number" ? "none" : `${props.value.length}em`;
+
+  console.log("type :>> ", type);
+  
   return (
     <Popover
       PaperProps={{
-        style: { background: "rgba(43,50,66,.95)", border: "1px solid #abc" },
+        style: {
+          background: "rgba(43,50,66,.95)",
+          border: "1px solid #abc",
+          width,
+          overflow: "visible",
+        },
       }}
       transformOrigin={{
         vertical: "top",
@@ -13,7 +26,7 @@ export default function PopupInput(props) {
       }}
       anchorOrigin={{ vertical: "top", horizontal: "center" }}
     >
-      {!props.value.match(/^#\w+|^rgba|^rgb/gm) ? (
+      {type!="color" ? (
         <div
           style={{
             cursor: "pointer",
@@ -27,10 +40,10 @@ export default function PopupInput(props) {
         <div
           style={{
             cursor: "pointer",
-            marginTop:"0.2em",
+            marginTop: "0.2em",
             height: "1em",
             width: "1.2em",
-            backgroundColor:props.value
+            backgroundColor: props.value,
           }}
         />
       )}

@@ -5,7 +5,7 @@ export default function Paper(props) {
   const { setValue } = props;
   const [value, setThisValue] = useState(props.value);
   // console.log("Paper value", value);
-
+  const [width] = useState(`100%`);
   useEffect(() => {
     setThisValue(props.value);
     return () => {};
@@ -19,11 +19,11 @@ export default function Paper(props) {
   };
 
   return (
-    <div style={{ color: "#eee" }}>
+    <div style={{ color: "#eee", width }}>
       <input
         style={{
           background: "transparent",
-          width: `${value.length * 0.5}em`,
+          width:"100%" ,
           minWidth: "80px",
           paddingLeft: "4px",
           outline: "none",
@@ -43,7 +43,12 @@ export default function Paper(props) {
           setThisValue(e.target.value);
         }}
       />
-      <div style={{ backgroundColor: "#234c" }}>
+      <div
+        style={{
+          backgroundColor: "#234c",
+          // width: "100px",
+        }}
+      >
         <PropertyInputSwitch {...props} value={value} setValue={setValue} />
       </div>
     </div>
