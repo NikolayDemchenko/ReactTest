@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import ErrorBoundry from "./ErrorBoundry";
 import "./App.css";
 import Page from "./Components/Page";
-import VerticalPanel from "./Components/ControlPanel/VerticalPanel/VerticalPanel";
+import AttributesPanel from "./Components/ControlPanel/AttributesPanel/AttributesPanel";
 const App = () => {
   const [settings, setSettings] = useState();
   // console.log("App");
@@ -35,7 +35,7 @@ const App = () => {
   return (
     <ErrorBoundry>
       <Page setSettings={setSettings} />
-      {settings && <VerticalPanel {...settings} 
+      {settings && <AttributesPanel {...settings} 
       // setSettings={setSettings} setStyleSettings={setStyleSettings}
       />}
     </ErrorBoundry>

@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import Tag from "./Tag/Tag";
 import Tags from "./Tag/Tags";
-import { div, page, tagStructure } from "./Tag/Classes";
+import {tagStructure } from "./Tag/Classes";
 import NavigationPanel from "./ControlPanel/NavigationPanel/NavigationPanel";
-import FileSaver from "file-saver";
+// import FileSaver from "file-saver";
 export default function Page(props) {
   // console.log("Page-App");
   // const [_page, _setPage] = useState(div);
@@ -11,7 +10,7 @@ export default function Page(props) {
   // console.log("0-page", page);
   // console.log("%ctagStructure", `color: green`, tagStructure);
 
-console.log('selectedId :>> ', selectedId);
+// console.log('selectedId :>> ', selectedId);
 
   // FileSaver.saveAs(
   //   new Blob([JSON.stringify(page)], {
@@ -25,7 +24,7 @@ console.log('selectedId :>> ', selectedId);
   // };
 
   // console.log("props", props);
-  const _tag = page.tags.find((tag) => tag.parentId === null);
+  // const _tag = page.tags.find((tag) => tag.parentId === null);
   // console.log("_tag", _tag);
   return (
     <div>
@@ -39,15 +38,7 @@ console.log('selectedId :>> ', selectedId);
         tags={tagStructure}
         selectedId={selectedId}
         setSelectedId={setSelectedId}
-      />
-
-      {/* <Tag
-        {...props}
-        page={page}
-        tag={_page}
-        setTag={setPage}
-        setSelectedId={setSelectedId}
-      /> */}
+      /> 
     </div>
   );
 }

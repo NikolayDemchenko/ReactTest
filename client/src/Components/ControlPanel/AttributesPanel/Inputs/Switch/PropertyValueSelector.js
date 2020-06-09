@@ -1,5 +1,5 @@
 export default function PropertyValueSelector({ value, func, funcTemplate }) {
-  console.log("typeof value :>> ", typeof value);
+  // console.log("typeof value :>> ", typeof value);
   let funcTempl = funcTemplate
     ? funcTemplate
     : /^(?!^rgba\(.*\)|\d|@|\W|\w+\(-*\w+\)).*\(.*\).*$/gm;

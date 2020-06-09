@@ -28,21 +28,24 @@ const innerStyle = {
   margin: "10px",
   // marginBottom: "10px",
   "&:hover": {
-    // transform: "perspective(200px) scaleZ(-0.5) translateZ(-2px)",
+    transform: "perspective(200px) scaleZ(-0.5) translateZ(-2px)",
     boxShadow: "0 8px 5px 2px #0005, inset 0 8px 5px 2px #00ffff",
-    // transition: "0.2s",
+    transition: "0.2s",
   },
-  // "&:active": {
-  //   transition: "0s",
-  //   boxShadow: "none",
-  // },
+  "&:active": {
+    transition: "0s",
+    boxShadow: "none",
+  },
 };
+
 const innerPageStyle = { style: innerStyle, id: uuidv4(), name: "innerStyle" };
+
 const innerDiv = {
   type: "div",
   style: innerStyle,
   attributes: {},
 };
+
 const childs = [];
 for (let i = 0; i < 100; i++) {
   childs.push(JSON.parse(JSON.stringify(innerDiv)));
@@ -91,8 +94,7 @@ const baseDiv = {
 };
 
 const pageBaseDiv = {
-  id: uuidv4(),
-  index: 0,
+  id: uuidv4(),  
   parentId: null,
   type: "div",
   styleId: basePageStyle.id,
@@ -117,17 +119,17 @@ for (let i = 0; i < 100; i++) {
   pageInnerDiv.parentId = pageBaseDiv.id;  
   page.tags.push(JSON.parse(JSON.stringify(pageInnerDiv)));
 }
-
+console.log('page :>> ', page);
 const getTagStructure = (tags, parentId, styles) =>
-tags.filter((item) => {
-    if (item.parentId === parentId) {
-      item.style=JSON.parse(JSON.stringify(styles.find(style=>style.id===item.styleId).style))
-      item.childrens = getTagStructure(tags, item.id,styles);
-      return item;
+tags.filter((tag) => {
+    if (tag.parentId === parentId) {
+      tag.style=JSON.parse(JSON.stringify(styles.find(style=>style.id===tag.styleId).style))
+      tag.childrens = getTagStructure(tags, tag.id,styles);
+      return tag;
     }
   });
 
 const tagStructure = getTagStructure(page.tags, null, page.styles);
 const div = baseDiv;
-
+console.log('tagStructure :>> ', tagStructure);
 export { newDiv, div, page, tagStructure };

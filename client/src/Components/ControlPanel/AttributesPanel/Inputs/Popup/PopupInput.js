@@ -3,12 +3,12 @@ import Popover from "../../../ModalWindows/PopoverPopupState";
 import Paper from "./Paper";
 import PropertyValueSelector from "../Switch/PropertyValueSelector";
 export default function PopupInput(props) {
-  console.log('props.value :>> ',typeof props.value);
+  // console.log('props.value :>> ',typeof props.value);
   // const type ="number"
   const type = PropertyValueSelector({value:props.value});
   const width = type!="number" ? "none" : `${props.value.length}em`;
 
-  console.log("type :>> ", type);
+  // console.log("type :>> ", type);
   
   return (
     <Popover

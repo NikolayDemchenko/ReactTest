@@ -1,71 +1,41 @@
 import React, { useState, useEffect } from "react";
-import { newDiv } from "../../Tag/Classes";
 import StylePanel from "./StylePanel/StylePanel";
-import Icon from "react-icons-kit";
-import { plus } from "react-icons-kit/icomoon/plus";
 import { Link } from "react-scroll";
-// import { cross } from "react-icons-kit/icomoon/cross";
-import { v4 as uuidv4 } from "uuid";
+// import { v4 as uuidv4 } from "uuid";
 import jss from "jss";
 import preset from "jss-preset-default";
 import Select from "../ModalWindows/Select";
 import { htmlTags } from "../../Class/HtmlCss";
-// import download from './download.json'
-function VerticalPanel(props) {
+
+function AttributesPanel(props) {
   //    console.log(
   //     "%cVerticalPanel-App",
   //     'color: green');
   // console.log("props :>> ", props);
-  // console.log("uuidv4", uuidv4());
-  // console.log("download.json", download);
+
   const { preview, setPreview } = props;
   const [tag, _setTag] = useState(preview);
-  // console.log('tag.style :>> ', tag.style);
+
   const setTag = (tag, chain) => {
     // console.log(`setTag-VerticalPanel ${chain}`);
     _setTag(tag);
   };
-  // const tag=preview
-  // const setTag=setPreview
-  // const [stylePreview, setStylePreview] = useState(tag.style);
 
   useEffect(() => {
     setTag(preview);
-    return () => {   
-    };
+    return () => {};
   }, [preview]);
-
-  // console.log("stylePreview :>> ", stylePreview);
-  // const tag=preview
-  // const setTag = setPreview
-  // const clickElementById = (id) => document.getElementById(id).click();
-
-  // const setPanel = () => {
-  //   console.log("preview.style", preview.style);
-  //   setSettings({ preview, setPreview });
-  // };
 
   // Получает tag
   const setTagType = ({ value: type }) => {
     setPreview({ ...tag, type });
     setTag({ ...tag, type });
   };
-
-  const addChildren = () => {
-    // console.log("tag", tag);
-    // preview.childrens = preview.childrens ? preview.childrens : [];
-    // preview.childrens.push(JSON.parse(JSON.stringify(newDiv)));
-    // setPanel({ ...preview });
-    // clickElementById(preview.id);
-  };
-
   const style = {
     flexWrap: "wrap",
     maxHeight: "95vh",
-    // overflowY: "auto",
     minWidth: "280px",
     maxWidth: "280px",
-    // fontSize:"16px",
     position: "fixed",
     top: 0,
     right: 0,
@@ -82,7 +52,7 @@ function VerticalPanel(props) {
       style,
     })
     .attach();
-  // console.log('tag', tag)
+
   return (
     <div className={classes.style}>
       <div style={{ cursor: "default", display: "flex" }}>
@@ -123,34 +93,12 @@ function VerticalPanel(props) {
             display: "flex",
             marginLeft: "auto",
           }}
-        >
-          <div
-            title={"Добавить элемент"}
-            style={{
-              marginLeft: "auto",
-              cursor: "pointer",
-              width: "16px",
-              margin: "0px 2px ",
-              // border: "1px solid #fff",
-            }}
-            onClick={(e) => {
-              e.stopPropagation();
-              addChildren();
-            }}
-          >
-            <Icon size={"100%"} icon={plus} />
-          </div>
-        </div>
+        ></div>
       </div>
-      <StylePanel
-        {...props}
-        tag={tag}
-        setTag={setTag}
-        // setStyleFragment={setStyleFragment}
-      />
+      <StylePanel {...props} tag={tag} setTag={setTag} />
       <div style={{ paddingBottom: "4em" }} />
     </div>
   );
 }
 
-export default VerticalPanel;
+export default AttributesPanel;
