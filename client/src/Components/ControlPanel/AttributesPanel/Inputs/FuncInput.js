@@ -1,6 +1,6 @@
 import React from "react";
 import Select from "../../ModalWindows/Select";
-import PopupInput from "./Popup/PopupInput";
+import PopupInput from "./PopupInput";
 import { cssFunc } from "../../../Class/HtmlCss";
 export default function FuncInput({ value, setValue, setPreview }) {
   // console.log("FuncInput");

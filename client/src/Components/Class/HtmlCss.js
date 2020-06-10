@@ -71,9 +71,7 @@ const tags = [
   { name: "img" },
   { name: "h1" },
   { name: "h2" },
-  { name: "h3" },
-  { name: "h4" },
-  { name: "h5" },
+  { name: "h3" },,
   { name: "p" },
 ];
 

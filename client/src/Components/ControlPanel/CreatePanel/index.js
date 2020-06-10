@@ -1,10 +1,10 @@
 import React from "react";
-import Popover from "../ModalWindows/PopoverPopupState";
+import Popover from "../ModalWindows/Popover";
 import Icon from "react-icons-kit";
 import { plus } from "react-icons-kit/icomoon/plus";
 import CreatePanel from './CreatePanel'
 export default function Create(props) {
-  console.log("Create :>> ");
+  // console.log("Create :>> ");
   return (
     <div
       title={"Добавить элемент"}
@@ -12,6 +12,7 @@ export default function Create(props) {
         marginLeft: "auto",
         cursor: "pointer",
         width: "16px",
+        color: "rgba(140, 200, 255, 0.8)"
         // border: "1px solid #fff",
       }}
     >
@@ -19,7 +20,7 @@ export default function Create(props) {
         PaperProps={{
           style: {
             background: "rgba(43,50,66,.95)",
-            border: "1px solid #abc",
+            // border: "1px solid #abc",
             // width,
             overflow: "visible",
           },

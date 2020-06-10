@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import ErrorBoundry from "./ErrorBoundry";
 import "./App.css";
 import Page from "./Components/Page";
-import AttributesPanel from "./Components/ControlPanel/AttributesPanel/AttributesPanel";
+import AttributesPanel from "./Components/ControlPanel/AttributesPanel";
 const App = () => {
   const [settings, setSettings] = useState();
   // console.log("App");
