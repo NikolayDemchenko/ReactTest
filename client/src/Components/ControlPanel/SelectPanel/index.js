@@ -2,8 +2,6 @@ import React from "react";
 import Popover from "../ModalWindows/Popover";
 import Items from "./Items";
 export default function SelectPanel(props) {
-
-
   return (
     <Popover
       PaperProps={{
@@ -14,14 +12,14 @@ export default function SelectPanel(props) {
           color: "rgba(140, 200, 255, 0.8)",
           overflow: "visible",
         },
-      }}      
+      }}
       transformOrigin={{
         vertical: "top",
         horizontal: "center",
       }}
-      anchorOrigin={{ vertical: "top", horizontal: "center" }}    
+      anchorOrigin={{ vertical: "top", horizontal: "center" }}
     >
-      <div style={{ cursor: "pointer" }}>{props.item}</div>
+      <div style={{ cursor: "pointer", margin: "0 6px" }}>{props.item}</div>
       <Items {...props} />
     </Popover>
   );

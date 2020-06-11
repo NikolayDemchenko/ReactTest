@@ -58,7 +58,9 @@ function Tag({ tag, selectedId, setSelectedId }) {
           {toggle}
           {/* id: {id}  */}
           type: {type}
-          <CreatePanel tag={tag} />
+          <div style={{margin:"0 10px 0 auto"}}>
+            <CreatePanel tag={tag} />
+          </div>
         </div>
       </Link>
 

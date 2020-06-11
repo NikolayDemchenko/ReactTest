@@ -1,8 +1,5 @@
 import React, { useState } from "react";
-// import { ic_keyboard_arrow_right } from "react-icons-kit/md/ic_keyboard_arrow_right";
-// import Icon from "react-icons-kit";
-// import { Link } from "react-scroll";
-import Tags from './Tags'
+import Tags from "./Tags";
 import jss from "jss";
 import preset from "jss-preset-default";
 function NavigationPanel(props) {
