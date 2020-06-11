@@ -34,7 +34,7 @@ export default function SelectPanel(props) {
         onChange={handleChange}
         style={{
           background: "rgba(30,40,57,.9)",
-          color: "inherit",
+          color: "#fff",
           fontSize: "16px",
           padding: "0 8px",
           // width: "90%",
@@ -53,8 +53,8 @@ export default function SelectPanel(props) {
             onClick={() => handleClick(item)}
             style={{
               background: "rgba(30,40,57,.9)",
-              padding: "0 8px",
-              margin: "2px 0 0",
+              padding: "1px 8px",
+              margin: "1px 0 0",             
               cursor: "pointer",
             }}
           >

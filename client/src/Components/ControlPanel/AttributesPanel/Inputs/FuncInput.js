@@ -1,10 +1,11 @@
 import React from "react";
-import Select from "../../ModalWindows/Select";
+// import Select from "../../ModalWindows/Select";
+import SelectPanel from '../../SelectPanel';
 import PopupInput from "./PopupInput";
 import { cssFunc } from "../../../Class/HtmlCss";
 export default function FuncInput({ value, setValue, setPreview }) {
   // console.log("FuncInput");
-  
+
   // const funcType = /^(?!\(.*\))[\w,\-]+/gm.exec(value)[0];
   const funcType = /^(?!\(.*\))[\w,-]+/gm.exec(value)[0];
 
@@ -37,11 +38,17 @@ export default function FuncInput({ value, setValue, setPreview }) {
   return (
     <div style={{ color: "rgba(140, 200, 255, 0.8)", display: "inline-flex" }}>
       <div style={blockStyle}>
-        <Select
+        <SelectPanel
+          item={funcType}
+          items={cssFunc.map(fnc=>fnc.value)}
+          setItem={(i) => setFuncType(i)}
+          // changeItem={changeTag}
+        />
+        {/* <Select
           defaultItem={funcType}
           setItem={(i) => setFuncType(i.value)}
           listItems={cssFunc}
-        />
+        /> */}
       </div>
       {funcInnerValue && (
         <div style={blockStyle}>
