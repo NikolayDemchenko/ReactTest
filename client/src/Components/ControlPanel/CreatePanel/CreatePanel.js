@@ -13,7 +13,7 @@ export default function CreatePanel(props) {
     >
       type:{" "}
       <SelectPanel
-        startItems={startHtmlTags.map((item) => item.value)}
+        items={startHtmlTags.map((item) => item.value)}
         allItems={htmlTags}
         selectedItem={props.tag.type}
       />

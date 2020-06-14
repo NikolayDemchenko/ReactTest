@@ -6,7 +6,7 @@ export default function PopupInput(props) {
   // console.log('props.value :>> ',typeof props.value);
   // const type ="number"
   const type = PropertyValueSelector({ value: props.value });
-  const width = type != "number" ? "none" : `${props.value.length}em`;
+  const width = type != "number" ? "none" :props.value.length>5? `${props.value.length}em`:"5em";
 
   // console.log("type :>> ", type);
 

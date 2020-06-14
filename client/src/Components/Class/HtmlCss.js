@@ -1,6 +1,6 @@
 // CSS
 const units = [
-  { name: "none" },
+  { name: "no" },
   { name: "px" },
   { name: "%" },
   { name: "em" },
@@ -14,7 +14,7 @@ const units = [
 ];
 
 const cssUnits = units.map((item) => {
-  if (item.name === "none") {
+  if (item.name === "no") {
     item.value = "";
   } else {
     item.value = item.name;
