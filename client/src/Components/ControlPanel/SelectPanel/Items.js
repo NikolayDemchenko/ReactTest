@@ -2,23 +2,23 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 export default function SelectPanel(props) {
   const { setItem, changeItem, item, items, close } = props;
-  const [value, setValue] = useState(item);
+  // const [value, setValue] = useState(item);
   // console.log("items :>> ", items);
 
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
       // console.log("handleKeyPress");
-      handleClick(value);
+      handleClick(item);
     }
   };
   const handleClick = (item) => {
-    setValue(item);
+    // setItem(item);
     setItem(item);
     close(null);
     // console.log("handleClick", item);
   };
   const handleChange = ({ target: { value } }) => {
-    setValue(value);
+    setItem(value);
     changeItem(value);
     // console.log("handleChange", value);
   };
@@ -30,7 +30,7 @@ export default function SelectPanel(props) {
     >
       <input
         ref={(comp) => comp && ReactDOM.findDOMNode(comp).focus()}
-        value={value}
+        value={item}
         onChange={handleChange}
         style={{
           background: "rgba(30,40,57,.9)",
@@ -49,7 +49,7 @@ export default function SelectPanel(props) {
         {items.map((item, index) => (
           <div
             key={index}
-            onMouseDown={() => setValue(item)}
+            onMouseDown={() => setItem(item)}
             onClick={() => handleClick(item)}
             style={{
               background: "rgba(30,40,57,.9)",

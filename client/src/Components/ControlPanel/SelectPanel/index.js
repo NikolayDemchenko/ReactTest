@@ -1,26 +1,42 @@
-import React from "react";
-import Popover from "../ModalWindows/Popover";
-import Items from "./Items";
-export default function SelectPanel(props) {
+import React, { useState, useEffect } from "react";
+import SelectPopover from "./SelectPopover";
+// Переделать под универсальный вариант
+export default function PopupTagList({
+  selectedItem,
+  startItems,
+  allItems,
+  setItem,
+}) {
+  allItems = allItems ? allItems : startItems;
+  const [item, _setItem] = useState(selectedItem);
+  const setThisItem = (item) => {
+    _setItem(item);
+    setItem && setItem(item);
+  };
+
+  const [items, setItems] = useState(startItems);
+
+  useEffect(() => {
+    return () => {
+      setItems(startItems);
+    };
+  }, []);
+  // console.log('htmlTags :>> ', htmlTags);
+
+  const changeItems = (item) => {
+    // Поиск по подстроке
+    const findedItems = allItems.filter((_item) => _item.includes(item));
+    // Сортировка по позиции подстроки
+    findedItems.sort((a, b) => a.indexOf(item) - b.indexOf(item));
+    setItems(findedItems.length > 0 ? findedItems : startItems);
+  };
+
   return (
-    <Popover
-      PaperProps={{
-        style: {
-          borderRadius: "0",
-          background: "transparent",
-          // border: "1px solid #abc",
-          color: "rgba(140, 200, 255, 0.8)",
-          overflow: "visible",
-        },
-      }}
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "center",
-      }}
-      anchorOrigin={{ vertical: "top", horizontal: "center" }}
-    >
-      <div style={{ cursor: "pointer", margin: "0 6px" }}>{props.item}</div>
-      <Items {...props} />
-    </Popover>
+    <SelectPopover
+      item={item}
+      items={items}
+      setItem={setThisItem}
+      changeItem={changeItems}
+    />
   );
 }
