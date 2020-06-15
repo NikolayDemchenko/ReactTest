@@ -4,7 +4,8 @@ import { angleDown } from "react-icons-kit/fa/angleDown";
 import { angleUp } from "react-icons-kit/fa/angleUp";
 import Slider from "@material-ui/core/Slider";
 import { cssUnits } from "../../../Class/HtmlCss";
-import Select from "../../ModalWindows/Select";
+// import Select from "../../ModalWindows/Select";
+import SelectPanel from "../../SelectPanel";
 
 export default function NumberSlider(props) {
   const value = props.value.replace(/-/gm, "");
@@ -91,9 +92,9 @@ const ThisSlider = ({ value, unit, sign, setPreview, setValue }) => {
   };
 
   const setUnit = (item) => {
-    // console.log("setUnit", item);
-    // setunit(item.value);
-    setValue(sign + _value + item.value);
+    const thisValue=sign + _value + item
+    setValue(thisValue);
+    setPreview(thisValue);
   };
   useEffect(() => {
     _setValue(value);
@@ -135,7 +136,12 @@ const ThisSlider = ({ value, unit, sign, setPreview, setValue }) => {
           {sign}
           {_value}
         </div>
-        <Select defaultItem={unit} setItem={setUnit} listItems={cssUnits} />
+        <SelectPanel
+          selectedItem={unit}
+          items={cssUnits.map((unit) => unit.value)}
+          setItem={setUnit}        
+        />
+        {/* <Select defaultItem={unit} setItem={setUnit} listItems={cssUnits} /> */}
       </div>
       <div
         style={{

@@ -3,7 +3,7 @@ import SelectPopover from "./SelectPopover";
 // Переделать под универсальный вариант
 export default function SelectPanel({
   selectedItem,
-  startItems,
+  items,
   allItems,
   setItem,
   button,
@@ -15,12 +15,12 @@ export default function SelectPanel({
     setItem && setItem(item);
   };
 
-  const [items, setItems] = useState(startItems);
+  const [_items, _setItems] = useState(items);
 
   useEffect(() => {
     // _setItem(selectedItem)
     return () => {
-      setItems(startItems);
+      _setItems(items);
     };
   }, []);
   // console.log('htmlTags :>> ', htmlTags);
@@ -30,13 +30,18 @@ export default function SelectPanel({
     const findedItems = allItems.filter((_item) => _item.includes(item));
     // Сортировка по позиции подстроки
     findedItems.sort((a, b) => a.indexOf(item) - b.indexOf(item));
-    setItems(findedItems.length > 0 ? findedItems : startItems);
+    _setItems(findedItems.length > 0 ? findedItems : items);
   };
 
   return (
     <SelectPopover
+
       item={selectedItem}
       items={items}
+
+      item={item}
+      items={_items}
+
       setItem={setThisItem}
       changeItem={changeItems}
       button={button}

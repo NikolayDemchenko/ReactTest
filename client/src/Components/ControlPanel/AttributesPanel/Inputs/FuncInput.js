@@ -1,6 +1,5 @@
 import React from "react";
-// import Select from "../../ModalWindows/Select";
-import SelectPanel from "../../SelectPanel/SelectPanel";
+import SelectPanel from "../../SelectPanel";
 import PopupInput from "./PopupInput";
 import { cssFunc } from "../../../Class/HtmlCss";
 export default function FuncInput({ value, setValue, setPreview }) {
@@ -40,15 +39,9 @@ export default function FuncInput({ value, setValue, setPreview }) {
       <div style={blockStyle}>
         <SelectPanel
           selectedItem={funcType}
-          startItems={cssFunc.map((fnc) => fnc.value)}
-          setItem={(i) => setFuncType(i)}
-          // changeItem={changeTag}
-        />
-        {/* <Select
-          defaultItem={funcType}
-          setItem={(i) => setFuncType(i.value)}
-          listItems={cssFunc}
-        /> */}
+          items={cssFunc.map((fnc) => fnc.value)}
+          setItem={setFuncType}        
+        /> 
       </div>
       {funcInnerValue && (
         <div style={blockStyle}>

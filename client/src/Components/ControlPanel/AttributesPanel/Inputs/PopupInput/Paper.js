@@ -5,7 +5,7 @@ export default function Paper(props) {
   const { setValue } = props;
   const [value, setThisValue] = useState(props.value);
   // console.log("Paper value", value);
-  const [width] = useState(`100%`);
+  const [width] = useState("100%");
   useEffect(() => {
     setThisValue(props.value);
     return () => {};
