@@ -20,7 +20,7 @@ export default function SelectPopover(props) {
       anchorOrigin={{ vertical: "top", horizontal: "center" }}
     >
       <div style={{ cursor: "pointer" }}>
-        {props.button ? props.button : props.item}
+        {props.button ? props.button : props.selectedItem}
       </div>
       <Items {...props} />
     </Popover>

@@ -1,42 +1,48 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 export default function SelectPanel(props) {
-  const { setItem, changeItem, item, items, close } = props;
-  const [value, setValue] = useState(item);
-  // console.log("items :>> ", items);
-
-  useEffect(() => {
-    value&&setItem(value);
-    return () => {
-    };
-  }, [value]);
+  let { setItem, allItems, selectedItem: value, items, close } = props;
+  allItems = allItems ? allItems : items;
+  const [state, _setState] = useState({ value, items });
+  console.log("state.items :>> ", state);
+  const setState = (value) => {
+    _setState({ items: search(value), value });
+  };
+  const setValue = (value) => {
+    _setState({ ...state, value });
+  };
 
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
       // console.log("handleKeyPress");
-      handleClick(item);
+      handleClick(e.target.value);
     }
   };
   const handleClick = (item) => {
-    // setItem(item);
-    setValue(item);
+    setItem(item);
+    setState(item);
     close(null);
     // console.log("handleClick", item);
   };
   const handleChange = ({ target: { value } }) => {
-    setValue(value);
-    changeItem(value);
-    // console.log("handleChange", value);
+    setState(value);
+    console.log("handleChange", value);
+  };
+
+  const search = (item) => {
+    // Поиск по подстроке
+    const findedItems = allItems.filter((_item) => _item.includes(item));
+    // Сортировка по позиции подстроки
+    findedItems.sort((a, b) => a.indexOf(item) - b.indexOf(item));
+    return findedItems.length > 0 ? findedItems : items;
   };
 
   return (
-    <div
-      onKeyPress={handleKeyPress}
-      style={{ maxHeight: "90vh", background: "#3459" }}
-    >
+    <div style={{ maxHeight: "90vh", background: "#3459" }}>
       <input
+        onKeyPress={handleKeyPress}
         ref={(comp) => comp && ReactDOM.findDOMNode(comp).focus()}
-        value={value}
+        value={state.value}
         onChange={handleChange}
         style={{
           background: "rgba(30,40,57,.9)",
@@ -52,7 +58,7 @@ export default function SelectPanel(props) {
         onKeyPress={handleKeyPress}
         style={{ maxHeight: "90vh", overflowY: "auto", background: "#3459" }}
       >
-        {items.map((item, index) => (
+        {state.items.map((item, index) => (
           <div
             key={index}
             onMouseDown={() => setValue(item)}

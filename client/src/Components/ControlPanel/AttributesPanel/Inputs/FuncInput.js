@@ -1,5 +1,5 @@
 import React from "react";
-import SelectPanel from "../../SelectPanel";
+import SelectPanel from "../../SelectPanel/SelectPanel";
 import PopupInput from "./PopupInput";
 import { cssFunc } from "../../../Class/HtmlCss";
 export default function FuncInput({ value, setValue, setPreview }) {

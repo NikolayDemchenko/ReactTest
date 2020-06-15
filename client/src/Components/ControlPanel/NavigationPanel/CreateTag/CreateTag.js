@@ -10,7 +10,7 @@ function CreateTag({ tag, setTags }) {
   };
   return (
     <SelectPanel
-      startItems={startTags.map((item) => item.value)}
+      items={startTags.map((item) => item.value)}
       allItems={htmlTags}
       selectedItem={''}
       setItem={setItem}
