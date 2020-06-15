@@ -1,8 +1,8 @@
 import React from "react";
-import Tag from "./Tag";
-function Tags(props) {
+import Tag from "./NavTag";
+function NavTags(props) {
   return props.tags.map((tag, index) => {
     return <Tag {...props} key={index} tag={tag} />;
   });
 }
-export default Tags;
+export default NavTags;

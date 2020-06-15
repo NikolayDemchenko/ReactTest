@@ -1,22 +1,24 @@
 import React, { useState, useEffect } from "react";
 import SelectPopover from "./SelectPopover";
 // Переделать под универсальный вариант
-export default function PopupTagList({
+export default function SelectPanel({
   selectedItem,
   startItems,
   allItems,
   setItem,
+  button,
 }) {
+  
   allItems = allItems ? allItems : startItems;
-  const [item, _setItem] = useState(selectedItem);
+
   const setThisItem = (item) => {
-    _setItem(item);
     setItem && setItem(item);
   };
 
   const [items, setItems] = useState(startItems);
 
   useEffect(() => {
+    // _setItem(selectedItem)
     return () => {
       setItems(startItems);
     };
@@ -33,10 +35,11 @@ export default function PopupTagList({
 
   return (
     <SelectPopover
-      item={item}
+      item={selectedItem}
       items={items}
       setItem={setThisItem}
       changeItem={changeItems}
+      button={button}
     />
   );
 }

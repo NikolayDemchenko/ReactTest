@@ -5,7 +5,7 @@ import NavigationPanel from "./ControlPanel/NavigationPanel/NavigationPanel";
 // import FileSaver from "file-saver";
 export default function Page(props) {
   // console.log("Page-App");
-  // const [_page, _setPage] = useState(div);
+  const [tags, setTags] = useState(tagStructure);
   const [selectedId, setSelectedId] = useState();
   // console.log("0-page", page);
   // console.log("%ctagStructure", `color: green`, tagStructure);
@@ -29,7 +29,8 @@ export default function Page(props) {
   return (
     <div>
       <NavigationPanel
-        tags={tagStructure}
+        tags={tags}
+        setTags={setTags}
         selectedId={selectedId}
         setSelectedId={setSelectedId}
       />

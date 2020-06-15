@@ -1,9 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 export default function SelectPanel(props) {
   const { setItem, changeItem, item, items, close } = props;
-  // const [value, setValue] = useState(item);
+  const [value, setValue] = useState(item);
   // console.log("items :>> ", items);
+
+  useEffect(() => {
+    value&&setItem(value);
+    return () => {
+    };
+  }, [value]);
 
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
@@ -13,12 +19,12 @@ export default function SelectPanel(props) {
   };
   const handleClick = (item) => {
     // setItem(item);
-    setItem(item);
+    setValue(item);
     close(null);
     // console.log("handleClick", item);
   };
   const handleChange = ({ target: { value } }) => {
-    setItem(value);
+    setValue(value);
     changeItem(value);
     // console.log("handleChange", value);
   };
@@ -30,7 +36,7 @@ export default function SelectPanel(props) {
     >
       <input
         ref={(comp) => comp && ReactDOM.findDOMNode(comp).focus()}
-        value={item}
+        value={value}
         onChange={handleChange}
         style={{
           background: "rgba(30,40,57,.9)",
@@ -49,12 +55,12 @@ export default function SelectPanel(props) {
         {items.map((item, index) => (
           <div
             key={index}
-            onMouseDown={() => setItem(item)}
+            onMouseDown={() => setValue(item)}
             onClick={() => handleClick(item)}
             style={{
               background: "rgba(30,40,57,.9)",
               padding: "1px 8px",
-              margin: "1px 0 0",             
+              margin: "1px 0 0",
               cursor: "pointer",
             }}
           >

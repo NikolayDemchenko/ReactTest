@@ -2,19 +2,10 @@ import React, { useState, useEffect } from "react";
 import ErrorBoundry from "./ErrorBoundry";
 import "./App.css";
 import Page from "./Components/Page";
-import AttributesPanel from "./Components/ControlPanel/AttributesPanel";
+import AttributesPanel from "./Components/ControlPanel/AttributesPanel/AttributesPanel";
 const App = () => {
   const [settings, setSettings] = useState();
   // console.log("App");
-  
-  // settings&&console.log('settings.preview.style.backgroundColor :>> ', settings.preview.style.backgroundColor);
-
-// const setStyleSettings=(style)=>{
-//   settings.preview.style=style
-//   setSettings({...settings})
-// }
-  // settings&&console.log('settings', settings)
-
 
   useEffect(() => {
     if (settings) {
@@ -35,9 +26,7 @@ const App = () => {
   return (
     <ErrorBoundry>
       <Page setSettings={setSettings} />
-      {settings && <AttributesPanel {...settings} 
-      // setSettings={setSettings} setStyleSettings={setStyleSettings}
-      />}
+      {settings && <AttributesPanel {...settings} />}
     </ErrorBoundry>
   );
 };

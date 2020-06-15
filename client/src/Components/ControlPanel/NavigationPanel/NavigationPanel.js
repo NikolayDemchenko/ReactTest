@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Tags from "./Tags";
+import NavTags from "./NavTags";
 import jss from "jss";
 import preset from "jss-preset-default";
 function NavigationPanel(props) {
@@ -51,7 +51,7 @@ function NavigationPanel(props) {
       </div>
       {showPanel && (
         <div className={classes.style}>
-          <Tags {...props} />
+          <NavTags {...props} />
         </div>
       )}
     </div>

@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import { ic_keyboard_arrow_right } from "react-icons-kit/md/ic_keyboard_arrow_right";
 import Icon from "react-icons-kit";
 import { Link } from "react-scroll";
-import Tags from "./Tags";
-import CreatePanel from "../CreatePanel";
-function Tag({ tag, selectedId, setSelectedId }) {
+import NavTags from "./NavTags";
+import CreateTag from "./CreateTag/CreateTag";
+
+function NavTag({ tag, setTags, selectedId, setSelectedId }) {
   const { type, childrens, id } = tag;
   const [showChilds, setshowChilds] = useState(false);
+
   // console.log("id", id);
   const _icon = <Icon size={"100%"} icon={ic_keyboard_arrow_right} />;
 
@@ -31,6 +33,7 @@ function Tag({ tag, selectedId, setSelectedId }) {
   // const id = index ? index : "0";
   const background =
     id === selectedId ? "rgba(30,60,97,1)" : "rgba(30,40,57,.4)";
+
   return (
     <div>
       <Link
@@ -56,17 +59,19 @@ function Tag({ tag, selectedId, setSelectedId }) {
           }}
         >
           {toggle}
-          {/* id: {id}  */}
           type: {type}
-          <div style={{margin:"0 10px 0 auto"}}>
-            <CreatePanel tag={tag} />
+          <div style={{ margin: "0 10px 0 auto" }}>
+            <CreateTag     
+              tag={tag}  
+              setTags={setTags}          
+            />
           </div>
         </div>
       </Link>
 
       <div style={{ marginLeft: "30px" }}>
         {childrens && showChilds && (
-          <Tags
+          <NavTags
             tags={childrens}
             index={id}
             selectedId={selectedId}
@@ -77,4 +82,4 @@ function Tag({ tag, selectedId, setSelectedId }) {
     </div>
   );
 }
-export default Tag;
+export default NavTag;
