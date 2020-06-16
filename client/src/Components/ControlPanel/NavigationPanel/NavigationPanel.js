@@ -3,6 +3,7 @@ import NavTags from "./NavTags";
 import jss from "jss";
 import preset from "jss-preset-default";
 function NavigationPanel(props) {
+ 
   const style = {
     // flexWrap: "wrap",
     minWidth: "280px",

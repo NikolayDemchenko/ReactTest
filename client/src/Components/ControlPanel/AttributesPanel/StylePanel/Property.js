@@ -107,19 +107,4 @@ function Property(props) {
     </div>
   );
 }
-
-function areEqual(prevProps, nextProps) {
-  const prev = Object.entries(prevProps.property).join("");
-  const next = Object.entries(nextProps.property).join("");
-  // console.log("prevProps.property", prev);
-  // console.log("nextProps.property", next);
-  // console.log(`%cprev ${prevVal}`,'border:solid 1px #e33; color: #333')
-  // console.log(`%cnext ${nextVal}`,'color: #f33')
-  // prev===next?console.log(`%c${prev} равно ${next}`, ' color: #248'):console.log(`%c${prev} не равно ${next}`, 'color: #f33')
-
-  return prev === next && prevProps.draggedProp === nextProps.draggedProp
-    ? true
-    : false;
-}
-// export default React.memo(Property, areEqual);
 export default Property;

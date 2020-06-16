@@ -14,41 +14,18 @@ function StylePanel(props) {
     setDragged(item);
   };
 
-  const { tag, setTag, preview, setPreview } = props;
+  const { tag, setTag, setPreview } = props;
   // console.log('tag :>> ', tag);
-  const { type, style } = tag;
+  const { style } = tag;
 
   // console.log("style", style);
   // console.log("props", props);
 
   useEffect(() => {
     return () => {
-      onAllStyle();   
+      onAllStyle();
     };
   }, [tag.id]);
-
-  // const clearStyleFragment = (element) => {
-  //   // console.log("element :>> ", element);
-  //   for (let key in element) {
-  //     if (typeof element[key] === "object") {
-  //       delete element[key];
-  //     }
-  //   }
-  //   // console.log("element :>> ", element);
-  //   return { ...element };
-  // };
-
-  // const setStyleFragment = (style) => {
-  //   style
-  //     ? setPreview({
-  //         ...preview,
-  //         style: {
-  //           ...clearStyleFragment({ ...tag.style }),
-  //           ...clearStyleFragment(style),
-  //         },
-  //       })
-  //     : setPreview({ ...preview, style: { ...tag.style } });
-  // };
 
   const onAllStyle = () => {
     setSelected("All style");

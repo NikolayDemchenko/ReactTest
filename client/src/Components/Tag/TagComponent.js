@@ -2,7 +2,7 @@ import React from "react";
 import Tags from "./Tags";
 import jss from "jss";
 import preset from "jss-preset-default";
-import { v4 as uuidv4 } from "uuid";
+// import { v4 as uuidv4 } from "uuid";
 function TagComponent(props) {
   // console.log("TagComponent-Tag",uuidv4());
   const { tag, index } = props;

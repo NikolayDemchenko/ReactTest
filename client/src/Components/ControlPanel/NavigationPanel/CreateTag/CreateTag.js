@@ -4,8 +4,10 @@ import Icon from "react-icons-kit";
 import SelectPanel from "../../SelectPanel/SelectPanel";
 import htmlTags from "html-tags";
 import { htmlTags as startTags } from "../../../Class/HtmlCss";
-function CreateTag({ tag, setTags }) {
+function CreateTag({ tag, addTag,removeTag }) {
+  // console.log('setPage :>> ', setPage);
   const setItem = (item) => {
+    addTag(item)
     console.log("item :>> ", item);
   };
   return (

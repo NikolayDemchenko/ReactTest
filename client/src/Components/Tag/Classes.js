@@ -119,17 +119,8 @@ for (let i = 0; i < 100; i++) {
   pageInnerDiv.parentId = pageBaseDiv.id;  
   page.tags.push(JSON.parse(JSON.stringify(pageInnerDiv)));
 }
-console.log('page :>> ', page);
-const getTagStructure = (tags, parentId, styles) =>
-tags.filter((tag) => {
-    if (tag.parentId === parentId) {
-      tag.style=JSON.parse(JSON.stringify(styles.find(style=>style.id===tag.styleId).style))
-      tag.childrens = getTagStructure(tags, tag.id,styles);
-      return tag;
-    }
-  });
+// console.log('page :>> ', page);
 
-const tagStructure = getTagStructure(page.tags, null, page.styles);
 const div = baseDiv;
-console.log('tagStructure :>> ', tagStructure);
-export { newDiv, div, page, tagStructure };
+// console.log('tagStructure :>> ', tagStructure);
+export { newDiv, div, page };

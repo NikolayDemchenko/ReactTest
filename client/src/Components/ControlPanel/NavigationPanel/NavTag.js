@@ -5,11 +5,11 @@ import { Link } from "react-scroll";
 import NavTags from "./NavTags";
 import CreateTag from "./CreateTag/CreateTag";
 
-function NavTag({ tag, setTags, selectedId, setSelectedId }) {
+function NavTag({ tag, addTag, selectedId }) {
   const { type, childrens, id } = tag;
   const [showChilds, setshowChilds] = useState(false);
-
-  // console.log("id", id);
+  // console.log("id :>> ", id);
+  // console.log("selectedId :>> ", selectedId);
   const _icon = <Icon size={"100%"} icon={ic_keyboard_arrow_right} />;
 
   const icon = !showChilds ? (
@@ -30,9 +30,9 @@ function NavTag({ tag, setTags, selectedId, setSelectedId }) {
         {icon}
       </div>
     ) : null;
-  // const id = index ? index : "0";
+
   const background =
-    id === selectedId ? "rgba(30,60,97,1)" : "rgba(30,40,57,.4)";
+    id === selectedId ? "rgba(30,60,97,1)" : "rgba(30,40,57,.8)";
 
   return (
     <div>
@@ -47,7 +47,6 @@ function NavTag({ tag, setTags, selectedId, setSelectedId }) {
         <div
           onClick={(e) => {
             e.preventDefault();
-            setSelectedId(id);
             document.getElementById(id).click();
           }}
           style={{
@@ -61,25 +60,18 @@ function NavTag({ tag, setTags, selectedId, setSelectedId }) {
           {toggle}
           type: {type}
           <div style={{ margin: "0 10px 0 auto" }}>
-            <CreateTag     
-              tag={tag}  
-              setTags={setTags}          
-            />
+            <CreateTag tag={tag} addTag={addTag} />
           </div>
         </div>
       </Link>
 
       <div style={{ marginLeft: "30px" }}>
         {childrens && showChilds && (
-          <NavTags
-            tags={childrens}
-            index={id}
-            selectedId={selectedId}
-            setSelectedId={setSelectedId}
-          />
+          <NavTags tags={childrens} index={id} selectedId={selectedId} />
         )}
       </div>
     </div>
   );
 }
+// export default React.memo(NavTag);
 export default NavTag;

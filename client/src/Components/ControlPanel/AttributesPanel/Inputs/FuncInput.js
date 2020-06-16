@@ -18,7 +18,7 @@ export default function FuncInput({ value, setValue, setPreview }) {
 
   const updateFunc = (oldvalue, foo1, foo2) => {
     return function (newvalue) {
-      console.log("newvalue", newvalue);
+      // console.log("newvalue", newvalue);
       const newValue = value.replace(oldvalue, newvalue);
       foo1 && foo1(newValue);
       foo2 && foo2(newValue);

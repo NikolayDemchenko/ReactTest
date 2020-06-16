@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
 export default function SelectPanel(props) {
   let { setItem, allItems, selectedItem: value, items, close } = props;
