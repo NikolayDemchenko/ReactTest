@@ -1,6 +1,6 @@
 import React from "react";
 import SelectPanel from "../../SelectPanel/SelectPanel";
-import PopupInput from "./PopupInput";
+import PopupInput from "./PopupInput/PopupInput";
 import { cssFunc } from "../../../Class/HtmlCss";
 export default function FuncInput({ value, setValue, setPreview }) {
   // console.log("FuncInput");
@@ -16,21 +16,23 @@ export default function FuncInput({ value, setValue, setPreview }) {
     /(?!.*\)).+$/gm.exec(value) &&
     /(?!.*\)).+$/gm.exec(value)[0].replace(/^\s/gm, "");
 
-  const updateFunc = (foo, oldvalue) => {
+  const updateFunc = (oldvalue, foo1, foo2) => {
     return function (newvalue) {
+      console.log("newvalue", newvalue);
       const newValue = value.replace(oldvalue, newvalue);
-      foo(newValue);
+      foo1 && foo1(newValue);
+      foo2 && foo2(newValue);
     };
   };
 
-  const setFuncType = updateFunc(setValue, funcType);
+  const setFuncType = updateFunc(funcType, setValue, setPreview);
 
-  const setInnerValue = updateFunc(setValue, funcInnerValue);
+  const setInnerValue = updateFunc(funcInnerValue, setValue);
 
-  const setInnerPreview = updateFunc(setPreview, funcInnerValue);
-  const setOuterValue = updateFunc(setValue, funcOuterValue);
+  const setInnerPreview = updateFunc(funcInnerValue, setPreview);
+  const setOuterValue = updateFunc(funcOuterValue, setValue);
 
-  const setOuterPreview = updateFunc(setPreview, funcOuterValue);
+  const setOuterPreview = updateFunc(funcOuterValue, setPreview);
 
   const blockStyle = { border: "1px solid #ccc3", padding: "2px 6px" };
 
@@ -40,8 +42,8 @@ export default function FuncInput({ value, setValue, setPreview }) {
         <SelectPanel
           selectedItem={funcType}
           items={cssFunc.map((fnc) => fnc.value)}
-          setItem={setFuncType}        
-        /> 
+          setItem={setFuncType}
+        />
       </div>
       {funcInnerValue && (
         <div style={blockStyle}>

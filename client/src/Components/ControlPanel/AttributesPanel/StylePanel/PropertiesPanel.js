@@ -5,7 +5,7 @@ import { cross } from "react-icons-kit/icomoon/cross";
 
 import { ic_note_add } from "react-icons-kit/md/ic_note_add";
 import { ic_library_add } from "react-icons-kit/md/ic_library_add";
-import Input from "../Inputs/PopupInput";
+import PopupInput from "../Inputs/PopupInput/PopupInput";
 import Properties from "./Properties";
 
 export default function PropertiesPanel(props) {
@@ -105,7 +105,7 @@ export default function PropertiesPanel(props) {
         {name === "Base style" ? (
           name
         ) : (
-          <Input value={name} setValue={setName} />
+          <PopupInput value={name} setValue={setName} />
         )}
         <div
           style={{

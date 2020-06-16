@@ -4,7 +4,7 @@ export default function SelectPanel(props) {
   let { setItem, allItems, selectedItem: value, items, close } = props;
   allItems = allItems ? allItems : items;
   const [state, _setState] = useState({ value, items });
-  console.log("state.items :>> ", state);
+  // console.log("state.items :>> ", state);
   const setState = (value) => {
     _setState({ items: search(value), value });
   };
@@ -31,10 +31,13 @@ export default function SelectPanel(props) {
 
   const search = (item) => {
     // Поиск по подстроке
-    const findedItems = allItems.filter((_item) => _item.includes(item));
+    const findedAllItems = allItems.filter((_item) => _item.includes(item));
     // Сортировка по позиции подстроки
+    findedAllItems.sort((a, b) => a.indexOf(item) - b.indexOf(item));
+    const findedItems = items.filter((_item) => _item.includes(item));
     findedItems.sort((a, b) => a.indexOf(item) - b.indexOf(item));
-    return findedItems.length > 0 ? findedItems : items;
+    const listItems = [...new Set([...findedItems, ...findedAllItems])];
+    return findedAllItems.length > 0 ? listItems : items;
   };
 
   return (
