@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 
-const newStyle = {
+const _newStyle = {
   height: "200px",
   width: "200px",
   backgroundColor: "#678",
@@ -15,10 +15,10 @@ const newStyle = {
     boxShadow: "none",
   },
 };
-const newPageStyle = { style: newStyle, id: uuidv4(), name: "newStyle" };
+const newPageStyle = { style: _newStyle, id: uuidv4(), name: "newStyle" };
 const newDiv = {
   type: "div",
-  style: newStyle,
+  style: _newStyle,
   attributes: {},
 };
 const innerStyle = {
@@ -94,7 +94,7 @@ const baseDiv = {
 };
 
 const pageBaseDiv = {
-  id: uuidv4(),  
+  id: uuidv4(),
   parentId: null,
   type: "div",
   styleId: basePageStyle.id,
@@ -106,9 +106,10 @@ const pageInnerDiv = {
   styleId: innerPageStyle.id,
   attributes: {},
 };
+const newStyle = { style: {}, id: uuidv4(), name: "newStyle" };
 
 const page = {
-  styles: [basePageStyle, innerPageStyle, newPageStyle],
+  styles: [basePageStyle, innerPageStyle, newPageStyle,newStyle],
   tags: [],
 };
 page.tags.push(pageBaseDiv);
@@ -116,11 +117,12 @@ page.tags.push(pageBaseDiv);
 for (let i = 0; i < 100; i++) {
   pageInnerDiv.index = i;
   pageInnerDiv.id = uuidv4();
-  pageInnerDiv.parentId = pageBaseDiv.id;  
+  pageInnerDiv.parentId = pageBaseDiv.id;
   page.tags.push(JSON.parse(JSON.stringify(pageInnerDiv)));
 }
 // console.log('page :>> ', page);
 
 const div = baseDiv;
+
 // console.log('tagStructure :>> ', tagStructure);
 export { newDiv, div, page };

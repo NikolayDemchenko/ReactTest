@@ -3,9 +3,10 @@ import { ic_keyboard_arrow_right } from "react-icons-kit/md/ic_keyboard_arrow_ri
 import Icon from "react-icons-kit";
 import { Link } from "react-scroll";
 import NavTags from "./NavTags";
-import CreateTag from "./CreateTag/CreateTag";
+import CRUDTag from "./CreateTag/CRUDTag";
 
-function NavTag({ tag, addTag, selectedId }) {
+function NavTag(props) {
+  const { tag, addTag, selectedId }=props
   const { type, childrens, id } = tag;
   const [showChilds, setshowChilds] = useState(false);
   // console.log("id :>> ", id);
@@ -60,14 +61,14 @@ function NavTag({ tag, addTag, selectedId }) {
           {toggle}
           type: {type}
           <div style={{ margin: "0 10px 0 auto" }}>
-            <CreateTag tag={tag} addTag={addTag} />
+            <CRUDTag tag={tag} addTag={addTag} />
           </div>
         </div>
       </Link>
 
       <div style={{ marginLeft: "30px" }}>
         {childrens && showChilds && (
-          <NavTags tags={childrens} index={id} selectedId={selectedId} />
+          <NavTags {...props} tags={childrens} index={id}/>
         )}
       </div>
     </div>

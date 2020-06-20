@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
 import Tags from "./Tag/Tags";
 import { page as _page } from "./Tag/Classes";
 import NavigationPanel from "./ControlPanel/NavigationPanel/NavigationPanel";
@@ -24,9 +25,19 @@ export default function Page(props) {
   const [page, setPage] = useState(_page);
   const tags = getTagStructure(page.tags, null, page.styles);
 
-  const addTag=(item)=>{
-    console.log("item :>> ", item);
-  }
+  const addTag = (item, parent) => {
+    const newTag = {
+      id: uuidv4(),
+      parentId: parent.id,
+      type: item,
+      index: parent.childrens.length,
+      styleId: _page.styles.find((style) => style.name === "newStyle").id,
+      attributes: {},
+      childrens: [],
+    };
+    setPage({ ...page, tags: [...page.tags, newTag] });
+    console.log("newTag :>> ", newTag);
+  };
 
   // console.log("page :>> ", page);
   // console.log("settings :>> ", settings);

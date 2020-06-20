@@ -4,7 +4,7 @@ export default function SelectPanel(props) {
   let { setItem, allItems, selectedItem: value, items, close } = props;
   allItems = allItems ? allItems : items;
   const [state, _setState] = useState({ value, items });
-  // console.log("state.items :>> ", state);
+ 
   const setState = (value) => {
     _setState({ items: search(value), value });
   };
