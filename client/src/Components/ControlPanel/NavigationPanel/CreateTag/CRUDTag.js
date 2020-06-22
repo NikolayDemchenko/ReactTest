@@ -8,7 +8,7 @@ function CRUDTag({ tag, addTag,removeTag }) {
   // console.log('setPage :>> ', setPage);
   const setItem = (item) => {
     addTag(item,tag)
-    console.log("item :>> ", item);
+    // console.log("item :>> ", item);
   };
   return (
     // Добавление тега

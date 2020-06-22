@@ -34,12 +34,13 @@ export default function Page(props) {
       styleId: _page.styles.find((style) => style.name === "newStyle").id,
       attributes: {},
       childrens: [],
-    };
+    };    
     setPage({ ...page, tags: [...page.tags, newTag] });
-    console.log("newTag :>> ", newTag);
+    // console.log("newTag :>> ", newTag);
   };
 
   // console.log("page :>> ", page);
+  // console.log('tags :>> ', tags);
   // console.log("settings :>> ", settings);
 
   useEffect(() => {
@@ -65,7 +66,7 @@ export default function Page(props) {
         selectedId={settings && settings.preview.id}
       />
       {settings && <AttributesPanel {...settings} />}
-      <Tags setSettings={setSettings} tags={tags} setPage={setPage} />
+      <Tags setSettings={setSettings} tags={tags} page={page} setPage={setPage} />
     </div>
   );
 }

@@ -47,7 +47,7 @@ function NavTag(props) {
       >
         <div
           onClick={(e) => {
-            e.preventDefault();
+            e.preventDefault();    
             document.getElementById(id).click();
           }}
           style={{
