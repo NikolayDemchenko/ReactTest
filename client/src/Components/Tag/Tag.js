@@ -23,5 +23,10 @@ const Tag = (props) => {
     </div>
   );
 };
+
+// function areEqual(prevProps, nextProps) {
+//   return prevProps.page.tags === nextProps.tag ? true : false;
+// }
+// export default Tag;
 export default React.memo(Tag);
 

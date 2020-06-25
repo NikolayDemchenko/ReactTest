@@ -36,7 +36,10 @@ export default function Page(props) {
       childrens: [],
     };    
     setPage({ ...page, tags: [...page.tags, newTag] });
-    // console.log("newTag :>> ", newTag);
+  };
+  const removeTag = (tagId) => {
+    // setSettings()
+    setPage({ ...page, tags: [...page.tags].filter(tag=>tag.id!==tagId)});
   };
 
   // console.log("page :>> ", page);
@@ -45,15 +48,13 @@ export default function Page(props) {
 
   useEffect(() => {
     if (settings) {
-      const style = document.getElementById(settings.preview.id).style;
-      // console.log("nextId", settings.id, style);
-      style.outline = "1px dashed #5af";
+      const element = document.getElementById(settings.preview.id) 
+      element&&(element.style.outline = "1px dashed #5af");
     }
     return () => {
       if (settings) {
-        const style = document.getElementById(settings.preview.id).style;
-        // console.log("prevId", settings.id, style);
-        style.outline = "";
+        const element = document.getElementById(settings.preview.id) 
+        element&&(element.style.outline = "");
       }
     };
   }, [settings]);
@@ -63,10 +64,11 @@ export default function Page(props) {
       <NavigationPanel
         tags={tags}
         addTag={addTag}
+        removeTag={removeTag}
         selectedId={settings && settings.preview.id}
       />
       {settings && <AttributesPanel {...settings} />}
-      <Tags setSettings={setSettings} tags={tags} page={page} setPage={setPage} />
+      <Tags setSettings={setSettings} tags={tags} pageTags={page.tags} page={page} setPage={setPage} />
     </div>
   );
 }

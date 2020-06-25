@@ -4,25 +4,28 @@ import Icon from "react-icons-kit";
 import SelectPanel from "../../SelectPanel/SelectPanel";
 import htmlTags from "html-tags";
 import { htmlTags as startTags } from "../../../Class/HtmlCss";
-function CRUDTag({ tag, addTag,removeTag }) {
+function CRUDTag({ tag, addTag, removeTag }) {
   // console.log('setPage :>> ', setPage);
-  const setItem = (item) => {
-    addTag(item,tag)
-    // console.log("item :>> ", item);
-  };
+
   return (
-    // Добавление тега
-    <SelectPanel
-      items={startTags.map((item) => item.value)}
-      allItems={htmlTags}
-      selectedItem={''}
-      setItem={setItem}
-      button={
-        <div style={{ cursor: "pointer", width: "1em" }}>
-          <Icon size={"100%"} icon={plus} />
-        </div>
-      }
-    />
+    <div style={{display:"flex"}}>
+      {/* Добавление тега */}
+      <SelectPanel
+        items={startTags.map((item) => item.value)}
+        allItems={htmlTags}
+        selectedItem={""}
+        setItem={(item) => addTag(item, tag)}
+        button={
+          <div style={{ cursor: "pointer", width: "1em" }}>
+            <Icon size={"100%"} icon={plus} />
+          </div>
+        }
+      />
+      {/* Удаление тега */}
+      <div onClick={()=>removeTag(tag.id)} style={{ cursor: "pointer", width: "1em" }}>
+        <Icon size={"100%"} icon={plus} />
+      </div>
+    </div>
   );
 }
 export default CRUDTag;
