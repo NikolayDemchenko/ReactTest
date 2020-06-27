@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import Tags from "./Tags";
+import Tag from "./Tag";
 import jss from "jss";
 import preset from "jss-preset-default";
 function Element(props) {
-  const { tag, index, edit } = props;
+  const { tag, index } = props;
 
   jss.setup(preset());
   const { classes } = jss
@@ -11,15 +12,12 @@ function Element(props) {
       style: tag.style,
     })
     .attach();
-  const onClick = () => {
-    if (edit) {
-      console.log("edit");
-    } else {
-      console.log("function");
-    }
+
+  const onClick = (e) => { 
+    // console.log("edit", tag.id);
   };
 
-  let element = (
+  return (
     <tag.type
       id={tag.id}
       key={index}
@@ -31,6 +29,5 @@ function Element(props) {
       ) : null}
     </tag.type>
   );
-  return element ;
 }
 export default Element;

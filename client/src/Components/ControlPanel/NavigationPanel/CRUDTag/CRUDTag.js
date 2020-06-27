@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { plus } from "react-icons-kit/icomoon/plus";
+import { cross } from "react-icons-kit/icomoon/cross";
 import Icon from "react-icons-kit";
 import SelectPanel from "../../SelectPanel/SelectPanel";
 import htmlTags from "html-tags";
@@ -8,7 +9,7 @@ function CRUDTag({ tag, addTag, removeTag }) {
   // console.log('setPage :>> ', setPage);
 
   return (
-    <div style={{display:"flex"}}>
+    <div style={{ display: "flex" }}>
       {/* Добавление тега */}
       <SelectPanel
         items={startTags.map((item) => item.value)}
@@ -16,14 +17,20 @@ function CRUDTag({ tag, addTag, removeTag }) {
         selectedItem={""}
         setItem={(item) => addTag(item, tag)}
         button={
-          <div style={{ cursor: "pointer", width: "1em" }}>
+          <div style={{ margin: "0 0.2em", cursor: "pointer", width: "1em" }}>
             <Icon size={"100%"} icon={plus} />
           </div>
         }
       />
       {/* Удаление тега */}
-      <div onClick={()=>removeTag(tag.id)} style={{ cursor: "pointer", width: "1em" }}>
-        <Icon size={"100%"} icon={plus} />
+      <div
+        onClick={(e) => {
+          e.stopPropagation()
+          removeTag(tag.id);
+        }}
+        style={{ margin: "0 0.2em", cursor: "pointer", width: "1em" }}
+      >
+        <Icon size={"100%"} icon={cross} />
       </div>
     </div>
   );

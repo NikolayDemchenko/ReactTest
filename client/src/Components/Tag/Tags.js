@@ -1,29 +1,24 @@
 import React from "react";
 import Tag from "./Tag";
-import Element from "./Element";
-function Tags({ tags, page, setSettings, setPage, edit, pageTags }) {
+function Tags({ tags, page, setSettings}) {
   return tags.map((tag, index) => {
     // console.log("tag :>> ", tag);
     // console.log("pageTags :>> ", pageTags);
-    return (
-      <Element
+    return ( 
+      <Tag
         page={page}
-        // pageTags={pageTags}
-        edit={edit}
-        setPage={setPage}
         setSettings={setSettings}
         key={index}
         tag={tag}
       />
-      // <Tag
-      //   page={page}
-      //   pageTags={pageTags}
-      //   setPage={setPage}
-      //   setSettings={setSettings}
-      //   key={index}
-      //   tag={tag}
-      // />
     );
   });
 }
-export default Tags;
+function areEqual(prevProps, nextProps) {
+  // console.log('prevProps.page.tags :>> ', prevProps.page.tags);
+  // console.log('nextProps.page.tags :>> ', nextProps.page.tags);
+  return prevProps.page.tags === nextProps.page.tags ? true : false;
+}
+// export default Tags;
+// export default React.memo(Tags);
+export default React.memo(Tags,areEqual);

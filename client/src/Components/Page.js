@@ -37,8 +37,7 @@ export default function Page(props) {
     };
     setPage({ ...page, tags: [...page.tags, newTag] });
   };
-  const removeTag = (tagId) => {
-    // setSettings()
+  const removeTag = (tagId) => {  
     setPage({
       ...page,
       tags: [...page.tags].filter((tag) => tag.id !== tagId),
@@ -46,7 +45,7 @@ export default function Page(props) {
   };
 
   // console.log("page :>> ", page);
-  // console.log('tags :>> ', tags);
+  console.log('tags :>> ', tags);
   // console.log("settings :>> ", settings);
 
   useEffect(() => {
@@ -73,11 +72,8 @@ export default function Page(props) {
       {settings && <AttributesPanel {...settings} />}
       <Tags
         setSettings={setSettings}
-        tags={tags}
-        // pageTags={page.tags}
-        edit={true}
-        page={page}
-        setPage={setPage}
+        tags={tags}       
+        page={page}    
       />
     </div>
   );

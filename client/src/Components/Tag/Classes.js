@@ -16,11 +16,7 @@ const _newStyle = {
   },
 };
 const newPageStyle = { style: _newStyle, id: uuidv4(), name: "newStyle" };
-const newDiv = {
-  type: "div",
-  style: _newStyle,
-  attributes: {},
-};
+
 const innerStyle = {
   height: "200px",
   width: "200px",
@@ -40,16 +36,6 @@ const innerStyle = {
 
 const innerPageStyle = { style: innerStyle, id: uuidv4(), name: "innerStyle" };
 
-const innerDiv = {
-  type: "div",
-  style: innerStyle,
-  attributes: {},
-};
-
-const childs = [];
-for (let i = 0; i < 100; i++) {
-  childs.push(JSON.parse(JSON.stringify(innerDiv)));
-}
 
 const baseStyle = {
   display: "flex",
@@ -86,12 +72,6 @@ const baseStyle = {
   },
 };
 const basePageStyle = { style: baseStyle, id: uuidv4(), name: "baseStyle" };
-const baseDiv = {
-  type: "div",
-  style: baseStyle,
-  childrens: childs,
-  attributes: {},
-};
 
 const pageBaseDiv = {
   id: uuidv4(),
@@ -114,15 +94,11 @@ const page = {
 };
 page.tags.push(pageBaseDiv);
 
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i < 9; i++) {
   pageInnerDiv.index = i;
   pageInnerDiv.id = uuidv4();
   pageInnerDiv.parentId = pageBaseDiv.id;
   page.tags.push(JSON.parse(JSON.stringify(pageInnerDiv)));
 }
-// console.log('page :>> ', page);
 
-const div = baseDiv;
-
-// console.log('tagStructure :>> ', tagStructure);
-export { newDiv, div, page };
+export {page };
