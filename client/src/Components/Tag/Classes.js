@@ -36,7 +36,6 @@ const innerStyle = {
 
 const innerPageStyle = { style: innerStyle, id: uuidv4(), name: "innerStyle" };
 
-
 const baseStyle = {
   display: "flex",
   justifyContent: "center",
@@ -89,16 +88,16 @@ const pageInnerDiv = {
 const newStyle = { style: {}, id: uuidv4(), name: "newStyle" };
 
 const page = {
-  styles: [basePageStyle, innerPageStyle, newPageStyle,newStyle],
+  styles: [basePageStyle, innerPageStyle, newPageStyle, newStyle],
   tags: [],
 };
 page.tags.push(pageBaseDiv);
 
 for (let i = 0; i < 9; i++) {
-  pageInnerDiv.index = i;
+  // pageInnerDiv.index = i;
   pageInnerDiv.id = uuidv4();
   pageInnerDiv.parentId = pageBaseDiv.id;
   page.tags.push(JSON.parse(JSON.stringify(pageInnerDiv)));
 }
 
-export {page };
+export { page };

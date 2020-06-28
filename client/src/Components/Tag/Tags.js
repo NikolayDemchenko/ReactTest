@@ -1,9 +1,7 @@
 import React from "react";
 import Tag from "./Tag";
 function Tags({ tags, page, setSettings}) {
-  return tags.map((tag, index) => {
-    // console.log("tag :>> ", tag);
-    // console.log("pageTags :>> ", pageTags);
+  return tags.map((tag, index) => { 
     return ( 
       <Tag
         page={page}
@@ -15,8 +13,8 @@ function Tags({ tags, page, setSettings}) {
   });
 }
 function areEqual(prevProps, nextProps) {
-  // console.log('prevProps.page.tags :>> ', prevProps.page.tags);
-  // console.log('nextProps.page.tags :>> ', nextProps.page.tags);
+  console.log('prevProps.page.tags :>> ', prevProps.page.tags);
+  console.log('nextProps.page.tags :>> ', nextProps.page.tags);
   return prevProps.page.tags === nextProps.page.tags ? true : false;
 }
 // export default Tags;

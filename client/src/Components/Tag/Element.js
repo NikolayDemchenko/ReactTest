@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import Tags from "./Tags";
-import Tag from "./Tag";
 import jss from "jss";
 import preset from "jss-preset-default";
 function Element(props) {

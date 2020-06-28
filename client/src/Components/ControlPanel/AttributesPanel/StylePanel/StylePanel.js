@@ -32,6 +32,7 @@ function StylePanel(props) {
     props.setFunc({ styleFilter: (p) => p });
   };
   const setPreviewStyle = (style) => {
+    // console.log('style :>> ', style);
     setPreview({ ...tag, style });
   };
 
@@ -44,7 +45,6 @@ function StylePanel(props) {
     selected !== "All style"
       ? "rgba(140, 200, 255, 0)"
       : "rgba(140, 200, 255, 0.4)";
-
   return (
     <div style={{ background: "rgba(30,40,57,.6)" }} title="CSS (JSS) Стили">
       <div
@@ -108,5 +108,4 @@ function StylePanel(props) {
     </div>
   );
 }
-
 export default StylePanel;

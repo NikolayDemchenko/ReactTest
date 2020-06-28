@@ -14,6 +14,7 @@ export default function Paper(props) {
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
       console.log("handleKeyPress");
+      console.log('value :>> ', value);
       setPreview(value);
       setValue(value);
     }

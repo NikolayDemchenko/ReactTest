@@ -25,11 +25,11 @@ export default function Page(props) {
   const [page, setPage] = useState(_page);
   const tags = getTagStructure(page.tags, null, page.styles);
 
-  const addTag = (item, parent) => {
+  const addTag = (type, parent) => {
     const newTag = {
       id: uuidv4(),
       parentId: parent.id,
-      type: item,
+      type,
       index: parent.childrens.length,
       styleId: _page.styles.find((style) => style.name === "newStyle").id,
       attributes: {},
@@ -37,15 +37,20 @@ export default function Page(props) {
     };
     setPage({ ...page, tags: [...page.tags, newTag] });
   };
-  const removeTag = (tagId) => {  
-    setPage({
-      ...page,
-      tags: [...page.tags].filter((tag) => tag.id !== tagId),
-    });
+
+  const removeTag = (tagId) => {
+    // console.log([... [...page.tags].filter((tag) => tag.id !== tagId)]);
+    // const newTags = JSON.parse(JSON.stringify(page.tags)).filter(
+    //   (tag) => tag.id !== tagId
+    // );
+    const _newTags = [...[...page.tags].filter((tag) => tag.id !== tagId)];
+    console.log("_newTags", _newTags);
+    // setSettings();
+    setPage({ ...page, tags: _newTags });
   };
 
-  // console.log("page :>> ", page);
-  console.log('tags :>> ', tags);
+  console.log("page.tags :>> ", page.tags);
+  // console.log("tags :>> ", tags);
   // console.log("settings :>> ", settings);
 
   useEffect(() => {
@@ -70,11 +75,7 @@ export default function Page(props) {
         selectedId={settings && settings.preview.id}
       />
       {settings && <AttributesPanel {...settings} />}
-      <Tags
-        setSettings={setSettings}
-        tags={tags}       
-        page={page}    
-      />
+      <Tags setSettings={setSettings} tags={tags} page={page} />
     </div>
   );
 }

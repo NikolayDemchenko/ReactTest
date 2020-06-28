@@ -28,12 +28,13 @@ export default function Properties(props) {
       RenameObjectProperty(style, Object.keys(item)[0], value),
       `\nsetName-Properties ${chain}`
     );
+    setPreview(
+      RenameObjectProperty(style, Object.keys(item)[0], value),
+      `\nsetName-Properties ${chain}`
+    );
   };
-  const setValue = (item, value, chain) => {
-    // console.log('value :>> ', value);
-    style[Object.keys(item)[0]] = value;
-    setStyle({ ...style }, `\nsetValue-Properties ${chain}`);
-    // console.log('{ ...style } :>> ', { ...style });
+  const setValue = (item, value, chain) => {   
+    setStyle({ ...style,[[Object.keys(item)[0]]]:value }, `\nsetValue-Properties ${chain}`);
   };
 
   const remove = (item, chain) => {
@@ -63,11 +64,9 @@ export default function Properties(props) {
   });
   // console.log("properties", properties);
   const thisProps = properties.map((property, index) => {
-    const setPreviewValue = (value) => {
-      // console.log('setPreviewValue', value)
-      setPreview({ ...style, [Object.keys(property)[0]]: value });
 
-      // console.log('{ ...style, [Object.keys(property)[0]]: value } :>> ', { ...style, [Object.keys(property)[0]]: value });
+    const setPreviewValue = (value) => {        
+      setPreview({ ...style, [Object.keys(property)[0]]: value });
     };
 
     const onDrop = (targetProp, draggedProp, target, chain) => {

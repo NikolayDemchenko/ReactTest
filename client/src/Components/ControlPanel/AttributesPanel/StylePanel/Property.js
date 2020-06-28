@@ -74,9 +74,10 @@ function Property(props) {
       >
         <PopupInput
           value={propKey}
-          setValue={(v) => {
-            console.log("setName", v);
-            setName(v);
+          setPreview={setName}
+          setValue={(val) => {
+            console.log("setName", val);
+            setName(val);
           }}
         />
       </div>
