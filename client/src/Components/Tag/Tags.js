@@ -1,5 +1,6 @@
 import React from "react";
 import Tag from "./Tag";
+import Element from "./Element";
 function Tags({ tags, page, setSettings}) {
   return tags.map((tag, index) => { 
     return ( 
@@ -13,8 +14,8 @@ function Tags({ tags, page, setSettings}) {
   });
 }
 function areEqual(prevProps, nextProps) {
-  console.log('prevProps.page.tags :>> ', prevProps.page.tags);
-  console.log('nextProps.page.tags :>> ', nextProps.page.tags);
+  // console.log('prevProps.page.tags :>> ', prevProps.page.tags);
+  // console.log('nextProps.page.tags :>> ', nextProps.page.tags);
   return prevProps.page.tags === nextProps.page.tags ? true : false;
 }
 // export default Tags;

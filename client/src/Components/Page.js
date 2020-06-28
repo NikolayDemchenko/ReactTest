@@ -22,7 +22,7 @@ export default function Page(props) {
     });
 
   const [settings, setSettings] = useState();
-  const [page, setPage] = useState(_page);
+  const [page, setPage] = useState(JSON.parse(JSON.stringify(_page)));
   const tags = getTagStructure(page.tags, null, page.styles);
 
   const addTag = (type, parent) => {
@@ -31,7 +31,7 @@ export default function Page(props) {
       parentId: parent.id,
       type,
       index: parent.childrens.length,
-      styleId: _page.styles.find((style) => style.name === "newStyle").id,
+      styleId: page.styles.find((style) => style.name === "newStyle").id,
       attributes: {},
       childrens: [],
     };
@@ -43,15 +43,18 @@ export default function Page(props) {
     // const newTags = JSON.parse(JSON.stringify(page.tags)).filter(
     //   (tag) => tag.id !== tagId
     // );
-    const _newTags = [...[...page.tags].filter((tag) => tag.id !== tagId)];
-    console.log("_newTags", _newTags);
+    const newTags = [...[...page.tags].filter((tag) => tag.id !== tagId)];
+
+    console.log("newTags", newTags);
     // setSettings();
-    setPage({ ...page, tags: _newTags });
+    setPage();
+    setPage({ ...page, tags: newTags });
   };
 
-  console.log("page.tags :>> ", page.tags);
+  // console.log("page.tags :>> ", page.tags);
   // console.log("tags :>> ", tags);
   // console.log("settings :>> ", settings);
+
 
   useEffect(() => {
     if (settings) {

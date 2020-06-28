@@ -94,7 +94,7 @@ const page = {
 page.tags.push(pageBaseDiv);
 
 for (let i = 0; i < 9; i++) {
-  // pageInnerDiv.index = i;
+  pageInnerDiv.index = i;
   pageInnerDiv.id = uuidv4();
   pageInnerDiv.parentId = pageBaseDiv.id;
   page.tags.push(JSON.parse(JSON.stringify(pageInnerDiv)));

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Element from "./Element";
 
 const Tag = (props) => {
@@ -13,7 +13,7 @@ const Tag = (props) => {
       id={tag.id}
       onClick={(e) => {
         e.stopPropagation();
-        setSettings({ preview, setPreview, setFunc });
+        setSettings({preview, setPreview, setFunc });
       }}
     >
       <Element {...props} tag={func.styleFilter(preview)} />
@@ -22,7 +22,8 @@ const Tag = (props) => {
 };
 
 // function areEqual(prevProps, nextProps) {
-//   return prevProps.page.tags === nextProps.tag ? true : false;
+//   return prevProps.page.tags === nextProps.page.tags ? true : false;
 // }
 export default Tag;
 // export default React.memo(Tag);
+// export default React.memo(Tag,areEqual);
