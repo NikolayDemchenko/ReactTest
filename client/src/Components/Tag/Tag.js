@@ -7,7 +7,7 @@ const Tag = (props) => {
   const { setSettings, tag } = props;
   const [preview, setPreview] = useState(tag);
   const [func, setFunc] = useState({ styleFilter: (p) => p });
-
+console.log('tag.index :>> ', tag.index);
   return (
     <div
       id={tag.id}

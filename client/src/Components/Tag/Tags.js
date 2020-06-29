@@ -1,6 +1,6 @@
 import React from "react";
 import Tag from "./Tag";
-import Element from "./Element";
+
 function Tags({ tags, page, setSettings}) {
   return tags.map((tag, index) => { 
     return ( 

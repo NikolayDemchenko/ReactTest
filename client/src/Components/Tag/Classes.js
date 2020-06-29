@@ -73,6 +73,7 @@ const baseStyle = {
 const basePageStyle = { style: baseStyle, id: uuidv4(), name: "baseStyle" };
 
 const pageBaseDiv = {
+  index:0,
   id: uuidv4(),
   parentId: null,
   type: "div",
