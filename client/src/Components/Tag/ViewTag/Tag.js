@@ -25,7 +25,7 @@ export default function Tag(props) {
       onClick={onClick}
     >
       {childrens && childrens.length > 0 ? (
-        <Tags {...props} tags={childrens} />
+        <Tags tags={childrens} />
       ) : null}
     </props.tag.type>
   );

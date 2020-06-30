@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
-import Tags from "./Tag/Tags";
+// import Tags from "./Tag/Tags";
+import Tags from "./Tag/ViewTag/Tags";
 import { page as _page } from "./Tag/Classes";
 import NavigationPanel from "./ControlPanel/NavigationPanel/NavigationPanel";
 import AttributesPanel from "./ControlPanel/AttributesPanel/AttributesPanel";
@@ -39,10 +40,6 @@ export default function Page(props) {
   };
 
   const removeTag = (tagId) => {
-    // console.log([... [...page.tags].filter((tag) => tag.id !== tagId)]);
-    // const newTags = JSON.parse(JSON.stringify(page.tags)).filter(
-    //   (tag) => tag.id !== tagId
-    // );
     const newTags = [...[...page.tags].filter((tag) => tag.id !== tagId)];
 
     console.log("newTags", newTags);
