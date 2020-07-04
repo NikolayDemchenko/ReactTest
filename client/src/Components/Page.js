@@ -75,7 +75,7 @@ export default function Page(props) {
         selectedId={settings && settings.preview.id}
       />
       {settings && <AttributesPanel {...settings} />}
-      <Tags setSettings={setSettings} tags={tags} page={page} />
+      <Tags setSettings={setSettings}  tags={tags} page={page} />
     </div>
   );
 }

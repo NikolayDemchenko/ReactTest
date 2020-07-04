@@ -1,8 +1,9 @@
 import React from "react";
 import Tag from "./Tag";
 
-export default function Tags({ tags }) {
+function Tags({ tags, page }) {
   return tags.map((tag, index) => {
-    return <Tag key={index} tag={tag} />;
+    return <Tag key={index} tag={tag} page={page} />;
   });
 }
+export default React.memo(Tags);

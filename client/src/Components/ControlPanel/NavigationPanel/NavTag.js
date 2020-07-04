@@ -6,11 +6,12 @@ import NavTags from "./NavTags";
 import CRUDTag from "./CRUDTag/CRUDTag";
 
 function NavTag(props) {
-  const { tag, addTag, removeTag, selectedId } = props;
-  const { type, childrens, id,index } = tag;
+  const { tag, addTag, removeTag, selected, setSelected} = props;
+
+  const { type, childrens, id, index } = tag;
   const [showChilds, setshowChilds] = useState(false);
   // console.log("id :>> ", id);
-  // console.log("selectedId :>> ", selectedId);
+
   const _icon = <Icon size={"100%"} icon={ic_keyboard_arrow_right} />;
 
   const icon = !showChilds ? (
@@ -32,8 +33,14 @@ function NavTag(props) {
       </div>
     ) : null;
 
-  const background =
-    id === selectedId ? "rgba(30,60,97,1)" : "rgba(30,40,57,.8)";
+  // const background =
+  // selected&&id === selected.id ? "rgba(30,60,97,1)" : "rgba(30,40,57,.8)";
+  let background = "rgba(30,40,57,.8)";
+  let showButtons = false;
+  if (selected && id === selected.id) {
+    background = "rgba(30,60,97,1)";
+    showButtons = true;
+  }
 
   return (
     <div>
@@ -48,6 +55,7 @@ function NavTag(props) {
         <div
           onClick={(e) => {
             e.preventDefault();
+            setSelected(tag);
             document.getElementById(id).click();
           }}
           style={{
@@ -60,9 +68,15 @@ function NavTag(props) {
         >
           {toggle}
           type: {type} index: {index}
-          <div style={{ margin: "0 10px 0 auto" }}>
-            <CRUDTag tag={tag} addTag={addTag} removeTag={removeTag} />
-          </div>
+          {showButtons && (
+            <div
+              style={{
+                //  outline: "1px solid white",
+                  margin: "0 4px 4px auto" }}
+            >
+              <CRUDTag tag={tag} addTag={addTag} removeTag={removeTag} />
+            </div>
+          )}
         </div>
       </Link>
 

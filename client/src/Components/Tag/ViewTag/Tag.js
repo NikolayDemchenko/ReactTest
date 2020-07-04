@@ -3,7 +3,7 @@ import Tags from "./Tags";
 import jss from "jss";
 import preset from "jss-preset-default";
 
-export default function Tag(props) {
+ function Tag(props) {
   const { id, index, style,childrens } = props.tag;
 
   jss.setup(preset());
@@ -25,8 +25,9 @@ export default function Tag(props) {
       onClick={onClick}
     >
       {childrens && childrens.length > 0 ? (
-        <Tags tags={childrens} />
+        <Tags tags={childrens} page={props.page} />
       ) : null}
     </props.tag.type>
   );
 }
+export default React.memo(Tag);

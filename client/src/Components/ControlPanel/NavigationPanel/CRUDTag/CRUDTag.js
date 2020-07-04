@@ -17,7 +17,7 @@ function CRUDTag({ tag, addTag, removeTag }) {
         selectedItem={""}
         setItem={(item) => addTag(item, tag)}
         button={
-          <div style={{ margin: "0 0.2em", cursor: "pointer", width: "1em" }}>
+          <div style={{ margin: "0 0.2em", cursor: "pointer", width: "0.8em" }}>
             <Icon size={"100%"} icon={plus} />
           </div>
         }
@@ -28,7 +28,7 @@ function CRUDTag({ tag, addTag, removeTag }) {
           e.stopPropagation()
           removeTag(tag.id);
         }}
-        style={{ margin: "0 0.2em", cursor: "pointer", width: "1em" }}
+        style={{ margin: "0 0.2em", cursor: "pointer", width: "0.8em" }}
       >
         <Icon size={"100%"} icon={cross} />
       </div>

@@ -10,8 +10,8 @@ const App = () => {
     </ErrorBoundry>
   );
 };
-function areEqual(prevProps, nextProps) {  
-  return prevProps === nextProps ? true : false;
-}
-export default React.memo(App, areEqual);
-// export default App;
+// function areEqual(prevProps, nextProps) {  
+//   return prevProps === nextProps ? true : false;
+// }
+// export default React.memo(App, areEqual);
+export default App;

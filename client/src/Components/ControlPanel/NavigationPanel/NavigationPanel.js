@@ -29,6 +29,7 @@ function NavigationPanel(props) {
     .attach();
 
   const [showPanel, setShowPanel] = useState(false);
+  const [selected, setSelected] = useState();
   return (
     <div>
       <div
@@ -52,7 +53,7 @@ function NavigationPanel(props) {
       </div>
       {showPanel && (
         <div className={classes.style}>
-          <NavTags {...props} />
+          <NavTags {...props} selected={selected} setSelected={setSelected} />
         </div>
       )}
     </div>
