@@ -11,16 +11,12 @@ function AttributesPanel(props) {
   //    console.log(
   //     "%cVerticalPanel-App",
   //     'color: green');
-  console.log("props :>> ", props);
+  // console.log("props :>> ", props);
 
   const { preview, setPreview } = props;
-  const [tag, _setTag] = useState(preview);
+  const [tag, setTag] = useState(preview);
 
-  const setTag = (tag, chain) => {
-    // console.log(`setTag-VerticalPanel ${chain}`);
-    _setTag(tag);
-  };
-
+  
   useEffect(() => {
     setTag(preview);
     return () => {};

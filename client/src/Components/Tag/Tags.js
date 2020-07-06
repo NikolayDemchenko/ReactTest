@@ -19,5 +19,5 @@ function areEqual(prevProps, nextProps) {
   return prevProps.page.tags === nextProps.page.tags ? true : false;
 }
 // export default Tags;
-// export default React.memo(Tags);
-export default React.memo(Tags,areEqual);
+export default React.memo(Tags);
+// export default React.memo(Tags,areEqual);

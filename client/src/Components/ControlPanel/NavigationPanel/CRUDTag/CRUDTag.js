@@ -10,8 +10,6 @@ function CRUDTag({ tag, addTag, removeTag }) {
   // console.log('setPage :>> ', setPage);
 // console.log('htmlTagsVoid :>> ', Array.isArray(htmlTagsVoid) );
 
-console.log('htmlTagsVoid.foreEach(tagVoid=>tagVoid===tag.type) :>> ', htmlTagsVoid.find(tagVoid=>tagVoid===tag.type));
-
   return (
     <div style={{ display: "flex" }}>
       {/* Добавление тега */}

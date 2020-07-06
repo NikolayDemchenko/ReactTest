@@ -12,8 +12,9 @@ function Element(props) {
     })
     .attach();
 
-  const onClick = (e) => { 
-    // console.log("edit", tag.id);
+  const onClick = (e) => {
+    // e.stopPropagation();
+    props.onClick && props.onClick();
   };
 
   return (
@@ -23,6 +24,7 @@ function Element(props) {
       className={classes.style}
       onClick={onClick}
     >
+      {/* {tag.id} */}
       {tag.childrens && tag.childrens.length > 0 ? (
         <Tags {...props} tags={tag.childrens} />
       ) : null}

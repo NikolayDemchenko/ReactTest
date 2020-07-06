@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
-// import Tags from "./Tag/Tags";
-import Tags from "./Tag/ViewTag/Tags";
+import Tags from "./Tag/Tags";
+// import Tags from "./Tag/ViewTag/Tags";
 import { page as _page } from "./Tag/Classes";
 import NavigationPanel from "./ControlPanel/NavigationPanel/NavigationPanel";
 import AttributesPanel from "./ControlPanel/AttributesPanel/AttributesPanel";
@@ -25,6 +25,7 @@ export default function Page(props) {
   const [settings, setSettings] = useState();
   const [page, setPage] = useState(JSON.parse(JSON.stringify(_page)));
   const tags = getTagStructure(page.tags, null, page.styles);
+  console.log("settings :>> ", settings);
 
   const addTag = (type, parent) => {
     const newTag = {
@@ -36,6 +37,7 @@ export default function Page(props) {
       attributes: {},
       childrens: [],
     };
+    setSettings({...settings,preview:parent});
     setPage({ ...page, tags: [...page.tags, newTag] });
   };
 
@@ -43,15 +45,13 @@ export default function Page(props) {
     const newTags = [...[...page.tags].filter((tag) => tag.id !== tagId)];
 
     console.log("newTags", newTags);
-    // setSettings();
-    setPage();
+    setSettings();
     setPage({ ...page, tags: newTags });
   };
 
   // console.log("page.tags :>> ", page.tags);
   // console.log("tags :>> ", tags);
-  // console.log("settings :>> ", settings);
-
+  // console.log("id :>> ",settings&& settings.preview.id);
 
   useEffect(() => {
     if (settings) {
@@ -72,10 +72,10 @@ export default function Page(props) {
         tags={tags}
         addTag={addTag}
         removeTag={removeTag}
-        selectedId={settings && settings.preview.id}
+        selected={settings && settings.preview}
       />
       {settings && <AttributesPanel {...settings} />}
-      <Tags setSettings={setSettings}  tags={tags} page={page} />
+      <Tags setSettings={setSettings} tags={tags} page={page} edit={true} />
     </div>
   );
 }

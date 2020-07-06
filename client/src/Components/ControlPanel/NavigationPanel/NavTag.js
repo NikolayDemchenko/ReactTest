@@ -33,10 +33,10 @@ function NavTag(props) {
       </div>
     ) : null;
 
-  // const background =
-  // selected&&id === selected.id ? "rgba(30,60,97,1)" : "rgba(30,40,57,.8)";
+ 
   let background = "rgba(30,40,57,.8)";
   let showButtons = false;
+  // let showButtons = true;
   if (selected && id === selected.id) {
     background = "rgba(30,60,97,1)";
     showButtons = true;
@@ -55,7 +55,8 @@ function NavTag(props) {
         <div
           onClick={(e) => {
             e.preventDefault();
-            setSelected(tag);
+            // setSelected(tag);
+            console.log('id :>> ', id);
             document.getElementById(id).click();
           }}
           style={{

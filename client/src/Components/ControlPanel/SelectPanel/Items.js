@@ -4,7 +4,7 @@ export default function SelectPanel(props) {
   let { setItem, allItems, selectedItem: value, items, close } = props;
   allItems = allItems ? allItems : items;
   const [state, _setState] = useState({ value, items });
- 
+
   const setState = (value) => {
     _setState({ items: search(value), value });
   };
@@ -65,7 +65,10 @@ export default function SelectPanel(props) {
           <div
             key={index}
             onMouseDown={() => setValue(item)}
-            onClick={() => handleClick(item)}
+            onClick={(e) => {
+              e.stopPropagation()
+              handleClick(item);
+            }}
             style={{
               background: "rgba(30,40,57,.9)",
               padding: "1px 8px",
