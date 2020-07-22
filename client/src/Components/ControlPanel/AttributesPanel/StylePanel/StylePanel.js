@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
 import PropertiesPanel from "./PropertiesPanel";
-import Icon from "react-icons-kit";
-import { exportIcon } from "react-icons-kit/entypo/exportIcon";
-import FileSaver from "file-saver";
+import StyleSettings from "./SettingsPanel/StyleSettings";
 function StylePanel(props) {
   // console.log("%cStylePanel-VerticalPanel-App", "color: green");
   // console.log("props :>> ", props);
@@ -15,11 +13,7 @@ function StylePanel(props) {
   };
 
   const { tag, setTag, setPreview } = props;
-  // console.log('tag :>> ', tag);
   const { style } = tag;
-
-  // console.log("style", style);
-  // console.log("props", props);
 
   useEffect(() => {
     return () => {
@@ -41,59 +35,9 @@ function StylePanel(props) {
     setTag({ ...tag, style }, `\nsetStyle-StylePanel ${chain}`);
   };
 
-  const borderColor =
-    selected !== "All style"
-      ? "rgba(140, 200, 255, 0)"
-      : "rgba(140, 200, 255, 0.4)";
   return (
     <div style={{ background: "rgba(30,40,57,.6)" }} title="CSS (JSS) Стили">
-      <div
-        id={"All_styles"}
-        style={{
-          display: "flex",
-          borderTop: "4px solid ",
-          borderColor,
-          // color: "#bdef",
-          paddingLeft: "0.5em",
-          height: "26px",
-          background:
-            selected === "All style" ? "rgba(134, 186, 250, 0.15)" : "none",
-        }}
-        onClick={(e) => {
-          e.stopPropagation();
-          onAllStyle();
-        }}
-      >
-        {"Styles"}
-        <div
-          style={{
-            display: "flex",
-            marginLeft: "auto",
-          }}
-        >
-          <div
-            title={"Экспортировать стиль"}
-            style={{
-              cursor: "pointer",
-              width: "16px",
-              margin: "0px 2px ",
-              // border: "1px solid #fff",
-            }}
-            // Сохранение файлов
-            onClick={(e) => {
-              e.stopPropagation();
-
-              FileSaver.saveAs(
-                new Blob([JSON.stringify(style)], {
-                  type: "application/json;charset=utf-8",
-                })
-              );
-            }}
-          >
-            <Icon size={"100%"} icon={exportIcon} />
-          </div>
-        </div>
-      </div>
+      <StyleSettings {...{...props, onAllStyle, selected, style }} />
       <PropertiesPanel
         {...props}
         name={"Base style"}

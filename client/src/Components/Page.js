@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Tags from "./Tag/Tags";
-// import Tags from "./Tag/ViewTag/Tags";
-import { page as _page } from "./Tag/Classes";
+import { page as _page, createStyle } from "./Tag/Classes";
 import NavigationPanel from "./ControlPanel/NavigationPanel/NavigationPanel";
 import AttributesPanel from "./ControlPanel/AttributesPanel/AttributesPanel";
 // import FileSaver from "file-saver";
@@ -37,7 +36,7 @@ export default function Page(props) {
       attributes: {},
       childrens: [],
     };
-    setSettings({...settings,preview:parent});
+    setSettings({ ...settings, preview: parent });
     setPage({ ...page, tags: [...page.tags, newTag] });
   };
 
@@ -47,6 +46,31 @@ export default function Page(props) {
     console.log("newTags", newTags);
     setSettings();
     setPage({ ...page, tags: newTags });
+  };
+
+  const newStyle = (style, name, tag) => {
+    const newStyle = createStyle(style, name);
+    const changedTag = { ...tag, styleId: newStyle.id };
+    const newTags = page.tags.map((tag) => {
+      if (changedTag.id === tag.id) {
+        return changedTag;
+      } else {
+        return tag;
+      }
+    });
+    setPage({ ...page, tags: newTags, styles: [...page.styles, newStyle] });
+  };
+  const updateStyle = (style, styleId) => {
+    console.log("style :>> ", style);
+
+    const newStyles = page.styles.map((st) => {
+      if (st.id === styleId) {
+        return { ...st, style };
+      } else {
+        return st;
+      }
+    });
+    setPage({ ...page, styles: [...newStyles] });
   };
 
   // console.log("page.tags :>> ", page.tags);
@@ -74,7 +98,13 @@ export default function Page(props) {
         removeTag={removeTag}
         selected={settings && settings.preview}
       />
-      {settings && <AttributesPanel {...settings} />}
+      {settings && (
+        <AttributesPanel
+          {...settings}
+          newStyle={newStyle}
+          updateStyle={updateStyle}
+        />
+      )}
       <Tags setSettings={setSettings} tags={tags} page={page} edit={true} />
     </div>
   );

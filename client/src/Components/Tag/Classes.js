@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
+import {createStyle} from '../../AppFunction'
 
 const _newStyle = {
   height: "200px",
@@ -34,7 +35,7 @@ const innerStyle = {
   },
 };
 
-const innerPageStyle = { style: innerStyle, id: uuidv4(), name: "innerStyle" };
+const innerPageStyle = createStyle(innerStyle, "innerStyle");
 
 const baseStyle = {
   display: "flex",
@@ -70,10 +71,11 @@ const baseStyle = {
     },
   },
 };
-const basePageStyle = { style: baseStyle, id: uuidv4(), name: "baseStyle" };
+
+const basePageStyle = createStyle(baseStyle, "baseStyle");
 
 const pageBaseDiv = {
-  index:0,
+  index: 0,
   id: uuidv4(),
   parentId: null,
   type: "div",
@@ -94,11 +96,11 @@ const page = {
 };
 page.tags.push(pageBaseDiv);
 
-for (let i = 0; i < 200; i++) {
+for (let i = 0; i < 50; i++) {
   pageInnerDiv.index = i;
   pageInnerDiv.id = uuidv4();
   pageInnerDiv.parentId = pageBaseDiv.id;
   page.tags.push(JSON.parse(JSON.stringify(pageInnerDiv)));
 }
 
-export { page };
+export { page, createStyle };
