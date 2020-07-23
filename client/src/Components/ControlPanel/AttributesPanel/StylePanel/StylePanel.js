@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import PropertiesPanel from "./PropertiesPanel";
 import StyleSettings from "./SettingsPanel/StyleSettings";
 function StylePanel(props) {
@@ -12,14 +12,16 @@ function StylePanel(props) {
     setDragged(item);
   };
 
-  const { tag, setTag, setPreview } = props;
+  const { tag, setTag, setPreview,updateStyle } = props;
   const { style } = tag;
 
   useEffect(() => {
-    return () => {
+    return () => {      
+      console.log('style :>> ', style);
       onAllStyle();
     };
   }, [tag.id]);
+
 
   const onAllStyle = () => {
     setSelected("All style");
@@ -37,7 +39,7 @@ function StylePanel(props) {
 
   return (
     <div style={{ background: "rgba(30,40,57,.6)" }} title="CSS (JSS) Стили">
-      <StyleSettings {...{...props, onAllStyle, selected, style }} />
+      <StyleSettings {...{ ...props, onAllStyle, selected, style }} />
       <PropertiesPanel
         {...props}
         name={"Base style"}

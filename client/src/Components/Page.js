@@ -58,8 +58,10 @@ export default function Page(props) {
         return tag;
       }
     });
+    setSettings({ ...settings, preview: changedTag });
     setPage({ ...page, tags: newTags, styles: [...page.styles, newStyle] });
   };
+
   const updateStyle = (style, styleId) => {
     console.log("style :>> ", style);
 
@@ -86,6 +88,7 @@ export default function Page(props) {
       if (settings) {
         const element = document.getElementById(settings.preview.id);
         element && (element.style.outline = "");
+        // updateStyle(settings.preview.style,settings.preview.styleId)
       }
     };
   }, [settings]);

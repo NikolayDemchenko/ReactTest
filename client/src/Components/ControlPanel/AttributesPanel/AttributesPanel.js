@@ -13,13 +13,15 @@ function AttributesPanel(props) {
   //     'color: green');
   // console.log("props :>> ", props);
 
-  const { preview, setPreview } = props;
+  const { preview, setPreview,updateStyle } = props;
   const [tag, setTag] = useState(preview);
 
   
   useEffect(() => {
     setTag(preview);
-    return () => {};
+    updateStyle(tag.style, tag.styleId);
+    return () => {
+    };
   }, [preview]);
 
   // Получает tag

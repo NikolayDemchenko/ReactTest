@@ -5,7 +5,7 @@ import { floppyDisk } from "react-icons-kit/icomoon/floppyDisk";
 import { exportIcon } from "react-icons-kit/entypo/exportIcon";
 import { SaveToJSON } from "../../../../../AppFunction";
 function StylePanel(props) {
-    console.log("props :>> ", props);
+    // console.log("props :>> ", props);
   const {newStyle,updateStyle, onAllStyle, style, selected,tag } = props;
   const btnStyle = {
     cursor: "pointer",
