@@ -4,6 +4,7 @@ import { copy } from "react-icons-kit/icomoon/copy";
 import { floppyDisk } from "react-icons-kit/icomoon/floppyDisk";
 import { exportIcon } from "react-icons-kit/entypo/exportIcon";
 import { SaveToJSON } from "../../../../../AppFunction";
+import {paintBrush} from 'react-icons-kit/fa/paintBrush'
 function StylePanel(props) {
     // console.log("props :>> ", props);
   const {newStyle,updateStyle, onAllStyle, style, selected,tag } = props;
@@ -40,6 +41,17 @@ function StylePanel(props) {
           marginLeft: "auto",
         }}
       >
+        <div
+          title={"Назначить стиль"}
+          style={btnStyle}
+          onClick={(e) => {
+            e.stopPropagation();
+            // updateStyle(style,tag.styleId)
+            console.log("Назначить стиль!");
+          }}
+        >
+          <Icon size={"100%"} icon={paintBrush} />
+        </div>
         <div
           title={"Сохранить изменения"}
           style={btnStyle}
