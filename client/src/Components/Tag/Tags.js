@@ -13,11 +13,12 @@ function Tags({ tags, page, setSettings}) {
     );
   });
 }
-function areEqual(prevProps, nextProps) {
-  // console.log('prevProps.page.tags :>> ', prevProps.page.tags);
-  // console.log('nextProps.page.tags :>> ', nextProps.page.tags);
-  return prevProps.page.tags === nextProps.page.tags ? true : false;
+function areEqual(prevProps, nextProps) {  
+  
+  console.log('prevProps.page.tags :>> ', prevProps.page.tags);
+  console.log('nextProps.page.tags :>> ', nextProps.page.tags);
+  return prevProps.page.tags === nextProps.page.tags||prevProps.page.styles === nextProps.page.styles? true : false;
 }
 // export default Tags;
-export default React.memo(Tags);
-// export default React.memo(Tags,areEqual);
+// export default React.memo(Tags);
+export default React.memo(Tags,areEqual);
