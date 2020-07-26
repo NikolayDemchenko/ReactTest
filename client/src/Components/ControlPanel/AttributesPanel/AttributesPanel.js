@@ -4,7 +4,7 @@ import { Link } from "react-scroll";
 // import { v4 as uuidv4 } from "uuid";
 import jss from "jss";
 import preset from "jss-preset-default";
-import Select from "../ModalWindows/Select";
+import SelectPanel from "../SelectPanel/SelectPanel";
 import { htmlTags } from "../../Class/HtmlCss";
 
 function AttributesPanel(props) {
@@ -13,7 +13,7 @@ function AttributesPanel(props) {
   //     'color: green');
   // console.log("props :>> ", props);
 
-  const { preview, setPreview,updateStyle } = props;
+  const { preview, updateStyle,changeTag } = props;
   const [tag, setTag] = useState(preview);
 
   
@@ -25,9 +25,8 @@ function AttributesPanel(props) {
   }, [preview]);
 
   // Получает tag
-  const setTagType = ({ value: type }) => {
-    setPreview({ ...tag, type });
-    setTag({ ...tag, type });
+  const setTagType = ( type ) => {
+    changeTag(tag,"type",type)
   };
   const style = {
     flexWrap: "wrap",
@@ -80,11 +79,11 @@ function AttributesPanel(props) {
           }}
         >
           type:
-        </div>
-        <Select
-          defaultItem={tag.type}
-          setItem={setTagType}
-          listItems={htmlTags}
+        </div> 
+         <SelectPanel
+          selectedItem={tag.type}
+          items={htmlTags}
+          setItem={setTagType}        
         />
         <div
           style={{

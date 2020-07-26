@@ -72,7 +72,7 @@ export default function PropertiesPanel(props) {
     return { ...obj };
   };
 
-// Не доделано, нужно отправлять не style а имя объекта
+
   const styleFilter = (preview) => {
     return { ...preview, style: { ...clearObject({...preview.style}), ...clearObject({...preview.style[name]}) } };
   };

@@ -27,14 +27,13 @@ const Tag = (props) => {
       }}
     >
       <Element {...props} tag={func.styleFilter(preview)} />
-      {/* {edit?<Element {...props} tag={func.styleFilter(preview)} />:<Element {...props} tag={tag} />} */}
     </div>
   );
 };
 
-// function areEqual(prevProps, nextProps) {
-//   return prevProps.page.tags === nextProps.page.tags ? true : false;
-// }
+function areEqual(prevProps, nextProps) {
+  return prevProps.tag === nextProps.tag ? true : false;
+}
 // export default Tag;
-export default React.memo(Tag);
-// export default React.memo(Tag,areEqual);
+// export default React.memo(Tag);
+export default React.memo(Tag,areEqual);

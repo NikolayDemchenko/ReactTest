@@ -3,9 +3,9 @@ import { plus } from "react-icons-kit/icomoon/plus";
 import { cross } from "react-icons-kit/icomoon/cross";
 import Icon from "react-icons-kit";
 import SelectPanel from "../../SelectPanel/SelectPanel";
-import htmlTags from "html-tags";
+// import htmlTags from "html-tags";
 import htmlTagsVoid from "html-tags/void";
-import { htmlTags as startTags } from "../../../Class/HtmlCss";
+import { htmlTags, basehtmlTags } from "../../../Class/HtmlCss";
 function CRUDTag({ tag, addTag, removeTag }) {
   // console.log('setPage :>> ', setPage);
 // console.log('htmlTagsVoid :>> ', Array.isArray(htmlTagsVoid) );
@@ -15,7 +15,7 @@ function CRUDTag({ tag, addTag, removeTag }) {
       {/* Добавление тега */}
     {!htmlTagsVoid.find(tagVoid=>tagVoid===tag.type)&&
     <SelectPanel
-        items={startTags.map((item) => item.value)}
+        items={basehtmlTags.map((item) => item.value)}
         allItems={htmlTags}
         selectedItem={""}
         setItem={(item) => addTag(item, tag)}

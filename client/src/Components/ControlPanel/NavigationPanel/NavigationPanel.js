@@ -3,7 +3,6 @@ import NavTags from "./NavTags";
 import jss from "jss";
 import preset from "jss-preset-default";
 function NavigationPanel(props) {
- 
   const style = {
     // flexWrap: "wrap",
     minWidth: "280px",
@@ -31,18 +30,18 @@ function NavigationPanel(props) {
   const [showPanel, setShowPanel] = useState(false);
   // const [selected, setSelected] = useState();
   return (
-    <div>
+    <div
+      style={{
+        position: "fixed",
+        top: 0,
+        backgroundColor: "#456c",     
+        display: "flex",
+        justifyContent: "center",
+        padding: "0 10px",
+        cursor: "pointer",
+      }}
+    >
       <div
-        style={{
-          position: "fixed",
-          top: 0,
-          backgroundColor: "#456c",
-          maxWidth: "100px",
-          display: "flex",
-          justifyContent: "center",
-          padding: "0 10px",
-          cursor: "pointer",
-        }}
         onClick={(e) => {
           e.stopPropagation();
           console.log("setShowPanel");
@@ -50,6 +49,21 @@ function NavigationPanel(props) {
         }}
       >
         Navigation
+      </div>
+      <div
+        style={{
+          backgroundColor: "#456c",
+          justifyContent: "center",
+          padding: "0 10px",
+          cursor: "pointer",
+        }}
+        onClick={(e) => {
+          e.stopPropagation();
+          console.log("savePage");
+          props.savePage()
+        }}
+      >
+        Save
       </div>
       {showPanel && (
         <div className={classes.style}>

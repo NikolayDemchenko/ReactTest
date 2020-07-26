@@ -1,3 +1,4 @@
+import htmlTags from "html-tags";
 // CSS
 const units = [
   { name: "no" },
@@ -64,6 +65,9 @@ const cssFunc = cssfunc.map((item) => {
 });
 
 // Html
+
+
+
 const tags = [
   { name: "div" },
   { name: "input" },
@@ -75,8 +79,8 @@ const tags = [
   { name: "p" },
 ];
 
-const htmlTags = tags.map((item) => {
+const basehtmlTags = tags.map((item) => {
   item.value = item.name;
   return item;
 });
-export { cssUnits, htmlTags , cssFunc};
+export { cssUnits, basehtmlTags , cssFunc,htmlTags};
