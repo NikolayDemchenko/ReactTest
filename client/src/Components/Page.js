@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Tags from "./Tag/Tags";
+import { getParentBranch } from "./Tag/Tag";
 import { page as _page, createStyle } from "./Tag/Classes";
 import NavigationPanel from "./ControlPanel/NavigationPanel/NavigationPanel";
 import AttributesPanel from "./ControlPanel/AttributesPanel/AttributesPanel";
@@ -10,12 +11,11 @@ export default function Page(props) {
   // console.log("Page-App");
 
   const getTagStructure = (tags, parentId, styles) => {
-    const newTags=JSON.parse(
-      JSON.stringify(tags))
+    const newTags = JSON.parse(JSON.stringify(tags));
     return newTags.filter((tag) => {
       if (tag.parentId === parentId) {
         tag.style = JSON.parse(
-          JSON.stringify({...styles.find((style) => style.id === tag.styleId).style})
+          JSON.stringify(styles.find((style) => style.id === tag.styleId).style)
         );
         tag.childrens = getTagStructure(newTags, tag.id, styles);
         return tag;
@@ -27,7 +27,7 @@ export default function Page(props) {
 
   const [settings, setSettings] = useState();
   const [page, setPage] = useState(JSON.parse(JSON.stringify(_page)));
-  console.log("page.tags :>> ", page.tags);
+  // console.log("page.tags :>> ", page.tags);
 
   const tags = getTagStructure([...page.tags], null, [...page.styles]);
   // console.log("settings :>> ", settings);
@@ -84,16 +84,29 @@ export default function Page(props) {
   const updateStyle = (style, styleId) => {
     // console.log("style :>> ", style);
 
-    const newStyles = page.styles.map((st) => {
+    const styles = page.styles.map((st) => {
       if (st.id === styleId) {
         return { ...st, style };
       } else {
         return st;
       }
     });
-    setPage({ ...page, styles: [...newStyles] });
+
+    // Вот эту хуйню допилить это сборщик айдишек для рендера
+    const tagsForRender = [
+      page.tags.forEach((tag) => {
+       if (tag.styleId === styleId) getParentBranch(page.tags, tag.id);
+      }),
+    ];
+    console.log(
+      "[...page.tags.map((tag) => tag.styleId === styleId)] :>> ",
+      tagsForRender
+    );
+    setSettings({ ...settings, tagsForRender });
+    setPage({ ...page, styles });
   };
 
+  // settings&&console.log('settings.parentBranch :>> ', settings.parentBranch);
   // console.log("page.tags :>> ", page.tags);
   // console.log("tags :>> ", tags);
   // console.log("id :>> ",settings&& settings.preview.id);
@@ -126,7 +139,10 @@ export default function Page(props) {
           {...{ ...settings, changeTag, newStyle, updateStyle }}
         />
       )}
-      <Tags setSettings={setSettings} tags={tags} page={page} edit={true} />
+      <Tags
+        {...{ ...settings, setSettings, tags, page }}
+        // edit={true}
+      />
     </div>
   );
 }

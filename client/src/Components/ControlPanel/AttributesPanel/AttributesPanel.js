@@ -19,7 +19,7 @@ function AttributesPanel(props) {
   
   useEffect(() => {
     setTag(preview);
-    updateStyle(tag.style, tag.styleId);
+    // updateStyle(tag.style, tag.styleId);
     return () => {
     };
   }, [preview]);
