@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Tags from "./Tag/Tags";
 import { getParentBranch } from "./Tag/Tag";
-import { page as _page, createStyle } from "./Tag/Classes";
+import { page as _page } from "./Tag/Classes";
+import { createStyle } from "../AppFunction";
 import NavigationPanel from "./ControlPanel/NavigationPanel/NavigationPanel";
 import AttributesPanel from "./ControlPanel/AttributesPanel/AttributesPanel";
 import { SaveToJSON } from "../AppFunction";
@@ -92,24 +93,25 @@ export default function Page(props) {
       }
     });
 
-    // Вот эту хуйню допилить это сборщик айдишек для рендера
-    const tagsForRender = [
-      page.tags.forEach((tag) => {
-       if (tag.styleId === styleId) getParentBranch(page.tags, tag.id);
-      }),
-    ];
-    console.log(
-      "[...page.tags.map((tag) => tag.styleId === styleId)] :>> ",
-      tagsForRender
-    );
-    setSettings({ ...settings, tagsForRender });
+    // Сборщик айдишек для рендера
+    const tagsForRender = page.tags.filter((t) => t.styleId === styleId);
+
+    const fnc = (tagsForRender = []) => {
+      let tFR = [];
+      tagsForRender.forEach((tag) => {
+        console.log("tag :>> ", tag);
+        tFR.push(tag.id);
+        tFR = [...getParentBranch(page.tags, tag), ...tFR];
+      });
+
+      return Array.from(new Set(tFR));
+    };
+
+    console.log("tagsForRender :>> ", fnc(tagsForRender));
+
+    setSettings({ ...settings, tagsForRender:fnc(tagsForRender) });
     setPage({ ...page, styles });
   };
-
-  // settings&&console.log('settings.parentBranch :>> ', settings.parentBranch);
-  // console.log("page.tags :>> ", page.tags);
-  // console.log("tags :>> ", tags);
-  // console.log("id :>> ",settings&& settings.preview.id);
 
   useEffect(() => {
     if (settings) {

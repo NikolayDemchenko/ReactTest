@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 
 import PropertyInputSwitch from "../Switch/PropertyInputSwitch";
 export default function Paper(props) {
-  const { setValue,setPreview } = props;
+  const { setValue } = props;
   const [value, setThisValue] = useState(props.value);
+ const setPreview=props.setPreview?props.setPreview:setValue
   // console.log("Paper value", value);
   // const [width] = useState("100%");
   useEffect(() => {

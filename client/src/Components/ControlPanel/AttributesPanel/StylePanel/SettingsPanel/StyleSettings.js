@@ -7,6 +7,7 @@ import { floppyDisk } from "react-icons-kit/icomoon/floppyDisk";
 import { exportIcon } from "react-icons-kit/entypo/exportIcon";
 import { SaveToJSON } from "../../../../../AppFunction";
 import { paintBrush } from "react-icons-kit/fa/paintBrush";
+import {ic_update} from 'react-icons-kit/md/ic_update'
 function StylePanel(props) {
   // console.log("props :>> ", props);
   const {
@@ -28,11 +29,12 @@ function StylePanel(props) {
     // border: "1px solid #fff",
   };
   const btnHoverStyle = {
-// outline:"#cef solid 1px"
-transform:"perspective(200px) scaleZ(-20) translateZ(-2px)"
+    // outline:"#cef solid 1px"
+    transform: "perspective(200px) scaleZ(-20) translateZ(-2px)",
   };
   const btnActivStyle = {
-    color: "#cef"  
+    color: "#ffa",
+    textShadow: "red 0 0 2px",
   };
   jss.setup(preset());
   const { classes } = jss
@@ -96,7 +98,7 @@ transform:"perspective(200px) scaleZ(-20) translateZ(-2px)"
             console.log("Сохранить изменения стиля!");
           }}
         >
-          <Icon size={"100%"} icon={floppyDisk} />
+          <Icon size={"120%"} icon={ic_update} />
         </div>
         <div
           title={"Копировать стиль"}
