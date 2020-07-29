@@ -2,11 +2,10 @@ import React, { useState, useEffect } from "react";
 import log from "../Log";
 import { v4 as uuidv4 } from "uuid";
 import Tags from "./Tag/Tags";
-import { getParentBranch } from "./Tag/Tag";
+import { getParentBranch } from "./Tag/_Tag";
 import { page as _page } from "./Tag/Classes";
 import { createStyle } from "../AppFunction";
 import NavigationPanel from "./ControlPanel/NavigationPanel/NavigationPanel";
-import AttributesPanel from "./ControlPanel/AttributesPanel/AttributesPanel";
 import { SaveToJSON } from "../AppFunction";
 // import FileSaver from "file-saver";
  function Page(props) {
@@ -79,7 +78,7 @@ import { SaveToJSON } from "../AppFunction";
         return tag;
       }
     });
-    setSettings({ ...settings, preview: changedTag });
+    // setSettings({ ...settings, preview: changedTag });
     setPage({ ...page, tags: newTags });
   };
 
@@ -109,20 +108,6 @@ import { SaveToJSON } from "../AppFunction";
     setPage({ ...page, styles });
   };
 
-  // useEffect(() => {
-  //   if (settings) {
-  //     const element = document.getElementById(settings.selectedId);
-  //     element && (element.style.outline = "1px dashed #5af");
-  //   }
-  //   return () => {
-  //     if (settings) {
-  //       const element = document.getElementById(settings.selectedId);
-  //       element && (element.style.outline = "");
-  //       // updateStyle(settings.preview.style,settings.preview.styleId)
-  //     }
-  //   };
-  // }, [settings]);
-
   return (
     <div>
       <NavigationPanel
@@ -132,14 +117,8 @@ import { SaveToJSON } from "../AppFunction";
         savePage={() => SaveToJSON(page)}
         selected={settings && settings.preview}
       />
-      {/* {settings&&settings.preview && (
-        <AttributesPanel
-          {...{ ...settings, changeTag, newStyle, updateStyle }}
-        />
-      )} */}
       <Tags
-        {...{ ...settings, setSettings, tags, page,changeTag, newStyle, updateStyle }}
-        // edit={true}
+        {...{ ...settings, setSettings, tags, page,changeTag, newStyle, updateStyle }}     
       />
     </div>
   );

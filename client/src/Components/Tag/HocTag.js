@@ -19,6 +19,7 @@ const HocTag = (props) => {
   const [preview, setPreview] = useState(tag);
   const [func, setFunc] = useState({ styleFilter: (p) => p });
   const [panelTag, setPanelTag] = useState(preview);
+  
   // setSettings({
   //   tagsForRender: [...getParentBranch(page.tags, tag), tag.id],
   //   preview,
@@ -26,12 +27,14 @@ const HocTag = (props) => {
   //   setFunc
   // });
   
-  // useEffect(() => {
-  //   // console.log("setPreview");
-  //   setPreview(tag);
-  //   return () => {};
-  // }, []);
+  useEffect(() => {
+    console.log("!!!!!tag.styleId",tag.styleId );
+    setPreview(tag);
+    return () => {};
+  }, [tag]);
 
+  console.log('tag.styleId \n', tag.styleId)
+  console.log('preview.styleId \n', preview.styleId)
   return (
     <div style={{ outline: "1px dashed #5af" }}>
       <Portal>

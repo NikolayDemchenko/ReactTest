@@ -7,7 +7,7 @@ import { floppyDisk } from "react-icons-kit/icomoon/floppyDisk";
 import { exportIcon } from "react-icons-kit/entypo/exportIcon";
 import { SaveToJSON } from "../../../../../AppFunction";
 import { paintBrush } from "react-icons-kit/fa/paintBrush";
-import {ic_update} from 'react-icons-kit/md/ic_update'
+import { ic_update } from "react-icons-kit/md/ic_update";
 function StylePanel(props) {
   // console.log("props :>> ", props);
   const {
@@ -20,6 +20,7 @@ function StylePanel(props) {
     clon,
     setClon,
     setClonStyle,
+    setTag,
   } = props;
 
   const btnStyle = {
@@ -108,6 +109,8 @@ function StylePanel(props) {
             e.stopPropagation();
             console.log("Копировать стиль!");
             newStyle(style, "Новый стиль", tag);
+            // console.log('tag', tag)
+            // setTag({...tag,style})
           }}
         >
           <Icon size={"100%"} icon={copy} />

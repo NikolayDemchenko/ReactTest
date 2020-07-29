@@ -100,4 +100,5 @@ function AttributesPanel(props) {
   );
 }
 
+// export default log(AttributesPanel);
 export default React.memo(log(AttributesPanel));
