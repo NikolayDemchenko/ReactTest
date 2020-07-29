@@ -12,7 +12,7 @@ export default function Properties(props) {
   //   "%cProperties-PropertiesPanel",
   //   'color: green');
   // console.log('props :>> ', props);
-  const { style, setStyle, setPreview } = props;
+  const {draggedProp, setDraggedProp, style, setStyle, setPreview } = props;
 
   const properties = [];
   const propPanels = [];
@@ -86,10 +86,12 @@ export default function Properties(props) {
 
     return (
       <Property
-        {...props}
+        {...{draggedProp, setDraggedProp}}
         key={index}
         tabIndex={index}
-        property={property}
+        // property={property}
+        name={Object.keys(property)[0]}
+        value={Object.values(property)[0]}
         setPreview={setPreviewValue}
         setName={(name, chain) => setName(property, name, chain)}
         setValue={(value, chain) => setValue(property, value, chain)}

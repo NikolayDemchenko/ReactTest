@@ -93,9 +93,9 @@ function StylePanel(props) {
           className={classes.style}
           onClick={(e) => {
             e.stopPropagation();
+            console.log("Сохранить изменения стиля!");
             updateStyle(style, tag.styleId);
             setClonStyle(tag.styleId);
-            console.log("Сохранить изменения стиля!");
           }}
         >
           <Icon size={"120%"} icon={ic_update} />

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import StylePanel from "./StylePanel/StylePanel";
 import { Link } from "react-scroll";
-// import { v4 as uuidv4 } from "uuid";
+import log from '../../../Log'
 import jss from "jss";
 import preset from "jss-preset-default";
 import SelectPanel from "../SelectPanel/SelectPanel";
@@ -13,16 +13,18 @@ function AttributesPanel(props) {
   //     'color: green');
   // console.log("props :>> ", props);
 
-  const { preview, updateStyle,changeTag } = props;
-  const [tag, setTag] = useState(preview);
+  const { changeTag, panelTag, setPanelTag } = props;
+  // const [tag, setTag] = useState(preview);
+  const tag  = panelTag;
+  const setTag=setPanelTag;
 
   
-  useEffect(() => {
-    setTag(preview);
-    // updateStyle(tag.style, tag.styleId);
-    return () => {
-    };
-  }, [preview]);
+  // useEffect(() => {
+  //   // setTag(preview);
+  //   // updateStyle(tag.style, tag.styleId);
+  //   return () => {
+  //   };
+  // }, [preview]);
 
   // Получает tag
   const setTagType = ( type ) => {
@@ -98,4 +100,4 @@ function AttributesPanel(props) {
   );
 }
 
-export default AttributesPanel;
+export default React.memo(log(AttributesPanel));

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import log from "../Log";
 import { v4 as uuidv4 } from "uuid";
 import Tags from "./Tag/Tags";
 import { getParentBranch } from "./Tag/Tag";
@@ -8,7 +9,7 @@ import NavigationPanel from "./ControlPanel/NavigationPanel/NavigationPanel";
 import AttributesPanel from "./ControlPanel/AttributesPanel/AttributesPanel";
 import { SaveToJSON } from "../AppFunction";
 // import FileSaver from "file-saver";
-export default function Page(props) {
+ function Page(props) {
   // console.log("Page-App");
 
   const getTagStructure = (tags, parentId, styles) => {
@@ -92,40 +93,35 @@ export default function Page(props) {
         return st;
       }
     });
-
-    // Сборщик айдишек для рендера
-    const tagsForRender = page.tags.filter((t) => t.styleId === styleId);
-
-    const fnc = (tagsForRender = []) => {
+    // Сборщик айдишек для рендера  
+    const getAllParents = (tagsForRender = []) => {
       let tFR = [];
       tagsForRender.forEach((tag) => {
-        console.log("tag :>> ", tag);
+        // console.log("tag :>> ", tag);
         tFR.push(tag.id);
         tFR = [...getParentBranch(page.tags, tag), ...tFR];
       });
 
       return Array.from(new Set(tFR));
     };
-
-    console.log("tagsForRender :>> ", fnc(tagsForRender));
-
-    setSettings({ ...settings, tagsForRender:fnc(tagsForRender) });
+    // console.log("tagsForRender :>> ", fnc(tagsForRender));
+    setSettings({ ...settings, tagsForRender:getAllParents(page.tags.filter((t) => t.styleId === styleId)) });   
     setPage({ ...page, styles });
   };
 
-  useEffect(() => {
-    if (settings) {
-      const element = document.getElementById(settings.preview.id);
-      element && (element.style.outline = "1px dashed #5af");
-    }
-    return () => {
-      if (settings) {
-        const element = document.getElementById(settings.preview.id);
-        element && (element.style.outline = "");
-        // updateStyle(settings.preview.style,settings.preview.styleId)
-      }
-    };
-  }, [settings]);
+  // useEffect(() => {
+  //   if (settings) {
+  //     const element = document.getElementById(settings.selectedId);
+  //     element && (element.style.outline = "1px dashed #5af");
+  //   }
+  //   return () => {
+  //     if (settings) {
+  //       const element = document.getElementById(settings.selectedId);
+  //       element && (element.style.outline = "");
+  //       // updateStyle(settings.preview.style,settings.preview.styleId)
+  //     }
+  //   };
+  // }, [settings]);
 
   return (
     <div>
@@ -136,15 +132,16 @@ export default function Page(props) {
         savePage={() => SaveToJSON(page)}
         selected={settings && settings.preview}
       />
-      {settings && (
+      {/* {settings&&settings.preview && (
         <AttributesPanel
           {...{ ...settings, changeTag, newStyle, updateStyle }}
         />
-      )}
+      )} */}
       <Tags
-        {...{ ...settings, setSettings, tags, page }}
+        {...{ ...settings, setSettings, tags, page,changeTag, newStyle, updateStyle }}
         // edit={true}
       />
     </div>
   );
 }
+export default log(Page)

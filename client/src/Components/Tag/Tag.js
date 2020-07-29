@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Element from "./Element";
 import log from "../../Log";
-export const getParentBranch = (tags, tag, idList=[]) => {
+export const getParentBranch = (tags, tag, idList = []) => {
   const parentId = tag.parentId;
   if (parentId) {
     idList.push(parentId);
@@ -14,47 +14,45 @@ export const getParentBranch = (tags, tag, idList=[]) => {
 const Tag = (props) => {
   // console.log("Tag-Page props", props);
 
-  const { setSettings, tag, page, tagsForRender } = props;
+  const { setSettings, tag, page} = props;
 
-  const tagsFR= tagsForRender &&[...tagsForRender.filter((id) => id != tag.id)]
 
   const [preview, setPreview] = useState(tag);
   const [func, setFunc] = useState({ styleFilter: (p) => p });
 
   useEffect(() => {
+    console.log("setPreview");
     setPreview(tag);
     return () => {};
-  }, [tag, page]);
+  }, [tag]);
 
   return (
     <div
       id={tag.id}
       onClick={(e) => {
         e.stopPropagation();
-        // console.log("id :>> ", tag.id);
-        // console.log("id :>> ", preview.id);
         const tagsForRender = [...getParentBranch(page.tags, tag), tag.id];
-        console.log('tagsForRender :>> ', tagsForRender);
+        // console.log('tagsForRender :>> ', tagsForRender);
         setSettings({ preview, setPreview, setFunc, tagsForRender });
       }}
     >
       <Element
         {...props}
-        tag={func.styleFilter(preview)}
-        tagsForRender={tagsFR}
+        tag={func.styleFilter(preview)}     
       />
     </div>
   );
 };
 
 function areEqual(prevProps, nextProps) {
-
   // console.log("prevProps.parentBranch", prevProps.parentBranch);
   // console.log("nextProps.parentBranch", nextProps.parentBranch);
 
-  return prevProps.tagsForRender?nextProps.tagsForRender.find((id) => id === nextProps.tag.id)
-    ? false
-    : true:false
+  return prevProps.tagsForRender
+    ? nextProps.tagsForRender.find((id) => id === nextProps.tag.id)
+      ? false
+      : true
+    : false;
 }
 // export default Tag;
 // export default React.memo(Tag);

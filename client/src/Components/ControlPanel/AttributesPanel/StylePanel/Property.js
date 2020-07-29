@@ -1,17 +1,20 @@
 import React, { useState } from "react";
+import log from "../../../../Log";
 import Icon from "react-icons-kit";
 import { cross } from "react-icons-kit/icomoon/cross";
 import PopupInput from "../Inputs/PopupInput/PopupInput";
 
 function Property(props) {
   const {
-    property,
+    tabIndex,
+    // property,
+    name,
+    value,
+    setPreview,
     setName,
     setValue,
     deleteProperty,
-    setPreview,
     onDrop,
-    tabIndex,
     draggedProp,
     setDraggedProp,
   } = props;
@@ -20,8 +23,8 @@ function Property(props) {
   // const [copy, setcopy] = useState(false);
 
   const [target, setTarget] = useState();
-  const propKey = Object.keys(property)[0];
-  const propValue = Object.values(property)[0];
+  // const propKey = Object.keys(property)[0];
+  // const propValue = Object.values(property)[0];
 
   // console.log("%cProperty", "color:#191", propKey, propValue);
   // console.log('props :>> ', props);
@@ -41,7 +44,8 @@ function Property(props) {
       // }}
       onDrop={(e) => {
         e.stopPropagation();
-        onDrop(property, draggedProp, target);
+        // onDrop(property, draggedProp, target);
+        onDrop({ [name]: value }, draggedProp, target);
       }}
       style={{
         // border: "1px solid #fff",
@@ -51,7 +55,8 @@ function Property(props) {
         background: "rgba(30,40,57,.4)",
       }}
       onDragStart={() => {
-        setDraggedProp(property);
+        // setDraggedProp(property);
+        setDraggedProp({ [name]: value });
       }}
       onDragOver={(e) => {
         if (Y < e.pageY) {
@@ -69,11 +74,12 @@ function Property(props) {
         style={{
           padding: "0px 0.5em",
           // border: "1px solid #fff",
-          width: `${propKey.length / 2}em`,
+          width: `${name.length / 2}em`,
         }}
       >
         <PopupInput
-          value={propKey}
+          // value={propKey}
+          value={name}
           setPreview={setName}
           setValue={(val) => {
             console.log("setName", val);
@@ -82,7 +88,7 @@ function Property(props) {
         />
       </div>
       <div
-        title={propValue}
+        title={value}
         style={{
           overflow: "hidden",
           width: "80px",
@@ -90,7 +96,8 @@ function Property(props) {
       >
         <PopupInput
           height="1em"
-          value={propValue}
+          // value={propValue}
+          value={value}
           setValue={setValue}
           setPreview={setPreview}
         />
@@ -108,4 +115,10 @@ function Property(props) {
     </div>
   );
 }
-export default Property;
+function areEqual(prevProps, nextProps) {
+
+  return prevProps.value === nextProps.value;
+}
+
+export default React.memo(Property, areEqual);
+// export default React.memo(log(Property), areEqual);

@@ -31,7 +31,6 @@ function StylePanel(props) {
     props.setFunc({ styleFilter: (p) => p });
   };
   const setPreviewStyle = (style) => {
-    // console.log('style :>> ', style);
     setPreview({ ...tag, style });
   };
 
