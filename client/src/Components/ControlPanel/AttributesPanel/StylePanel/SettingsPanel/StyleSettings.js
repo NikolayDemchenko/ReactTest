@@ -11,7 +11,7 @@ import { ic_update } from "react-icons-kit/md/ic_update";
 function StylePanel(props) {
   // console.log("props :>> ", props);
   const {
-    newStyle,
+    addStyle,
     updateStyle,
     onAllStyle,
     style,
@@ -20,7 +20,7 @@ function StylePanel(props) {
     clon,
     setClon,
     setClonStyle,
-    setTag,
+    // setTag,
   } = props;
 
   const btnStyle = {
@@ -108,7 +108,7 @@ function StylePanel(props) {
           onClick={(e) => {
             e.stopPropagation();
             console.log("Копировать стиль!");
-            newStyle(style, "Новый стиль", tag);
+            addStyle(style, "Новый стиль", tag);
             // console.log('tag', tag)
             // setTag({...tag,style})
           }}

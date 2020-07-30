@@ -15,30 +15,37 @@ export const getParentBranch = (tags, tag, idList = []) => {
 const HocTag = (props) => {
   // console.log("props", props);
 
-  const { children, tag } = props; 
+  const { children, tag } = props;
   const [preview, setPreview] = useState(tag);
   const [func, setFunc] = useState({ styleFilter: (p) => p });
   const [panelTag, setPanelTag] = useState(preview);
-  
+
   // setSettings({
   //   tagsForRender: [...getParentBranch(page.tags, tag), tag.id],
   //   preview,
   //   setPreview,
   //   setFunc
   // });
-  
+
   useEffect(() => {
-    console.log("!!!!!tag.styleId",tag.styleId );
+    console.log("!!!!!tag.styleId", tag.styleId);
     setPreview(tag);
     return () => {};
   }, [tag]);
 
-  console.log('tag.styleId \n', tag.styleId)
-  console.log('preview.styleId \n', preview.styleId)
+  // console.log('tag.styleId \n', tag.styleId)
+  // console.log('preview.styleId \n', preview.styleId)
   return (
-    <div style={{ outline: "1px dashed #5af" }}>
+    <div
+      style={{ outline: "1px dashed #5af" }}
+      onClick={(e) => {
+        e.stopPropagation();
+      }}
+    >
       <Portal>
-        <AttributesPanel {...{ ...props, setPreview, setFunc, panelTag, setPanelTag }} />
+        <AttributesPanel
+          {...{ ...props, setPreview, setFunc, panelTag, setPanelTag }}
+        />
       </Portal>
       {{
         ...children,

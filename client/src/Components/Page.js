@@ -8,7 +8,7 @@ import { createStyle } from "../AppFunction";
 import NavigationPanel from "./ControlPanel/NavigationPanel/NavigationPanel";
 import { SaveToJSON } from "../AppFunction";
 // import FileSaver from "file-saver";
- function Page(props) {
+function Page(props) {
   // console.log("Page-App");
 
   const getTagStructure = (tags, parentId, styles) => {
@@ -27,11 +27,12 @@ import { SaveToJSON } from "../AppFunction";
   };
 
   const [settings, setSettings] = useState();
+  console.log("settings :>> ", settings);
+  
   const [page, setPage] = useState(JSON.parse(JSON.stringify(_page)));
   // console.log("page.tags :>> ", page.tags);
 
   const tags = getTagStructure([...page.tags], null, [...page.styles]);
-  // console.log("settings :>> ", settings);
 
   const addTag = (type, parent) => {
     const newTag = {
@@ -55,7 +56,7 @@ import { SaveToJSON } from "../AppFunction";
     setPage({ ...page, tags: newTags });
   };
 
-  const newStyle = (style, name, tag) => {
+  const addStyle = (style, name, tag) => {
     const newStyle = createStyle(style, name);
     const changedTag = { ...tag, styleId: newStyle.id };
     const newTags = page.tags.map((tag) => {
@@ -71,7 +72,7 @@ import { SaveToJSON } from "../AppFunction";
 
   const changeTag = (tag, propName, propValue) => {
     const changedTag = { ...tag, [propName]: propValue };
-    const newTags = page.tags.map((tag) => {
+    const tags = page.tags.map((tag) => {
       if (changedTag.id === tag.id) {
         return changedTag;
       } else {
@@ -79,7 +80,7 @@ import { SaveToJSON } from "../AppFunction";
       }
     });
     // setSettings({ ...settings, preview: changedTag });
-    setPage({ ...page, tags: newTags });
+    setPage({ ...page, tags });
   };
 
   const updateStyle = (style, styleId) => {
@@ -92,7 +93,7 @@ import { SaveToJSON } from "../AppFunction";
         return st;
       }
     });
-    // Сборщик айдишек для рендера  
+    // Сборщик айдишек для рендера
     const getAllParents = (tagsForRender = []) => {
       let tFR = [];
       tagsForRender.forEach((tag) => {
@@ -104,7 +105,12 @@ import { SaveToJSON } from "../AppFunction";
       return Array.from(new Set(tFR));
     };
     // console.log("tagsForRender :>> ", fnc(tagsForRender));
-    setSettings({ ...settings, tagsForRender:getAllParents(page.tags.filter((t) => t.styleId === styleId)) });   
+    setSettings({
+      ...settings,
+      tagsForRender: getAllParents(
+        page.tags.filter((t) => t.styleId === styleId)
+      ),
+    });
     setPage({ ...page, styles });
   };
 
@@ -115,12 +121,20 @@ import { SaveToJSON } from "../AppFunction";
         addTag={addTag}
         removeTag={removeTag}
         savePage={() => SaveToJSON(page)}
-        selected={settings && settings.preview}
+        selectedId={settings && settings.selectedId}
       />
       <Tags
-        {...{ ...settings, setSettings, tags, page,changeTag, newStyle, updateStyle }}     
+        {...{
+          ...settings,
+          setSettings,
+          tags,
+          page,
+          changeTag,
+          addStyle,
+          updateStyle,
+        }}
       />
     </div>
   );
 }
-export default log(Page)
+export default log(Page);

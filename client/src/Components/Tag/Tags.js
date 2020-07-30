@@ -11,7 +11,7 @@ function Tags(props) {
           key={key}
           onClick={(e) => {
             e.stopPropagation();
-            console.log("tag.id", tag.id);
+            // console.log("tag.id", tag.id);
             props.setSettings({
               selectedId: tag.id,
               tagsForRender: [...getParentBranch(props.page.tags, tag), tag.id],
@@ -30,7 +30,7 @@ function Tags(props) {
         key={key}
         onClick={(e) => {
           e.stopPropagation();
-          console.log("tag.id", tag.id);
+          // console.log("tag.id", tag.id);
           props.setSettings({
             selectedId: tag.id,
             tagsForRender: [...getParentBranch(props.page.tags, tag), tag.id],
@@ -40,7 +40,6 @@ function Tags(props) {
         <Element {...{ ...props, tag }} />
       </div>
     );
-    // return <Tag {...{ ...props, tag, key }} />;
   });
 }
 export default log(Tags);

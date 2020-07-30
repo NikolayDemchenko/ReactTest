@@ -6,11 +6,12 @@ import NavTags from "./NavTags";
 import CRUDTag from "./CRUDTag/CRUDTag";
 
 function NavTag(props) {
-  const { tag, addTag, removeTag, selected, setSelected} = props;
+  const { tag, addTag, removeTag, selectedId} = props;
 
   const { type, childrens, id, index } = tag;
   const [showChilds, setshowChilds] = useState(false);
-  // console.log("id :>> ", id);
+  console.log("id :>> ", id);
+  console.log("selectedId :>> ", selectedId);
 
   const _icon = <Icon size={"100%"} icon={ic_keyboard_arrow_right} />;
 
@@ -37,7 +38,7 @@ function NavTag(props) {
   let background = "rgba(30,40,57,.8)";
   let showButtons = false;
   // let showButtons = true;
-  if (selected && id === selected.id) {
+  if (selectedId && id === selectedId) {
     background = "rgba(30,60,97,1)";
     showButtons = true;
   }

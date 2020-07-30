@@ -38,10 +38,10 @@ function Element(props) {
   );
 }
 function areEqual(prevProps, nextProps) {
-  // console.log("prevProps.parentBranch", prevProps.parentBranch);
-  // console.log("nextProps.tagsForRender", nextProps.tagsForRender);
+  console.log("prevProps.tagsForRender", prevProps.tagsForRender);
+  console.log("nextProps.tagsForRender", nextProps.tagsForRender);
 
-  return prevProps.tagsForRender
+  return nextProps.tagsForRender
     ? nextProps.tagsForRender.find((id) => id === nextProps.tag.id)
       ? false
       : true

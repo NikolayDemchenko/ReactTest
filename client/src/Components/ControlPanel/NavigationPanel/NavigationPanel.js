@@ -3,6 +3,7 @@ import NavTags from "./NavTags";
 import jss from "jss";
 import preset from "jss-preset-default";
 function NavigationPanel(props) {
+  // console.log('props', props)
   const style = {
     // flexWrap: "wrap",
     minWidth: "280px",
@@ -28,7 +29,7 @@ function NavigationPanel(props) {
     .attach();
 
   const [showPanel, setShowPanel] = useState(false);
-  // const [selected, setSelected] = useState();
+ 
   return (
     <div
       style={{
