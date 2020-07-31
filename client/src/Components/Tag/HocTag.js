@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Portal } from "react-portal";
 import AttributesPanel from "../ControlPanel/AttributesPanel/AttributesPanel";
+import jss from "jss";
+import preset from "jss-preset-default";
 import log from "../../Log";
 export const getParentBranch = (tags, tag, idList = []) => {
   const parentId = tag.parentId;
@@ -18,19 +20,22 @@ const HocTag = (props) => {
   const { children, tag } = props;
   const [preview, setPreview] = useState(tag);
   const [func, setFunc] = useState({ styleFilter: (p) => p });
-  const [panelTag, setPanelTag] = useState(preview);
+  const [panelTag, setPanelTag] = useState(tag);
 
-  // setSettings({
-  //   tagsForRender: [...getParentBranch(page.tags, tag), tag.id],
-  //   preview,
-  //   setPreview,
-  //   setFunc
-  // });
+  jss.setup(preset());
+
+  const { classes } = jss
+    .createStyleSheet({
+      [tag.styleId]: tag.style,
+    })
+    .attach();
 
   useEffect(() => {
-    console.log("!!!!!tag.styleId", tag.styleId);
+    // console.log("props", props);
     setPreview(tag);
-    return () => {};
+    return () => {
+      // console.log("props", props);
+    };
   }, [tag]);
 
   // console.log('tag.styleId \n', tag.styleId)
@@ -52,6 +57,7 @@ const HocTag = (props) => {
         props: {
           ...props,
           tag: func.styleFilter(preview),
+          classes,
         },
       }}
     </div>

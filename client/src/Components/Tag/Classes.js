@@ -96,7 +96,7 @@ const page = {
 };
 page.tags.push(pageBaseDiv);
 
-for (let i = 0; i < 20; i++) {
+for (let i = 0; i < 50; i++) {
   pageInnerDiv.index = i;
   pageInnerDiv.id = uuidv4();
   pageInnerDiv.parentId = pageBaseDiv.id;

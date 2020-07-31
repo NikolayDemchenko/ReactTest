@@ -7,6 +7,9 @@ import { page as _page } from "./Tag/Classes";
 import { createStyle } from "../AppFunction";
 import NavigationPanel from "./ControlPanel/NavigationPanel/NavigationPanel";
 import { SaveToJSON } from "../AppFunction";
+import jss from "jss";
+import preset from "jss-preset-default";
+
 // import FileSaver from "file-saver";
 function Page(props) {
   // console.log("Page-App");
@@ -27,12 +30,21 @@ function Page(props) {
   };
 
   const [settings, setSettings] = useState();
-  console.log("settings :>> ", settings);
-  
+
+  // console.log("settings :>> ", settings);
+
   const [page, setPage] = useState(JSON.parse(JSON.stringify(_page)));
   // console.log("page.tags :>> ", page.tags);
 
   const tags = getTagStructure([...page.tags], null, [...page.styles]);
+
+  jss.setup(preset());
+  const myStyles = {};
+  page.styles.forEach(({ id, style }) => {
+    myStyles[id] = style;
+  });  
+  const { classes } = jss.createStyleSheet({ ...myStyles }).attach();
+
 
   const addTag = (type, parent) => {
     const newTag = {
@@ -132,6 +144,7 @@ function Page(props) {
           changeTag,
           addStyle,
           updateStyle,
+          classes,
         }}
       />
     </div>
