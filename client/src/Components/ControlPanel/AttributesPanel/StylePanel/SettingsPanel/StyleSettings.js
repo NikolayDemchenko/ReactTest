@@ -20,7 +20,7 @@ function StylePanel(props) {
     clon,
     setClon,
     setClonStyle,
-    // setTag,
+    setTag,
   } = props;
 
   const btnStyle = {
@@ -108,9 +108,7 @@ function StylePanel(props) {
           onClick={(e) => {
             e.stopPropagation();
             console.log("Копировать стиль!");
-            addStyle(style, "Новый стиль", tag);
-            // console.log('tag', tag)
-            // setTag({...tag,style})
+            setTag(addStyle(style, "Новый стиль", tag));       
           }}
         >
           <Icon size={"100%"} icon={copy} />

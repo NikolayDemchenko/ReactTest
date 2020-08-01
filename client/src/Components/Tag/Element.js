@@ -6,7 +6,7 @@ import log from "../../Log";
 function Element(props) {
   const { tag, tagsForRender, classes } = props;
 
-  console.log('classes', classes[tag.styleId])
+  // console.log('classes', classes[tag.styleId])
   //   jss.setup(preset());
 
   //   const myStyles={};

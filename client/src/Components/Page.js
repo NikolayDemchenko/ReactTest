@@ -78,8 +78,9 @@ function Page(props) {
         return tag;
       }
     });
-    setSettings({ ...settings, preview: changedTag });
-    setPage({ ...page, tags: newTags, styles: [...page.styles, newStyle] });
+    console.log('page', page)
+    setPage({tags: newTags, styles: [...page.styles, newStyle] });
+    return changedTag 
   };
 
   const changeTag = (tag, propName, propValue) => {
@@ -113,10 +114,9 @@ function Page(props) {
         tFR.push(tag.id);
         tFR = [...getParentBranch(page.tags, tag), ...tFR];
       });
-
       return Array.from(new Set(tFR));
     };
-    // console.log("tagsForRender :>> ", fnc(tagsForRender));
+    
     setSettings({
       ...settings,
       tagsForRender: getAllParents(

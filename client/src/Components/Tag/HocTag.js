@@ -17,26 +17,28 @@ export const getParentBranch = (tags, tag, idList = []) => {
 const HocTag = (props) => {
   // console.log("props", props);
 
-  const { children, tag } = props;
+  const { children, tag, classes: allClasses } = props;
   const [preview, setPreview] = useState(tag);
   const [func, setFunc] = useState({ styleFilter: (p) => p });
-  const [panelTag, setPanelTag] = useState(tag);
+  const [panelTag, setPanelTag] = useState(preview);
+
+  // console.log("func.styleFilter(preview)", func.styleFilter(preview));
 
   jss.setup(preset());
 
   const { classes } = jss
     .createStyleSheet({
-      [tag.styleId]: tag.style,
+      [tag.styleId]: func.styleFilter(preview).style,
     })
     .attach();
 
-  useEffect(() => {
-    // console.log("props", props);
-    setPreview(tag);
-    return () => {
-      // console.log("props", props);
-    };
-  }, [tag]);
+  // useEffect(() => {
+  //   // console.log("props", props);
+  //   setPreview(tag);
+  //   return () => {
+  //     // console.log("props", props);
+  //   };
+  // }, [tag]);
 
   // console.log('tag.styleId \n', tag.styleId)
   // console.log('preview.styleId \n', preview.styleId)
@@ -54,26 +56,10 @@ const HocTag = (props) => {
       </Portal>
       {{
         ...children,
-        props: {
-          ...props,
-          tag: func.styleFilter(preview),
-          classes,
-        },
+        props: { ...props, classes: { ...allClasses, ...classes } },
       }}
     </div>
   );
 };
 
-function areEqual(prevProps, nextProps) {
-  // console.log("prevProps.parentBranch", prevProps.parentBranch);
-  // console.log("nextProps.parentBranch", nextProps.parentBranch);
-
-  return prevProps.tagsForRender
-    ? nextProps.tagsForRender.find((id) => id === nextProps.tag.id)
-      ? false
-      : true
-    : false;
-}
 export default log(HocTag);
-// export default React.memo(HocTag, areEqual);
-// export default React.memo(log(HocTag), areEqual);
