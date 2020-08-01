@@ -85,6 +85,7 @@ function Page(props) {
 
   const changeTag = (tag, propName, propValue) => {
     const changedTag = { ...tag, [propName]: propValue };
+    console.log('changedTag :>> ', changedTag);
     const tags = page.tags.map((tag) => {
       if (changedTag.id === tag.id) {
         return changedTag;
@@ -92,8 +93,8 @@ function Page(props) {
         return tag;
       }
     });
-    // setSettings({ ...settings, preview: changedTag });
     setPage({ ...page, tags });
+    return changedTag 
   };
 
   const updateStyle = (style, styleId) => {

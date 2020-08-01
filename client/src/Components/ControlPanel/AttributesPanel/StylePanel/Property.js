@@ -18,8 +18,8 @@ function Property(props) {
     draggedProp,
     setDraggedProp,
   } = props;
+  // console.log('props :>> ', props);
   const [Y, setY] = useState();
-
   // const [copy, setcopy] = useState(false);
 
   const [target, setTarget] = useState();
@@ -42,9 +42,8 @@ function Property(props) {
       //   setcopy(!copy);
       //   console.log("onKeyDown", e.key);
       // }}
-      onDrop={(e) => {
-        e.stopPropagation();
-        // onDrop(property, draggedProp, target);
+      onDrop={(e) => { 
+        e.stopPropagation();      
         onDrop({ [name]: value }, draggedProp, target);
       }}
       style={{
@@ -94,13 +93,7 @@ function Property(props) {
           width: "80px",
         }}
       >
-        <PopupInput
-          height="1em"
-          // value={propValue}
-          value={value}
-          setValue={setValue}
-          setPreview={setPreview}
-        />
+        <PopupInput {...{ value, setValue, setPreview }} height="1em" />
       </div>
       <div
         title={"Удалить свойство"}
@@ -117,8 +110,10 @@ function Property(props) {
 }
 function areEqual(prevProps, nextProps) {
 
+
   return prevProps.value === nextProps.value;
 }
 
-export default React.memo(Property, areEqual);
+export default React.memo(Property);
+// export default React.memo(log(Property));
 // export default React.memo(log(Property), areEqual);

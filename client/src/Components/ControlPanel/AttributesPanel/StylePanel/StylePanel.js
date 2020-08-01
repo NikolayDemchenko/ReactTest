@@ -7,8 +7,9 @@ function StylePanel(props) {
   const { tag, setTag, setPreview, changeTag } = props;
   const { style } = tag;
 
-  const [clon, setClon] = useState();
-  const [clonStyleId, setClonStyle] = useState(tag.styleId);
+  // const [clon, setClon] = useState(false);
+  // console.log('clon :>> ', clon);
+  // const [clonStyleId, setClonStyle] = useState(tag.styleId);
   const [selected, setSelected] = useState("All style");
   const [draggedProp, setDragged] = useState();
 
@@ -17,20 +18,22 @@ function StylePanel(props) {
     setDragged(item);
   };
 
-  useEffect(() => {
-    if (clon) {
-      changeTag(tag, "styleId", clonStyleId);
-    }
-    return () => {
-      onAllStyle();
-    };
-  }, [tag.id]);
+  // useEffect(() => {
+  //   return () => {
+  //     console.log('clon :>> ', clon);
+  //     if (clon) {
+  //       changeTag(tag, "styleId", clonStyleId);
+  //     }
+  //     onAllStyle();
+  //   };
+  // }, [tag.id]);
 
   const onAllStyle = () => {
     setSelected("All style");
     props.setFunc({ styleFilter: (p) => p });
   };
   const setPreviewStyle = (style) => {
+    // console.log("style :>> ", style);
     setPreview({ ...tag, style });
   };
 
@@ -47,21 +50,23 @@ function StylePanel(props) {
           onAllStyle,
           selected,
           style,
-          clon,
-          setClon,
-          setClonStyle,
+          // clon,
+          // setClon,
+          // setClonStyle,
         }}
       />
       <PropertiesPanel
-        {...props}
-        name={"Base style"}
-        style={style}
-        setStyle={setStyle}
-        selected={selected}
-        setSelected={setSelected}
-        setPreview={setPreviewStyle}
-        draggedProp={draggedProp}
-        setDraggedProp={setDraggedProp}
+        {...{
+          ...props,
+          name: "Base style",
+          selected,
+          style,
+          setStyle,
+          setSelected,
+          draggedProp,
+          setDraggedProp,
+          setPreview: setPreviewStyle,
+        }}
       />
     </div>
   );

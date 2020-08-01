@@ -10,13 +10,11 @@ function Tags(props) {
         key={key}
         onClick={(e) => {
           e.stopPropagation();
-          props.setSettings({
+          props.setSettings((state) => ({
+            ...state,
             selectedId: tag.id,
-            tagsForRender: [            
-              ...getParentBranch(props.page.tags, tag),
-              tag.id,
-            ],
-          });
+            tagsForRender: [...getParentBranch(props.page.tags, tag), tag.id],
+          }));
         }}
       >
         <Element {...{ ...props, tag }} />

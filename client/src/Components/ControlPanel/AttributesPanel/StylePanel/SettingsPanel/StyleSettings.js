@@ -17,12 +17,11 @@ function StylePanel(props) {
     style,
     selected,
     tag,
-    clon,
-    setClon,
-    setClonStyle,
+    assignableStyle,
+    setSettings,
     setTag,
   } = props;
-
+  // console.log("props :>> ", props);
   const btnStyle = {
     cursor: "pointer",
     width: "16px",
@@ -78,11 +77,23 @@ function StylePanel(props) {
         <div
           title={"Назначить стиль"}
           className={classes.style}
-          style={clon ? btnActivStyle : btnStyle}
+          style={assignableStyle ? btnActivStyle : btnStyle}
           onClick={(e) => {
             e.stopPropagation();
-            setClon(!clon);
-            setClonStyle(tag.styleId);
+            setSettings((state) => {
+              if (!state.assignableStyle) {
+                return {
+                  ...state,
+                  tagsForRender: null,
+                  assignableStyle: tag.styleId,
+                };
+              }else{
+                return {
+                  selectedId:state.selectedId,
+                  tagsForRender: null          
+                };
+              }
+            });
             console.log("Назначить стиль!");
           }}
         >
@@ -96,7 +107,7 @@ function StylePanel(props) {
             e.stopPropagation();
             console.log("Сохранить изменения стиля!");
             updateStyle(style, tag.styleId);
-            setClonStyle(tag.styleId);
+            // setClonStyle(tag.styleId);
           }}
         >
           <Icon size={"120%"} icon={ic_update} />
@@ -108,7 +119,7 @@ function StylePanel(props) {
           onClick={(e) => {
             e.stopPropagation();
             console.log("Копировать стиль!");
-            setTag(addStyle(style, "Новый стиль", tag));       
+            setTag(addStyle(style, "Новый стиль", tag));
           }}
         >
           <Icon size={"100%"} icon={copy} />

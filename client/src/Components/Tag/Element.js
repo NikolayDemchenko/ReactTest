@@ -6,25 +6,6 @@ import log from "../../Log";
 function Element(props) {
   const { tag, tagsForRender, classes } = props;
 
-  // console.log('classes', classes[tag.styleId])
-  //   jss.setup(preset());
-
-  //   const myStyles={};
-  //   props.page.styles.forEach(({id,style}) => {
-  //     // console.log('element :>> ', element);
-  //     myStyles[id]=style
-  //   });
-  // console.log('myStyles :>> ', myStyles);
-  //   const {classes} = jss
-  //     .createStyleSheet({
-  //       ...myStyles
-  //       // [tag.styleId]: tag.style,
-  //       // // style2: tag.style,
-  //     })
-  //     .attach();
-
-  // console.log('classes :>> ', classes);
-
   const onClick = (e) => {
     tag.onClick && tag.onClick(e);
   };

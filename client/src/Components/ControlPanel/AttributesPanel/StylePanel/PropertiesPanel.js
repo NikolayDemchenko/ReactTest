@@ -2,24 +2,25 @@ import React from "react";
 import Icon from "react-icons-kit";
 import { plus } from "react-icons-kit/icomoon/plus";
 import { cross } from "react-icons-kit/icomoon/cross";
-
+import log from "../../../../Log";
 import { ic_note_add } from "react-icons-kit/md/ic_note_add";
 import { ic_library_add } from "react-icons-kit/md/ic_library_add";
 import PopupInput from "../Inputs/PopupInput/PopupInput";
 import Properties from "./Properties";
 
-export default function PropertiesPanel(props) {
+function PropertiesPanel(props) {
   const {
     name,
     parentName,
     setName,
     style,
-    setStyle,   
-    setFunc,    
+    setStyle,
+    setFunc,
     deletePanel,
     selected,
-    setSelected,
+    setSelected,   
   } = props;
+
   // console.log("props :>> ", props);
   // console.log("%cPropertiesPanel-StylePanel", "color: green");
   // console.log("props :>> ", props);
@@ -41,7 +42,7 @@ export default function PropertiesPanel(props) {
     }
     setStyle({ ..._style, "@media": {}, ...style });
   };
-  
+
   const fullName = name + parentName;
   // console.log('fullName', fullName)
   let color;
@@ -63,18 +64,23 @@ export default function PropertiesPanel(props) {
   borderTop = !fullName.indexOf("@media") ? "none" : borderTop;
 
   // Удаляет у объекта все свойства являющиеся объектами
-  const clearObject = (obj) => {  
+  const clearObject = (obj) => {
     for (let key in obj) {
       if (typeof obj[key] === "object") {
         delete obj[key];
       }
-    }  
+    }
     return { ...obj };
   };
 
-
   const styleFilter = (preview) => {
-    return { ...preview, style: { ...clearObject({...preview.style}), ...clearObject({...preview.style[name]}) } };
+    return {
+      ...preview,
+      style: {
+        ...clearObject({ ...preview.style }),
+        ...clearObject({ ...preview.style[name] }),
+      },
+    };
   };
 
   return (
@@ -82,7 +88,7 @@ export default function PropertiesPanel(props) {
       // Включение частичного превью
       onClick={(e) => {
         e.stopPropagation();
-        setFunc({styleFilter});    
+        setFunc({ styleFilter });
         setSelected(fullName);
       }}
       style={{ borderTop, color }}
@@ -168,10 +174,9 @@ export default function PropertiesPanel(props) {
           )}
         </div>
       </div>
-      <Properties
-        {...props}
-        parentName={name}  
-      />
+      <Properties {...props} parentName={name} />
     </div>
   );
 }
+export default PropertiesPanel
+// export default log(PropertiesPanel)

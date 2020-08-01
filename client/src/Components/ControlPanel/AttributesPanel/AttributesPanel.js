@@ -100,5 +100,15 @@ function AttributesPanel(props) {
   );
 }
 
+
+
+function areEqual(prevProps, nextProps) {
+  console.log("prevProps", prevProps.assignableStyle);
+  console.log("nextProps", nextProps.assignableStyle);
+
+  return prevProps.panelTag===nextProps.panelTag&&prevProps.assignableStyle===nextProps.assignableStyle;
+}
+// export default Element;
+export default React.memo(log(AttributesPanel), areEqual);
 // export default log(AttributesPanel);
-export default React.memo(log(AttributesPanel));
+// export default React.memo(log(AttributesPanel));

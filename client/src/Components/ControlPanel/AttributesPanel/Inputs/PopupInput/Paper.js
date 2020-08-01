@@ -4,7 +4,7 @@ import PropertyInputSwitch from "../Switch/PropertyInputSwitch";
 export default function Paper(props) {
   const { setValue } = props;
   const [value, setThisValue] = useState(props.value);
- const setPreview=props.setPreview?props.setPreview:setValue
+ const setPreview = props.setPreview ? props.setPreview : setValue;
   // console.log("Paper value", value);
   // const [width] = useState("100%");
   useEffect(() => {
@@ -15,18 +15,18 @@ export default function Paper(props) {
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
       console.log("handleKeyPress");
-      console.log('value :>> ', value);
+      console.log("value :>> ", value);
       setPreview(value);
       setValue(value);
     }
   };
 
   return (
-    <div style={{ color: "#eee", width:"100%" }}>
+    <div style={{ color: "#eee", width: "100%" }}>
       <input
         style={{
           background: "transparent",
-          width:"100%" ,
+          width: "100%",
           minWidth: "80px",
           paddingLeft: "4px",
           outline: "none",
@@ -52,7 +52,9 @@ export default function Paper(props) {
           // width: "100px",
         }}
       >
-        <PropertyInputSwitch {...props} value={value} setValue={setValue} />
+        <PropertyInputSwitch
+          {...{ ...props, value, setValue }}  
+        />
       </div>
     </div>
   );

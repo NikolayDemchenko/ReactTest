@@ -2,17 +2,18 @@ import React from "react";
 import Property from "./Property";
 import PropertiesPanel from "./PropertiesPanel";
 import RenameObjectProperty from "./Function/RenameObjectProperty";
+import log from "../../../../Log";
 import {
   addNewPropUp,
   addNewPropDown,
   removeThisLevelPropByName as removeProp,
 } from "./Function/ObjectManager";
-export default function Properties(props) {
+ function  Properties(props) {
   // console.log(
   //   "%cProperties-PropertiesPanel",
   //   'color: green');
   // console.log('props :>> ', props);
-  const {draggedProp, setDraggedProp, style, setStyle, setPreview } = props;
+  const { draggedProp, setDraggedProp, style, setStyle, setPreview } = props;
 
   const properties = [];
   const propPanels = [];
@@ -24,17 +25,16 @@ export default function Properties(props) {
     }
   }
   const setName = (item, value, chain) => {
-    setStyle(
-      RenameObjectProperty(style, Object.keys(item)[0], value),
-      `\nsetName-Properties ${chain}`
-    );
-    setPreview(
-      RenameObjectProperty(style, Object.keys(item)[0], value),
-      `\nsetName-Properties ${chain}`
-    );
+    const prop = RenameObjectProperty(style, Object.keys(item)[0], value);
+
+    setStyle(prop, `\nsetName-Properties ${chain}`);
+    setPreview(prop, `\nsetName-Properties ${chain}`);
   };
-  const setValue = (item, value, chain) => {   
-    setStyle({ ...style,[[Object.keys(item)[0]]]:value }, `\nsetValue-Properties ${chain}`);
+  const setValue = (item, value, chain) => {
+    setStyle(
+      { ...style, [[Object.keys(item)[0]]]: value },
+      `\nsetValue-Properties ${chain}`
+    );
   };
 
   const remove = (item, chain) => {
@@ -45,7 +45,9 @@ export default function Properties(props) {
     setPreview(style);
   };
   const panels = propPanels.map((panel, index) => {
-    const setPreviewPanel = (value) => {   
+    const setPreviewPanel = (value) => {
+      console.log("value :>> ", value);
+
       setPreview({ ...style, [Object.keys(panel)[0]]: value });
     };
     return (
@@ -64,13 +66,12 @@ export default function Properties(props) {
   });
   // console.log("properties", properties);
   const thisProps = properties.map((property, index) => {
-
-    const setPreviewValue = (value) => {        
+    const setPreviewValue = (value) => {
       setPreview({ ...style, [Object.keys(property)[0]]: value });
     };
 
     const onDrop = (targetProp, draggedProp, target, chain) => {
-      console.log("draggedProp", draggedProp);
+      // console.log("draggedProp", draggedProp);
       const addNewProp = (foo) =>
         foo(
           removeProp(style, Object.keys(draggedProp)[0]),
@@ -83,10 +84,8 @@ export default function Properties(props) {
         setStyle(addNewProp(addNewPropDown), `\nonDrop-Properties ${chain}`);
       }
     };
-
     return (
       <Property
-        {...{draggedProp, setDraggedProp}}
         key={index}
         tabIndex={index}
         // property={property}
@@ -97,6 +96,7 @@ export default function Properties(props) {
         setValue={(value, chain) => setValue(property, value, chain)}
         deleteProperty={(chain) => remove(property, chain)}
         onDrop={onDrop}
+        {...{ draggedProp, setDraggedProp }}
       />
     );
   });
@@ -108,3 +108,5 @@ export default function Properties(props) {
     </div>
   );
 }
+export default Properties
+// export default log(Properties)
