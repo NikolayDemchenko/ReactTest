@@ -3,7 +3,6 @@ import Icon from "react-icons-kit";
 import jss from "jss";
 import preset from "jss-preset-default";
 import { copy } from "react-icons-kit/icomoon/copy";
-import { floppyDisk } from "react-icons-kit/icomoon/floppyDisk";
 import { exportIcon } from "react-icons-kit/entypo/exportIcon";
 import { SaveToJSON } from "../../../../../AppFunction";
 import { paintBrush } from "react-icons-kit/fa/paintBrush";
@@ -21,7 +20,7 @@ function StylePanel(props) {
     setSettings,
     setTag,
   } = props;
-  // console.log("props :>> ", props);
+
   const btnStyle = {
     cursor: "pointer",
     width: "16px",
@@ -33,8 +32,7 @@ function StylePanel(props) {
     transform: "perspective(200px) scaleZ(-20) translateZ(-2px)",
   };
   const btnActivStyle = {
-    color: "#ffa",
-    textShadow: "red 0 0 2px",
+    color: "#ffa"  
   };
   jss.setup(preset());
   const { classes } = jss
@@ -77,7 +75,7 @@ function StylePanel(props) {
         <div
           title={"Назначить стиль"}
           className={classes.style}
-          style={assignableStyle ? btnActivStyle : btnStyle}
+          style={assignableStyle&&btnActivStyle}
           onClick={(e) => {
             e.stopPropagation();
             setSettings((state) => {

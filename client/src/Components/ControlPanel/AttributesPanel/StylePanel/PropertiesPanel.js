@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import Icon from "react-icons-kit";
-import { plus } from "react-icons-kit/icomoon/plus";
+import jss from "jss";
+import preset from "jss-preset-default";
+import { ic_add_to_queue } from "react-icons-kit/md/ic_add_to_queue";
 import { cross } from "react-icons-kit/icomoon/cross";
 import log from "../../../../Log";
+import { ic_credit_card } from "react-icons-kit/md/ic_credit_card";
 import { ic_note_add } from "react-icons-kit/md/ic_note_add";
 import { ic_library_add } from "react-icons-kit/md/ic_library_add";
 import PopupInput from "../Inputs/PopupInput/PopupInput";
@@ -18,12 +21,14 @@ function PropertiesPanel(props) {
     setFunc,
     deletePanel,
     selected,
-    setSelected,   
+    setSelected,
   } = props;
 
-  // console.log("props :>> ", props);
   // console.log("%cPropertiesPanel-StylePanel", "color: green");
   // console.log("props :>> ", props);
+
+  const [edit, setEdit] = useState();
+
   const addProperty = (e) => {
     e.stopPropagation();
     setStyle({ property: "value", ...style });
@@ -44,18 +49,18 @@ function PropertiesPanel(props) {
   };
 
   const fullName = name + parentName;
-  // console.log('fullName', fullName)
-  let color;
-  switch (selected) {
-    case fullName:
-      color = "rgba(140, 200, 255, 0.8)";
-      break;
-    case "All style":
-      color = "rgba(140, 200, 255, 0.7)";
-      break;
-    default:
-      color = "rgba(140, 200, 255, 0.4)";
-  }
+
+  const setColor = (value, name) => {
+    switch (value) {
+      case name:
+        return "rgba(140, 200, 255, 0.8)";
+      case "All style":
+        return "rgba(140, 200, 255, 0.7)";
+      default:
+        return "rgba(140, 200, 255, 0.4)";
+    }
+  };
+
   let borderTop =
     selected !== fullName
       ? "4px solid rgba(140, 200, 255, 0.1)"
@@ -83,6 +88,31 @@ function PropertiesPanel(props) {
     };
   };
 
+  const btnStyle = {
+    cursor: "pointer",
+    width: "22px",
+    margin: "0px 2px ",
+    // border: "1px solid #fff",
+  };
+
+  const btnHoverStyle = {
+    // outline:"#cef solid 1px"
+    transform: "perspective(200px) scaleZ(-20) translateZ(-2px)",
+  };
+  const btnActivStyle = {
+    color: "#ffa",
+  };
+  jss.setup(preset());
+  const { classes } = jss
+    .createStyleSheet({
+      style: {
+        ...btnStyle,
+        "&:hover": { ...btnHoverStyle },
+        "&:active": { ...btnActivStyle },
+      },
+    })
+    .attach();
+
   return (
     <div
       // Включение частичного превью
@@ -91,7 +121,7 @@ function PropertiesPanel(props) {
         setFunc({ styleFilter });
         setSelected(fullName);
       }}
-      style={{ borderTop, color }}
+      style={{ borderTop, color: setColor(selected, fullName) }}
       onDragOver={(e) => {
         // console.log('div', div)
         e.preventDefault();
@@ -119,64 +149,74 @@ function PropertiesPanel(props) {
           }}
         >
           <div
+            title={"Редактировать"}
+            className={classes.style}
+            // style={btnStyle}
+            onClick={() => setEdit((edit) => !edit)}
+          >
+            <Icon size={"100%"} icon={ic_credit_card} />
+          </div>
+          <div
             title={"Добавить свойство"}
-            style={{
-              cursor: "pointer",
-              width: "16px",
-              margin: "0px 2px ",
-              // border: "1px solid #fff",
-            }}
+            className={classes.style}
+            // style={btnStyle}
             onClick={addProperty}
           >
-            <Icon size={"100%"} icon={plus} />
+            <Icon size={"100%"} icon={ic_add_to_queue} />
           </div>
-          {name === "Base style" ? (
+          {name === "Base style" && (
             <div
               title={"Добавить псевдокласс"}
-              style={{
-                cursor: "pointer",
-                width: "22px",
-                margin: "0 1px",
-              }}
+              className={classes.style}
+              // style={btnStyle}
               onClick={addPseudoClass}
             >
               <Icon size={"100%"} icon={ic_note_add} />
             </div>
-          ) : null}
+          )}
           {!name.indexOf("@media") ? null : (
             <div
               title={"Добавить @media"}
-              style={{
-                cursor: "pointer",
-                width: "22px",
-                margin: "0 1px",
-              }}
+              className={classes.style}
+              // style={btnStyle}
               onClick={addMedia}
             >
               <Icon size={"100%"} icon={ic_library_add} />
             </div>
           )}
-          {name === "Base style" ? null : (
+          {name !== "Base style" && (
             <div
               title={"Удалить панель"}
-              style={{
-                cursor: "pointer",
-                marginLeft: "10px",
-                width: "14px",
-              }}
+              className={classes.style}
+              // style={btnStyle}
               onClick={(e) => {
                 e.stopPropagation();
                 deletePanel();
               }}
             >
-              <Icon size={"100%"} icon={cross} />
+              <Icon size={"70%"} icon={cross} />
             </div>
           )}
         </div>
       </div>
+
+      {edit && (
+        <div
+          contentEditable
+          style={{
+            width: "100%",
+            padding: "5px 6px",
+            outline:"none"
+            // border: "1px solid #fff",
+          }}
+        >
+          {JSON.stringify(style)}
+        </div>
+
+      )}
       <Properties {...props} parentName={name} />
     </div>
   );
 }
-export default PropertiesPanel
+export default PropertiesPanel;
 // export default log(PropertiesPanel)

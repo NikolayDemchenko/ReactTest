@@ -10,6 +10,7 @@ export default function SelectPanel(props) {
           background: "transparent",
           // border: "1px solid #abc",
           color: "rgba(140, 200, 255, 0.8)",
+      
           overflow: "visible",
         },
       }}

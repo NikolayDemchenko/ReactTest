@@ -15,7 +15,7 @@ export default function PopupInput(props) {
       PaperProps={{
         style: {
           background: "rgba(43,50,66,.95)",
-          border: "1px solid #abc",
+          border: "1px solid #678",
           width,
           overflow: "visible",
         },

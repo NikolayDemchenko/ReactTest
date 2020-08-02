@@ -4,12 +4,10 @@ import StyleSettings from "./SettingsPanel/StyleSettings";
 function StylePanel(props) {
   // console.log("%cStylePanel-VerticalPanel-App", "color: green");
   // console.log("props :>> ", props);
+
   const { tag, setTag, setPreview, changeTag } = props;
   const { style } = tag;
 
-  // const [clon, setClon] = useState(false);
-  // console.log('clon :>> ', clon);
-  // const [clonStyleId, setClonStyle] = useState(tag.styleId);
   const [selected, setSelected] = useState("All style");
   const [draggedProp, setDragged] = useState();
 
@@ -18,27 +16,15 @@ function StylePanel(props) {
     setDragged(item);
   };
 
-  // useEffect(() => {
-  //   return () => {
-  //     console.log('clon :>> ', clon);
-  //     if (clon) {
-  //       changeTag(tag, "styleId", clonStyleId);
-  //     }
-  //     onAllStyle();
-  //   };
-  // }, [tag.id]);
-
   const onAllStyle = () => {
     setSelected("All style");
     props.setFunc({ styleFilter: (p) => p });
   };
   const setPreviewStyle = (style) => {
-    // console.log("style :>> ", style);
     setPreview({ ...tag, style });
   };
 
   const setStyle = (style, chain) => {
-    // console.log(`setStyle-StylePanel ${chain}`);
     setTag({ ...tag, style }, `\nsetStyle-StylePanel ${chain}`);
   };
 
@@ -49,10 +35,7 @@ function StylePanel(props) {
           ...props,
           onAllStyle,
           selected,
-          style,
-          // clon,
-          // setClon,
-          // setClonStyle,
+          style 
         }}
       />
       <PropertiesPanel
