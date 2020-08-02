@@ -18,9 +18,6 @@ function Page(props) {
     const newTags = JSON.parse(JSON.stringify(tags));
     return newTags.filter((tag) => {
       if (tag.parentId === parentId) {
-        tag.style = JSON.parse(
-          JSON.stringify(styles.find((style) => style.id === tag.styleId).style)
-        );
         tag.childrens = getTagStructure(newTags, tag.id, styles);
         return tag;
       } else {
@@ -85,7 +82,7 @@ function Page(props) {
 
   const changeTag = (tag, propName, propValue) => {
     const changedTag = { ...tag, [propName]: propValue };
-    console.log('changedTag :>> ', changedTag);
+    // console.log('changedTag :>> ', changedTag);
     const tags = page.tags.map((tag) => {
       if (changedTag.id === tag.id) {
         return changedTag;

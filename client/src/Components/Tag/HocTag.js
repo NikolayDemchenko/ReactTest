@@ -15,32 +15,35 @@ export const getParentBranch = (tags, tag, idList = []) => {
 };
 
 const HocTag = (props) => {
-  console.log("props", props);
+  // console.log("props", props);
+  const {
+    page: { styles },
+    assignableStyle,
+    changeTag,
+    children,
+    tag,
+    classes: allClasses,
+  } = props;
 
-  let {assignableStyle,changeTag, children, tag, classes: allClasses } = props;
+  // console.log("tag", tag);
 
-  
-  const [preview, _setPreview] = useState(tag);
+  const style = styles.find(({ id }) => id === tag.styleId).style;
+  const thisTag = { ...tag, style };
 
-
+  const [preview, _setPreview] = useState(thisTag);
 
   const [func, setFunc] = useState({ styleFilter: (p) => p });
   const [panelTag, _setPanelTag] = useState(preview);
 
-  
-
-  const setPreview = (preview) => {
-    // console.log("setPreview :>> ", preview.style);
-    _setPreview(preview);
+  const setPreview = ({ style }) => {
+    // console.log("setPreview :>> ", style);
+    _setPreview((tag) => ({ ...tag, style }));
   };
   const setPanelTag = (tag) => {
     // console.log("setPanelTag :>> ", tag.style);
-    _setPreview(tag);
+    setPreview(tag);
     _setPanelTag(tag);
   };
-  // console.log('panelTag.style :>> ', panelTag.style);
-  // console.log('preview.style :>> ', preview.style);
-  // console.log("func.styleFilter(preview)", func.styleFilter(preview));
 
   jss.setup(preset());
 
@@ -51,9 +54,10 @@ const HocTag = (props) => {
     .attach();
 
   useEffect(() => {
-    // console.log("props", props);
-    assignableStyle&&assignableStyle!==tag.styleId&&setPreview(changeTag(tag,"styleId",assignableStyle))
-    // setPreview(tag);
+    assignableStyle &&
+      assignableStyle !== tag.styleId &&
+      changeTag(tag, "styleId", assignableStyle);
+    setPreview(thisTag);
     return () => {
       // console.log("props", props);
     };
