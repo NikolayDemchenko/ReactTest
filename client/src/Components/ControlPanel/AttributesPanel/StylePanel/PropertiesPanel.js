@@ -4,13 +4,14 @@ import jss from "jss";
 import preset from "jss-preset-default";
 import { ic_add_to_queue } from "react-icons-kit/md/ic_add_to_queue";
 import { cross } from "react-icons-kit/icomoon/cross";
+import EditPanel from "./EditPanel";
 import log from "../../../../Log";
 import { ic_credit_card } from "react-icons-kit/md/ic_credit_card";
 import { ic_note_add } from "react-icons-kit/md/ic_note_add";
 import { ic_library_add } from "react-icons-kit/md/ic_library_add";
 import PopupInput from "../Inputs/PopupInput/PopupInput";
 import Properties from "./Properties";
-
+import { clearObject } from "./Function/ObjectManager";
 function PropertiesPanel(props) {
   const {
     name,
@@ -67,16 +68,6 @@ function PropertiesPanel(props) {
       : "4px solid rgba(140, 200, 255, 0.4)";
 
   borderTop = !fullName.indexOf("@media") ? "none" : borderTop;
-
-  // Удаляет у объекта все свойства являющиеся объектами
-  const clearObject = (obj) => {
-    for (let key in obj) {
-      if (typeof obj[key] === "object") {
-        delete obj[key];
-      }
-    }
-    return { ...obj };
-  };
 
   const styleFilter = (preview) => {
     return {
@@ -200,20 +191,7 @@ function PropertiesPanel(props) {
         </div>
       </div>
 
-      {edit && (
-        <div
-          contentEditable
-          style={{
-            width: "100%",
-            padding: "5px 6px",
-            outline:"none"
-            // border: "1px solid #fff",
-          }}
-        >
-          {JSON.stringify(style)}
-        </div>
-
-      )}
+      {edit && <EditPanel {...{ style }} />}
       <Properties {...props} parentName={name} />
     </div>
   );

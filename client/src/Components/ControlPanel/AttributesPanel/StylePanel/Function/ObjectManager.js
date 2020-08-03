@@ -48,21 +48,35 @@ export const addNewPropUp = (object, targetProp, draggedProp) => {
 
 
 export const removePropByName = (obj, name) => {
-  for (let key in obj) {
+  const thisObj={...obj}
+  for (let key in thisObj) {
     if (key === name) {
-      delete obj[key];
+      delete thisObj[key];
     }
-    if (typeof obj[key] === "object") {
-      removePropByName(obj[key], name);
+    if (typeof thisObj[key] === "object") {
+      removePropByName(thisObj[key], name);
     }
   }
-  return obj;
+  return thisObj;
 };
+
 export const removeThisLevelPropByName = (obj, name) => {
-  for (let key in obj) {
+  const thisObj={...obj}
+  for (let key in thisObj) {
     if (key === name) {
-      delete obj[key];
+      delete thisObj[key];
     }   
   }
-  return obj;
+  return thisObj;
+};
+
+  // Удаляет у объекта все свойства являющиеся объектами
+export const clearObject = (obj) => {
+  const thisObj={...obj}
+  for (let key in thisObj) {
+    if (typeof thisObj[key] === "object") {
+      delete thisObj[key];
+    }
+  }
+  return thisObj;
 };

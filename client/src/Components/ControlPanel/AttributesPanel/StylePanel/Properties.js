@@ -87,8 +87,7 @@ import {
     return (
       <Property
         key={index}
-        tabIndex={index}
-        // property={property}
+        // tabIndex={index}
         name={Object.keys(property)[0]}
         value={Object.values(property)[0]}
         setPreview={setPreviewValue}
