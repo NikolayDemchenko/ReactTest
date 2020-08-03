@@ -11,7 +11,7 @@ import { ic_note_add } from "react-icons-kit/md/ic_note_add";
 import { ic_library_add } from "react-icons-kit/md/ic_library_add";
 import PopupInput from "../Inputs/PopupInput/PopupInput";
 import Properties from "./Properties";
-import { clearObject } from "./Function/ObjectManager";
+import { deleteObjectProps } from "./Function/ObjectManager";
 function PropertiesPanel(props) {
   const {
     name,
@@ -73,8 +73,8 @@ function PropertiesPanel(props) {
     return {
       ...preview,
       style: {
-        ...clearObject({ ...preview.style }),
-        ...clearObject({ ...preview.style[name] }),
+        ...deleteObjectProps({ ...preview.style }),
+        ...deleteObjectProps({ ...preview.style[name] }),
       },
     };
   };
@@ -191,7 +191,7 @@ function PropertiesPanel(props) {
         </div>
       </div>
 
-      {edit && <EditPanel {...{ style }} />}
+      {edit && <EditPanel {...{ style,setStyle }} />}
       <Properties {...props} parentName={name} />
     </div>
   );
