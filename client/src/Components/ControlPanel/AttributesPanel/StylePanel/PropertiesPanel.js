@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Icon from "react-icons-kit";
-import jss from "jss";
-import preset from "jss-preset-default";
+import { buttonStyle } from "./BtnStyle";
 import { ic_add_to_queue } from "react-icons-kit/md/ic_add_to_queue";
 import { cross } from "react-icons-kit/icomoon/cross";
 import EditPanel from "./EditPanel";
@@ -79,31 +78,6 @@ function PropertiesPanel(props) {
     };
   };
 
-  const btnStyle = {
-    cursor: "pointer",
-    width: "22px",
-    margin: "0px 2px ",
-    // border: "1px solid #fff",
-  };
-
-  const btnHoverStyle = {
-    // outline:"#cef solid 1px"
-    transform: "perspective(200px) scaleZ(-20) translateZ(-2px)",
-  };
-  const btnActivStyle = {
-    color: "#ffa",
-  };
-  jss.setup(preset());
-  const { classes } = jss
-    .createStyleSheet({
-      style: {
-        ...btnStyle,
-        "&:hover": { ...btnHoverStyle },
-        "&:active": { ...btnActivStyle },
-      },
-    })
-    .attach();
-
   return (
     <div
       // Включение частичного превью
@@ -141,16 +115,14 @@ function PropertiesPanel(props) {
         >
           <div
             title={"Редактировать"}
-            className={classes.style}
-            // style={btnStyle}
+            className={buttonStyle}        
             onClick={() => setEdit((edit) => !edit)}
           >
             <Icon size={"100%"} icon={ic_credit_card} />
           </div>
           <div
             title={"Добавить свойство"}
-            className={classes.style}
-            // style={btnStyle}
+            className={buttonStyle}      
             onClick={addProperty}
           >
             <Icon size={"100%"} icon={ic_add_to_queue} />
@@ -158,8 +130,7 @@ function PropertiesPanel(props) {
           {name === "Base style" && (
             <div
               title={"Добавить псевдокласс"}
-              className={classes.style}
-              // style={btnStyle}
+              className={buttonStyle}             
               onClick={addPseudoClass}
             >
               <Icon size={"100%"} icon={ic_note_add} />
@@ -168,8 +139,7 @@ function PropertiesPanel(props) {
           {!name.indexOf("@media") ? null : (
             <div
               title={"Добавить @media"}
-              className={classes.style}
-              // style={btnStyle}
+              className={buttonStyle}           
               onClick={addMedia}
             >
               <Icon size={"100%"} icon={ic_library_add} />
@@ -178,8 +148,7 @@ function PropertiesPanel(props) {
           {name !== "Base style" && (
             <div
               title={"Удалить панель"}
-              className={classes.style}
-              // style={btnStyle}
+              className={buttonStyle}            
               onClick={(e) => {
                 e.stopPropagation();
                 deletePanel();

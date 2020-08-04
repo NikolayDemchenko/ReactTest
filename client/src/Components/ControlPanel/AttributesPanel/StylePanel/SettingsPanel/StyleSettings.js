@@ -1,7 +1,6 @@
 import React from "react";
 import Icon from "react-icons-kit";
-import jss from "jss";
-import preset from "jss-preset-default";
+import { buttonStyle } from "../BtnStyle";
 import { copy } from "react-icons-kit/icomoon/copy";
 import { exportIcon } from "react-icons-kit/entypo/exportIcon";
 import { SaveToJSON } from "../../../../../AppFunction";
@@ -21,30 +20,7 @@ function StylePanel(props) {
     setTag,
   } = props;
 
-  const btnStyle = {
-    cursor: "pointer",
-    width: "16px",
-    margin: "0px 5px ",
-    // border: "1px solid #fff",
-  };
-  const btnHoverStyle = {
-    // outline:"#cef solid 1px"
-    transform: "perspective(200px) scaleZ(-20) translateZ(-2px)",
-  };
-  const btnActivStyle = {
-    color: "#ffa"  
-  };
-  jss.setup(preset());
-  const { classes } = jss
-    .createStyleSheet({
-      style: {
-        ...btnStyle,
-        "&:hover": { ...btnHoverStyle },
-        "&:active": { ...btnActivStyle },
-      },
-    })
-    .attach();
-
+  
   return (
     <div
       style={{
@@ -74,8 +50,10 @@ function StylePanel(props) {
       >
         <div
           title={"Назначить стиль"}
-          className={classes.style}
-          style={assignableStyle&&btnActivStyle}
+          className={buttonStyle}
+          style={
+            assignableStyle && {color: "#ffa"}
+          }
           onClick={(e) => {
             e.stopPropagation();
             setSettings((state) => {
@@ -85,10 +63,10 @@ function StylePanel(props) {
                   tagsForRender: null,
                   assignableStyle: tag.styleId,
                 };
-              }else{
+              } else {
                 return {
-                  selectedId:state.selectedId,
-                  tagsForRender: null          
+                  selectedId: state.selectedId,
+                  tagsForRender: null,
                 };
               }
             });
@@ -98,14 +76,11 @@ function StylePanel(props) {
           <Icon size={"100%"} icon={paintBrush} />
         </div>
         <div
-          title={"Сохранить изменения"}
-          // style={btnStyle}
-          className={classes.style}
+          title={"Обновить изменения"}
+          className={buttonStyle}
           onClick={(e) => {
             e.stopPropagation();
-            console.log("Сохранить изменения стиля!");
             updateStyle(style, tag.styleId);
-            // setClonStyle(tag.styleId);
           }}
         >
           <Icon size={"120%"} icon={ic_update} />
@@ -113,7 +88,7 @@ function StylePanel(props) {
         <div
           title={"Копировать стиль"}
           // style={btnStyle}
-          className={classes.style}
+          className={buttonStyle}
           onClick={(e) => {
             e.stopPropagation();
             console.log("Копировать стиль!");
@@ -125,7 +100,7 @@ function StylePanel(props) {
         <div
           title={"Экспортировать стиль"}
           // style={btnStyle}
-          className={classes.style}
+          className={buttonStyle}
           // Сохранение файлов
           onClick={(e) => {
             e.stopPropagation();

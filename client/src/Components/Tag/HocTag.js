@@ -57,7 +57,7 @@ const HocTag = (props) => {
     assignableStyle &&
       assignableStyle !== tag.styleId &&
       changeTag(tag, "styleId", assignableStyle);
-    setPreview(thisTag);
+      setPanelTag(thisTag);
     return () => {
       // console.log("props", props);
     };
