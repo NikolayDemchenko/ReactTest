@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import log from "../Log";
 import { v4 as uuidv4 } from "uuid";
 import Tags from "./Tag/Tags";
-import { getParentBranch } from "./Tag/_Tag";
+import { getParentBranch } from "./Tag/HocTag";
 import { page as _page } from "./Tag/Classes";
 import { createStyle } from "../AppFunction";
 import NavigationPanel from "./ControlPanel/NavigationPanel/NavigationPanel";
@@ -53,7 +53,7 @@ function Page(props) {
       attributes: {},
       childrens: [],
     };
-    setSettings({ ...settings, preview: parent });
+
     setPage({ ...page, tags: [...page.tags, newTag] });
   };
 

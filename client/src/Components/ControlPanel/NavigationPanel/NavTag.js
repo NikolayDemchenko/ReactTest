@@ -6,7 +6,7 @@ import NavTags from "./NavTags";
 import CRUDTag from "./CRUDTag/CRUDTag";
 
 function NavTag(props) {
-  const { tag, addTag, removeTag, selectedId} = props;
+  const { tag, addTag, removeTag, selectedId } = props;
 
   const { type, childrens, id, index } = tag;
   const [showChilds, setshowChilds] = useState(false);
@@ -34,7 +34,6 @@ function NavTag(props) {
       </div>
     ) : null;
 
- 
   let background = "rgba(30,40,57,.8)";
   let showButtons = false;
   // let showButtons = true;
@@ -57,7 +56,7 @@ function NavTag(props) {
           onClick={(e) => {
             e.preventDefault();
             // setSelected(tag);
-            console.log('id :>> ', id);
+            console.log("id :>> ", id);
             document.getElementById(id).click();
           }}
           style={{
@@ -74,9 +73,10 @@ function NavTag(props) {
             <div
               style={{
                 //  outline: "1px solid white",
-                  margin: "0 4px 4px auto" }}
+                margin: "0 4px 4px auto",
+              }}
             >
-              <CRUDTag tag={tag} addTag={addTag} removeTag={removeTag} />
+              <CRUDTag {...{ tag, addTag, removeTag }} />
             </div>
           )}
         </div>

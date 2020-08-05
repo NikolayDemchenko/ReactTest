@@ -41,7 +41,7 @@ function StylePanel(props) {
       <PropertiesPanel
         {...{
           ...props,
-          name: "Base style",
+          name: "Style",
           selected,
           style,
           setStyle,

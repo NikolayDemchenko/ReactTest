@@ -9,6 +9,7 @@ import { ic_credit_card } from "react-icons-kit/md/ic_credit_card";
 import { ic_note_add } from "react-icons-kit/md/ic_note_add";
 import { ic_library_add } from "react-icons-kit/md/ic_library_add";
 import PopupInput from "../Inputs/PopupInput/PopupInput";
+import SelectPanel from "../../SelectPanel/SelectPanel";
 import Properties from "./Properties";
 import { deleteObjectProps } from "./Function/ObjectManager";
 function PropertiesPanel(props) {
@@ -22,15 +23,17 @@ function PropertiesPanel(props) {
     deletePanel,
     selected,
     setSelected,
+    tag,
   } = props;
 
   // console.log("%cPropertiesPanel-StylePanel", "color: green");
-  // console.log("props :>> ", props);
+  console.log("props :>> ", props);
 
   const [edit, setEdit] = useState();
 
   const addProperty = (e) => {
     e.stopPropagation();
+
     setStyle({ property: "value", ...style });
   };
   const addPseudoClass = (e) => {
@@ -102,7 +105,7 @@ function PropertiesPanel(props) {
             selected === fullName ? "rgba(134, 186, 250, 0.1)" : "none",
         }}
       >
-        {name === "Base style" ? (
+        {name === "Style" ? (
           name
         ) : (
           <PopupInput value={name} setValue={setName} />
@@ -115,22 +118,39 @@ function PropertiesPanel(props) {
         >
           <div
             title={"Редактировать"}
-            className={buttonStyle}        
+            className={buttonStyle}
             onClick={() => setEdit((edit) => !edit)}
           >
             <Icon size={"100%"} icon={ic_credit_card} />
           </div>
-          <div
-            title={"Добавить свойство"}
-            className={buttonStyle}      
-            onClick={addProperty}
-          >
-            <Icon size={"100%"} icon={ic_add_to_queue} />
-          </div>
-          {name === "Base style" && (
+          <SelectPanel
+            items={(() => {
+              
+             const styles= Object.entries(
+                getComputedStyle(document.getElementById(tag.id))
+              ).map(([key, value]) => {
+                key= +key||key==="0"?+key:key
+                return ({key,value});
+              }).filter(obj=>typeof obj.key!=='number') 
+              return styles.map(({key})=>key)
+            })()}
+            selectedItem={""}
+            setItem={""}
+            button={
+              <div
+                title={"Добавить свойство"}
+                className={buttonStyle}
+                // onClick={addProperty}
+              >
+                <Icon size={"100%"} icon={ic_add_to_queue} />
+              </div>
+            }
+          />
+
+          {name === "Style" && (
             <div
               title={"Добавить псевдокласс"}
-              className={buttonStyle}             
+              className={buttonStyle}
               onClick={addPseudoClass}
             >
               <Icon size={"100%"} icon={ic_note_add} />
@@ -139,16 +159,16 @@ function PropertiesPanel(props) {
           {!name.indexOf("@media") ? null : (
             <div
               title={"Добавить @media"}
-              className={buttonStyle}           
+              className={buttonStyle}
               onClick={addMedia}
             >
               <Icon size={"100%"} icon={ic_library_add} />
             </div>
           )}
-          {name !== "Base style" && (
+          {name !== "Style" && (
             <div
               title={"Удалить панель"}
-              className={buttonStyle}            
+              className={buttonStyle}
               onClick={(e) => {
                 e.stopPropagation();
                 deletePanel();
@@ -160,7 +180,7 @@ function PropertiesPanel(props) {
         </div>
       </div>
 
-      {edit && <EditPanel {...{ style,setStyle }} />}
+      {edit && <EditPanel {...{ style, setStyle }} />}
       <Properties {...props} parentName={name} />
     </div>
   );
