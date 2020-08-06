@@ -24,6 +24,7 @@ function PropertiesPanel(props) {
     selected,
     setSelected,
     tag,
+    tagAllStyles,
   } = props;
 
   // console.log("%cPropertiesPanel-StylePanel", "color: green");
@@ -31,11 +32,6 @@ function PropertiesPanel(props) {
 
   const [edit, setEdit] = useState();
 
-  const addProperty = (e) => {
-    e.stopPropagation();
-
-    setStyle({ property: "value", ...style });
-  };
   const addPseudoClass = (e) => {
     e.stopPropagation();
     setStyle({ ...style, "&:": {} });
@@ -80,7 +76,13 @@ function PropertiesPanel(props) {
       },
     };
   };
+ 
+  const addProperty = (_key) => {
+    const {key,value} = tagAllStyles.find((style) => style.key === _key);
 
+    console.log("!!!!!!!!!!!!!!!e", key, value);
+    setStyle({ [key]: value, ...style });
+  };
   return (
     <div
       // Включение частичного превью
@@ -124,24 +126,11 @@ function PropertiesPanel(props) {
             <Icon size={"100%"} icon={ic_credit_card} />
           </div>
           <SelectPanel
-            items={(() => {
-              
-             const styles= Object.entries(
-                getComputedStyle(document.getElementById(tag.id))
-              ).map(([key, value]) => {
-                key= +key||key==="0"?+key:key
-                return ({key,value});
-              }).filter(obj=>typeof obj.key!=='number') 
-              return styles.map(({key})=>key)
-            })()}
+            items={tagAllStyles.map(({ key }) => key)}
             selectedItem={""}
-            setItem={""}
+            setItem={addProperty}
             button={
-              <div
-                title={"Добавить свойство"}
-                className={buttonStyle}
-                // onClick={addProperty}
-              >
+              <div title={"Добавить свойство"} className={buttonStyle}>
                 <Icon size={"100%"} icon={ic_add_to_queue} />
               </div>
             }
