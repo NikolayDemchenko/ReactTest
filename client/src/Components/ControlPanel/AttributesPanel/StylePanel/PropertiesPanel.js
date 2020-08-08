@@ -169,7 +169,7 @@ function PropertiesPanel(props) {
         </div>
       </div>
 
-      {edit && <EditPanel {...{ style, setStyle }} />}
+      {edit && <EditPanel {...{ style, setStyle,styleId:tag.styleId }} />}
       <Properties {...props} parentName={name} />
     </div>
   );

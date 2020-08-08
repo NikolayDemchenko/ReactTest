@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { ic_update } from "react-icons-kit/md/ic_update";
 import Icon from "react-icons-kit";
 import log from "../../../../Log";
-import { buttonStyle } from "./BtnStyle";
+import { buttonStyle } from "./BtnStyle";import {ic_content_copy} from 'react-icons-kit/md/ic_content_copy'
 import parse from "style-to-object";
 import {createCssProperties} from "convert-to-css";
 import {
@@ -10,9 +10,11 @@ import {
   deleteNoObjectProps,
 } from "./Function/ObjectManager";
 function EditPanel(props) {
-  const { style, setStyle } = props;
+  const { style, setStyle} = props;
   // console.log("%cPropertiesPanel-StylePanel", "color: green");
-  // console.log("props :>> ", props);
+  console.log("props :>> ", props);
+  
+  JSON.stringify(style)
 
   const stringStyle =
     createCssProperties(deleteObjectProps(style)) + ";";
@@ -27,10 +29,19 @@ function EditPanel(props) {
       <div
         style={{
           display: "flex",
-          marginLeft: "auto",
-          flexDirection: "row-reverse",
+          justifyContent: "flex-end"        
         }}
       >
+        <div
+          title={"Копировать стиль в буфер"}
+          className={buttonStyle}
+          onClick={(e) => {
+            e.stopPropagation();
+     window.navigator.clipboard.writeText(JSON.stringify({name:"",style}))
+          }}
+        >
+          <Icon size={"100%"} icon={ic_content_copy} />
+        </div>
         <div
           title={"Обновить изменения"}
           className={buttonStyle}
