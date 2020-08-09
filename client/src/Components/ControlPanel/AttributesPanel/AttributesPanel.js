@@ -28,7 +28,8 @@ function AttributesPanel(props) {
 
   // Получает tag
   const setTagType = ( type ) => {
-    changeTag(tag,"type",type)
+    console.log('type', type)
+    changeTag(props.tag,"type",type)
   };
   const style = {
     flexWrap: "wrap",

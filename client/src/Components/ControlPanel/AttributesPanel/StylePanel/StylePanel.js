@@ -10,6 +10,7 @@ function StylePanel(props) {
 
   const [selected, setSelected] = useState("All style");
   const [draggedProp, setDragged] = useState();
+
   const getTagAllStyles = (tag) => {
     return Object.entries(getComputedStyle(document.getElementById(tag.id)))
       .map(([key, value]) => {
@@ -18,7 +19,6 @@ function StylePanel(props) {
       })
       .filter((obj) => typeof obj.key !== "number");
   };
- 
 
   const setDraggedProp = (item) => {
     console.log("draggedProp", item);
@@ -44,7 +44,8 @@ function StylePanel(props) {
           ...props,
           onAllStyle,
           selected,
-          style 
+          style,
+          setPreview: setPreviewStyle,
         }}
       />
       <PropertiesPanel
@@ -57,7 +58,8 @@ function StylePanel(props) {
           setSelected,
           draggedProp,
           setDraggedProp,
-          setPreview: setPreviewStyle,tagAllStyles:getTagAllStyles(tag)
+          setPreview: setPreviewStyle,
+          tagAllStyles: getTagAllStyles(tag),
         }}
       />
     </div>

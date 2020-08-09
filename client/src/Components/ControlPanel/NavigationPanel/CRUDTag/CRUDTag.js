@@ -9,7 +9,7 @@ import { htmlTags, basehtmlTags } from "../../../Class/HtmlCss";
 function CRUDTag({ tag, addTag, removeTag }) {
   // console.log('setPage :>> ', setPage);
 // console.log('htmlTagsVoid :>> ', Array.isArray(htmlTagsVoid) );
-
+console.log('htmlTags', htmlTags)
   return (
     <div style={{ display: "flex" }}>
       {/* Добавление тега */}

@@ -5,7 +5,8 @@ export default function SelectPanel(props) {
   allItems = allItems ? allItems : items;
   const [state, _setState] = useState({ value, items });
 
-  console.log('items :>> ', items);
+  // console.log('items :>> ', items);
+  // console.log('allItems :>> ', allItems);
   const setState = (value) => {
     _setState({ items: search(value), value });
   };
@@ -38,6 +39,7 @@ export default function SelectPanel(props) {
     const findedItems = items.filter((_item) => _item.includes(item));
     findedItems.sort((a, b) => a.indexOf(item) - b.indexOf(item));
     const listItems = [...new Set([...findedItems, ...findedAllItems])];
+    console.log('listItems', listItems)
     return findedAllItems.length > 0 ? listItems : items;
   };
 

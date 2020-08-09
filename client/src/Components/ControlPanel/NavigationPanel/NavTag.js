@@ -10,8 +10,8 @@ function NavTag(props) {
 
   const { type, childrens, id, index } = tag;
   const [showChilds, setshowChilds] = useState(false);
-  console.log("id :>> ", id);
-  console.log("selectedId :>> ", selectedId);
+  // console.log("id :>> ", id);
+  // console.log("selectedId :>> ", selectedId);
 
   const _icon = <Icon size={"100%"} icon={ic_keyboard_arrow_right} />;
 

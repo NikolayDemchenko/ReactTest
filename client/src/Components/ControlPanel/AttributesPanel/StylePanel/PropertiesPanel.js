@@ -28,7 +28,7 @@ function PropertiesPanel(props) {
   } = props;
 
   // console.log("%cPropertiesPanel-StylePanel", "color: green");
-  console.log("props :>> ", props);
+  // console.log("props :>> ", props);
 
   const [edit, setEdit] = useState();
 
@@ -76,9 +76,9 @@ function PropertiesPanel(props) {
       },
     };
   };
- 
+
   const addProperty = (_key) => {
-    const {key,value} = tagAllStyles.find((style) => style.key === _key);
+    const { key, value } = tagAllStyles.find((style) => style.key === _key);
 
     console.log("!!!!!!!!!!!!!!!e", key, value);
     setStyle({ [key]: value, ...style });
@@ -100,8 +100,7 @@ function PropertiesPanel(props) {
       <div
         style={{
           color: "#bdec",
-          display: "flex",
-          flexWrap: "wrap",
+          display: "flex",         
           paddingLeft: "0.5em",
           background:
             selected === fullName ? "rgba(134, 186, 250, 0.1)" : "none",
@@ -115,7 +114,8 @@ function PropertiesPanel(props) {
         <div
           style={{
             display: "flex",
-            marginLeft: "auto",
+            width: "100%",
+            justifyContent: "flex-end",      
           }}
         >
           <div
@@ -169,7 +169,7 @@ function PropertiesPanel(props) {
         </div>
       </div>
 
-      {edit && <EditPanel {...{ style, setStyle,styleId:tag.styleId }} />}
+      {edit && <EditPanel {...{ style, setStyle, styleId: tag.styleId }} />}
       <Properties {...props} parentName={name} />
     </div>
   );

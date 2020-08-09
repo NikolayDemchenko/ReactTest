@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 import {createStyle} from '../../AppFunction'
 
-const _newStyle = {
+const newStyle = {
   height: "200px",
   width: "200px",
   backgroundColor: "#678",
@@ -16,7 +16,7 @@ const _newStyle = {
     boxShadow: "none",
   },
 };
-const newPageStyle = { style: _newStyle, id: uuidv4(), name: "newStyle" };
+const newPageStyle =createStyle(newStyle, "newStyle"); 
 
 const innerStyle = {
   height: "200px",
@@ -83,24 +83,21 @@ const pageBaseDiv = {
   attributes: {},
 };
 
-const pageInnerDiv = {
-  type: "div",
-  styleId: innerPageStyle.id,
-  attributes: {},
-};
-const newStyle = { style: {}, id: uuidv4(), name: "newStyle" };
-
 const page = {
-  styles: [basePageStyle, innerPageStyle, newPageStyle, newStyle],
+  styles: [basePageStyle, innerPageStyle, newPageStyle],
   tags: [],
 };
 page.tags.push(pageBaseDiv);
 
 for (let i = 0; i < 100; i++) {
-  pageInnerDiv.index = i;
-  pageInnerDiv.id = uuidv4();
-  pageInnerDiv.parentId = pageBaseDiv.id;
-  page.tags.push(JSON.parse(JSON.stringify(pageInnerDiv)));
+  page.tags.push(JSON.parse(JSON.stringify({
+    index: i,
+    id: uuidv4(),
+    parentId: pageBaseDiv.id,
+    type: "div",
+    styleId: innerPageStyle.id,
+    attributes: {},
+  })));
 }
 
 export { page, createStyle };

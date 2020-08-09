@@ -1,7 +1,6 @@
 [
   {
     "name": "inner div style demo",
-    "id": "c250cfd3-3286-4ef9-8e3c-fd3b4a0cb8e1",
     "style": {
       "height": "200px",
       "width": "200px",
@@ -19,60 +18,7 @@
     }
   },
   {
-    "&:hover": {
-      "transform": "perspective(200px) scaleZ(-0.5) translateZ(-2px)",
-      "boxShadow": "0 8px 5px 2px #0005, inset 0 8px 5px 2px #00ffff",
-      "transition": "0.2s"
-    },
-    "&:active": { "transition": "0s", "boxShadow": "none" },
-    "height": "200px",
-    "width": "200px",
-    "background-color": "#789",
-    "margin": "10px"
-  },
-  {
-    "&:hover": {
-      "transform": "perspective(200px) scaleZ(-0.5) translateZ(-2px)",
-      "boxShadow": "0 8px 5px 2px #0005, inset 0 8px 5px 2px #00ffff",
-      "transition": "0.2s"
-    },
-    "&:active": { "transition": "0s", "boxShadow": "none" },
-    "height": "400px",
-    "width": "200px",
-    "background-color": "#789",
-    "margin": "10px"
-  },
-  {
-    "&:hover": {
-      "transform": "perspective(200px) scaleZ(-0.5) translateZ(-2px)",
-      "boxShadow": "0 8px 5px 2px #0005, inset 0 8px 5px 2px #00ffff",
-      "transition": "0.2s"
-    },
-    "&:active": { "transition": "0s", "boxShadow": "none" },
-    "height": "200px",
-    "width": "200px",
-    "background-color": "#0086ff",
-    "margin": "10px"
-  },
-  {
-    "transform": "perspective(200px) scaleZ(-0.5) translateZ(-2px)",
-    "boxShadow": "0 8px 5px 2px #0005, inset 0 8px 5px 2px #00ffff",
-    "transition": "0.2s"
-  },
-  {
-    "height": "200px",
-    "width": "200px",
-    "backgroundColor": "#789",
-    "margin": "10px",
-    "&:hover": {
-      "transform": "perspective(200px) scaleZ(-0.5) translateZ(-2px)",
-      "boxShadow": "0 8px 5px 2px #0005, inset 0 8px 5px 2px #00ffff",
-      "transition": "0.2s"
-    },
-    "&:active": { "transition": "0s", "boxShadow": "none" }
-  },
-  {
-    "name": "",
+    "name": "Какой-то стиль",
     "style": {
       "height": "200px",
       "width": "200px",
@@ -87,11 +33,56 @@
     }
   },
   {
-    "name": "",
+    "name": "Ещё стиль",
     "style": {
       "height": "200px",
       "width": "200px",
       "backgroundColor": "#789",
+      "margin": "10px",
+      "&:hover": {
+        "transform": "perspective(200px) scaleZ(-0.5) translateZ(-2px)",
+        "boxShadow": "0 8px 5px 2px #0005, inset 0 8px 5px 2px #00ffff",
+        "transition": "0.2s"
+      },
+      "&:active": { "transition": "0s", "boxShadow": "none" }
+    }
+  },
+  {
+    "name": "Новый стиль",
+    "style": {
+      "height": "200px",
+      "width": "200px",
+      "backgroundColor": "#0d78e2",
+      "margin": "10px",
+      "&:hover": {
+        "transform": "perspective(200px) scaleZ(-0.5) translateZ(-2px)",
+        "boxShadow": "0 8px 5px 2px #0005, inset 0 8px 5px 2px #00ffff",
+        "transition": "0.2s"
+      },
+      "&:active": { "transition": "0s", "boxShadow": "none" }
+    }
+  },
+  {
+    "name": "Высокий div",
+    "style": {
+      "height": "400px",
+      "width": "200px",
+      "backgroundColor": "#789",
+      "margin": "10px",
+      "&:hover": {
+        "transform": "perspective(200px) scaleZ(-0.5) translateZ(-2px)",
+        "boxShadow": "0 8px 5px 2px #0005, inset 0 8px 5px 2px #00ffff",
+        "transition": "0.2s"
+      },
+      "&:active": { "transition": "0s", "boxShadow": "none" }
+    }
+  },
+  {
+    "name": "input",
+    "style": {
+      "height": "16px",
+      "width": "200px",
+      "backgroundColor": "#ffffff",
       "margin": "10px",
       "&:hover": {
         "transform": "perspective(200px) scaleZ(-0.5) translateZ(-2px)",

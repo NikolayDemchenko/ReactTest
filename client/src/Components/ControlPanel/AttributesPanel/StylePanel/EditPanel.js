@@ -32,7 +32,7 @@ function EditPanel(props) {
           justifyContent: "flex-end"        
         }}
       >
-        <div
+        {/* <div
           title={"Копировать стиль в буфер"}
           className={buttonStyle}
           onClick={(e) => {
@@ -41,7 +41,7 @@ function EditPanel(props) {
           }}
         >
           <Icon size={"100%"} icon={ic_content_copy} />
-        </div>
+        </div> */}
         <div
           title={"Обновить изменения"}
           className={buttonStyle}

@@ -6,6 +6,11 @@ import { exportIcon } from "react-icons-kit/entypo/exportIcon";
 import { SaveToJSON } from "../../../../../AppFunction";
 import { paintBrush } from "react-icons-kit/fa/paintBrush";
 import { ic_update } from "react-icons-kit/md/ic_update";
+import { folderDownload } from "react-icons-kit/icomoon/folderDownload";
+import { boxAdd } from "react-icons-kit/icomoon/boxAdd";
+import {boxRemove} from 'react-icons-kit/icomoon/boxRemove'
+import SelectPanel from "../../../SelectPanel/SelectPanel";
+import Styles from "../../JSON/Styles.json";
 function StylePanel(props) {
   // console.log("props :>> ", props);
   const {
@@ -13,14 +18,27 @@ function StylePanel(props) {
     updateStyle,
     onAllStyle,
     style,
+    setPreview,
     selected,
     tag,
     assignableStyle,
     setSettings,
     setTag,
+    page: { styles },
   } = props;
+  // console.log("props", props);
+  // console.log("Styles", Styles);
+  const allStyles = [...styles, ...Styles];
+  const getStyle = (item) => {
+    const style = allStyles.find((style) => style.name === item).style;
+    setTag((tag) => ({ ...tag, style }));
+    setPreview(style);
 
-  
+    // console.log(
+    //   "addStyle(allStyles.find(style=>style.name===item).style)",
+    //   allStyles.find((style) => style.name === item).style
+    // );
+  };
   return (
     <div
       style={{
@@ -45,15 +63,24 @@ function StylePanel(props) {
       <div
         style={{
           display: "flex",
-          marginLeft: "auto",
+          width: "100%",
+          justifyContent: "flex-end",
         }}
       >
+        <SelectPanel
+          items={allStyles.map((style) => style.name)}
+          selectedItem={""}
+          setItem={getStyle}
+          button={
+            <div title={"Выбрать стиль"} className={buttonStyle}>
+              <Icon size={"100%"} icon={folderDownload} />
+            </div>
+          }
+        />
         <div
           title={"Назначить стиль"}
           className={buttonStyle}
-          style={
-            assignableStyle && {color: "#ffa"}
-          }
+          style={assignableStyle && { color: "#ffa" }}
           onClick={(e) => {
             e.stopPropagation();
             setSettings((state) => {
@@ -92,10 +119,21 @@ function StylePanel(props) {
           onClick={(e) => {
             e.stopPropagation();
             console.log("Копировать стиль!");
-            setTag(addStyle(style, "Новый стиль", tag));
+            setTag(addStyle(style, "Самый новый стиль", tag));
           }}
         >
           <Icon size={"100%"} icon={copy} />
+        </div>
+        <div
+          title={"Копировать в буфер"}
+          // style={btnStyle}
+          className={buttonStyle}
+          onClick={(e) => {
+            e.stopPropagation();          
+            window.navigator.clipboard.writeText(JSON.stringify({name:"",style}))
+          }}
+        >
+          <Icon size={"100%"} icon={boxRemove} />
         </div>
         <div
           title={"Экспортировать стиль"}
