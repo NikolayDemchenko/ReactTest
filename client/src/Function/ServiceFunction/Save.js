@@ -1,6 +1,6 @@
-import FileSaver from "file-saver";
+import {saveAs} from "file-saver";
 export const SaveToJSON= (data) => {
-  FileSaver.saveAs(
+  saveAs(
     new Blob([JSON.stringify(data)], {
       type: "application/json;charset=utf-8",
     })

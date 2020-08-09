@@ -91,5 +91,21 @@
       },
       "&:active": { "transition": "0s", "boxShadow": "none" }
     }
+  },
+  {
+    "name": "Градиент",
+    "style": {
+      "&:hover": {
+        "transform": "perspective(200px) scaleZ(-0.5) translateZ(-2px)",
+        "boxShadow": "0 8px 5px 2px #0005, inset 0 8px 5px 2px #00ffff",
+        "transition": "0.2s"
+      },
+      "&:active": { "transition": "0s", "boxShadow": "none" },
+      "height": "200px",
+      "width": "200px",
+      "background-color": "#789",
+      "margin": "10px",
+      "background": "linear-gradient(141deg, rgba(2,0,36,1) 19%, rgba(1,104,143,1) 24%, rgba(1,127,167,1) 24%, rgba(221,0,34,1) 71%, rgba(0,212,255,1) 100%)"
+    }
   }
 ]
