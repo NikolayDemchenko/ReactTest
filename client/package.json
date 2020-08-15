@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "@material-ui/core": "^4.9.5",
+    "axios": "^0.19.2",
     "convert-to-css": "^1.0.4",
     "file-saver": "^2.0.2",
     "html-tags": "^3.1.0",

@@ -9,6 +9,7 @@ import NavigationPanel from "./ControlPanel/NavigationPanel/NavigationPanel";
 import { SaveToJSON } from "../AppFunction";
 import jss from "jss";
 import preset from "jss-preset-default";
+import axios from "axios";
 
 // import FileSaver from "file-saver";
 function Page(props) {
@@ -39,9 +40,8 @@ function Page(props) {
   const myStyles = {};
   page.styles.forEach(({ id, style }) => {
     myStyles[id] = style;
-  });  
+  });
   const { classes } = jss.createStyleSheet({ ...myStyles }).attach();
-
 
   const addTag = (type, parent) => {
     const newTag = {
@@ -75,9 +75,9 @@ function Page(props) {
         return tag;
       }
     });
-    console.log('page', page)
-    setPage({tags: newTags, styles: [...page.styles, newStyle] });
-    return changedTag 
+    console.log("page", page);
+    setPage({ tags: newTags, styles: [...page.styles, newStyle] });
+    return changedTag;
   };
 
   const changeTag = (tag, propName, propValue) => {
@@ -91,7 +91,7 @@ function Page(props) {
       }
     });
     setPage({ ...page, tags });
-    return changedTag 
+    return changedTag;
   };
 
   const updateStyle = (style, styleId) => {
@@ -114,7 +114,7 @@ function Page(props) {
       });
       return Array.from(new Set(tFR));
     };
-    
+
     setSettings({
       ...settings,
       tagsForRender: getAllParents(
@@ -124,13 +124,30 @@ function Page(props) {
     setPage({ ...page, styles });
   };
 
+  let config = {
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    responseType: "blob",
+  };
   return (
     <div>
       <NavigationPanel
         tags={tags}
         addTag={addTag}
         removeTag={removeTag}
-        savePage={() => SaveToJSON(page)}
+        savePage={() =>
+          axios({
+            method: "post",
+            url: "http://localhost:8000/components",
+            data: JSON.stringify(page),
+          })
+            .then((response) => {
+              console.log(response.data);
+            })
+            .catch(function (error) {
+              console.log(error);
+            })
+        }
+        // savePage={() => SaveToJSON(page)}
         selectedId={settings && settings.selectedId}
       />
       <Tags

@@ -15,6 +15,7 @@ const cloudURI =
 const localURI = "mongodb://localhost:27017/LocalMongoBase";
 
 const port = 8000;
+app.use(bodyParser.urlencoded({ extended: true }));
 
 router.get("/", (req, res) => {
   const elements = req.app.locals.elements;
@@ -25,14 +26,13 @@ router.get("/", (req, res) => {
     .catch((error) => console.error(error)); 
 });
 
-// app.get("/:id", (req, res) => {
-//   const collection = req.app.locals.collection;
-//   const id = new ObjectId(req.params.id);
-//   collection
-//     .findOne({ _id: id })
-//     .then((response) => res.status(200).json(response))
-//     .catch((error) => console.error(error));
-// });
+app.post('/components', (req, res) => {
+ const components= req.app.locals.components
+//  components.insertOne(req.body)
+  console.log(JSON.parse(req.body))
+  // res.send(req.body)
+});
+
 let dbClient;
 MongoClient.connect(localURI, {
   useUnifiedTopology: true,
@@ -44,7 +44,8 @@ MongoClient.connect(localURI, {
     dbClient = client;
     app.listen(port, () => console.info(`REST API running on port http://localhost:${port}`));
     app.locals.elements = db.collection("elements");
-    app.locals.folders = db.collection("folders");
+    app.locals.components = db.collection("components");
+    app.locals.styles = db.collection("styles");
   })
   .catch((error) => console.error(error));
 
