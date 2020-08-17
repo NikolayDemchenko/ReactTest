@@ -134,19 +134,19 @@ function Page(props) {
         tags={tags}
         addTag={addTag}
         removeTag={removeTag}
-        savePage={() =>
+        savePage={() => {    
           axios({
             method: "post",
             url: "http://localhost:8000/components",
-            data: JSON.stringify(page),
+            data: {component:JSON.stringify(page)},
           })
             .then((response) => {
               console.log(response.data);
             })
             .catch(function (error) {
               console.log(error);
-            })
-        }
+            });
+        }}
         // savePage={() => SaveToJSON(page)}
         selectedId={settings && settings.selectedId}
       />
