@@ -24,7 +24,7 @@ function StylePanel(props) {
     assignableStyle,
     setSettings,
     setTag,
-    page: { styles },
+    component: { styles },
   } = props;
   // console.log("props", props);
   // console.log("Styles", Styles);

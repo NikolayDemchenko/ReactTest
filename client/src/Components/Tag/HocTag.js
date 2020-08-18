@@ -17,7 +17,7 @@ export const getParentBranch = (tags, tag, idList = []) => {
 const HocTag = (props) => {
   // console.log("props", props);
   const {
-    page: { styles },
+    component: { styles },
     assignableStyle,
     changeTag,
     children,

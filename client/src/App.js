@@ -1,14 +1,14 @@
 import React from "react";
 import ErrorBoundry from "./ErrorBoundry";
 import "./App.css";
-import Page from "./Components/Page";
+import Component from "./Components/Component";
 
 // import AttributesPanel from "./Components/ControlPanel/AttributesPanel/AttributesPanel";
 
 const App = () => {
   return (
     <ErrorBoundry>
-      <Page />
+      <Component />
     </ErrorBoundry>
   );
 };

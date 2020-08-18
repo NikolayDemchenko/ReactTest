@@ -3,7 +3,7 @@ import Tags from "./Tags";
 import log from "../../Log";
 // import jss from "jss";
 // import preset from "jss-preset-default";
-function Element(props) {
+function Tag(props) {
   const { tag, tagsForRender, classes } = props;
 
   const onClick = (e) => {
@@ -36,4 +36,4 @@ function areEqual(prevProps, nextProps) {
     : false;
 }
 // export default Element;
-export default React.memo(log(Element), areEqual);
+export default React.memo(log(Tag), areEqual);

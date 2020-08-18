@@ -3,7 +3,7 @@ import log from "../Log";
 import { v4 as uuidv4 } from "uuid";
 import Tags from "./Tag/Tags";
 import { getParentBranch } from "./Tag/HocTag";
-import { page as _page } from "./Tag/Classes";
+import { page as _component } from "./Tag/Classes";
 import { createStyle } from "../AppFunction";
 import NavigationPanel from "./ControlPanel/NavigationPanel/NavigationPanel";
 import { SaveToJSON } from "../AppFunction";
@@ -12,8 +12,8 @@ import preset from "jss-preset-default";
 import axios from "axios";
 
 // import FileSaver from "file-saver";
-function Page(props) {
-  // console.log("Page-App");
+function Component(props) {
+  // console.log("component-App");
 
   const getTagStructure = (tags, parentId, styles) => {
     const newTags = JSON.parse(JSON.stringify(tags));
@@ -31,14 +31,14 @@ function Page(props) {
 
   // console.log("settings :>> ", settings);
 
-  const [page, setPage] = useState(JSON.parse(JSON.stringify(_page)));
-  // console.log("page.tags :>> ", page.tags);
+  const [component, setComponent] = useState(JSON.parse(JSON.stringify(_component)));
+  // console.log("component.tags :>> ", component.tags);
 
-  const tags = getTagStructure([...page.tags], null, [...page.styles]);
+  const tags = getTagStructure([...component.tags], null, [...component.styles]);
 
   jss.setup(preset());
   const myStyles = {};
-  page.styles.forEach(({ id, style }) => {
+  component.styles.forEach(({ id, style }) => {
     myStyles[id] = style;
   });
   const { classes } = jss.createStyleSheet({ ...myStyles }).attach();
@@ -49,55 +49,55 @@ function Page(props) {
       parentId: parent.id,
       type,
       index: parent.childrens.length,
-      styleId: page.styles.find((style) => style.name === "newStyle").id,
+      styleId: component.styles.find((style) => style.name === "newStyle").id,
       attributes: {},
       childrens: [],
     };
 
-    setPage({ ...page, tags: [...page.tags, newTag] });
+    setComponent({ ...component, tags: [...component.tags, newTag] });
   };
 
   const removeTag = (tagId) => {
-    const newTags = [...[...page.tags].filter((tag) => tag.id !== tagId)];
+    const newTags = [...[...component.tags].filter((tag) => tag.id !== tagId)];
 
     console.log("newTags", newTags);
     setSettings();
-    setPage({ ...page, tags: newTags });
+    setComponent({ ...component, tags: newTags });
   };
 
   const addStyle = (style, name, tag) => {
     const newStyle = createStyle(style, name);
     const changedTag = { ...tag, styleId: newStyle.id };
-    const newTags = page.tags.map((tag) => {
+    const newTags = component.tags.map((tag) => {
       if (changedTag.id === tag.id) {
         return changedTag;
       } else {
         return tag;
       }
     });
-    console.log("page", page);
-    setPage({ tags: newTags, styles: [...page.styles, newStyle] });
+    console.log("component", component);
+    setComponent({ tags: newTags, styles: [...component.styles, newStyle] });
     return changedTag;
   };
 
   const changeTag = (tag, propName, propValue) => {
     const changedTag = { ...tag, [propName]: propValue };
     // console.log('changedTag :>> ', changedTag);
-    const tags = page.tags.map((tag) => {
+    const tags = component.tags.map((tag) => {
       if (changedTag.id === tag.id) {
         return changedTag;
       } else {
         return tag;
       }
     });
-    setPage({ ...page, tags });
+    setComponent({ ...component, tags });
     return changedTag;
   };
 
   const updateStyle = (style, styleId) => {
     // console.log("style :>> ", style);
 
-    const styles = page.styles.map((st) => {
+    const styles = component.styles.map((st) => {
       if (st.id === styleId) {
         return { ...st, style };
       } else {
@@ -110,7 +110,7 @@ function Page(props) {
       tagsForRender.forEach((tag) => {
         // console.log("tag :>> ", tag);
         tFR.push(tag.id);
-        tFR = [...getParentBranch(page.tags, tag), ...tFR];
+        tFR = [...getParentBranch(component.tags, tag), ...tFR];
       });
       return Array.from(new Set(tFR));
     };
@@ -118,10 +118,10 @@ function Page(props) {
     setSettings({
       ...settings,
       tagsForRender: getAllParents(
-        page.tags.filter((t) => t.styleId === styleId)
+        component.tags.filter((t) => t.styleId === styleId)
       ),
     });
-    setPage({ ...page, styles });
+    setComponent({ ...component, styles });
   };
 
   let config = {
@@ -134,11 +134,11 @@ function Page(props) {
         tags={tags}
         addTag={addTag}
         removeTag={removeTag}
-        savePage={() => {    
+        saveComponent={() => {    
           axios({
             method: "post",
             url: "http://localhost:8000/components",
-            data: {component:JSON.stringify(page)},
+            data: {component:JSON.stringify(component)},
           })
             .then((response) => {
               console.log(response.data);
@@ -147,7 +147,7 @@ function Page(props) {
               console.log(error);
             });
         }}
-        // savePage={() => SaveToJSON(page)}
+        // savecomponent={() => SaveToJSON(component)}
         selectedId={settings && settings.selectedId}
       />
       <Tags
@@ -155,7 +155,7 @@ function Page(props) {
           ...settings,
           setSettings,
           tags,
-          page,
+          component,
           changeTag,
           addStyle,
           updateStyle,
@@ -165,4 +165,4 @@ function Page(props) {
     </div>
   );
 }
-export default log(Page);
+export default log(Component);

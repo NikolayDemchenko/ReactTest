@@ -89,7 +89,7 @@ const page = {
 };
 page.tags.push(pageBaseDiv);
 
-for (let i = 0; i < 200; i++) {
+for (let i = 0; i < 9; i++) {
   page.tags.push( JSON.parse(JSON.stringify({
     index: i,
     id: uuidv4(),

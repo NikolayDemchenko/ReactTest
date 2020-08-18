@@ -19,8 +19,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 router.get("/", (req, res) => {
-  const elements = req.app.locals.elements;
-  elements
+  const components = req.app.locals.components;
+  components
     .find({})
     .toArray()
     .then((response) => res.status(200).json(response))

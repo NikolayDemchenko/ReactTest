@@ -29,13 +29,13 @@ function NavigationPanel(props) {
     .attach();
 
   const [showPanel, setShowPanel] = useState(false);
- 
+
   return (
     <div
       style={{
         position: "fixed",
         top: 0,
-        backgroundColor: "#456c",     
+        backgroundColor: "#456c",
         display: "flex",
         justifyContent: "center",
         padding: "0 10px",
@@ -61,7 +61,7 @@ function NavigationPanel(props) {
         onClick={(e) => {
           e.stopPropagation();
           console.log("savePage");
-          props.savePage()
+          props.saveComponent();
         }}
       >
         Save
