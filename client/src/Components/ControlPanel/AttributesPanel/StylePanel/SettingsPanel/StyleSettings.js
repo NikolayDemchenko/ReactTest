@@ -7,9 +7,9 @@ import { SaveToJSON } from "../../../../../AppFunction";
 import { paintBrush } from "react-icons-kit/fa/paintBrush";
 import { ic_update } from "react-icons-kit/md/ic_update";
 import { folderDownload } from "react-icons-kit/icomoon/folderDownload";
-import { boxAdd } from "react-icons-kit/icomoon/boxAdd";
+// import { boxAdd } from "react-icons-kit/icomoon/boxAdd";
 import {boxRemove} from 'react-icons-kit/icomoon/boxRemove'
-import SelectPanel from "../../../SelectPanel/SelectPanel";
+import SelectPanel from "../../../ModalWindows/SelectPanel/SelectPanel";
 import Styles from "../../JSON/Styles.json";
 function StylePanel(props) {
   // console.log("props :>> ", props);

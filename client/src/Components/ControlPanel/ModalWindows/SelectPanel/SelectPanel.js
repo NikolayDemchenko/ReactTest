@@ -1,5 +1,5 @@
 import React from "react";
-import Popover from "../ModalWindows/Popover";
+import Popover from "../Popover";
 import Items from "./Items";
 export default function SelectPanel(props) {
   return (

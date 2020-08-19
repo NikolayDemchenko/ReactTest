@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { plus } from "react-icons-kit/icomoon/plus";
 import { cross } from "react-icons-kit/icomoon/cross";
 import Icon from "react-icons-kit";
-import SelectPanel from "../../SelectPanel/SelectPanel";
+import SelectPanel from "../../ModalWindows/SelectPanel/SelectPanel";
 // import htmlTags from "html-tags";
 import htmlTagsVoid from "html-tags/void";
 import { htmlTags, basehtmlTags } from "../../../Class/HtmlCss";

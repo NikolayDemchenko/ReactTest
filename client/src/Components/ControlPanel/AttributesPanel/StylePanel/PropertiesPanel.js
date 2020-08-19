@@ -9,7 +9,7 @@ import { ic_credit_card } from "react-icons-kit/md/ic_credit_card";
 import { ic_note_add } from "react-icons-kit/md/ic_note_add";
 import { ic_library_add } from "react-icons-kit/md/ic_library_add";
 import PopupInput from "../Inputs/PopupInput/PopupInput";
-import SelectPanel from "../../SelectPanel/SelectPanel";
+import SelectPanel from "../../ModalWindows/SelectPanel/SelectPanel";
 import Properties from "./Properties";
 import { deleteObjectProps } from "./Function/ObjectManager";
 function PropertiesPanel(props) {

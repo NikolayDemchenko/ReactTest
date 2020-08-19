@@ -4,7 +4,7 @@ import { angleDown } from "react-icons-kit/fa/angleDown";
 import { angleUp } from "react-icons-kit/fa/angleUp";
 import Slider from "@material-ui/core/Slider";
 import { cssUnits } from "../../../Class/HtmlCss";
-import SelectPanel from "../../SelectPanel/SelectPanel";
+import SelectPanel from "../../ModalWindows/SelectPanel/SelectPanel";
 
 export default function NumberSlider(props) {
   const value = props.value.replace(/-/gm, "");

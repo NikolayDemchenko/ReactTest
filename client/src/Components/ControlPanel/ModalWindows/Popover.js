@@ -16,6 +16,7 @@ function Popover(props) {
     setAnchorEl(null);
   };
   const open = Boolean(anchorEl);
+  // const paper={...children[1],props:{...children[1].props}}
   const paper={...children[1],props:{...children[1].props,close:handleClose}}
 
   const id = open ? "new-popover" : undefined;

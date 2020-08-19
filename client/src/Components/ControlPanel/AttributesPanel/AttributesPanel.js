@@ -4,7 +4,7 @@ import { Link } from "react-scroll";
 import log from '../../../Log'
 import jss from "jss";
 import preset from "jss-preset-default";
-import SelectPanel from "../SelectPanel/SelectPanel";
+import SelectPanel from "../ModalWindows/SelectPanel/SelectPanel";
 import { htmlTags } from "../../Class/HtmlCss";
 
 function AttributesPanel(props) {

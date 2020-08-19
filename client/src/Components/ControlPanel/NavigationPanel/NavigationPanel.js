@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import NavTags from "./NavTags";
+import ModalInput from "../ModalWindows/ModalInput/ModalInput";
 import jss from "jss";
 import preset from "jss-preset-default";
 function NavigationPanel(props) {
@@ -59,13 +60,27 @@ function NavigationPanel(props) {
           cursor: "pointer",
         }}
         onClick={(e) => {
-          e.stopPropagation();
-          console.log("savePage");
+          // e.stopPropagation();
+          e.preventDefault()
           props.saveComponent();
         }}
+        // onClick={props.saveComponent}
       >
         Save
       </div>
+
+      <ModalInput setItem={props.saveNewComponent}>
+        <div
+          style={{
+            backgroundColor: "#456c",
+            justifyContent: "center",
+            padding: "0 10px",
+            cursor: "pointer",
+          }}
+        >
+          Save as
+        </div>
+      </ModalInput>
       {showPanel && (
         <div className={classes.style}>
           <NavTags {...props} />

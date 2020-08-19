@@ -31,10 +31,14 @@ function Component(props) {
 
   // console.log("settings :>> ", settings);
 
-  const [component, setComponent] = useState(JSON.parse(JSON.stringify(_component)));
+  const [component, setComponent] = useState(
+    JSON.parse(JSON.stringify(_component))
+  );
   // console.log("component.tags :>> ", component.tags);
 
-  const tags = getTagStructure([...component.tags], null, [...component.styles]);
+  const tags = getTagStructure([...component.tags], null, [
+    ...component.styles,
+  ]);
 
   jss.setup(preset());
   const myStyles = {};
@@ -124,9 +128,36 @@ function Component(props) {
     setComponent({ ...component, styles });
   };
 
-  let config = {
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    responseType: "blob",
+  const saveNewComponent = (name) => {
+    name && name !== ""
+      ? axios({
+          method: "post",
+          url: "http://localhost:8000/components",
+          data: { component: JSON.stringify({  name,...component }) },
+        })
+          .then((response) => {
+            console.log(response.data);
+            setComponent({ ...response.data });
+          })
+          .catch(function (error) {
+            console.log(error);
+          })
+      : alert("string empty!");
+  };
+  const saveComponent = () => {
+    console.log("save")
+    axios({
+      method: "post",
+      url: "http://localhost:8000/updatecomponent",
+      data: { component: JSON.stringify(component) },
+    })
+      .then((response) => {
+        console.log(response.data);
+        setComponent({ ...response.data });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
   return (
     <div>
@@ -134,20 +165,8 @@ function Component(props) {
         tags={tags}
         addTag={addTag}
         removeTag={removeTag}
-        saveComponent={() => {    
-          axios({
-            method: "post",
-            url: "http://localhost:8000/components",
-            data: {component:JSON.stringify(component)},
-          })
-            .then((response) => {
-              console.log(response.data);
-            })
-            .catch(function (error) {
-              console.log(error);
-            });
-        }}
-        // savecomponent={() => SaveToJSON(component)}
+        saveComponent={saveComponent}
+        saveNewComponent={saveNewComponent}
         selectedId={settings && settings.selectedId}
       />
       <Tags

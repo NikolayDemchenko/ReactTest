@@ -30,10 +30,29 @@ router.get("/", (req, res) => {
 app.post("/components", (req, res) => {
   const components = req.app.locals.components;
   const component = JSON.parse(req.body.component);
-  console.log(component);
+  delete component._id;
+  // console.log(component);
+  console.log("save as");
   components.insertOne(component, (err, result) => {
     if (err) return console.log(err);
     res.send(component);
+  });
+  // console.log('typeof component._id', typeof component._id)
+});
+
+app.post("/updatecomponent", (req, res) => {
+  const components = req.app.locals.components;
+  const component = JSON.parse(req.body.component);
+
+  console.log("save");
+  // console.log(component);
+  // console.log('typeof component._id', typeof ObjectId(component._id),ObjectId(component._id))
+  const _id = ObjectId(component._id);
+ 
+  components.findOneAndUpdate({ _id }, { $set: { ...component,_id } }, (err, result) => {
+    if (err) return console.log(err);
+    console.log("result", result);
+    res.send(component)
   });
 });
 

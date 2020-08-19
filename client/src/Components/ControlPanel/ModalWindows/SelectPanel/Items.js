@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
-export default function SelectPanel(props) {
+export default function Items(props) {
   let { setItem, allItems, selectedItem: value, items, close } = props;
   allItems = allItems ? allItems : items;
   const [state, _setState] = useState({ value, items });
@@ -23,7 +23,7 @@ export default function SelectPanel(props) {
   const handleClick = (item) => {
     setItem(item);
     setState(item);
-    close(null);
+    // close(null);
     // console.log("handleClick", item);
   };
   const handleChange = ({ target: { value } }) => {
