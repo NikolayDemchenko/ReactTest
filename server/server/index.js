@@ -27,7 +27,7 @@ router.get("/", (req, res) => {
     .catch((error) => console.error(error));
 });
 
-app.post("/components", (req, res) => {
+app.post("/addcomponent", (req, res) => {
   const components = req.app.locals.components;
   const component = JSON.parse(req.body.component);
   delete component._id;

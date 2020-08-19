@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
-import {createStyle} from '../../AppFunction'
+import shortid from "shortid";
+import { createStyle } from "../../AppFunction";
 
 const newStyle = {
   height: "200px",
@@ -16,7 +17,7 @@ const newStyle = {
     boxShadow: "none",
   },
 };
-const newPageStyle =createStyle(newStyle, "newStyle"); 
+const newPageStyle = createStyle(newStyle, "newStyle");
 
 const innerStyle = {
   height: "200px",
@@ -76,28 +77,34 @@ const basePageStyle = createStyle(baseStyle, "baseStyle");
 
 const pageBaseDiv = {
   index: 0,
-  id: uuidv4(),
+  // id: uuidv4(),
+  id: shortid.generate(),
   parentId: null,
   type: "div",
   styleId: basePageStyle.id,
   attributes: {},
 };
 
-const page = {
+const component = {
   styles: [basePageStyle, innerPageStyle, newPageStyle],
   tags: [],
 };
-page.tags.push(pageBaseDiv);
+component.tags.push(pageBaseDiv);
 
 for (let i = 0; i < 9; i++) {
-  page.tags.push( JSON.parse(JSON.stringify({
-    index: i,
-    id: uuidv4(),
-    parentId: pageBaseDiv.id,
-    type: "div",
-    styleId: innerPageStyle.id,
-    attributes: {},
-  })));
+  component.tags.push(
+    JSON.parse(
+      JSON.stringify({
+        index: i,
+        // id: uuidv4(),
+        id: shortid.generate(),
+        parentId: pageBaseDiv.id,
+        type: "div",
+        styleId: innerPageStyle.id,
+        attributes: {},
+      })
+    )
+  );
 }
 
-export { page, createStyle };
+export { component, createStyle };

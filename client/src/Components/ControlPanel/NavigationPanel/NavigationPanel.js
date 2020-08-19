@@ -3,8 +3,9 @@ import NavTags from "./NavTags";
 import ModalInput from "../ModalWindows/ModalInput/ModalInput";
 import jss from "jss";
 import preset from "jss-preset-default";
+import SaveComponent from "./CRUD/Component/SaveComponent";
 function NavigationPanel(props) {
-  // console.log('props', props)
+  console.log('props', props)
   const style = {
     // flexWrap: "wrap",
     minWidth: "280px",
@@ -52,7 +53,7 @@ function NavigationPanel(props) {
       >
         Navigation
       </div>
-      <div
+      {/* <div
         style={{
           backgroundColor: "#456c",
           justifyContent: "center",
@@ -67,8 +68,8 @@ function NavigationPanel(props) {
         // onClick={props.saveComponent}
       >
         Save
-      </div>
-
+      </div> */}
+      <SaveComponent saveComponent={props.saveComponent} title={"Save"} componentId={props.componentId} />
       <ModalInput setItem={props.saveNewComponent}>
         <div
           style={{

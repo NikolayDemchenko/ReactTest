@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
-export const createStyle = (style, name, id = uuidv4()) => ({
+import shortid from "shortid";
+export const createStyle = (style, name, id = shortid.generate()) => ({
   name,
   id,
   style,

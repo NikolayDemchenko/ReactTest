@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import log from "../Log";
 import { v4 as uuidv4 } from "uuid";
+import shortid from "shortid";
 import Tags from "./Tag/Tags";
 import { getParentBranch } from "./Tag/HocTag";
-import { page as _component } from "./Tag/Classes";
+import { component as _component } from "./Tag/Classes";
 import { createStyle } from "../AppFunction";
 import NavigationPanel from "./ControlPanel/NavigationPanel/NavigationPanel";
 import { SaveToJSON } from "../AppFunction";
@@ -49,7 +50,7 @@ function Component(props) {
 
   const addTag = (type, parent) => {
     const newTag = {
-      id: uuidv4(),
+      id: shortid.generate(),
       parentId: parent.id,
       type,
       index: parent.childrens.length,
@@ -132,8 +133,8 @@ function Component(props) {
     name && name !== ""
       ? axios({
           method: "post",
-          url: "http://localhost:8000/components",
-          data: { component: JSON.stringify({  name,...component }) },
+          url: "http://localhost:8000/addcomponent",
+          data: { component: JSON.stringify({ ...component, name }) },
         })
           .then((response) => {
             console.log(response.data);
@@ -145,7 +146,7 @@ function Component(props) {
       : alert("string empty!");
   };
   const saveComponent = () => {
-    console.log("save")
+    console.log("save");
     axios({
       method: "post",
       url: "http://localhost:8000/updatecomponent",
@@ -162,11 +163,8 @@ function Component(props) {
   return (
     <div>
       <NavigationPanel
-        tags={tags}
-        addTag={addTag}
-        removeTag={removeTag}
-        saveComponent={saveComponent}
-        saveNewComponent={saveNewComponent}
+        {...{ tags, addTag, removeTag, saveComponent, saveNewComponent }}
+        componentId={component._id}
         selectedId={settings && settings.selectedId}
       />
       <Tags
