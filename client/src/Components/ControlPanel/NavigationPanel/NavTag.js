@@ -3,7 +3,7 @@ import { ic_keyboard_arrow_right } from "react-icons-kit/md/ic_keyboard_arrow_ri
 import Icon from "react-icons-kit";
 import { Link } from "react-scroll";
 import NavTags from "./NavTags";
-import CRUDTag from "./CRUDTag/CRUDTag";
+import CRUDTag from "./CRUD/Tag/CRUDTag";
 
 function NavTag(props) {
   const { tag, addTag, removeTag, selectedId } = props;
