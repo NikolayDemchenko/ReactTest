@@ -1,6 +1,5 @@
-import { v4 as uuidv4 } from "uuid";
 import shortid from "shortid";
-import { createStyle } from "../../AppFunction";
+import { createStyle } from "../../../../AppFunction";
 
 const newStyle = {
   height: "200px",

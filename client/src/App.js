@@ -1,7 +1,7 @@
 import React from "react";
 import ErrorBoundry from "./ErrorBoundry";
 import "./App.css";
-import Component from "./Components/Component";
+import Component from "./Components/View/Pages/Components/Component";
 
 // import AttributesPanel from "./Components/ControlPanel/AttributesPanel/AttributesPanel";
 

@@ -1,5 +1,5 @@
 import React from "react";
-import log from "../../Log";
+import log from "../../../../../Log";
 import Element from "./Tag";
 import HocTag, { getParentBranch } from "./HocTag";
 function Tags(props) {

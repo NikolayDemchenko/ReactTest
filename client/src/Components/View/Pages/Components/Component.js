@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-import log from "../Log";
+import log from "../../../../Log";
 import { v4 as uuidv4 } from "uuid";
 import shortid from "shortid";
 import Tags from "./Tag/Tags";
 import { getParentBranch } from "./Tag/HocTag";
-import { component as _component } from "./Tag/Classes";
-import { createStyle } from "../AppFunction";
-import NavigationPanel from "./ControlPanel/NavigationPanel/NavigationPanel";
-import { SaveToJSON } from "../AppFunction";
+import { component as _component } from "./CreateComponent";
+import { createStyle } from "../../../../AppFunction";
+import NavigationPanel from "../../../Control/NavigationPanel/NavigationPanel";
+import { SaveToJSON } from "../../../../AppFunction";
 import jss from "jss";
 import preset from "jss-preset-default";
 import axios from "axios";

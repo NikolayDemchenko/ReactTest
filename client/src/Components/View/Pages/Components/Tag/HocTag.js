@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Portal } from "react-portal";
-import AttributesPanel from "../ControlPanel/AttributesPanel/AttributesPanel";
+import AttributesPanel from "../../../../Control/AttributesPanel/AttributesPanel";
 import jss from "jss";
 import preset from "jss-preset-default";
-import log from "../../Log";
+import log from "../../../../../Log";
 export const getParentBranch = (tags, tag, idList = []) => {
   const parentId = tag.parentId;
   if (parentId) {
