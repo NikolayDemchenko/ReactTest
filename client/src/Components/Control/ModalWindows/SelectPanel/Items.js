@@ -3,12 +3,38 @@ import ReactDOM from "react-dom";
 export default function Items(props) {
   let { setItem, allItems, selectedItem: value, items, close } = props;
   allItems = allItems ? allItems : items;
-  const [state, _setState] = useState({ value, items });
+  const [state, _setState] = useState({ value, items: items.sort() });
 
-  // console.log('items :>> ', items);
+  const search = (item, items, allItems) => {
+    // Поиск по подстроке
+    const findedAllItems = allItems.filter((_item) => _item.includes(item));
+    // Сортировка по позиции подстроки
+    findedAllItems.sort((a, b) => a.indexOf(item) - b.indexOf(item));
+    const findedItems = items.filter((_item) => _item.includes(item));
+    findedItems.sort((a, b) => a.indexOf(item) - b.indexOf(item));
+    const listItems = [...new Set([...findedItems, ...findedAllItems])];
+    console.log("listItems", listItems);
+
+    const result = findedAllItems.length > 0 ? listItems : items;
+
+    const upItems = allItems.map(
+      (_item, index) => index > allItems.indexOf(item) && _item
+    ).filter((el)=>el!==false);
+    const downItems = allItems.map(
+      (_item, index) => index < allItems.indexOf(item) && _item
+    ).filter((el)=>el!==false);
+    // const downItems = allItems.splice(allItems.indexOf(item), 3);
+
+    console.log("upItems :>> ", upItems);
+    console.log("downItems :>> ", downItems);
+    return result;
+  };
+
+  console.log("state :>> ", state);
   // console.log('allItems :>> ', allItems);
   const setState = (value) => {
-    _setState({ items: search(value), value });
+    const _items = search(value, items, allItems).sort();
+    _setState({ items: _items, value });
   };
   const setValue = (value) => {
     _setState({ ...state, value });
@@ -29,18 +55,6 @@ export default function Items(props) {
   const handleChange = ({ target: { value } }) => {
     setState(value);
     console.log("handleChange", value);
-  };
-
-  const search = (item) => {
-    // Поиск по подстроке
-    const findedAllItems = allItems.filter((_item) => _item.includes(item));
-    // Сортировка по позиции подстроки
-    findedAllItems.sort((a, b) => a.indexOf(item) - b.indexOf(item));
-    const findedItems = items.filter((_item) => _item.includes(item));
-    findedItems.sort((a, b) => a.indexOf(item) - b.indexOf(item));
-    const listItems = [...new Set([...findedItems, ...findedAllItems])];
-    console.log('listItems', listItems)
-    return findedAllItems.length > 0 ? listItems : items;
   };
 
   return (
@@ -69,7 +83,7 @@ export default function Items(props) {
             key={index}
             onMouseDown={() => setValue(item)}
             onClick={(e) => {
-              e.stopPropagation()
+              e.stopPropagation();
               handleClick(item);
             }}
             style={{
