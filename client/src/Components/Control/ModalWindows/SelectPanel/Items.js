@@ -5,28 +5,28 @@ export default function Items(props) {
   allItems = allItems ? allItems : items;
   const [state, _setState] = useState({ value, items: items.sort() });
 
-  const search = (item, items, allItems) => {
+  const search = (chars,words,allWords) => {
     // Поиск по подстроке
-    const findedAllItems = allItems.filter((_item) => _item.includes(item));
+    const findedAllWords = allWords.filter((word) => word.includes(chars));
     // Сортировка по позиции подстроки
-    findedAllItems.sort((a, b) => a.indexOf(item) - b.indexOf(item));
-    const findedItems = items.filter((_item) => _item.includes(item));
-    findedItems.sort((a, b) => a.indexOf(item) - b.indexOf(item));
-    const listItems = [...new Set([...findedItems, ...findedAllItems])];
-    console.log("listItems", listItems);
+    findedAllWords.sort((a, b) => a.indexOf(chars) - b.indexOf(chars));
+    const findedWords = words.filter((word) => word.includes(chars));
+    findedWords.sort((a, b) => a.indexOf(chars) - b.indexOf(chars));
+    const listWords = [...new Set([...findedWords, ...findedAllWords])];
+    console.log("listWords", listWords);
 
-    const result = findedAllItems.length > 0 ? listItems : items;
+    const result = findedAllWords.length > 0 ? listWords : words;
 
-    const upItems = allItems.map(
-      (_item, index) => index > allItems.indexOf(item) && _item
-    ).filter((el)=>el!==false);
-    const downItems = allItems.map(
-      (_item, index) => index < allItems.indexOf(item) && _item
-    ).filter((el)=>el!==false);
-    // const downItems = allItems.splice(allItems.indexOf(item), 3);
+    // const upItems = allItems.map(
+    //   (_item, index) => index > allItems.indexOf(item) && _item
+    // ).filter((el)=>el!==false);
+    // const downItems = allItems.map(
+    //   (_item, index) => index < allItems.indexOf(item) && _item
+    // ).filter((el)=>el!==false);
+    // // const downItems = allItems.splice(allItems.indexOf(item), 3);
 
-    console.log("upItems :>> ", upItems);
-    console.log("downItems :>> ", downItems);
+    // console.log("upItems :>> ", upItems);
+    // console.log("downItems :>> ", downItems);
     return result;
   };
 
