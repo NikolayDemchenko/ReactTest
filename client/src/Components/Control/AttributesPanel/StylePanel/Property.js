@@ -73,7 +73,7 @@ function Property(props) {
         style={{
           padding: "0px 0.5em",
           // border: "1px solid #fff",
-          width: `${name.length / 2}em`,
+          // width: `${name.length / 2}em`,
         }}
       >
         <PopupInput
