@@ -135,7 +135,7 @@ const ThisSlider = ({ value, unit, sign, setPreview, setValue }) => {
           {_value}
         </div>
         <SelectPanel
-          selectedItem={unit}
+          selected={unit}
           items={cssUnits.map((unit) => unit.value)}
           setItem={setUnit}        
         />

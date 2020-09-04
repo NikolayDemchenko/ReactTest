@@ -40,7 +40,7 @@ export default function FuncInput({ value, setValue, setPreview }) {
     <div style={{ color: "rgba(140, 200, 255, 0.8)", display: "inline-flex" }}>
       <div style={blockStyle}>
         <SelectPanel
-          selectedItem={funcType}
+          selected={funcType}
           items={cssFunc.map((fnc) => fnc.value)}
           setItem={setFuncType}
         />

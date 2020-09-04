@@ -17,7 +17,7 @@ console.log('htmlTags', htmlTags)
     <SelectPanel
         items={basehtmlTags.map((item) => item.value)}
         allItems={htmlTags}
-        selectedItem={""}
+        selected={""}
         setItem={(item) => addTag(item, tag)}
         button={
           <div style={{ margin: "0 0.2em", cursor: "pointer", width: "0.8em" }}>

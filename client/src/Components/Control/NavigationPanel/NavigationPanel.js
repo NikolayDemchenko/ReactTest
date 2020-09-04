@@ -5,7 +5,7 @@ import jss from "jss";
 import preset from "jss-preset-default";
 import SaveComponent from "./CRUD/Component/SaveComponent";
 function NavigationPanel(props) {
-  console.log('props', props)
+  // console.log('props', props)
   const style = {
     // flexWrap: "wrap",
     minWidth: "280px",

@@ -84,7 +84,7 @@ function AttributesPanel(props) {
           type:
         </div> 
          <SelectPanel
-          selectedItem={tag.type}
+          selected={tag.type}
           items={htmlTags}
           setItem={setTagType}        
         />

@@ -21,7 +21,7 @@ export default function SelectPanel(props) {
       anchorOrigin={{ vertical: "top", horizontal: "center" }}
     >
       <div style={{ cursor: "pointer" }}>
-        {props.button ? props.button : props.selectedItem}
+        {props.button ? props.button : props.selected}
       </div>
       <Items {...props} />
     </Popover>

@@ -5,19 +5,22 @@ function StylePanel(props) {
   // console.log("%cStylePanel-VerticalPanel-App", "color: green");
   // console.log("props :>> ", props);
 
-  const { tag, setTag, setPreview, changeTag } = props;
+  const { tag, setTag, setPreview} = props;
   const { style } = tag;
 
   const [selected, setSelected] = useState("All style");
   const [draggedProp, setDragged] = useState();
 
   const getTagAllStyles = (tag) => {
-    return Object.entries(getComputedStyle(document.getElementById(tag.id)))
+    const result = Object.entries(
+      getComputedStyle(document.getElementById(tag.id))
+    )
       .map(([key, value]) => {
         key = +key || key === "0" ? +key : key;
         return { key, value };
       })
       .filter((obj) => typeof obj.key !== "number");
+    return result;
   };
 
   const setDraggedProp = (item) => {
@@ -36,7 +39,7 @@ function StylePanel(props) {
   const setStyle = (style, chain) => {
     setTag({ ...tag, style }, `\nsetStyle-StylePanel ${chain}`);
   };
-
+  // console.log('getTagAllStyles(tag)', getTagAllStyles(tag))
   return (
     <div style={{ background: "rgba(30,40,57,.6)" }} title="CSS (JSS) Стили">
       <StyleSettings

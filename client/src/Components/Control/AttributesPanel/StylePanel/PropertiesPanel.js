@@ -127,7 +127,7 @@ function PropertiesPanel(props) {
           </div>
           <SelectPanel
             items={tagAllStyles.map(({ key }) => key)}
-            selectedItem={""}
+            selected={""}
             setItem={addProperty}
             button={
               <div title={"Добавить свойство"} className={buttonStyle}>

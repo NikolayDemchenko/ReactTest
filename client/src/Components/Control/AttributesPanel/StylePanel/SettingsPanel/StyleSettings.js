@@ -69,7 +69,7 @@ function StylePanel(props) {
       >
         <SelectPanel
           items={allStyles.map((style) => style.name)}
-          selectedItem={""}
+          selected={""}
           setItem={getStyle}
           button={
             <div title={"Выбрать стиль"} className={buttonStyle}>
