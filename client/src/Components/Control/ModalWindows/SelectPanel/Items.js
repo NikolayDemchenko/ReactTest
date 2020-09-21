@@ -29,9 +29,9 @@ export default function Items(props) {
     }
   };
 
-  const handleClick = (selected) => {
-    setItem(selected);
-    setSelected(selected);
+  const handleClick = (value) => {
+    setItem(value);
+    setSelected(value);
   };
 
   const handleChange = ({ target: { value } }) => {

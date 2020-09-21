@@ -1,17 +1,17 @@
 import React from "react";
 import Icon from "react-icons-kit";
-import { buttonStyle } from "../BtnStyle";
+import { buttonStyle } from "./BtnStyle";
 import { copy } from "react-icons-kit/icomoon/copy";
 import { exportIcon } from "react-icons-kit/entypo/exportIcon";
-import { SaveToJSON } from "../../../../../AppFunction";
+import { SaveToJSON } from "../../../../AppFunction";
 import { paintBrush } from "react-icons-kit/fa/paintBrush";
 import { ic_update } from "react-icons-kit/md/ic_update";
 import { folderDownload } from "react-icons-kit/icomoon/folderDownload";
 // import { boxAdd } from "react-icons-kit/icomoon/boxAdd";
 import { boxRemove } from "react-icons-kit/icomoon/boxRemove";
-import SelectPanel from "../../../ModalWindows/SelectPanel/SelectPanel";
-import Styles from "../../JSON/Styles.json";
-function StylePanel(props) {
+import SelectPanel from "../../ModalWindows/SelectPanel/SelectPanel";
+import Styles from "../JSON/Styles.json";
+function SettingsPanel(props) {
   // console.log("props :>> ", props);
   const {
     addStyle,
@@ -24,21 +24,19 @@ function StylePanel(props) {
     assignableStyle,
     setSettings,
     setTag,
+    setStyle,
     component: { styles },
   } = props;
 
   // console.log("props", props);
   // console.log("Styles", Styles);
   const allStyles = [...styles, ...Styles];
+
   const setStyleByName = (name) => {
     const style = allStyles.find((style) => style.name === name);  
-    setPreview(style.style);
-    console.log(
-      "styles.find(({ id }) => id === tag.styleId)",
-      styles.find(({ id }) => id === tag.styleId)
-    );
-
+    setStyle(style.style);    
   };
+
   return (
     <div
       style={{
@@ -153,4 +151,4 @@ function StylePanel(props) {
     </div>
   );
 }
-export default StylePanel;
+export default SettingsPanel;

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import PropertiesPanel from "./PropertiesPanel";
-import StyleSettings from "./SettingsPanel/StyleSettings";
+import SettingsPanel from "./SettingsPanel";
 function StylePanel(props) {
   // console.log("%cStylePanel-VerticalPanel-App", "color: green");
   // console.log("props :>> ", props);
 
-  const { tag, setTag, setPreview} = props;
+  const { tag, setTag, setPreview } = props;
   const { style } = tag;
 
   const [selected, setSelected] = useState("All style");
@@ -42,10 +42,11 @@ function StylePanel(props) {
   // console.log('getTagAllStyles(tag)', getTagAllStyles(tag))
   return (
     <div style={{ background: "rgba(30,40,57,.6)" }} title="CSS (JSS) Стили">
-      <StyleSettings
+      <SettingsPanel
         {...{
           ...props,
           onAllStyle,
+          setStyle,
           selected,
           style,
           setPreview: setPreviewStyle,

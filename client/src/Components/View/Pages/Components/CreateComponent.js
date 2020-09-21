@@ -1,6 +1,8 @@
 import shortid from "shortid";
 import { createStyle } from "../../../../AppFunction";
 
+const pages = [{ components: [{ tags: [] }] }, { components: [{ tags: [] }] }];
+
 const newStyle = {
   height: "200px",
   width: "200px",
