@@ -13,10 +13,7 @@ function AttributesPanel(props) {
   //     'color: green');
   // console.log("props :>> ", props);
 
-  const { changeTag, panelTag, setPanelTag } = props;
-  // const [tag, setTag] = useState(preview);
-  const tag  = panelTag;
-  const setTag=setPanelTag;
+  const { changeTag, panelTag:tag, setPanelTag:setTag } = props;
 
   
   // useEffect(() => {
@@ -26,7 +23,7 @@ function AttributesPanel(props) {
   //   };
   // }, [preview]);
 
-  // Получает tag
+  // Назначает тип тега
   const setTagType = ( type ) => {
     console.log('type', type)
     changeTag(props.tag,"type",type)

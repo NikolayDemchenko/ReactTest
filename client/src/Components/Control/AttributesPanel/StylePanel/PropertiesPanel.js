@@ -19,16 +19,17 @@ function PropertiesPanel(props) {
     setName,
     style,
     setStyle,
-    setFunc,
+    setStyleView,
     deletePanel,
     selected,
     setSelected,
-    tag,
-    tagAllStyles,
+    tag, 
+    allStyleProps,
   } = props;
 
   // console.log("%cPropertiesPanel-StylePanel", "color: green");
   // console.log("props :>> ", props);
+  // console.log("style", style);
 
   const [edit, setEdit] = useState();
 
@@ -67,7 +68,7 @@ function PropertiesPanel(props) {
 
   borderTop = !fullName.indexOf("@media") ? "none" : borderTop;
 
-  const styleFilter = (preview) => {
+  const styleViewFilter = (preview) => {
     return {
       ...preview,
       style: {
@@ -78,17 +79,18 @@ function PropertiesPanel(props) {
   };
 
   const addProperty = (_key) => {
-    const { key, value } = tagAllStyles.find((style) => style.key === _key);
+    const { key, value } = allStyleProps.find((style) => style.key === _key);
 
     console.log("!!!!!!!!!!!!!!!e", key, value);
     setStyle({ [key]: value, ...style });
   };
+
   return (
     <div
       // Включение частичного превью
       onClick={(e) => {
         e.stopPropagation();
-        setFunc({ styleFilter });
+        setStyleView({ styleViewFilter });
         setSelected(fullName);
       }}
       style={{ borderTop, color: setColor(selected, fullName) }}
@@ -100,7 +102,7 @@ function PropertiesPanel(props) {
       <div
         style={{
           color: "#bdec",
-          display: "flex",         
+          display: "flex",
           paddingLeft: "0.5em",
           background:
             selected === fullName ? "rgba(134, 186, 250, 0.1)" : "none",
@@ -115,7 +117,7 @@ function PropertiesPanel(props) {
           style={{
             display: "flex",
             width: "100%",
-            justifyContent: "flex-end",      
+            justifyContent: "flex-end",
           }}
         >
           <div
@@ -126,9 +128,10 @@ function PropertiesPanel(props) {
             <Icon size={"100%"} icon={ic_credit_card} />
           </div>
           <SelectPanel
-            items={tagAllStyles.map(({ key }) => key)}
+            items={allStyleProps.map(({ key }) => key)}
             selected={""}
             setItem={addProperty}
+            exItems={Object.keys(style)}
             button={
               <div title={"Добавить свойство"} className={buttonStyle}>
                 <Icon size={"100%"} icon={ic_add_to_queue} />

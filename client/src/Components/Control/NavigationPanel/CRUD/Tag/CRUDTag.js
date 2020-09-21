@@ -15,8 +15,7 @@ console.log('htmlTags', htmlTags)
       {/* Добавление тега */}
     {!htmlTagsVoid.find(tagVoid=>tagVoid===tag.type)&&
     <SelectPanel
-        items={basehtmlTags.map((item) => item.value)}
-        allItems={htmlTags}
+        items={[...new Set([...basehtmlTags.map((item) => item.value),...htmlTags])]}       
         selected={""}
         setItem={(item) => addTag(item, tag)}
         button={

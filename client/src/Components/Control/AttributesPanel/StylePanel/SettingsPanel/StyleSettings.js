@@ -8,7 +8,7 @@ import { paintBrush } from "react-icons-kit/fa/paintBrush";
 import { ic_update } from "react-icons-kit/md/ic_update";
 import { folderDownload } from "react-icons-kit/icomoon/folderDownload";
 // import { boxAdd } from "react-icons-kit/icomoon/boxAdd";
-import {boxRemove} from 'react-icons-kit/icomoon/boxRemove'
+import { boxRemove } from "react-icons-kit/icomoon/boxRemove";
 import SelectPanel from "../../../ModalWindows/SelectPanel/SelectPanel";
 import Styles from "../../JSON/Styles.json";
 function StylePanel(props) {
@@ -26,18 +26,18 @@ function StylePanel(props) {
     setTag,
     component: { styles },
   } = props;
+
   // console.log("props", props);
   // console.log("Styles", Styles);
   const allStyles = [...styles, ...Styles];
-  const getStyle = (item) => {
-    const style = allStyles.find((style) => style.name === item).style;
-    setTag((tag) => ({ ...tag, style }));
-    setPreview(style);
+  const setStyleByName = (name) => {
+    const style = allStyles.find((style) => style.name === name);  
+    setPreview(style.style);
+    console.log(
+      "styles.find(({ id }) => id === tag.styleId)",
+      styles.find(({ id }) => id === tag.styleId)
+    );
 
-    // console.log(
-    //   "addStyle(allStyles.find(style=>style.name===item).style)",
-    //   allStyles.find((style) => style.name === item).style
-    // );
   };
   return (
     <div
@@ -69,8 +69,8 @@ function StylePanel(props) {
       >
         <SelectPanel
           items={allStyles.map((style) => style.name)}
-          selected={""}
-          setItem={getStyle}
+          selected={styles.find(({ id }) => id === tag.styleId).name}
+          setItem={setStyleByName}
           button={
             <div title={"Выбрать стиль"} className={buttonStyle}>
               <Icon size={"100%"} icon={folderDownload} />
@@ -129,8 +129,10 @@ function StylePanel(props) {
           // style={btnStyle}
           className={buttonStyle}
           onClick={(e) => {
-            e.stopPropagation();          
-            window.navigator.clipboard.writeText(JSON.stringify({name:"",style}))
+            e.stopPropagation();
+            window.navigator.clipboard.writeText(
+              JSON.stringify({ name: "", style })
+            );
           }}
         >
           <Icon size={"100%"} icon={boxRemove} />

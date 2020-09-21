@@ -1,46 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 export default function Items(props) {
-  let { setItem, allItems, selected, items, close } = props;
-  allItems = allItems ? allItems : items;
-  const [state, _setState] = useState({ selected, items: items.sort() });
+  const { setItem, items, exItems } = props;
 
-  const search = (item, items, allItems) => {
-    // Поиск по подстроке
-    const findedAllItems = allItems.filter((_item) => _item.includes(item));    
-    const findedItems = items.filter((_item) => _item.includes(item));    
-    const listItems = [...new Set([...findedItems, ...findedAllItems])];
-    console.log("listItems", listItems);
-    const result = findedAllItems.length > 0 ? listItems : items;
-    // Сортировка по позиции подстроки
-    result.sort((a, b) => a.indexOf(item) - b.indexOf(item));
-    return result;
-  };
+  const arrayDiff = (arrA = [], arrB = []) =>
+    arrA.filter((el) => !arrB.includes(el));
 
-  console.log("state :>> ", state);
-  // console.log('allItems :>> ', allItems);
-  const setState = (selected) => {
-    const _items = search(selected, items, allItems);
-    _setState({ items: _items, selected });
-  };
-  // const setValue = (selected) => {
-  //   _setState({ ...state, selected });
-  // };
+  const thisItems = arrayDiff(items, exItems);
+  const [search, setSearch] = useState("");
+  const [list, setList] = useState(thisItems);
+  const [selected, setSelected] = useState(props.selected);
+
+  useEffect(() => {
+    setList(Search(search, thisItems));
+  }, [exItems]);
+
+  // Поиск по подстроке и сортировка по позиции подстроки
+  const Search = (item, items) =>
+    items
+      .filter((_item) => _item.includes(item))
+      .sort((a, b) => a.indexOf(item) - b.indexOf(item));
 
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
       // console.log("handleKeyPress");
-      handleClick(e.target.value);
+      // console.log('list.find()', list.find((item) =>item.includes(e.target.value)))
+      handleClick(list.find((item) => item.includes(e.target.value)));
     }
   };
+
   const handleClick = (selected) => {
     setItem(selected);
-    _setState({ ...state, selected });
-    // close(null);
-    // console.log("handleClick", item);
+    setSelected(selected);
   };
+
   const handleChange = ({ target: { value } }) => {
-    setState(value);
+    setList(Search(value, thisItems));
+    setSearch(value);
+
     console.log("handleChange", value);
   };
 
@@ -65,7 +62,7 @@ export default function Items(props) {
         onKeyPress={handleKeyPress}
         style={{ maxHeight: "90vh", overflowY: "auto", background: "#3459" }}
       >
-        {state.items.map((item, index) => (
+        {list.map((item, index) => (
           <div
             key={index}
             // onMouseDown={() => setValue(item)}
@@ -75,7 +72,7 @@ export default function Items(props) {
             }}
             style={{
               background:
-                item === state.selected ? "rgb(30,60,97)" : "rgba(30,40,57,.9)",
+                item === selected ? "rgb(30,60,97)" : "rgba(30,40,57,.9)",
               padding: "1px 8px",
               margin: "1px 0 0",
               cursor: "pointer",

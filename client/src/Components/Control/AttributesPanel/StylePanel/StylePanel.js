@@ -11,7 +11,7 @@ function StylePanel(props) {
   const [selected, setSelected] = useState("All style");
   const [draggedProp, setDragged] = useState();
 
-  const getTagAllStyles = (tag) => {
+  const getAllStyleProps = (tag) => {
     const result = Object.entries(
       getComputedStyle(document.getElementById(tag.id))
     )
@@ -30,7 +30,7 @@ function StylePanel(props) {
 
   const onAllStyle = () => {
     setSelected("All style");
-    props.setFunc({ styleFilter: (p) => p });
+    props.setStyleView({ styleViewFilter: (p) => p });
   };
   const setPreviewStyle = (style) => {
     setPreview({ ...tag, style });
@@ -62,7 +62,7 @@ function StylePanel(props) {
           draggedProp,
           setDraggedProp,
           setPreview: setPreviewStyle,
-          tagAllStyles: getTagAllStyles(tag),
+          allStyleProps: getAllStyleProps(tag),
         }}
       />
     </div>

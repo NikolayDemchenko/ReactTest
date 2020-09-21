@@ -4,14 +4,14 @@ import log from "../../../../../Log";
 // import jss from "jss";
 // import preset from "jss-preset-default";
 function Tag(props) {
-  const { tag, tagsForRender, classes } = props;
+  const { tag, tagsForRender, className } = props;
 
   const onClick = (e) => {
     tag.onClick && tag.onClick(e);
   };
 
   return (
-    <tag.type id={tag.id} className={classes[tag.styleId]} onClick={onClick}>
+    <tag.type id={tag.id} className={className} onClick={onClick}>
       {/* {tag.id} */}
       {tag.childrens && tag.childrens.length > 0 ? (
         <Tags

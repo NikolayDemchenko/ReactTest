@@ -32,7 +32,7 @@ const HocTag = (props) => {
 
   const [preview, _setPreview] = useState(thisTag);
 
-  const [func, setFunc] = useState({ styleFilter: (p) => p });
+  const [styleView, setStyleView] = useState({ styleViewFilter: (p) => p });
   const [panelTag, _setPanelTag] = useState(preview);
 
   const setPreview = ({ style }) => {
@@ -49,7 +49,7 @@ const HocTag = (props) => {
 
   const { classes } = jss
     .createStyleSheet({
-      [tag.styleId]: func.styleFilter(preview).style,
+      [tag.styleId]: styleView.styleViewFilter(preview).style,
     })
     .attach();
 
@@ -74,12 +74,12 @@ const HocTag = (props) => {
     >
       <Portal>
         <AttributesPanel
-          {...{ ...props, setPreview, setFunc, panelTag, setPanelTag }}
+          {...{ ...props, setPreview, setStyleView, panelTag, setPanelTag }}
         />
       </Portal>
       {{
         ...children,
-        props: { ...props, classes: { ...allClasses, ...classes } },
+        props: { ...props, className:classes[tag.styleId], classes: { ...allClasses,  } },
       }}
     </div>
   );

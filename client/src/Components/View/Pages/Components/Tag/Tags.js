@@ -1,9 +1,9 @@
 import React from "react";
 import log from "../../../../../Log";
-import Element from "./Tag";
+import Tag from "./Tag";
 import HocTag, { getParentBranch } from "./HocTag";
 function Tags(props) {
-  // console.log("props", props);
+  // console.log("props", props); 
   return props.tags.map((tag, key) => {
     return props.selectedId !== tag.id ? (
       <div
@@ -17,11 +17,11 @@ function Tags(props) {
           }));
         }}
       >
-        <Element {...{ ...props, tag }} />
+        <Tag {...{ ...props, className: props.classes[tag.styleId], tag }} />
       </div>
     ) : (
       <HocTag {...{ ...props, tag, key }}>
-        <Element />
+        <Tag />
       </HocTag>
     );
   });
