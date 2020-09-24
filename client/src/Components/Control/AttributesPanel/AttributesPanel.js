@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import StylePanel from "./StylePanel/StylePanel";
 import { Link } from "react-scroll";
-import log from '../../../Log'
+import log from "../../../Log";
 import jss from "jss";
 import preset from "jss-preset-default";
 import SelectPanel from "../ModalWindows/SelectPanel/SelectPanel";
@@ -13,9 +13,9 @@ function AttributesPanel(props) {
   //     'color: green');
   // console.log("props :>> ", props);
 
-  const { changeTag, panelTag:tag, setPanelTag:setTag } = props;
+  const { changeTag, tag } = props;
+  // const { changeTag, panelTag: tag, setPanelTag: setTag } = props;
 
-  
   // useEffect(() => {
   //   // setTag(preview);
   //   // updateStyle(tag.style, tag.styleId);
@@ -24,9 +24,9 @@ function AttributesPanel(props) {
   // }, [preview]);
 
   // Назначает тип тега
-  const setTagType = ( type ) => {
-    console.log('type', type)
-    changeTag(props.tag,"type",type)
+  const setTagType = (type) => {
+    console.log("type", type);
+    changeTag(props.tag, "type", type);
   };
   const style = {
     flexWrap: "wrap",
@@ -79,11 +79,11 @@ function AttributesPanel(props) {
           }}
         >
           type:
-        </div> 
-         <SelectPanel
+        </div>
+        <SelectPanel
           selected={tag.type}
           items={htmlTags}
-          setItem={setTagType}        
+          setItem={setTagType}
         />
         <div
           style={{
@@ -92,21 +92,27 @@ function AttributesPanel(props) {
           }}
         ></div>
       </div>
-      <StylePanel {...props} tag={tag} setTag={setTag} />
+      <div>
+        {props.component.styles.map((style, index) => (
+          <div key={index}>{style.name}</div>
+        ))}
+      </div>
+      <StylePanel {...props} />
       <div style={{ paddingBottom: "4em" }} />
     </div>
   );
 }
 
+// function areEqual(prevProps, nextProps) {
+//   // console.log("prevProps", prevProps.assignableStyle);
+//   // console.log("nextProps", nextProps.assignableStyle);
 
-
-function areEqual(prevProps, nextProps) {
-  // console.log("prevProps", prevProps.assignableStyle);
-  // console.log("nextProps", nextProps.assignableStyle);
-
-  return prevProps.panelTag===nextProps.panelTag&&prevProps.assignableStyle===nextProps.assignableStyle;
-}
+//   return (
+//     prevProps.panelStyle === nextProps.panelStyle &&
+//     prevProps.assignableStyle === nextProps.assignableStyle
+//   );
+// }
 // export default Element;
-export default React.memo(log(AttributesPanel), areEqual);
+// export default React.memo(log(AttributesPanel), areEqual);
 // export default log(AttributesPanel);
-// export default React.memo(log(AttributesPanel));
+export default React.memo(log(AttributesPanel));

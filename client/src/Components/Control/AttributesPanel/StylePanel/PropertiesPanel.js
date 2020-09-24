@@ -17,35 +17,35 @@ function PropertiesPanel(props) {
     name,
     parentName,
     setName,
-    style,
-    setStyle,
+    panelStyle,
+    setPanelStyle,
     setStyleView,
     deletePanel,
     selected,
     setSelected,
-    tag, 
+    tag,
     allStyleProps,
   } = props;
 
   // console.log("%cPropertiesPanel-StylePanel", "color: green");
   // console.log("props :>> ", props);
-  // console.log("style", style);
-
+  // console.log("panelStyle", panelStyle);
+  // console.log("tag", tag);
   const [edit, setEdit] = useState();
 
   const addPseudoClass = (e) => {
     e.stopPropagation();
-    setStyle({ ...style, "&:": {} });
+    setPanelStyle({ ...panelStyle, "&:": {} });
   };
   const addMedia = (e) => {
     e.stopPropagation();
-    let _style = { ...style };
+    let _style = { ...panelStyle };
     for (let key in _style) {
       if (typeof _style[key] === "object" && key.indexOf("@media")) {
         delete _style[key];
       }
     }
-    setStyle({ ..._style, "@media": {}, ...style });
+    setPanelStyle({ ..._style, "@media": {}, ...panelStyle });
   };
 
   const fullName = name + parentName;
@@ -68,21 +68,16 @@ function PropertiesPanel(props) {
 
   borderTop = !fullName.indexOf("@media") ? "none" : borderTop;
 
-  const styleViewFilter = (preview) => {
-    return {
-      ...preview,
-      style: {
-        ...deleteObjectProps({ ...preview.style }),
-        ...deleteObjectProps({ ...preview.style[name] }),
-      },
-    };
-  };
+  const styleViewFilter = (style) => ({
+    ...deleteObjectProps({ ...style }),
+    ...deleteObjectProps({ ...style[name] }),
+  });
 
   const addProperty = (_key) => {
     const { key, value } = allStyleProps.find((style) => style.key === _key);
 
     console.log("!!!!!!!!!!!!!!!e", key, value);
-    setStyle({ [key]: value, ...style });
+    setPanelStyle({ [key]: value, ...panelStyle });
   };
 
   return (
@@ -131,7 +126,7 @@ function PropertiesPanel(props) {
             items={allStyleProps.map(({ key }) => key)}
             selected={""}
             setItem={addProperty}
-            exItems={Object.keys(style)}
+            exItems={Object.keys(panelStyle)}
             button={
               <div title={"Добавить свойство"} className={buttonStyle}>
                 <Icon size={"100%"} icon={ic_add_to_queue} />
@@ -172,7 +167,7 @@ function PropertiesPanel(props) {
         </div>
       </div>
 
-      {edit && <EditPanel {...{ style, setStyle, styleId: tag.styleId }} />}
+      {edit && <EditPanel {...{ panelStyle, setPanelStyle, styleId: tag.styleId }} />}
       <Properties {...props} parentName={name} />
     </div>
   );

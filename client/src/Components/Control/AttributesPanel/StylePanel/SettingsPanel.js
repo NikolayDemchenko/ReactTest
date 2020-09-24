@@ -17,24 +17,23 @@ function SettingsPanel(props) {
     addStyle,
     updateStyle,
     onAllStyle,
-    style,
+    panelStyle,
     setPreview,
     selected,
     tag,
     assignableStyle,
     setSettings,
-    setTag,
-    setStyle,
+    setPanelStyle,
     component: { styles },
   } = props;
 
   // console.log("props", props);
-  // console.log("Styles", Styles);
-  const allStyles = [...styles, ...Styles];
+  // console.log("Styles", Styles);  
 
   const setStyleByName = (name) => {
-    const style = allStyles.find((style) => style.name === name);  
-    setStyle(style.style);    
+    const style = Styles.find((style) => style.name === name);
+    setPreview(style.style);
+    setPanelStyle(style.style);
   };
 
   return (
@@ -66,7 +65,7 @@ function SettingsPanel(props) {
         }}
       >
         <SelectPanel
-          items={allStyles.map((style) => style.name)}
+          items={Styles.map((style) => style.name)}
           selected={styles.find(({ id }) => id === tag.styleId).name}
           setItem={setStyleByName}
           button={
@@ -105,7 +104,7 @@ function SettingsPanel(props) {
           className={buttonStyle}
           onClick={(e) => {
             e.stopPropagation();
-            updateStyle(style, tag.styleId);
+            updateStyle(tag.styleId,"style",panelStyle);
           }}
         >
           <Icon size={"120%"} icon={ic_update} />
@@ -117,7 +116,8 @@ function SettingsPanel(props) {
           onClick={(e) => {
             e.stopPropagation();
             console.log("Копировать стиль!");
-            setTag(addStyle(style, "Самый новый стиль", tag));
+            addStyle(panelStyle, "Самый новый стиль", tag);
+            // setPanelStyle(panelStyle);
           }}
         >
           <Icon size={"100%"} icon={copy} />
@@ -129,7 +129,7 @@ function SettingsPanel(props) {
           onClick={(e) => {
             e.stopPropagation();
             window.navigator.clipboard.writeText(
-              JSON.stringify({ name: "", style })
+              JSON.stringify({ name: "", panelStyle })
             );
           }}
         >
@@ -142,7 +142,7 @@ function SettingsPanel(props) {
           // Сохранение файлов
           onClick={(e) => {
             e.stopPropagation();
-            SaveToJSON(style);
+            SaveToJSON(panelStyle);
           }}
         >
           <Icon size={"100%"} icon={exportIcon} />

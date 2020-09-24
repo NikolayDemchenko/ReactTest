@@ -30,7 +30,7 @@ function Component(props) {
 
   const [settings, setSettings] = useState();
 
-  // console.log("settings :>> ", settings);
+  console.log("settings :>> ", settings);
 
   const [component, setComponent] = useState(
     JSON.parse(JSON.stringify(_component))
@@ -99,12 +99,13 @@ function Component(props) {
     return changedTag;
   };
 
-  const updateStyle = (style, styleId) => {
+  const updateStyle = ( styleId,propName, propValue) => {
     // console.log("style :>> ", style);
+    // const changedStyle = { ...style, [propName]: propValue };
 
     const styles = component.styles.map((st) => {
       if (st.id === styleId) {
-        return { ...st, style };
+        return { ...st, [propName]: propValue };
       } else {
         return st;
       }

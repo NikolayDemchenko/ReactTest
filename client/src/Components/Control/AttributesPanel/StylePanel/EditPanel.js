@@ -10,19 +10,19 @@ import {
   deleteNoObjectProps,
 } from "./Function/ObjectManager";
 function EditPanel(props) {
-  const { style, setStyle} = props;
+  const { panelStyle, setPanelStyle} = props;
   // console.log("%cPropertiesPanel-StylePanel", "color: green");
   console.log("props :>> ", props);
   
-  JSON.stringify(style)
+  // JSON.stringify(panelStyle)
 
   const stringStyle =
-    createCssProperties(deleteObjectProps(style)) + ";";
+    createCssProperties(deleteObjectProps(panelStyle)) + ";";
   const [value, setValue] = useState(stringStyle);
   useEffect(() => {
     setValue(stringStyle);
     return () => {};
-  }, [style]);
+  }, [panelStyle]);
 
   return (
     <div>
@@ -47,8 +47,8 @@ function EditPanel(props) {
           className={buttonStyle}
           onClick={(e) => {
             e.stopPropagation();
-            setStyle({
-              ...deleteNoObjectProps(style),
+            setPanelStyle({
+              ...deleteNoObjectProps(panelStyle),
               ...parse(value),
             });
           }}

@@ -1,20 +1,19 @@
 import React, { useState, useEffect } from "react";
 import PropertiesPanel from "./PropertiesPanel";
 import SettingsPanel from "./SettingsPanel";
+import PopupInput from "../Inputs/PopupInput/PopupInput";
 function StylePanel(props) {
   // console.log("%cStylePanel-VerticalPanel-App", "color: green");
   // console.log("props :>> ", props);
 
-  const { tag, setTag, setPreview } = props;
-  const { style } = tag;
+  const { tag, setPanelStyle, setPreview, panelStyle,styleName,updateStyle } = props;
+
 
   const [selected, setSelected] = useState("All style");
   const [draggedProp, setDragged] = useState();
 
-  const getAllStyleProps = (tag) => {
-    const result = Object.entries(
-      getComputedStyle(document.getElementById(tag.id))
-    )
+  const getDefaultStyleProps = (id) => {
+    const result = Object.entries(getComputedStyle(document.getElementById(id)))
       .map(([key, value]) => {
         key = +key || key === "0" ? +key : key;
         return { key, value };
@@ -32,38 +31,31 @@ function StylePanel(props) {
     setSelected("All style");
     props.setStyleView({ styleViewFilter: (p) => p });
   };
-  const setPreviewStyle = (style) => {
-    setPreview({ ...tag, style });
-  };
 
-  const setStyle = (style, chain) => {
-    setTag({ ...tag, style }, `\nsetStyle-StylePanel ${chain}`);
-  };
-  // console.log('getTagAllStyles(tag)', getTagAllStyles(tag))
   return (
     <div style={{ background: "rgba(30,40,57,.6)" }} title="CSS (JSS) Стили">
+      <PopupInput value={styleName} setValue={name=>updateStyle(tag.styleId,"name",name)} />
       <SettingsPanel
         {...{
           ...props,
-          onAllStyle,
-          setStyle,
+          onAllStyle,    
           selected,
-          style,
-          setPreview: setPreviewStyle,
+          panelStyle,
+          setPreview,
         }}
       />
       <PropertiesPanel
         {...{
           ...props,
           name: "Style",
-          selected,
-          style,
-          setStyle,
+          selected,         
+          panelStyle,
+          setPanelStyle,
           setSelected,
           draggedProp,
           setDraggedProp,
-          setPreview: setPreviewStyle,
-          allStyleProps: getAllStyleProps(tag),
+          setPreview,
+          allStyleProps: getDefaultStyleProps(tag.id),
         }}
       />
     </div>

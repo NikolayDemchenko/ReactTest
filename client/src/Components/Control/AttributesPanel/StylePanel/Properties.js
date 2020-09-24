@@ -13,52 +13,52 @@ import {
   //   "%cProperties-PropertiesPanel",
   //   'color: green');
   // console.log('props :>> ', props);
-  const { draggedProp, setDraggedProp, style, setStyle, setPreview } = props;
+  const { draggedProp, setDraggedProp, panelStyle, setPanelStyle, setPreview } = props;
 
   const properties = [];
   const propPanels = [];
-  for (let key in style) {
-    if (typeof style[key] !== "object") {
-      properties.push({ [key]: style[key] });
+  for (let key in panelStyle) {
+    if (typeof panelStyle[key] !== "object") {
+      properties.push({ [key]: panelStyle[key] });
     } else {
-      propPanels.push({ [key]: style[key] });
+      propPanels.push({ [key]: panelStyle[key] });
     }
   }
   const setName = (item, value, chain) => {
-    const prop = RenameObjectProperty(style, Object.keys(item)[0], value);
+    const prop = RenameObjectProperty(panelStyle, Object.keys(item)[0], value);
 
-    setStyle(prop, `\nsetName-Properties ${chain}`);
+    setPanelStyle(prop, `\nsetName-Properties ${chain}`);
     setPreview(prop, `\nsetName-Properties ${chain}`);
   };
   const setValue = (item, value, chain) => {
-    setStyle(
-      { ...style, [[Object.keys(item)[0]]]: value },
+    setPanelStyle(
+      { ...panelStyle, [[Object.keys(item)[0]]]: value },
       `\nsetValue-Properties ${chain}`
     );
   };
 
   const remove = (item, chain) => {
     console.log("item :>> ", item);
-    delete style[Object.keys(item)[0]];
-    console.log("style :>> ", style);
-    setStyle(style, `\nremove-Properties ${chain}`);
-    setPreview(style);
+    delete panelStyle[Object.keys(item)[0]];
+    console.log("panelStyle :>> ", panelStyle);
+    setPanelStyle(panelStyle, `\nremove-Properties ${chain}`);
+    setPreview(panelStyle);
   };
   const panels = propPanels.map((panel, index) => {
     const setPreviewPanel = (value) => {
       console.log("value :>> ", value);
 
-      setPreview({ ...style, [Object.keys(panel)[0]]: value });
+      setPreview({ ...panelStyle, [Object.keys(panel)[0]]: value });
     };
     return (
       <PropertiesPanel
         {...props}
         name={Object.keys(panel)[0]}
         key={index}
-        style={Object.values(panel)[0]}
+        panelStyle={Object.values(panel)[0]}
         setName={(name, chain) => setName(panel, name, chain)}
-        setStyle={(style, chain) => setValue(panel, style, chain)}
-        baseStyle={style}
+        setStyle={(panelStyle, chain) => setValue(panel, panelStyle, chain)}
+        basepanelStyle={panelStyle}
         deletePanel={(chain) => remove(panel, chain)}
         setPreview={setPreviewPanel}
       />
@@ -67,21 +67,21 @@ import {
   // console.log("properties", properties);
   const thisProps = properties.map((property, index) => {
     const setPreviewValue = (value) => {
-      setPreview({ ...style, [Object.keys(property)[0]]: value });
+      setPreview({ ...panelStyle, [Object.keys(property)[0]]: value });
     };
 
     const onDrop = (targetProp, draggedProp, target, chain) => {
       // console.log("draggedProp", draggedProp);
       const addNewProp = (foo) =>
         foo(
-          removeProp(style, Object.keys(draggedProp)[0]),
+          removeProp(panelStyle, Object.keys(draggedProp)[0]),
           targetProp,
           draggedProp
         ).obj;
       if (target === "up") {
-        setStyle(addNewProp(addNewPropUp), `\nonDrop-Properties ${chain}`);
+        setPanelStyle(addNewProp(addNewPropUp), `\nonDrop-Properties ${chain}`);
       } else if (target === "down") {
-        setStyle(addNewProp(addNewPropDown), `\nonDrop-Properties ${chain}`);
+        setPanelStyle(addNewProp(addNewPropDown), `\nonDrop-Properties ${chain}`);
       }
     };
     return (
