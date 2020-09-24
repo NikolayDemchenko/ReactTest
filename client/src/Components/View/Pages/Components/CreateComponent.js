@@ -1,7 +1,10 @@
 import shortid from "shortid";
 import { createStyle } from "../../../../AppFunction";
 
-const pages = [{ components: [{ tags: [] }] }, { components: [{ tags: [] }] }];
+const app = {
+  styles: [],
+  pages: [{ name: "1", components: [{ name: "Title", tags: [] }] }],
+};
 
 const newStyle = {
   height: "200px",
