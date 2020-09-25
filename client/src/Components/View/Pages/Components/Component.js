@@ -101,7 +101,6 @@ function Component(props) {
 
   const updateStyle = ( styleId,propName, propValue) => {
     // console.log("style :>> ", style);
-    // const changedStyle = { ...style, [propName]: propValue };
 
     const styles = component.styles.map((st) => {
       if (st.id === styleId) {

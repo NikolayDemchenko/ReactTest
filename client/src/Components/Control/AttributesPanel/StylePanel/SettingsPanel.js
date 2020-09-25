@@ -6,11 +6,13 @@ import { exportIcon } from "react-icons-kit/entypo/exportIcon";
 import { SaveToJSON } from "../../../../AppFunction";
 import { paintBrush } from "react-icons-kit/fa/paintBrush";
 import { ic_update } from "react-icons-kit/md/ic_update";
+import {book} from 'react-icons-kit/fa/book'
 import { folderDownload } from "react-icons-kit/icomoon/folderDownload";
 // import { boxAdd } from "react-icons-kit/icomoon/boxAdd";
 import { boxRemove } from "react-icons-kit/icomoon/boxRemove";
 import SelectPanel from "../../ModalWindows/SelectPanel/SelectPanel";
 import Styles from "../JSON/Styles.json";
+import PopupInput from "../Inputs/PopupInput/PopupInput";
 function SettingsPanel(props) {
   // console.log("props :>> ", props);
   const {
@@ -24,20 +26,28 @@ function SettingsPanel(props) {
     assignableStyle,
     setSettings,
     setPanelStyle,
+    styleName,
     component: { styles },
   } = props;
 
   // console.log("props", props);
-  // console.log("Styles", Styles);  
+  // console.log("Styles", Styles);
 
-  const setStyleByName = (name) => {
+  const setLibrStyleByName = (name) => {
     const style = Styles.find((style) => style.name === name);
     setPreview(style.style);
     setPanelStyle(style.style);
   };
+  const setWorkStyleByName = (name) => {
+    const style = styles.find((style) => style.name === name);
+    setPreview(style.style);
+    setPanelStyle(style.style);
+  };
+
 
   return (
     <div
+      title={"свойства стиля"}
       style={{
         display: "flex",
         borderTop: "4px solid ",
@@ -56,7 +66,12 @@ function SettingsPanel(props) {
         onAllStyle();
       }}
     >
-      {"Settings"}
+      <div title={"имя стиля"}>
+        <PopupInput
+          value={styleName}
+          setValue={(name) => updateStyle(tag.styleId, "name", name)}
+        />
+      </div>
       <div
         style={{
           display: "flex",
@@ -65,12 +80,21 @@ function SettingsPanel(props) {
         }}
       >
         <SelectPanel
-          items={Styles.map((style) => style.name)}
+          items={styles.map((style) => style.name)}
           selected={styles.find(({ id }) => id === tag.styleId).name}
-          setItem={setStyleByName}
+          setItem={setWorkStyleByName}
           button={
-            <div title={"Выбрать стиль"} className={buttonStyle}>
+            <div title={"Рабочие стили"} className={buttonStyle}>
               <Icon size={"100%"} icon={folderDownload} />
+            </div>
+          }
+        />
+        <SelectPanel
+          items={Styles.map((style) => style.name)} 
+          setItem={setLibrStyleByName}
+          button={
+            <div title={"Библиотека стилей"} className={buttonStyle}>
+              <Icon size={"100%"} icon={book} />
             </div>
           }
         />
@@ -104,7 +128,7 @@ function SettingsPanel(props) {
           className={buttonStyle}
           onClick={(e) => {
             e.stopPropagation();
-            updateStyle(tag.styleId,"style",panelStyle);
+            updateStyle(tag.styleId, "style", panelStyle);
           }}
         >
           <Icon size={"120%"} icon={ic_update} />

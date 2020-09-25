@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import PropertiesPanel from "./PropertiesPanel";
 import SettingsPanel from "./SettingsPanel";
-import PopupInput from "../Inputs/PopupInput/PopupInput";
+// import PopupInput from "../Inputs/PopupInput/PopupInput";
 function StylePanel(props) {
   // console.log("%cStylePanel-VerticalPanel-App", "color: green");
   // console.log("props :>> ", props);
 
-  const { tag, setPanelStyle, setPreview, panelStyle,styleName,updateStyle } = props;
+  const { tag, setPanelStyle, setPreview, panelStyle, } = props;
 
 
   const [selected, setSelected] = useState("All style");
@@ -34,7 +34,7 @@ function StylePanel(props) {
 
   return (
     <div style={{ background: "rgba(30,40,57,.6)" }} title="CSS (JSS) Стили">
-      <PopupInput value={styleName} setValue={name=>updateStyle(tag.styleId,"name",name)} />
+      {/* <PopupInput value={styleName} setValue={name=>updateStyle(tag.styleId,"name",name)} /> */}
       <SettingsPanel
         {...{
           ...props,

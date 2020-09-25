@@ -92,11 +92,11 @@ function AttributesPanel(props) {
           }}
         ></div>
       </div>
-      <div>
+      {/* <div>
         {props.component.styles.map((style, index) => (
           <div key={index}>{style.name}</div>
         ))}
-      </div>
+      </div> */}
       <StylePanel {...props} />
       <div style={{ paddingBottom: "4em" }} />
     </div>
