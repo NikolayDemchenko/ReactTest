@@ -8,12 +8,18 @@ import {
   addNewPropDown,
   removeThisLevelPropByName as removeProp,
 } from "./Function/ObjectManager";
- function  Properties(props) {
+function Properties(props) {
   // console.log(
   //   "%cProperties-PropertiesPanel",
   //   'color: green');
-  // console.log('props :>> ', props);
-  const { draggedProp, setDraggedProp, panelStyle, setPanelStyle, setPreview } = props;
+  // console.log("props :>> ", props);
+  const {
+    draggedProp,
+    setDraggedProp,
+    panelStyle,
+    setPanelStyle,
+    setPreview,
+  } = props;
 
   const properties = [];
   const propPanels = [];
@@ -81,11 +87,15 @@ import {
       if (target === "up") {
         setPanelStyle(addNewProp(addNewPropUp), `\nonDrop-Properties ${chain}`);
       } else if (target === "down") {
-        setPanelStyle(addNewProp(addNewPropDown), `\nonDrop-Properties ${chain}`);
+        setPanelStyle(
+          addNewProp(addNewPropDown),
+          `\nonDrop-Properties ${chain}`
+        );
       }
     };
     return (
       <Property
+        {...{ ...props, draggedProp, setDraggedProp }}
         key={index}
         // tabIndex={index}
         name={Object.keys(property)[0]}
@@ -95,7 +105,6 @@ import {
         setValue={(value, chain) => setValue(property, value, chain)}
         deleteProperty={(chain) => remove(property, chain)}
         onDrop={onDrop}
-        {...{ draggedProp, setDraggedProp }}
       />
     );
   });
@@ -107,5 +116,5 @@ import {
     </div>
   );
 }
-export default Properties
+export default Properties;
 // export default log(Properties)

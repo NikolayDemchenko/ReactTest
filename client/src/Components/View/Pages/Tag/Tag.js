@@ -1,6 +1,6 @@
 import React from "react";
 import Tags from "./Tags";
-import log from "../../../../../Log";
+import log from "../../../../Log";
 // import jss from "jss";
 // import preset from "jss-preset-default";
 function Tag(props) {

@@ -1,5 +1,5 @@
 import React from "react";
-import log from "../../../../../Log";
+import log from "../../../../Log";
 import Tag from "./Tag";
 import HocTag, { getParentBranch } from "./HocTag";
 function Tags(props) {
@@ -13,7 +13,7 @@ function Tags(props) {
           props.setSettings((state) => ({
             ...state,
             selectedId: tag.id,
-            tagsForRender: [...getParentBranch(props.component.tags, tag), tag.id],
+            tagsForRender: [...getParentBranch(props.page.tags, tag), tag.id],
           }));
         }}
       >

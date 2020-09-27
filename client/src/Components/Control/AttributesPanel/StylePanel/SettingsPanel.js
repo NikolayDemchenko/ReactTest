@@ -6,7 +6,7 @@ import { exportIcon } from "react-icons-kit/entypo/exportIcon";
 import { SaveToJSON } from "../../../../AppFunction";
 import { paintBrush } from "react-icons-kit/fa/paintBrush";
 import { ic_update } from "react-icons-kit/md/ic_update";
-import {book} from 'react-icons-kit/fa/book'
+import { book } from "react-icons-kit/fa/book";
 import { folderDownload } from "react-icons-kit/icomoon/folderDownload";
 // import { boxAdd } from "react-icons-kit/icomoon/boxAdd";
 import { boxRemove } from "react-icons-kit/icomoon/boxRemove";
@@ -27,7 +27,8 @@ function SettingsPanel(props) {
     setSettings,
     setPanelStyle,
     styleName,
-    component: { styles },
+    changeTag,
+    page: { styles },
   } = props;
 
   // console.log("props", props);
@@ -40,10 +41,8 @@ function SettingsPanel(props) {
   };
   const setWorkStyleByName = (name) => {
     const style = styles.find((style) => style.name === name);
-    setPreview(style.style);
-    setPanelStyle(style.style);
+    changeTag(tag,"styleId",style.id);
   };
-
 
   return (
     <div
@@ -84,13 +83,13 @@ function SettingsPanel(props) {
           selected={styles.find(({ id }) => id === tag.styleId).name}
           setItem={setWorkStyleByName}
           button={
-            <div title={"Рабочие стили"} className={buttonStyle}>
+            <div title={"Выбрать стиль тега"} className={buttonStyle}>
               <Icon size={"100%"} icon={folderDownload} />
             </div>
           }
         />
         <SelectPanel
-          items={Styles.map((style) => style.name)} 
+          items={Styles.map((style) => style.name)}
           setItem={setLibrStyleByName}
           button={
             <div title={"Библиотека стилей"} className={buttonStyle}>

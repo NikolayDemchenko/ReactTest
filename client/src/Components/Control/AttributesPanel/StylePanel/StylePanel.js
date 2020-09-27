@@ -6,11 +6,21 @@ function StylePanel(props) {
   // console.log("%cStylePanel-VerticalPanel-App", "color: green");
   // console.log("props :>> ", props);
 
-  const { tag, setPanelStyle, setPreview, panelStyle, } = props;
-
+  const {
+    tag,
+    setPanelStyle,
+    updateStyle: _updateStyle,
+    setPreview,
+    panelStyle,
+  } = props;
 
   const [selected, setSelected] = useState("All style");
   const [draggedProp, setDragged] = useState();
+
+  const updateStyle = () => {
+    // console.log("Close!!!!!!");
+    _updateStyle(tag.styleId, "style", panelStyle);
+  };
 
   const getDefaultStyleProps = (id) => {
     const result = Object.entries(getComputedStyle(document.getElementById(id)))
@@ -38,7 +48,7 @@ function StylePanel(props) {
       <SettingsPanel
         {...{
           ...props,
-          onAllStyle,    
+          onAllStyle,
           selected,
           panelStyle,
           setPreview,
@@ -48,7 +58,8 @@ function StylePanel(props) {
         {...{
           ...props,
           name: "Style",
-          selected,         
+          updateStyle,
+          selected,
           panelStyle,
           setPanelStyle,
           setSelected,

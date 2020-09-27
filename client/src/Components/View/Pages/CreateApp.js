@@ -1,5 +1,5 @@
 import shortid from "shortid";
-import { createStyle } from "../../../../AppFunction";
+import { createStyle } from "../../../AppFunction";
 
 const app = {
   styles: [],
@@ -89,14 +89,14 @@ const pageBaseDiv = {
   attributes: {},
 };
 
-const component = {
+const page = {
   styles: [basePageStyle, innerPageStyle, newPageStyle],
   tags: [],
 };
-component.tags.push(pageBaseDiv);
+page.tags.push(pageBaseDiv);
 
 for (let i = 0; i < 9; i++) {
-  component.tags.push(
+  page.tags.push(
     JSON.parse(
       JSON.stringify({
         index: i,
@@ -111,4 +111,4 @@ for (let i = 0; i < 9; i++) {
   );
 }
 
-export { component, createStyle };
+export { page, createStyle };

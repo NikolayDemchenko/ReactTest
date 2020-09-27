@@ -1,5 +1,5 @@
 import React from "react";
-import log from "../../../Log";
+import log from "../../../../Log";
 import Page from './Page'
 function Pages(props) {
   // console.log("props", props);

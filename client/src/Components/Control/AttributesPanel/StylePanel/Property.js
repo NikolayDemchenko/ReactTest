@@ -6,8 +6,8 @@ import PopupInput from "../Inputs/PopupInput/PopupInput";
 
 function Property(props) {
   const {
+    updateStyle,
     tabIndex,
-    // property,
     name,
     value,
     setPreview,
@@ -16,34 +16,24 @@ function Property(props) {
     deleteProperty,
     onDrop,
     draggedProp,
-    setDraggedProp,
+    setDraggedProp,   
   } = props;
-  // console.log('props :>> ', props);
+  // console.log("props :>> ", props);
   const [Y, setY] = useState();
   // const [copy, setcopy] = useState(false);
 
   const [target, setTarget] = useState();
-  // const propKey = Object.keys(property)[0];
-  // const propValue = Object.values(property)[0];
 
-  // console.log("%cProperty", "color:#191", propKey, propValue);
-  // console.log('props :>> ', props);
-  // console.log('property',propKey, propValue)
+
+
+
   return (
-    <div
-      // onClick={(e) => e.stopPropagation()}
+    <div     
       draggable
       tabIndex={tabIndex}
-      // onKeyUp={(e) => {
-      //   setcopy(!copy);
-      //   console.log("onKeyUp", e.key);
-      // }}
-      // onKeyDown={(e) => {
-      //   setcopy(!copy);
-      //   console.log("onKeyDown", e.key);
-      // }}
-      onDrop={(e) => { 
-        e.stopPropagation();      
+
+      onDrop={(e) => {
+        e.stopPropagation();
         onDrop({ [name]: value }, draggedProp, target);
       }}
       style={{
@@ -78,6 +68,7 @@ function Property(props) {
       >
         <PopupInput
           // value={propKey}
+          {...{ onExit:updateStyle }}
           value={name}
           setPreview={setName}
           setValue={(val) => {
@@ -93,7 +84,7 @@ function Property(props) {
           width: "80px",
         }}
       >
-        <PopupInput {...{ value, setValue, setPreview }} height="1em" />
+        <PopupInput {...{ value, setValue, setPreview, onExit:updateStyle }} height="1em" />
       </div>
       <div
         title={"Удалить свойство"}
@@ -109,11 +100,9 @@ function Property(props) {
   );
 }
 function areEqual(prevProps, nextProps) {
-
-
   return prevProps.value === nextProps.value;
 }
 
-export default React.memo(Property);
-// export default React.memo(log(Property));
+// export default React.memo(Property);
+export default React.memo(log(Property));
 // export default React.memo(log(Property), areEqual);
