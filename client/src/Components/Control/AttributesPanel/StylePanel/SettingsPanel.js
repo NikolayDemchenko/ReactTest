@@ -38,17 +38,18 @@ function SettingsPanel(props) {
     const style = Styles.find((style) => style.name === name);
     setPreview(style.style);
     setPanelStyle(style.style);
+    updateStyle(tag.styleId, "style", style.style);
   };
-  const setWorkStyleByName = (name) => {
+  const changeTagStyleByName = (name) => {
     const style = styles.find((style) => style.name === name);
-    changeTag(tag,"styleId",style.id);
+    changeTag(tag, "styleId", style.id);
   };
 
   return (
     <div
       title={"свойства стиля"}
       style={{
-        display: "flex",
+        // display: "flex",
         borderTop: "4px solid ",
         borderColor:
           selected !== "All style"
@@ -56,7 +57,7 @@ function SettingsPanel(props) {
             : "rgba(140, 200, 255, 0.4)",
         cursor: "default",
         paddingLeft: "0.5em",
-        height: "26px",
+        // height: "26px",
         background:
           selected === "All style" ? "rgba(134, 186, 250, 0.15)" : "none",
       }}
@@ -65,11 +66,56 @@ function SettingsPanel(props) {
         onAllStyle();
       }}
     >
-      <div title={"имя стиля"}>
-        <PopupInput
-          value={styleName}
-          setValue={(name) => updateStyle(tag.styleId, "name", name)}
-        />
+      <div
+        style={{
+          display: "flex",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            overflow: "hidden",  
+            height: "26px",
+            width: "100%",
+            // border: "1px solid white",
+          }}
+          title={"имя стиля"}
+        >
+          <PopupInput
+            value={styleName}
+            setValue={(name) => updateStyle(tag.styleId, "name", name)}
+          />
+        </div>
+        <div
+          style={{
+            display: "flex",         
+            justifyContent: "flex-end",
+          }}
+        >
+          <div
+            title={"Новый стиль"}
+            // style={btnStyle}
+            className={buttonStyle}
+            onClick={(e) => {
+              e.stopPropagation();
+              console.log("Копировать стиль!");
+              addStyle(panelStyle, "Самый новый стиль", tag);
+              // setPanelStyle(panelStyle);
+            }}
+          >
+            <Icon size={"100%"} icon={copy} />
+          </div>
+          <SelectPanel
+            items={styles.map((style) => style.name)}
+            selected={styles.find(({ id }) => id === tag.styleId).name}
+            setItem={changeTagStyleByName}
+            button={
+              <div title={"Выбрать стиль тега"} className={buttonStyle}>
+                <Icon size={"100%"} icon={folderDownload} />
+              </div>
+            }
+          />
+        </div>
       </div>
       <div
         style={{
@@ -78,16 +124,6 @@ function SettingsPanel(props) {
           justifyContent: "flex-end",
         }}
       >
-        <SelectPanel
-          items={styles.map((style) => style.name)}
-          selected={styles.find(({ id }) => id === tag.styleId).name}
-          setItem={setWorkStyleByName}
-          button={
-            <div title={"Выбрать стиль тега"} className={buttonStyle}>
-              <Icon size={"100%"} icon={folderDownload} />
-            </div>
-          }
-        />
         <SelectPanel
           items={Styles.map((style) => style.name)}
           setItem={setLibrStyleByName}
@@ -132,19 +168,7 @@ function SettingsPanel(props) {
         >
           <Icon size={"120%"} icon={ic_update} />
         </div>
-        <div
-          title={"Копировать стиль"}
-          // style={btnStyle}
-          className={buttonStyle}
-          onClick={(e) => {
-            e.stopPropagation();
-            console.log("Копировать стиль!");
-            addStyle(panelStyle, "Самый новый стиль", tag);
-            // setPanelStyle(panelStyle);
-          }}
-        >
-          <Icon size={"100%"} icon={copy} />
-        </div>
+
         <div
           title={"Копировать в буфер"}
           // style={btnStyle}

@@ -15,7 +15,7 @@ export default function PopupInput(props) {
 
   // console.log("type :>> ", type);
   // console.log("props :>> ", props);
-  console.log('props.onExit :>> ', props.onExit);
+  // console.log('props.onExit :>> ', props.onExit);
   return (
     <Popover
     // onExit={()=>console.log("Закрыто!!!!")}

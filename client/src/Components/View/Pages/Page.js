@@ -97,7 +97,7 @@ function Page(props) {
 
   const updateStyle = (styleId, propName, propValue) => {
     // console.log("style :>> ", style);
-console.log('styleId, propName, propValue :>> ', styleId, propName, propValue);
+    // console.log('styleId, propName, propValue :>> ', styleId, propName, propValue);
     const styles = page.styles.map((st) => {
       if (st.id === styleId) {
         return { ...st, [propName]: propValue };
@@ -156,7 +156,7 @@ console.log('styleId, propName, propValue :>> ', styleId, propName, propValue);
         console.log(error);
       });
   };
-  
+
   return (
     <div>
       <NavigationPanel

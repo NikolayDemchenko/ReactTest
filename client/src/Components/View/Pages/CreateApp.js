@@ -95,7 +95,7 @@ const page = {
 };
 page.tags.push(pageBaseDiv);
 
-for (let i = 0; i < 9; i++) {
+for (let i = 0; i < 100; i++) {
   page.tags.push(
     JSON.parse(
       JSON.stringify({
