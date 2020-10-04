@@ -36,11 +36,8 @@ function Properties(props) {
     setPanelStyle(prop, `\nsetName-Properties ${chain}`);
     setPreview(prop, `\nsetName-Properties ${chain}`);
   };
-  const setValue = (item, value, chain) => {
-    setPanelStyle(
-      { ...panelStyle, [[Object.keys(item)[0]]]: value },
-      `\nsetValue-Properties ${chain}`
-    );
+  const setValue = (item, value) => {
+    setPanelStyle({ ...panelStyle, [[Object.keys(item)[0]]]: value });
   };
 
   const remove = (item, chain) => {
@@ -52,8 +49,6 @@ function Properties(props) {
   };
   const panels = propPanels.map((panel, index) => {
     const setPreviewPanel = (value) => {
-      console.log("value :>> ", value);
-
       setPreview({ ...panelStyle, [Object.keys(panel)[0]]: value });
     };
     return (
@@ -63,7 +58,7 @@ function Properties(props) {
         key={index}
         panelStyle={Object.values(panel)[0]}
         setName={(name, chain) => setName(panel, name, chain)}
-        setStyle={(panelStyle, chain) => setValue(panel, panelStyle, chain)}
+        setPanelStyle={(panelStyle, chain) => setValue(panel, panelStyle, chain)}
         basepanelStyle={panelStyle}
         deletePanel={(chain) => remove(panel, chain)}
         setPreview={setPreviewPanel}

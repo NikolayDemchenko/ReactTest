@@ -14,14 +14,7 @@ function AttributesPanel(props) {
   // console.log("props :>> ", props);
 
   const { changeTag, tag } = props;
-  // const { changeTag, panelTag: tag, setPanelTag: setTag } = props;
 
-  // useEffect(() => {
-  //   // setTag(preview);
-  //   // updateStyle(tag.style, tag.styleId);
-  //   return () => {
-  //   };
-  // }, [preview]);
 
   // Назначает тип тега
   const setTagType = (type) => {

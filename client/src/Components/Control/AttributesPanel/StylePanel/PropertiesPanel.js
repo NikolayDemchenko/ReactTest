@@ -28,9 +28,7 @@ function PropertiesPanel(props) {
   } = props;
 
   // console.log("%cPropertiesPanel-StylePanel", "color: green");
-  // console.log("props :>> ", props);
-  // console.log("panelStyle", panelStyle);
-  // console.log("tag", tag);
+
   const [edit, setEdit] = useState();
 
   const addPseudoClass = (e) => {
