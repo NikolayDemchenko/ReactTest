@@ -3,7 +3,6 @@ import log from "../../../Log";
 // import { v4 as uuidv4 } from "uuid";
 import shortid from "shortid";
 import Tags from "./Tag/Tags";
-import { getParentBranch } from "./Tag/HocTag";
 import { page as _page } from "./CreateApp";
 import { createStyle } from "../../../AppFunction";
 import NavigationPanel from "../../Control/NavigationPanel/NavigationPanel";
@@ -95,32 +94,13 @@ function Page(props) {
     return changedTag;
   };
 
-  const updateStyle = (styleId, propName, propValue) => {
-    // console.log("style :>> ", style);
-    // console.log('styleId, propName, propValue :>> ', styleId, propName, propValue);
+  const updateStyle = (styleId, style) => { 
     const styles = page.styles.map((st) => {
       if (st.id === styleId) {
-        return { ...st, [propName]: propValue };
+        return { ...st, style };
       } else {
         return st;
       }
-    });
-    // Сборщик айдишек для рендера
-    const getAllParents = (tagsForRender = []) => {
-      let tFR = [];
-      tagsForRender.forEach((tag) => {
-        // console.log("tag :>> ", tag);
-        tFR.push(tag.id);
-        tFR = [...getParentBranch(page.tags, tag), ...tFR];
-      });
-      return Array.from(new Set(tFR));
-    };
-
-    setSettings({
-      ...settings,
-      tagsForRender: getAllParents(
-        page.tags.filter((t) => t.styleId === styleId)
-      ),
     });
     setPage({ ...page, styles });
   };

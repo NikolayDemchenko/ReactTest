@@ -10,8 +10,8 @@ function Property(props) {
     tabIndex,
     name,
     value,
-    setPreview,
     setName,
+    setPreview,
     setValue,
     deleteProperty,
     onDrop,
@@ -67,8 +67,7 @@ function Property(props) {
         }}
       >
         <PopupInput
-          // value={propKey}
-          {...{ onExit:updateStyle }}
+          // value={propKey}    
           value={name}
           setPreview={setName}
           setValue={(val) => {
@@ -84,7 +83,7 @@ function Property(props) {
           width: "80px",
         }}
       >
-        <PopupInput {...{ value, setValue, setPreview, onExit:updateStyle }} height="1em" />
+        <PopupInput {...{ value, setValue, setPreview}} height="1em" />
       </div>
       <div
         title={"Удалить свойство"}

@@ -1,9 +1,9 @@
 import React from "react";
 import log from "../../../../Log";
 import Tag from "./Tag";
-import HocTag, { getParentBranch } from "./HocTag";
+import HocTag from "./HocTag";
 function Tags(props) {
-  // console.log("props", props); 
+  // console.log("props", props);
   return props.tags.map((tag, key) => {
     return props.selectedId !== tag.id ? (
       <div
@@ -13,7 +13,6 @@ function Tags(props) {
           props.setSettings((state) => ({
             ...state,
             selectedId: tag.id,
-            tagsForRender: [...getParentBranch(props.page.tags, tag), tag.id],
           }));
         }}
       >

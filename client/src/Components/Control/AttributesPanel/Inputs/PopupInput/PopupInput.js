@@ -19,7 +19,7 @@ export default function PopupInput(props) {
   return (
     <Popover
     // onExit={()=>console.log("Закрыто!!!!")}
-    onExit={props.onExit}
+    
       PaperProps={{
         style: {
           background: "rgba(43,50,66,.95)",

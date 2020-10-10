@@ -38,7 +38,7 @@ function SettingsPanel(props) {
     const style = Styles.find((style) => style.name === name);
     setPreview(style.style);
     setPanelStyle(style.style);
-    updateStyle(tag.styleId, "style", style.style);
+    updateStyle(tag.styleId, style.style);
   };
   const changeTagStyleByName = (name) => {
     const style = styles.find((style) => style.name === name);
@@ -74,7 +74,7 @@ function SettingsPanel(props) {
         <div
           style={{
             display: "flex",
-            overflow: "hidden",  
+            overflow: "hidden",
             height: "26px",
             width: "100%",
             // border: "1px solid white",
@@ -88,7 +88,7 @@ function SettingsPanel(props) {
         </div>
         <div
           style={{
-            display: "flex",         
+            display: "flex",
             justifyContent: "flex-end",
           }}
         >
@@ -143,13 +143,11 @@ function SettingsPanel(props) {
               if (!state.assignableStyle) {
                 return {
                   ...state,
-                  tagsForRender: null,
                   assignableStyle: tag.styleId,
                 };
               } else {
                 return {
                   selectedId: state.selectedId,
-                  tagsForRender: null,
                 };
               }
             });
@@ -163,7 +161,7 @@ function SettingsPanel(props) {
           className={buttonStyle}
           onClick={(e) => {
             e.stopPropagation();
-            updateStyle(tag.styleId, "style", panelStyle);
+            updateStyle(tag.styleId, panelStyle);
           }}
         >
           <Icon size={"120%"} icon={ic_update} />

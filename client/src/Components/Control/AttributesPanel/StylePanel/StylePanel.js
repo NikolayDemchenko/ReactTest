@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import log from "../../../../Log";
 import PropertiesPanel from "./PropertiesPanel";
 import SettingsPanel from "./SettingsPanel";
 // import PopupInput from "../Inputs/PopupInput/PopupInput";
@@ -18,7 +19,7 @@ function StylePanel(props) {
 
   const updateStyle = () => {
     // console.log("Close!!!!!!");
-    _updateStyle(tag.styleId, "style", panelStyle);
+    _updateStyle(tag.styleId, panelStyle);
   };
 
   const getDefaultStyleProps = (id) => {
@@ -70,4 +71,7 @@ function StylePanel(props) {
     </div>
   );
 }
-export default StylePanel;
+
+
+export default React.memo(log(StylePanel) );
+

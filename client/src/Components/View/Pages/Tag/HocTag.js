@@ -4,15 +4,6 @@ import AttributesPanel from "../../../Control/AttributesPanel/AttributesPanel";
 import jss from "jss";
 import preset from "jss-preset-default";
 import log from "../../../../Log";
-export const getParentBranch = (tags, tag, idList = []) => {
-  const parentId = tag.parentId;
-  if (parentId) {
-    idList.push(parentId);
-    const parent = tags.find((_tag) => _tag.id === parentId);
-    return getParentBranch(tags, parent, idList);
-  }
-  return idList;
-};
 
 const HocTag = (props) => {
   // console.log("props", props.component.styles);
@@ -20,6 +11,7 @@ const HocTag = (props) => {
     page: { styles },
     assignableStyle,
     changeTag,
+    updateStyle,
     children,
     tag,
     classes: allClasses,
@@ -29,8 +21,12 @@ const HocTag = (props) => {
 
   const style = styles.find(({ id }) => id === tag.styleId);
   const [previewStyle, setPreview] = useState(style.style);
-  const [panelStyle, setPanelStyle] = useState(previewStyle);
+  const [panelStyle, setStyle] = useState(previewStyle);
 
+  const setPanelStyle=(style)=>{
+    setStyle(style)
+    updateStyle(tag.styleId,style)
+  }
   const [styleView, setStyleView] = useState({ styleViewFilter: (p) => p });
 
   jss.setup(preset());
@@ -46,12 +42,11 @@ const HocTag = (props) => {
       assignableStyle !== tag.styleId &&
       changeTag(tag, "styleId", assignableStyle);
     setPreview(style.style);
-    setPanelStyle(style.style);
+    setStyle(style.style);
     return () => {
       // console.log("props", props);
     };
   }, [tag]);
-
 
   return (
     <div

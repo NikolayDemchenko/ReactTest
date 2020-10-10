@@ -40,13 +40,17 @@ function Properties(props) {
     setPanelStyle({ ...panelStyle, [[Object.keys(item)[0]]]: value });
   };
 
-  const remove = (item, chain) => {
-    console.log("item :>> ", item);
-    delete panelStyle[Object.keys(item)[0]];
-    console.log("panelStyle :>> ", panelStyle);
-    setPanelStyle(panelStyle, `\nremove-Properties ${chain}`);
-    setPreview(panelStyle);
+  const remove = (item) => {
+
+    console.log("remove property :>> ", item);
+    const style=panelStyle
+    delete style[Object.keys(item)[0]];
+  console.log('style :>> ', style);
+
+    setPanelStyle(style);
+    setPreview(style);
   };
+
   const panels = propPanels.map((panel, index) => {
     const setPreviewPanel = (value) => {
       setPreview({ ...panelStyle, [Object.keys(panel)[0]]: value });
@@ -111,5 +115,5 @@ function Properties(props) {
     </div>
   );
 }
-export default Properties;
-// export default log(Properties)
+// export default Properties;
+export default React.memo(log(Properties))

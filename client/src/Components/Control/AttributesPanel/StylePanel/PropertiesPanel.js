@@ -74,7 +74,7 @@ function PropertiesPanel(props) {
   const addProperty = (_key) => {
     const { key, value } = allStyleProps.find((style) => style.key === _key);
 
-    console.log("!!!!!!!!!!!!!!!e", key, value);
+    console.log("add property", key, value);
     setPanelStyle({ [key]: value, ...panelStyle });
   };
 
@@ -170,5 +170,15 @@ function PropertiesPanel(props) {
     </div>
   );
 }
-export default PropertiesPanel;
-// export default log(PropertiesPanel)
+
+// function areEqual(prevProps, nextProps) {
+//   console.log('prevProps === nextProps:>> ', prevProps.panelStyle === nextProps.panelStyle);
+//   console.log('prevProps.panelStyle :>> ', prevProps.panelStyle);
+//   console.log('nextProps.panelStyle :>> ', nextProps.panelStyle);
+
+//   return prevProps.panelStyle === nextProps.panelStyle  
+// }
+// export default React.memo(log(PropertiesPanel), areEqual);
+export default React.memo(log(PropertiesPanel));
+
+
