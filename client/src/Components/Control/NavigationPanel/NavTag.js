@@ -54,8 +54,7 @@ function NavTag(props) {
       >
         <div
           onClick={(e) => {
-            e.preventDefault();
-            // setSelected(tag);
+            e.preventDefault();         
             console.log("id :>> ", id);
             document.getElementById(id).click();
           }}

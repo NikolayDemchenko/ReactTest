@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import MuiPopover from "@material-ui/core/Popover";
-function Popover(props) {  
+function Popover(props) {
   const { children } = props;
   const [anchorEl, setAnchorEl] = useState(null);
 
-  useEffect(() => {
-    setAnchorEl(null);
-    return () => {};
-  }, [props.isopen]);
+  // useEffect(() => {
+  //   console.log("useEffect in");
+  //   setAnchorEl(null);
+  //   return () => {
+  //     console.log("useEffect out");
+  //   };
+  // }, [props.isopen]);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -17,7 +20,10 @@ function Popover(props) {
   };
   const open = Boolean(anchorEl);
   // const paper={...children[1],props:{...children[1].props}}
-  const paper={...children[1],props:{...children[1].props,close:handleClose}}
+  const paper = {
+    ...children[1],
+    props: { ...children[1].props, close: handleClose },
+  };
 
   const id = open ? "new-popover" : undefined;
   return (

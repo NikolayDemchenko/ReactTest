@@ -23,10 +23,10 @@ const HocTag = (props) => {
   const [previewStyle, setPreview] = useState(style.style);
   const [panelStyle, setStyle] = useState(previewStyle);
 
-  const setPanelStyle=(style)=>{
-    setStyle(style)
-    updateStyle(tag.styleId,style)
-  }
+  const setPanelStyle = (style) => {
+    setStyle(style);
+    updateStyle(tag.styleId, style);
+  };
   const [styleView, setStyleView] = useState({ styleViewFilter: (p) => p });
 
   jss.setup(preset());
@@ -38,13 +38,14 @@ const HocTag = (props) => {
     .attach();
 
   useEffect(() => {
+    console.log("useEffect in");
     assignableStyle &&
       assignableStyle !== tag.styleId &&
       changeTag(tag, "styleId", assignableStyle);
     setPreview(style.style);
     setStyle(style.style);
     return () => {
-      // console.log("props", props);
+      console.log("useEffect out");
     };
   }, [tag]);
 

@@ -2,6 +2,7 @@ import React from "react";
 import Popover from "../Popover";
 import Items from "./Items";
 export default function SelectPanel(props) {
+  // console.log("SelectPanel");
   return (
     <Popover
       PaperProps={{

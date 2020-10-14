@@ -6,8 +6,11 @@ export default function ColorPicker({ value, setValue, setPreview }) {
   // console.log('%cColorPicker',`background-color:${value}`,value )
 
   useEffect(() => {
+    console.log("useEffect in");
     setColor(value);
-    return () => {};
+    return () =>{
+      console.log("useEffect out");
+  };
   }, [value]);
   const swichColorType = (color) => {
     if (color.rgb.a !== 1) {

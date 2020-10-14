@@ -13,12 +13,25 @@ function AttributesPanel(props) {
   //     'color: green');
   // console.log("props :>> ", props);
 
-  const { changeTag, tag } = props;
-
+  const {
+    changeTag,
+    tag,
+    addStyle,
+    panelStyle,
+    setPreview,
+    selected,
+    assignableStyle,
+    setSettings,
+    styleName,
+    updateStyle,
+    setStyleView,
+    setPanelStyle,
+    page,
+  } = props;
 
   // Назначает тип тега
   const setTagType = (type) => {
-    console.log("type", type);
+    console.log("setTagType", type);
     changeTag(props.tag, "type", type);
   };
   const style = {
@@ -63,7 +76,7 @@ function AttributesPanel(props) {
               overflow: "hidden",
             }}
           >
-            id: {tag.id}
+            tag.id: {tag.id}
           </div>
         </Link>
         <div
@@ -90,14 +103,39 @@ function AttributesPanel(props) {
           <div key={index}>{style.name}</div>
         ))}
       </div> */}
-      <StylePanel {...props} />
+      <Link
+        activeClass="active"
+        to={tag.id}
+        spy={true}
+        smooth={true}
+        offset={-70}
+        duration={500}
+      >
+        <StylePanel
+          {...{           
+            addStyle,
+            panelStyle,
+            setPreview,
+            selected,
+            assignableStyle,
+            setSettings,
+            styleName,
+            changeTag,
+            tag,
+            updateStyle,
+            setStyleView,
+            setPanelStyle,
+            page,
+          }}
+        />
+      </Link>
       <div style={{ paddingBottom: "4em" }} />
     </div>
   );
 }
 
 // function areEqual(prevProps, nextProps) {
-//   return prevProps.panelStyle === nextProps.panelStyle  
+//   return prevProps.panelStyle === nextProps.panelStyle
 // }
 
 // export default log(AttributesPanel);

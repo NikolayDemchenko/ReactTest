@@ -17,8 +17,7 @@ function SettingsPanel(props) {
   // console.log("props :>> ", props);
   const {
     addStyle,
-    updateStyle,
-    onAllStyle,
+    updateStyle,  
     panelStyle,
     setPreview,
     selected,
@@ -61,10 +60,10 @@ function SettingsPanel(props) {
         background:
           selected === "All style" ? "rgba(134, 186, 250, 0.15)" : "none",
       }}
-      onClick={(e) => {
-        e.stopPropagation();
-        onAllStyle();
-      }}
+      // onClick={(e) => {
+      //   e.stopPropagation();
+      //   onAllStyle();
+      // }}
     >
       <div
         style={{

@@ -18,8 +18,14 @@ export default function PopupInput(props) {
   // console.log('props.onExit :>> ', props.onExit);
   return (
     <Popover
-    // onExit={()=>console.log("Закрыто!!!!")}
-    
+      onEnter={() => {
+        props.setPartPreview && props.setPartPreview();
+        console.log("Открыто!");
+      }}
+      onExit={() => {
+        props.setFullPreview&&props.setFullPreview()
+        console.log("Закрыто!");
+      }}
       PaperProps={{
         style: {
           background: "rgba(43,50,66,.95)",

@@ -37,6 +37,7 @@ function Properties(props) {
     setPreview(prop, `\nsetName-Properties ${chain}`);
   };
   const setValue = (item, value) => {
+    // console.log('value :>> ', value);
     setPanelStyle({ ...panelStyle, [[Object.keys(item)[0]]]: value });
   };
 

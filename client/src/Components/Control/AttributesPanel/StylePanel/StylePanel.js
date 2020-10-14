@@ -7,22 +7,30 @@ function StylePanel(props) {
   // console.log("%cStylePanel-VerticalPanel-App", "color: green");
   // console.log("props :>> ", props);
 
-  const {
-    tag,  
-    updateStyle: _updateStyle,
-    setPreview,
+  const { 
     panelStyle,
+    setPreview,
+    selected,
+    assignableStyle,
+    setSettings,
+    styleName,
+    changeTag,
+    tag,
+    updateStyle: _updateStyle,
+    setStyleView,
+    setPanelStyle,
+    page,
   } = props;
 
-  const [selected, setSelected] = useState("All style");
   const [draggedProp, setDragged] = useState();
 
   const updateStyle = () => {
-    // console.log("Close!!!!!!");
+    console.log("updateStyle");
     _updateStyle(tag.styleId, panelStyle);
   };
 
   const getDefaultStyleProps = (id) => {
+    // console.log('getDefaultStyleProps :>> ', id);
     const result = Object.entries(getComputedStyle(document.getElementById(id)))
       .map(([key, value]) => {
         key = +key || key === "0" ? +key : key;
@@ -33,12 +41,12 @@ function StylePanel(props) {
   };
 
   const setDraggedProp = (item) => {
-    console.log("draggedProp", item);
+    console.log("setDraggedProp", item);
     setDragged(item);
   };
 
-  const onAllStyle = () => {
-    setSelected("All style");
+  const setFullPreview = () => {
+    console.log("setFullPreview");
     props.setStyleView({ styleViewFilter: (p) => p });
   };
 
@@ -47,31 +55,39 @@ function StylePanel(props) {
       {/* <PopupInput value={styleName} setValue={name=>updateStyle(tag.styleId,"name",name)} /> */}
       <SettingsPanel
         {...{
-          ...props,
-          onAllStyle,
-          selected,
-          panelStyle,
+          ...props,         
+          updateStyle,      
           setPreview,
+          selected,
+          assignableStyle,
+          setSettings,
+          setPanelStyle,
+          styleName,
+          changeTag,
+          tag,
+          page,      
+    
         }}
       />
       <PropertiesPanel
-        {...{
-          ...props,
+        {...{...props, 
+          setFullPreview,
+          setPanelStyle,
+          setStyleView,
           name: "Style",
-          updateStyle,
-          selected,
-          panelStyle,          
-          setSelected,
+          updateStyle,     
           draggedProp,
           setDraggedProp,
           setPreview,
-          allStyleProps: getDefaultStyleProps(tag.id),
+          allStyleProps: () => getDefaultStyleProps(tag.id),
         }}
       />
     </div>
   );
 }
 
-
-export default React.memo(log(StylePanel) );
-
+const change = (prev, next) => {
+  // console.log("prevprops :>> ", prev);
+  // console.log("nextprops :>> ", next);
+};
+export default React.memo(log(StylePanel));

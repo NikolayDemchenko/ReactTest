@@ -90,12 +90,16 @@ const ThisSlider = ({ value, unit, sign, setPreview, setValue }) => {
   };
 
   const setUnit = (item) => {
-    const thisValue=sign + _value + item
+    const thisValue = sign + _value + item;
     setValue(thisValue);
     setPreview(thisValue);
   };
   useEffect(() => {
+    console.log("useEffect in");
     _setValue(value);
+    return () => {
+      console.log("useEffect out");
+    };
   }, [value]);
   const [_value, _setValue] = useState(value);
   // console.log("_value", _value);
@@ -137,7 +141,7 @@ const ThisSlider = ({ value, unit, sign, setPreview, setValue }) => {
         <SelectPanel
           selected={unit}
           items={cssUnits.map((unit) => unit.value)}
-          setItem={setUnit}        
+          setItem={setUnit}
         />
         {/* <Select defaultItem={unit} setItem={setUnit} listItems={cssUnits} /> */}
       </div>

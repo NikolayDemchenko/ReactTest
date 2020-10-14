@@ -2,26 +2,29 @@ import React, { useState, useEffect } from "react";
 import { ic_update } from "react-icons-kit/md/ic_update";
 import Icon from "react-icons-kit";
 import log from "../../../../Log";
-import { buttonStyle } from "./BtnStyle";import {ic_content_copy} from 'react-icons-kit/md/ic_content_copy'
+import { buttonStyle } from "./BtnStyle";
+import { ic_content_copy } from "react-icons-kit/md/ic_content_copy";
 import parse from "style-to-object";
-import {createCssProperties} from "convert-to-css";
+import { createCssProperties } from "convert-to-css";
 import {
   deleteObjectProps,
   deleteNoObjectProps,
 } from "./Function/ObjectManager";
 function EditPanel(props) {
-  const { panelStyle, setPanelStyle} = props;
+  const { panelStyle, setPanelStyle } = props;
   // console.log("%cPropertiesPanel-StylePanel", "color: green");
   console.log("props :>> ", props);
-  
+
   // JSON.stringify(panelStyle)
 
-  const stringStyle =
-    createCssProperties(deleteObjectProps(panelStyle)) + ";";
+  const stringStyle = createCssProperties(deleteObjectProps(panelStyle)) + ";";
   const [value, setValue] = useState(stringStyle);
   useEffect(() => {
+    console.log("useEffect in");
     setValue(stringStyle);
-    return () => {};
+    return () => {
+      console.log("useEffect out");
+    };
   }, [panelStyle]);
 
   return (
@@ -29,7 +32,7 @@ function EditPanel(props) {
       <div
         style={{
           display: "flex",
-          justifyContent: "flex-end"        
+          justifyContent: "flex-end",
         }}
       >
         {/* <div

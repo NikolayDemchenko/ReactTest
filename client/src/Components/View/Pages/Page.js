@@ -29,7 +29,7 @@ function Page(props) {
 
   const [settings, setSettings] = useState();
 
-  console.log("settings :>> ", settings);
+  // console.log("settings :>> ", settings);
 
   const [page, setPage] = useState(JSON.parse(JSON.stringify(_page)));
   // console.log("page.tags :>> ", page.tags);

@@ -12,8 +12,11 @@ export default function Items(props) {
   const [selected, setSelected] = useState(props.selected);
 
   useEffect(() => {
+    console.log("useEffect in");
     setList(Search(search, thisItems));
-  }, [exItems]);
+    return () =>{
+      console.log("useEffect out");
+  }}, [exItems]);
 
   // Поиск по подстроке и сортировка по позиции подстроки
   const Search = (item, items) =>

@@ -16,7 +16,9 @@ function Property(props) {
     deleteProperty,
     onDrop,
     draggedProp,
-    setDraggedProp,   
+    setDraggedProp,
+    setPartPreview,
+    setFullPreview
   } = props;
   // console.log("props :>> ", props);
   const [Y, setY] = useState();
@@ -24,14 +26,10 @@ function Property(props) {
 
   const [target, setTarget] = useState();
 
-
-
-
   return (
-    <div     
+    <div
       draggable
       tabIndex={tabIndex}
-
       onDrop={(e) => {
         e.stopPropagation();
         onDrop({ [name]: value }, draggedProp, target);
@@ -67,7 +65,8 @@ function Property(props) {
         }}
       >
         <PopupInput
-          // value={propKey}    
+          {...{ setPartPreview,setFullPreview }}
+          // value={propKey}
           value={name}
           setPreview={setName}
           setValue={(val) => {
@@ -83,7 +82,10 @@ function Property(props) {
           width: "80px",
         }}
       >
-        <PopupInput {...{ value, setValue, setPreview}} height="1em" />
+        <PopupInput
+          {...{ value, setValue, setPreview, setPartPreview,setFullPreview }}
+          height="1em"
+        />
       </div>
       <div
         title={"Удалить свойство"}

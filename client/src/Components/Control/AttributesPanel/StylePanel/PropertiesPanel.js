@@ -20,9 +20,7 @@ function PropertiesPanel(props) {
     panelStyle,
     setPanelStyle,
     setStyleView,
-    deletePanel,
-    selected,
-    setSelected,
+    deletePanel,  
     tag,
     allStyleProps,
   } = props;
@@ -48,45 +46,21 @@ function PropertiesPanel(props) {
 
   const fullName = name + parentName;
 
-  const setColor = (value, name) => {
-    switch (value) {
-      case name:
-        return "rgba(140, 200, 255, 0.8)";
-      case "All style":
-        return "rgba(140, 200, 255, 0.7)";
-      default:
-        return "rgba(140, 200, 255, 0.4)";
-    }
-  };
-
-  let borderTop =
-    selected !== fullName
-      ? "4px solid rgba(140, 200, 255, 0.1)"
-      : "4px solid rgba(140, 200, 255, 0.4)";
-
-  borderTop = !fullName.indexOf("@media") ? "none" : borderTop;
-
   const styleViewFilter = (style) => ({
     ...deleteObjectProps({ ...style }),
     ...deleteObjectProps({ ...style[name] }),
   });
 
   const addProperty = (_key) => {
-    const { key, value } = allStyleProps.find((style) => style.key === _key);
+    const { key, value } = allStyleProps().find((style) => style.key === _key);
 
     console.log("add property", key, value);
     setPanelStyle({ [key]: value, ...panelStyle });
   };
 
   return (
-    <div
-      // Включение частичного превью
-      onClick={(e) => {
-        e.stopPropagation();
-        setStyleView({ styleViewFilter });
-        setSelected(fullName);
-      }}
-      style={{ borderTop, color: setColor(selected, fullName) }}
+    <div 
+      style={{ borderTop:"4px solid rgba(140, 200, 255, 0.2)", color: "rgba(140, 200, 255, 0.7)" }}
       onDragOver={(e) => {
         // console.log('div', div)
         e.preventDefault();
@@ -96,9 +70,7 @@ function PropertiesPanel(props) {
         style={{
           color: "#bdec",
           display: "flex",
-          paddingLeft: "0.5em",
-          background:
-            selected === fullName ? "rgba(134, 186, 250, 0.1)" : "none",
+          paddingLeft: "0.5em",  
         }}
       >
         {name === "Style" ? (
@@ -121,7 +93,7 @@ function PropertiesPanel(props) {
             <Icon size={"100%"} icon={ic_credit_card} />
           </div>
           <SelectPanel
-            items={allStyleProps.map(({ key }) => key)}
+            items={allStyleProps().map(({ key }) => key)}
             selected={""}
             setItem={addProperty}
             exItems={Object.keys(panelStyle)}
@@ -166,7 +138,7 @@ function PropertiesPanel(props) {
       </div>
 
       {edit && <EditPanel {...{ panelStyle, setPanelStyle, styleId: tag.styleId }} />}
-      <Properties {...props} parentName={name} />
+      <Properties {...props} parentName={name} setPartPreview={()=> setStyleView({ styleViewFilter })} />
     </div>
   );
 }
