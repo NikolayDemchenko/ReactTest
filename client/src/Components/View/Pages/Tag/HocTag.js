@@ -8,18 +8,21 @@ import log from "../../../../Log";
 const HocTag = (props) => {
   // console.log("props", props.component.styles);
   const {
-    page: { styles },
     assignableStyle,
     changeTag,
     updateStyle,
     children,
     tag,
+    addStyle,
+    selected,
+    setSettings,
+    page,
     classes: allClasses,
   } = props;
 
   // console.log("tag", tag);
 
-  const style = styles.find(({ id }) => id === tag.styleId);
+  const style = page.styles.find(({ id }) => id === tag.styleId);
   const [previewStyle, setPreview] = useState(style.style);
   const [panelStyle, setStyle] = useState(previewStyle);
 
@@ -59,10 +62,17 @@ const HocTag = (props) => {
       <Portal>
         <AttributesPanel
           {...{
-            ...props,
-            styleName: style.name,
-            previewStyle,
+            // ...props,
+            changeTag,
+            tag,
             setPreview,
+            addStyle,
+            selected,
+            setSettings,
+            page,
+            assignableStyle,
+            updateStyle,
+            styleName: style.name,
             setStyleView,
             panelStyle,
             setPanelStyle,

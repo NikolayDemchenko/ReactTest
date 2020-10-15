@@ -134,10 +134,10 @@ function AttributesPanel(props) {
   );
 }
 
-// function areEqual(prevProps, nextProps) {
-//   return prevProps.panelStyle === nextProps.panelStyle
-// }
+function areEqual(prevProps, nextProps) {
+  return prevProps.panelStyle === nextProps.panelStyle
+}
 
 // export default log(AttributesPanel);
-export default React.memo(log(AttributesPanel));
-// export default React.memo(log(AttributesPanel), areEqual);
+// export default React.memo(log(AttributesPanel));
+export default React.memo(log(AttributesPanel), areEqual);
