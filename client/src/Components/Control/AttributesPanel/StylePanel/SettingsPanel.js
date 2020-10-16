@@ -27,7 +27,7 @@ function SettingsPanel(props) {
     setPanelStyle,
     styleName,
     changeTag,
-    page: { styles },
+    styles,
   } = props;
 
   // console.log("props", props);

@@ -27,8 +27,8 @@ const HocTag = (props) => {
   const [panelStyle, setStyle] = useState(previewStyle);
 
   const setPanelStyle = (style) => {
-    setStyle(style);
-    updateStyle(tag.styleId, style);
+    // setStyle(style);
+    // updateStyle(tag.styleId, style);
   };
   const [styleView, setStyleView] = useState({ styleViewFilter: (p) => p });
 
@@ -69,13 +69,14 @@ const HocTag = (props) => {
             addStyle,
             selected,
             setSettings,
-            page,
+            styles: page.styles,
             assignableStyle,
             updateStyle,
             styleName: style.name,
             setStyleView,
             panelStyle,
-            setPanelStyle,
+            setStyle,
+            // setPanelStyle,
           }}
         />
       </Portal>

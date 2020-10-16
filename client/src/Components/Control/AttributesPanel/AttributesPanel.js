@@ -19,14 +19,14 @@ function AttributesPanel(props) {
     addStyle,
     panelStyle,
     setPreview,
-    selected,
     assignableStyle,
     setSettings,
     styleName,
     updateStyle,
     setStyleView,
-    setPanelStyle,
-    page,
+    setStyle,
+    // setPanelStyle,
+    styles,
   } = props;
 
   // Назначает тип тега
@@ -112,11 +112,11 @@ function AttributesPanel(props) {
         duration={500}
       >
         <StylePanel
-          {...{           
+          {...{
             addStyle,
             panelStyle,
             setPreview,
-            selected,
+            // selected,
             assignableStyle,
             setSettings,
             styleName,
@@ -124,8 +124,11 @@ function AttributesPanel(props) {
             tag,
             updateStyle,
             setStyleView,
-            setPanelStyle,
-            page,
+            setPanelStyle: (style) => {
+              setStyle(style);
+              updateStyle(tag.styleId, style);
+            },
+            styles,
           }}
         />
       </Link>
@@ -135,9 +138,58 @@ function AttributesPanel(props) {
 }
 
 function areEqual(prevProps, nextProps) {
-  return prevProps.panelStyle === nextProps.panelStyle
+  console.log(
+    "prevProps.changeTag===nextProps.changeTag",
+    prevProps.changeTag === nextProps.changeTag
+  );
+  console.log("prevProps.tag===nextProps.tag", prevProps.tag === nextProps.tag);
+  console.log(
+    "prevProps.addStyle===nextProps.addStyle",
+    prevProps.addStyle === nextProps.addStyle
+  );
+  console.log(
+    "prevProps.panelStyle===nextProps.panelStyle",
+    prevProps.panelStyle === nextProps.panelStyle
+  );
+  console.log(
+    "prevProps.setPreview===nextProps.setPreview",
+    prevProps.setPreview === nextProps.setPreview
+  );
+  console.log(
+    "prevProps.assignableStyle===nextProps.assignableStyle",
+    prevProps.assignableStyle === nextProps.assignableStyle
+  );
+  console.log(
+    "prevProps.setSettings===nextProps.setSettings",
+    prevProps.setSettings === nextProps.setSettings
+  );
+  console.log(
+    "prevProps.styleName===nextProps.styleName",
+    prevProps.styleName === nextProps.styleName
+  );
+  console.log(
+    "prevProps.updateStyle===nextProps.updateStyle",
+    prevProps.updateStyle === nextProps.updateStyle
+  );
+  console.log(
+    "prevProps.styles===nextProps.styles",
+    prevProps.styles === nextProps.styles
+  );
+  console.log(
+    "prevProps.setStyleView===nextProps.setStyleView",
+    prevProps.setStyleView === nextProps.setStyleView
+  );
+  console.log(
+    "prevProps.setStyle===nextProps.setStyle",
+    prevProps.setStyle === nextProps.setStyle
+  );
+  console.log("prevProps===nextProps", prevProps === nextProps);
+
+  return prevProps === nextProps;
+  // return prevProps.panelStyle === nextProps.panelStyle
+  // && prevProps.assignableStyle === nextProps.assignableStyle
 }
 
-// export default log(AttributesPanel);
-// export default React.memo(log(AttributesPanel));
-export default React.memo(log(AttributesPanel), areEqual);
+
+export default React.memo(log(AttributesPanel));
+// export default React.memo(log(AttributesPanel), areEqual);

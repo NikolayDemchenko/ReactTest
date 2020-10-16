@@ -7,7 +7,7 @@ function Tag(props) {
   const { tag, className } = props;
 
   const onClick = (e) => {
-    tag.onClick && tag.onClick(e);
+    // tag.onClick && tag.onClick(e);
   };
 
   return (
