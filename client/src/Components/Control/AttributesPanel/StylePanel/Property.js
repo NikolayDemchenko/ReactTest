@@ -6,7 +6,7 @@ import PopupInput from "../Inputs/PopupInput/PopupInput";
 
 function Property(props) {
   const {
-    updateStyle,
+    // updateStyle,
     tabIndex,
     name,
     value,

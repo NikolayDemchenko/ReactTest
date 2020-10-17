@@ -24,9 +24,9 @@ function StylePanel(props) {
 
   const [draggedProp, setDragged] = useState();
 
-  const updateStyle = () => {
+  const updateStyle = (propName, propValue) => {
     console.log("updateStyle");
-    _updateStyle(tag.styleId, panelStyle);
+    _updateStyle(tag.styleId, propName, propValue);
   };
 
   const getDefaultStyleProps = (id) => {
@@ -75,7 +75,7 @@ function StylePanel(props) {
           setPanelStyle,
           setStyleView,
           name: "Style",
-          updateStyle,     
+          // updateStyle,     
           draggedProp,
           setDraggedProp,
           setPreview,

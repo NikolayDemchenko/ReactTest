@@ -26,10 +26,7 @@ const HocTag = (props) => {
   const [previewStyle, setPreview] = useState(style.style);
   const [panelStyle, setStyle] = useState(previewStyle);
 
-  const setPanelStyle = (style) => {
-    // setStyle(style);
-    // updateStyle(tag.styleId, style);
-  };
+
   const [styleView, setStyleView] = useState({ styleViewFilter: (p) => p });
 
   jss.setup(preset());
@@ -61,8 +58,7 @@ const HocTag = (props) => {
     >
       <Portal>
         <AttributesPanel
-          {...{
-            // ...props,
+          {...{            
             changeTag,
             tag,
             setPreview,
@@ -75,8 +71,7 @@ const HocTag = (props) => {
             styleName: style.name,
             setStyleView,
             panelStyle,
-            setStyle,
-            // setPanelStyle,
+            setStyle,        
           }}
         />
       </Portal>

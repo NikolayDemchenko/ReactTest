@@ -17,9 +17,9 @@ function SettingsPanel(props) {
   // console.log("props :>> ", props);
   const {
     addStyle,
-    updateStyle,  
+    updateStyle,
     panelStyle,
-    setPreview,
+    // setPreview,
     selected,
     tag,
     assignableStyle,
@@ -35,9 +35,7 @@ function SettingsPanel(props) {
 
   const setLibrStyleByName = (name) => {
     const style = Styles.find((style) => style.name === name);
-    setPreview(style.style);
     setPanelStyle(style.style);
-    updateStyle(tag.styleId, style.style);
   };
   const changeTagStyleByName = (name) => {
     const style = styles.find((style) => style.name === name);
@@ -82,7 +80,10 @@ function SettingsPanel(props) {
         >
           <PopupInput
             value={styleName}
-            setValue={(name) => updateStyle(tag.styleId, "name", name)}
+            setValue={(name) => {
+              console.log('setValue', name)
+              updateStyle("name", name);
+            }}
           />
         </div>
         <div
@@ -160,7 +161,7 @@ function SettingsPanel(props) {
           className={buttonStyle}
           onClick={(e) => {
             e.stopPropagation();
-            updateStyle(tag.styleId, panelStyle);
+            updateStyle("style", panelStyle);
           }}
         >
           <Icon size={"120%"} icon={ic_update} />

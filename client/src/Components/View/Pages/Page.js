@@ -94,10 +94,11 @@ function Page(props) {
     return changedTag;
   };
 
-  const updateStyle = (styleId, style) => { 
+  const updateStyle = (styleId, propName, propValue) => { 
+    console.log('updateStyle', propName)
     const styles = page.styles.map((st) => {
       if (st.id === styleId) {
-        return { ...st, style };
+        return { ...st, [propName]: propValue };
       } else {
         return st;
       }

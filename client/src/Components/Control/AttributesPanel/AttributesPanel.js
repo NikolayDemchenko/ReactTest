@@ -126,7 +126,7 @@ function AttributesPanel(props) {
             setStyleView,
             setPanelStyle: (style) => {
               setStyle(style);
-              updateStyle(tag.styleId, style);
+              updateStyle(tag.styleId, 'style',style);
             },
             styles,
           }}
@@ -191,5 +191,6 @@ function areEqual(prevProps, nextProps) {
 }
 
 
+// export default log(AttributesPanel);
 export default React.memo(log(AttributesPanel));
 // export default React.memo(log(AttributesPanel), areEqual);
