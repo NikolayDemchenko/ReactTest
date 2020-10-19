@@ -8,7 +8,7 @@ function StylePanel(props) {
   // console.log("props :>> ", props);
 
   const { 
-    panelStyle,
+    // panelStyle,
     setPreview,
     selected,
     assignableStyle,
@@ -74,8 +74,7 @@ function StylePanel(props) {
           setFullPreview,
           setPanelStyle,
           setStyleView,
-          name: "Style",
-          // updateStyle,     
+          name: "Style",             
           draggedProp,
           setDraggedProp,
           setPreview,

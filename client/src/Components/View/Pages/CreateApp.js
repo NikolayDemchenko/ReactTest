@@ -88,14 +88,18 @@ const pageBaseDiv = {
   styleId: basePageStyle.id,
   attributes: {},
 };
+const  bodyStyle= {
+  'background-color': "#3b485d",
+}
 
 const page = {
+  bodyStyle,
   styles: [basePageStyle, innerPageStyle, newPageStyle],
   tags: [],
 };
 page.tags.push(pageBaseDiv);
 
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i < 10; i++) {
   page.tags.push(
     JSON.parse(
       JSON.stringify({

@@ -51,7 +51,8 @@ const HocTag = (props) => {
 
   return (
     <div
-      style={{ outline: "1px dashed #5af" }}
+    
+      style={{ outline: "1px dashed #5af"}}
       onClick={(e) => {
         e.stopPropagation();
       }}

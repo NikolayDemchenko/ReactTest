@@ -6,7 +6,7 @@ function Tags(props) {
   // console.log("props", props);
   return props.tags.map((tag, key) => {
     return props.selectedId !== tag.id ? (
-      <div
+      <div        
         key={key}
         onClick={(e) => {
           e.stopPropagation();

@@ -14,16 +14,10 @@ import axios from "axios";
 // import FileSaver from "file-saver";
 function Page(props) {
   // console.log("page-App");
+  const [page, setPage] = useState(JSON.parse(JSON.stringify(_page)));
 
-  const back = jss.createStyleSheet({    
-    body: {
-      'background-color': "#3b485d",
-    },   
-}).attach();
+  const back = jss.createStyleSheet({ body:page.bodyStyle }).attach();
   document.querySelector("body").classList.add(`${back.classes.body}`);
-
-
-
 
   const getTagStructure = (tags, parentId, styles) => {
     const newTags = JSON.parse(JSON.stringify(tags));
@@ -41,7 +35,6 @@ function Page(props) {
 
   // console.log("settings :>> ", settings);
 
-  const [page, setPage] = useState(JSON.parse(JSON.stringify(_page)));
   // console.log("page.tags :>> ", page.tags);
 
   const tags = getTagStructure([...page.tags], null, [...page.styles]);
