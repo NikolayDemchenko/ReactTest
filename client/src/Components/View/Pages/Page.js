@@ -15,6 +15,16 @@ import axios from "axios";
 function Page(props) {
   // console.log("page-App");
 
+  const back = jss.createStyleSheet({    
+    body: {
+      'background-color': "#3b485d",
+    },   
+}).attach();
+  document.querySelector("body").classList.add(`${back.classes.body}`);
+
+
+
+
   const getTagStructure = (tags, parentId, styles) => {
     const newTags = JSON.parse(JSON.stringify(tags));
     return newTags.filter((tag) => {
@@ -94,8 +104,8 @@ function Page(props) {
     return changedTag;
   };
 
-  const updateStyle = (styleId, propName, propValue) => { 
-    console.log('updateStyle', propName)
+  const updateStyle = (styleId, propName, propValue) => {
+    console.log("updateStyle", propName);
     const styles = page.styles.map((st) => {
       if (st.id === styleId) {
         return { ...st, [propName]: propValue };
