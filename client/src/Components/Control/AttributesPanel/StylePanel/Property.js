@@ -32,7 +32,7 @@ function Property(props) {
       tabIndex={tabIndex}
       onDrop={(e) => {
         e.stopPropagation();
-        onDrop({ [name]: value }, draggedProp, target);
+        onDrop&&onDrop({ [name]: value }, draggedProp, target);
       }}
       style={{
         // border: "1px solid #fff",
