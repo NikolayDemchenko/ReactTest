@@ -6,7 +6,7 @@ import jss from "jss";
 import preset from "jss-preset-default";
 import SelectPanel from "../ModalWindows/SelectPanel/SelectPanel";
 import { htmlTags } from "../../Class/HtmlCss";
-
+import BackSettings from './BackSettings';
 function AttributesPanel(props) {
   //    console.log(
   //     "%cVerticalPanel-App",
@@ -58,6 +58,7 @@ function AttributesPanel(props) {
 
   return (
     <div className={classes.style}>
+      <BackSettings {...props}/>
       <div style={{ cursor: "default", display: "flex" }}>
         <Link
           activeClass="active"
@@ -115,8 +116,7 @@ function AttributesPanel(props) {
           {...{
             addStyle,
             panelStyle,
-            setPreview,
-            // selected,
+            setPreview,     
             assignableStyle,
             setSettings,
             styleName,

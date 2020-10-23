@@ -20,12 +20,11 @@ const HocTag = (props) => {
     classes: allClasses,
   } = props;
 
-  // console.log("tag", tag);
+  // console.log("page", page);
 
   const style = page.styles.find(({ id }) => id === tag.styleId);
   const [previewStyle, setPreview] = useState(style.style);
   const [panelStyle, setStyle] = useState(previewStyle);
-
 
   const [styleView, setStyleView] = useState({ styleViewFilter: (p) => p });
 
@@ -51,15 +50,14 @@ const HocTag = (props) => {
 
   return (
     <div
-    
-      style={{ outline: "1px dashed #5af"}}
+      style={{ outline: "1px dashed #5af" }}
       onClick={(e) => {
         e.stopPropagation();
       }}
     >
       <Portal>
         <AttributesPanel
-          {...{            
+          {...{...props,
             changeTag,
             tag,
             setPreview,
@@ -72,7 +70,8 @@ const HocTag = (props) => {
             styleName: style.name,
             setStyleView,
             panelStyle,
-            setStyle,        
+            setStyle,
+            page,
           }}
         />
       </Portal>

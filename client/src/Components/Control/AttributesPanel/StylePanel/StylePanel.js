@@ -7,8 +7,7 @@ function StylePanel(props) {
   // console.log("%cStylePanel-VerticalPanel-App", "color: green");
   // console.log("props :>> ", props);
 
-  const { 
-    // panelStyle,
+  const {     
     setPreview,
     selected,
     assignableStyle,
@@ -18,8 +17,7 @@ function StylePanel(props) {
     tag,
     updateStyle: _updateStyle,
     setStyleView,
-    setPanelStyle,
-    page,
+    setPanelStyle    
   } = props;
 
   const [draggedProp, setDragged] = useState();
@@ -52,7 +50,7 @@ function StylePanel(props) {
 
   return (
     <div style={{ background: "rgba(30,40,57,.6)" }} title="CSS (JSS) Стили">
-      {/* <PopupInput value={styleName} setValue={name=>updateStyle(tag.styleId,"name",name)} /> */}
+
       <SettingsPanel
         {...{
           ...props,         
@@ -65,7 +63,7 @@ function StylePanel(props) {
           styleName,
           changeTag,
           tag,
-          page,      
+          
     
         }}
       />

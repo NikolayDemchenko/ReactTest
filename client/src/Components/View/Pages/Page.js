@@ -16,7 +16,7 @@ function Page(props) {
   // console.log("page-App");
   const [page, setPage] = useState(JSON.parse(JSON.stringify(_page)));
 
-  const back = jss.createStyleSheet({ body:page.bodyStyle }).attach();
+  const back = jss.createStyleSheet({ body: page.bodyStyle }).attach();
   document.querySelector("body").classList.add(`${back.classes.body}`);
 
   const getTagStructure = (tags, parentId, styles) => {
@@ -158,6 +158,7 @@ function Page(props) {
           addStyle,
           updateStyle,
           classes,
+          setPage,
         }}
       />
     </div>
