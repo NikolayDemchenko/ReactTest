@@ -8,13 +8,13 @@ const BackSettings = (props) => {
   const setPreview = (color) => {
     jss.setup(preset());
     const back = jss
-      .createStyleSheet({ body: { "background-color": color } })
+      .createStyleSheet({ body: { "background": color } })
       .attach();
     document.querySelector("body").classList.add(`${back.classes.body}`);
   };
   const setValue = (color) => {
     props.setPage((page) => {
-      return { ...page, bodyStyle: { "background-color": color } };
+      return { ...page, bodyStyle: { "background": color } };
     });
   };
   return (
@@ -22,7 +22,7 @@ const BackSettings = (props) => {
       <div style={{ paddingRight: "2em" }}>Background</div>
       <PopupInput
         {...{
-          value: props.page.bodyStyle["background-color"],
+          value: props.page.bodyStyle["background"],
           setValue,
           setPreview,
         }}

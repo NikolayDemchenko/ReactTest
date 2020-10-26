@@ -89,7 +89,7 @@ const pageBaseDiv = {
   attributes: {},
 };
 const  bodyStyle= {
-  'background-color': "#3b485d",
+  'background': "#3b485d",
 }
 
 const page = {
