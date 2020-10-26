@@ -2,8 +2,7 @@ import shortid from "shortid";
 import { createStyle } from "../../../AppFunction";
 
 const app = {
-  styles: [],
-  pages: [{ name: "1", components: [{ name: "Title", tags: [] }] }],
+  pageIds: ["1", "2", "3", "4", "5"],
 };
 
 const newStyle = {
@@ -21,7 +20,7 @@ const newStyle = {
     boxShadow: "none",
   },
 };
-const newPageStyle = createStyle(newStyle, "newStyle");
+const newTagStyle = createStyle(newStyle, "newStyle");
 
 const innerStyle = {
   height: "200px",
@@ -40,7 +39,7 @@ const innerStyle = {
   },
 };
 
-const innerPageStyle = createStyle(innerStyle, "innerStyle");
+const childTagStyle = createStyle(innerStyle, "innerStyle");
 
 const baseStyle = {
   display: "flex",
@@ -77,42 +76,49 @@ const baseStyle = {
   },
 };
 
-const basePageStyle = createStyle(baseStyle, "baseStyle");
+const rootTagStyle = createStyle(baseStyle, "baseStyle");
 
-const pageBaseDiv = {
-  index: 0,
-  // id: uuidv4(),
+const rootTagGenerator = (parentId, index, type, styleId) => ({
+  index,
   id: shortid.generate(),
-  parentId: null,
-  type: "div",
-  styleId: basePageStyle.id,
-  attributes: {},
+  parentId,
+  type,
+  styleId,
+});
+
+const rootTag_1 = rootTagGenerator(null, 0, "div", rootTagStyle.id);
+const rootTag_2 = rootTagGenerator(null, 1, "div", rootTagStyle.id);
+
+const bodyStyle = {
+  background: "#3b485d",
 };
-const  bodyStyle= {
-  'background': "#3b485d",
-}
 
 const page = {
   bodyStyle,
-  styles: [basePageStyle, innerPageStyle, newPageStyle],
+  styles: [rootTagStyle, childTagStyle, newTagStyle],
   tags: [],
 };
-page.tags.push(pageBaseDiv);
+page.tags.push(rootTag_1);
+page.tags.push(rootTag_2);
 
-for (let i = 0; i < 10; i++) {
-  page.tags.push(
-    JSON.parse(
-      JSON.stringify({
-        index: i,
-        // id: uuidv4(),
-        id: shortid.generate(),
-        parentId: pageBaseDiv.id,
-        type: "div",
-        styleId: innerPageStyle.id,
-        attributes: {},
-      })
-    )
-  );
-}
+const childGenerator = (amount, tag, childStyle) => {
+  for (let i = 0; i < amount; i++) {
+    page.tags.push(
+      JSON.parse(
+        JSON.stringify({
+          index: i,
+          id: shortid.generate(),
+          parentId: tag.id,
+          type: "div",
+          styleId: childStyle.id,
+          attributes: {},
+        })
+      )
+    );
+  }
+};
+
+childGenerator(6, rootTag_1, childTagStyle);
+childGenerator(9, rootTag_2, childTagStyle);
 
 export { page, createStyle };

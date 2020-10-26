@@ -7,18 +7,23 @@ const BackSettings = (props) => {
   console.log("props :>> ", props.page.bodyStyle);
   const setPreview = (color) => {
     jss.setup(preset());
-    const back = jss
-      .createStyleSheet({ body: { "background": color } })
-      .attach();
+    const back = jss.createStyleSheet({ body: { background: color } }).attach();
     document.querySelector("body").classList.add(`${back.classes.body}`);
   };
   const setValue = (color) => {
     props.setPage((page) => {
-      return { ...page, bodyStyle: { "background": color } };
+      return { ...page, bodyStyle: { background: color } };
     });
   };
   return (
-    <div style={{ display: "flex", margin: "0.5em" }}>
+    <div
+    title={props.page.bodyStyle["background"]}
+      style={{
+        overflow: "hidden",
+        display: "flex",
+        margin: "0.5em",
+      }}
+    >
       <div style={{ paddingRight: "2em" }}>Background</div>
       <PopupInput
         {...{
