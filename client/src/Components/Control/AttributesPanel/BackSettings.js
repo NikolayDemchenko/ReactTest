@@ -21,7 +21,8 @@ const BackSettings = (props) => {
       style={{
         overflow: "hidden",
         display: "flex",
-        margin: "0.5em",
+        margin: "0.5em 0",paddingLeft: "0.5em",
+        background: "rgba(30,40,57,.4)"
       }}
     >
       <div style={{ paddingRight: "2em" }}>Background</div>
