@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ModalInput from "../../../ModalWindows/ModalInput/ModalInput";
+import ModalInput from "../../ModalWindows/ModalInput/ModalInput";
 
 function SaveComponent({componentId, saveNewComponent, saveComponent, title }) {
   // console.log('props', props)

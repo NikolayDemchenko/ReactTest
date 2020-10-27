@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import NavTags from "./NavTags";
+import NavTags from "./Tags/NavTags";
 import ModalInput from "../ModalWindows/ModalInput/ModalInput";
 import jss from "jss";
 import preset from "jss-preset-default";
-import SaveComponent from "./CRUD/Component/SaveComponent";
+import SaveComponent from "./Pages/SaveComponent";
 function NavigationPanel(props) {
   // console.log('props', props)
   const style = {
