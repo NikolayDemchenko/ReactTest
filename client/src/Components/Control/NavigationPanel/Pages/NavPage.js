@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { ic_keyboard_arrow_right } from "react-icons-kit/md/ic_keyboard_arrow_right";
 import Icon from "react-icons-kit";
 import { Link } from "react-scroll";
-import NavTags from "./NavTags";
-import CRUDTag from "./CRUD/Tag/CRUDTag";
+import NavTags from "../Tags/NavTags";
+// import CRUDTag from "./CRUD/Tag/CRUDTag";
 
-function NavTag(props) {
+function NavPage(props) {
   const { tag, addTag, removeTag, selectedId } = props;
 
   const { type, childrens, id, index } = tag;
@@ -44,19 +44,12 @@ function NavTag(props) {
 
   return (
     <div>
-      <Link
-        activeClass="active"
-        to={id}
-        spy={true}
-        smooth={true}
-        offset={-70}
-        duration={500}
-      >
+     
         <div
           onClick={(e) => {
             e.preventDefault();         
             console.log("id :>> ", id);
-            document.getElementById(id).click();
+         
           }}
           style={{
             display: "flex",
@@ -75,12 +68,10 @@ function NavTag(props) {
                 margin: "0 4px 4px auto",
               }}
             >
-              <CRUDTag {...{ tag, addTag, removeTag }} />
+              {/* <CRUDTag {...{ tag, addTag, removeTag }} /> */}
             </div>
           )}
         </div>
-      </Link>
-
       <div style={{ marginLeft: "30px" }}>
         {childrens && showChilds && (
           <NavTags {...props} tags={childrens} index={id} />
@@ -90,4 +81,4 @@ function NavTag(props) {
   );
 }
 // export default React.memo(NavTag);
-export default NavTag;
+export default NavPage;

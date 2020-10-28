@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import NavTags from "./Tags/NavTags";
+import NavPages from "./Pages/NavPages";
 import ModalInput from "../ModalWindows/ModalInput/ModalInput";
 import jss from "jss";
 import preset from "jss-preset-default";
@@ -85,6 +86,7 @@ function NavigationPanel(props) {
       {showPanel && (
         <div className={classes.style}>
           <NavTags {...props} />
+          {/* <NavPages {...props} /> */}
         </div>
       )}
     </div>
