@@ -21,9 +21,20 @@ function StylePanel(props) {
   } = props;
 
   const [draggedProp, setDragged] = useState();
-  const addStyle = (data, name, tag) => {   
+  const addStyle = (data, name, tag) => {
     setPage((page) => {
-      const newStyle = createStyle(data);
+      const names = page.styles.map((style) => style.name);
+      // let name = "Новый";
+      names.forEach((element) => {
+        if (element === name) {
+          const namestr = name.replace(/\d/gi, "");
+          const num = name.replace(/\D/gi, "");
+          const namenum = Number(num) + 1;
+          name = namestr + namenum;
+        }
+      });
+
+      const newStyle = createStyle(data, name);
       const changedTag = { ...tag, styleId: newStyle.id };
       return {
         ...page,
@@ -36,7 +47,7 @@ function StylePanel(props) {
         }),
         styles: [...page.styles, newStyle],
       };
-    });   
+    });
   };
 
   const updateStyleById = (styleId, propName, propValue, setPage) => {
@@ -57,8 +68,9 @@ function StylePanel(props) {
   const updateStyleData = (data) =>
     updateStyleById(tag.styleId, "data", data, setPage);
 
-  const updateStyleName = (name) =>
-    updateStyleById(tag.styleId, "name", name, setPage);
+  const updateStyleName = (name) => {       
+    !page.styles.map((style) => style.name).find((element) => element === name) && updateStyleById(tag.styleId, "name", name, setPage);
+  };
 
   const getDefaultStyleProps = (id) => {
     // console.log('getDefaultStyleProps :>> ', id);

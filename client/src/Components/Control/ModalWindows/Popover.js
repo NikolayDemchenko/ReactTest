@@ -4,20 +4,13 @@ function Popover(props) {
   const { children } = props;
   const [anchorEl, setAnchorEl] = useState(null);
 
-  // useEffect(() => {
-  //   console.log("useEffect in");
-  //   setAnchorEl(null);
-  //   return () => {
-  //     console.log("useEffect out");
-  //   };
-  // }, [props.isopen]);
-
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
   };
+
   const open = Boolean(anchorEl);
   // const paper={...children[1],props:{...children[1].props}}
   const paper = {
@@ -26,6 +19,7 @@ function Popover(props) {
   };
 
   const id = open ? "new-popover" : undefined;
+
   return (
     <>
       <div onClick={handleClick}>{children[0]}</div>

@@ -29,7 +29,6 @@ function AttributesPanel(props) {
     page,
     setPage,
   } = props;
-console.log('panelStyle :>> ', panelStyle);
   // Назначает тип тега
   const setTagType = (type) => {
     console.log("setTagType", type);

@@ -78,10 +78,7 @@ function SettingsPanel(props) {
           }}
           title={"имя стиля"}
         >
-          <PopupInput
-            value={styleName}
-            setValue={updateStyleName}
-          />
+          <PopupInput value={styleName} setValue={updateStyleName} />
         </div>
         <div
           style={{
@@ -96,7 +93,7 @@ function SettingsPanel(props) {
             onClick={(e) => {
               e.stopPropagation();
               console.log("Копировать стиль!");
-              addStyle(panelStyle, "Самый новый стиль", tag);              
+              addStyle(panelStyle,"new_style",tag);
             }}
           >
             <Icon size={"100%"} icon={copy} />
@@ -152,7 +149,6 @@ function SettingsPanel(props) {
         >
           <Icon size={"100%"} icon={paintBrush} />
         </div>
-
 
         <div
           title={"Копировать в буфер"}

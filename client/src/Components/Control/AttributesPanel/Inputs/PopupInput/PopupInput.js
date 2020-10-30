@@ -7,6 +7,7 @@ export default function PopupInput(props) {
   // const type ="number"
   // console.log('props.value', props.value)
   const value = props.value ? props.value : "none";
+  // console.log('new Boolean(value)', new Boolean(value))
   const type = PropertyValueSelector({ value });
   const width =
     type !== "number" ? "none" : value.length > 5 ? `${value.length}em` : "5em";
@@ -14,10 +15,9 @@ export default function PopupInput(props) {
   // console.log("type :>> ", type);
   // console.log("props :>> ", props);
   // console.log('props.onExit :>> ', props.onExit);
-
+  // console.log("value", value?value:"Хуй!!!!");
   return (
-    <Popover
-      open={false}
+    <Popover    
       onEnter={() => {
         props.setPartPreview && props.setPartPreview();
         console.log("Открыто!");

@@ -4,7 +4,6 @@ import log from "../../../Log";
 import shortid from "shortid";
 import Tags from "./Tag/Tags";
 import { page as _page } from "./CreateApp";
-import { createStyle } from "../../../AppFunction";
 import NavigationPanel from "../../Control/NavigationPanel/NavigationPanel";
 // import { SaveToJSON } from "../../../../AppFunction";
 import jss from "jss";
@@ -81,22 +80,6 @@ function Page(props) {
     setPage({ ...page, tags });
     return changedTag;
   };
-
-  // const addStyle = (style, name, tag) => {
-  //   const newStyle = createStyle(style, name);
-  //   const changedTag = { ...tag, styleId: newStyle.id };
-  //   const newTags = page.tags.map((tag) => {
-  //     if (changedTag.id === tag.id) {
-  //       return changedTag;
-  //     } else {
-  //       return tag;
-  //     }
-  //   });
-  //   console.log("page", page);
-  //   setPage({ tags: newTags, styles: [...page.styles, newStyle] });
-  //   return changedTag;
-  // };
-
 
   const saveNewPage = (name) => {
     name && name !== ""
