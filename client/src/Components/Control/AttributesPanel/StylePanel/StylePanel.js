@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import log from "../../../../Log";
 import PropertiesPanel from "./PropertiesPanel";
 import SettingsPanel from "./SettingsPanel";
-// import PopupInput from "../Inputs/PopupInput/PopupInput";
+import { createStyle } from "../../../../AppFunction";
 function StylePanel(props) {
   // console.log("%cStylePanel-VerticalPanel-App", "color: green");
   // console.log("props :>> ", props);
 
-  const {     
+  const {
     setPreview,
     selected,
     assignableStyle,
@@ -15,17 +15,50 @@ function StylePanel(props) {
     styleName,
     changeTag,
     tag,
-    updateStyle: _updateStyle,
     setStyleView,
-    setPanelStyle    
+    page,
+    setPage,
   } = props;
 
   const [draggedProp, setDragged] = useState();
-
-  const updateStyle = (propName, propValue) => {
-    console.log("updateStyle");
-    _updateStyle(tag.styleId, propName, propValue);
+  const addStyle = (data, name, tag) => {   
+    setPage((page) => {
+      const newStyle = createStyle(data);
+      const changedTag = { ...tag, styleId: newStyle.id };
+      return {
+        ...page,
+        tags: page.tags.map((tag) => {
+          if (changedTag.id === tag.id) {
+            return changedTag;
+          } else {
+            return tag;
+          }
+        }),
+        styles: [...page.styles, newStyle],
+      };
+    });   
   };
+
+  const updateStyleById = (styleId, propName, propValue, setPage) => {
+    // console.log("page :>> ", page);
+    // console.log("updateStyle", propName);
+    setPage((page) => ({
+      ...page,
+      styles: page.styles.map((style) => {
+        if (style.id === styleId) {
+          return { ...style, [propName]: propValue };
+        } else {
+          return style;
+        }
+      }),
+    }));
+  };
+
+  const updateStyleData = (data) =>
+    updateStyleById(tag.styleId, "data", data, setPage);
+
+  const updateStyleName = (name) =>
+    updateStyleById(tag.styleId, "name", name, setPage);
 
   const getDefaultStyleProps = (id) => {
     // console.log('getDefaultStyleProps :>> ', id);
@@ -50,29 +83,28 @@ function StylePanel(props) {
 
   return (
     <div style={{ background: "rgba(30,40,57,.6)" }} title="CSS (JSS) Стили">
-
       <SettingsPanel
         {...{
-          ...props,         
-          updateStyle,      
+          ...props,
+          updateStyleName,
+          updateStyleData,
           setPreview,
           selected,
           assignableStyle,
           setSettings,
-          setPanelStyle,
           styleName,
           changeTag,
           tag,
-          
-    
+          addStyle,
         }}
       />
       <PropertiesPanel
-        {...{...props, 
+        {...{
+          ...props,
           setFullPreview,
-          setPanelStyle,
+          updateStyleData,
           setStyleView,
-          name: "Style",             
+          name: "Style",
           draggedProp,
           setDraggedProp,
           setPreview,

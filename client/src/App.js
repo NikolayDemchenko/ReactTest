@@ -8,6 +8,11 @@ import Page from "./Components/View/Pages/Page";
 const App = () => {
   return (
     <ErrorBoundry>
+       {/* <NavigationPanel
+        {...{ tags, addTag, removeTag, savepage, saveNewPage }}
+        pageId={page._id}
+        selectedId={settings && settings.selectedId}
+      /> */}
       <Page />
     </ErrorBoundry>
   );

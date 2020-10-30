@@ -17,14 +17,14 @@ function SettingsPanel(props) {
   // console.log("props :>> ", props);
   const {
     addStyle,
-    updateStyle,
+    updateStyleName,
     panelStyle,
     // setPreview,
     selected,
     tag,
     assignableStyle,
     setSettings,
-    setPanelStyle,
+    updateStyleData,
     styleName,
     changeTag,
     styles,
@@ -35,7 +35,7 @@ function SettingsPanel(props) {
 
   const setLibrStyleByName = (name) => {
     const style = Styles.find((style) => style.name === name);
-    setPanelStyle(style.style);
+    updateStyleData(style.data);
   };
   const changeTagStyleByName = (name) => {
     const style = styles.find((style) => style.name === name);
@@ -80,10 +80,7 @@ function SettingsPanel(props) {
         >
           <PopupInput
             value={styleName}
-            setValue={(name) => {
-              console.log('setValue', name)
-              updateStyle("name", name);
-            }}
+            setValue={updateStyleName}
           />
         </div>
         <div
@@ -99,8 +96,7 @@ function SettingsPanel(props) {
             onClick={(e) => {
               e.stopPropagation();
               console.log("Копировать стиль!");
-              addStyle(panelStyle, "Самый новый стиль", tag);
-              // setPanelStyle(panelStyle);
+              addStyle(panelStyle, "Самый новый стиль", tag);              
             }}
           >
             <Icon size={"100%"} icon={copy} />
@@ -156,16 +152,7 @@ function SettingsPanel(props) {
         >
           <Icon size={"100%"} icon={paintBrush} />
         </div>
-        <div
-          title={"Обновить изменения"}
-          className={buttonStyle}
-          onClick={(e) => {
-            e.stopPropagation();
-            updateStyle("style", panelStyle);
-          }}
-        >
-          <Icon size={"120%"} icon={ic_update} />
-        </div>
+
 
         <div
           title={"Копировать в буфер"}

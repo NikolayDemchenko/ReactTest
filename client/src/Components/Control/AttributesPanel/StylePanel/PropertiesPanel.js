@@ -18,7 +18,7 @@ function PropertiesPanel(props) {
     parentName,
     setName,
     panelStyle,
-    setPanelStyle,
+    updateStyleData,
     setStyleView,
     deletePanel,  
     tag,
@@ -31,7 +31,7 @@ function PropertiesPanel(props) {
 
   const addPseudoClass = (e) => {
     e.stopPropagation();
-    setPanelStyle({ ...panelStyle, "&:": {} });
+    updateStyleData({ ...panelStyle, "&:": {} });
   };
   const addMedia = (e) => {
     e.stopPropagation();
@@ -41,7 +41,7 @@ function PropertiesPanel(props) {
         delete _style[key];
       }
     }
-    setPanelStyle({ ..._style, "@media": {}, ...panelStyle });
+    updateStyleData({ ..._style, "@media": {}, ...panelStyle });
   };
 
   const fullName = name + parentName;
@@ -55,7 +55,7 @@ function PropertiesPanel(props) {
     const { key, value } = allStyleProps().find((style) => style.key === _key);
 
     console.log("add property", key, value);
-    setPanelStyle({ [key]: value, ...panelStyle });
+    updateStyleData({ [key]: value, ...panelStyle });
   };
 
   return (
@@ -137,7 +137,7 @@ function PropertiesPanel(props) {
         </div>
       </div>
 
-      {edit && <EditPanel {...{ panelStyle, setPanelStyle, styleId: tag.styleId }} />}
+      {edit && <EditPanel {...{ panelStyle, updateStyleData, styleId: tag.styleId }} />}
       <Properties {...props} parentName={name} setPartPreview={()=> setStyleView({ styleViewFilter })} />
     </div>
   );

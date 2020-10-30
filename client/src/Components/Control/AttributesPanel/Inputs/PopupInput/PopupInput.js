@@ -5,25 +5,25 @@ import PropertyValueSelector from "../Switch/PropertyValueSelector";
 export default function PopupInput(props) {
   // console.log('props.value :>> ',typeof props.value);
   // const type ="number"
-  const type = PropertyValueSelector({ value: props.value });
+  // console.log('props.value', props.value)
+  const value = props.value ? props.value : "none";
+  const type = PropertyValueSelector({ value });
   const width =
-    type !== "number"
-      ? "none"
-      : props.value.length > 5
-      ? `${props.value.length}em`
-      : "5em";
+    type !== "number" ? "none" : value.length > 5 ? `${value.length}em` : "5em";
 
   // console.log("type :>> ", type);
   // console.log("props :>> ", props);
   // console.log('props.onExit :>> ', props.onExit);
+
   return (
     <Popover
+      open={false}
       onEnter={() => {
         props.setPartPreview && props.setPartPreview();
         console.log("Открыто!");
       }}
       onExit={() => {
-        props.setFullPreview&&props.setFullPreview()
+        props.setFullPreview && props.setFullPreview();
         console.log("Закрыто!");
       }}
       PaperProps={{
@@ -48,7 +48,7 @@ export default function PopupInput(props) {
             width: props.width,
           }}
         >
-          {props.value ? props.value : "none"}
+          {value}
         </div>
       ) : (
         <div
@@ -57,7 +57,7 @@ export default function PopupInput(props) {
             marginTop: "0.2em",
             height: "1em",
             width: "1.2em",
-            backgroundColor: props.value,
+            backgroundColor: value,
           }}
         />
       )}

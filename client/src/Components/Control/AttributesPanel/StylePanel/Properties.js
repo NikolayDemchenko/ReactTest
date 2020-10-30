@@ -17,7 +17,7 @@ function Properties(props) {
     draggedProp,
     setDraggedProp,
     panelStyle,
-    setPanelStyle,
+    updateStyleData,
     setPreview,
   } = props;
 
@@ -33,22 +33,21 @@ function Properties(props) {
   const setName = (item, value, chain) => {
     const prop = RenameObjectProperty(panelStyle, Object.keys(item)[0], value);
 
-    setPanelStyle(prop, `\nsetName-Properties ${chain}`);
+    updateStyleData(prop, `\nsetName-Properties ${chain}`);
     setPreview(prop, `\nsetName-Properties ${chain}`);
   };
   const setValue = (item, value) => {
     // console.log('value :>> ', value);
-    setPanelStyle({ ...panelStyle, [[Object.keys(item)[0]]]: value });
+    updateStyleData({ ...panelStyle, [[Object.keys(item)[0]]]: value });
   };
 
   const remove = (item) => {
-
     console.log("remove property :>> ", item);
-    const style=panelStyle
+    const style = panelStyle;
     delete style[Object.keys(item)[0]];
-  console.log('style :>> ', style);
+    console.log("style :>> ", style);
 
-    setPanelStyle(style);
+    updateStyleData(style);
     setPreview(style);
   };
 
@@ -63,7 +62,9 @@ function Properties(props) {
         key={index}
         panelStyle={Object.values(panel)[0]}
         setName={(name, chain) => setName(panel, name, chain)}
-        setPanelStyle={(panelStyle, chain) => setValue(panel, panelStyle, chain)}
+        updateStyleData={(panelStyle, chain) =>
+          setValue(panel, panelStyle, chain)
+        }
         basepanelStyle={panelStyle}
         deletePanel={(chain) => remove(panel, chain)}
         setPreview={setPreviewPanel}
@@ -85,9 +86,12 @@ function Properties(props) {
           draggedProp
         ).obj;
       if (target === "up") {
-        setPanelStyle(addNewProp(addNewPropUp), `\nonDrop-Properties ${chain}`);
+        updateStyleData(
+          addNewProp(addNewPropUp),
+          `\nonDrop-Properties ${chain}`
+        );
       } else if (target === "down") {
-        setPanelStyle(
+        updateStyleData(
           addNewProp(addNewPropDown),
           `\nonDrop-Properties ${chain}`
         );
@@ -117,4 +121,4 @@ function Properties(props) {
   );
 }
 // export default Properties;
-export default React.memo(log(Properties))
+export default React.memo(log(Properties));

@@ -41,8 +41,8 @@ function Page(props) {
 
   jss.setup(preset());
   const myStyles = {};
-  page.styles.forEach(({ id, style }) => {
-    myStyles[id] = style;
+  page.styles.forEach(({ id, data }) => {
+    myStyles[id] = data;
   });
   const { classes } = jss.createStyleSheet({ ...myStyles }).attach();
 
@@ -82,32 +82,21 @@ function Page(props) {
     return changedTag;
   };
 
-  const addStyle = (style, name, tag) => {
-    const newStyle = createStyle(style, name);
-    const changedTag = { ...tag, styleId: newStyle.id };
-    const newTags = page.tags.map((tag) => {
-      if (changedTag.id === tag.id) {
-        return changedTag;
-      } else {
-        return tag;
-      }
-    });
-    console.log("page", page);
-    setPage({ tags: newTags, styles: [...page.styles, newStyle] });
-    return changedTag;
-  };
+  // const addStyle = (style, name, tag) => {
+  //   const newStyle = createStyle(style, name);
+  //   const changedTag = { ...tag, styleId: newStyle.id };
+  //   const newTags = page.tags.map((tag) => {
+  //     if (changedTag.id === tag.id) {
+  //       return changedTag;
+  //     } else {
+  //       return tag;
+  //     }
+  //   });
+  //   console.log("page", page);
+  //   setPage({ tags: newTags, styles: [...page.styles, newStyle] });
+  //   return changedTag;
+  // };
 
-  const updateStyle = (styleId, propName, propValue) => {
-    console.log("updateStyle", propName);
-    const styles = page.styles.map((st) => {
-      if (st.id === styleId) {
-        return { ...st, [propName]: propValue };
-      } else {
-        return st;
-      }
-    });
-    setPage({ ...page, styles });
-  };
 
   const saveNewPage = (name) => {
     name && name !== ""
@@ -155,8 +144,7 @@ function Page(props) {
           tags,
           page,
           changeTag,
-          addStyle,
-          updateStyle,
+          // addStyle,      
           classes,
           setPage,
         }}

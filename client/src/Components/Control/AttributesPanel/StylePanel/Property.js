@@ -5,8 +5,7 @@ import { cross } from "react-icons-kit/icomoon/cross";
 import PopupInput from "../Inputs/PopupInput/PopupInput";
 
 function Property(props) {
-  const {
-    // updateStyle,
+  const {  
     tabIndex,
     name,
     value,

@@ -1,6 +1,6 @@
 import shortid from "shortid";
-export const createStyle = (style, name, id = shortid.generate()) => ({
+export const createStyle = (data, name, id = shortid.generate()) => ({
   name,
   id,
-  style,
+  data,
 });

@@ -9,22 +9,22 @@ const HocTag = (props) => {
   // console.log("props", props.component.styles);
   const {
     assignableStyle,
-    changeTag,
-    updateStyle,
+    changeTag,  
     children,
     tag,
-    addStyle,
+    // addStyle,
     selected,
     setSettings,
     page,
+    setPage,
     classes: allClasses,
   } = props;
 
   // console.log("page", page);
 
   const style = page.styles.find(({ id }) => id === tag.styleId);
-  const [previewStyle, setPreview] = useState(style.style);
-  const [panelStyle, setStyle] = useState(previewStyle);
+  const [previewStyle, setPreview] = useState(style.data);
+  
 
   const [styleView, setStyleView] = useState({ styleViewFilter: (p) => p });
 
@@ -41,8 +41,7 @@ const HocTag = (props) => {
     assignableStyle &&
       assignableStyle !== tag.styleId &&
       changeTag(tag, "styleId", assignableStyle);
-    setPreview(style.style);
-    setStyle(style.style);
+    setPreview(style.data);  
     return () => {
       console.log("useEffect out");
     };
@@ -57,21 +56,21 @@ const HocTag = (props) => {
     >
       <Portal>
         <AttributesPanel
-          {...{...props,
+          {...{
+            ...props,
             changeTag,
             tag,
             setPreview,
-            addStyle,
+            // addStyle,
             selected,
             setSettings,
             styles: page.styles,
-            assignableStyle,
-            updateStyle,
+            assignableStyle,         
             styleName: style.name,
             setStyleView,
-            panelStyle,
-            setStyle,
+            panelStyle:style.data,        
             page,
+            setPage,
           }}
         />
       </Portal>

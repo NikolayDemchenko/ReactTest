@@ -1,7 +1,7 @@
 [
   {
-    "name": "inner div style demo",
-    "style": {
+    "name": "inner div data demo",
+    "data": {
       "height": "200px",
       "width": "200px",
       "backgroundColor": "#789",
@@ -19,7 +19,7 @@
   },
   {
     "name": "Какой-то стиль",
-    "style": {
+    "data": {
       "height": "200px",
       "width": "200px",
       "backgroundColor": "#789",
@@ -34,7 +34,7 @@
   },
   {
     "name": "Ещё стиль",
-    "style": {
+    "data": {
       "height": "200px",
       "width": "200px",
       "backgroundColor": "#789",
@@ -49,7 +49,7 @@
   },
   {
     "name": "Новый стиль",
-    "style": {
+    "data": {
       "height": "200px",
       "width": "200px",
       "backgroundColor": "#0d78e2",
@@ -64,7 +64,7 @@
   },
   {
     "name": "Высокий div",
-    "style": {
+    "data": {
       "height": "400px",
       "width": "200px",
       "backgroundColor": "#789",
@@ -79,7 +79,7 @@
   },
   {
     "name": "input",
-    "style": {
+    "data": {
       "height": "16px",
       "width": "200px",
       "backgroundColor": "#ffffff",
@@ -94,7 +94,7 @@
   },
   {
     "name": "Градиент",
-    "style": {
+    "data": {
       "&:hover": {
         "transform": "perspective(200px) scaleZ(-0.5) translateZ(-2px)",
         "boxShadow": "0 8px 5px 2px #0005, inset 0 8px 5px 2px #00ffff",

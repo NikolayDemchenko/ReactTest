@@ -6,7 +6,7 @@ import jss from "jss";
 import preset from "jss-preset-default";
 import SelectPanel from "../ModalWindows/SelectPanel/SelectPanel";
 import { htmlTags } from "../../Class/HtmlCss";
-import BackSettings from './BackSettings';
+import BackSettings from "./BackSettings";
 function AttributesPanel(props) {
   //    console.log(
   //     "%cVerticalPanel-App",
@@ -16,19 +16,20 @@ function AttributesPanel(props) {
   const {
     changeTag,
     tag,
-    addStyle,
+    // addStyle,
     panelStyle,
     setPreview,
     assignableStyle,
     setSettings,
     styleName,
-    updateStyle,
-    setStyleView,
-    setStyle,
-    // setPanelStyle,
-    styles,
-  } = props;
 
+    setStyleView,
+    
+    styles,
+    page,
+    setPage,
+  } = props;
+console.log('panelStyle :>> ', panelStyle);
   // Назначает тип тега
   const setTagType = (type) => {
     console.log("setTagType", type);
@@ -58,7 +59,7 @@ function AttributesPanel(props) {
 
   return (
     <div className={classes.style}>
-      <BackSettings {...props}/>
+      <BackSettings {...props} />
       <div style={{ cursor: "default", display: "flex" }}>
         <Link
           activeClass="active"
@@ -114,21 +115,20 @@ function AttributesPanel(props) {
       >
         <StylePanel
           {...{
-            addStyle,
+            // addStyle,
             panelStyle,
-            setPreview,     
+            setPreview,
             assignableStyle,
             setSettings,
             styleName,
             changeTag,
             tag,
-            updateStyle,
+
             setStyleView,
-            setPanelStyle: (style) => {
-              setStyle(style);
-              updateStyle(tag.styleId, 'style',style);
-            },
+        
             styles,
+            page,
+            setPage,
           }}
         />
       </Link>
@@ -143,14 +143,8 @@ function areEqual(prevProps, nextProps) {
     prevProps.changeTag === nextProps.changeTag
   );
   console.log("prevProps.tag===nextProps.tag", prevProps.tag === nextProps.tag);
-  console.log(
-    "prevProps.addStyle===nextProps.addStyle",
-    prevProps.addStyle === nextProps.addStyle
-  );
-  console.log(
-    "prevProps.panelStyle===nextProps.panelStyle",
-    prevProps.panelStyle === nextProps.panelStyle
-  );
+
+  
   console.log(
     "prevProps.setPreview===nextProps.setPreview",
     prevProps.setPreview === nextProps.setPreview
@@ -167,10 +161,7 @@ function areEqual(prevProps, nextProps) {
     "prevProps.styleName===nextProps.styleName",
     prevProps.styleName === nextProps.styleName
   );
-  console.log(
-    "prevProps.updateStyle===nextProps.updateStyle",
-    prevProps.updateStyle === nextProps.updateStyle
-  );
+
   console.log(
     "prevProps.styles===nextProps.styles",
     prevProps.styles === nextProps.styles
@@ -179,17 +170,12 @@ function areEqual(prevProps, nextProps) {
     "prevProps.setStyleView===nextProps.setStyleView",
     prevProps.setStyleView === nextProps.setStyleView
   );
-  console.log(
-    "prevProps.setStyle===nextProps.setStyle",
-    prevProps.setStyle === nextProps.setStyle
-  );
+
   console.log("prevProps===nextProps", prevProps === nextProps);
 
   return prevProps === nextProps;
-  // return prevProps.panelStyle === nextProps.panelStyle
-  // && prevProps.assignableStyle === nextProps.assignableStyle
-}
 
+}
 
 // export default log(AttributesPanel);
 export default React.memo(log(AttributesPanel));
