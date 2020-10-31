@@ -7,8 +7,7 @@ import FuncInput from "../FuncInput";
 
 function PropertyInputSwitch(props) {
 
-  switch (PropertyValueSelector(props)) {
-
+  switch (props.dataType||PropertyValueSelector(props)) {
     case "multi":
       return <MultiInput {...props} />;
     case "color":

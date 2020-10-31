@@ -78,7 +78,7 @@ function SettingsPanel(props) {
           }}
           title={"имя стиля"}
         >
-          <PopupInput value={styleName} setValue={updateStyleName} />
+          <PopupInput dataType={"string"} value={styleName} setValue={updateStyleName} />
         </div>
         <div
           style={{
