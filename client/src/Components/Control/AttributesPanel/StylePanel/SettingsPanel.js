@@ -18,8 +18,7 @@ function SettingsPanel(props) {
   const {
     addStyle,
     updateStyleName,
-    panelStyle,
-    // setPreview,
+    panelStyle,   
     selected,
     tag,
     assignableStyle,

@@ -3,7 +3,7 @@ import log from "../../../Log";
 // import { v4 as uuidv4 } from "uuid";
 import shortid from "shortid";
 import Tags from "./Tag/Tags";
-import { page as _page } from "./CreateApp";
+// import { page as _page } from "./CreateApp";
 import NavigationPanel from "../../Control/NavigationPanel/NavigationPanel";
 // import { SaveToJSON } from "../../../../AppFunction";
 import jss from "jss";
@@ -11,18 +11,17 @@ import preset from "jss-preset-default";
 import axios from "axios";
 
 // import FileSaver from "file-saver";
-function Page(props) {
+function Page({page, setPage, settings, setSettings}) {
   // console.log("page-App");
-  const [page, setPage] = useState(JSON.parse(JSON.stringify(_page)));
+  // const [page, setPage] = useState(JSON.parse(JSON.stringify(_page)));
 
   const back = jss.createStyleSheet({ body: page.bodyStyle }).attach();
   document.querySelector("body").classList.add(`${back.classes.body}`);
 
   const getTagStructure = (tags, parentId, styles) => {
-    const newTags = JSON.parse(JSON.stringify(tags));
-    return newTags.filter((tag) => {
+    return tags.filter((tag) => {
       if (tag.parentId === parentId) {
-        tag.childrens = getTagStructure(newTags, tag.id, styles);
+        tag.childrens = getTagStructure(tags, tag.id, styles);
         return tag;
       } else {
         return null;
@@ -30,7 +29,7 @@ function Page(props) {
     });
   };
 
-  const [settings, setSettings] = useState();
+  
 
   // console.log("settings :>> ", settings);
 
@@ -125,10 +124,9 @@ function Page(props) {
           ...settings,
           setSettings,
           tags,
-          page,
-          changeTag,
-          // addStyle,      
+          changeTag,             
           classes,
+          page,
           setPage,
         }}
       />
