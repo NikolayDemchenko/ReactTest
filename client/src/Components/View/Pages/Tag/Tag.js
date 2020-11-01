@@ -14,10 +14,11 @@ function Tag(props) {
     <tag.type id={tag.id} className={className} onClick={onClick}>
       {/* {tag.id} */}
       {tag.childrens && tag.childrens.length > 0 ? (
-        <Tags
-          {...props}
-          tags={tag.childrens}     
-        />
+        {...props.children} // последняя переделка
+        // <Tags
+        //   {...props}
+        //   tags={tag.childrens}     
+        // />
       ) : null}
     </tag.type>
   );

@@ -78,7 +78,7 @@ const HocTag = (props) => {
         ...children,
         props: {
           ...props,
-          className: classes[tag.styleId],
+          className: props.classes[tag.styleId],
           classes: { ...allClasses },
         },
       }}

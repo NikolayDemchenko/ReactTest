@@ -3,6 +3,7 @@ import log from "../../../Log";
 // import { v4 as uuidv4 } from "uuid";
 import shortid from "shortid";
 import Tags from "./Tag/Tags";
+import Tag from "./Tag/Tag";
 // import { page as _page } from "./CreateApp";
 import NavigationPanel from "../../Control/NavigationPanel/NavigationPanel";
 // import { SaveToJSON } from "../../../../AppFunction";
@@ -11,17 +12,17 @@ import preset from "jss-preset-default";
 import axios from "axios";
 
 // import FileSaver from "file-saver";
-function Page({page, setPage, settings, setSettings}) {
+function Page({ page, setPage, settings, setSettings }) {
   // console.log("page-App");
   // const [page, setPage] = useState(JSON.parse(JSON.stringify(_page)));
 
   const back = jss.createStyleSheet({ body: page.bodyStyle }).attach();
   document.querySelector("body").classList.add(`${back.classes.body}`);
 
-  const getTagStructure = (tags, parentId, styles) => {
+  const getTagStructure = (tags, parentId) => {
     return tags.filter((tag) => {
       if (tag.parentId === parentId) {
-        tag.childrens = getTagStructure(tags, tag.id, styles);
+        tag.childrens = getTagStructure(tags, tag.id);
         return tag;
       } else {
         return null;
@@ -29,13 +30,32 @@ function Page({page, setPage, settings, setSettings}) {
     });
   };
 
-  
+  const TagStructure = ({ tags, parentId, classes }) => {
+    return tags.map((tag) => {
+      return (
+        tag.parentId === parentId && (
+          <div
+            onClick={(e) => {
+              e.stopPropagation();
+              setSettings((state) => ({
+                ...state,
+                selectedId: tag.id,
+              }));
+            }}
+          >
+            <Tag {...{ tag, className: classes[tag.styleId] }}>
+              <TagStructure {...{ classes }} tags={tags} parentId={tag.id} />
+            </Tag>
+          </div>
+        )
+      );
+    });
+  };
 
   // console.log("settings :>> ", settings);
-
   // console.log("page.tags :>> ", page.tags);
 
-  const tags = getTagStructure([...page.tags], null, [...page.styles]);
+  const tags = getTagStructure([...page.tags], null);
 
   jss.setup(preset());
   const myStyles = {};
@@ -119,17 +139,18 @@ function Page({page, setPage, settings, setSettings}) {
         pageId={page._id}
         selectedId={settings && settings.selectedId}
       />
-      <Tags
+      <TagStructure {...{ classes }} tags={page.tags} parentId={null} />
+      {/* <Tags
         {...{
           ...settings,
           setSettings,
           tags,
-          changeTag,             
+          changeTag,
           classes,
           page,
           setPage,
         }}
-      />
+      /> */}
     </div>
   );
 }

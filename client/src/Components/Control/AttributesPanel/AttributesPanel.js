@@ -18,7 +18,7 @@ function AttributesPanel(props) {
     tag,
     // addStyle,
     panelStyle,
-    setPreview,
+    // setPreview,
     assignableStyle,
     setSettings,
     styleName,
@@ -29,6 +29,18 @@ function AttributesPanel(props) {
     page,
     setPage,
   } = props;
+
+
+
+  const setPreview = (value) => {
+    // console.log('value', value)
+    jss.setup(preset());
+    const style = jss.createStyleSheet({ value }).attach();
+    document.getElementById(tag.id).classList.add(`${style.classes.value}`);
+  };
+
+
+
   // Назначает тип тега
   const setTagType = (type) => {
     console.log("setTagType", type);

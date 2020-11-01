@@ -4,13 +4,15 @@ import jss from "jss";
 import preset from "jss-preset-default";
 import PopupInput from "./Inputs/PopupInput/PopupInput";
 const BackSettings = (props) => {
-  console.log("props :>> ", props.page.bodyStyle);
+  // console.log("props :>> ", props.page.bodyStyle);
   const setPreview = (color) => {
+    console.log('color', color)
     jss.setup(preset());
     const back = jss.createStyleSheet({ body: { background: color } }).attach();
     document.querySelector("body").classList.add(`${back.classes.body}`);
   };
   const setValue = (color) => {
+
     props.setPage((page) => {
       return { ...page, bodyStyle: { background: color } };
     });
