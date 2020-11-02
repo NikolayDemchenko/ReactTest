@@ -8,7 +8,7 @@ export const PageManager = (page, setPage) => ({
           data: { page: JSON.stringify({ ...page, name }) },
         })
           .then((response) => {
-            console.log(response.data);
+            console.log("response.data!",response.data);
             setPage({ ...response.data });
           })
           .catch(function (error) {

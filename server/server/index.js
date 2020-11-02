@@ -16,7 +16,8 @@ const localURI = "mongodb://localhost:27017/LocalMongoBase";
 const port = 8000;
 
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '150mb'}));
+
 
 router.get("/", (req, res) => {
   const pages = req.app.locals.pages;
