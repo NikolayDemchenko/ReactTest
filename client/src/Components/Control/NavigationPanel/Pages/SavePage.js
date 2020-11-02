@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import ModalInput from "../../ModalWindows/ModalInput/ModalInput";
 
-function SaveComponent({componentId, saveNewComponent, saveComponent, title }) {
+function SavePage({pageId, saveNewPage, savePage, title }) {
   // console.log('props', props)
 
   return (
     <div>
-      {saveComponent&&componentId ? (
+      {savePage&&pageId ? (
         <div
           style={{
             backgroundColor: "#456c",
@@ -17,13 +17,13 @@ function SaveComponent({componentId, saveNewComponent, saveComponent, title }) {
           onClick={(e) => {
             // e.stopPropagation();
             e.preventDefault();
-            saveComponent();
+            savePage();
           }}
         >
           {title}
         </div>
       ) : (
-        <ModalInput setItem={saveNewComponent}>
+        <ModalInput setItem={saveNewPage}>
           <div
             style={{
               backgroundColor: "#456c",
@@ -39,4 +39,4 @@ function SaveComponent({componentId, saveNewComponent, saveComponent, title }) {
     </div>
   );
 }
-export default SaveComponent;
+export default SavePage;

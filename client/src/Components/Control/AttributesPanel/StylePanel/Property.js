@@ -99,9 +99,10 @@ function Property(props) {
     </div>
   );
 }
-function areEqual(prevProps, nextProps) {
-  return prevProps.value === nextProps.value;
-}
+
+// function areEqual(prevProps, nextProps) {
+//   return prevProps.value === nextProps.value;
+// }
 
 // export default React.memo(Property);
 export default React.memo(log(Property));

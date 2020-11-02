@@ -15,9 +15,8 @@ function EditPanel(props) {
   // console.log("%cPropertiesPanel-StylePanel", "color: green");
   console.log("props :>> ", props);
 
-  // JSON.stringify(panelStyle)
-
-  const stringStyle = createCssProperties(deleteObjectProps(panelStyle)) + ";";
+  const stringStyle =
+    createCssProperties(deleteObjectProps(panelStyle)) + ";";
 
   const [value, setValue] = useState(stringStyle);
 

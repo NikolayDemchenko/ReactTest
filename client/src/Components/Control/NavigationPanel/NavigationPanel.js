@@ -4,7 +4,7 @@ import NavPages from "./Pages/NavPages";
 import ModalInput from "../ModalWindows/ModalInput/ModalInput";
 import jss from "jss";
 import preset from "jss-preset-default";
-import SaveComponent from "./Pages/SaveComponent";
+import SavePage from "./Pages/SavePage";
 function NavigationPanel(props) {
   // console.log('props', props)
   const style = {
@@ -54,24 +54,9 @@ function NavigationPanel(props) {
       >
         Navigation
       </div>
-      {/* <div
-        style={{
-          backgroundColor: "#456c",
-          justifyContent: "center",
-          padding: "0 10px",
-          cursor: "pointer",
-        }}
-        onClick={(e) => {
-          // e.stopPropagation();
-          e.preventDefault()
-          props.saveComponent();
-        }}
-        // onClick={props.saveComponent}
-      >
-        Save
-      </div> */}
-      <SaveComponent saveComponent={props.saveComponent} title={"Save"} componentId={props.componentId} />
-      <ModalInput setItem={props.saveNewComponent}>
+
+      <SavePage savePage={props.savePage} title={"Save"} pageId={props.pageId} />
+      <ModalInput setItem={props.saveNewPage}>
         <div
           style={{
             backgroundColor: "#456c",

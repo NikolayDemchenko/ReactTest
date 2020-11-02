@@ -1,24 +1,19 @@
 import React from "react";
 import Tags from "./Tags";
 import log from "../../../../Log";
-// import jss from "jss";
-// import preset from "jss-preset-default";
 function Tag(props) {
-  const { tag, className } = props;
+  const { tag, className, setClickedId } = props;
 
   const onClick = (e) => {
-    // tag.onClick && tag.onClick(e);
+    // console.log("e.target.id", e.target.id);
+    e.stopPropagation();
+    setClickedId(tag.id);
   };
 
   return (
     <tag.type id={tag.id} className={className} onClick={onClick}>
-      {/* {tag.id} */}
       {tag.childrens && tag.childrens.length > 0 ? (
-        {...props.children} // последняя переделка
-        // <Tags
-        //   {...props}
-        //   tags={tag.childrens}     
-        // />
+        <Tags {...props} tags={tag.childrens} />
       ) : null}
     </tag.type>
   );
@@ -27,4 +22,4 @@ function Tag(props) {
 // function areEqual(prevProps, nextProps) {
 // }
 // export default React.memo(log(Tag), areEqual);
-export default React.memo(log(Tag))
+export default React.memo(log(Tag));

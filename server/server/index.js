@@ -19,45 +19,45 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 router.get("/", (req, res) => {
-  const components = req.app.locals.components;
-  components
+  const pages = req.app.locals.pages;
+  pages
     .find({})
     .toArray()
     .then((response) => res.status(200).json(response))
     .catch((error) => console.error(error));
 });
 
-app.post("/addcomponent", (req, res) => {
-  const components = req.app.locals.components;
-  const component = JSON.parse(req.body.component);
-  delete component._id;
+app.post("/addpage", (req, res) => {
+  const pages = req.app.locals.pages;
+  const page = JSON.parse(req.body.page);
+  delete page._id;
   // console.log(component);
   console.log("save as");
-  components.insertOne(component, (err, result) => {
+  pages.insertOne(page, (err, result) => {
     if (err) return console.log(err);
-    res.send(component);
+    res.send(page);
   });
   // console.log('typeof component._id', typeof component._id)
 });
 
-app.post("/updatecomponent", (req, res) => {
-  const components = req.app.locals.components;
-  const component = JSON.parse(req.body.component);
-
+app.post("/updatepage", (req, res) => {
+  const pages = req.app.locals.pages;
+  const page = JSON.parse(req.body.page);
   console.log("save");
+
   // console.log(component);
   // console.log('typeof component._id', typeof ObjectId(component._id),ObjectId(component._id))
   const _id = ObjectId(component._id);
- 
-  components.findOneAndUpdate({ _id }, { $set: { ...component,_id } }, (err, result) => {
+
+  pages.findOneAndUpdate({ _id }, { $set: { ...page, _id } }, (err, result) => {
     if (err) return console.log(err);
     console.log("result", result);
-    res.send(component)
+    res.send(page);
   });
 });
 
 let dbClient;
-MongoClient.connect(localURI, {
+MongoClient.connect(cloudURI, {
   useUnifiedTopology: true,
   useNewUrlParser: true,
   poolSize: 10,
@@ -69,7 +69,7 @@ MongoClient.connect(localURI, {
       console.info(`REST API running on port http://localhost:${port}`)
     );
     app.locals.elements = db.collection("elements");
-    app.locals.components = db.collection("components");
+    app.locals.pages = db.collection("pages");
     app.locals.styles = db.collection("styles");
   })
   .catch((error) => console.error(error));

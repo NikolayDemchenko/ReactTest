@@ -10,17 +10,18 @@ function StylePanel(props) {
   const {
     setPreview,
     selected,
-    assignableStyle,
-    setSettings,
-    styleName,
-    changeTag,
+    assigStyleId,
+    setSettings,  
+    updateTag,
     tag,
     setStyleView,
     page,
     setPage,
   } = props;
 
+  // console.log('tag', tag)
   const [draggedProp, setDragged] = useState();
+
   const addStyle = (data, name, tag) => {
     setPage((page) => {
       const names = page.styles.map((style) => style.name);
@@ -33,7 +34,6 @@ function StylePanel(props) {
           name = namestr + namenum;
         }
       });
-
       const newStyle = createStyle(data, name);
       const changedTag = { ...tag, styleId: newStyle.id };
       return {
@@ -102,10 +102,9 @@ function StylePanel(props) {
           updateStyleData,
           setPreview,
           selected,
-          assignableStyle,
-          setSettings,
-          styleName,
-          changeTag,
+          assigStyleId,
+          setSettings,        
+          updateTag,
           tag,
           addStyle,
         }}
@@ -119,7 +118,7 @@ function StylePanel(props) {
           name: "Style",
           draggedProp,
           setDraggedProp,
-          setPreview,
+          setPreview,     
           allStyleProps: () => getDefaultStyleProps(tag.id),
         }}
       />

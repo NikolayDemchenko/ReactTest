@@ -14,37 +14,42 @@ function AttributesPanel(props) {
   // console.log("props :>> ", props);
 
   const {
-    changeTag,
-    tag,
-    // addStyle,
-    panelStyle,
-    // setPreview,
-    assignableStyle,
-    setSettings,
-    styleName,
-
-    setStyleView,
-    
-    styles,
+    updateTag,
+    setSettings, 
+    settings: { clickedId, assigStyleId },
     page,
     setPage,
   } = props;
 
+  const tag = page.tags.find(({ id }) => id === clickedId);
+  const tagStyle = page.styles.find(({ id }) => id === tag.styleId);
 
 
-  const setPreview = (value) => {
-    // console.log('value', value)
+  console.log("assigStyleId", assigStyleId);
+
+  useEffect(() => {
+    console.log("useEffect in");
+    assigStyleId &&
+    assigStyleId !== tag.styleId &&
+      updateTag(tag.id, "styleId", assigStyleId);
+    return () => {
+      console.log("useEffect out");
+    };
+  }, [tag]);
+
+  const [styleView, setStyleView] = useState({ styleViewFilter: (p) => p });
+
+  const setPreview = (style) => {
     jss.setup(preset());
-    const style = jss.createStyleSheet({ value }).attach();
-    document.getElementById(tag.id).classList.add(`${style.classes.value}`);
+    document.getElementById(tag.id).className = jss
+      .createStyleSheet({ className: styleView.styleViewFilter(style) })
+      .attach().classes.className;
   };
-
-
 
   // Назначает тип тега
   const setTagType = (type) => {
-    console.log("setTagType", type);
-    changeTag(props.tag, "type", type);
+    // console.log("setTagType", type);
+    updateTag(tag.id, "type", type);
   };
   const style = {
     flexWrap: "wrap",
@@ -111,11 +116,6 @@ function AttributesPanel(props) {
           }}
         ></div>
       </div>
-      {/* <div>
-        {props.component.styles.map((style, index) => (
-          <div key={index}>{style.name}</div>
-        ))}
-      </div> */}
       <Link
         activeClass="active"
         to={tag.id}
@@ -126,18 +126,14 @@ function AttributesPanel(props) {
       >
         <StylePanel
           {...{
-            // addStyle,
-            panelStyle,
+            tagStyle,
+            panelStyle:tagStyle.data,        
             setPreview,
-            assignableStyle,
+            assigStyleId,
             setSettings,
-            styleName,
-            changeTag,
+            updateTag,
             tag,
-
             setStyleView,
-        
-            styles,
             page,
             setPage,
           }}
@@ -149,43 +145,7 @@ function AttributesPanel(props) {
 }
 
 function areEqual(prevProps, nextProps) {
-  console.log(
-    "prevProps.changeTag===nextProps.changeTag",
-    prevProps.changeTag === nextProps.changeTag
-  );
-  console.log("prevProps.tag===nextProps.tag", prevProps.tag === nextProps.tag);
-
-  
-  console.log(
-    "prevProps.setPreview===nextProps.setPreview",
-    prevProps.setPreview === nextProps.setPreview
-  );
-  console.log(
-    "prevProps.assignableStyle===nextProps.assignableStyle",
-    prevProps.assignableStyle === nextProps.assignableStyle
-  );
-  console.log(
-    "prevProps.setSettings===nextProps.setSettings",
-    prevProps.setSettings === nextProps.setSettings
-  );
-  console.log(
-    "prevProps.styleName===nextProps.styleName",
-    prevProps.styleName === nextProps.styleName
-  );
-
-  console.log(
-    "prevProps.styles===nextProps.styles",
-    prevProps.styles === nextProps.styles
-  );
-  console.log(
-    "prevProps.setStyleView===nextProps.setStyleView",
-    prevProps.setStyleView === nextProps.setStyleView
-  );
-
-  console.log("prevProps===nextProps", prevProps === nextProps);
-
   return prevProps === nextProps;
-
 }
 
 // export default log(AttributesPanel);

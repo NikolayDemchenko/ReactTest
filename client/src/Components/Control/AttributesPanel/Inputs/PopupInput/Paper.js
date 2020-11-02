@@ -4,8 +4,8 @@ export default function Paper(props) {
   const { setValue } = props;
   const [value, setThisValue] = useState(props.value);
   const setPreview = props.setPreview ? props.setPreview : setValue;
-  console.log("Paper value", value);
-  console.log("props.value", props.value);
+  // console.log("Paper value", value);
+  // console.log("props.value", props.value);
   // const [width] = useState("100%");
   useEffect(() => {
     console.log("useEffect in");

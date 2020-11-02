@@ -1,20 +1,62 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import ErrorBoundry from "./ErrorBoundry";
-import "./App.css";
 import Page from "./Components/View/Pages/Page";
 import { page as _page } from "./Components/View/Pages/CreateApp";
-// import AttributesPanel from "./Components/ControlPanel/AttributesPanel/AttributesPanel";
+import { Portal } from "react-portal";
+import AttributesPanel from "./Components/Control/AttributesPanel/AttributesPanel";
+import jss from "jss";
+import preset from "jss-preset-default";
+import NavigationPanel from "./Components/Control/NavigationPanel/NavigationPanel";
+import { TagManager, PageManager } from "./AppFunction";
+
 const App = () => {
+
   const [settings, setSettings] = useState();
-  const [page, setPage] = useState(JSON.parse(JSON.stringify(_page)));
+  const [page, setPage] = useState(_page);  
+
+  // console.log("page", page);
+
+  const {getTagStructure, addTag, removeTag, updateTag } = TagManager(setPage, setSettings);
+  const tags = getTagStructure(page.tags, null); 
+  const { saveNewPage, savePage } = PageManager(page, setPage);
+
+  const clickedId = settings && settings.clickedId;
+  const setClickedId = (clickedId) => {
+    setSettings((state) => ({
+      ...state,
+      clickedId,
+    }));
+  };
+
+  jss.setup(preset());
+  const myStyles = {};
+  page.styles.forEach(({ id, data }) => {
+    myStyles[id] = data;
+  });
+  const { classes } = jss.createStyleSheet({ ...myStyles }).attach();
+  
+
   return (
     <ErrorBoundry>
-      {/* <NavigationPanel
-        {...{ tags, addTag, removeTag, savepage, saveNewPage }}
+      <NavigationPanel
+        {...{ tags, addTag, removeTag, savePage, saveNewPage }}
         pageId={page._id}
-        selectedId={settings && settings.selectedId}
-      /> */}
-      <Page {...{ page, setPage,settings, setSettings }} />
+        selectedId={settings && settings.clickedId}
+      />
+      {settings && (
+        <Portal>
+          <AttributesPanel
+            {...{
+              updateTag,
+              setSettings,
+              settings,
+              page,
+              setPage,
+            }}
+          />
+        </Portal>
+      )}
+      <Page {...{ page, tags, classes, clickedId, setClickedId }} />
     </ErrorBoundry>
   );
 };

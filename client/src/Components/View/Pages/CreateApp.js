@@ -99,7 +99,7 @@ const page = {
   tags: [],
 };
 page.tags.push(rootTag_1);
-page.tags.push(rootTag_2);
+// page.tags.push(rootTag_2);
 
 const childGenerator = (amount, tag, childStyle) => {
   for (let i = 0; i < amount; i++) {
@@ -110,15 +110,14 @@ const childGenerator = (amount, tag, childStyle) => {
           id: shortid.generate(),
           parentId: tag.id,
           type: "div",
-          styleId: childStyle.id,
-          attributes: {},
+          styleId: childStyle.id,      
         })
       )
     );
   }
 };
 
-childGenerator(8, rootTag_1, childTagStyle);
-childGenerator(200, rootTag_2, childTagStyle);
+childGenerator(200, rootTag_1, childTagStyle);
+// childGenerator(200, rootTag_2, childTagStyle);
 
 export { page, createStyle };

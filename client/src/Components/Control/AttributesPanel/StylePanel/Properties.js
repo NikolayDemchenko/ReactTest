@@ -74,6 +74,7 @@ function Properties(props) {
   // console.log("properties", properties);
   const thisProps = properties.map((property, index) => {
     const setPreviewValue = (value) => {
+      // console.log('value', value)
       setPreview({ ...panelStyle, [Object.keys(property)[0]]: value });
     };
 

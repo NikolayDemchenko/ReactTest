@@ -9,7 +9,7 @@ const BackSettings = (props) => {
     console.log('color', color)
     jss.setup(preset());
     const back = jss.createStyleSheet({ body: { background: color } }).attach();
-    document.querySelector("body").classList.add(`${back.classes.body}`);
+    document.querySelector("body").classList.add(back.classes.body);
   };
   const setValue = (color) => {
 

@@ -21,12 +21,12 @@ function SettingsPanel(props) {
     panelStyle,   
     selected,
     tag,
-    assignableStyle,
+    assigStyleId,
     setSettings,
     updateStyleData,
-    styleName,
-    changeTag,
-    styles,
+    tagStyle,
+    updateTag,
+    page,
   } = props;
 
   // console.log("props", props);
@@ -37,8 +37,8 @@ function SettingsPanel(props) {
     updateStyleData(style.data);
   };
   const changeTagStyleByName = (name) => {
-    const style = styles.find((style) => style.name === name);
-    changeTag(tag, "styleId", style.id);
+    const style = page.styles.find((style) => style.name === name);
+    updateTag(tag.id, "styleId", style.id);
   };
 
   return (
@@ -52,15 +52,11 @@ function SettingsPanel(props) {
             ? "rgba(140, 200, 255, 0)"
             : "rgba(140, 200, 255, 0.4)",
         cursor: "default",
-        paddingLeft: "0.5em",
-        // height: "26px",
+        paddingLeft: "0.5em",      
         background:
           selected === "All style" ? "rgba(134, 186, 250, 0.15)" : "none",
       }}
-      // onClick={(e) => {
-      //   e.stopPropagation();
-      //   onAllStyle();
-      // }}
+
     >
       <div
         style={{
@@ -77,7 +73,7 @@ function SettingsPanel(props) {
           }}
           title={"имя стиля"}
         >
-          <PopupInput dataType={"string"} value={styleName} setValue={updateStyleName} />
+          <PopupInput dataType={"string"} value={tagStyle.name} setValue={updateStyleName} />
         </div>
         <div
           style={{
@@ -86,8 +82,7 @@ function SettingsPanel(props) {
           }}
         >
           <div
-            title={"Новый стиль"}
-            // style={btnStyle}
+            title={"Новый стиль"}   
             className={buttonStyle}
             onClick={(e) => {
               e.stopPropagation();
@@ -98,8 +93,8 @@ function SettingsPanel(props) {
             <Icon size={"100%"} icon={copy} />
           </div>
           <SelectPanel
-            items={styles.map((style) => style.name)}
-            selected={styles.find(({ id }) => id === tag.styleId).name}
+            items={page.styles.map((style) => style.name)}
+            selected={page.styles.find(({ id }) => id === tag.styleId).name}
             setItem={changeTagStyleByName}
             button={
               <div title={"Выбрать стиль тега"} className={buttonStyle}>
@@ -128,18 +123,19 @@ function SettingsPanel(props) {
         <div
           title={"Назначить стиль"}
           className={buttonStyle}
-          style={assignableStyle && { color: "#ffa" }}
+          style={assigStyleId && { color: "#ffa" }}
           onClick={(e) => {
             e.stopPropagation();
             setSettings((state) => {
-              if (!state.assignableStyle) {
+              if (!state.assigStyleId) {
                 return {
                   ...state,
-                  assignableStyle: tag.styleId,
+                  assigStyleId: tag.styleId,
                 };
               } else {
                 return {
-                  selectedId: state.selectedId,
+                  ...state,
+                  assigStyleId: null
                 };
               }
             });
