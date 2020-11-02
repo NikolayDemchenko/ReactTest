@@ -6,7 +6,7 @@ import SelectPanel from "../../ModalWindows/SelectPanel/SelectPanel";
 // import htmlTags from "html-tags";
 import htmlTagsVoid from "html-tags/void";
 import { htmlTags, basehtmlTags } from "../../../Class/HtmlCss";
-function CRUDTag({ tag, addTag, removeTag }) {
+function CRUDTag({ tag, createTag, removeTag }) {
   // console.log('setPage :>> ', setPage);
 // console.log('htmlTagsVoid :>> ', Array.isArray(htmlTagsVoid) );
 console.log('htmlTags', htmlTags)
@@ -17,7 +17,7 @@ console.log('htmlTags', htmlTags)
     <SelectPanel
         items={[...new Set([...basehtmlTags.map((item) => item.value),...htmlTags])]}       
         selected={""}
-        setItem={(item) => addTag(item, tag)}
+        setItem={(item) => createTag(item, tag)}
         button={
           <div style={{ margin: "0 0.2em", cursor: "pointer", width: "0.8em" }}>
             <Icon size={"100%"} icon={plus} />

@@ -14,7 +14,7 @@ const getTagStructure = (tags, _parentId) => {
 };
 export const TagManager = (setPage, setSettings) => ({
   getTagStructure,
-  addTag: (type, parent) => {
+  createTag: (type, parent) => {
     setPage((page) => ({
       ...page,
       tags: [

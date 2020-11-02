@@ -16,7 +16,7 @@ const App = () => {
 
   // console.log("page", page);
 
-  const {getTagStructure, addTag, removeTag, updateTag } = TagManager(setPage, setSettings);
+  const {getTagStructure, createTag, removeTag, updateTag } = TagManager(setPage, setSettings);
   const tags = getTagStructure(page.tags, null); 
   const { saveNewPage, savePage } = PageManager(page, setPage);
 
@@ -39,7 +39,7 @@ const App = () => {
   return (
     <ErrorBoundry>
       <NavigationPanel
-        {...{ tags, addTag, removeTag, savePage, saveNewPage }}
+        {...{ tags, createTag, removeTag, savePage, saveNewPage }}
         pageId={page._id}
         selectedId={settings && settings.clickedId}
       />

@@ -6,7 +6,7 @@ import NavTags from "./NavTags";
 import CRUDTag from "./CRUDTag";
 
 function NavTag(props) {
-  const { tag, addTag, removeTag, selectedId } = props;
+  const { tag, createTag, removeTag, selectedId } = props;
 
   const { type, childrens, id, index } = tag;
   const [showChilds, setshowChilds] = useState(false);
@@ -75,7 +75,7 @@ function NavTag(props) {
                 margin: "0 4px 4px auto",
               }}
             >
-              <CRUDTag {...{ tag, addTag, removeTag }} />
+              <CRUDTag {...{ tag, createTag, removeTag }} />
             </div>
           )}
         </div>
