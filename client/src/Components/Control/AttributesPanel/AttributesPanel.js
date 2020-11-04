@@ -15,7 +15,7 @@ function AttributesPanel(props) {
 
   const {
     updateTag,
-    setSettings, 
+    setSettings,
     settings: { clickedId, assigStyleId },
     page,
     setPage,
@@ -24,23 +24,22 @@ function AttributesPanel(props) {
   const tag = page.tags.find(({ id }) => id === clickedId);
   const tagStyle = page.styles.find(({ id }) => id === tag.styleId);
 
-
   console.log("assigStyleId", assigStyleId);
 
   useEffect(() => {
     console.log("useEffect in");
     assigStyleId &&
-    assigStyleId !== tag.styleId &&
+      assigStyleId !== tag.styleId &&
       updateTag(tag.id, "styleId", assigStyleId);
     return () => {
       console.log("useEffect out");
+      // window.location.reload()
     };
   }, [tag]);
 
   const [styleView, setStyleView] = useState({ styleViewFilter: (p) => p });
 
-  const setPreview = (style) => {
-    jss.setup(preset());
+  const setPreview = (style) => { 
     document.getElementById(tag.id).className = jss
       .createStyleSheet({ className: styleView.styleViewFilter(style) })
       .attach().classes.className;
@@ -127,7 +126,7 @@ function AttributesPanel(props) {
         <StylePanel
           {...{
             tagStyle,
-            panelStyle:tagStyle.data,        
+            panelStyle: tagStyle.data,
             setPreview,
             assigStyleId,
             setSettings,
