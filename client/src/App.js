@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import ErrorBoundry from "./ErrorBoundry";
 import Page from "./Components/View/Pages/Page";
 import { page as _page } from "./Components/View/Pages/CreateApp";
@@ -11,13 +11,30 @@ import { TagManager, PageManager } from "./AppFunction";
 
 const App = () => {
 
-  const [settings, setSettings] = useState();
-  const [page, setPage] = useState(_page);  
+  const [settings, setSettings] = useState(JSON.parse(sessionStorage.getItem("settings")));
+  const [page, setPage] = useState(_page);
+
+  settings&&sessionStorage.setItem('settings', JSON.stringify(settings))
+
+  // page&&sessionStorage.setItem('page', JSON.stringify(page))
+
+  console.log('JSON.parse(sessionStorage.getItem("page")) :>> ', JSON.parse(sessionStorage.getItem("page")));
+
+  // JSON.parse(localStorage.getItem("settings"))
+  // const savedSettings= JSON.parse(localStorage.getItem("settings"))
+  // savedSettings&&setSettings(savedSettings)
 
   // console.log("page", page);
-
-  const {getTagStructure, createTag, removeTag, updateTag } = TagManager(setPage, setSettings);
-  const tags = getTagStructure(page.tags, null); 
+  
+  // console.log(
+  //   "localStorage.getItem('settings') :>> ",
+  //   JSON.parse(localStorage.getItem("settings"))
+  // );
+  const { getTagStructure, createTag, removeTag, updateTag } = TagManager(
+    setPage,
+    setSettings
+  );
+  const tags = getTagStructure(page.tags, null);
   const { saveNewPage, savePage } = PageManager(page, setPage);
 
   const clickedId = settings && settings.clickedId;
@@ -34,8 +51,8 @@ const App = () => {
     myStyles[id] = data;
   });
   const { classes } = jss.createStyleSheet({ ...myStyles }).attach();
-  
 
+  const tag =settings&& page.tags.find(({ id }) => id === settings.clickedId);
   return (
     <ErrorBoundry>
       <NavigationPanel
@@ -43,7 +60,7 @@ const App = () => {
         pageId={page._id}
         selectedId={settings && settings.clickedId}
       />
-      {settings && (
+      {tag && (
         <Portal>
           <AttributesPanel
             {...{
@@ -51,6 +68,7 @@ const App = () => {
               setSettings,
               settings,
               page,
+              tag,
               setPage,
             }}
           />

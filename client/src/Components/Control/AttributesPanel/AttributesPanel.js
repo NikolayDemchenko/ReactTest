@@ -17,11 +17,12 @@ function AttributesPanel(props) {
     updateTag,
     setSettings,
     settings: { clickedId, assigStyleId },
-    page,
+    page,tag,
     setPage,
   } = props;
 
-  const tag = page.tags.find(({ id }) => id === clickedId);
+  // const tag = page.tags.find(({ id }) => id === clickedId);
+   
   const tagStyle = page.styles.find(({ id }) => id === tag.styleId);
 
   console.log("assigStyleId", assigStyleId);
@@ -32,8 +33,8 @@ function AttributesPanel(props) {
       assigStyleId !== tag.styleId &&
       updateTag(tag.id, "styleId", assigStyleId);
     return () => {
-      console.log("useEffect out");
-      // window.location.reload()
+      console.log("useEffect out");    
+      window.location.reload()
     };
   }, [tag]);
 
