@@ -16,41 +16,40 @@ function AttributesPanel(props) {
   const {
     updateTag,
     setSettings,
-    settings: { clickedId, assigStyleId },
-    page,tag,
+    settings: { tag, assignStyleId },
+    page,
     setPage,
   } = props;
 
   // const tag = page.tags.find(({ id }) => id === clickedId);
-   
+
   const tagStyle = page.styles.find(({ id }) => id === tag.styleId);
 
-  console.log("assigStyleId", assigStyleId);
+  // console.log("tagStyle :>> ", tagStyle);
+  // console.log("assigStyleId", assignStyleId);
 
   useEffect(() => {
     console.log("useEffect in");
-    assigStyleId &&
-      assigStyleId !== tag.styleId &&
-      updateTag(tag.id, "styleId", assigStyleId);
+    assignStyleId &&
+      assignStyleId !== tag.styleId &&
+      updateTag(tag.id, "styleId", assignStyleId);
     return () => {
-      console.log("useEffect out");    
-      window.location.reload()
+      console.log("useEffect out");
+
+      // console.log("window.location.reload()");
+      // window.location.reload()
     };
   }, [tag]);
 
-  const [styleView, setStyleView] = useState({ styleViewFilter: (p) => p });
+  // const [styleView, setStyleView] = useState();
 
-  const setPreview = (style) => { 
-    document.getElementById(tag.id).className = jss
-      .createStyleSheet({ className: styleView.styleViewFilter(style) })
-      .attach().classes.className;
-  };
+  // const setPreview = (style) => {
+  //   document.getElementById(tag.id).className = jss
+  //     .createStyleSheet({ className: styleView.styleViewFilter(style) })
+  //     .attach().classes.className;
+  // };
 
-  // Назначает тип тега
-  const setTagType = (type) => {
-    // console.log("setTagType", type);
-    updateTag(tag.id, "type", type);
-  };
+
   const style = {
     flexWrap: "wrap",
     maxHeight: "95vh",
@@ -107,7 +106,7 @@ function AttributesPanel(props) {
         <SelectPanel
           selected={tag.type}
           items={htmlTags}
-          setItem={setTagType}
+          setItem={(type) => updateTag(tag.id, "type", type)}
         />
         <div
           style={{
@@ -128,12 +127,12 @@ function AttributesPanel(props) {
           {...{
             tagStyle,
             panelStyle: tagStyle.data,
-            setPreview,
-            assigStyleId,
+            // setPreview,
+            assignStyleId,
             setSettings,
             updateTag,
             tag,
-            setStyleView,
+            // setStyleView,
             page,
             setPage,
           }}

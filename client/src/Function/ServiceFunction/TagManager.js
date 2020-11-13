@@ -1,10 +1,10 @@
 import shortid from "shortid";
-const getTagStructure = (tags, _parentId) => {
+const getTagTree = (tags, _parentId) => {
   const thisTags = JSON.parse(JSON.stringify(tags));
   return thisTags.filter((tag) => {
     // console.log("getTagStructure");
     if (tag.parentId === _parentId) {
-      tag.childrens = getTagStructure(
+      tag.childrens = getTagTree(
         thisTags.filter(({ parentId }) => parentId !== _parentId),
         tag.id
       );
@@ -13,7 +13,7 @@ const getTagStructure = (tags, _parentId) => {
   });
 };
 export const TagManager = (setPage, setSettings) => ({
-  getTagStructure,
+  getTagTree,
   createTag: (type, parent) => {
     setPage((page) => ({
       ...page,

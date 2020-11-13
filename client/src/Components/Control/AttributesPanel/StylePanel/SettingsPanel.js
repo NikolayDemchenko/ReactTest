@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import Icon from "react-icons-kit";
 import { buttonStyle } from "./BtnStyle";
 import { copy } from "react-icons-kit/icomoon/copy";
@@ -21,7 +21,7 @@ function SettingsPanel(props) {
     panelStyle,   
     selected,
     tag,
-    assigStyleId,
+    assignStyleId,
     setSettings,
     updateStyleData,
     tagStyle,
@@ -31,7 +31,13 @@ function SettingsPanel(props) {
 
   // console.log("props", props);
   // console.log("Styles", Styles);
+// const [assignStyleId, setAssignStyleId] = useState()
 
+assignStyleId &&
+assignStyleId !== tag.styleId &&
+updateTag(tag.id, "styleId", assignStyleId);
+
+// console.log('assignStyleId :>> ', assignStyleId);
   const setLibrStyleByName = (name) => {
     const style = Styles.find((style) => style.name === name);
     updateStyleData(style.data);
@@ -123,19 +129,19 @@ function SettingsPanel(props) {
         <div
           title={"Назначить стиль"}
           className={buttonStyle}
-          style={assigStyleId && { color: "#ffa" }}
+          style={assignStyleId && { color: "#ffa" }}
           onClick={(e) => {
-            e.stopPropagation();
+            e.stopPropagation();         
             setSettings((state) => {
-              if (!state.assigStyleId) {
+              if (!state.assignStyleId) {
                 return {
                   ...state,
-                  assigStyleId: tag.styleId,
+                  assignStyleId: tag.styleId,
                 };
               } else {
                 return {
                   ...state,
-                  assigStyleId: null
+                  assignStyleId: null
                 };
               }
             });

@@ -12,10 +12,13 @@ function randColor(name) {
 }
 
 const log = (BaseComponent) => (props) => {
-  console.log(
-    `%cRendering ${BaseComponent.name}`,
-    `color: ${randColor(BaseComponent.name.length)}`
-  );
+  // console.log(
+  //   `%cRendering ${BaseComponent.name}`,
+  //   `color: ${randColor(BaseComponent.name.length)}`
+  // );
   return <BaseComponent {...props} />;
 };
 export default log;
+// Не работает сброс частичного превью инпутов кроме цветового цветовой сбрасывет раньше
+// Не работает отображение смены типа тега
+// Сделать функцию назначения цвета и свичить её в функцию клика тега вместо функции выбора.

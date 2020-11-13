@@ -117,7 +117,7 @@ const childGenerator = (amount, tag, childStyle) => {
   }
 };
 
-childGenerator(500, rootTag_1, childTagStyle);
+childGenerator(1000, rootTag_1, childTagStyle);
 // childGenerator(200, rootTag_2, childTagStyle);
 
 export { page, createStyle };

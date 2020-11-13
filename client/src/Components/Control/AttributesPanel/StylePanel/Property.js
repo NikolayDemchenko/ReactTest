@@ -5,7 +5,7 @@ import { cross } from "react-icons-kit/icomoon/cross";
 import PopupInput from "../Inputs/PopupInput/PopupInput";
 
 function Property(props) {
-  const {  
+  const {
     tabIndex,
     name,
     value,
@@ -17,7 +17,7 @@ function Property(props) {
     draggedProp,
     setDraggedProp,
     setPartPreview,
-    setFullPreview
+    setFullPreview,
   } = props;
   // console.log("props :>> ", props);
   const [Y, setY] = useState();
@@ -31,7 +31,7 @@ function Property(props) {
       tabIndex={tabIndex}
       onDrop={(e) => {
         e.stopPropagation();
-        onDrop&&onDrop({ [name]: value }, draggedProp, target);
+        onDrop && onDrop({ [name]: value }, draggedProp, target);
       }}
       style={{
         // border: "1px solid #fff",
@@ -64,7 +64,7 @@ function Property(props) {
         }}
       >
         <PopupInput
-          {...{ setPartPreview,setFullPreview }}
+          {...{ setPartPreview, setFullPreview }}
           // value={propKey}
           value={name}
           setPreview={setName}
@@ -82,7 +82,7 @@ function Property(props) {
         }}
       >
         <PopupInput
-          {...{ value, setValue, setPreview, setPartPreview,setFullPreview }}
+          {...{ value, setValue, setPreview, setPartPreview, setFullPreview }}
           height="1em"
         />
       </div>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import jss from "jss";
 import log from "../../../../Log";
 import PropertiesPanel from "./PropertiesPanel";
 import SettingsPanel from "./SettingsPanel";
@@ -8,19 +9,29 @@ function StylePanel(props) {
   // console.log("props :>> ", props);
 
   const {
-    setPreview,
-    selected,
-    assigStyleId,
-    setSettings,  
+    // setPreview,
+    assignStyleId,
+    setSettings,
     updateTag,
     tag,
-    setStyleView,
+    // setStyleView,
     page,
     setPage,
+    panelStyle,
   } = props;
 
   // console.log('tag', tag)
   const [draggedProp, setDragged] = useState();
+  const [styleView, setStyleView] = useState();
+
+  const setPreview = (style) => {
+
+    // console.log('styleView.styleViewFilter(style) :>> ', styleView.styleViewFilter(style));
+
+    document.getElementById(tag.id).className = jss
+      .createStyleSheet({ className: styleView.styleViewFilter(style) })
+      .attach().classes.className;
+  };
 
   const addStyle = (data, name, tag) => {
     setPage((page) => {
@@ -68,8 +79,11 @@ function StylePanel(props) {
   const updateStyleData = (data) =>
     updateStyleById(tag.styleId, "data", data, setPage);
 
-  const updateStyleName = (name) => {       
-    !page.styles.map((style) => style.name).find((element) => element === name) && updateStyleById(tag.styleId, "name", name, setPage);
+  const updateStyleName = (name) => {
+    !page.styles
+      .map((style) => style.name)
+      .find((element) => element === name) &&
+      updateStyleById(tag.styleId, "name", name, setPage);
   };
 
   const getDefaultStyleProps = (id) => {
@@ -89,8 +103,8 @@ function StylePanel(props) {
   };
 
   const setFullPreview = () => {
-    console.log("setFullPreview");
-    props.setStyleView({ styleViewFilter: (p) => p });
+    console.log("!!!!!!!!!!!!!!setFullPreview!!!!!!!!!!");
+    setStyleView({ styleViewFilter: (p) => p });
   };
 
   return (
@@ -101,9 +115,9 @@ function StylePanel(props) {
           updateStyleName,
           updateStyleData,
           setPreview,
-          selected,
-          assigStyleId,
-          setSettings,        
+          // selected,
+          assignStyleId,
+          setSettings,
           updateTag,
           tag,
           addStyle,
@@ -111,14 +125,16 @@ function StylePanel(props) {
       />
       <PropertiesPanel
         {...{
-          ...props,
+          // ...props,
+          panelStyle,
+          tag,
           setFullPreview,
           updateStyleData,
           setStyleView,
           name: "Style",
           draggedProp,
           setDraggedProp,
-          setPreview,     
+          setPreview,
           allStyleProps: () => getDefaultStyleProps(tag.id),
         }}
       />

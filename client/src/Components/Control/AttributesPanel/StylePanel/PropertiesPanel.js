@@ -20,12 +20,14 @@ function PropertiesPanel(props) {
     panelStyle,
     updateStyleData,
     setStyleView,
-    deletePanel,  
+    deletePanel,
     tag,
     allStyleProps,
+    setPreview,
   } = props;
 
   // console.log("%cPropertiesPanel-StylePanel", "color: green");
+
 
   const [edit, setEdit] = useState();
 
@@ -44,7 +46,7 @@ function PropertiesPanel(props) {
     updateStyleData({ ..._style, "@media": {}, ...panelStyle });
   };
 
-  const fullName = name + parentName;
+  // const fullName = name + parentName;
 
   const styleViewFilter = (style) => ({
     ...deleteObjectProps({ ...style }),
@@ -59,8 +61,11 @@ function PropertiesPanel(props) {
   };
 
   return (
-    <div 
-      style={{ borderTop:"4px solid rgba(140, 200, 255, 0.2)", color: "rgba(140, 200, 255, 0.7)" }}
+    <div
+      style={{
+        borderTop: "4px solid rgba(140, 200, 255, 0.2)",
+        color: "rgba(140, 200, 255, 0.7)",
+      }}
       onDragOver={(e) => {
         // console.log('div', div)
         e.preventDefault();
@@ -70,7 +75,7 @@ function PropertiesPanel(props) {
         style={{
           color: "#bdec",
           display: "flex",
-          paddingLeft: "0.5em",  
+          paddingLeft: "0.5em",
         }}
       >
         {name === "Style" ? (
@@ -137,8 +142,14 @@ function PropertiesPanel(props) {
         </div>
       </div>
 
-      {edit && <EditPanel {...{ panelStyle, updateStyleData, styleId: tag.styleId }} />}
-      <Properties {...props} parentName={name} setPartPreview={()=> setStyleView({ styleViewFilter })} />
+      {edit && (
+        <EditPanel {...{ panelStyle, updateStyleData, styleId: tag.styleId }} />
+      )}
+      <Properties
+        {...props}
+        parentName={name}
+        setPartPreview={() => setStyleView({ styleViewFilter })}
+      />
     </div>
   );
 }
@@ -148,9 +159,7 @@ function PropertiesPanel(props) {
 //   console.log('prevProps.panelStyle :>> ', prevProps.panelStyle);
 //   console.log('nextProps.panelStyle :>> ', nextProps.panelStyle);
 
-//   return prevProps.panelStyle === nextProps.panelStyle  
+//   return prevProps.panelStyle === nextProps.panelStyle
 // }
 // export default React.memo(log(PropertiesPanel), areEqual);
 export default React.memo(log(PropertiesPanel));
-
-

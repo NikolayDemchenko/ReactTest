@@ -11,10 +11,11 @@ import { TagManager, PageManager } from "./AppFunction";
 
 const App = () => {
 
-  const [settings, setSettings] = useState(JSON.parse(sessionStorage.getItem("settings")));
+  // const [settings, setSettings] = useState(JSON.parse(sessionStorage.getItem("settings")));
+  const [settings, setSettings] = useState();
   const [page, setPage] = useState(_page);
-
-  settings&&sessionStorage.setItem('settings', JSON.stringify(settings))
+  console.log('settings :>> ', settings);
+  // settings&&sessionStorage.setItem('settings', JSON.stringify(settings))
 
   // page&&sessionStorage.setItem('page', JSON.stringify(page))
 
@@ -30,20 +31,20 @@ const App = () => {
   //   "localStorage.getItem('settings') :>> ",
   //   JSON.parse(localStorage.getItem("settings"))
   // );
-  const { getTagStructure, createTag, removeTag, updateTag } = TagManager(
+  const { getTagTree, createTag, removeTag, updateTag } = TagManager(
     setPage,
     setSettings
   );
-  const tags = getTagStructure(page.tags, null);
+  const tagTree = getTagTree(page.tags, null);
   const { saveNewPage, savePage } = PageManager(page, setPage);
 
-  const clickedId = settings && settings.clickedId;
-  const setClickedId = (clickedId) => {
-    setSettings((state) => ({
-      ...state,
-      clickedId,
-    }));
-  };
+  // const clickedId = settings && settings.clickedId;
+  // const setClickedId = (clickedId) => {
+  //   setSettings((state) => ({
+  //     ...state,
+  //     clickedId,
+  //   }));
+  // };
 
   jss.setup(preset());
   const myStyles = {};
@@ -52,29 +53,29 @@ const App = () => {
   });
   const { classes } = jss.createStyleSheet({ ...myStyles }).attach();
 
-  const tag =settings&& page.tags.find(({ id }) => id === settings.clickedId);
+  // const tag =settings&& page.tags.find(({ id }) => id === settings.clickedId);
+  // settings&& console.log('tag :>> ', tag);
   return (
     <ErrorBoundry>
       <NavigationPanel
-        {...{ tags, createTag, removeTag, savePage, saveNewPage }}
+        {...{ tagTree, createTag, removeTag, savePage, saveNewPage }}
         pageId={page._id}
-        selectedId={settings && settings.clickedId}
+        selectedId={settings && settings.tag.id}
       />
-      {tag && (
+      {settings && (
         <Portal>
           <AttributesPanel
             {...{
               updateTag,
               setSettings,
               settings,
-              page,
-              tag,
+              page,          
               setPage,
             }}
           />
         </Portal>
       )}
-      <Page {...{ page, tags, classes, clickedId, setClickedId }} />
+      <Page {...{ bodyStyle:page.bodyStyle, tagTree, classes, settings, setSettings }} />
     </ErrorBoundry>
   );
 };

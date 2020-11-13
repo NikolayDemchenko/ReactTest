@@ -83,7 +83,7 @@ function NavTag(props) {
 
       <div style={{ marginLeft: "30px" }}>
         {childrens && showChilds && (
-          <NavTags {...props} tags={childrens} index={id} />
+          <NavTags {...props} tagTree={childrens} index={id} />
         )}
       </div>
     </div>

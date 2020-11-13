@@ -5,13 +5,14 @@ export default function ColorPicker({ value, setValue, setPreview }) {
 
   // console.log('%cColorPicker',`background-color:${value}`,value )
 
-  useEffect(() => {
-    console.log("useEffect in");
-    setColor(value);
-    return () =>{
-      console.log("useEffect out");
-  };
-  }, [value]);
+  // useEffect(() => {
+  //   console.log("useEffect in");
+  //   setColor(value);
+  //   return () =>{
+  //     console.log("useEffect out");
+  // };
+  // }, [value]);
+
   const swichColorType = (color) => {
     if (color.rgb.a !== 1) {
       return `rgba(${Object.values(color.rgb).join(",")})`;
@@ -19,6 +20,7 @@ export default function ColorPicker({ value, setValue, setPreview }) {
       return color.hex;
     }
   };
+  
   const setNewColor = (color) => {
     const newColor = swichColorType(color);
     setColor(newColor);
