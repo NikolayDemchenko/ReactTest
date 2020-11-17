@@ -1,7 +1,7 @@
 import React from "react";
 import Popover from "../../../ModalWindows/Popover";
 import Paper from "./Paper";
-import PropertyValueSelector from "../Switch/PropertyValueSelector";
+import PropertyValueSelector from "../Switch/DataTypeRecognizer";
 export default function PopupInput(props) {
   // console.log('props.value :>> ',typeof props.value);
   // const type ="number"
@@ -12,18 +12,15 @@ export default function PopupInput(props) {
   const width =
     type !== "number" ? "none" : value.length > 5 ? `${value.length}em` : "5em";
 
-  // console.log("type :>> ", type);
-  // console.log("props :>> ", props);
-  // console.log('props.onExit :>> ', props.onExit);
-  // console.log("value", value?value:"Хуй!!!!");
+
   return (
     <Popover    
       onEnter={() => {
-        props.setPartPreview && props.setPartPreview();
+        props.onEnter && props.onEnter();
         console.log("Открыто!");
       }}
       onExit={() => {
-        props.setFullPreview && props.setFullPreview();
+        props.onExit && props.onExit();
         console.log("Закрыто!");
       }}
       PaperProps={{

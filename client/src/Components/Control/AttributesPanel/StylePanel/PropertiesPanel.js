@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Icon from "react-icons-kit";
 import { buttonStyle } from "./BtnStyle";
 import { ic_add_to_queue } from "react-icons-kit/md/ic_add_to_queue";
@@ -11,7 +11,8 @@ import { ic_library_add } from "react-icons-kit/md/ic_library_add";
 import PopupInput from "../Inputs/PopupInput/PopupInput";
 import SelectPanel from "../../ModalWindows/SelectPanel/SelectPanel";
 import Properties from "./Properties";
-import { deleteObjectProps } from "./Function/ObjectManager";
+import jss from "jss";
+// import { deleteObjectProps } from "./Function/ObjectManager";
 function PropertiesPanel(props) {
   const {
     name,
@@ -19,15 +20,24 @@ function PropertiesPanel(props) {
     setName,
     panelStyle,
     updateStyleData,
-    setStyleView,
     deletePanel,
     tag,
     allStyleProps,
-    setPreview,
+    previewBase,
   } = props;
 
   // console.log("%cPropertiesPanel-StylePanel", "color: green");
 
+  const [styleView, setStyleView] = useState();
+  console.log("styleView :>> ", styleView);
+  console.log('panelStyle :>> ', panelStyle);
+  const setPreview = (style) => {
+    document.getElementById(tag.id).className = jss
+      .createStyleSheet({ className: { ...previewBase, ...style } })
+      .attach().classes.className;
+  };
+
+  styleView && setPreview(panelStyle);
 
   const [edit, setEdit] = useState();
 
@@ -45,13 +55,6 @@ function PropertiesPanel(props) {
     }
     updateStyleData({ ..._style, "@media": {}, ...panelStyle });
   };
-
-  // const fullName = name + parentName;
-
-  const styleViewFilter = (style) => ({
-    ...deleteObjectProps({ ...style }),
-    ...deleteObjectProps({ ...style[name] }),
-  });
 
   const addProperty = (_key) => {
     const { key, value } = allStyleProps().find((style) => style.key === _key);
@@ -146,9 +149,11 @@ function PropertiesPanel(props) {
         <EditPanel {...{ panelStyle, updateStyleData, styleId: tag.styleId }} />
       )}
       <Properties
-        {...props}
+        {...{ ...props, setPreview }}
+        onEnter={() => setStyleView(true)}
+        onExit={() => setStyleView()}
         parentName={name}
-        setPartPreview={() => setStyleView({ styleViewFilter })}
+        previewBase={{ ...previewBase, ...panelStyle }}
       />
     </div>
   );

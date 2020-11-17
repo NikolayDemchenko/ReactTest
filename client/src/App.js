@@ -14,12 +14,12 @@ const App = () => {
   // const [settings, setSettings] = useState(JSON.parse(sessionStorage.getItem("settings")));
   const [settings, setSettings] = useState();
   const [page, setPage] = useState(_page);
-  console.log('settings :>> ', settings);
+  // console.log('settings :>> ', settings);
   // settings&&sessionStorage.setItem('settings', JSON.stringify(settings))
 
   // page&&sessionStorage.setItem('page', JSON.stringify(page))
 
-  console.log('JSON.parse(sessionStorage.getItem("page")) :>> ', JSON.parse(sessionStorage.getItem("page")));
+  // console.log('JSON.parse(sessionStorage.getItem("page")) :>> ', JSON.parse(sessionStorage.getItem("page")));
 
   // JSON.parse(localStorage.getItem("settings"))
   // const savedSettings= JSON.parse(localStorage.getItem("settings"))

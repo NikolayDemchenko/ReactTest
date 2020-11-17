@@ -72,20 +72,20 @@ export const removeThisLevelPropByName = (obj, name) => {
 
   // Удаляет у объекта все свойства являющиеся объектами
 export const deleteObjectProps = (obj) => {
-  const thisObj={...obj}
-  for (let key in thisObj) {
-    if (typeof thisObj[key] === "object") {
-      delete thisObj[key];
+  const thisObj={}
+  for (let key in obj) {
+    if (typeof obj[key] !== "object") {
+       thisObj[key]=obj[key]
     }
   }
   return thisObj;
 };
   // Удаляет у объекта все свойства кроме являющихся объектами
 export const deleteNoObjectProps = (obj) => {
-  const thisObj={...obj}
-  for (let key in thisObj) {
-    if (typeof thisObj[key] !== "object") {
-      delete thisObj[key];
+  const thisObj={}
+  for (let key in obj) {
+    if (typeof obj[key] === "object") {
+       thisObj[key]=obj[key]
     }
   }
   return thisObj;

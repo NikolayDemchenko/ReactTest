@@ -30,7 +30,7 @@ export default function ColorPicker({ value, setValue, setPreview }) {
     <ChromePicker
       color={color}
       onChange={setNewColor}
-      onChangeComplete={(color) => {
+      onChangeComplete={(color) => {        
         setValue(swichColorType(color),`\nonChangeComplete-ChromePicker`);
       }}
     />

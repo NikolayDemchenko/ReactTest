@@ -65,7 +65,7 @@ function Properties(props) {
         updateStyleData={(panelStyle, chain) =>
           setValue(panel, panelStyle, chain)
         }
-        basepanelStyle={panelStyle}
+        // basepanelStyle={panelStyle}
         deletePanel={(chain) => remove(panel, chain)}
         setPreview={setPreviewPanel}
       />
@@ -98,6 +98,7 @@ function Properties(props) {
         );
       }
     };
+
     return (
       <Property
         {...{ ...props, draggedProp, setDraggedProp }}

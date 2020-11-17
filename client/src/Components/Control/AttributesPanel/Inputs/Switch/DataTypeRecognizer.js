@@ -1,4 +1,4 @@
-export default function PropertyValueSelector({ value, func, funcTemplate }) {
+export default function DataTypeRecognizer({ value, func, funcTemplate }) {
   // console.log("typeof value :>> ", typeof value);
   let funcTempl = funcTemplate
     ? funcTemplate

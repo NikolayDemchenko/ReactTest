@@ -16,8 +16,8 @@ function Property(props) {
     onDrop,
     draggedProp,
     setDraggedProp,
-    setPartPreview,
-    setFullPreview,
+    onEnter,
+    onExit,
   } = props;
   // console.log("props :>> ", props);
   const [Y, setY] = useState();
@@ -64,8 +64,7 @@ function Property(props) {
         }}
       >
         <PopupInput
-          {...{ setPartPreview, setFullPreview }}
-          // value={propKey}
+          {...{ onEnter, onExit }}          
           value={name}
           setPreview={setName}
           setValue={(val) => {
@@ -82,7 +81,7 @@ function Property(props) {
         }}
       >
         <PopupInput
-          {...{ value, setValue, setPreview, setPartPreview, setFullPreview }}
+          {...{ value, setValue, setPreview, onEnter, onExit }}
           height="1em"
         />
       </div>

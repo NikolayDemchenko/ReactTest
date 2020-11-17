@@ -1,5 +1,5 @@
 import React from "react";
-import PropertyValueSelector from "./PropertyValueSelector";
+import DataTypeRecognizer from "./DataTypeRecognizer";
 import Color from "../Color";
 import NumberSlider from "../NumberSlider";
 import MultiInput from "../MultiInput";
@@ -7,7 +7,7 @@ import FuncInput from "../FuncInput";
 
 function PropertyInputSwitch(props) {
 
-  switch (props.dataType||PropertyValueSelector(props)) {
+  switch (props.dataType||DataTypeRecognizer(props)) {
     case "multi":
       return <MultiInput {...props} />;
     case "color":

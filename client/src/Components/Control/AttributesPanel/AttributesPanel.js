@@ -41,15 +41,6 @@ function AttributesPanel(props) {
     };
   }, [tag]);
 
-  // const [styleView, setStyleView] = useState();
-
-  // const setPreview = (style) => {
-  //   document.getElementById(tag.id).className = jss
-  //     .createStyleSheet({ className: styleView.styleViewFilter(style) })
-  //     .attach().classes.className;
-  // };
-
-
   const style = {
     flexWrap: "wrap",
     maxHeight: "95vh",
@@ -126,13 +117,11 @@ function AttributesPanel(props) {
         <StylePanel
           {...{
             tagStyle,
-            panelStyle: tagStyle.data,
-            // setPreview,
+            panelStyle: tagStyle.data,        
             assignStyleId,
             setSettings,
             updateTag,
-            tag,
-            // setStyleView,
+            tag,      
             page,
             setPage,
           }}
