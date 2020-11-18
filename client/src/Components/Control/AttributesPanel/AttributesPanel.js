@@ -22,24 +22,24 @@ function AttributesPanel(props) {
   } = props;
 
   // const tag = page.tags.find(({ id }) => id === clickedId);
-
+  console.log("tag.type", tag.type);
   const tagStyle = page.styles.find(({ id }) => id === tag.styleId);
 
   // console.log("tagStyle :>> ", tagStyle);
   // console.log("assigStyleId", assignStyleId);
 
-  useEffect(() => {
-    console.log("useEffect in");
-    assignStyleId &&
-      assignStyleId !== tag.styleId &&
-      updateTag(tag.id, "styleId", assignStyleId);
-    return () => {
-      console.log("useEffect out");
+  // useEffect(() => {
+  //   console.log("useEffect in");
+  //   assignStyleId &&
+  //     assignStyleId !== tag.styleId &&
+  //     updateTag(tag.id, "styleId", assignStyleId);
+  //   return () => {
+  //     console.log("useEffect out");
 
-      // console.log("window.location.reload()");
-      // window.location.reload()
-    };
-  }, [tag]);
+  //     // console.log("window.location.reload()");
+  //     // window.location.reload()
+  //   };
+  // }, [tag]);
 
   const style = {
     flexWrap: "wrap",
@@ -117,11 +117,11 @@ function AttributesPanel(props) {
         <StylePanel
           {...{
             tagStyle,
-            panelStyle: tagStyle.data,        
+            panelStyle: tagStyle.data,
             assignStyleId,
             setSettings,
             updateTag,
-            tag,      
+            tag,
             page,
             setPage,
           }}
@@ -136,6 +136,6 @@ function areEqual(prevProps, nextProps) {
   return prevProps === nextProps;
 }
 
-// export default log(AttributesPanel);
-export default React.memo(log(AttributesPanel));
+export default log(AttributesPanel);
+// export default React.memo(log(AttributesPanel));
 // export default React.memo(log(AttributesPanel), areEqual);

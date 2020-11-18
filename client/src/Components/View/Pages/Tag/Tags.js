@@ -8,7 +8,7 @@ function Tags(props) {
     return (
       <div
         key={key}
-        style={{ outline:props.settings&&props.settings.tag.id === tag.id && "1px dashed #5af" }}
+        style={{ outline:props.selectedId === tag.id && "1px dashed #5af" }}
       >
         <Tag {...{ ...props, className: props.classes[tag.styleId], tag }} />
       </div>

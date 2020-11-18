@@ -33,9 +33,9 @@ function SettingsPanel(props) {
   // console.log("Styles", Styles);
 // const [assignStyleId, setAssignStyleId] = useState()
 
-assignStyleId &&
-assignStyleId !== tag.styleId &&
-updateTag(tag.id, "styleId", assignStyleId);
+// assignStyleId &&
+// assignStyleId !== tag.styleId &&
+// updateTag(tag.id, "styleId", assignStyleId);
 
 // console.log('assignStyleId :>> ', assignStyleId);
   const setLibrStyleByName = (name) => {
@@ -92,7 +92,7 @@ updateTag(tag.id, "styleId", assignStyleId);
             className={buttonStyle}
             onClick={(e) => {
               e.stopPropagation();
-              console.log("Копировать стиль!");
+              console.log("Новый стиль!");
               addStyle(panelStyle,"new_style",tag);
             }}
           >

@@ -10,7 +10,6 @@ import NavigationPanel from "./Components/Control/NavigationPanel/NavigationPane
 import { TagManager, PageManager } from "./AppFunction";
 
 const App = () => {
-
   // const [settings, setSettings] = useState(JSON.parse(sessionStorage.getItem("settings")));
   const [settings, setSettings] = useState();
   const [page, setPage] = useState(_page);
@@ -26,7 +25,7 @@ const App = () => {
   // savedSettings&&setSettings(savedSettings)
 
   // console.log("page", page);
-  
+
   // console.log(
   //   "localStorage.getItem('settings') :>> ",
   //   JSON.parse(localStorage.getItem("settings"))
@@ -37,6 +36,11 @@ const App = () => {
   );
   const tagTree = getTagTree(page.tags, null);
   const { saveNewPage, savePage } = PageManager(page, setPage);
+
+  const onClick =
+    settings && settings.assignStyleId
+      ? (tag) => updateTag(tag.id, "styleId", settings.assignStyleId)
+      : (tag) => setSettings((settings) => ({ ...settings, tag }));
 
   // const clickedId = settings && settings.clickedId;
   // const setClickedId = (clickedId) => {
@@ -69,13 +73,21 @@ const App = () => {
               updateTag,
               setSettings,
               settings,
-              page,          
+              page,
               setPage,
             }}
           />
         </Portal>
       )}
-      <Page {...{ bodyStyle:page.bodyStyle, tagTree, classes, settings, setSettings }} />
+      <Page
+        {...{
+          bodyStyle: page.bodyStyle,
+          tagTree,
+          classes,
+          selectedId: settings && settings.tag.id,
+          onClick,
+        }}
+      />
     </ErrorBoundry>
   );
 };

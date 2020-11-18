@@ -12,14 +12,11 @@ function randColor(name) {
 }
 
 const log = (BaseComponent) => (props) => {
-  // console.log(
-  //   `%cRendering ${BaseComponent.name}`,
-  //   `color: ${randColor(BaseComponent.name.length)}`
-  // );
+  console.log(
+    `%cRendering ${BaseComponent.name}`,
+    `color: ${randColor(BaseComponent.name.length)}`
+  );
   return <BaseComponent {...props} />;
 };
 export default log;
-// Нужно переделать properties заменить на объекты типа {name:"",value:""}
-// Не работает частичное превью инпутов, сбрасывается
-// Не работает отображение смены типа тега
-// Сделать функцию назначения цвета и свичить её в функцию клика тега вместо функции выбора.
+// Сделать меню загрузки страницы

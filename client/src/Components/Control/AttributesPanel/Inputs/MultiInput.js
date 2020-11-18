@@ -14,11 +14,11 @@ export default function MultiInput({ value, setValue, setPreview }) {
     }
 
     const updateValue = (foo) => {
-      return (newValue,chain) => {
+      return (newValue) => {
         if (index !== -1) {
           arr[index] = newValue + comma;
         }
-        foo(arr.join(" "),`\nupdateValue-MultiInput ${chain}`);
+        foo(arr.join(" "));
       };
     };
 

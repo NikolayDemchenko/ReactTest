@@ -66,24 +66,24 @@ const ThisSlider = ({ value, unit, sign, setPreview, setValue }) => {
   };
   const step = setStep();
 
-  const changeValue = (val, chain) => {
+  const changeValue = (val) => {
     if (String(val).match(/^-/gm)) {
       const _sign = String(val).replace(/[\w.]+/gm, "");
       const value = String(val).replace(/^-/gm, "");
       if (sign === _sign) {
         const val1 = Number(value) + unit;
-        setValue(val1, `\nchangeValue-NumberSlider ${chain}`);
+        setValue(val1);
         // setPreview(val1);
       } else {
         const val2 = "-" + Number(value) + unit;
-        setValue(val2, `\nchangeValue-NumberSlider ${chain}`);
+        setValue(val2);
         // setPreview(val2);
       }
       _setValue(Number(value));
     } else {
       const roundVal = Number(val.toFixed(singQuantity));
       const val3 = sign + roundVal + unit;
-      setValue(val3, `\nchangeValue-NumberSlider ${chain}`);
+      setValue(val3);
       // setPreview(val3);
       _setValue(roundVal);
     }

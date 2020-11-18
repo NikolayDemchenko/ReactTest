@@ -1,28 +1,48 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import log from "../../../../Log";
 import Icon from "react-icons-kit";
 import { cross } from "react-icons-kit/icomoon/cross";
 import PopupInput from "../Inputs/PopupInput/PopupInput";
-
+import jss from "jss";
 function Property(props) {
   const {
     tabIndex,
     name,
     value,
     setName,
-    setPreview,
     setValue,
-    deleteProperty,
+    removeProperty,
     onDrop,
     draggedProp,
     setDraggedProp,
-    onEnter,
-    onExit,
+    previewBase,
+    tag,
+    panelStyle,    
   } = props;
   // console.log("props :>> ", props);
-  const [Y, setY] = useState();
-  // const [copy, setcopy] = useState(false);
+ 
+  //#region setPreview
+  const [partPreview, setPartPreview] = useState();
+  const setPreview = (value) => {
+    document.getElementById(tag.id).className = jss
+      .createStyleSheet({ className: { ...previewBase, [name]: value } })
+      .attach().classes.className;
+  };
+  partPreview && setPreview(value);
+  useEffect(() => {
+    partPreview && setPreview(value);
+    return () => {};
+  }, [panelStyle]);
 
+  const onEnter = () => setPartPreview(true);
+  const onExit = () => {
+    setPartPreview(false);
+    setValue(value);
+  };
+//#endregion
+
+
+  const [Y, setY] = useState();
   const [target, setTarget] = useState();
 
   return (
@@ -64,7 +84,7 @@ function Property(props) {
         }}
       >
         <PopupInput
-          {...{ onEnter, onExit }}          
+          {...{ onEnter, onExit }}
           value={name}
           setPreview={setName}
           setValue={(val) => {
@@ -91,7 +111,7 @@ function Property(props) {
           cursor: "pointer",
           margin: "0 5px 0 auto",
         }}
-        onClick={deleteProperty}
+        onClick={removeProperty}
       >
         <Icon size={"100%"} icon={cross} />
       </div>
@@ -103,6 +123,7 @@ function Property(props) {
 //   return prevProps.value === nextProps.value;
 // }
 
+// export default log(Property);
 // export default React.memo(Property);
 export default React.memo(log(Property));
 // export default React.memo(log(Property), areEqual);

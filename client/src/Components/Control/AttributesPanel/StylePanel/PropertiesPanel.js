@@ -11,33 +11,21 @@ import { ic_library_add } from "react-icons-kit/md/ic_library_add";
 import PopupInput from "../Inputs/PopupInput/PopupInput";
 import SelectPanel from "../../ModalWindows/SelectPanel/SelectPanel";
 import Properties from "./Properties";
-import jss from "jss";
+// import jss from "jss";
 // import { deleteObjectProps } from "./Function/ObjectManager";
 function PropertiesPanel(props) {
   const {
     name,
-    parentName,
     setName,
     panelStyle,
     updateStyleData,
-    deletePanel,
+    removePanel,
     tag,
     allStyleProps,
     previewBase,
   } = props;
 
   // console.log("%cPropertiesPanel-StylePanel", "color: green");
-
-  const [styleView, setStyleView] = useState();
-  console.log("styleView :>> ", styleView);
-  console.log('panelStyle :>> ', panelStyle);
-  const setPreview = (style) => {
-    document.getElementById(tag.id).className = jss
-      .createStyleSheet({ className: { ...previewBase, ...style } })
-      .attach().classes.className;
-  };
-
-  styleView && setPreview(panelStyle);
 
   const [edit, setEdit] = useState();
 
@@ -136,7 +124,7 @@ function PropertiesPanel(props) {
               className={buttonStyle}
               onClick={(e) => {
                 e.stopPropagation();
-                deletePanel();
+                removePanel();
               }}
             >
               <Icon size={"70%"} icon={cross} />
@@ -149,9 +137,7 @@ function PropertiesPanel(props) {
         <EditPanel {...{ panelStyle, updateStyleData, styleId: tag.styleId }} />
       )}
       <Properties
-        {...{ ...props, setPreview }}
-        onEnter={() => setStyleView(true)}
-        onExit={() => setStyleView()}
+        {...props}    
         parentName={name}
         previewBase={{ ...previewBase, ...panelStyle }}
       />

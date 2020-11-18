@@ -10,15 +10,14 @@ function StylePanel(props) {
 
   const { 
     assignStyleId,
-    setSettings,
-    updateTag,
+    setSettings, 
     tag,   
     page,
     setPage,
     panelStyle,
   } = props;
 
-  // console.log('tag', tag)
+  console.log('tag', tag.styleId)
   const [draggedProp, setDragged] = useState();
 
   const addStyle = (data, name, tag) => {
@@ -33,8 +32,10 @@ function StylePanel(props) {
           name = namestr + namenum;
         }
       });
+
       const newStyle = createStyle(data, name);
       const changedTag = { ...tag, styleId: newStyle.id };
+      setSettings((settings) => ({ ...settings, tag:changedTag }));
       return {
         ...page,
         tags: page.tags.map((tag) => {
@@ -99,8 +100,7 @@ function StylePanel(props) {
           updateStyleName,
           updateStyleData,    
           assignStyleId,
-          setSettings,
-          updateTag,
+          setSettings,      
           tag,
           addStyle,
         }}

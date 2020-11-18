@@ -2,17 +2,17 @@ import React from "react";
 import Tags from "./Tags";
 import log from "../../../../Log";
 function Tag(props) {
-  const { tag, className, setSettings } = props;
+  const { tag, className, onClick } = props;
 
-  const onClick = (e) => {
+  const click = (e) => {
     // console.log('tag :>> ', tag);
     // console.log("e.target.id", e.target.id);
     e.stopPropagation();
-    setSettings(settings=>({...settings,tag}));
+    onClick(tag);
   };
 
   return (
-    <tag.type id={tag.id} className={className} onClick={onClick}>
+    <tag.type id={tag.id} className={className} onClick={click}>
       {tag.childrens && tag.childrens.length > 0 ? (
         <Tags {...props} tagTree={tag.childrens} />
       ) : null}

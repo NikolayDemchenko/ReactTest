@@ -55,7 +55,7 @@ export default function Paper(props) {
           // width: "100px",
         }}
       >
-        <PropertyInputSwitch {...{ ...props, value, setValue }} />
+        <PropertyInputSwitch {...{ ...props, value }} />
       </div>
     </div>
   );

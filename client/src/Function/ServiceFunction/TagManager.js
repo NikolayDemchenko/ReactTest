@@ -39,11 +39,13 @@ export const TagManager = (setPage, setSettings) => ({
   updateTag: (tagId, propName, propValue) => {
     setPage((page) => ({
       ...page,
-      tags: page.tags.map((tag) => {
-        if (tag.id === tagId) {
-          return { ...tag, [propName]: propValue };
+      tags: page.tags.map((_tag) => {
+        if (_tag.id === tagId) {
+          const tag = { ..._tag, [propName]: propValue };
+          setSettings((settings) => ({ ...settings, tag }));
+          return tag
         } else {
-          return tag;
+          return _tag;
         }
       }),
     }));
