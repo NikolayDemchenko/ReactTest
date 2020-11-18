@@ -35,8 +35,8 @@ const App = () => {
     setSettings
   );
   const tagTree = getTagTree(page.tags, null);
-  const { saveNewPage, savePage } = PageManager(page, setPage);
-
+  const {getPages, saveNewPage, savePage } = PageManager(page, setPage);
+  getPages()
   const onClick =
     settings && settings.assignStyleId
       ? (tag) => updateTag(tag.id, "styleId", settings.assignStyleId)

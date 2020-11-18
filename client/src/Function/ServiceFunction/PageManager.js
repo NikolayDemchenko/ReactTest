@@ -1,5 +1,18 @@
 import axios from "axios";
 export const PageManager = (page, setPage) => ({
+  getPages: () => {
+    axios({
+      method: "get",
+      url: "http://localhost:8000/getPages",
+    })
+      .then((response) => {
+        console.log("response.data!", response.data);
+        // setPage({ ...response.data });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  },
   saveNewPage: (name) => {
     name && name !== ""
       ? axios({
@@ -8,7 +21,7 @@ export const PageManager = (page, setPage) => ({
           data: { page: JSON.stringify({ ...page, name }) },
         })
           .then((response) => {
-            console.log("response.data!",response.data);
+            console.log("response.data!", response.data);
             setPage({ ...response.data });
           })
           .catch(function (error) {

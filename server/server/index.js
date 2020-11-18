@@ -16,17 +16,18 @@ const localURI = "mongodb://localhost:27017/LocalMongoBase";
 const port = 8000;
 
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json({limit: '150mb'}));
+app.use(bodyParser.json({limit: '10mb'}));
 
 
-router.get("/", (req, res) => {
+router.get("/getPages", (req, res) => {
   const pages = req.app.locals.pages;
   pages
     .find({})
     .toArray()
-    .then((response) => res.status(200).json(response))
+    .then((response) => res.status(200).json(response.map(res=>res.name)))
     .catch((error) => console.error(error));
 });
+
 
 app.post("/addpage", (req, res) => {
   const pages = req.app.locals.pages;
@@ -35,11 +36,12 @@ app.post("/addpage", (req, res) => {
   // console.log(component);
   console.log("save as");
   pages.insertOne(page, (err, result) => {
+    // console.log('result', result.ops[0])
     if (err) return console.log(err);
-    res.send(page);
+    res.send(result.ops[0]);
   });
-  // console.log('typeof component._id', typeof component._id)
 });
+
 
 app.post("/updatepage", (req, res) => {
   const pages = req.app.locals.pages;
@@ -68,10 +70,8 @@ MongoClient.connect(cloudURI, {
     dbClient = client;
     app.listen(port, () =>
       console.info(`REST API running on port http://localhost:${port}`)
-    );
-    app.locals.elements = db.collection("elements");
+    );  
     app.locals.pages = db.collection("pages");
-    app.locals.styles = db.collection("styles");
   })
   .catch((error) => console.error(error));
 
