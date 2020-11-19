@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import NavTags from "./Tags/NavTags";
 import NavPages from "./Pages/NavPages";
 import ModalInput from "../ModalWindows/ModalInput/ModalInput";
+import PageForm from "../ModalWindows/ModalInput/PageForm";
 import jss from "jss";
 import preset from "jss-preset-default";
 import SavePage from "./Pages/SavePage";
@@ -68,6 +69,18 @@ function NavigationPanel(props) {
           Save as
         </div>
       </ModalInput>
+      <PageForm setItem={props.saveNewPage}>
+        <div
+          style={{
+            backgroundColor: "#456c",
+            justifyContent: "center",
+            padding: "0 10px",
+            cursor: "pointer",
+          }}
+        >
+          New App
+        </div>
+      </PageForm>
       {showPanel && (
         <div className={classes.style}>
           <NavTags {...props} />

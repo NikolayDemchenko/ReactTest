@@ -5,8 +5,8 @@ import { check } from "react-icons-kit/iconic/check";
 import Icon from "react-icons-kit";
 
 export default function ModalInput(props) {
-  const Input = (props) => {
-    let { setItem, close } = props;
+  const Input = ({ setItem, close }) => {
+  
 
     const handleKeyPress = (e) => {
       if (e.key === "Enter") {
