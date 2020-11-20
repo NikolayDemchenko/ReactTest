@@ -12,7 +12,12 @@ import { TagManager, PageManager } from "./AppFunction";
 const App = () => {
   // const [settings, setSettings] = useState(JSON.parse(sessionStorage.getItem("settings")));
   const [settings, setSettings] = useState();
-  const [page, setPage] = useState(_page);
+  const [page, _setPage] = useState(_page);
+  // console.log("page :>> ", page);
+  const setPage = (page) => {
+    console.log("page :>> ", page);
+    _setPage(page);
+  };
   // console.log('settings :>> ', settings);
   // settings&&sessionStorage.setItem('settings', JSON.stringify(settings))
 
@@ -35,8 +40,11 @@ const App = () => {
     setSettings
   );
   const tagTree = getTagTree(page.tags, null);
-  const {getPages, saveNewPage, savePage } = PageManager(page, setPage);
-  getPages()
+  const { getPages, createApp, createPage, updatePage } = PageManager(
+    page,
+    setPage
+  );
+  // getPages()
   const onClick =
     settings && settings.assignStyleId
       ? (tag) => updateTag(tag.id, "styleId", settings.assignStyleId)
@@ -62,7 +70,14 @@ const App = () => {
   return (
     <ErrorBoundry>
       <NavigationPanel
-        {...{ tagTree, createTag, removeTag, savePage, saveNewPage }}
+        {...{
+          tagTree,
+          createTag,
+          removeTag,
+          createApp,
+          createPage,
+          updatePage,
+        }}
         pageId={page._id}
         selectedId={settings && settings.tag.id}
       />

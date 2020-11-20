@@ -12,14 +12,13 @@ function randColor(name) {
 }
 
 const log = (BaseComponent) => (props) => {
-  console.log(
-    `%cRendering ${BaseComponent.name}`,
-    `color: ${randColor(BaseComponent.name.length)}`
-  );
+  // console.log(
+  //   `%cRendering ${BaseComponent.name}`,
+  //   `color: ${randColor(BaseComponent.name.length)}`
+  // );
   return <BaseComponent {...props} />;
 };
 export default log;
-// Доделать форму создания приложения, разобраться с сохранением в базу
 // Сделать загрузку списка названий приложений - доменных имён
 // Сделать загрузку списка наименований страниц по клику на имя приложения и загрузку стартовой страницы
 // Сделать меню загрузки страницы

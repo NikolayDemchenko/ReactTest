@@ -29,7 +29,18 @@ router.get("/getPages", (req, res) => {
 });
 
 
-app.post("/addpage", (req, res) => {
+app.post("/createApp", (req, res) => {
+  const pages = req.app.locals.pages;
+  const page = JSON.parse(req.body.page);
+  // delete page._id; 
+  console.log("createApp");
+  pages.insertOne(page, (err, result) => {
+    console.log('result', result.ops[0])
+    if (err) return console.log(err);
+    res.send(result.ops[0]);
+  });
+});
+app.post("/createPage", (req, res) => {
   const pages = req.app.locals.pages;
   const page = JSON.parse(req.body.page);
   delete page._id;
@@ -43,7 +54,7 @@ app.post("/addpage", (req, res) => {
 });
 
 
-app.post("/updatepage", (req, res) => {
+app.post("/updatePage", (req, res) => {
   const pages = req.app.locals.pages;
   const page = JSON.parse(req.body.page);
   console.log("save");

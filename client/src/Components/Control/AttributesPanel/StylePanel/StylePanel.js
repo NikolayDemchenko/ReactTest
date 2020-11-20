@@ -8,16 +8,9 @@ function StylePanel(props) {
   // console.log("%cStylePanel-VerticalPanel-App", "color: green");
   // console.log("props :>> ", props);
 
-  const { 
-    assignStyleId,
-    setSettings, 
-    tag,   
-    page,
-    setPage,
-    panelStyle,
-  } = props;
+  const { assignStyleId, setSettings, tag, page, setPage, panelStyle } = props;
 
-  console.log('tag', tag.styleId)
+  // console.log('tag', tag.styleId)
   const [draggedProp, setDragged] = useState();
 
   const addStyle = (data, name, tag) => {
@@ -35,7 +28,7 @@ function StylePanel(props) {
 
       const newStyle = createStyle(data, name);
       const changedTag = { ...tag, styleId: newStyle.id };
-      setSettings((settings) => ({ ...settings, tag:changedTag }));
+      setSettings((settings) => ({ ...settings, tag: changedTag }));
       return {
         ...page,
         tags: page.tags.map((tag) => {
@@ -52,17 +45,16 @@ function StylePanel(props) {
 
   const updateStyleById = (styleId, propName, propValue, setPage) => {
     // console.log("page :>> ", page);
-    // console.log("updateStyle", propName);
-    setPage((page) => ({
-      ...page,
-      styles: page.styles.map((style) => {
+    setPage((page) => {
+      const styles = page.styles.map((style) => {
         if (style.id === styleId) {
           return { ...style, [propName]: propValue };
         } else {
           return style;
         }
-      }),
-    }));
+      });
+      return { ...page, styles };
+    });
   };
 
   const updateStyleData = (data) =>
@@ -91,16 +83,15 @@ function StylePanel(props) {
     setDragged(item);
   };
 
-
   return (
     <div style={{ background: "rgba(30,40,57,.6)" }} title="CSS (JSS) Стили">
       <SettingsPanel
         {...{
           ...props,
           updateStyleName,
-          updateStyleData,    
+          updateStyleData,
           assignStyleId,
-          setSettings,      
+          setSettings,
           tag,
           addStyle,
         }}
@@ -109,12 +100,13 @@ function StylePanel(props) {
         {...{
           // ...props,
           panelStyle,
-          tag,        
-          updateStyleData,       
+          tag,
+          updateStyleData,
           name: "Style",
           draggedProp,
-          setDraggedProp,        
-          allStyleProps: () => getDefaultStyleProps(tag.id),previewBase:panelStyle
+          setDraggedProp,
+          allStyleProps: () => getDefaultStyleProps(tag.id),
+          previewBase: panelStyle,
         }}
       />
     </div>

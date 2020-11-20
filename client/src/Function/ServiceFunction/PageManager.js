@@ -7,17 +7,17 @@ export const PageManager = (page, setPage) => ({
     })
       .then((response) => {
         console.log("response.data!", response.data);
-        // setPage({ ...response.data });
+        setPage(response.data);
       })
       .catch(function (error) {
         console.log(error);
       });
   },
-  saveNewPage: (name) => {
+  createPage: (name) => {
     name && name !== ""
       ? axios({
           method: "post",
-          url: "http://localhost:8000/addpage",
+          url: "http://localhost:8000/createPage",
           data: { page: JSON.stringify({ ...page, name }) },
         })
           .then((response) => {
@@ -29,11 +29,26 @@ export const PageManager = (page, setPage) => ({
           })
       : alert("string empty!");
   },
-  savePage: () => {
+  createApp: (page) => {
+    console.log("createApp");
+    axios({
+      method: "post",
+      url: "http://localhost:8000/createApp",
+      data: { page: JSON.stringify(page) },
+    })
+      .then((response) => {
+        console.log("response.data!", response.data);
+        setPage({...response.data});
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  },
+  updatePage: () => {
     console.log("save");
     axios({
       method: "post",
-      url: "http://localhost:8000/updatepage",
+      url: "http://localhost:8000/updatePage",
       data: { page: JSON.stringify(page) },
     })
       .then((response) => {

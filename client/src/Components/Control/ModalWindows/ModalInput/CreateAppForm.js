@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import ReactDOM from "react-dom";
 import Popover from "../Popover";
 import { check } from "react-icons-kit/iconic/check";
 import Icon from "react-icons-kit";
 
-export default function PageForm(props) {
+export default function CreateAppForm(props) {
   const Input = ({ title, name }) => {
-    const [value, setValue] = useState("");
-    console.log("value :>> ", value);
+    const [value, setValue] = useState();
+    // console.log("value :>> ", value);
 
     return (
       <div style={{ display: "flex" }}>
@@ -35,17 +34,26 @@ export default function PageForm(props) {
     const handleKeyPress = (e) => {
       if (e.key === "Enter") {
         // console.log("handleKeyPress");
-        handleClick(e.target.value);
+        handleClick();
       }
     };
+    
     const handleClick = () => {
       const domain = document.getElementById("domain").value;
       const name = document.getElementById("name").value;
       const appName = document.getElementById("appName").value;
-
-      setItem({appName,name,domain});
-      // close();
-      // console.log("handleClick", item);
+      if (appName && domain && name) {
+        // console.log("{appName,name,domain} :>> ", { appName, name, domain });
+        setItem({
+          appName,
+          name,
+          domain,
+          styles: [],
+          tags: [],
+          bodyStyle: { background: "inherit" },
+        });
+        close();
+      }
     };
 
     return (
@@ -58,7 +66,7 @@ export default function PageForm(props) {
       >
         <div
           onClick={(e) => {
-            e.stopPropagation();         
+            e.stopPropagation();
             handleClick();
           }}
           style={{

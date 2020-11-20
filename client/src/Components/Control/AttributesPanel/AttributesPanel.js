@@ -22,7 +22,7 @@ function AttributesPanel(props) {
   } = props;
 
   // const tag = page.tags.find(({ id }) => id === clickedId);
-  console.log("tag.type", tag.type);
+  // console.log("tag.type", tag.type);
   const tagStyle = page.styles.find(({ id }) => id === tag.styleId);
 
   // console.log("tagStyle :>> ", tagStyle);
