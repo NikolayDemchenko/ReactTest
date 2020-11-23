@@ -16,26 +16,53 @@ const localURI = "mongodb://localhost:27017/LocalMongoBase";
 const port = 8000;
 
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json({limit: '10mb'}));
-
+app.use(bodyParser.json({ limit: "10mb" }));
 
 router.get("/getPages", (req, res) => {
   const pages = req.app.locals.pages;
   pages
     .find({})
     .toArray()
-    .then((response) => res.status(200).json(response.map(res=>res.name)))
+    .then((response) => res.status(200).json(response.map((res) => res.name)))
     .catch((error) => console.error(error));
 });
-
+router.get("/getApps", (req, res) => {
+  const pages = req.app.locals.pages;
+  pages
+    .find({ domain: /\D+/i })
+    .toArray()
+    .then((response) => {
+      res
+        .status(200)
+        .json(Array.from(new Set(response.map((res) => res.appName))));
+    })
+    .catch((error) => console.error(error));
+});
+router.get("/getPagesByAppName", (req, res) => {
+  const appName = req.query.appName;
+  console.log("appName :>> ", appName);
+  const pages = req.app.locals.pages;
+  pages
+    .find({ appName })
+    .toArray()
+    .then((response) =>
+      res
+        .status(200)
+        .json({
+          pageNames: response.map((res) => res.name),
+          startPage: response.find(res=>res.domain),
+        })
+    )
+    .catch((error) => console.error(error));
+});
 
 app.post("/createApp", (req, res) => {
   const pages = req.app.locals.pages;
   const page = JSON.parse(req.body.page);
-  // delete page._id; 
+  // delete page._id;
   console.log("createApp");
   pages.insertOne(page, (err, result) => {
-    console.log('result', result.ops[0])
+    console.log("result", result.ops[0]);
     if (err) return console.log(err);
     res.send(result.ops[0]);
   });
@@ -52,7 +79,6 @@ app.post("/createPage", (req, res) => {
     res.send(result.ops[0]);
   });
 });
-
 
 app.post("/updatePage", (req, res) => {
   const pages = req.app.locals.pages;
@@ -81,7 +107,7 @@ MongoClient.connect(cloudURI, {
     dbClient = client;
     app.listen(port, () =>
       console.info(`REST API running on port http://localhost:${port}`)
-    );  
+    );
     app.locals.pages = db.collection("pages");
   })
   .catch((error) => console.error(error));

@@ -31,12 +31,12 @@ export default function CreateAppForm(props) {
   };
 
   const Form = ({ setItem, close }) => {
-    const handleKeyPress = (e) => {
-      if (e.key === "Enter") {
-        // console.log("handleKeyPress");
-        handleClick();
-      }
-    };
+    // const handleKeyPress = (e) => {
+    //   if (e.key === "Enter") {
+    //     // console.log("handleKeyPress");
+    //     handleClick();
+    //   }
+    // };
     
     const handleClick = () => {
       const domain = document.getElementById("domain").value;

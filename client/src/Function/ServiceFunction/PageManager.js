@@ -1,5 +1,6 @@
 import axios from "axios";
-export const PageManager = (page, setPage) => ({
+export const GetPageManager = (page, setPage) => ({
+  
   getPages: () => {
     axios({
       method: "get",
@@ -13,6 +14,7 @@ export const PageManager = (page, setPage) => ({
         console.log(error);
       });
   },
+
   createPage: (name) => {
     name && name !== ""
       ? axios({

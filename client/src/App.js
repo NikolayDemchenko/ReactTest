@@ -7,7 +7,7 @@ import AttributesPanel from "./Components/Control/AttributesPanel/AttributesPane
 import jss from "jss";
 import preset from "jss-preset-default";
 import NavigationPanel from "./Components/Control/NavigationPanel/NavigationPanel";
-import { TagManager, PageManager } from "./AppFunction";
+import { TagManager, GetPageManager } from "./AppFunction";
 
 const App = () => {
   // const [settings, setSettings] = useState(JSON.parse(sessionStorage.getItem("settings")));
@@ -40,11 +40,9 @@ const App = () => {
     setSettings
   );
   const tagTree = getTagTree(page.tags, null);
-  const { getPages, createApp, createPage, updatePage } = PageManager(
-    page,
-    setPage
-  );
-  // getPages()
+  const pageManager = GetPageManager(page, setPage);
+  // const { getApps, createApp, createPage, updatePage } = pageManager;
+  // getApps();
   const onClick =
     settings && settings.assignStyleId
       ? (tag) => updateTag(tag.id, "styleId", settings.assignStyleId)
@@ -74,9 +72,8 @@ const App = () => {
           tagTree,
           createTag,
           removeTag,
-          createApp,
-          createPage,
-          updatePage,
+          pageManager,
+          setPage
         }}
         pageId={page._id}
         selectedId={settings && settings.tag.id}

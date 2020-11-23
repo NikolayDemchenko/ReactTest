@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import NavTags from "./Tags/NavTags";
+import AppList from "./Apps/AppList";
 import NavPages from "./Pages/NavPages";
 import ModalInput from "../ModalWindows/ModalInput/ModalInput";
 import CreateAppForm from "../ModalWindows/ModalInput/CreateAppForm";
@@ -7,6 +8,9 @@ import jss from "jss";
 import preset from "jss-preset-default";
 import SavePage from "./Pages/SavePage";
 function NavigationPanel(props) {
+  const {
+    pageManager: {createApp, createPage, updatePage },
+  } = props;
   // console.log('props', props)
   const style = {
     // flexWrap: "wrap",
@@ -56,8 +60,12 @@ function NavigationPanel(props) {
         Navigation
       </div>
 
-      <SavePage savePage={props.updatePage} title={"Save"} pageId={props.pageId} />
-      <ModalInput setItem={props.createPage}>
+      <SavePage
+        savePage={updatePage}
+        title={"Save"}
+        pageId={props.pageId}
+      />
+      <ModalInput setItem={createPage}>
         <div
           style={{
             backgroundColor: "#456c",
@@ -69,7 +77,7 @@ function NavigationPanel(props) {
           Save as
         </div>
       </ModalInput>
-      <CreateAppForm setItem={props.createApp}>
+      <CreateAppForm setItem={createApp}>
         <div
           style={{
             backgroundColor: "#456c",
@@ -83,6 +91,7 @@ function NavigationPanel(props) {
       </CreateAppForm>
       {showPanel && (
         <div className={classes.style}>
+          <AppList {...props} />
           <NavTags {...props} />
           {/* <NavPages {...props} /> */}
         </div>
