@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import NavTags from "./Tags/NavTags";
 import AppList from "./Apps/AppList";
-import NavPages from "./Pages/NavPages";
+import PageList from "./Pages/PageList";
 import ModalInput from "../ModalWindows/ModalInput/ModalInput";
 import CreateAppForm from "../ModalWindows/ModalInput/CreateAppForm";
 import jss from "jss";
@@ -9,7 +9,7 @@ import preset from "jss-preset-default";
 import SavePage from "./Pages/SavePage";
 function NavigationPanel(props) {
   const {
-    pageManager: {createApp, createPage, updatePage },
+    pageManager: { createApp, createPage, updatePage },
   } = props;
   // console.log('props', props)
   const style = {
@@ -43,6 +43,7 @@ function NavigationPanel(props) {
       style={{
         position: "fixed",
         top: 0,
+        zIndex: 999,
         backgroundColor: "#456c",
         display: "flex",
         justifyContent: "center",
@@ -60,11 +61,7 @@ function NavigationPanel(props) {
         Navigation
       </div>
 
-      <SavePage
-        savePage={updatePage}
-        title={"Save"}
-        pageId={props.pageId}
-      />
+      <SavePage savePage={updatePage} title={"Save"} pageId={props.pageId} />
       <ModalInput setItem={createPage}>
         <div
           style={{
@@ -92,8 +89,8 @@ function NavigationPanel(props) {
       {showPanel && (
         <div className={classes.style}>
           <AppList {...props} />
+          <PageList {...props} />
           <NavTags {...props} />
-          {/* <NavPages {...props} /> */}
         </div>
       )}
     </div>

@@ -73,12 +73,14 @@ const App = () => {
           createTag,
           removeTag,
           pageManager,
-          setPage
+          setPage,
+          settings,
+          setSettings,
         }}
         pageId={page._id}
-        selectedId={settings && settings.tag.id}
+        selectedId={settings && settings.tag && settings.tag.id}
       />
-      {settings && (
+      {settings && settings.tag && (
         <Portal>
           <AttributesPanel
             {...{
@@ -96,7 +98,7 @@ const App = () => {
           bodyStyle: page.bodyStyle,
           tagTree,
           classes,
-          selectedId: settings && settings.tag.id,
+          selectedId: settings && settings.tag && settings.tag.id,
           onClick,
         }}
       />

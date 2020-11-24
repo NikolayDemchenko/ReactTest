@@ -1,7 +1,17 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 function AppList(props) {
-  const [appList, setAppList] = useState([]);
+  // const [appList, setAppList] = useState([]);
+
+  const appList = props.settings ? props.settings.appList : [];
+
+  const setAppList = (appList) => {
+    props.setSettings((settings) => ({ ...settings, appList }));
+  };
+  const setPageList = (pageList) => {
+    props.setSettings((settings) => ({ ...settings, pageList }));
+  };
+
   const getApps = (set) => {
     axios({
       method: "get",
@@ -20,12 +30,12 @@ function AppList(props) {
       method: "get",
       url: "http://localhost:8000/getPagesByAppName",
       params: {
-        appName
-      }
+        appName,
+      },
     })
       .then((response) => {
         console.log("response.data!", response.data);
-        // setPageList(response.data.pageNames)
+        setPageList(response.data.pageNames)
         props.setPage(response.data.startPage);
       })
       .catch(function (error) {

@@ -8,7 +8,7 @@ import NavTags from "../Tags/NavTags";
 function NavPage(props) {
   const { tag, createTag, removeTag, selectedId } = props;
 
-  const { type, childrens, id, index } = tag;
+  // const { type, childrens, id, index } = tag;
   const [showChilds, setshowChilds] = useState(false);
   // console.log("id :>> ", id);
   // console.log("selectedId :>> ", selectedId);
@@ -21,35 +21,33 @@ function NavPage(props) {
     <div style={{ transform: "rotate(90deg)" }}>{_icon}</div>
   );
   // console.log('childrens', childrens)
-  const toggle =
-    childrens.length > 0 ? (
-      <div
-        style={{ cursor: "pointer", width: "20px" }}
-        onClick={(e) => {
-          e.stopPropagation();
-          setshowChilds(!showChilds);
-        }}
-      >
-        {icon}
-      </div>
-    ) : null;
+  // const toggle =
+  //   childrens.length > 0 ? (
+  //     <div
+  //       style={{ cursor: "pointer", width: "20px" }}
+  //       onClick={(e) => {
+  //         e.stopPropagation();
+  //         setshowChilds(!showChilds);
+  //       }}
+  //     >
+  //       {icon}
+  //     </div>
+  //   ) : null;
 
   let background = "rgba(30,40,57,.8)";
   let showButtons = false;
   // let showButtons = true;
-  if (selectedId && id === selectedId) {
-    background = "rgba(30,60,97,1)";
-    showButtons = true;
-  }
+  // if (selectedId && id === selectedId) {
+  //   background = "rgba(30,60,97,1)";
+  //   showButtons = true;
+  // }
 
   return (
-    <div>
-     
+    <div>     
         <div
           onClick={(e) => {
             e.preventDefault();         
-            console.log("id :>> ", id);
-         
+            // console.log("id :>> ", id);         
           }}
           style={{
             display: "flex",
@@ -59,8 +57,8 @@ function NavPage(props) {
             // outline: "1px solid white",
           }}
         >
-          {toggle}
-          type: {type} index: {index}
+          {/* {toggle} */}
+          {/* type: {type} index: {index} */}
           {showButtons && (
             <div
               style={{
@@ -73,9 +71,9 @@ function NavPage(props) {
           )}
         </div>
       <div style={{ marginLeft: "30px" }}>
-        {childrens && showChilds && (
+        {/* {childrens && showChilds && (
           <NavTags {...props} tagTree={childrens} index={id} />
-        )}
+        )} */}
       </div>
     </div>
   );

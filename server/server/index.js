@@ -87,7 +87,7 @@ app.post("/updatePage", (req, res) => {
 
   // console.log(component);
   // console.log('typeof component._id', typeof ObjectId(component._id),ObjectId(component._id))
-  const _id = ObjectId(component._id);
+  const _id = ObjectId(page._id);
 
   pages.findOneAndUpdate({ _id }, { $set: { ...page, _id } }, (err, result) => {
     if (err) return console.log(err);

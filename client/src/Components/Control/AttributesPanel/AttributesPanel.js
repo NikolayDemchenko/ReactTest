@@ -64,70 +64,75 @@ function AttributesPanel(props) {
     .attach();
 
   return (
-    <div className={classes.style}>
-      <BackSettings {...props} />
-      <div style={{ cursor: "default", display: "flex" }}>
-        <Link
-          activeClass="active"
-          to={tag.id}
-          spy={true}
-          smooth={true}
-          offset={-70}
-          duration={500}
-        >
-          <div
-            title={tag.id}
-            style={{
-              display: "inline-flex",
-              height: "1.5em",
-              padding: "0px 0.5em",
-              overflow: "hidden",
-            }}
-          >
-            tag.id: {tag.id}
+    <div>
+      {" "}
+      {tagStyle && (
+        <div className={classes.style}>
+          <BackSettings {...props} />
+          <div style={{ cursor: "default", display: "flex" }}>
+            <Link
+              activeClass="active"
+              to={tag.id}
+              spy={true}
+              smooth={true}
+              offset={-70}
+              duration={500}
+            >
+              <div
+                title={tag.id}
+                style={{
+                  display: "inline-flex",
+                  height: "1.5em",
+                  padding: "0px 0.5em",
+                  overflow: "hidden",
+                }}
+              >
+                tag.id: {tag.id}
+              </div>
+            </Link>
+            <div
+              style={{
+                padding: "0px 0.5em",
+              }}
+            >
+              type:
+            </div>
+            <SelectPanel
+              selected={tag.type}
+              items={htmlTags}
+              setItem={(type) => updateTag(tag.id, "type", type)}
+            />
+            <div
+              style={{
+                display: "flex",
+                marginLeft: "auto",
+              }}
+            ></div>
           </div>
-        </Link>
-        <div
-          style={{
-            padding: "0px 0.5em",
-          }}
-        >
-          type:
+          <Link
+            activeClass="active"
+            to={tag.id}
+            spy={true}
+            smooth={true}
+            offset={-70}
+            duration={500}
+          >
+            <StylePanel
+              {...{
+                tagStyle,
+                panelStyle: tagStyle.data,
+                assignStyleId,
+                setSettings,
+                updateTag,
+                tag,
+                page,
+                setPage,
+              }}
+            />
+          </Link>
+          <div style={{ paddingBottom: "4em" }} />
         </div>
-        <SelectPanel
-          selected={tag.type}
-          items={htmlTags}
-          setItem={(type) => updateTag(tag.id, "type", type)}
-        />
-        <div
-          style={{
-            display: "flex",
-            marginLeft: "auto",
-          }}
-        ></div>
-      </div>
-      <Link
-        activeClass="active"
-        to={tag.id}
-        spy={true}
-        smooth={true}
-        offset={-70}
-        duration={500}
-      >
-        <StylePanel
-          {...{
-            tagStyle,
-            panelStyle: tagStyle.data,
-            assignStyleId,
-            setSettings,
-            updateTag,
-            tag,
-            page,
-            setPage,
-          }}
-        />
-      </Link>
-      <div style={{ paddingBottom: "4em" }} />
+      )}
     </div>
   );
 }
