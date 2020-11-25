@@ -35,7 +35,7 @@ function AppList(props) {
     })
       .then((response) => {
         console.log("response.data!", response.data);
-        setPageList(response.data.pageNames)
+        setPageList(response.data.pages)
         props.setPage(response.data.startPage);
       })
       .catch(function (error) {

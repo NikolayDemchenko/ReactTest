@@ -1,18 +1,34 @@
 import React, { useState } from "react";
 import { ic_keyboard_arrow_right } from "react-icons-kit/md/ic_keyboard_arrow_right";
 import Icon from "react-icons-kit";
-import { Link } from "react-scroll";
-import NavTags from "../Tags/NavTags";
+import axios from "axios";
+
 // import CRUDTag from "./CRUD/Tag/CRUDTag";
 
 function NavPage(props) {
-  const { tag, createTag, removeTag, selectedId } = props;
+  const { page, setPage, createTag } = props;
+  // console.log("props", props);
 
-  // const { type, childrens, id, index } = tag;
+  const getPageById = (_id) => {
+    axios({
+      method: "get",
+      url: "http://localhost:8000/getPageById",
+      params: {
+        _id,
+      },
+    })
+      .then((response) => {
+        console.log("response.data!", response.data);        
+       setPage(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+
+
   const [showChilds, setshowChilds] = useState(false);
-  // console.log("id :>> ", id);
-  // console.log("selectedId :>> ", selectedId);
-
   const _icon = <Icon size={"100%"} icon={ic_keyboard_arrow_right} />;
 
   const icon = !showChilds ? (
@@ -43,33 +59,34 @@ function NavPage(props) {
   // }
 
   return (
-    <div>     
-        <div
-          onClick={(e) => {
-            e.preventDefault();         
-            // console.log("id :>> ", id);         
-          }}
-          style={{
-            display: "flex",
-            borderBottom: "2px solid #55667766",
-            background,
-            cursor: "default",
-            // outline: "1px solid white",
-          }}
-        >
-          {/* {toggle} */}
-          {/* type: {type} index: {index} */}
-          {showButtons && (
-            <div
-              style={{
-                //  outline: "1px solid white",
-                margin: "0 4px 4px auto",
-              }}
-            >
-              {/* <CRUDTag {...{ tag, createTag, removeTag }} /> */}
-            </div>
-          )}
-        </div>
+    <div>
+      <div
+        onClick={(e) => {
+          e.preventDefault();
+          getPageById(page._id)
+          // console.log("id :>> ", id);
+        }}
+        style={{
+          display: "flex",
+          borderBottom: "2px solid #55667766",
+          background,
+          cursor: "default",
+          // outline: "1px solid white",
+        }}
+      >
+        {/* {toggle} */}
+        {page.name}
+        {showButtons && (
+          <div
+            style={{
+              //  outline: "1px solid white",
+              margin: "0 4px 4px auto",
+            }}
+          >
+            {/* <CRUDTag {...{ tag, createTag, removeTag }} /> */}
+          </div>
+        )}
+      </div>
       <div style={{ marginLeft: "30px" }}>
         {/* {childrens && showChilds && (
           <NavTags {...props} tagTree={childrens} index={id} />

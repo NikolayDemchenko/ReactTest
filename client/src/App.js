@@ -58,7 +58,7 @@ const App = () => {
 
   jss.setup(preset());
   const myStyles = {};
-  page.styles.forEach(({ id, data }) => {
+  page.styles&&page.styles.forEach(({ id, data }) => {
     myStyles[id] = data;
   });
   const { classes } = jss.createStyleSheet({ ...myStyles }).attach();

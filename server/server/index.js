@@ -26,6 +26,19 @@ router.get("/getPages", (req, res) => {
     .then((response) => res.status(200).json(response.map((res) => res.name)))
     .catch((error) => console.error(error));
 });
+
+router.get("/getPageById", (req, res) => {
+  const _id = req.query._id;
+  const pages = req.app.locals.pages;
+  pages
+    .find({ _id: new ObjectId(_id) })
+    .toArray()
+    .then((response) => {
+      // console.log("response", response[0]);
+      res.status(200).json(response[0]);
+    })
+    .catch((error) => console.error(error));
+});
 router.get("/getApps", (req, res) => {
   const pages = req.app.locals.pages;
   pages
@@ -46,12 +59,10 @@ router.get("/getPagesByAppName", (req, res) => {
     .find({ appName })
     .toArray()
     .then((response) =>
-      res
-        .status(200)
-        .json({
-          pageNames: response.map((res) => res.name),
-          startPage: response.find(res=>res.domain),
-        })
+      res.status(200).json({
+        pages: response.map(({ name, _id }) => ({ name, _id })),
+        startPage: response.find((res) => res.domain),
+      })
     )
     .catch((error) => console.error(error));
 });
@@ -88,7 +99,6 @@ app.post("/updatePage", (req, res) => {
   // console.log(component);
   // console.log('typeof component._id', typeof ObjectId(component._id),ObjectId(component._id))
   const _id = ObjectId(page._id);
-
   pages.findOneAndUpdate({ _id }, { $set: { ...page, _id } }, (err, result) => {
     if (err) return console.log(err);
     console.log("result", result);

@@ -1,5 +1,5 @@
 import shortid from "shortid";
-const getTagTree = (tags, _parentId) => {
+const getTagTree = (tags=[], _parentId) => {
   const thisTags = JSON.parse(JSON.stringify(tags));
   return thisTags.filter((tag) => {
     // console.log("getTagStructure");
