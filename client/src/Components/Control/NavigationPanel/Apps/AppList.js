@@ -3,7 +3,8 @@ import axios from "axios";
 function AppList(props) {
   // const [appList, setAppList] = useState([]);
 
-  const appList = props.settings ? props.settings.appList : [];
+  const appList =
+    props.settings && props.settings.appList ? props.settings.appList : [];
 
   const setAppList = (appList) => {
     props.setSettings((settings) => ({ ...settings, appList }));
@@ -35,7 +36,7 @@ function AppList(props) {
     })
       .then((response) => {
         console.log("response.data!", response.data);
-        setPageList(response.data.pages)
+        setPageList(response.data.pages);
         props.setPage(response.data.startPage);
       })
       .catch(function (error) {
