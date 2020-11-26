@@ -1,1 +1,1 @@
-yarn client
+yarn start
