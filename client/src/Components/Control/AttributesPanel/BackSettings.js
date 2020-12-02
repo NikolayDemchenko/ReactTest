@@ -1,10 +1,13 @@
-import React from "react";
+import React,{useContext} from "react";
 import log from "../../../Log";
 import jss from "jss";
 import preset from "jss-preset-default";
 import PopupInput from "./Inputs/PopupInput/PopupInput";
-const BackSettings = (props) => {
+import {Context} from '../../../AppFunction'
+
+const BackSettings = () => {
   // console.log("props :>> ", props.page.bodyStyle);
+  const context = useContext(Context)
   const setPreview = (color) => {
     console.log('color', color)
     jss.setup(preset());
@@ -13,13 +16,13 @@ const BackSettings = (props) => {
   };
   const setValue = (color) => {
 
-    props.setPage((page) => {
+    context.setPage((page) => {
       return { ...page, bodyStyle: { background: color } };
     });
   };
   return (
     <div
-    title={props.page.bodyStyle["background"]}
+    title={context.page.bodyStyle["background"]}
       style={{
         overflow: "hidden",
         display: "flex",
@@ -30,7 +33,7 @@ const BackSettings = (props) => {
       <div style={{ paddingRight: "2em" }}>Background</div>
       <PopupInput
         {...{
-          value: props.page.bodyStyle["background"],
+          value: context.page.bodyStyle["background"],
           setValue,
           setPreview,
         }}

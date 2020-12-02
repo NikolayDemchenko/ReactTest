@@ -7,7 +7,7 @@ import AttributesPanel from "./Components/Control/AttributesPanel/AttributesPane
 import jss from "jss";
 import preset from "jss-preset-default";
 import NavigationPanel from "./Components/Control/NavigationPanel/NavigationPanel";
-import { TagManager, GetPageManager } from "./AppFunction";
+import { TagManager, GetPageManager, Context } from "./AppFunction";
 
 const App = () => {
   // const [settings, setSettings] = useState(JSON.parse(sessionStorage.getItem("settings")));
@@ -58,41 +58,56 @@ const App = () => {
 
   jss.setup(preset());
   const myStyles = {};
-  page.styles&&page.styles.forEach(({ id, data }) => {
-    myStyles[id] = data;
-  });
+  page.styles &&
+    page.styles.forEach(({ id, data }) => {
+      myStyles[id] = data;
+    });
   const { classes } = jss.createStyleSheet({ ...myStyles }).attach();
 
   // const tag =settings&& page.tags.find(({ id }) => id === settings.clickedId);
   // settings&& console.log('tag :>> ', tag);
   return (
     <ErrorBoundry>
-      <NavigationPanel
-        {...{
+      <Context.Provider
+        value={{
           tagTree,
           createTag,
           removeTag,
+          updateTag,
           pageManager,
+          page,
           setPage,
           settings,
           setSettings,
         }}
-        pageId={page._id}
-        selectedId={settings && settings.tag && settings.tag.id}
-      />
-      {settings && settings.tag && (
-        <Portal>
-          <AttributesPanel
-            {...{
-              updateTag,
-              setSettings,
-              settings,
-              page,
-              setPage,
-            }}
-          />
-        </Portal>
-      )}
+      >
+        <NavigationPanel
+          {...{
+            tagTree,
+            createTag,
+            removeTag,
+            pageManager,
+            setPage,
+            settings,
+            setSettings,
+          }}
+          pageId={page._id}
+          selectedId={settings && settings.tag && settings.tag.id}
+        />
+        {settings && settings.tag && (
+          <Portal>
+            <AttributesPanel
+              {...{
+                updateTag,
+                setSettings,
+                settings,
+                page,
+                setPage,
+              }}
+            />
+          </Portal>
+        )}
+      </Context.Provider>
       <Page
         {...{
           bodyStyle: page.bodyStyle,

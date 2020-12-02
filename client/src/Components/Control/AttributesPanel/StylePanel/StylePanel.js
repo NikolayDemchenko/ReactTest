@@ -1,14 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 // import jss from "jss";
 import log from "../../../../Log";
 import PropertiesPanel from "./PropertiesPanel";
 import SettingsPanel from "./SettingsPanel";
-import { createStyle } from "../../../../AppFunction";
+import { createStyle, Context } from "../../../../AppFunction";
+
 function StylePanel(props) {
   // console.log("%cStylePanel-VerticalPanel-App", "color: green");
   // console.log("props :>> ", props);
-
-  const { assignStyleId, setSettings, tag, page, setPage, panelStyle } = props;
+  const {
+    page,
+    setPage,
+    setSettings,
+    settings: { tag, assignStyleId },
+  } = useContext(Context);
+  const tagStyle = page.styles.find(({ id }) => id === tag.styleId);
+  
+  // const {panelStyle } = props;
 
   // console.log('tag', tag.styleId)
   const [draggedProp, setDragged] = useState();
@@ -87,7 +95,8 @@ function StylePanel(props) {
     <div style={{ background: "rgba(30,40,57,.6)" }} title="CSS (JSS) Стили">
       <SettingsPanel
         {...{
-          ...props,
+          // ...props,
+          tagStyle,
           updateStyleName,
           updateStyleData,
           assignStyleId,
@@ -99,14 +108,14 @@ function StylePanel(props) {
       <PropertiesPanel
         {...{
           // ...props,
-          panelStyle,
+          panelStyle:tagStyle.data,
           tag,
           updateStyleData,
           name: "Style",
           draggedProp,
           setDraggedProp,
           allStyleProps: () => getDefaultStyleProps(tag.id),
-          previewBase: panelStyle,
+          previewBase: tagStyle.data,
         }}
       />
     </div>

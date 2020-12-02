@@ -23,7 +23,7 @@ function AttributesPanel(props) {
 
   // const tag = page.tags.find(({ id }) => id === clickedId);
   // console.log("tag.type", tag.type);
-  const tagStyle = page.styles.find(({ id }) => id === tag.styleId);
+  // const tagStyle = page.styles.find(({ id }) => id === tag.styleId);
 
   // console.log("tagStyle :>> ", tagStyle);
   // console.log("assigStyleId", assignStyleId);
@@ -65,8 +65,8 @@ function AttributesPanel(props) {
 
   return (
     <div>
-      {" "}
-      {tagStyle && (
+      
+      {/* {tagStyle && ( */}
         <div className={classes.style}>
           <BackSettings {...props} />
           <div style={{ cursor: "default", display: "flex" }}>
@@ -119,20 +119,20 @@ function AttributesPanel(props) {
           >
             <StylePanel
               {...{
-                tagStyle,
-                panelStyle: tagStyle.data,
-                assignStyleId,
-                setSettings,
-                updateTag,
-                tag,
-                page,
-                setPage,
+                // tagStyle,
+                // panelStyle: tagStyle.data,
+                // assignStyleId,
+                // setSettings,
+                // updateTag,
+                // tag,
+                // page,
+                // setPage,
               }}
             />
           </Link>
           <div style={{ paddingBottom: "4em" }} />
         </div>
-      )}
+      {/* )} */}
     </div>
   );
 }

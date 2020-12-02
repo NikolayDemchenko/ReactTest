@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useContext} from "react";
 import Icon from "react-icons-kit";
 import { buttonStyle } from "./BtnStyle";
 import { copy } from "react-icons-kit/icomoon/copy";
@@ -13,6 +13,7 @@ import { boxRemove } from "react-icons-kit/icomoon/boxRemove";
 import SelectPanel from "../../ModalWindows/SelectPanel/SelectPanel";
 import Styles from "../JSON/Styles.json";
 import PopupInput from "../Inputs/PopupInput/PopupInput";
+import { Context } from "../../../../AppFunction";
 function SettingsPanel(props) {
   // console.log("props :>> ", props);
   const {
@@ -20,15 +21,22 @@ function SettingsPanel(props) {
     updateStyleName,
     panelStyle,   
     selected,
-    tag,
-    assignStyleId,
-    setSettings,
+    // tag,
+    // assignStyleId,
+    // setSettings,
     updateStyleData,
     tagStyle,
-    updateTag,
-    page,
+    // updateTag,
+    // page,
   } = props;
 
+  const {
+    page,
+    // setPage,
+    updateTag,
+    setSettings,
+    settings: { tag, assignStyleId },
+  } = useContext(Context);
   // console.log("props", props);
   // console.log("Styles", Styles);
 // const [assignStyleId, setAssignStyleId] = useState()
