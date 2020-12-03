@@ -2,7 +2,7 @@ import React from "react";
 import Tags from "./Tags";
 import log from "../../../../Log";
 function Tag(props) {
-  const { tag, className, onClick } = props;
+  const { tag, onClick } = props;
 
   const click = (e) => {
     // console.log('tag :>> ', tag);
@@ -12,7 +12,7 @@ function Tag(props) {
   };
 
   return (
-    <tag.type id={tag.id} className={className} onClick={click}>
+    <tag.type id={tag.id} className={tag.className} onClick={click}>
       {tag.childrens && tag.childrens.length > 0 ? (
         <Tags {...props} tagTree={tag.childrens} />
       ) : null}

@@ -1,9 +1,11 @@
-import React from "react";
+import React,{useContext} from "react";
 import NavPage from "./NavPage";
-function NavPages(props) {
-  const pageList = props.settings&&props.settings.pageList ? props.settings.pageList : [];
+import { Context } from "../../../../AppFunction";
+function NavPages() {
+  const { settings } = useContext(Context);
+  const pageList = settings&&settings.pageList ? settings.pageList : [];
   return pageList.map((page, index) => {
-    return <NavPage {...props} key={index} page={page} />;
+    return <NavPage  key={index} page={page} />;
   });
 }
 export default NavPages;

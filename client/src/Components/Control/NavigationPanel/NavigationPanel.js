@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import NavTags from "./Tags/NavTags";
+import React, { useState, useContext } from "react";
+import { TagList } from "./Tags/TagList";
 import AppList from "./Apps/AppList";
 import PageList from "./Pages/PageList";
 import ModalInput from "../ModalWindows/ModalInput/ModalInput";
@@ -7,10 +7,13 @@ import CreateAppForm from "../ModalWindows/ModalInput/CreateAppForm";
 import jss from "jss";
 import preset from "jss-preset-default";
 import SavePage from "./Pages/SavePage";
+import { Context } from "../../../AppFunction";
+
 function NavigationPanel(props) {
-  const {
+  const {page,
     pageManager: { createApp, createPage, updatePage },
-  } = props;
+  } = useContext(Context);
+
   // console.log('props', props)
   const style = {
     // flexWrap: "wrap",
@@ -61,7 +64,7 @@ function NavigationPanel(props) {
         Navigation
       </div>
 
-      <SavePage savePage={updatePage} title={"Save"} pageId={props.pageId} />
+      <SavePage savePage={updatePage} title={"Save"} pageId={page._id} />
       <ModalInput setItem={createPage}>
         <div
           style={{
@@ -88,9 +91,9 @@ function NavigationPanel(props) {
       </CreateAppForm>
       {showPanel && (
         <div className={classes.style}>
-          <AppList {...props} />
-          <PageList {...props} />
-          <NavTags {...props} />
+          <AppList />
+          <PageList />
+          <TagList />
         </div>
       )}
     </div>

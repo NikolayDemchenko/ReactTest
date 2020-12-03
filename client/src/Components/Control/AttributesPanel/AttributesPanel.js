@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext } from "react";
 import StylePanel from "./StylePanel/StylePanel";
 import { Link } from "react-scroll";
 import log from "../../../Log";
@@ -7,6 +7,8 @@ import preset from "jss-preset-default";
 import SelectPanel from "../ModalWindows/SelectPanel/SelectPanel";
 import { htmlTags } from "../../Class/HtmlCss";
 import BackSettings from "./BackSettings";
+import { Context } from "../../../AppFunction";
+
 function AttributesPanel(props) {
   //    console.log(
   //     "%cVerticalPanel-App",
@@ -15,31 +17,8 @@ function AttributesPanel(props) {
 
   const {
     updateTag,
-    setSettings,
-    settings: { tag, assignStyleId },
-    page,
-    setPage,
-  } = props;
-
-  // const tag = page.tags.find(({ id }) => id === clickedId);
-  // console.log("tag.type", tag.type);
-  // const tagStyle = page.styles.find(({ id }) => id === tag.styleId);
-
-  // console.log("tagStyle :>> ", tagStyle);
-  // console.log("assigStyleId", assignStyleId);
-
-  // useEffect(() => {
-  //   console.log("useEffect in");
-  //   assignStyleId &&
-  //     assignStyleId !== tag.styleId &&
-  //     updateTag(tag.id, "styleId", assignStyleId);
-  //   return () => {
-  //     console.log("useEffect out");
-
-  //     // console.log("window.location.reload()");
-  //     // window.location.reload()
-  //   };
-  // }, [tag]);
+    settings: { tag },
+  } = useContext(Context); 
 
   const style = {
     flexWrap: "wrap",
@@ -64,51 +43,10 @@ function AttributesPanel(props) {
     .attach();
 
   return (
-    <div>
-      
-      {/* {tagStyle && ( */}
-        <div className={classes.style}>
-          <BackSettings {...props} />
-          <div style={{ cursor: "default", display: "flex" }}>
-            <Link
-              activeClass="active"
-              to={tag.id}
-              spy={true}
-              smooth={true}
-              offset={-70}
-              duration={500}
-            >
-              <div
-                title={tag.id}
-                style={{
-                  display: "inline-flex",
-                  height: "1.5em",
-                  padding: "0px 0.5em",
-                  overflow: "hidden",
-                }}
-              >
-                tag.id: {tag.id}
-              </div>
-            </Link>
-            <div
-              style={{
-                padding: "0px 0.5em",
-              }}
-            >
-              type:
-            </div>
-            <SelectPanel
-              selected={tag.type}
-              items={htmlTags}
-              setItem={(type) => updateTag(tag.id, "type", type)}
-            />
-            <div
-              style={{
-                display: "flex",
-                marginLeft: "auto",
-              }}
-            ></div>
-          </div>
+    <div>    
+      <div className={classes.style}>
+        <BackSettings {...props} />
+        <div style={{ cursor: "default", display: "flex" }}>
           <Link
             activeClass="active"
             to={tag.id}
@@ -117,8 +55,48 @@ function AttributesPanel(props) {
             offset={-70}
             duration={500}
           >
-            <StylePanel
-              {...{
+            <div
+              title={tag.id}
+              style={{
+                display: "inline-flex",
+                height: "1.5em",
+                padding: "0px 0.5em",
+                overflow: "hidden",
+              }}
+            >
+              tag.id: {tag.id}
+            </div>
+          </Link>
+          <div
+            style={{
+              padding: "0px 0.5em",
+            }}
+          >
+            type:
+          </div>
+          <SelectPanel
+            selected={tag.type}
+            items={htmlTags}
+            setItem={(type) => updateTag(tag.id, "type", type)}
+          />
+          <div
+            style={{
+              display: "flex",
+              marginLeft: "auto",
+            }}
+          ></div>
+        </div>
+        <Link
+          activeClass="active"
+          to={tag.id}
+          spy={true}
+          smooth={true}
+          offset={-70}
+          duration={500}
+        >
+          <StylePanel
+            {
+              ...{
                 // tagStyle,
                 // panelStyle: tagStyle.data,
                 // assignStyleId,
@@ -127,12 +105,12 @@ function AttributesPanel(props) {
                 // tag,
                 // page,
                 // setPage,
-              }}
-            />
-          </Link>
-          <div style={{ paddingBottom: "4em" }} />
-        </div>
-      {/* )} */}
+              }
+            }
+          />
+        </Link>
+        <div style={{ paddingBottom: "4em" }} />
+      </div>
     </div>
   );
 }

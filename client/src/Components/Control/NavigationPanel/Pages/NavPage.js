@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { ic_keyboard_arrow_right } from "react-icons-kit/md/ic_keyboard_arrow_right";
 import Icon from "react-icons-kit";
 import axios from "axios";
+import { Context } from "../../../../AppFunction";
 
 // import CRUDTag from "./CRUD/Tag/CRUDTag";
 
-function NavPage(props) {
-  const { page, setPage, createTag } = props;
-  // console.log("props", props);
+function NavPage() {
+  const { page, setPage, createTag } = useContext(Context);
 
   const getPageById = (_id) => {
     axios({
@@ -18,15 +18,13 @@ function NavPage(props) {
       },
     })
       .then((response) => {
-        console.log("response.data!", response.data);        
-       setPage(response.data);
+        console.log("response.data!", response.data);
+        setPage(response.data);
       })
       .catch(function (error) {
         console.log(error);
       });
   };
-
-
 
   const [showChilds, setshowChilds] = useState(false);
   const _icon = <Icon size={"100%"} icon={ic_keyboard_arrow_right} />;
@@ -63,7 +61,7 @@ function NavPage(props) {
       <div
         onClick={(e) => {
           e.preventDefault();
-          getPageById(page._id)
+          getPageById(page._id);
           // console.log("id :>> ", id);
         }}
         style={{

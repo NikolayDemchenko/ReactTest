@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import axios from "axios";
-function AppList(props) {
-  // const [appList, setAppList] = useState([]);
+import { Context } from "../../../../AppFunction";
 
-  const appList =
-    props.settings && props.settings.appList ? props.settings.appList : [];
+function AppList() {
+  // const [appList, setAppList] = useState([]);
+  const { settings, setSettings, setPage } = useContext(Context);
+
+  const appList = settings && settings.appList ? settings.appList : [];
 
   const setAppList = (appList) => {
-    props.setSettings((settings) => ({ ...settings, appList }));
+    setSettings((settings) => ({ ...settings, appList }));
   };
   const setPageList = (pageList) => {
-    props.setSettings((settings) => ({ ...settings, pageList }));
+    setSettings((settings) => ({ ...settings, pageList }));
   };
 
   const getApps = (set) => {
@@ -37,7 +39,7 @@ function AppList(props) {
       .then((response) => {
         console.log("response.data!", response.data);
         setPageList(response.data.pages);
-        props.setPage(response.data.startPage);
+        setPage(response.data.startPage);
       })
       .catch(function (error) {
         console.log(error);

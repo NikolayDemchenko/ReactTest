@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { ic_keyboard_arrow_right } from "react-icons-kit/md/ic_keyboard_arrow_right";
 import Icon from "react-icons-kit";
 import { Link } from "react-scroll";
-import NavTags from "./NavTags";
+import { NavTags } from "./TagList";
 import CRUDTag from "./CRUDTag";
+import { Context } from "../../../../AppFunction";
 
 function NavTag(props) {
-  const { tag, createTag, removeTag, selectedId } = props;
+  const {createTag, removeTag, settings } = useContext(Context);
+  const { tag } = props;
 
   const { type, childrens, id, index } = tag;
   const [showChilds, setshowChilds] = useState(false);
@@ -37,7 +39,7 @@ function NavTag(props) {
   let background = "rgba(30,40,57,.8)";
   let showButtons = false;
   // let showButtons = true;
-  if (selectedId && id === selectedId) {
+  if (settings && settings.tag && id === settings.tag.id) {
     background = "rgba(30,60,97,1)";
     showButtons = true;
   }
@@ -54,7 +56,7 @@ function NavTag(props) {
       >
         <div
           onClick={(e) => {
-            e.preventDefault();         
+            e.preventDefault();
             console.log("id :>> ", id);
             document.getElementById(id).click();
           }}
@@ -83,7 +85,7 @@ function NavTag(props) {
 
       <div style={{ marginLeft: "30px" }}>
         {childrens && showChilds && (
-          <NavTags {...props} tagTree={childrens} index={id} />
+          <NavTags  tagTree={childrens} index={id} />
         )}
       </div>
     </div>
