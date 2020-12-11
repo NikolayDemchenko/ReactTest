@@ -1,7 +1,7 @@
 import shortid from "shortid";
 import jss from "jss";
 import preset from "jss-preset-default";
-import { createStyle } from "../../AppFunction";
+import { createVariable,createUniqueName } from "../../AppFunction";
 
 const getTree = (classes, tags = [], _parentId) => {
   return tags.filter((tag) => {
@@ -28,24 +28,24 @@ export const TagCRUD = (page, setPage, setSettings) => {
 
   return {
     getTagTree: (tags, pId) => getTree(classes, tags, pId),
-    createTag: (type, parent) => {
-
-      const newStyle = createStyle({}, "name");
-
-      setPage((page) => ({
-        ...page,
-        tags: [
-          ...page.tags,
-          {
-            id: shortid.generate(),
-            parentId: parent.id,
-            type,
-            index: (parent.childrens && parent.childrens.length) || 0,
-            styleId: newStyle.id,
-          },
-        ],
-        styles: [...page.styles, newStyle],
-      }));
+    createTag: (type, parent) => {      
+      setPage((page) => {
+        const newStyle = createVariable({}, createUniqueName("new_style",page.styles.map(({name})=>name)));        
+        return {
+          ...page,
+          tags: [
+            ...page.tags,
+            {
+              id: shortid.generate(),
+              parentId: parent.id,
+              type,
+              index: (parent.childrens && parent.childrens.length) || 0,
+              styleId: newStyle.id,
+            },
+          ],
+          styles: [...page.styles, newStyle],
+        };
+      });
     },
     removeTag: (tagId) => {
       setSettings();

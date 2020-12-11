@@ -1,5 +1,5 @@
 import shortid from "shortid";
-import { createStyle } from "../../../AppFunction";
+import { createVariable } from "../../../AppFunction";
 
 const app = {
   pageIds: ["1", "2", "3", "4", "5"],
@@ -20,7 +20,7 @@ const newStyle = {
     boxShadow: "none",
   },
 };
-const newTagStyle = createStyle(newStyle, "newStyle");
+const newTagStyle = createVariable(newStyle, "newStyle");
 
 const innerStyle = {
   height: "200px",
@@ -39,7 +39,7 @@ const innerStyle = {
   },
 };
 
-const childTagStyle = createStyle(innerStyle, "innerStyle");
+const childTagStyle = createVariable(innerStyle, "innerStyle");
 
 const baseStyle = {
   display: "flex",
@@ -76,7 +76,7 @@ const baseStyle = {
   },
 };
 
-const rootTagStyle = createStyle(baseStyle, "baseStyle");
+const rootTagStyle = createVariable(baseStyle, "baseStyle");
 
 const rootTagGenerator = (parentId, index, type, styleId) => ({
   index,
@@ -120,4 +120,4 @@ const childGenerator = (amount, tag, childStyle) => {
 childGenerator(200, rootTag_1, childTagStyle);
 // childGenerator(200, rootTag_2, childTagStyle);
 
-export { page, createStyle };
+export { page, createVariable };

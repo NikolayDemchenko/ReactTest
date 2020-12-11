@@ -1,9 +1,19 @@
 import { SaveToJSON } from "./Function/ServiceFunction/Save";
-import { createStyle } from "./Function/ServiceFunction/StyleManager";
-import { TagCRUD } from "./Function/ServiceFunction/TagCRUD";
+import {
+  createVariable,
+  createUniqueName,
+} from "./Function/ServiceFunction/DataFunction";
+import { TagCRUD } from "./Function/ServiceFunction/TagFunctions";
 import { GetPageManager } from "./Function/ServiceFunction/PageManager";
 import React from "react";
 
 const Context = React.createContext();
 
-export { SaveToJSON, createStyle, TagCRUD, GetPageManager, Context };
+export {
+  SaveToJSON,
+  createVariable,
+  createUniqueName,
+  TagCRUD,
+  GetPageManager,
+  Context,
+};

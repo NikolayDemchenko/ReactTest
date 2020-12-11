@@ -30,14 +30,28 @@ function NavPage({ page }) {
       });
   };
 
-  const [showChilds, setshowChilds] = useState(false);
-  const _icon = <Icon size={"100%"} icon={ic_keyboard_arrow_right} />;
+  const removePageById = (_id) => {
+    console.log("removePageById");
+    
+    axios({
+      method: "post",
+      url: "http://localhost:8000/removePageById",
+      params: {
+        _id,
+      },
+    }).catch(function (error) {
+      console.log(error);
+    });
+  };
 
-  const icon = !showChilds ? (
-    <div>{_icon}</div>
-  ) : (
-    <div style={{ transform: "rotate(90deg)" }}>{_icon}</div>
-  );
+  // const [showChilds, setshowChilds] = useState(false);
+  // const _icon = <Icon size={"100%"} icon={ic_keyboard_arrow_right} />;
+
+  // const icon = !showChilds ? (
+  //   <div>{_icon}</div>
+  // ) : (
+  //   <div style={{ transform: "rotate(90deg)" }}>{_icon}</div>
+  // );
   // console.log('childrens', childrens)
   // const toggle =
   //   childrens.length > 0 ? (
@@ -65,7 +79,7 @@ function NavPage({ page }) {
       onClick={(e) => {
         console.log("onClick");
         e.preventDefault();
-        context.page._id !== page._id&&getPageById(page._id);
+        context.page._id !== page._id && getPageById(page._id);
         // console.log("id :>> ", id);
       }}
       style={{
@@ -85,7 +99,7 @@ function NavPage({ page }) {
             margin: "0 4px 4px auto",
           }}
         >
-          <CRUDTag {...{ createTag, removeTag }} />
+          <CRUDTag {...{ createTag, removeTag: removePageById }} />
         </div>
       )}
     </div>

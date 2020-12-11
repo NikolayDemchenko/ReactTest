@@ -3,7 +3,7 @@ import React, { useState, useContext } from "react";
 import log from "../../../../Log";
 import PropertiesPanel from "./PropertiesPanel";
 import SettingsPanel from "./SettingsPanel";
-import { createStyle, Context } from "../../../../AppFunction";
+import {createUniqueName, createVariable, Context } from "../../../../AppFunction";
 
 function StylePanel(props) {
   // console.log("%cStylePanel-VerticalPanel-App", "color: green");
@@ -15,7 +15,7 @@ function StylePanel(props) {
     settings: { tag, assignStyleId },
   } = useContext(Context);
   const tagStyle = page.styles.find(({ id }) => id === tag.styleId);
-  
+
   // const {panelStyle } = props;
 
   // console.log('tag', tag.styleId)
@@ -25,16 +25,8 @@ function StylePanel(props) {
     setPage((page) => {
       const names = page.styles.map((style) => style.name);
       // let name = "Новый";
-      names.forEach((element) => {
-        if (element === name) {
-          const namestr = name.replace(/\d/gi, "");
-          const num = name.replace(/\D/gi, "");
-          const namenum = Number(num) + 1;
-          name = namestr + namenum;
-        }
-      });
 
-      const newStyle = createStyle(data, name);
+      const newStyle = createVariable(data, createUniqueName(name, names));
       const changedTag = { ...tag, styleId: newStyle.id };
       setSettings((settings) => ({ ...settings, tag: changedTag }));
       return {
@@ -108,7 +100,7 @@ function StylePanel(props) {
       <PropertiesPanel
         {...{
           // ...props,
-          panelStyle:tagStyle.data,
+          panelStyle: tagStyle.data,
           tag,
           updateStyleData,
           name: "Style",
