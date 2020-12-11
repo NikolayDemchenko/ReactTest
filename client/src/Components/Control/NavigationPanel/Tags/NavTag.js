@@ -77,7 +77,7 @@ function NavTag(props) {
                 margin: "0 4px 4px auto",
               }}
             >
-              <CRUDTag {...{ tag, createTag, removeTag }} />
+              <CRUDTag {...{ tag, createTag, removeTag:()=>removeTag(tag.id) }} />
             </div>
           )}
         </div>

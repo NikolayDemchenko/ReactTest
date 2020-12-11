@@ -30,14 +30,14 @@ function NavPage({ page }) {
       });
   };
 
-  const removePageById = (_id) => {
+  const removePageById = () => {
     console.log("removePageById");
     
     axios({
       method: "post",
       url: "http://localhost:8000/removePageById",
       params: {
-        _id,
+        _id:page._id,
       },
     }).catch(function (error) {
       console.log(error);

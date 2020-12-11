@@ -36,7 +36,7 @@ function CRUDTag({ tag = { id: null, type: "div" }, createTag, removeTag }) {
       <div
         onClick={(e) => {
           e.stopPropagation();
-          removeTag(tag.id);
+          removeTag();
         }}
         style={{ margin: "0 0.2em", cursor: "pointer", width: "0.8em" }}
       >

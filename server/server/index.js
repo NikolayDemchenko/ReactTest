@@ -106,11 +106,12 @@ app.post("/updatePage", (req, res) => {
   });
 });
 app.post("/removePageById", (req, res) => {
-  console.log("removePageById!!!!");
   const _id = req.query._id;
+  console.log("removePageById!!!!",_id);
   const pages = req.app.locals.pages;
+
   pages
-    .deleteOne({ _id: new ObjectId(_id) })    
+    .deleteOne({_id: new ObjectId(_id) })    
     .then(() => {
       res.status(200);
     })
