@@ -21,13 +21,9 @@ function SettingsPanel(props) {
     updateStyleName,
     panelStyle,   
     selected,
-    // tag,
-    // assignStyleId,
-    // setSettings,
     updateStyleData,
     tagStyle,
-    // updateTag,
-    // page,
+
   } = props;
 
   const {
@@ -39,11 +35,6 @@ function SettingsPanel(props) {
   } = useContext(Context);
   // console.log("props", props);
   // console.log("Styles", Styles);
-// const [assignStyleId, setAssignStyleId] = useState()
-
-// assignStyleId &&
-// assignStyleId !== tag.styleId &&
-// updateTag(tag.id, "styleId", assignStyleId);
 
 // console.log('assignStyleId :>> ', assignStyleId);
   const setLibrStyleByName = (name) => {

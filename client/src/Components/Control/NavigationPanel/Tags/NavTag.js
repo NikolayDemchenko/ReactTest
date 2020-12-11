@@ -39,7 +39,7 @@ function NavTag(props) {
   let background = "rgba(30,40,57,.8)";
   let showButtons = false;
   // let showButtons = true;
-  if (settings && settings.tag && id === settings.tag.id) {
+  if (settings && settings.tag && settings.tag.id === id) {
     background = "rgba(30,60,97,1)";
     showButtons = true;
   }

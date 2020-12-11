@@ -11,17 +11,18 @@ function AppList() {
   const setAppList = (appList) => {
     setSettings((settings) => ({ ...settings, appList }));
   };
-  const setPageList = (pageList) => {
-    setSettings((settings) => ({ ...settings, pageList }));
+  const setPageList = (appName, pageList) => {
+    setSettings((settings) => ({ ...settings, pageList, appName }));
   };
 
   const getApps = (set) => {
+    console.log("getApps");
     axios({
       method: "get",
       url: "http://localhost:8000/getApps",
     })
       .then((response) => {
-        console.log("response.data!", response.data);
+        // console.log("response.data!", response.data);
         set(response.data);
       })
       .catch(function (error) {
@@ -29,6 +30,7 @@ function AppList() {
       });
   };
   const getPagesByAppName = (appName) => {
+    console.log("getPagesByAppName")
     axios({
       method: "get",
       url: "http://localhost:8000/getPagesByAppName",
@@ -37,8 +39,8 @@ function AppList() {
       },
     })
       .then((response) => {
-        console.log("response.data!", response.data);
-        setPageList(response.data.pages);
+        // console.log("response.data!", response.data);
+        setPageList(appName, response.data.pages);
         setPage(response.data.startPage);
       })
       .catch(function (error) {
@@ -48,12 +50,34 @@ function AppList() {
 
   useEffect(() => {
     getApps(setAppList);
+
     return () => {};
   }, []);
 
   return appList.map((app, index) => {
+    let background = "rgba(30,40,57,.8)";
+    let showButtons = false;
+    // console.log(
+    //   "settings.pageList[0]",
+    //   settings.pageList && settings.pageList[0],
+    //   app
+    // );
+    if (settings.appName && settings.appName === app) {
+      background = "rgba(30,60,97,1)";
+      showButtons = true;
+    }
     return (
-      <div key={index} onClick={() => getPagesByAppName(app)}>
+      <div
+        style={{
+          display: "flex",
+          borderBottom: "2px solid #55667766",
+          background,
+          cursor: "default",
+          // outline: "1px solid white",
+        }}
+        key={index}
+        onClick={() => getPagesByAppName(app)}
+      >
         {app}
       </div>
     );

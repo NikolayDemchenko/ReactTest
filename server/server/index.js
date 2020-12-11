@@ -37,7 +37,7 @@ router.get("/getPageById", (req, res) => {
       // console.log("response", response[0]);
       res.status(200).json(response[0]);
     })
-    .catch((error) => console.error(error));
+    .catch((error) => console.error(error) );
 });
 router.get("/getApps", (req, res) => {
   const pages = req.app.locals.pages;

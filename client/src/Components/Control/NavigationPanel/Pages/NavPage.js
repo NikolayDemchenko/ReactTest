@@ -3,13 +3,17 @@ import { ic_keyboard_arrow_right } from "react-icons-kit/md/ic_keyboard_arrow_ri
 import Icon from "react-icons-kit";
 import axios from "axios";
 import { Context } from "../../../../AppFunction";
+import CRUDTag from "../Tags/CRUDTag";
 
-// import CRUDTag from "./CRUD/Tag/CRUDTag";
+function NavPage({ page }) {
+  const context = useContext(Context);
+  const { setPage, createTag, removeTag } = context;
 
-function NavPage() {
-  const { page, setPage, createTag } = useContext(Context);
+  // console.log("context.page", context.page);
+  // console.log("page", page);
 
   const getPageById = (_id) => {
+    console.log("getPageById");
     axios({
       method: "get",
       url: "http://localhost:8000/getPageById",
@@ -18,7 +22,7 @@ function NavPage() {
       },
     })
       .then((response) => {
-        console.log("response.data!", response.data);
+        // console.log("response.data!", response.data);
         setPage(response.data);
       })
       .catch(function (error) {
@@ -50,46 +54,40 @@ function NavPage() {
 
   let background = "rgba(30,40,57,.8)";
   let showButtons = false;
-  // let showButtons = true;
-  // if (selectedId && id === selectedId) {
-  //   background = "rgba(30,60,97,1)";
-  //   showButtons = true;
-  // }
+
+  if (context.page && context.page._id === page._id) {
+    background = "rgba(30,60,97,1)";
+    showButtons = true;
+  }
 
   return (
-    <div>
-      <div
-        onClick={(e) => {
-          e.preventDefault();
-          getPageById(page._id);
-          // console.log("id :>> ", id);
-        }}
-        style={{
-          display: "flex",
-          borderBottom: "2px solid #55667766",
-          background,
-          cursor: "default",
-          // outline: "1px solid white",
-        }}
-      >
-        {/* {toggle} */}
-        {page.name}
-        {showButtons && (
-          <div
-            style={{
-              //  outline: "1px solid white",
-              margin: "0 4px 4px auto",
-            }}
-          >
-            {/* <CRUDTag {...{ tag, createTag, removeTag }} /> */}
-          </div>
-        )}
-      </div>
-      <div style={{ marginLeft: "30px" }}>
-        {/* {childrens && showChilds && (
-          <NavTags {...props} tagTree={childrens} index={id} />
-        )} */}
-      </div>
+    <div
+      onClick={(e) => {
+        console.log("onClick");
+        e.preventDefault();
+        context.page._id !== page._id&&getPageById(page._id);
+        // console.log("id :>> ", id);
+      }}
+      style={{
+        display: "flex",
+        borderBottom: "2px solid #55667766",
+        background,
+        cursor: "default",
+        // outline: "1px solid white",
+      }}
+    >
+      {/* {toggle} */}
+      {page.name}
+      {showButtons && (
+        <div
+          style={{
+            //  outline: "1px solid white",
+            margin: "0 4px 4px auto",
+          }}
+        >
+          <CRUDTag {...{ createTag, removeTag }} />
+        </div>
+      )}
     </div>
   );
 }

@@ -1,10 +1,11 @@
 import shortid from "shortid";
 import jss from "jss";
 import preset from "jss-preset-default";
+import { createStyle } from "../../AppFunction";
 
 const getTree = (classes, tags = [], _parentId) => {
   return tags.filter((tag) => {
-    tag.className = classes[tag.styleId]
+    tag.className = classes[tag.styleId];
     // console.log("getTagStructure");
     if (tag.parentId === _parentId) {
       tag.childrens = getTree(
@@ -28,6 +29,9 @@ export const TagCRUD = (page, setPage, setSettings) => {
   return {
     getTagTree: (tags, pId) => getTree(classes, tags, pId),
     createTag: (type, parent) => {
+
+      const newStyle = createStyle({}, "name");
+
       setPage((page) => ({
         ...page,
         tags: [
@@ -36,10 +40,11 @@ export const TagCRUD = (page, setPage, setSettings) => {
             id: shortid.generate(),
             parentId: parent.id,
             type,
-            index: parent.childrens.length,
-            styleId: page.styles.find((style) => style.name === "newStyle").id,
+            index: (parent.childrens && parent.childrens.length) || 0,
+            styleId: newStyle.id,
           },
         ],
+        styles: [...page.styles, newStyle],
       }));
     },
     removeTag: (tagId) => {
