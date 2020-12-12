@@ -10,7 +10,8 @@ import SavePage from "./Pages/SavePage";
 import { Context } from "../../../AppFunction";
 
 function NavigationPanel(props) {
-  const {page,
+  const {
+    page,
     pageManager: { createApp, createPage, updatePage },
   } = useContext(Context);
 
@@ -26,7 +27,7 @@ function NavigationPanel(props) {
     top: "20px",
     left: 0,
     zIndex: 999,
-    // backgroundColor: "#456",
+    backgroundColor: "#456",
     color: "rgba(140, 200, 255, 0.8)",
     boxShadow: "2px 10px 5px 2px #00000055",
     "&::-webkit-scrollbar": { width: "20px" },
@@ -91,8 +92,11 @@ function NavigationPanel(props) {
       </CreateAppForm>
       {showPanel && (
         <div className={classes.style}>
+          {"Application"}
           <AppList />
+          {"Pages"}
           <PageList />
+          {"Tags"}
           <TagList />
         </div>
       )}

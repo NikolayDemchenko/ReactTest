@@ -18,7 +18,7 @@ function AttributesPanel(props) {
   const {
     updateTag,
     settings: { tag },
-  } = useContext(Context); 
+  } = useContext(Context);
 
   const style = {
     flexWrap: "wrap",
@@ -43,7 +43,7 @@ function AttributesPanel(props) {
     .attach();
 
   return (
-    <div>    
+    <div>
       <div className={classes.style}>
         <BackSettings {...props} />
         <div style={{ cursor: "default", display: "flex" }}>
@@ -94,20 +94,7 @@ function AttributesPanel(props) {
           offset={-70}
           duration={500}
         >
-          <StylePanel
-            {
-              ...{
-                // tagStyle,
-                // panelStyle: tagStyle.data,
-                // assignStyleId,
-                // setSettings,
-                // updateTag,
-                // tag,
-                // page,
-                // setPage,
-              }
-            }
-          />
+          <StylePanel />
         </Link>
         <div style={{ paddingBottom: "4em" }} />
       </div>

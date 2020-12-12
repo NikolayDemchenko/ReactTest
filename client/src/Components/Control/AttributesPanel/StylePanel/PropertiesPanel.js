@@ -50,7 +50,7 @@ function PropertiesPanel(props) {
     console.log("add property", key, value);
     updateStyleData({ [key]: value, ...panelStyle });
   };
-
+  // console.log("panelStyle", panelStyle);
   return (
     <div
       style={{
@@ -137,7 +137,7 @@ function PropertiesPanel(props) {
         <EditPanel {...{ panelStyle, updateStyleData, styleId: tag.styleId }} />
       )}
       <Properties
-        {...props}    
+        {...props}
         parentName={name}
         previewBase={{ ...previewBase, ...panelStyle }}
       />

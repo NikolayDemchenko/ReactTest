@@ -18,8 +18,7 @@ function SettingsPanel(props) {
   // console.log("props :>> ", props);
   const {
     addStyle,
-    updateStyleName,
-    panelStyle,   
+    updateStyleName,   
     selected,
     updateStyleData,
     tagStyle,
@@ -91,8 +90,8 @@ function SettingsPanel(props) {
             className={buttonStyle}
             onClick={(e) => {
               e.stopPropagation();
-              console.log("Новый стиль!");
-              addStyle(panelStyle,"new_style",tag);
+              console.log("Новый стиль!",tagStyle.data);
+              addStyle(tagStyle.data,"new_style",tag);
             }}
           >
             <Icon size={"100%"} icon={copy} />
@@ -157,7 +156,7 @@ function SettingsPanel(props) {
           onClick={(e) => {
             e.stopPropagation();
             window.navigator.clipboard.writeText(
-              JSON.stringify({ name: "", panelStyle })
+              JSON.stringify({ name: "", panelStyle:tagStyle.data })
             );
           }}
         >
@@ -170,7 +169,7 @@ function SettingsPanel(props) {
           // Сохранение файлов
           onClick={(e) => {
             e.stopPropagation();
-            SaveToJSON(panelStyle);
+            SaveToJSON(tagStyle.data);
           }}
         >
           <Icon size={"100%"} icon={exportIcon} />
