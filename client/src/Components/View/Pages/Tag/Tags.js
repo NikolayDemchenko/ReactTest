@@ -1,5 +1,5 @@
 import React from "react";
-import log from "../../../../Log";
+import {log,funcLog} from "../../../../Log";
 import Tag from "./Tag";
 // import HocTag from "./HocTag";
 function Tags(props) {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import log from "../../../../Log";
+import {log,funcLog} from "../../../../Log";
 import Icon from "react-icons-kit";
 import { cross } from "react-icons-kit/icomoon/cross";
 import PopupInput from "../Inputs/PopupInput/PopupInput";

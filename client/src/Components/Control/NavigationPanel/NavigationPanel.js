@@ -12,7 +12,7 @@ import { Context } from "../../../AppFunction";
 function NavigationPanel(props) {
   const {
     page,
-    pageManager: { createApp, createPage, updatePage },
+    RESTManager: { createApp, saveAsPage, updatePage },
   } = useContext(Context);
 
   // console.log('props', props)
@@ -66,7 +66,7 @@ function NavigationPanel(props) {
       </div>
 
       <SavePage savePage={updatePage} title={"Save"} pageId={page._id} />
-      <ModalInput setItem={createPage}>
+      <ModalInput setItem={saveAsPage}>
         <div
           style={{
             backgroundColor: "#456c",

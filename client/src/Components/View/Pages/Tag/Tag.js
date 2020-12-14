@@ -1,6 +1,6 @@
 import React from "react";
 import Tags from "./Tags";
-import log from "../../../../Log";
+import {log,funcLog} from "../../../../Log";
 function Tag(props) {
   const { tag, onClick } = props;
 

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import StylePanel from "./StylePanel/StylePanel";
 import { Link } from "react-scroll";
-import log from "../../../Log";
+import {log,funcLog} from "../../../Log";
 import jss from "jss";
 import preset from "jss-preset-default";
 import SelectPanel from "../ModalWindows/SelectPanel/SelectPanel";
@@ -102,9 +102,9 @@ function AttributesPanel(props) {
   );
 }
 
-function areEqual(prevProps, nextProps) {
-  return prevProps === nextProps;
-}
+// function areEqual(prevProps, nextProps) {
+//   return prevProps === nextProps;
+// }
 
 export default log(AttributesPanel);
 // export default React.memo(log(AttributesPanel));

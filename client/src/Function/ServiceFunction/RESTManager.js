@@ -1,6 +1,5 @@
 import axios from "axios";
-export const GetPageManager = (page, setPage) => ({
-  
+export const GetRESTManager = (page, setPage, setSettings) => ({
   getPages: () => {
     axios({
       method: "get",
@@ -14,12 +13,33 @@ export const GetPageManager = (page, setPage) => ({
         console.log(error);
       });
   },
-
-  createPage: (name) => {
+  getPagesByAppName: (appName) => {
+    console.log("getPagesByAppName");
+    axios({
+      method: "get",
+      url: "http://localhost:8000/getPagesByAppName",
+      params: {
+        appName,
+      },
+    })
+      .then((response) => {
+        setSettings((settings) => ({
+          ...settings,
+          pageList: response.data.pages,
+          appName,
+        }));
+        setPage(response.data.startPage);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  },
+  saveAsPage: (name) => {
+    console.log("saveAsPage");
     name && name !== ""
       ? axios({
           method: "post",
-          url: "http://localhost:8000/createPage",
+          url: "http://localhost:8000/saveAsPage",
           data: { page: JSON.stringify({ ...page, name }) },
         })
           .then((response) => {
@@ -40,7 +60,7 @@ export const GetPageManager = (page, setPage) => ({
     })
       .then((response) => {
         console.log("response.data!", response.data);
-        setPage({...response.data});
+        setPage({ ...response.data });
       })
       .catch(function (error) {
         console.log(error);

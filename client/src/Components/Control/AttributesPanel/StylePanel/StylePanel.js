@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 // import jss from "jss";
-import log from "../../../../Log";
+import {log,funcLog} from "../../../../Log";
 import PropertiesPanel from "./PropertiesPanel";
 import SettingsPanel from "./SettingsPanel";
 import {

@@ -4,7 +4,7 @@ import {
   createUniqueName,
 } from "./Function/ServiceFunction/DataFunction";
 import { TagCRUD } from "./Function/ServiceFunction/TagFunctions";
-import { GetPageManager } from "./Function/ServiceFunction/PageManager";
+import { GetRESTManager } from "./Function/ServiceFunction/RESTManager";
 import React from "react";
 
 const Context = React.createContext();
@@ -14,6 +14,6 @@ export {
   createVariable,
   createUniqueName,
   TagCRUD,
-  GetPageManager,
+  GetRESTManager,
   Context,
 };
