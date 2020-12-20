@@ -30,7 +30,7 @@ function AppList() {
       });
   };
   const getPagesByAppName = (appName) => {
-    console.log("getPagesByAppName")
+    console.log("getPagesByAppName");
     axios({
       method: "get",
       url: "http://localhost:8000/getPagesByAppName",
@@ -41,6 +41,7 @@ function AppList() {
       .then((response) => {
         // console.log("response.data!", response.data);
         setPageList(appName, response.data.pages);
+        setSettings();
         setPage(response.data.startPage);
       })
       .catch(function (error) {
