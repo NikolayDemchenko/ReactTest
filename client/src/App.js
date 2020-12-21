@@ -11,7 +11,7 @@ const App = () => {
   // const [settings, setSettings] = useState(JSON.parse(sessionStorage.getItem("settings")));
   const [settings, _setSettings] = useState();
   const [page, _setPage] = useState(_page);
-  // console.log("page :>> ", page);
+  console.log("settings :>> ", settings);
   const setPage = (page) => {
     // console.log("page :>> ", page);
     _setPage(page);

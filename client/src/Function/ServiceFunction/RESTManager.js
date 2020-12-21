@@ -23,9 +23,10 @@ export const GetRESTManager = (page, setPage, setSettings) => ({
       },
     })
       .then((response) => {
+        // setSettings();
         setSettings((settings) => ({
-          ...settings,
           pageList: response.data.pages,
+          appList: settings.appList,
           appName,
         }));
         setPage(response.data.startPage);
