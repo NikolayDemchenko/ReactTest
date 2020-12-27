@@ -3,11 +3,11 @@ import { ic_keyboard_arrow_right } from "react-icons-kit/md/ic_keyboard_arrow_ri
 import Icon from "react-icons-kit";
 import { Link } from "react-scroll";
 import { NavTags } from "./TagList";
-import CRUDTag from "./CRUDTag";
+import CRUDbtn from "../CRUDbtn";
 import { Context } from "../../../../AppFunction";
 
 function NavTag(props) {
-  const {createTag, removeTag, settings } = useContext(Context);
+  const { createTag, removeTag, settings } = useContext(Context);
   const { tag } = props;
 
   const { type, childrens, id, index } = tag;
@@ -77,16 +77,20 @@ function NavTag(props) {
                 margin: "0 4px 4px auto",
               }}
             >
-              <CRUDTag {...{ tag, createTag, removeTag:()=>removeTag(tag.id) }} />
+              <CRUDbtn
+                {...{
+                  parent: tag,
+                  create: createTag,
+                  remove: () => removeTag(tag.id),
+                }}
+              />
             </div>
           )}
         </div>
       </Link>
 
       <div style={{ marginLeft: "30px" }}>
-        {childrens && showChilds && (
-          <NavTags  tagTree={childrens} index={id} />
-        )}
+        {childrens && showChilds && <NavTags tagTree={childrens} index={id} />}
       </div>
     </div>
   );

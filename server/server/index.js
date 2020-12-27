@@ -78,7 +78,7 @@ app.post("/createApp", (req, res) => {
     res.send(result.ops[0]);
   });
 });
-app.post("/createPage", (req, res) => {
+app.post("/saveAsPage", (req, res) => {
   const pages = req.app.locals.pages;
   const page = JSON.parse(req.body.page);
   delete page._id;
@@ -107,11 +107,11 @@ app.post("/updatePage", (req, res) => {
 });
 app.post("/removePageById", (req, res) => {
   const _id = req.query._id;
-  console.log("removePageById!!!!",_id);
+  console.log("removePageById!!!!", _id);
   const pages = req.app.locals.pages;
 
   pages
-    .deleteOne({_id: new ObjectId(_id) })    
+    .deleteOne({_id: new ObjectId(_id) })
     .then(() => {
       res.status(200);
     })

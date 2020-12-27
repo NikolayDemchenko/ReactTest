@@ -1,5 +1,5 @@
 import React,{useContext} from "react";
-import log from "../../../Log";
+import {log,funcLog} from "../../../Log";
 import jss from "jss";
 import preset from "jss-preset-default";
 import PopupInput from "./Inputs/PopupInput/PopupInput";

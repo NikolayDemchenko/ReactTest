@@ -4,7 +4,7 @@ import { buttonStyle } from "./BtnStyle";
 import { ic_add_to_queue } from "react-icons-kit/md/ic_add_to_queue";
 import { cross } from "react-icons-kit/icomoon/cross";
 import EditPanel from "./EditPanel";
-import log from "../../../../Log";
+import {log,funcLog} from "../../../../Log";
 import { ic_credit_card } from "react-icons-kit/md/ic_credit_card";
 import { ic_note_add } from "react-icons-kit/md/ic_note_add";
 import { ic_library_add } from "react-icons-kit/md/ic_library_add";
@@ -50,7 +50,7 @@ function PropertiesPanel(props) {
     console.log("add property", key, value);
     updateStyleData({ [key]: value, ...panelStyle });
   };
-
+  // console.log("panelStyle", panelStyle);
   return (
     <div
       style={{
@@ -137,7 +137,7 @@ function PropertiesPanel(props) {
         <EditPanel {...{ panelStyle, updateStyleData, styleId: tag.styleId }} />
       )}
       <Properties
-        {...props}    
+        {...props}
         parentName={name}
         previewBase={{ ...previewBase, ...panelStyle }}
       />

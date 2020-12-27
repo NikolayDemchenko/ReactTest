@@ -2,7 +2,7 @@ import React from "react";
 import Property from "./Property";
 import PropertiesPanel from "./PropertiesPanel";
 import RenameObjectProperty from "./Function/RenameObjectProperty";
-import log from "../../../../Log";
+import {log,funcLog} from "../../../../Log";
 import {
   addNewPropUp,
   addNewPropDown,

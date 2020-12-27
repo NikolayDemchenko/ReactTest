@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import StylePanel from "./StylePanel/StylePanel";
 import { Link } from "react-scroll";
-import log from "../../../Log";
+import {log,funcLog} from "../../../Log";
 import jss from "jss";
 import preset from "jss-preset-default";
 import SelectPanel from "../ModalWindows/SelectPanel/SelectPanel";
@@ -18,7 +18,7 @@ function AttributesPanel(props) {
   const {
     updateTag,
     settings: { tag },
-  } = useContext(Context); 
+  } = useContext(Context);
 
   const style = {
     flexWrap: "wrap",
@@ -43,7 +43,7 @@ function AttributesPanel(props) {
     .attach();
 
   return (
-    <div>    
+    <div>
       <div className={classes.style}>
         <BackSettings {...props} />
         <div style={{ cursor: "default", display: "flex" }}>
@@ -94,20 +94,7 @@ function AttributesPanel(props) {
           offset={-70}
           duration={500}
         >
-          <StylePanel
-            {
-              ...{
-                // tagStyle,
-                // panelStyle: tagStyle.data,
-                // assignStyleId,
-                // setSettings,
-                // updateTag,
-                // tag,
-                // page,
-                // setPage,
-              }
-            }
-          />
+          <StylePanel />
         </Link>
         <div style={{ paddingBottom: "4em" }} />
       </div>
@@ -115,9 +102,9 @@ function AttributesPanel(props) {
   );
 }
 
-function areEqual(prevProps, nextProps) {
-  return prevProps === nextProps;
-}
+// function areEqual(prevProps, nextProps) {
+//   return prevProps === nextProps;
+// }
 
 export default log(AttributesPanel);
 // export default React.memo(log(AttributesPanel));

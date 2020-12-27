@@ -1,8 +1,8 @@
 import React from "react";
 
-function randColor(name) {
+function randomColor(name) {
   let red = name > 5 ? name / 40 : name / 6;
-  let grin = name > 5 ? name / 25: name / 40;
+  let grin = name > 5 ? name / 25 : name / 40;
   let blue = name > 5 ? name / 15 : name / 10;
 
   var r = Math.floor(red * 256),
@@ -14,10 +14,16 @@ function randColor(name) {
 const log = (BaseComponent) => (props) => {
   // console.log(
   //   `%cRendering ${BaseComponent.name}`,
-  //   `color: ${randColor(BaseComponent.name.length)}`
+  //   `color: ${randomColor(BaseComponent.name.length)}`
   // );
   return <BaseComponent {...props} />;
 };
-export default log;
+
+const funcLog = (funcName) =>
+  console.log(
+    `%cRendering ${funcName}`,
+    `color: ${randomColor(funcName.length)}`
+  );
+export { log, funcLog };
 // Доделать функции добавления удаления приложений и страниц
 // Сделать сохранение стилей в базу и подгрузку в библиотеку стилей

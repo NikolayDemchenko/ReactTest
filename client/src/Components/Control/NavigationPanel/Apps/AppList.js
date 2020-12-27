@@ -1,20 +1,29 @@
 import React, { useContext, useEffect } from "react";
 import axios from "axios";
 import { Context } from "../../../../AppFunction";
-
+import CRUDbtn from "../CRUDbtn";
 function AppList() {
   // const [appList, setAppList] = useState([]);
-  const { settings, setSettings, setPage } = useContext(Context);
+  const { settings, setSettings, RESTManager } = useContext(Context);
 
   const appList = settings && settings.appList ? settings.appList : [];
 
   const setAppList = (appList) => {
     setSettings((settings) => ({ ...settings, appList }));
   };
-  const setPageList = (appName, pageList) => {
-    setSettings((settings) => ({ ...settings, pageList, appName }));
+  const createNewPage = (appName) => {
+    const newPage = {
+      appName,
+      name: "new_page",
+      styles: [],
+      tags: [],
+      bodyStyle: { background: "inherit" },
+    };
+    setSettings((settings) => ({
+      ...settings,
+      pageList: [ ...settings.pageList, newPage ],
+    }));
   };
-
   const getApps = (set) => {
     console.log("getApps");
     axios({
@@ -29,29 +38,9 @@ function AppList() {
         console.log(error);
       });
   };
-  const getPagesByAppName = (appName) => {
-    console.log("getPagesByAppName");
-    axios({
-      method: "get",
-      url: "http://localhost:8000/getPagesByAppName",
-      params: {
-        appName,
-      },
-    })
-      .then((response) => {
-        // console.log("response.data!", response.data);
-        setPageList(appName, response.data.pages);
-        setSettings();
-        setPage(response.data.startPage);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
 
   useEffect(() => {
     getApps(setAppList);
-
     return () => {};
   }, []);
 
@@ -77,9 +66,24 @@ function AppList() {
           // outline: "1px solid white",
         }}
         key={index}
-        onClick={() => getPagesByAppName(app)}
+        onClick={() => RESTManager.getPagesByAppName(app)}
       >
         {app}
+        {showButtons && (
+          <div
+            style={{
+              //  outline: "1px solid white",
+              margin: "0 4px 4px auto",
+            }}
+          >
+            <CRUDbtn
+              {...{
+                create:() => createNewPage(app),
+                remove: () => {},
+              }}
+            />
+          </div>
+        )}
       </div>
     );
   });

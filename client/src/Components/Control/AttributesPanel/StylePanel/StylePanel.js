@@ -1,9 +1,13 @@
 import React, { useState, useContext } from "react";
 // import jss from "jss";
-import log from "../../../../Log";
+import {log,funcLog} from "../../../../Log";
 import PropertiesPanel from "./PropertiesPanel";
 import SettingsPanel from "./SettingsPanel";
-import {createUniqueName, createVariable, Context } from "../../../../AppFunction";
+import {
+  createUniqueName,
+  createVariable,
+  Context,
+} from "../../../../AppFunction";
 
 function StylePanel(props) {
   // console.log("%cStylePanel-VerticalPanel-App", "color: green");
@@ -15,7 +19,7 @@ function StylePanel(props) {
     settings: { tag, assignStyleId },
   } = useContext(Context);
   const tagStyle = page.styles.find(({ id }) => id === tag.styleId);
-
+ 
   // const {panelStyle } = props;
 
   // console.log('tag', tag.styleId)
@@ -24,9 +28,8 @@ function StylePanel(props) {
   const addStyle = (data, name, tag) => {
     setPage((page) => {
       const names = page.styles.map((style) => style.name);
-      // let name = "Новый";
-
       const newStyle = createVariable(data, createUniqueName(name, names));
+      console.log('newStyle', newStyle)
       const changedTag = { ...tag, styleId: newStyle.id };
       setSettings((settings) => ({ ...settings, tag: changedTag }));
       return {
@@ -82,12 +85,11 @@ function StylePanel(props) {
     console.log("setDraggedProp", item);
     setDragged(item);
   };
-
+  console.log("tagStyle", tagStyle);
   return (
     <div style={{ background: "rgba(30,40,57,.6)" }} title="CSS (JSS) Стили">
       <SettingsPanel
-        {...{
-          // ...props,
+        {...{          
           tagStyle,
           updateStyleName,
           updateStyleData,
@@ -99,7 +101,6 @@ function StylePanel(props) {
       />
       <PropertiesPanel
         {...{
-          // ...props,
           panelStyle: tagStyle.data,
           tag,
           updateStyleData,

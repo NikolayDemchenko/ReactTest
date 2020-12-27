@@ -1,5 +1,5 @@
 import React from "react";
-import log from "../../../Log";
+import {log,funcLog} from "../../../Log";
 import Tags from "./Tag/Tags";
 import jss from "jss";
 

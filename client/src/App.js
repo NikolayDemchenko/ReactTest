@@ -5,16 +5,21 @@ import { page as _page } from "./Components/View/Pages/CreateApp";
 import { Portal } from "react-portal";
 import AttributesPanel from "./Components/Control/AttributesPanel/AttributesPanel";
 import NavigationPanel from "./Components/Control/NavigationPanel/NavigationPanel";
-import { TagCRUD, GetPageManager, Context } from "./AppFunction";
+import { TagCRUD, GetRESTManager, Context } from "./AppFunction";
 
 const App = () => {
   // const [settings, setSettings] = useState(JSON.parse(sessionStorage.getItem("settings")));
-  const [settings, setSettings] = useState();
+  const [settings, _setSettings] = useState();
   const [page, _setPage] = useState(_page);
-  // console.log("page :>> ", page);
+  console.log("settings :>> ", settings);
   const setPage = (page) => {
-    console.log("page :>> ", page);
+    // console.log("page :>> ", page);
     _setPage(page);
+    console.log("setPage");
+  };
+  const setSettings = (settings) => {
+    _setSettings(settings);
+    console.log("setSettings");
   };
   // console.log('settings :>> ', settings);
   // settings&&sessionStorage.setItem('settings', JSON.stringify(settings))
@@ -39,7 +44,7 @@ const App = () => {
     setSettings
   );
   const tagTree = getTagTree(page.tags, null);
-  const pageManager = GetPageManager(page, setPage);
+  const RESTManager = GetRESTManager(page, setPage, setSettings);
 
   // getApps();
   const onClick =
@@ -55,7 +60,7 @@ const App = () => {
           createTag,
           removeTag,
           updateTag,
-          pageManager,
+          RESTManager,
           page,
           setPage,
           settings,

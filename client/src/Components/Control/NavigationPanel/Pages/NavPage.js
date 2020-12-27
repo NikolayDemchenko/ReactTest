@@ -1,13 +1,13 @@
-import React, { useState, useContext } from "react";
+import React, {useContext } from "react";
 import { ic_keyboard_arrow_right } from "react-icons-kit/md/ic_keyboard_arrow_right";
 import Icon from "react-icons-kit";
 import axios from "axios";
 import { Context } from "../../../../AppFunction";
-import CRUDTag from "../Tags/CRUDTag";
+import CRUDbtn from "../CRUDbtn";
 
 function NavPage({ page }) {
   const context = useContext(Context);
-  const { setPage, createTag, removeTag } = context;
+  const { setPage, createTag } = context;
 
   // console.log("context.page", context.page);
   // console.log("page", page);
@@ -32,39 +32,17 @@ function NavPage({ page }) {
 
   const removePageById = () => {
     console.log("removePageById");
-    
+
     axios({
       method: "post",
       url: "http://localhost:8000/removePageById",
       params: {
-        _id:page._id,
+        _id: page._id,
       },
     }).catch(function (error) {
       console.log(error);
     });
   };
-
-  // const [showChilds, setshowChilds] = useState(false);
-  // const _icon = <Icon size={"100%"} icon={ic_keyboard_arrow_right} />;
-
-  // const icon = !showChilds ? (
-  //   <div>{_icon}</div>
-  // ) : (
-  //   <div style={{ transform: "rotate(90deg)" }}>{_icon}</div>
-  // );
-  // console.log('childrens', childrens)
-  // const toggle =
-  //   childrens.length > 0 ? (
-  //     <div
-  //       style={{ cursor: "pointer", width: "20px" }}
-  //       onClick={(e) => {
-  //         e.stopPropagation();
-  //         setshowChilds(!showChilds);
-  //       }}
-  //     >
-  //       {icon}
-  //     </div>
-  //   ) : null;
 
   let background = "rgba(30,40,57,.8)";
   let showButtons = false;
@@ -99,7 +77,7 @@ function NavPage({ page }) {
             margin: "0 4px 4px auto",
           }}
         >
-          <CRUDTag {...{ createTag, removeTag: removePageById }} />
+          <CRUDbtn {...{ create: createTag, remove: removePageById }} />
         </div>
       )}
     </div>
