@@ -1,46 +1,29 @@
 import React, { useContext, useEffect } from "react";
 import axios from "axios";
 import { Context } from "../../../../AppFunction";
-import CRUDbtn from "../CRUDbtn";
+import PageCRUDbtn from "../PageCRUDbtn";
+
 function AppList() {
   // const [appList, setAppList] = useState([]);
   const { settings, setSettings, RESTManager } = useContext(Context);
 
   const appList = settings && settings.appList ? settings.appList : [];
 
-  const setAppList = (appList) => {
-    setSettings((settings) => ({ ...settings, appList }));
-  };
-  const createNewPage = (appName) => {
+  const createNewPage = (name,appName) => {
     const newPage = {
       appName,
-      name: "new_page",
+      name,
       styles: [],
       tags: [],
       bodyStyle: { background: "inherit" },
     };
-    setSettings((settings) => ({
-      ...settings,
-      pageList: [ ...settings.pageList, newPage ],
-    }));
-  };
-  const getApps = (set) => {
-    console.log("getApps");
-    axios({
-      method: "get",
-      url: "http://localhost:8000/getApps",
-    })
-      .then((response) => {
-        // console.log("response.data!", response.data);
-        set(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    RESTManager.createPage(newPage);
+
   };
 
+
   useEffect(() => {
-    getApps(setAppList);
+    RESTManager.getApps();
     return () => {};
   }, []);
 
@@ -76,9 +59,9 @@ function AppList() {
               margin: "0 4px 4px auto",
             }}
           >
-            <CRUDbtn
+            <PageCRUDbtn
               {...{
-                create:() => createNewPage(app),
+                create:(name) => createNewPage(name,app),
                 remove: () => {},
               }}
             />

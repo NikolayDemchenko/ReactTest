@@ -3,7 +3,8 @@ import { ic_keyboard_arrow_right } from "react-icons-kit/md/ic_keyboard_arrow_ri
 import Icon from "react-icons-kit";
 import { Link } from "react-scroll";
 import { NavTags } from "./TagList";
-import CRUDbtn from "../CRUDbtn";
+import { tagList as elementList} from "../../../Class/HtmlCss";
+import TagCRUDbtn from "../TagCRUDbtn";
 import { Context } from "../../../../AppFunction";
 
 function NavTag(props) {
@@ -77,11 +78,12 @@ function NavTag(props) {
                 margin: "0 4px 4px auto",
               }}
             >
-              <CRUDbtn
+              <TagCRUDbtn
                 {...{
                   parent: tag,
                   create: createTag,
                   remove: () => removeTag(tag.id),
+                  elementList
                 }}
               />
             </div>

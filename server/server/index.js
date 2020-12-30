@@ -60,30 +60,35 @@ router.get("/getPagesByAppName", (req, res) => {
     .toArray()
     .then((response) =>
       res.status(200).json({
-        pages: response.map(({ name, _id }) => ({ name, _id })),
+        pages: response.map(({ domain, appName, name, _id }) => ({
+          domain,
+          appName,
+          name,
+          _id,
+        })),
         startPage: response.find((res) => res.domain),
       })
     )
     .catch((error) => console.error(error));
 });
 
-app.post("/createApp", (req, res) => {
+app.post("/createPage", (req, res) => {
   const pages = req.app.locals.pages;
   const page = JSON.parse(req.body.page);
   // delete page._id;
-  console.log("createApp");
+  console.log("createPage");
   pages.insertOne(page, (err, result) => {
     console.log("result", result.ops[0]);
     if (err) return console.log(err);
     res.send(result.ops[0]);
   });
 });
-app.post("/saveAsPage", (req, res) => {
+app.post("/createPage", (req, res) => {
   const pages = req.app.locals.pages;
   const page = JSON.parse(req.body.page);
   delete page._id;
   // console.log(component);
-  console.log("save as");
+  console.log("createPage");
   pages.insertOne(page, (err, result) => {
     // console.log('result', result.ops[0])
     if (err) return console.log(err);
@@ -111,9 +116,9 @@ app.post("/removePageById", (req, res) => {
   const pages = req.app.locals.pages;
 
   pages
-    .deleteOne({_id: new ObjectId(_id) })
+    .deleteOne({ _id: new ObjectId(_id) })
     .then(() => {
-      res.status(200);
+      res.send(200);
     })
     .catch((error) => console.error(error));
 });

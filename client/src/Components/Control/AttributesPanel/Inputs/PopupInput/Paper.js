@@ -19,7 +19,7 @@ export default function Paper(props) {
     if (e.key === "Enter") {
       console.log("handleKeyPress");
       console.log("value :>> ", value);
-      setPreview(value);
+      setPreview&&setPreview(value);
       setValue(value?value:props.value);
     }
   };
