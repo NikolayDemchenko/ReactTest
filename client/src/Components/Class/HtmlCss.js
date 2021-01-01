@@ -60,13 +60,11 @@ const cssfunc = [
 ];
 
 const cssFunc = cssfunc.map((item) => {
-    item.value = item.name;
+  item.value = item.name;
   return item;
 });
 
 // Html
-
-
 
 const tags = [
   { name: "div" },
@@ -83,4 +81,9 @@ const basehtmlTags = tags.map((item) => {
   item.value = item.name;
   return item;
 });
-export { cssUnits, basehtmlTags , cssFunc,htmlTags};
+
+const tagList = [
+  ...new Set([...basehtmlTags.map((item) => item.value), ...htmlTags]),
+];
+
+export { cssUnits,tagList, basehtmlTags, cssFunc, htmlTags };

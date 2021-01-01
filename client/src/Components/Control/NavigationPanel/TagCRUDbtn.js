@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { plus } from "react-icons-kit/icomoon/plus";
 import { cross } from "react-icons-kit/icomoon/cross";
 import Icon from "react-icons-kit";
 import SelectPanel from "../ModalWindows/SelectPanel/SelectPanel";
 import htmlTagsVoid from "html-tags/void";
-import { htmlTags, basehtmlTags } from "../../Class/HtmlCss";
-function CRUDbtn({ parent = { id: null, type: "div" }, create, remove }) {
+function TagCRUDbtn({ parent = { id: null, type: "div" }, create, remove, elementList }) {
   // console.log('setPage :>> ', setPage);
   // console.log('htmlTagsVoid :>> ', Array.isArray(htmlTagsVoid) );
   // console.log('htmlTags', htmlTags)
@@ -14,12 +13,7 @@ function CRUDbtn({ parent = { id: null, type: "div" }, create, remove }) {
       {/* Добавление */}
       {!htmlTagsVoid.find((tagVoid) => tagVoid === parent.type) && (
         <SelectPanel
-          items={[
-            ...new Set([
-              ...basehtmlTags.map((item) => item.value),
-              ...htmlTags,
-            ]),
-          ]}
+          items={elementList}  
           selected={""}
           setItem={(item) => create(item, parent)}
           button={
@@ -45,4 +39,4 @@ function CRUDbtn({ parent = { id: null, type: "div" }, create, remove }) {
     </div>
   );
 }
-export default CRUDbtn;
+export default TagCRUDbtn;
