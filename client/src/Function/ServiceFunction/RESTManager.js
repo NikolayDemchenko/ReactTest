@@ -1,7 +1,8 @@
 import axios from "axios";
+const clog = true;
 export const GetRESTManager = (page, setPage, setSettings) => ({
   getApps: () => {
-    console.log("getApps");
+    clog && console.log("getApps");
     axios({
       method: "get",
       url: "http://localhost:8000/getApps",
@@ -19,7 +20,7 @@ export const GetRESTManager = (page, setPage, setSettings) => ({
       url: "http://localhost:8000/getPages",
     })
       .then((response) => {
-        console.log("response.data!", response.data);
+        clog && console.log("getPages", response.data);
         setPage(response.data);
       })
       .catch(function (error) {
@@ -27,7 +28,6 @@ export const GetRESTManager = (page, setPage, setSettings) => ({
       });
   },
   getPagesByAppName: (appName) => {
-    console.log("getPagesByAppName");
     axios({
       method: "get",
       url: "http://localhost:8000/getPagesByAppName",
@@ -36,7 +36,7 @@ export const GetRESTManager = (page, setPage, setSettings) => ({
       },
     })
       .then((response) => {
-        console.log("response.data.pages", response.data.pages);
+        clog && console.log("getPagesByAppName", response.data.pages);
         setSettings((settings) => ({
           pageList: response.data.pages,
           appList: settings.appList,
@@ -49,14 +49,13 @@ export const GetRESTManager = (page, setPage, setSettings) => ({
       });
   },
   createPage: (page) => {
-    console.log("createPage");
     axios({
       method: "post",
       url: "http://localhost:8000/createPage",
       data: { page: JSON.stringify(page) },
     })
       .then((response) => {
-        console.log("response.data!", response.data);
+        clog && console.log("createPage", response.data);
         setPage({ ...response.data });
         setSettings((settings) => ({
           ...settings,
@@ -68,14 +67,14 @@ export const GetRESTManager = (page, setPage, setSettings) => ({
       });
   },
   updatePage: () => {
-    console.log("save");
+    clog && console.log("updatePage");
     axios({
       method: "post",
       url: "http://localhost:8000/updatePage",
       data: { page: JSON.stringify(page) },
     })
       .then((response) => {
-        console.log(response.data);
+        clog && console.log(response.data);
         setPage({ ...response.data });
       })
       .catch(function (error) {
@@ -83,7 +82,7 @@ export const GetRESTManager = (page, setPage, setSettings) => ({
       });
   },
   getPageById: (_id) => {
-    console.log("getPageById");
+    clog && console.log("getPageById");
     axios({
       method: "get",
       url: "http://localhost:8000/getPageById",
@@ -100,7 +99,7 @@ export const GetRESTManager = (page, setPage, setSettings) => ({
       });
   },
   removePageById: (_id) => {
-    console.log("removePageById");
+    clog && console.log("removePageById");
     axios({
       method: "post",
       url: "http://localhost:8000/removePageById",
@@ -109,10 +108,12 @@ export const GetRESTManager = (page, setPage, setSettings) => ({
       },
     })
       .then(() => {
-        setSettings((settings) => ({
-          ...settings,
-          pageList: [...settings.pageList.filter((page) => page._id !== _id)],
-        }));
+        setSettings((settings) => {          
+          return {
+            ...settings,
+            pageList: [...settings.pageList.filter((page) => page._id !== _id)],
+          };
+        });
       })
       .catch(function (error) {
         console.log(error);

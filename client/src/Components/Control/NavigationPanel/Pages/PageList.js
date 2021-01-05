@@ -8,12 +8,13 @@ function NavPages() {
   const { settings } = useContext(Context);
   // console.log("settings", settings);
   const pageList = settings && settings.pageList ? settings.pageList : [];
+  console.log('pageList', pageList)
   return pageList.map((page, index) => {
     // console.log('page', page)
-    return <NavPage key={index} page={page} />;
+    return <NavPage pageList={pageList} key={index} page={page} />;
   });
 }
-function NavPage({ page }) {
+function NavPage({ page ,pageList}) {
   const context = useContext(Context);
   const { createTag, RESTManager } = context;
 
@@ -22,7 +23,7 @@ function NavPage({ page }) {
 
   const remove = async () => {
      RESTManager.removePageById(page._id);
-     RESTManager.getPagesByAppName(page.appName);
+     RESTManager.getPageById(pageList[0]._id);
   };
   let background = "rgba(30,40,57,.8)";
   let showButtons = false;
