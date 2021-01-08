@@ -85,7 +85,7 @@ function StylePanel(props) {
     console.log("setDraggedProp", item);
     setDragged(item);
   };
-  console.log("tagStyle", tagStyle);
+
   return (
     <div style={{ background: "rgba(30,40,57,.6)" }} title="CSS (JSS) Стили">
       <SettingsPanel
@@ -115,8 +115,4 @@ function StylePanel(props) {
   );
 }
 
-const change = (prev, next) => {
-  // console.log("prevprops :>> ", prev);
-  // console.log("nextprops :>> ", next);
-};
 export default React.memo(log(StylePanel));
