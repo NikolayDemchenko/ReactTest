@@ -36,8 +36,7 @@ export default function Paper(props) {
           border: 0,
           color: "#eee",
           fontSize: "15px",
-        }}
-        // type={"text"}
+        }}       
         onKeyPress={handleKeyPress}
         onBlur={(e) => {
           setValue(value?value:props.value);

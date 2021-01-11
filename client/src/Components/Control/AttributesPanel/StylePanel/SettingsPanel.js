@@ -30,7 +30,7 @@ function SettingsPanel(props) {
     // setPage,
     updateTag,
     setSettings,
-    settings: { tag, assignStyleId },
+    settings: { node, assignStyleId },
   } = useContext(Context);
   // console.log("props", props);
   // console.log("Styles", Styles);
@@ -42,7 +42,7 @@ function SettingsPanel(props) {
   };
   const changeTagStyleByName = (name) => {
     const style = page.styles.find((style) => style.name === name);
-    updateTag(tag.id, "styleId", style.id);
+    updateTag(node.id, "styleId", style.id);
   };
 
   return (
@@ -91,14 +91,14 @@ function SettingsPanel(props) {
             onClick={(e) => {
               e.stopPropagation();
               console.log("Новый стиль!",tagStyle.data);
-              addStyle(tagStyle.data,"new_style",tag);
+              addStyle(tagStyle.data,"new_style",node);
             }}
           >
             <Icon size={"100%"} icon={copy} />
           </div>
           <SelectPanel
             items={page.styles.map((style) => style.name)}
-            selected={page.styles.find(({ id }) => id === tag.styleId).name}
+            selected={page.styles.find(({ id }) => id === node.styleId).name}
             setItem={changeTagStyleByName}
             button={
               <div title={"Выбрать стиль тега"} className={buttonStyle}>
@@ -134,7 +134,7 @@ function SettingsPanel(props) {
               if (!state.assignStyleId) {
                 return {
                   ...state,
-                  assignStyleId: tag.styleId,
+                  assignStyleId: node.styleId,
                 };
               } else {
                 return {

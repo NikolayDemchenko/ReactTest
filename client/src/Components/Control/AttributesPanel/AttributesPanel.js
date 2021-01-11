@@ -17,7 +17,7 @@ function AttributesPanel(props) {
 
   const {
     updateTag,
-    settings: { tag },
+    settings: { node },
   } = useContext(Context);
 
   const style = {
@@ -49,14 +49,14 @@ function AttributesPanel(props) {
         <div style={{ cursor: "default", display: "flex" }}>
           <Link
             activeClass="active"
-            to={tag.id}
+            to={node.id}
             spy={true}
             smooth={true}
             offset={-70}
             duration={500}
           >
             <div
-              title={tag.id}
+              title={node.id}
               style={{
                 display: "inline-flex",
                 height: "1.5em",
@@ -64,7 +64,7 @@ function AttributesPanel(props) {
                 overflow: "hidden",
               }}
             >
-              tag.id: {tag.id}
+              node.id: {node.id}
             </div>
           </Link>
           <div
@@ -75,9 +75,9 @@ function AttributesPanel(props) {
             type:
           </div>
           <SelectPanel
-            selected={tag.type}
+            selected={node.type}
             items={htmlTags}
-            setItem={(type) => updateTag(tag.id, "type", type)}
+            setItem={(type) => updateTag(node.id, "type", type)}
           />
           <div
             style={{
@@ -88,7 +88,7 @@ function AttributesPanel(props) {
         </div>
         <Link
           activeClass="active"
-          to={tag.id}
+          to={node.id}
           spy={true}
           smooth={true}
           offset={-70}

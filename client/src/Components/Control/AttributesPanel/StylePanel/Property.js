@@ -16,7 +16,7 @@ function Property(props) {
     draggedProp,
     setDraggedProp,
     previewBase,
-    tag,
+    node,
     panelStyle,    
   } = props;
   // console.log("props :>> ", props);
@@ -24,7 +24,7 @@ function Property(props) {
   //#region setPreview
   const [partPreview, setPartPreview] = useState();
   const setPreview = (value) => {
-    document.getElementById(tag.id).className = jss
+    document.getElementById(node.id).className = jss
       .createStyleSheet({ className: { ...previewBase, [name]: value } })
       .attach().classes.className;
   };

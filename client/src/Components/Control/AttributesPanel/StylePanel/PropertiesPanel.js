@@ -20,7 +20,7 @@ function PropertiesPanel(props) {
     panelStyle,
     updateStyleData,
     removePanel,
-    tag,
+    node,
     allStyleProps,
     previewBase,
   } = props;
@@ -134,7 +134,7 @@ function PropertiesPanel(props) {
       </div>
 
       {edit && (
-        <EditPanel {...{ panelStyle, updateStyleData, styleId: tag.styleId }} />
+        <EditPanel {...{ panelStyle, updateStyleData, styleId: node.styleId }} />
       )}
       <Properties
         {...props}

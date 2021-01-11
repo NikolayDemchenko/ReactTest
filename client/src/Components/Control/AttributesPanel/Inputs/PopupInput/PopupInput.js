@@ -4,7 +4,7 @@ import Paper from "./Paper";
 import PropertyValueSelector from "../Switch/DataTypeRecognizer";
 export default function PopupInput(props) {
   // console.log('props.value :>> ',typeof props.value);
-  // const type ="number"
+  
   // console.log('props.value', props.value)
   const value = props.value ? props.value : "none";
   // console.log('new Boolean(value)', new Boolean(value))

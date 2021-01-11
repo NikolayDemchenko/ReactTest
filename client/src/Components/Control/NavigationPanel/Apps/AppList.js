@@ -14,7 +14,7 @@ function AppList() {
       appName,
       name,
       styles: [],
-      tags: [],
+      nodes: [],
       bodyStyle: { background: "inherit" },
     };
     RESTManager.createPage(newPage);

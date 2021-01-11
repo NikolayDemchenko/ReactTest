@@ -49,7 +49,7 @@ export default function CreateAppForm(props) {
           name,
           domain,
           styles: [],
-          tags: [],
+          nodes: [],
           bodyStyle: { background: "inherit" },
         });
         close();

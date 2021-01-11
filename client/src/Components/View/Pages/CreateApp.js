@@ -96,19 +96,19 @@ const bodyStyle = {
 const page = {
   bodyStyle,
   styles: [rootTagStyle, childTagStyle, newTagStyle],
-  tags: [],
+  nodes: [],
 };
-page.tags.push(rootTag_1);
-// page.tags.push(rootTag_2);
+page.nodes.push(rootTag_1);
+// page.nodes.push(rootTag_2);
 
-const childGenerator = (amount, tag, childStyle) => {
+const childGenerator = (amount, node, childStyle) => {
   for (let i = 0; i < amount; i++) {
-    page.tags.push(
+    page.nodes.push(
       JSON.parse(
         JSON.stringify({
           index: i,
           id: shortid.generate(),
-          parentId: tag.id,
+          parentId: node.id,
           type: "div",
           styleId: childStyle.id,      
         })

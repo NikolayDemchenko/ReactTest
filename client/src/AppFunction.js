@@ -3,7 +3,8 @@ import {
   createVariable,
   createUniqueName,
 } from "./Function/ServiceFunction/DataFunction";
-import { TagCRUD } from "./Function/ServiceFunction/TagFunctions";
+import { TagFunctions } from "./Function/ServiceFunction/TagFunctions";
+
 import { GetRESTManager } from "./Function/ServiceFunction/RESTManager";
 import React from "react";
 
@@ -13,7 +14,7 @@ export {
   SaveToJSON,
   createVariable,
   createUniqueName,
-  TagCRUD,
+  TagFunctions,
   GetRESTManager,
   Context,
 };
