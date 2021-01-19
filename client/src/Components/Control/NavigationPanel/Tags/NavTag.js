@@ -10,7 +10,7 @@ import { Context } from '../../../../AppFunction';
 function NavTag(props) {
 	const { createTag, removeTag, settings, page } = useContext(Context);
 	const { node } = props;
-	const { type, id, index } = node;
+	const { tag, id, index } = node;
 	const nodes = page.nodes.filter(({ parentId }) => parentId === node.id);
 	const [showChilds, setshowChilds] = useState(false);
 	// console.log("id :>> ", id);
@@ -59,7 +59,7 @@ function NavTag(props) {
 					}}
 				>
 					{toggle}
-					type: {type} index: {index}
+					tag: {tag} index: {index}
 					{showButtons && (
 						<div
 							style={{

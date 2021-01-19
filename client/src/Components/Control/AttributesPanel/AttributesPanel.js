@@ -72,12 +72,12 @@ function AttributesPanel(props) {
               padding: "0px 0.5em",
             }}
           >
-            type:
+            tag:
           </div>
           <SelectPanel
-            selected={node.type}
+            selected={node.tag}
             items={htmlTags}
-            setItem={(type) => updateTag(node.id, "type", type)}
+            setItem={(tag) => updateTag(node.id, "tag", tag)}
           />
           <div
             style={{

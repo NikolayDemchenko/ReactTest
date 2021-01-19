@@ -78,11 +78,11 @@ const baseStyle = {
 
 const rootTagStyle = createVariable(baseStyle, "baseStyle");
 
-const rootTagGenerator = (parentId, index, type, styleId) => ({
+const rootTagGenerator = (parentId, index, tag, styleId) => ({
   index,
   id: shortid.generate(),
   parentId,
-  type,
+  tag,
   styleId,
 });
 
@@ -109,7 +109,7 @@ const childGenerator = (amount, node, childStyle) => {
           index: i,
           id: shortid.generate(),
           parentId: node.id,
-          type: "div",
+          tag: "div",
           styleId: childStyle.id,      
         })
       )

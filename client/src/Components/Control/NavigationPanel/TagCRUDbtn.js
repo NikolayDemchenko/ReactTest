@@ -4,14 +4,14 @@ import { cross } from "react-icons-kit/icomoon/cross";
 import Icon from "react-icons-kit";
 import SelectPanel from "../ModalWindows/SelectPanel/SelectPanel";
 import htmlTagsVoid from "html-tags/void";
-function TagCRUDbtn({ parent = { id: null, type: "div" },childrens, create, remove, elementList }) {
+function TagCRUDbtn({ parent = { id: null, tag: "div" },childrens, create, remove, elementList }) {
   // console.log('setPage :>> ', setPage);
   // console.log('htmlTagsVoid :>> ', Array.isArray(htmlTagsVoid) );
   // console.log('htmlTags', htmlTags)
   return (
     <div style={{ display: "flex" }}>
       {/* Добавление тега*/}
-      {!htmlTagsVoid.find((tagVoid) => tagVoid === parent.type) && (
+      {!htmlTagsVoid.find((tagVoid) => tagVoid === parent.tag) && (
         <SelectPanel
           items={elementList}  
           selected={""}

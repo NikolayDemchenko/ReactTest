@@ -29,7 +29,7 @@ export const TagFunctions = (page, setPage, setSettings) => {
 	return {
 		classes,
 		// getTagTree: (nodes, pId) => getTree(classes, nodes, pId),
-		createTag: (type, parent, childrens) => {
+		createTag: (tag, parent, childrens) => {
 			console.log('createTag');
 			setPage((page) => {
 				const newStyle = createVariable(
@@ -46,7 +46,7 @@ export const TagFunctions = (page, setPage, setSettings) => {
 						{
 							id: shortid.generate(),
 							parentId: parent.id,
-							type,
+							tag,
 							index: (childrens && childrens.length) || 0,
 							styleId: newStyle.id,
 						},

@@ -1,7 +1,7 @@
 import React from "react";
 import ModalInput from "../../ModalWindows/ModalInput/ModalInput";
-
-function SavePage({pageId, saveNewPage, savePage, title }) {
+import CreateAppForm from "../../ModalWindows/ModalInput/CreateAppForm";
+function SavePage({pageId,createPage, saveNewPage, savePage, title }) {
   // console.log('props', props)
 
   return (
@@ -23,18 +23,30 @@ function SavePage({pageId, saveNewPage, savePage, title }) {
           {title}
         </div>
       ) : (
-        <ModalInput setItem={saveNewPage}>
-          <div
-            style={{
-              backgroundColor: "#456c",
-              justifyContent: "center",
-              padding: "0 10px",
-              cursor: "pointer",
-            }}
-          >
-            {title}
-          </div>
-        </ModalInput>
+        <CreateAppForm setItem={createPage}>
+        <div
+          style={{
+            backgroundColor: "#456c",
+            justifyContent: "center",
+            padding: "0 10px",
+            cursor: "pointer",
+          }}
+        >
+          {title}
+        </div>
+      </CreateAppForm>
+        // <ModalInput setItem={saveNewPage}>
+        //   <div
+        //     style={{
+        //       backgroundColor: "#456c",
+        //       justifyContent: "center",
+        //       padding: "0 10px",
+        //       cursor: "pointer",
+        //     }}
+        //   >
+        //     {title}
+        //   </div>
+        // </ModalInput>
       )}
     </div>
   );

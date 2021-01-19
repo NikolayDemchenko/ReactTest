@@ -16,9 +16,9 @@ function Node(props) {
 	const nodes = page.nodes.filter(({ parentId }) => parentId === node.id);
 
 	return (
-		<node.type id={node.id} className={classes[node.styleId]} onClick={click}>
+		<node.tag id={node.id} className={classes[node.styleId]} onClick={click}>
 			{nodes && nodes.length > 0 ? <Nodes {...props} nodes={nodes} /> : null}
-		</node.type>
+		</node.tag>
 	);
 }
 

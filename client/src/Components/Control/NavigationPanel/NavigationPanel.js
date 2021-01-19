@@ -65,7 +65,7 @@ function NavigationPanel(props) {
         Navigation
       </div>
 
-      <SavePage savePage={updatePage} title={"Save"} pageId={page._id} />
+      <SavePage savePage={updatePage} createPage={createPage} title={"Save"} pageId={page._id} />
       {/* <ModalInput setItem={saveAsPage}>
         <div
           style={{
