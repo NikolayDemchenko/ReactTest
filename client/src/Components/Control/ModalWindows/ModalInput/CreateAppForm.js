@@ -4,6 +4,7 @@ import { check } from "react-icons-kit/iconic/check";
 import Icon from "react-icons-kit";
 
 export default function CreateAppForm(props) {
+ 
   const Input = ({ title, name }) => {
     const [value, setValue] = useState();
     // console.log("value :>> ", value);
@@ -37,11 +38,14 @@ export default function CreateAppForm(props) {
     //     handleClick();
     //   }
     // };
-    
+    const getInputValueById=(id)=>{
+      return document.getElementById(id).value;
+    }
+
     const handleClick = () => {
-      const domain = document.getElementById("domain").value;
-      const name = document.getElementById("name").value;
-      const appName = document.getElementById("appName").value;
+      const domain = getInputValueById("domain");
+      const name = getInputValueById("name");
+      const appName = getInputValueById("appName");
       if (appName && domain && name) {
         // console.log("{appName,name,domain} :>> ", { appName, name, domain });
         setItem({
