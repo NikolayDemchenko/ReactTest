@@ -43,37 +43,41 @@ export default function CreateAppForm(props) {
 			const value = document.getElementById(id).value;
 			return value ? value : null;
 		};
-		const getInputs = () => {
-			const values = [];
-			const inputs = document.getElementById('form').getElementsByTagName('input');
-			for (let i = 0, len = inputs.length; i < len; ++i) {
-				const { id, value, name, title } = inputs[i];
-				values.push({ id, value, name, title });
-			}
-			return values;
-		};
-		const getPropsInInputs = (arr) => {
-			const dataObject = {};
-			arr.forEach(({ name, value }) => {
-				dataObject[name] = value;
+		const getPropsElementsByParentId = (id, tagName, props = []) => {
+			// Выбирает в выбранном по id HTML элементе все теги с заданным именем (tagName)и возвращает массив объектов с запрошенными свойствами (props)
+			const elements = [];
+			[...document.getElementById(id).getElementsByTagName(tagName)].forEach((input) => {
+				const element = {};
+				props.forEach((prop) => {
+					element[prop] = input[prop];
+				});
+				elements.push(element);
 			});
-			return dataObject;
+			return elements;
+		};
+
+		const getValuesInInputs = (elements) => {
+			const object = {};
+			elements.forEach(({ name, value }) => {
+				if (value) object[name] = value;
+			});
+			return object;
 		};
 
 		// const input = { id, propName, title};
 
 		const handleClick = () => {
-			console.log('getPropsInInputs', getPropsInInputs(getInputs()));
+			const attributes = getPropsElementsByParentId('form', 'input', ['id', 'value', 'name', 'title']);
+			const _props = getValuesInInputs(attributes);
+			console.log('getPropsInInputs', attributes, _props);
 			const domain = getInputValueById('domain');
 			const name = getInputValueById('name');
 			const appName = getInputValueById('appName');
 			if (appName && domain && name) {
 				// console.log("{appName,name,domain} :>> ", { appName, name, domain });
 				setItem({
-          // Дописать тут
-					...getPropsInInputs(getInputs()),
-					styles: [],
-					nodes: [],
+					// Сделать проверку _props
+					..._props,
 					bodyStyle: { background: 'inherit' },
 				});
 				close();
