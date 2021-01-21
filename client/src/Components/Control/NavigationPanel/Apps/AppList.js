@@ -9,15 +9,14 @@ function AppList() {
 
   const appList = settings && settings.appList ? settings.appList : [];
 
-  const createNewPage = (name,appName) => {
-    const newPage = {
+  const createNewPage = (name,appName) => {    
+    RESTManager.createPage({
       appName,
       name,
       styles: [],
       nodes: [],
       bodyStyle: { background: "inherit" },
-    };
-    RESTManager.createPage(newPage);
+    });
 
   };
 

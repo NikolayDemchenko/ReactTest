@@ -17,7 +17,7 @@ function Node(props) {
 
 	return (
 		<node.tag id={node.id} className={classes[node.styleId]} onClick={click}>
-			{nodes && nodes.length > 0 ? <Nodes {...props} nodes={nodes} /> : null}
+			{nodes && <Nodes {...props} nodes={nodes} />}
 		</node.tag>
 	);
 }
