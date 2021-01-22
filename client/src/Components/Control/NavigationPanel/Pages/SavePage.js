@@ -1,54 +1,50 @@
-import React from "react";
-import ModalInput from "../../ModalWindows/ModalInput/ModalInput";
-import CreateAppForm from "../../ModalWindows/ModalInput/CreateAppForm";
-function SavePage({pageId,createPage, saveNewPage, savePage, title }) {
-  // console.log('props', props)
+import React from 'react';
+import ModalInput from '../../ModalWindows/ModalInput/ModalInput';
+import PopupInputsForm from '../../ModalWindows/ModalInput/PopupInputsForm';
+function SavePage({ pageId, createPage, saveNewPage, savePage, title }) {
+	// console.log('props', props)
 
-  return (
-    <div>
-      {savePage&&pageId ? (
-        <div
-          style={{
-            backgroundColor: "#456c",
-            justifyContent: "center",
-            padding: "0 10px",
-            cursor: "pointer",
-          }}
-          onClick={(e) => {
-            // e.stopPropagation();
-            e.preventDefault();
-            savePage();
-          }}
-        >
-          {title}
-        </div>
-      ) : (
-        <CreateAppForm setItem={createPage}>
-        <div
-          style={{
-            backgroundColor: "#456c",
-            justifyContent: "center",
-            padding: "0 10px",
-            cursor: "pointer",
-          }}
-        >
-          {title}
-        </div>
-      </CreateAppForm>
-        // <ModalInput setItem={saveNewPage}>
-        //   <div
-        //     style={{
-        //       backgroundColor: "#456c",
-        //       justifyContent: "center",
-        //       padding: "0 10px",
-        //       cursor: "pointer",
-        //     }}
-        //   >
-        //     {title}
-        //   </div>
-        // </ModalInput>
-      )}
-    </div>
-  );
+	return (
+		<div>
+			{savePage && pageId ? (
+				<div
+					style={{
+						backgroundColor: '#456c',
+						justifyContent: 'center',
+						padding: '0 10px',
+						cursor: 'pointer',
+					}}
+					onClick={(e) => {
+						// e.stopPropagation();
+						e.preventDefault();
+						savePage();
+					}}
+				>
+					{title}
+				</div>
+			) : (
+				<PopupInputsForm
+					setItem={createPage}
+					inputs={[
+						{ title: 'app name', name: 'appName' },
+						{ title: 'domain', name: 'domain' },
+						{ title: 'page name', name: 'name' },
+          ]}
+          requredNames={['domain', 'name', 'appName']}
+				>
+					<div
+						style={{
+							backgroundColor: '#456c',
+							justifyContent: 'center',
+							padding: '0 10px',
+							cursor: 'pointer',
+						}}
+					>
+						{title}
+					</div>
+				</PopupInputsForm>
+			)}
+		</div>
+	);
 }
 export default SavePage;
