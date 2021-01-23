@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import {log,funcLog} from "../../../../Log";
 import Icon from "react-icons-kit";
 import { cross } from "react-icons-kit/icomoon/cross";
-import PopupInput from "../Inputs/PopupInput/PopupInput";
+import PopupInput from "../../Inputs/ModalInput/PopupInput/PopupInput";
 import jss from "jss";
 function Property(props) {
   const {

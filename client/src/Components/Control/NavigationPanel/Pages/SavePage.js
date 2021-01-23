@@ -1,7 +1,6 @@
 import React from 'react';
-import ModalInput from '../../ModalWindows/ModalInput/ModalInput';
-import PopupInputsForm from '../../ModalWindows/ModalInput/PopupInputsForm';
-function SavePage({ pageId, createPage, saveNewPage, savePage, title }) {
+import PopupInputsForm from '../../Inputs/ModalInput/PopupInput/PopupInputsForm';
+function SavePage({ pageId, createPage, savePage, title }) {
 	// console.log('props', props)
 
 	return (

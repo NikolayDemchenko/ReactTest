@@ -1,5 +1,5 @@
 import React from "react";
-import Popover from "../../../ModalWindows/Popover";
+import Popover from "../../ModalInput/Popover";
 import Paper from "./Paper";
 import PropertyValueSelector from "../Switch/DataTypeRecognizer";
 export default function PopupInput(props) {

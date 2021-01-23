@@ -5,14 +5,12 @@ import { copy } from "react-icons-kit/icomoon/copy";
 import { exportIcon } from "react-icons-kit/entypo/exportIcon";
 import { SaveToJSON } from "../../../../AppFunction";
 import { paintBrush } from "react-icons-kit/fa/paintBrush";
-import { ic_update } from "react-icons-kit/md/ic_update";
 import { book } from "react-icons-kit/fa/book";
 import { folderDownload } from "react-icons-kit/icomoon/folderDownload";
-// import { boxAdd } from "react-icons-kit/icomoon/boxAdd";
 import { boxRemove } from "react-icons-kit/icomoon/boxRemove";
-import SelectPanel from "../../ModalWindows/SelectPanel/SelectPanel";
+import SelectPanel from "../../Inputs/ModalInput/SelectPanel/SelectPanel";
 import Styles from "../JSON/Styles.json";
-import PopupInput from "../Inputs/PopupInput/PopupInput";
+import PopupInput from "../../Inputs/ModalInput/PopupInput/PopupInput";
 import { Context } from "../../../../AppFunction";
 function SettingsPanel(props) {
   // console.log("props :>> ", props);

@@ -2,7 +2,7 @@ import React,{useContext} from "react";
 import {log,funcLog} from "../../../Log";
 import jss from "jss";
 import preset from "jss-preset-default";
-import PopupInput from "./Inputs/PopupInput/PopupInput";
+import PopupInput from "../Inputs/ModalInput/PopupInput/PopupInput";
 import {Context} from '../../../AppFunction'
 
 const BackSettings = () => {

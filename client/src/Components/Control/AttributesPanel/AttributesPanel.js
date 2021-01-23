@@ -4,7 +4,7 @@ import { Link } from "react-scroll";
 import {log,funcLog} from "../../../Log";
 import jss from "jss";
 import preset from "jss-preset-default";
-import SelectPanel from "../ModalWindows/SelectPanel/SelectPanel";
+import SelectPanel from "../Inputs/ModalInput/SelectPanel/SelectPanel";
 import { htmlTags } from "../../Class/HtmlCss";
 import BackSettings from "./BackSettings";
 import { Context } from "../../../AppFunction";

@@ -1,9 +1,9 @@
 import React from "react";
 import DataTypeRecognizer from "./DataTypeRecognizer";
-import Color from "../Color";
-import NumberSlider from "../NumberSlider";
-import MultiInput from "../MultiInput";
-import FuncInput from "../FuncInput";
+import Color from "../../Color";
+import NumberSlider from "../../NumberSlider";
+import MultiInput from "../../MultiInput";
+import FuncInput from "../../FuncInput";
 
 function PropertyInputSwitch(props) {
 

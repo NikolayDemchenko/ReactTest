@@ -1,7 +1,7 @@
 import React from "react";
-import SelectPanel from "../../ModalWindows/SelectPanel/SelectPanel";
-import PopupInput from "./PopupInput/PopupInput";
-import { cssFunc } from "../../../Class/HtmlCss";
+import SelectPanel from "./ModalInput/SelectPanel/SelectPanel";
+import PopupInput from "./ModalInput/PopupInput/PopupInput";
+import { cssFunc } from "../../Class/HtmlCss";
 export default function FuncInput({ value, setValue, setPreview }) {
   // console.log("FuncInput");
 

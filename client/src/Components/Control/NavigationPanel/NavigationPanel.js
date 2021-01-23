@@ -2,8 +2,7 @@ import React, { useState, useContext } from 'react';
 import { TagList } from './Tags/TagList';
 import AppList from './Apps/AppList';
 import PageList from './Pages/PageList';
-import ModalInput from '../ModalWindows/ModalInput/ModalInput';
-import PopupInputsForm from '../ModalWindows/ModalInput/PopupInputsForm';
+import PopupInputsForm from '../Inputs/ModalInput/PopupInput/PopupInputsForm';
 import jss from 'jss';
 import preset from 'jss-preset-default';
 import SavePage from './Pages/SavePage';
@@ -67,7 +66,8 @@ function NavigationPanel(props) {
 
 			<SavePage savePage={updatePage} createPage={createPage} title={'Save'} pageId={page._id} />
 
-			<PopupInputsForm        
+			<PopupInputsForm 
+			       
 				setItem={createPage}
 				inputs={[
 					{ title: 'app name', name: 'appName' },
