@@ -8,7 +8,7 @@ import preset from 'jss-preset-default';
 import SavePage from './Pages/SavePage';
 import { Context } from '../../../AppFunction';
 
-function NavigationPanel(props) {
+function NavigationPanel() {
 	const {
 		page,
 		RESTManager: { createPage, updatePage },
@@ -64,11 +64,16 @@ function NavigationPanel(props) {
 				Navigation
 			</div>
 
-			<SavePage savePage={updatePage} createPage={createPage} title={'Save'} pageId={page._id} />
+			<SavePage page={page} savePage={updatePage} createPage={createPage} title={'Save'} pageId={page._id} />
 
 			<PopupInputsForm 
 			       
-				setItem={createPage}
+				setItem={(data)=>createPage({
+					...data,
+					nodes: [],
+					styles: [],
+					bodyStyle: { background: 'inherit' },
+				})}
 				inputs={[
 					{ title: 'app name', name: 'appName' },
 					{ title: 'domain', name: 'domain' },

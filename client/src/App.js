@@ -11,7 +11,7 @@ const App = () => {
 	// const [settings, setSettings] = useState(JSON.parse(sessionStorage.getItem("settings")));
 	const [settings, _setSettings] = useState();
 	const [page, _setPage] = useState(_page);
-	settings && console.log('settings :>> ', settings.node);
+	settings && console.log('settings :>> ', settings);
 	const setPage = (page) => {
 		// console.log("page :>> ", page);
 		_setPage(page);
@@ -21,7 +21,7 @@ const App = () => {
 		_setSettings(settings);
 		// console.log("setSettings");
 	};
-	// console.log('settings :>> ', settings);
+	console.log('settings :>> ', settings);
 	// settings&&sessionStorage.setItem('settings', JSON.stringify(settings))
 
 	// page&&sessionStorage.setItem('page', JSON.stringify(page))
@@ -68,14 +68,14 @@ const App = () => {
 						<AttributesPanel />
 					</Portal>
 				)}
-				<Page
+				{page&&<Page
 					{...{
 						bodyStyle: page.bodyStyle,					
 						selectedId: settings && settings.node && settings.node.id,
 						onClick,
 						classes,
 					}}
-				/>
+				/>}
 			</Context.Provider>
 		</ErrorBoundry>
 	);

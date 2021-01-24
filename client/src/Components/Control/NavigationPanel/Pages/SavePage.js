@@ -1,6 +1,6 @@
 import React from 'react';
 import PopupInputsForm from '../../Inputs/ModalInput/PopupInput/PopupInputsForm';
-function SavePage({ pageId, createPage, savePage, title }) {
+function SavePage({ page, pageId, createPage, savePage, title }) {
 	// console.log('props', props)
 
 	return (
@@ -23,13 +23,13 @@ function SavePage({ pageId, createPage, savePage, title }) {
 				</div>
 			) : (
 				<PopupInputsForm
-					setItem={createPage}
+					setItem={(data) => createPage({ ...data, ...page })}
 					inputs={[
 						{ title: 'app name', name: 'appName' },
 						{ title: 'domain', name: 'domain' },
 						{ title: 'page name', name: 'name' },
-          ]}
-          requredNames={['domain', 'name', 'appName']}
+					]}
+					requredNames={['domain', 'name', 'appName']}
 				>
 					<div
 						style={{
