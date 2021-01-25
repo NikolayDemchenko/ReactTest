@@ -4,13 +4,12 @@ import { check } from 'react-icons-kit/iconic/check';
 import Icon from 'react-icons-kit';
 import { log } from '../../../../../Log';
 import shortid from 'shortid';
-import NamedInput from '../../NamedInput'
+import NamedInput from '../../NamedInput';
 function PopupInputsForm(props) {
 	const CheckForm = ({ setItem, inputs, requredNames, button, close }) => {
-	
 		const containerId = shortid.generate();
 		const getElementsPropsByСontainerId = (id, props = []) => {
-			// Выбирает в указанном по id HTML элементе все инпуты и возвращает массив объектов с запрошенными свойствами (props) инпутов 
+			// Выбирает в указанном по id HTML элементе все инпуты и возвращает массив объектов с запрошенными свойствами (props) инпутов
 			const elements = [];
 			[...document.getElementById(id).getElementsByTagName('input')].forEach((input) => {
 				const element = {};
@@ -46,11 +45,7 @@ function PopupInputsForm(props) {
 			const attributes = getElementsPropsByСontainerId(containerId, ['value', 'name']);
 			const props = convertInputsToObject(attributes);
 			if (checkingProps(requredNames, props)) {
-				setItem({
-					...props,
-					nodes: [],
-					bodyStyle: { background: 'inherit' },
-				});
+				setItem(props);
 				close && close();
 			}
 		};
