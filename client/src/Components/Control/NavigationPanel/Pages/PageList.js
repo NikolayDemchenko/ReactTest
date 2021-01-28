@@ -5,9 +5,9 @@ import { Context } from "../../../../AppFunction";
 import TagCRUDbtn from "../TagCRUDbtn";
 import { tagList as elementList } from "../../../Class/HtmlCss";
 function NavPages() {
-  const { settings } = useContext(Context);
-  // console.log("settings", settings);
-  const pageList = settings && settings.pageList ? settings.pageList : [];
+  const { state } = useContext(Context);
+  
+  const pageList = state && state.pageList ? state.pageList : [];
   console.log('pageList', pageList)
   return pageList.map((page, index) => {
     // console.log('page', page)

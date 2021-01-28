@@ -8,7 +8,7 @@ import TagCRUDbtn from '../TagCRUDbtn';
 import { Context } from '../../../../AppFunction';
 
 function NavTag(props) {
-	const { createTag, removeTag, settings, page } = useContext(Context);
+	const { createTag, removeTag, state, page } = useContext(Context);
 	const { node } = props;
 	const { tag, id, index } = node;
 	const nodes = page.nodes.filter(({ parentId }) => parentId === node.id);
@@ -36,7 +36,7 @@ function NavTag(props) {
 	let background = 'rgba(30,40,57,.8)';
 	let showButtons = false;
 	// let showButtons = true;
-	if (settings && settings.node && settings.node.id === id) {
+	if (state && state.node && state.node.id === id) {
 		background = 'rgba(30,60,97,1)';
 		showButtons = true;
 	}

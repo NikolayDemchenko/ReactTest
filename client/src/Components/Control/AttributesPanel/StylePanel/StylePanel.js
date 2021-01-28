@@ -15,8 +15,8 @@ function StylePanel(props) {
   const {
     page,
     setPage,
-    setSettings,
-    settings: { node, assignStyleId },
+    setState,
+    state: { node, assignStyleId },
   } = useContext(Context);
   const tagStyle = page.styles.find(({ id }) => id === node.styleId);
  
@@ -31,7 +31,7 @@ function StylePanel(props) {
       const newStyle = createVariable(data, createUniqueName(name, names));
       console.log('newStyle', newStyle)
       const changedTag = { ...node, styleId: newStyle.id };
-      setSettings((settings) => ({ ...settings, node: changedTag }));
+      setState((state) => ({ ...state, node: changedTag }));
       return {
         ...page,
         nodes: page.nodes.map((node) => {
@@ -93,7 +93,7 @@ function StylePanel(props) {
           updateStyleName,
           updateStyleData,
           assignStyleId,
-          setSettings,
+          setState,
           node,
           addStyle,
         }}

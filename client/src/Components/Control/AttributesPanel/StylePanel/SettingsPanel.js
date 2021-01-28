@@ -27,8 +27,8 @@ function SettingsPanel(props) {
     page,
     // setPage,
     updateTag,
-    setSettings,
-    settings: { node, assignStyleId },
+    setState,
+    state: { node, assignStyleId },
   } = useContext(Context);
   // console.log("props", props);
   // console.log("Styles", Styles);
@@ -128,7 +128,7 @@ function SettingsPanel(props) {
           style={assignStyleId && { color: "#ffa" }}
           onClick={(e) => {
             e.stopPropagation();         
-            setSettings((state) => {
+            setState((state) => {
               if (!state.assignStyleId) {
                 return {
                   ...state,

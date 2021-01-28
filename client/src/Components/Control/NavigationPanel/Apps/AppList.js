@@ -5,9 +5,9 @@ import PageCRUDbtn from "../PageCRUDbtn";
 
 function AppList() {
   // const [appList, setAppList] = useState([]);
-  const { settings, setSettings, RESTManager } = useContext(Context);
+  const { state,RESTManager } = useContext(Context);
 
-  const appList = settings && settings.appList ? settings.appList : [];
+  const appList = state && state.appList ? state.appList : [];
 
   const createNewPage = (name,appName) => {    
     RESTManager.createPage({
@@ -29,12 +29,8 @@ function AppList() {
   return appList.map((app, index) => {
     let background = "rgba(30,40,57,.8)";
     let showButtons = false;
-    // console.log(
-    //   "settings.pageList[0]",
-    //   settings.pageList && settings.pageList[0],
-    //   app
-    // );
-    if (settings.appName && settings.appName === app) {
+ 
+    if (state.appName && state.appName === app) {
       background = "rgba(30,60,97,1)";
       showButtons = true;
     }

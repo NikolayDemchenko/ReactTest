@@ -144,13 +144,4 @@ function PropertiesPanel(props) {
     </div>
   );
 }
-
-// function areEqual(prevProps, nextProps) {
-//   console.log('prevProps === nextProps:>> ', prevProps.panelStyle === nextProps.panelStyle);
-//   console.log('prevProps.panelStyle :>> ', prevProps.panelStyle);
-//   console.log('nextProps.panelStyle :>> ', nextProps.panelStyle);
-
-//   return prevProps.panelStyle === nextProps.panelStyle
-// }
-// export default React.memo(log(PropertiesPanel), areEqual);
 export default React.memo(log(PropertiesPanel));

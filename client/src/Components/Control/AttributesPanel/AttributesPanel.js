@@ -17,7 +17,7 @@ function AttributesPanel(props) {
 
   const {
     updateTag,
-    settings: { node },
+    state: { node },
   } = useContext(Context);
 
   const style = {

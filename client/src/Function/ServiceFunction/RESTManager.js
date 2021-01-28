@@ -1,6 +1,6 @@
 import axios from 'axios';
 const clog = true;
-export const GetRESTManager = (page, setPage, setSettings) => ({
+export const GetRESTManager = (page, setPage, setState) => ({
 	getApps: () => {
 		clog && console.log('getApps');
 		axios({
@@ -8,7 +8,7 @@ export const GetRESTManager = (page, setPage, setSettings) => ({
 			url: 'http://localhost:8000/getApps',
 		})
 			.then((response) => {
-				setSettings((settings) => ({ ...settings, appList: response.data }));
+				setState((state) => ({ ...state, appList: response.data }));
 			})
 			.catch(function (error) {
 				console.log(error);
@@ -37,9 +37,9 @@ export const GetRESTManager = (page, setPage, setSettings) => ({
 		})
 			.then((response) => {
 				clog && console.log('getPagesByAppName', response.data.pages);
-				setSettings((settings) => ({
+				setState((state) => ({
 					pageList: response.data.pages,
-					appList: settings.appList,
+					appList: state.appList,
 					appName,
 				}));
 				setPage(response.data.startPage);
@@ -57,12 +57,11 @@ export const GetRESTManager = (page, setPage, setSettings) => ({
 			.then((response) => {
 				clog && console.log('createPage', response.data);
 				setPage({ ...response.data });
-				setSettings((settings) => {
-					// clog &&console.log('settings', settings)
+				setState((state) => {			
 					const { _id, name, domain, appName } = response.data;
 					return {
-						...settings,
-						pageList: [...settings.pageList, { _id, name, domain, appName }],
+						...state,
+						pageList: [...state.pageList, { _id, name, domain, appName }],
 					};
 				});
 			})
@@ -112,10 +111,10 @@ export const GetRESTManager = (page, setPage, setSettings) => ({
 			},
 		})
 			.then(() => {
-				setSettings((settings) => {
+				setState((state) => {
 					return {
-						...settings,
-						pageList: [...settings.pageList.filter((page) => page._id !== _id)],
+						...state,
+						pageList: [...state.pageList.filter((page) => page._id !== _id)],
 					};
 				});
 			})
