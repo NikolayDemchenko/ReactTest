@@ -6,7 +6,6 @@ import { Portal } from 'react-portal';
 import AttributesPanel from './Components/Control/AttributesPanel/AttributesPanel';
 import NavigationPanel from './Components/Control/NavigationPanel/NavigationPanel';
 import { TagFunctions, GetRESTManager, Context } from './AppFunction';
-import PageEditor from './Components/Control/PageEditor'
 
 const App = () => {
 	// const [settings, setSettings] = useState(JSON.parse(sessionStorage.getItem("settings")));
