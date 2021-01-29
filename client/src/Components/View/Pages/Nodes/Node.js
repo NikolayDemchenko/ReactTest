@@ -7,7 +7,7 @@ function Node(props) {
 
   const click = (e) => { 
     e.stopPropagation();
-    onClick(node);
+    onClick(node.id);
   };
 
   const { page } = useContext(Context);

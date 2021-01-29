@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import StylePanel from "./StylePanel/StylePanel";
 import { Link } from "react-scroll";
-import {log,funcLog} from "../../../Log";
+import { log, funcLog } from "../../../Log";
 import jss from "jss";
 import preset from "jss-preset-default";
 import SelectPanel from "../Inputs/ModalInput/SelectPanel/SelectPanel";
@@ -15,10 +15,7 @@ function AttributesPanel(props) {
   //     'color: green');
   // console.log("props :>> ", props);
 
-  const {
-    updateTag,
-    state: { node },
-  } = useContext(Context);
+  const { updateTag, node } = useContext(Context);
 
   const style = {
     flexWrap: "wrap",

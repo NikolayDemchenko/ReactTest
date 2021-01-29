@@ -1,4 +1,4 @@
-import React,{useContext} from "react";
+import React, { useContext } from "react";
 import Icon from "react-icons-kit";
 import { buttonStyle } from "./BtnStyle";
 import { copy } from "react-icons-kit/icomoon/copy";
@@ -15,12 +15,11 @@ import { Context } from "../../../../AppFunction";
 function SettingsPanel(props) {
   // console.log("props :>> ", props);
   const {
-    addStyle,
-    updateStyleName,   
+    cloneStyle,
+    updateStyleName,
     selected,
     updateStyleData,
     tagStyle,
-
   } = props;
 
   const {
@@ -28,12 +27,13 @@ function SettingsPanel(props) {
     // setPage,
     updateTag,
     setState,
-    state: { node, assignStyleId },
+    node,
+    state: { assignStyleId },
   } = useContext(Context);
   // console.log("props", props);
   // console.log("Styles", Styles);
 
-// console.log('assignStyleId :>> ', assignStyleId);
+  // console.log('assignStyleId :>> ', assignStyleId);
   const setLibrStyleByName = (name) => {
     const style = Styles.find((style) => style.name === name);
     updateStyleData(style.data);
@@ -54,11 +54,10 @@ function SettingsPanel(props) {
             ? "rgba(140, 200, 255, 0)"
             : "rgba(140, 200, 255, 0.4)",
         cursor: "default",
-        paddingLeft: "0.5em",      
+        paddingLeft: "0.5em",
         background:
           selected === "All style" ? "rgba(134, 186, 250, 0.15)" : "none",
       }}
-
     >
       <div
         style={{
@@ -75,7 +74,11 @@ function SettingsPanel(props) {
           }}
           title={"имя стиля"}
         >
-          <PopupInput dataType={"string"} value={tagStyle.name} setValue={updateStyleName} />
+          <PopupInput
+            dataType={"string"}
+            value={tagStyle.name}
+            setValue={updateStyleName}
+          />
         </div>
         <div
           style={{
@@ -84,12 +87,12 @@ function SettingsPanel(props) {
           }}
         >
           <div
-            title={"Новый стиль"}   
+            title={"Новый стиль"}
             className={buttonStyle}
             onClick={(e) => {
               e.stopPropagation();
-              console.log("Новый стиль!",tagStyle.data);
-              addStyle(tagStyle.data,"new_style",node);
+              console.log("Новый стиль!", tagStyle.data);
+              cloneStyle(tagStyle.data, "new_style", node);
             }}
           >
             <Icon size={"100%"} icon={copy} />
@@ -127,7 +130,7 @@ function SettingsPanel(props) {
           className={buttonStyle}
           style={assignStyleId && { color: "#ffa" }}
           onClick={(e) => {
-            e.stopPropagation();         
+            e.stopPropagation();
             setState((state) => {
               if (!state.assignStyleId) {
                 return {
@@ -137,7 +140,7 @@ function SettingsPanel(props) {
               } else {
                 return {
                   ...state,
-                  assignStyleId: null
+                  assignStyleId: null,
                 };
               }
             });
@@ -154,7 +157,7 @@ function SettingsPanel(props) {
           onClick={(e) => {
             e.stopPropagation();
             window.navigator.clipboard.writeText(
-              JSON.stringify({ name: "", panelStyle:tagStyle.data })
+              JSON.stringify({ name: "", panelStyle: tagStyle.data })
             );
           }}
         >

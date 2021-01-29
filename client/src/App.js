@@ -42,10 +42,10 @@ const App = () => {
 
   const RESTManager = GetRESTManager(page, setPage, setState);
 
-  const onClick =
-    state && state.assignStyleId
-      ? (node) => updateTag(node.id, "styleId", state.assignStyleId)
-      : (node) => setState((state) => ({ ...state, node }));
+  // const onClick =
+  //   state && state.assignStyleId
+  //     ? (node) => updateTag(node.id, "styleId", state.assignStyleId)
+  //     : (node) => setState((state) => ({ ...state, node }));
 
   return (
     <ErrorBoundry>
