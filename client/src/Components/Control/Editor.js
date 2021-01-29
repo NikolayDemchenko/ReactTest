@@ -6,6 +6,7 @@ import { TagFunctions, Context } from "../../AppFunction";
 const Editor = ({ RESTManager, setState, state }) => {
   const page = state.page;
   const setPage = (page) => {
+    console.log('page', page)
     setState((state) => ({ ...state, page }));
   };
   console.log("state :>> ", state);

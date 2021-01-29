@@ -9,17 +9,13 @@ import { TagFunctions, GetRESTManager, Context } from "./AppFunction";
 import Editor from "./Components/Control/Editor";
 
 const App = () => {
-  const [state, _setState] = useState({page:_page});
+  const [state, setState] = useState({page:_page});
   const [page, _setPage] = useState(_page);
   state && console.log("state :>> ", state);
   const setPage = (page) => {
     // console.log("page :>> ", page);
     _setPage(page);
     // console.log("setPage");
-  };
-  const setState = (state) => {
-    _setState(state);
-    // console.log("setState");
   };
 
   // state&&sessionStorage.setItem('state', JSON.stringify(state))
@@ -54,19 +50,19 @@ const App = () => {
   return (
     <ErrorBoundry>
       <Context.Provider
-        value={{
-          createTag,
-          removeTag,
-          updateTag,
-          RESTManager,
-          page,
-          setPage,
-          state,
-          setState,
-        }}
+        // value={{
+        //   createTag,
+        //   removeTag,
+        //   updateTag,
+        //   RESTManager,
+        //   page,
+        //   setPage,
+        //   state,
+        //   setState,
+        // }}
       >
-        <NavigationPanel />
-        {state && state.node && (
+        {/* <NavigationPanel /> */}
+        {/* {state && state.node && (
           <Portal>
             <AttributesPanel />
           </Portal>
@@ -80,7 +76,7 @@ const App = () => {
               classes,
             }}
           />
-        )}
+        )} */}
       </Context.Provider>
       <Editor {...{ RESTManager, setState, state }} />
     </ErrorBoundry>
