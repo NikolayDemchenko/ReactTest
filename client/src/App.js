@@ -5,18 +5,18 @@ import { page as _page } from "./Components/View/Pages/CreateApp";
 import { Portal } from "react-portal";
 import AttributesPanel from "./Components/Control/AttributesPanel/AttributesPanel";
 import NavigationPanel from "./Components/Control/NavigationPanel/NavigationPanel";
-import { TagFunctions, GetRESTManager, Context } from "./AppFunction";
+import { GetRESTManager,NavigationContext } from "./AppFunction";
 import Editor from "./Components/Control/Editor";
 
 const App = () => {
   const [state, setState] = useState({page:_page});
-  const [page, _setPage] = useState(_page);
-  state && console.log("state :>> ", state);
-  const setPage = (page) => {
-    // console.log("page :>> ", page);
-    _setPage(page);
-    // console.log("setPage");
-  };
+  // const [page, _setPage] = useState(_page);
+  state && console.log("state :>> ", state.nodeId);
+  // const setPage = (page) => {
+  //   // console.log("page :>> ", page);
+  //   _setPage(page);
+  //   // console.log("setPage");
+  // };
 
   // state&&sessionStorage.setItem('state', JSON.stringify(state))
 
@@ -34,13 +34,13 @@ const App = () => {
   //   "localStorage.getItem('state') :>> ",
   //   JSON.parse(localStorage.getItem("state"))
   // );
-  const { createTag, removeTag, updateTag, classes } = TagFunctions(
-    page,
-    setPage,
-    setState
-  );
+  // const { createTag, removeTag, updateTag, classes } = TagManager(
+  //   state.page,
+  //   setPage,
+  //   setState
+  // );
 
-  const RESTManager = GetRESTManager(page, setPage, setState);
+  const RESTManager = GetRESTManager(state.page, setState);
 
   // const onClick =
   //   state && state.assignStyleId
@@ -49,19 +49,14 @@ const App = () => {
 
   return (
     <ErrorBoundry>
-      <Context.Provider
-        // value={{
-        //   createTag,
-        //   removeTag,
-        //   updateTag,
-        //   RESTManager,
-        //   page,
-        //   setPage,
-        //   state,
-        //   setState,
-        // }}
+      <NavigationContext.Provider
+        value={{
+          RESTManager,        
+          state,
+          setState,
+        }}
       >
-        {/* <NavigationPanel /> */}
+        <NavigationPanel />
         {/* {state && state.node && (
           <Portal>
             <AttributesPanel />
@@ -77,7 +72,7 @@ const App = () => {
             }}
           />
         )} */}
-      </Context.Provider>
+      </NavigationContext.Provider>
       <Editor {...{ RESTManager, setState, state }} />
     </ErrorBoundry>
   );

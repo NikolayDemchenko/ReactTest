@@ -12,7 +12,7 @@ const BackSettings = () => {
 		 page,
   } = useContext(Context);
   
-  console.log('page', page)
+  // console.log('page', page)
 	const setPreview = (color) => {
 		console.log('color', color);
 		jss.setup(preset());

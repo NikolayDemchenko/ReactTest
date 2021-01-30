@@ -1,11 +1,11 @@
 import React, { useContext, useEffect } from "react";
 import axios from "axios";
-import { Context } from "../../../../AppFunction";
+import { NavigationContext } from "../../../../AppFunction";
 import PageCRUDbtn from "../PageCRUDbtn";
 
 function AppList() {
   // const [appList, setAppList] = useState([]);
-  const { state,RESTManager } = useContext(Context);
+  const { state,RESTManager } = useContext(NavigationContext);
 
   const appList = state && state.appList ? state.appList : [];
 

@@ -6,13 +6,13 @@ import PopupInputsForm from '../Inputs/ModalInput/PopupInput/PopupInputsForm';
 import jss from 'jss';
 import preset from 'jss-preset-default';
 import SavePage from './Pages/SavePage';
-import { Context } from '../../../AppFunction';
+import { NavigationContext } from '../../../AppFunction';
 
 function NavigationPanel() {
 	const {
-		page,
+		state:{page},
 		RESTManager: { createPage, updatePage },
-	} = useContext(Context);
+	} = useContext(NavigationContext);
 
 	// console.log('props', props)
 	const style = {
@@ -64,7 +64,7 @@ function NavigationPanel() {
 				Navigation
 			</div>
 
-			<SavePage page={page} savePage={updatePage} createPage={createPage} title={'Save'} pageId={page._id} />
+			{page&&<SavePage page={page} savePage={updatePage} createPage={createPage} title={'Save'} pageId={page._id} />}
 
 			<PopupInputsForm 
 			       
@@ -99,7 +99,7 @@ function NavigationPanel() {
 					{'Pages'}
 					<PageList />
 					{'Tags'}
-					<TagList />
+					{page&&<TagList />}
 				</div>
 			)}
 		</div>

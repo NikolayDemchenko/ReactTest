@@ -5,13 +5,14 @@ import { Link } from 'react-scroll';
 import { NavTags } from './TagList';
 import { tagList as elementList } from '../../../Class/HtmlCss';
 import TagCRUDbtn from '../TagCRUDbtn';
-import { Context } from '../../../../AppFunction';
+import { NavigationContext } from '../../../../AppFunction';
 
 function NavTag(props) {
-	const { createTag, removeTag, state, page } = useContext(Context);
+	const { state } = useContext(NavigationContext);
+	const { createTag, removeTag } = state;
 	const { node } = props;
 	const { tag, id, index } = node;
-	const nodes = page.nodes.filter(({ parentId }) => parentId === node.id);
+	const nodes = state.page.nodes.filter(({ parentId }) => parentId === id);
 	const [showChilds, setshowChilds] = useState(false);
 	// console.log("id :>> ", id);
 	// console.log("selectedId :>> ", selectedId);
@@ -21,7 +22,7 @@ function NavTag(props) {
 	const icon = !showChilds ? <div>{_icon}</div> : <div style={{ transform: 'rotate(90deg)' }}>{_icon}</div>;
 
 	const toggle =
-  nodes.length > 0 ? (
+		nodes.length > 0 ? (
 			<div
 				style={{ cursor: 'pointer', width: '20px' }}
 				onClick={(e) => {
@@ -36,7 +37,7 @@ function NavTag(props) {
 	let background = 'rgba(30,40,57,.8)';
 	let showButtons = false;
 	// let showButtons = true;
-	if (state && state.node && state.node.id === id) {
+	if (state.nodeId === id) {
 		background = 'rgba(30,60,97,1)';
 		showButtons = true;
 	}
@@ -72,7 +73,7 @@ function NavTag(props) {
 									parent: node,
 									create: createTag,
 									remove: () => removeTag(node.id),
-									childrens: page.nodes.filter(({ parentId }) => parentId === node.id),
+									childrens: state.page.nodes.filter(({ parentId }) => parentId === node.id),
 									elementList,
 								}}
 							/>
@@ -81,9 +82,7 @@ function NavTag(props) {
 				</div>
 			</Link>
 
-			<div style={{ marginLeft: '30px' }}>
-				{nodes && showChilds && <NavTags  nodes={nodes} index={id} />}
-			</div>
+			<div style={{ marginLeft: '30px' }}>{nodes && showChilds && <NavTags nodes={nodes} index={id} />}</div>
 		</div>
 	);
 }

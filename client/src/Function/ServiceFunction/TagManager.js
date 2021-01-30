@@ -16,7 +16,7 @@ import { createVariable, createUniqueName } from '../../AppFunction';
 // 		}
 // 	});
 // };
-export const TagFunctions = (page, setPage, setState) => {
+export const TagManager = (page, setPage, setState) => {
 	jss.setup(preset());
 	const myStyles = {};
 	page.styles &&
@@ -56,24 +56,21 @@ export const TagFunctions = (page, setPage, setState) => {
 			});
 		},
 		removeTag: (tagId) => {
-			setState();
-			setPage((page) => ({
-				...page,
-				nodes: page.nodes.filter((node) => node.id !== tagId),
+			setState(({ page }) => ({
+				page: { ...page, nodes: page.nodes.filter((node) => node.id !== tagId) },
 			}));
 		},
 		updateTag: (nodeId, propName, propValue) => {
-			setPage((page) => ({
-				...page,
-				nodes: page.nodes.map((_node) => {
-					if (_node.id === nodeId) {
-						const node = { ..._node, [propName]: propValue };
-						setState((state) => ({ ...state, node }));
-						return node;
-					} else {
-						return _node;
-					}
-				}),
+		
+			setState((state) => ({
+				...state,
+				nodeId,
+				page: {
+					...state.page,
+					nodes: page.nodes.map((_node) =>
+						_node.id === nodeId ? { ..._node, [propName]: propValue } : _node
+					),
+				},
 			}));
 		},
 	};

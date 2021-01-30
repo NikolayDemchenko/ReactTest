@@ -19,12 +19,11 @@ function SettingsPanel(props) {
     updateStyleName,
     selected,
     updateStyleData,
-    tagStyle,
+    nodeStyle,
   } = props;
 
   const {
-    page,
-    // setPage,
+    page,    
     updateTag,
     setState,
     node,
@@ -76,7 +75,7 @@ function SettingsPanel(props) {
         >
           <PopupInput
             dataType={"string"}
-            value={tagStyle.name}
+            value={nodeStyle.name}
             setValue={updateStyleName}
           />
         </div>
@@ -91,8 +90,8 @@ function SettingsPanel(props) {
             className={buttonStyle}
             onClick={(e) => {
               e.stopPropagation();
-              console.log("Новый стиль!", tagStyle.data);
-              cloneStyle(tagStyle.data, "new_style", node);
+              console.log("Новый стиль!", nodeStyle.data);
+              cloneStyle();
             }}
           >
             <Icon size={"100%"} icon={copy} />
@@ -157,7 +156,7 @@ function SettingsPanel(props) {
           onClick={(e) => {
             e.stopPropagation();
             window.navigator.clipboard.writeText(
-              JSON.stringify({ name: "", panelStyle: tagStyle.data })
+              JSON.stringify({ name: "", panelStyle: nodeStyle.data })
             );
           }}
         >
@@ -170,7 +169,7 @@ function SettingsPanel(props) {
           // Сохранение файлов
           onClick={(e) => {
             e.stopPropagation();
-            SaveToJSON(tagStyle.data);
+            SaveToJSON(nodeStyle.data);
           }}
         >
           <Icon size={"100%"} icon={exportIcon} />

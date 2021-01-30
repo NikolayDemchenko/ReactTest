@@ -1,11 +1,9 @@
 import React, { useContext } from "react";
-
-import axios from "axios";
-import { Context } from "../../../../AppFunction";
+import { NavigationContext } from "../../../../AppFunction";
 import TagCRUDbtn from "../TagCRUDbtn";
 import { tagList as elementList } from "../../../Class/HtmlCss";
 function NavPages() {
-  const { state } = useContext(Context);
+  const { state } = useContext(NavigationContext);
   
   const pageList = state && state.pageList ? state.pageList : [];
   console.log('pageList', pageList)
@@ -15,8 +13,8 @@ function NavPages() {
   });
 }
 function NavPage({ page ,pageList}) {
-  const context = useContext(Context);
-  const { createTag, RESTManager } = context;
+  const { createTag, RESTManager,state } = useContext(NavigationContext);
+  // const  = context;
 
   // console.log("context.page", context.page);
   // console.log("page", page);
@@ -28,7 +26,7 @@ function NavPage({ page ,pageList}) {
   let background = "rgba(30,40,57,.8)";
   let showButtons = false;
 
-  if (context.page && context.page._id === page._id) {
+  if (state.page && state.page._id === page._id) {
     background = "rgba(30,60,97,1)";
     showButtons = true;
   }
@@ -38,7 +36,7 @@ function NavPage({ page ,pageList}) {
       onClick={(e) => {
         console.log("onClick");
         e.preventDefault();
-        context.page._id !== page._id && RESTManager.getPageById(page._id);
+        state.page._id !== page._id && RESTManager.getPageById(page._id);
         // console.log("id :>> ", id);
       }}
       style={{
