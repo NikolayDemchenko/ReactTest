@@ -16,7 +16,7 @@ function SavePage({ page, pageId, createPage, savePage, title }) {
 					onClick={(e) => {
 						// e.stopPropagation();
 						e.preventDefault();
-						savePage();
+						savePage(page);
 					}}
 				>
 					{title}

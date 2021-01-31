@@ -1,6 +1,6 @@
 import axios from 'axios';
 const clog = true;
-export const GetRESTManager = (page, setState) => {
+export const GetRESTManager = (setState) => {
 	const setPage = (page) => {
 		setState((state) => ({ ...state, page }));
 	};
@@ -74,7 +74,7 @@ export const GetRESTManager = (page, setState) => {
 					console.log(error);
 				});
 		},
-		updatePage: () => {
+		updatePage: (page) => {
 			clog && console.log('updatePage');
 			axios({
 				method: 'post',

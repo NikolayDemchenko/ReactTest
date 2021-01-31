@@ -10,10 +10,10 @@ import { NavigationContext } from '../../../AppFunction';
 
 function NavigationPanel() {
 	const {
-		state:{page},
+		state,
 		RESTManager: { createPage, updatePage },
 	} = useContext(NavigationContext);
-
+	const { page } = state;
 	// console.log('props', props)
 	const style = {
 		// flexWrap: "wrap",
@@ -64,22 +64,25 @@ function NavigationPanel() {
 				Navigation
 			</div>
 
-			{page&&<SavePage page={page} savePage={updatePage} createPage={createPage} title={'Save'} pageId={page._id} />}
+			{page && (
+				<SavePage page={page} savePage={updatePage} createPage={createPage} title={'Save'} pageId={page._id} />
+			)}
 
-			<PopupInputsForm 
-			       
-				setItem={(data)=>createPage({
-					...data,
-					nodes: [],
-					styles: [],
-					bodyStyle: { background: 'inherit' },
-				})}
+			<PopupInputsForm
+				setItem={(data) =>
+					createPage({
+						...data,
+						nodes: [],
+						styles: [],
+						bodyStyle: { background: 'inherit' },
+					})
+				}
 				inputs={[
 					{ title: 'app name', name: 'appName' },
 					{ title: 'domain', name: 'domain' },
-          { title: 'page name', name: 'name' },          
-        ]}
-        requredNames={['domain', 'name', 'appName']}
+					{ title: 'page name', name: 'name' },
+				]}
+				requredNames={['domain', 'name', 'appName']}
 			>
 				<div
 					style={{
@@ -99,7 +102,7 @@ function NavigationPanel() {
 					{'Pages'}
 					<PageList />
 					{'Tags'}
-					{page&&<TagList />}
+					{page && <TagList />}
 				</div>
 			)}
 		</div>
