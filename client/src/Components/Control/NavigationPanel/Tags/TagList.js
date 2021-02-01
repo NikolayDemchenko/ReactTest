@@ -6,7 +6,9 @@ function TagList() {
 	const {
 		state: { page },
 	} = useContext(NavigationContext);
+	// console.log('page', page)
 	const nodes = page.nodes.filter(({ parentId }) => parentId === null);
+
 	return <NavTags {...{nodes }} />;
 }
 function NavTags(props) {

@@ -6,14 +6,15 @@ function NavPages() {
   const { state } = useContext(NavigationContext);
   
   const pageList = state && state.pageList ? state.pageList : [];
-  console.log('pageList', pageList)
+  // console.log('pageList', pageList)
   return pageList.map((page, index) => {
     // console.log('page', page)
     return <NavPage pageList={pageList} key={index} page={page} />;
   });
 }
 function NavPage({ page ,pageList}) {
-  const { createTag, RESTManager,state } = useContext(NavigationContext);
+  const { RESTManager, state } = useContext(NavigationContext);
+  const { createTag } = state;
   // const  = context;
 
   // console.log("context.page", context.page);

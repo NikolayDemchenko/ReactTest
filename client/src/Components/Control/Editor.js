@@ -4,21 +4,19 @@ import AttributesPanel from './AttributesPanel/AttributesPanel';
 import { TagManager, Context } from '../../AppFunction';
 
 const Editor = ({ RESTManager, setState, state }) => {
+	console.log('Editor')
 	const page = state.page;
 	const node = page.nodes.find(({ id }) => state.nodeId === id);
 	const nodeStyle = node && page.styles.find(({ id }) => id === node.styleId);
+	// console.log('nodeStyle', nodeStyle)
 	// console.log('node :>> ', node);
-	const setPage = (page) => {
-		console.log('page', page);
-		setState((state) => ({ ...state, page }));
-	};
 	// console.log('state :>> ', state);
 
-  const { createTag, removeTag, updateTag, classes } = TagManager(page, setPage, setState);
+	const { createTag, removeTag, updateTag, classes } = TagManager(page, setState);
+	
   useEffect(() => {
     setState((state) => ({ ...state, createTag, removeTag, updateTag }));
-    return () => {
-    
+    return () => {    
     }
   }, [])
 	
@@ -36,8 +34,7 @@ const Editor = ({ RESTManager, setState, state }) => {
 				RESTManager,
 				page,
 				node,
-				nodeStyle,
-				setPage,
+				nodeStyle,		
 				state,
 				setState,
 			}}

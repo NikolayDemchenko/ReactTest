@@ -42,7 +42,7 @@ export const StyleManager = (page,node, setState) => {
 		updateStyleName: (name) => {
 			!page.styles.find((style) => style.name === name) && updateStyleById(node.styleId, 'name', name);
 		},
-		getDefaultStyleProps: (id) => {
+		getDefaultStyleProps: () => {
 			// console.log('getDefaultStyleProps :>> ', id);
 			const result = Object.entries(getComputedStyle(document.getElementById(node.id)))
 				.map(([key, value]) => {

@@ -1,9 +1,7 @@
 import axios from 'axios';
 const clog = true;
 export const GetRESTManager = (setState) => {
-	const setPage = (page) => {
-		setState((state) => ({ ...state, page }));
-	};
+
 	return {
 		getApps: () => {
 			clog && console.log('getApps');
@@ -18,19 +16,20 @@ export const GetRESTManager = (setState) => {
 					console.log(error);
 				});
 		},
-		getPages: () => {
-			axios({
-				method: 'get',
-				url: 'http://localhost:8000/getPages',
-			})
-				.then((response) => {
-					clog && console.log('getPages', response.data);
-					setPage(response.data);
-				})
-				.catch(function (error) {
-					console.log(error);
-				});
-		},
+		// getPages: () => {
+		// 	axios({
+		// 		method: 'get',
+		// 		url: 'http://localhost:8000/getPages',
+		// 	})
+		// 		.then((response) => {
+		// 			clog && console.log('getPages', response.data);
+		//
+		//    setState((state) => ({ ...state, page: response.data }));
+		// 		})
+		// 		.catch(function (error) {
+		// 			console.log(error);
+		// 		});
+		// },
 		getPagesByAppName: (appName) => {
 			axios({
 				method: 'get',
@@ -42,12 +41,12 @@ export const GetRESTManager = (setState) => {
 				.then((response) => {
 					clog && console.log('getPagesByAppName', response.data.pages);
 					setState((state) => ({
+						...state,
 						pageList: response.data.pages,
 						appList: state.appList,
 						appName,
 						page: response.data.startPage,
 					}));
-					// setPage(response.data.startPage);
 				})
 				.catch(function (error) {
 					console.log(error);
@@ -61,12 +60,12 @@ export const GetRESTManager = (setState) => {
 			})
 				.then((response) => {
 					clog && console.log('createPage', response.data);
-					setPage({ ...response.data });
 					setState((state) => {
 						const { _id, name, domain, appName } = response.data;
 						return {
 							...state,
-							pageList: [...state.pageList, { _id, name, domain, appName }],
+							page: { ...response.data },
+							pageList: [...(state.pageList && state.pageList), { _id, name, domain, appName }],
 						};
 					});
 				})
@@ -83,7 +82,7 @@ export const GetRESTManager = (setState) => {
 			})
 				.then((response) => {
 					clog && console.log(response.data);
-					setPage({ ...response.data });
+					setState((state) => ({ ...state, page: response.data }));
 				})
 				.catch(function (error) {
 					console.log(error);
@@ -100,7 +99,7 @@ export const GetRESTManager = (setState) => {
 			})
 				.then((response) => {
 					// console.log("response.data!", response.data);
-					setPage(response.data);
+					setState((state) => ({ ...state, page: response.data }));				
 				})
 				.catch(function (error) {
 					console.log(error);

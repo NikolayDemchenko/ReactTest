@@ -7,9 +7,9 @@ import Editor from './Components/Control/Editor';
 
 const App = () => {
 	// Рабочий
-	const [state, setState] = useState({});
+	// const [state, setState] = useState({});
 	// Тестовый
-	// const [state, setState] = useState({ page: _page });
+	const [state, setState] = useState({ page: _page });
 	console.log('state :>> ', state);
 
 	const RESTManager = GetRESTManager(setState);

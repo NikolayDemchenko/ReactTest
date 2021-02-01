@@ -16,7 +16,7 @@ import { createVariable, createUniqueName } from '../../AppFunction';
 // 		}
 // 	});
 // };
-export const TagManager = (page, setPage, setState) => {
+export const TagManager = (page, setState) => {
 	jss.setup(preset());
 	const myStyles = {};
 	page.styles &&
@@ -31,37 +31,47 @@ export const TagManager = (page, setPage, setState) => {
 		// getTagTree: (nodes, pId) => getTree(classes, nodes, pId),
 		createTag: (tag, parent, childrens) => {
 			console.log('createTag');
-			setPage((page) => {
+			setState((state) => {
 				const newStyle = createVariable(
 					{},
 					createUniqueName(
 						'new_style',
-						page.styles.map(({ name }) => name)
+						state.page.styles.map(({ name }) => name)
 					)
 				);
 				return {
-					...page,
-					nodes: [
-						...page.nodes,
-						{
-							id: shortid.generate(),
-							parentId: parent.id,
-							tag,
-							index: (childrens && childrens.length) || 0,
-							styleId: newStyle.id,
-						},
-					],
-					styles: [...page.styles, newStyle],
+					...state,
+					page: {
+						...state.page,
+						nodes: [
+							...state.page.nodes,
+							{
+								id: shortid.generate(),
+								parentId: parent.id,
+								tag,
+								index: (childrens && childrens.length) || 0,
+								styleId: newStyle.id,
+							},
+						],
+						styles: [...state.page.styles, newStyle],
+					},
 				};
 			});
 		},
 		removeTag: (tagId) => {
-			setState(({ page }) => ({
-				page: { ...page, nodes: page.nodes.filter((node) => node.id !== tagId) },
-			}));
+			const CascadeDelete = (nodes, tagId) => {
+				const node = nodes.filter((node) => node.id !== tagId);
+				const nodeChilds = nodes.filter((child) => tagId === child.parentId);
+				return Array.concat(node, nodeChilds);
+			};
+			console.log('CascadeDelete(page.nodes,tagId)', CascadeDelete(page.nodes, tagId));
+			// setState(({ page }) => {
+			// 	return {
+			// 		page: { ...page, nodes: page.nodes.filter((node) => node.id !== tagId) },
+			// 	};
+			// });
 		},
 		updateTag: (nodeId, propName, propValue) => {
-		
 			setState((state) => ({
 				...state,
 				nodeId,

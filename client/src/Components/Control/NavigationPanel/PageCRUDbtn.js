@@ -4,7 +4,7 @@ import { cross } from 'react-icons-kit/icomoon/cross';
 import Icon from 'react-icons-kit';
 import PopupInputsForm from '../Inputs/ModalInput/PopupInput/PopupInputsForm';
 function PageCRUDbtn({ create, remove }) {
-	// console.log('setPage :>> ', setPage);
+	
 	// console.log('htmlTagsVoid :>> ', Array.isArray(htmlTagsVoid) );
 	// console.log('htmlTags', htmlTags)
 	return (
