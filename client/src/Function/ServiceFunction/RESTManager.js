@@ -1,7 +1,6 @@
 import axios from 'axios';
 const clog = true;
 export const GetRESTManager = (setState) => {
-
 	return {
 		getApps: () => {
 			clog && console.log('getApps');
@@ -10,6 +9,7 @@ export const GetRESTManager = (setState) => {
 				url: 'http://localhost:8000/getApps',
 			})
 				.then((response) => {
+					// console.log('response.data', response.data)
 					setState((state) => ({ ...state, appList: response.data }));
 				})
 				.catch(function (error) {
@@ -61,12 +61,20 @@ export const GetRESTManager = (setState) => {
 				.then((response) => {
 					clog && console.log('createPage', response.data);
 					setState((state) => {
+						console.log('state', state);
 						const { _id, name, domain, appName } = response.data;
-						return {
-							...state,
-							page: { ...response.data },
-							pageList: [...(state.pageList && state.pageList), { _id, name, domain, appName }],
-						};
+						return !page.domain
+							? {
+									...state,
+									page: { ...response.data },
+									pageList: [...state.pageList, { _id, name, domain, appName }],
+							  }
+							: {
+									...state,
+									page: { ...response.data },
+									appList: [...state.appList, appName],
+									pageList: [{ _id, name, domain, appName }],
+							  };
 					});
 				})
 				.catch(function (error) {
@@ -99,7 +107,7 @@ export const GetRESTManager = (setState) => {
 			})
 				.then((response) => {
 					// console.log("response.data!", response.data);
-					setState((state) => ({ ...state, page: response.data }));				
+					setState((state) => ({ ...state, page: response.data }));
 				})
 				.catch(function (error) {
 					console.log(error);
