@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
-import { NavigationContext } from "../../../../AppFunction";
+import { NavigationContext,TagManager } from "../../../../AppFunction";
 import TagCRUDbtn from "../TagCRUDbtn";
 import { tagList as elementList } from "../../../Class/HtmlCss";
 function NavPages() {
   const { state } = useContext(NavigationContext);
-  
+
   const pageList = state && state.pageList ? state.pageList : [];
   // console.log('pageList', pageList)
   return pageList.map((page, index) => {
@@ -12,17 +12,18 @@ function NavPages() {
     return <NavPage pageList={pageList} key={index} page={page} />;
   });
 }
-function NavPage({ page ,pageList}) {
-  const { RESTManager, state } = useContext(NavigationContext);
-  const { createTag } = state;
+function NavPage({ page, pageList }) {
+  const { RESTManager, state, setState } = useContext(NavigationContext);
+
+  const { createTag } = TagManager(state, setState);
   // const  = context;
 
   // console.log("context.page", context.page);
   // console.log("page", page);
 
   const remove = async () => {
-     RESTManager.removePageById(page._id);
-     RESTManager.getPageById(pageList[0]._id);
+    RESTManager.removePageById(page._id);
+    RESTManager.getPageById(pageList[0]._id);
   };
   let background = "rgba(30,40,57,.8)";
   let showButtons = false;

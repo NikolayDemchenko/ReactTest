@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Page from "../View/Pages/Page";
 import AttributesPanel from "./AttributesPanel/AttributesPanel";
 import { TagManager, Context } from "../../AppFunction";
@@ -17,11 +17,6 @@ const Editor = ({ RESTManager, setState, state }) => {
     setState
   );
 
-  useEffect(() => {
-    setState((state) => ({ ...state, createTag, removeTag, updateTag }));
-    return () => {};
-  }, []);
-
   const onClick =
     state && state.assignStyleId
       ? (nodeId) => updateTag(nodeId, "styleId", state.assignStyleId)
@@ -30,8 +25,8 @@ const Editor = ({ RESTManager, setState, state }) => {
   return (
     <Context.Provider
       value={{
-        createTag,
-        removeTag,
+        // createTag,
+        // removeTag,
         updateTag,
         RESTManager,
         page,
