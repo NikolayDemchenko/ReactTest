@@ -40,8 +40,7 @@ export const GetRESTManager = (setState) => {
 			})
 				.then((response) => {
 					clog && console.log('getPagesByAppName', response.data.pages);
-					setState((state) => ({
-						...state,
+					setState((state) => ({				
 						pageList: response.data.pages,
 						appList: state.appList,
 						appName,

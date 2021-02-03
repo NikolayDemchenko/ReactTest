@@ -37,7 +37,7 @@ function StylePanel() {
 					name: 'Style',
 					draggedProp,
 					setDraggedProp,
-					allStyleProps: () => getDefaultStyleProps(),
+					allStyleProps: getDefaultStyleProps,
 					previewBase: nodeStyle.data,
 				}}
 			/>
