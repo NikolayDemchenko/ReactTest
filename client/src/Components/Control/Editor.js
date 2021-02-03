@@ -24,9 +24,7 @@ const Editor = ({ RESTManager, setState, state }) => {
 
   return (
     <Context.Provider
-      value={{
-        // createTag,
-        // removeTag,
+      value={{   
         updateTag,
         RESTManager,
         page,
