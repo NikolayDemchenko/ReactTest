@@ -9,12 +9,12 @@ import { NavigationContext, TagManager } from "../../../../AppFunction";
 
 function NavTag(props) {
   const { state, setState } = useContext(NavigationContext);
-  const { createTag, removeTag } = TagManager(state, setState); 
+  const { createTag, removeTag } = TagManager(state, setState);
   const { node } = props;
   const { tag, id, index } = node;
   const nodes = state.page.nodes.filter(({ parentId }) => parentId === id);
   const [showChilds, setshowChilds] = useState(false);
-  // console.log("id :>> ", id);
+  console.log("NavTag :>> ");
   // console.log("selectedId :>> ", selectedId);
 
   const _icon = <Icon size={"100%"} icon={ic_keyboard_arrow_right} />;
@@ -40,7 +40,7 @@ function NavTag(props) {
 
   let background = "rgba(30,40,57,.8)";
   let showButtons = false;
-  // let showButtons = true;
+
   if (state.nodeId === id) {
     background = "rgba(30,60,97,1)";
     showButtons = true;
@@ -59,7 +59,7 @@ function NavTag(props) {
         <div
           onClick={(e) => {
             e.preventDefault();
-            console.log("id :>> ", id);
+            console.log("id :>> ", id);           
             document.getElementById(id).click();
           }}
           style={{
@@ -70,8 +70,7 @@ function NavTag(props) {
             // outline: "1px solid white",
           }}
         >
-          {toggle}
-          tag: {tag} index: {index}
+          {toggle} {tag} {index}
           {showButtons && (
             <div
               style={{

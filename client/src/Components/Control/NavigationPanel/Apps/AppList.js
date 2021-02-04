@@ -20,6 +20,7 @@ function AppList() {
 	};
 
 	useEffect(() => {
+		console.log('getApps :>> ');
 		RESTManager.getApps();
 		return () => {};
 	}, []);

@@ -12,7 +12,7 @@ const Editor = ({ RESTManager, setState, state }) => {
   // console.log('node :>> ', node);
   // console.log('state :>> ', state);
 //   console.log("page.nodes :>> ", page.nodes);
-  const { createTag, removeTag, updateTag, classes } = TagManager(
+  const {updateTag, classes } = TagManager(
     state,
     setState
   );
