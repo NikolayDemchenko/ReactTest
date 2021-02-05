@@ -3,19 +3,17 @@ import jss from 'jss';
 import preset from 'jss-preset-default';
 import { createVariable, createUniqueName } from '../../AppFunction';
 
-// const getTree = (classes, nodes = [], _parentId) => {
-// 	return nodes.filter((node) => {
-// 		// node.className = classes[node.styleId];
-// 		if (node.parentId === _parentId) {
-// 			node.childrens = getTree(
-// 				classes,
-// 				nodes.filter(({ parentId }) => parentId !== _parentId),
-// 				node.id
-// 			);
-// 			return node;
-// 		}
-// 	});
-// };
+const getTree = (nodes = [], _parentId) => {
+	return nodes.filter((node) => {
+		if (node.parentId === _parentId) {
+			node.childrens = getTree(
+				nodes.filter(({ parentId }) => parentId !== _parentId),
+				node.id
+			);
+			return node;
+		}
+	});
+};
 export const TagManager = ({ page }, setState) => {
 	//   console.log("page :>> ", page);
 	jss.setup(preset());
@@ -29,7 +27,7 @@ export const TagManager = ({ page }, setState) => {
 
 	return {
 		classes,
-		// getTagTree: (nodes, pId) => getTree(classes, nodes, pId),
+		getTagTree: (nodes) => getTree(nodes, null),
 		createTag: (tag, parent, childrens) => {
 			console.log('createTag');
 			setState((state) => {
@@ -66,15 +64,15 @@ export const TagManager = ({ page }, setState) => {
 					.filter((child) => nodeId === child.parentId)
 					.forEach((node) => {
 						newNodes.push(node);
-						newNodes.push.apply(newNodes, getAllChilds(nodes,node.id));
+						newNodes.push.apply(newNodes, getAllChilds(nodes, node.id));
 					});
 				return newNodes;
 			};
 			const getNewNodes = (nodes, nodeId) => {
-				const deletedNodes = getAllChilds(nodes,nodeId);
+				const deletedNodes = getAllChilds(nodes, nodeId);
 				deletedNodes.push(nodes.find((item) => item.id === nodeId));
 				return nodes.filter((x) => !deletedNodes.includes(x));
-			};	
+			};
 			setState((state) => ({ ...state, page: { ...state.page, nodes: getNewNodes(state.page.nodes, tagId) } }));
 		},
 		updateTag: (nodeId, propName, propValue) => {

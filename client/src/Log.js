@@ -12,10 +12,10 @@ function randomColor(name) {
 }
 
 const log = (BaseComponent) => (props) => {
-  // console.log(
-  //   `%cRendering ${BaseComponent.name}`,
-  //   `color: ${randomColor(BaseComponent.name.length)}`
-  // );
+  console.log(
+    `%cRendering ${BaseComponent.name}`,
+    `color: ${randomColor(BaseComponent.name.length)}`
+  );
   return <BaseComponent {...props} />;
 };
 

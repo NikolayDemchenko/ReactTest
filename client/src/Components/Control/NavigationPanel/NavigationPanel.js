@@ -7,6 +7,7 @@ import jss from 'jss';
 import preset from 'jss-preset-default';
 import SavePage from './Pages/SavePage';
 import { NavigationContext } from '../../../AppFunction';
+import { log, funcLog } from '../../../Log';
 
 function NavigationPanel() {
 	const {
@@ -63,11 +64,6 @@ function NavigationPanel() {
 			>
 				Navigation
 			</div>
-
-			{page && (
-				<SavePage page={page} savePage={updatePage} createPage={createPage} title={'Save'} pageId={page._id} />
-			)}
-
 			<PopupInputsForm
 				setItem={(data) =>
 					createPage({
@@ -95,6 +91,9 @@ function NavigationPanel() {
 					New App
 				</div>
 			</PopupInputsForm>
+			{page && (
+				<SavePage page={page} savePage={updatePage} createPage={createPage} title={'Save'} pageId={page._id} />
+			)}
 			{showPanel && (
 				<div className={classes.style}>
 					{'Application'}
@@ -108,4 +107,5 @@ function NavigationPanel() {
 		</div>
 	);
 }
-export default NavigationPanel;
+export default log(NavigationPanel);
+// export default NavigationPanel;
