@@ -5,7 +5,7 @@ import PageCRUDbtn from '../PageCRUDbtn';
 
 function AppList() {
 	// const [appList, setAppList] = useState([]);
-	const { state, RESTManager } = useContext(NavigationContext);
+	const { state,setState, RESTManager } = useContext(NavigationContext);
 
 	const appList = state && state.appList ? state.appList : [];
 
@@ -21,7 +21,7 @@ function AppList() {
 
 	useEffect(() => {
 		console.log('getApps :>> ');
-		RESTManager.getApps();
+		RESTManager.getApps().then(appList=>setState((state) => ({ ...state, appList })));
 		return () => {};
 	}, []);
 
@@ -43,7 +43,7 @@ function AppList() {
 					// outline: "1px solid white",
 				}}
 				key={index}
-				onClick={() => RESTManager.getPagesByAppName(app)}
+				// onClick={() => RESTManager.getPagesByAppName(app)}
 			>
 				{app}
 				{showButtons && (

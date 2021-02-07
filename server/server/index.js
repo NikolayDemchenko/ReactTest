@@ -60,13 +60,13 @@ router.get("/getPagesByAppName", (req, res) => {
     .toArray()
     .then((response) =>
       res.status(200).json({
-        pages: response.map(({ domain, appName, name, _id }) => ({
+        pageList: response.map(({ domain, appName, name, _id }) => ({
           domain,
           appName,
           name,
           _id,
         })),
-        startPage: response.find((res) => res.domain),
+        page: response.find((res) => res.domain),
       })
     )
     .catch((error) => console.error(error));

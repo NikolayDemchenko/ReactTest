@@ -2,19 +2,17 @@ import axios from 'axios';
 const clog = true;
 export const GetRESTManager = (setState) => {
 	return {
-		getApps: () => {
+		getApps: async () => {
 			clog && console.log('getApps');
-			axios({
-				method: 'get',
-				url: 'http://localhost:8000/getApps',
-			})
-				.then((response) => {
-					// console.log('response.data', response.data)
-					setState((state) => ({ ...state, appList: response.data }));
-				})
-				.catch(function (error) {
-					console.log(error);
+			try {
+				const { data } = await axios({
+					method: 'get',
+					url: 'http://localhost:8000/getApps',
 				});
+				return await data;
+			} catch (e) {
+				console.error(e);
+			}
 		},
 		// getPages: () => {
 		// 	axios({
@@ -30,27 +28,62 @@ export const GetRESTManager = (setState) => {
 		// 			console.log(error);
 		// 		});
 		// },
-		getPagesByAppName: (appName) => {
-			axios({
-				method: 'get',
-				url: 'http://localhost:8000/getPagesByAppName',
-				params: {
-					appName,
-				},
-			})
-				.then((response) => {
-					clog && console.log('getPagesByAppName', response.data.pages);
-					setState((state) => ({				
-						pageList: response.data.pages,
-						appList: state.appList,
-						appName,
-						page: response.data.startPage,
-					}));
-				})
-				.catch(function (error) {
-					console.log(error);
-				});
+		getPagesByAppName: async(appName) => {
+			// axios({
+			// 	method: 'get',
+			// 	url: 'http://localhost:8000/getPagesByAppName',
+			// 	params: {
+			// 		appName,
+			// 	},
+			// })
+			// 	.then((response) => {
+			// 		clog && console.log('getPagesByAppName', response.data.pages);
+			// 		setState((state) => ({				
+			// 			pageList: response.data.pages,
+			// 			appList: state.appList,
+			// 			appName,
+			// 			page: response.data.startPage,
+			// 		}));
+			// 	})
+			// 	.catch(function (error) {
+			// 		console.log(error);
+			// 	});
+
+				clog && console.log('getPagesByAppName');
+				try {
+					const { data } = await axios({
+						method: 'get',
+						url: 'http://localhost:8000/getPagesByAppName',
+						params: {
+							appName,
+						},
+					});
+					return await data;
+				} catch (e) {
+					console.error(e);
+				}
 		},
+		// getPagesByAppName: (appName) => {
+		// 	axios({
+		// 		method: 'get',
+		// 		url: 'http://localhost:8000/getPagesByAppName',
+		// 		params: {
+		// 			appName,
+		// 		},
+		// 	})
+		// 		.then((response) => {
+		// 			clog && console.log('getPagesByAppName', response.data.pages);
+		// 			setState((state) => ({				
+		// 				pageList: response.data.pages,
+		// 				appList: state.appList,
+		// 				appName,
+		// 				page: response.data.startPage,
+		// 			}));
+		// 		})
+		// 		.catch(function (error) {
+		// 			console.log(error);
+		// 		});
+		// },
 		createPage: (page) => {
 			axios({
 				method: 'post',
