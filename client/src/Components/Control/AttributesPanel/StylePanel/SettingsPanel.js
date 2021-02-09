@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import Icon from "react-icons-kit";
-import { buttonStyle } from "./BtnStyle";
+import { buttonStyle } from "../../Styles/BtnStyle";
 import { copy } from "react-icons-kit/icomoon/copy";
 import { exportIcon } from "react-icons-kit/entypo/exportIcon";
 import { SaveToJSON } from "../../../../AppFunction";

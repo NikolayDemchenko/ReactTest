@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Icon from "react-icons-kit";
-import { buttonStyle } from "./BtnStyle";
+import { buttonStyle } from "../../Styles/BtnStyle";
 import { ic_add_to_queue } from "react-icons-kit/md/ic_add_to_queue";
 import { cross } from "react-icons-kit/icomoon/cross";
 import EditPanel from "./EditPanel";

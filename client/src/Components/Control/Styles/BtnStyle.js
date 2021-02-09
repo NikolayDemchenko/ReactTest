@@ -8,7 +8,7 @@ const btnStyle = {
 };
 const btnHoverStyle = {
   // outline:"#cef solid 1px"
-  transform: "perspective(200px) scaleZ(-20) translateZ(-2px)",
+  transform: "perspective(200px) scaleZ(-10) translateZ(-2px)",
 };
 const btnActivStyle = {
   color: "#ffa",

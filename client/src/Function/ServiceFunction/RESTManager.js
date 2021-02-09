@@ -29,26 +29,6 @@ export const GetRESTManager = (setState) => {
 		// 		});
 		// },
 		getPagesByAppName: async(appName) => {
-			// axios({
-			// 	method: 'get',
-			// 	url: 'http://localhost:8000/getPagesByAppName',
-			// 	params: {
-			// 		appName,
-			// 	},
-			// })
-			// 	.then((response) => {
-			// 		clog && console.log('getPagesByAppName', response.data.pages);
-			// 		setState((state) => ({				
-			// 			pageList: response.data.pages,
-			// 			appList: state.appList,
-			// 			appName,
-			// 			page: response.data.startPage,
-			// 		}));
-			// 	})
-			// 	.catch(function (error) {
-			// 		console.log(error);
-			// 	});
-
 				clog && console.log('getPagesByAppName');
 				try {
 					const { data } = await axios({
@@ -63,27 +43,6 @@ export const GetRESTManager = (setState) => {
 					console.error(e);
 				}
 		},
-		// getPagesByAppName: (appName) => {
-		// 	axios({
-		// 		method: 'get',
-		// 		url: 'http://localhost:8000/getPagesByAppName',
-		// 		params: {
-		// 			appName,
-		// 		},
-		// 	})
-		// 		.then((response) => {
-		// 			clog && console.log('getPagesByAppName', response.data.pages);
-		// 			setState((state) => ({				
-		// 				pageList: response.data.pages,
-		// 				appList: state.appList,
-		// 				appName,
-		// 				page: response.data.startPage,
-		// 			}));
-		// 		})
-		// 		.catch(function (error) {
-		// 			console.log(error);
-		// 		});
-		// },
 		createPage: (page) => {
 			axios({
 				method: 'post',

@@ -1,33 +1,28 @@
 import React, { useState } from 'react';
-import { ic_keyboard_arrow_right } from 'react-icons-kit/md/ic_keyboard_arrow_right';
 import Icon from 'react-icons-kit';
 import { Link } from 'react-scroll';
 import { NavTags } from './TagList';
 import { tagList as elementList } from '../../../Class/HtmlCss';
 import TagCRUDbtn from '../TagCRUDbtn';
 import { log, funcLog } from '../../../../Log';
+import RotatingArrow from '../RotatingArrow'
 function NavTag(props) {
 	const { createTag, removeTag, node, state } = props;
 	const { tag, id, index } = node;
 	const nodes = state.page.nodes.filter(({ parentId }) => parentId === id);
-	const [showChilds, setshowChilds] = useState(false);
+	const [show, setShow] = useState(false);
 
 	// console.log("selectedId :>> ", selectedId);
-
-	const _icon = <Icon size={'100%'} icon={ic_keyboard_arrow_right} />;
-
-	const icon = !showChilds ? <div>{_icon}</div> : <div style={{ transform: 'rotate(90deg)' }}>{_icon}</div>;
-
 	const toggle =
 		nodes.length > 0 ? (
 			<div
 				style={{ cursor: 'pointer', width: '20px' }}
 				onClick={(e) => {
 					e.stopPropagation();
-					setshowChilds(!showChilds);
+					setShow(!show);
 				}}
 			>
-				{icon}
+				<RotatingArrow {...{show}}/>		
 			</div>
 		) : (
 			<div style={{ width: '20px' }} />
@@ -37,7 +32,7 @@ function NavTag(props) {
 	let showButtons = false;
 
 	if (state.nodeId === id) {
-		background = 'rgba(30,60,97,1)';
+		background = 'rgb(30,40,57)';
 		showButtons = true;
 	}
 
@@ -80,7 +75,7 @@ function NavTag(props) {
 				</div>
 			</Link>
 
-			<div style={{ marginLeft: '15px' }}>{nodes && showChilds && <NavTags {...{ ...props, nodes }} />}</div>
+			<div style={{ marginLeft: '15px' }}>{nodes && show && <NavTags {...{ ...props, nodes }} />}</div>
 		</div>
 	);
 }

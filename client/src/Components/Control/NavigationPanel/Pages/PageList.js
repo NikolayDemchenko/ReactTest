@@ -29,7 +29,7 @@ function NavPage({ page, pageList }) {
   let showButtons = false;
 
   if (state.page && state.page._id === page._id) {
-    background = "rgba(30,60,97,1)";
+    background = "rgb(30,40,57)";
     showButtons = true;
   }
 
