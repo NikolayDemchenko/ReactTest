@@ -127,7 +127,7 @@ function SettingsPanel(props) {
         <div
           title={"Назначить стиль"}
           className={buttonStyle}
-          style={assignStyleId && { color: "#ffa" }}
+          style={{ color:assignStyleId &&  "#ffa" }}
           onClick={(e) => {
             e.stopPropagation();
             setState((state) => {

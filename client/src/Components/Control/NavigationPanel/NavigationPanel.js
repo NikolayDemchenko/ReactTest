@@ -7,6 +7,7 @@ import SelectPanel from '../Inputs/ModalInput/SelectPanel/SelectPanel';
 import jss from 'jss';
 import { fileTextO } from 'react-icons-kit/fa/fileTextO';
 import { save } from 'react-icons-kit/fa/save';
+import {navicon} from 'react-icons-kit/fa/navicon'
 import Icon from 'react-icons-kit';
 import preset from 'jss-preset-default';
 import SavePage from './Pages/SavePage';
@@ -80,13 +81,15 @@ function NavigationPanel() {
 				{page && (
 					<div
 						className={buttonStyle}
+						style={{ color:show && "#ffa" }}
 						onClick={(e) => {
 							e.stopPropagation();
 							console.log('setShowPanel');
 							setShow(!show);
 						}}
 					>
-						<RotatingArrow {...{ show }} />
+						<Icon size={'100%'} icon={navicon} />
+						{/* <RotatingArrow {...{ show }} /> */}
 					</div>
 				)}
 				<SelectPanel
