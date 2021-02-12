@@ -62,8 +62,7 @@ export const GetRESTManager = (setState) => {
 							  }
 							: {
 									...state,
-									page: { ...response.data },
-									appList: [...state.appList, appName],
+									page: { ...response.data },		
 									pageList: [{ _id, name, domain, appName }],
 							  };
 					});

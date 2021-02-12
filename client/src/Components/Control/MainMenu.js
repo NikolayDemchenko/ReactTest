@@ -1,9 +1,9 @@
 import React, { useState, useContext, useEffect } from "react";
-import { TagList } from "./Tags/TagList";
-import AppList from "./Apps/AppList";
-import PageList from "./Pages/PageList";
-import PopupInputsForm from "../Inputs/ModalInput/PopupInput/PopupInputsForm";
-import SelectPanel from "../Inputs/ModalInput/SelectPanel/SelectPanel";
+import { TagList } from "./NavigationPanel/Tags/TagList";
+import AppList from "./NavigationPanel/Apps/AppList";
+import PageList from "./NavigationPanel/Pages/PageList";
+import PopupInputsForm from "./Inputs/ModalInput/PopupInput/PopupInputsForm";
+import SelectPanel from "./Inputs/ModalInput/SelectPanel/SelectPanel";
 import jss from "jss";
 import { fileTextO } from "react-icons-kit/fa/fileTextO";
 import { save } from "react-icons-kit/fa/save";
@@ -12,12 +12,12 @@ import { folderOpen } from "react-icons-kit/icomoon/folderOpen";
 import { navicon } from "react-icons-kit/fa/navicon";
 import Icon from "react-icons-kit";
 import preset from "jss-preset-default";
-import SavePage from "./Pages/SavePage";
-import { NavigationContext } from "../../../AppFunction";
-import RotatingArrow from "./RotatingArrow";
-import { log, funcLog } from "../../../Log";
-import { buttonStyle } from "../Styles/BtnStyle";
-function NavigationPanel() {
+import SavePage from "./NavigationPanel/Pages/SavePage";
+import { NavigationContext } from "../../AppFunction";
+
+import { log, funcLog } from "../../Log";
+import { buttonStyle } from "./Styles/BtnStyle";
+function MainMenu() {
   const {
     state,
     setState,
@@ -150,5 +150,5 @@ function NavigationPanel() {
     </div>
   );
 }
-export default log(NavigationPanel);
+export default log(MainMenu);
 // export default NavigationPanel;

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ErrorBoundry from './ErrorBoundry';
 import { page as _page } from './Components/View/Pages/CreateApp';
 import NavigationPanel from './Components/Control/NavigationPanel/NavigationPanel';
+import MainMenu from './Components/Control/MainMenu';
 import { GetRESTManager, NavigationContext } from './AppFunction';
 import Editor from './Components/Control/Editor';
 
@@ -24,6 +25,7 @@ const App = () => {
 				}}
 			>
 				<NavigationPanel />
+				<MainMenu />
 			</NavigationContext.Provider>
 			{state.page && <Editor {...{ RESTManager, setState, state }} />}
 		</ErrorBoundry>
