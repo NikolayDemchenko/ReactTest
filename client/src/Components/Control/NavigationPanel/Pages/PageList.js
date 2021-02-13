@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { NavigationContext,TagManager } from "../../../../AppFunction";
 import TagCRUDbtn from "../TagCRUDbtn";
 import { tagList as elementList } from "../../../Class/HtmlCss";
+import { TagList } from "../Tags/TagList";
 function NavPages() {
   const { state } = useContext(NavigationContext);
 
@@ -60,7 +61,9 @@ function NavPage({ page, pageList }) {
         >
           <TagCRUDbtn {...{ create: createTag, remove, elementList }} />
         </div>
+        
       )}
+        <TagList />
     </div>
   );
 }

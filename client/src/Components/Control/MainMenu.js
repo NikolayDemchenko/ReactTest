@@ -17,6 +17,7 @@ import { NavigationContext } from "../../AppFunction";
 
 import { log, funcLog } from "../../Log";
 import { buttonStyle } from "./Styles/BtnStyle";
+import NavigationPanel from "./NavigationPanel/NavigationPanel";
 function MainMenu() {
   const {
     state,
@@ -25,29 +26,29 @@ function MainMenu() {
   } = useContext(NavigationContext);
   const { page } = state;
   // console.log('props', props)
-  const style = {
-    // flexWrap: "wrap",
-    minWidth: "280px",
-    maxWidth: "280px",
-    maxHeight: "95vh",
-    overflowY: "auto",
-    // fontSize:"16px",
-    // position: 'fixed',
-    // top: '20px',
-    // left: 0,
-    // zIndex: 999,
-    // backgroundColor: 'rgba(30,40,57,.6)',
-    color: "rgba(140, 200, 255, 0.8)",
-    boxShadow: "2px 10px 5px 2px #00000055",
-    "&::-webkit-scrollbar": { width: "20px" },
-    "&::-webkit-scrollbar-thumb": { backgroundColor: "#567" },
-  };
-  jss.setup(preset());
-  const { classes } = jss
-    .createStyleSheet({
-      style,
-    })
-    .attach();
+  // const style = {
+  //   // flexWrap: "wrap",
+  //   minWidth: "280px",
+  //   maxWidth: "280px",
+  //   maxHeight: "95vh",
+  //   overflowY: "auto",
+  //   // fontSize:"16px",
+  //   // position: 'fixed',
+  //   // top: '20px',
+  //   // left: 0,
+  //   // zIndex: 999,
+  //   // backgroundColor: 'rgba(30,40,57,.6)',
+  //   color: "rgba(140, 200, 255, 0.8)",
+  //   boxShadow: "2px 10px 5px 2px #00000055",
+  //   "&::-webkit-scrollbar": { width: "20px" },
+  //   "&::-webkit-scrollbar-thumb": { backgroundColor: "#567" },
+  // };
+  // jss.setup(preset());
+  // const { classes } = jss
+  //   .createStyleSheet({
+  //     style,
+  //   })
+  //   .attach();
 
   const [show, setShow] = useState(false);
   const [apps, setApps] = useState();
@@ -142,10 +143,7 @@ function MainMenu() {
         )}
       </div>
       {show && (
-        <div className={classes.style}>
-          <PageList />
-          {page && <TagList />}
-        </div>
+        <NavigationPanel/>   
       )}
     </div>
   );

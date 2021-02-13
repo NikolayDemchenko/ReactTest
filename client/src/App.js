@@ -24,7 +24,7 @@ const App = () => {
 					setState,
 				}}
 			>
-				<NavigationPanel />
+			
 				<MainMenu />
 			</NavigationContext.Provider>
 			{state.page && <Editor {...{ RESTManager, setState, state }} />}
