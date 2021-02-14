@@ -14,7 +14,7 @@ function SavePage({ page, pageId, createPage, savePage, children }) {
 		</div>
 	) : (
 		<PopupInputsForm
-			setItem={(data) => createPage({ ...data, ...page })}
+			setItem={(data) => createPage({...page, ...data })}
 			inputs={[
 				{ title: 'app name', name: 'appName' },
 				{ title: 'domain', name: 'domain' },

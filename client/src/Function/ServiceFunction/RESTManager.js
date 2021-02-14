@@ -28,48 +28,32 @@ export const GetRESTManager = (setState) => {
 		// 			console.log(error);
 		// 		});
 		// },
-		getPagesByAppName: async(appName) => {
-				clog && console.log('getPagesByAppName');
-				try {
-					const { data } = await axios({
-						method: 'get',
-						url: 'http://localhost:8000/getPagesByAppName',
-						params: {
-							appName,
-						},
-					});
-					return await data;
-				} catch (e) {
-					console.error(e);
-				}
-		},
-		createPage: (page) => {
-			axios({
-				method: 'post',
-				url: 'http://localhost:8000/createPage',
-				data: { page: JSON.stringify(page) },
-			})
-				.then((response) => {
-					clog && console.log('createPage', response.data);
-					setState((state) => {
-						console.log('state', state);
-						const { _id, name, domain, appName } = response.data;
-						return !page.domain
-							? {
-									...state,
-									page: { ...response.data },
-									pageList: [...state.pageList, { _id, name, domain, appName }],
-							  }
-							: {
-									...state,
-									page: { ...response.data },		
-									pageList: [{ _id, name, domain, appName }],
-							  };
-					});
-				})
-				.catch(function (error) {
-					console.log(error);
+		getPagesByAppName: async (appName) => {
+			clog && console.log('getPagesByAppName');
+			try {
+				const { data } = await axios({
+					method: 'get',
+					url: 'http://localhost:8000/getPagesByAppName',
+					params: {
+						appName,
+					},
 				});
+				return await data;
+			} catch (e) {
+				console.error(e);
+			}
+		},
+		createPage:async (page) => {
+			try {
+				const { data } = await axios({
+					method: 'post',
+					url: 'http://localhost:8000/createPage',
+					data: { page: JSON.stringify(page) },
+				});
+				return await data;
+			} catch (e) {
+				console.error(e);
+			}		
 		},
 		updatePage: (page) => {
 			clog && console.log('updatePage');

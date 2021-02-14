@@ -33,6 +33,7 @@ function AppList() {
 			background = 'rgba(30,60,97,1)';
 			showButtons = true;
 		}
+		
 		return (
 			<div
 				style={{

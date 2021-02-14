@@ -5,9 +5,9 @@ import { NavTags } from './TagList';
 import { tagList as elementList } from '../../../Class/HtmlCss';
 import TagCRUDbtn from '../TagCRUDbtn';
 import { log, funcLog } from '../../../../Log';
-import RotatingArrow from '../RotatingArrow'
+import RotatingArrow from '../RotatingArrow';
 function NavTag(props) {
-	const { createTag, removeTag, node, state } = props;
+	const { createTag, removeTag, node, state, selection, setSelection } = props;
 	const { tag, id, index } = node;
 	const nodes = state.page.nodes.filter(({ parentId }) => parentId === id);
 	const [show, setShow] = useState(false);
@@ -22,7 +22,7 @@ function NavTag(props) {
 					setShow(!show);
 				}}
 			>
-				<RotatingArrow {...{show}}/>		
+				<RotatingArrow {...{ show }} />
 			</div>
 		) : (
 			<div style={{ width: '20px' }} />
@@ -31,10 +31,7 @@ function NavTag(props) {
 	let background = 'rgba(30,40,57,.8)';
 	let showButtons = false;
 
-	if (state.nodeId === id) {
-		background = 'rgb(30,40,57)';
-		showButtons = true;
-	}
+	selection === id && (background = 'rgb(30,40,57)') && (showButtons = true);
 
 	return (
 		<div>
@@ -43,7 +40,9 @@ function NavTag(props) {
 					onClick={(e) => {
 						e.preventDefault();
 						console.log('id :>> ', id);
+						setSelection(id);
 						document.getElementById(id).click();
+						// e.stopPropagation();
 					}}
 					style={{
 						display: 'flex',
@@ -75,7 +74,7 @@ function NavTag(props) {
 				</div>
 			</Link>
 
-			<div style={{ marginLeft: '15px' }}>{nodes && show && <NavTags {...{ ...props, nodes }} />}</div>
+			<div style={{ marginLeft: '12px' }}>{nodes && show && <NavTags {...{ ...props, nodes }} />}</div>
 		</div>
 	);
 }

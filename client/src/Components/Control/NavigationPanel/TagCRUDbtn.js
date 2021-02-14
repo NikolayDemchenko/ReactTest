@@ -5,7 +5,6 @@ import Icon from 'react-icons-kit';
 import SelectPanel from '../Inputs/ModalInput/SelectPanel/SelectPanel';
 import htmlTagsVoid from 'html-tags/void';
 function TagCRUDbtn({ parent = { id: null, tag: 'div' }, childrens, create, remove, elementList }) {
-
 	// console.log('htmlTagsVoid :>> ', Array.isArray(htmlTagsVoid) );
 	// console.log('htmlTags', htmlTags)
 	return (
@@ -17,7 +16,7 @@ function TagCRUDbtn({ parent = { id: null, tag: 'div' }, childrens, create, remo
 					selected={''}
 					setItem={(item) => create(item, parent, childrens)}
 					button={
-						<div style={{ margin: '0 0.2em', cursor: 'pointer', width: '0.8em' }}>
+						<div title={'create tag'} style={{ margin: '0 0.2em', cursor: 'pointer', width: '0.8em' }}>
 							<Icon size={'100%'} icon={plus} />
 						</div>
 					}
@@ -26,6 +25,7 @@ function TagCRUDbtn({ parent = { id: null, tag: 'div' }, childrens, create, remo
 
 			{/* Удаление */}
 			<div
+				title={'remove tag'}
 				onClick={(e) => {
 					e.stopPropagation();
 					remove();
