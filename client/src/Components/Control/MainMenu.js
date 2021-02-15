@@ -65,6 +65,7 @@ function MainMenu() {
 				}}
 			>
 				<SelectPanel
+					closeAftSelect={true}
 					items={apps}
 					selected={''}
 					setItem={(appName) =>

@@ -1,18 +1,10 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext} from 'react';
 import PageList from './Pages/PageList';
 import jss from 'jss';
-import { fileTextO } from 'react-icons-kit/fa/fileTextO';
-import { save } from 'react-icons-kit/fa/save';
-import { map } from 'react-icons-kit/icomoon/map';
-import { folderOpen } from 'react-icons-kit/icomoon/folderOpen';
-import { navicon } from 'react-icons-kit/fa/navicon';
 import Icon from 'react-icons-kit';
 import preset from 'jss-preset-default';
-import SavePage from './Pages/SavePage';
 import { NavigationContext } from '../../../AppFunction';
-import RotatingArrow from './RotatingArrow';
 import { log, funcLog } from '../../../Log';
-import { buttonStyle } from '../Styles/BtnStyle';
 import PageCRUDbtn from './PageCRUDbtn';
 function NavigationPanel({ createNewPage }) {
 	const { state } = useContext(NavigationContext);
@@ -37,8 +29,8 @@ function NavigationPanel({ createNewPage }) {
 
 	let background = 'rgba(30,40,57,.8)';
 	let showButtons = false;
-
-	selection === state.page.appName && (background = 'rgb(30,40,57)') && (showButtons = true);
+	const { appName } = state.page;
+	appName && selection === appName && (background = 'rgb(30,40,57)') && (showButtons = true);
 
 	return (
 		<div
@@ -46,7 +38,7 @@ function NavigationPanel({ createNewPage }) {
 			onClick={(e) => {
 				e.stopPropagation();
 				e.preventDefault();
-				setSelection(state.page.appName);
+				setSelection(appName);
 			}}
 		>
 			<div
@@ -63,7 +55,7 @@ function NavigationPanel({ createNewPage }) {
 					}}
 					title={'application name'}
 				>
-					{state.page.appName}
+					{appName}
 				</div>
 				{showButtons && (
 					<div style={{ margin: '0 4px 4px auto' }}>
@@ -72,7 +64,7 @@ function NavigationPanel({ createNewPage }) {
 								create: (name) =>
 									createNewPage({
 										name,
-										appName: state.page.appName,
+										appName,
 										styles: [],
 										nodes: [],
 										bodyStyle: { background: 'inherit' },

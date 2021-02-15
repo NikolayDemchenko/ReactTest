@@ -11,7 +11,7 @@ function TagCRUDbtn({ parent = { id: null, tag: 'div' }, childrens, create, remo
 		<div style={{ display: 'flex' }}>
 			{/* Добавление тега*/}
 			{!htmlTagsVoid.find((tagVoid) => tagVoid === parent.tag) && (
-				<SelectPanel
+				<SelectPanel				
 					items={elementList}
 					selected={''}
 					setItem={(item) => create(item, parent, childrens)}
