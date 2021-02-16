@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PropertyInputSwitch from "../Switch/PropertyInputSwitch";
 export default function Paper(props) {
-  const { setValue,setPreview } = props;
+  const { setValue, setPreview } = props;
   const [value, setThisValue] = useState(props.value);
   // const setPreview = props.setPreview ? props.setPreview : setValue;
   // console.log("Paper value", value);
@@ -19,14 +19,14 @@ export default function Paper(props) {
     if (e.key === "Enter") {
       console.log("handleKeyPress");
       console.log("value :>> ", value);
-      setPreview&&setPreview(value);
-      setValue(value?value:props.value);
+      setPreview && setPreview(value);
+      setValue(value ? value : props.value);
     }
   };
 
   return (
     <div style={{ color: "#eee", width: "100%" }}>
-      <input     
+      <input
         style={{
           background: "transparent",
           width: "100%",
@@ -36,10 +36,10 @@ export default function Paper(props) {
           border: 0,
           color: "#eee",
           fontSize: "15px",
-        }}       
+        }}
         onKeyPress={handleKeyPress}
         onBlur={(e) => {
-          setValue(value?value:props.value);
+          setValue(value ? value : props.value);
           // props.setValue(e.target.value);
         }}
         value={value}

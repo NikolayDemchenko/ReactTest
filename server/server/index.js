@@ -51,6 +51,34 @@ router.get("/getApps", (req, res) => {
     })
     .catch((error) => console.error(error));
 });
+
+app.post("/updateAppName", async (req, res) => {
+  console.log("updateAppName");
+  const pages = req.app.locals.pages;
+  const { oldName, newName } = JSON.parse(req.body.appName);
+  pages.updateMany(
+    { appName: oldName }, // критерий фильтрации
+    { $set: { appName: newName } }, // параметр обновления
+    () => {
+      pages
+        .find({ appName: newName })
+        .toArray()
+        .then((response) => {
+          console.log("response :>> ", response);
+          res.status(200).json({
+            pageList: response.map(({ domain, appName, name, _id }) => ({
+              domain,
+              appName,
+              name,
+              _id,
+            })),
+            page: response.find((res) => res.domain),
+          });
+        })
+        .catch((error) => console.error(error));
+    }
+  );
+});
 router.get("/getPagesByAppName", (req, res) => {
   const appName = req.query.appName;
   console.log("appName :>> ", appName);
@@ -83,26 +111,12 @@ app.post("/createPage", (req, res) => {
     res.send(result.ops[0]);
   });
 });
-app.post("/createPage", (req, res) => {
-  const pages = req.app.locals.pages;
-  const page = JSON.parse(req.body.page);
-  delete page._id;
-  // console.log(component);
-  console.log("createPage");
-  pages.insertOne(page, (err, result) => {
-    // console.log('result', result.ops[0])
-    if (err) return console.log(err);
-    res.send(result.ops[0]);
-  });
-});
+
 
 app.post("/updatePage", (req, res) => {
   const pages = req.app.locals.pages;
   const page = JSON.parse(req.body.page);
   console.log("save");
-
-  // console.log(component);
-  // console.log('typeof component._id', typeof ObjectId(component._id),ObjectId(component._id))
   const _id = ObjectId(page._id);
   pages.findOneAndUpdate({ _id }, { $set: { ...page, _id } }, (err, result) => {
     if (err) return console.log(err);
@@ -110,6 +124,7 @@ app.post("/updatePage", (req, res) => {
     res.send(page);
   });
 });
+
 app.post("/removePageById", (req, res) => {
   const _id = req.query._id;
   console.log("removePageById!!!!", _id);

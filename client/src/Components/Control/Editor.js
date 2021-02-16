@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import Page from "../View/Pages/Page";
 import AttributesPanel from "./AttributesPanel/AttributesPanel";
 import { TagManager, Context } from "../../AppFunction";
 
-const Editor = ({ RESTManager, setState, state }) => {
+const Editor = () => {
+  const { state, setState, RESTManager } = useContext(Context);
   console.log("Editor");
   const page = state.page;
   const node = page.nodes.find(({ id }) => state.nodeId === id);
@@ -11,11 +12,8 @@ const Editor = ({ RESTManager, setState, state }) => {
   // console.log('nodeStyle', nodeStyle)
   // console.log('node :>> ', node);
   // console.log('state :>> ', state);
-//   console.log("page.nodes :>> ", page.nodes);
-  const {updateTag, classes } = TagManager(
-    state,
-    setState
-  );
+  //   console.log("page.nodes :>> ", page.nodes);
+  const { updateTag, classes } = TagManager(state, setState);
 
   const onClick =
     state && state.assignStyleId
@@ -24,7 +22,7 @@ const Editor = ({ RESTManager, setState, state }) => {
 
   return (
     <Context.Provider
-      value={{   
+      value={{
         updateTag,
         RESTManager,
         page,
