@@ -17,11 +17,12 @@ export const GetRESTManager = (setState) => {
     updateAppName: async (appName) => {
       clog && console.log("getApps");
       try {
-        await axios({
+        const { data } = await axios({
           method: "post",
           url: "http://localhost:8000/updateAppName",
           data: { appName: JSON.stringify(appName) },
         });
+        return await data;
       } catch (e) {
         console.error(e);
       }
@@ -67,20 +68,31 @@ export const GetRESTManager = (setState) => {
         console.error(e);
       }
     },
-    updatePage: (page) => {
+    updatePage: async (page) => {
       clog && console.log("updatePage");
-      axios({
-        method: "post",
-        url: "http://localhost:8000/updatePage",
-        data: { page: JSON.stringify(page) },
-      })
-        .then((response) => {
-          clog && console.log(response.data);
-          setState((state) => ({ ...state, page: response.data }));
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+
+      try {
+        const { data } = await axios({
+          method: "post",
+          url: "http://localhost:8000/updatePage",
+          data: { page: JSON.stringify(page) },
+        });        
+        return await data;
+      } catch (e) {
+        console.error(e);
+      }
+      // axios({
+      //   method: "post",
+      //   url: "http://localhost:8000/updatePage",
+      //   data: { page: JSON.stringify(page) },
+      // })
+      //   .then((response) => {
+      //     clog && console.log(response.data);
+      //     setState((state) => ({ ...state, page: response.data }));
+      //   })
+      //   .catch(function (error) {
+      //     console.log(error);
+      //   });
     },
     getPageById: async (_id) => {
       clog && console.log("getPageById");
@@ -95,21 +107,7 @@ export const GetRESTManager = (setState) => {
         return await data;
       } catch (e) {
         console.error(e);
-      }
-      // axios({
-      // 	method: 'get',
-      // 	url: 'http://localhost:8000/getPageById',
-      // 	params: {
-      // 		_id,
-      // 	},
-      // })
-      // 	.then((response) => {
-      // 		// console.log("response.data!", response.data);
-      // 		setState((state) => ({ ...state, page: response.data }));
-      // 	})
-      // 	.catch(function (error) {
-      // 		console.log(error);
-      // 	});
+      }     
     },
     removePageById: (_id) => {
       clog && console.log("removePageById");

@@ -3,20 +3,20 @@ export const StyleManager = (page,node, setState) => {
 	const updateStyleById = (styleId, propName, propValue) => {
 		// console.log("page :>> ", page);
 		setState((state) => {
-			const styles = page.styles.map((style) => {
+			const styles = state.page.styles.map((style) => {
 				if (style.id === styleId) {
 					return { ...style, [propName]: propValue };
 				} else {
 					return style;
 				}
 			});
-			return { ...state, page: { ...page, styles } };
+			return { ...state, page: { ...state.page, styles } };
 		});
 	};
 	return {
 		cloneStyle: () => {
 			setState((state) => {
-				const { name, data } = page.styles.find(({ id }) => id === node.styleId);
+				const { name, data } = state.page.styles.find(({ id }) => id === node.styleId);
 				const styleName = name + '_copy';
 				const clonedStyle = createVariable(data, styleName);
 				console.log('clonedStyle', clonedStyle);
@@ -24,7 +24,7 @@ export const StyleManager = (page,node, setState) => {
 				return {
 					...state,
 					page: {
-						...page,
+						...state.page,
 						nodes: state.page.nodes.map((node) => {
 							if (changedTag.id === node.id) {
 								return changedTag;
@@ -32,7 +32,7 @@ export const StyleManager = (page,node, setState) => {
 								return node;
 							}
 						}),
-						styles: [...page.styles, clonedStyle],
+						styles: [...state.page.styles, clonedStyle],
 					},
 					node: changedTag,
 				};

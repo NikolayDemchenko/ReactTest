@@ -52,7 +52,7 @@ router.get("/getApps", (req, res) => {
     .catch((error) => console.error(error));
 });
 
-app.post("/updateAppName", async (req, res) => {
+app.post("/updateAppName",  (req, res) => {
   console.log("updateAppName");
   const pages = req.app.locals.pages;
   const { oldName, newName } = JSON.parse(req.body.appName);

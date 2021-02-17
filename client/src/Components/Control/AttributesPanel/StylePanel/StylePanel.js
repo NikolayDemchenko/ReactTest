@@ -6,13 +6,8 @@ import { StyleManager, Context } from '../../../../AppFunction';
 
 function StylePanel() {
 	// console.log("%cStylePanel-VerticalPanel-App", "color: green");
-	const {
-		setState,
-		page,
-		node,
-		nodeStyle,		
-	} = useContext(Context);
-
+	const { setState, page, node, nodeStyle } = useContext(Context);
+	console.log('nodeStyle', nodeStyle);
 	const [draggedProp, setDraggedProp] = useState();
 
 	const { cloneStyle, updateStyleData, updateStyleName, getDefaultStyleProps } = StyleManager(page, node, setState);
