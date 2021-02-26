@@ -27,10 +27,9 @@ router.get("/getPages", (req, res) => {
     .catch((error) => console.error(error));
 });
 
-router.get("/getPageById", (req, res) => {
+router.get("/getPageById", (req, res) => {  
   const _id = req.query._id;
-  const pages = req.app.locals.pages;
-  pages
+  req.app.locals.pages
     .find({ _id: new ObjectId(_id) })
     .toArray()
     .then((response) => {
@@ -52,7 +51,7 @@ router.get("/getApps", (req, res) => {
     .catch((error) => console.error(error));
 });
 
-app.post("/updateAppName",  (req, res) => {
+app.post("/updateAppName", (req, res) => {
   console.log("updateAppName");
   const pages = req.app.locals.pages;
   const { oldName, newName } = JSON.parse(req.body.appName);
@@ -111,7 +110,6 @@ app.post("/createPage", (req, res) => {
     res.send(result.ops[0]);
   });
 });
-
 
 app.post("/updatePage", (req, res) => {
   const pages = req.app.locals.pages;
