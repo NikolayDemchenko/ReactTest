@@ -1,134 +1,21 @@
 const express = require('express');
 const cors = require('cors');
-const router = express.Router();
 const bodyParser = require('body-parser');
-const MongoClient = require('mongodb').MongoClient;
-const ObjectId = require('mongodb').ObjectId;
+const pageRouter = require('../routers/page');
+const { MongoClient, ObjectId } = require('mongodb');
 
 const app = express();
 app.use(cors());
-app.use('/', router);
+app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json({ limit: '10mb' }));
+
+app.use(pageRouter);
 
 const cloudURI = 'mongodb+srv://MainAdmin:123454321@clustermongodb-vzdz7.mongodb.net/test?retryWrites=true&w=majority';
 const localURI = 'mongodb://localhost:27017/LocalMongoBase';
 
 const port = 8000;
-
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json({ limit: '10mb' }));
-
-router.get('/getPages', (req, res) => {
-	const pages = req.app.locals.pages;
-	pages
-		.find({})
-		.toArray()
-		.then((response) => res.status(200).json(response.map((res) => res.name)))
-		.catch((error) => console.error(error));
-});
-
-router.get('/getPageById', (req, res) => {
-	const _id = req.query._id;
-	req.app.locals.pages
-		.find({ _id: new ObjectId(_id) })
-		.toArray()
-		.then((response) => {
-			// console.log("response", response[0]);
-			res.status(200).json(response[0]);
-		})
-		.catch((error) => console.error(error));
-});
-router.get('/getApps', (req, res) => {
-	const pages = req.app.locals.pages;
-	pages
-		.find({ domain: /\D+/i })
-		.toArray()
-		.then((response) => {
-			res.status(200).json(Array.from(new Set(response.map((res) => res.appName))));
-		})
-		.catch((error) => console.error(error));
-});
-
-app.post('/updateAppName', (req, res) => {
-	console.log('updateAppName');
-	const pages = req.app.locals.pages;
-	const { oldName, newName } = JSON.parse(req.body.appName);
-	pages.updateMany(
-		{ appName: oldName }, // критерий фильтрации
-		{ $set: { appName: newName } }, // параметр обновления
-		() => {
-			pages
-				.find({ appName: newName })
-				.toArray()
-				.then((response) => {
-					console.log('response :>> ', response);
-					res.status(200).json({
-						pageList: response.map(({ domain, appName, name, _id }) => ({
-							domain,
-							appName,
-							name,
-							_id,
-						})),
-						page: response.find((res) => res.domain),
-					});
-				})
-				.catch((error) => console.error(error));
-		}
-	);
-});
-router.get('/getPagesByAppName', (req, res) => {
-	const appName = req.query.appName;
-	console.log('appName :>> ', appName);
-	const pages = req.app.locals.pages;
-	pages
-		.find({ appName })
-		.toArray()
-		.then((response) =>
-			res.status(200).json({
-				pageList: response.map(({ domain, appName, name, _id }) => ({
-					domain,
-					appName,
-					name,
-					_id,
-				})),
-				page: response.find((res) => res.domain),
-			})
-		)
-		.catch((error) => console.error(error));
-});
-
-app.post('/createPage', (req, res) => {
-	const pages = req.app.locals.pages;
-	const page = JSON.parse(req.body.page);
-	console.log('createPage');
-	pages.insertOne(page, (err, result) => {
-		if (err) return console.log(err);
-		res.send(result.ops[0]);
-	});
-});
-
-app.post('/updatePage', (req, res) => {
-	const pages = req.app.locals.pages;
-	const page = JSON.parse(req.body.page);
-	console.log('updatePage');
-	const _id = ObjectId(page._id);
-	pages.updateOne({ _id }, { $set: { ...page, _id } }, (err, result) => {
-		if (err) return console.log(err);
-		res.send(page);
-	});
-});
-
-app.post('/removePageById', (req, res) => {
-	const _id = req.body._id;
-	console.log('removePageById!!!!', _id);
-	const pages = req.app.locals.pages;
-
-	pages
-		.deleteOne({ _id: new ObjectId(_id) })
-		.then(() => {
-			res.send(200);
-		})
-		.catch((error) => console.error(error));
-});
 
 let dbClient;
 MongoClient.connect(cloudURI, {
@@ -141,6 +28,7 @@ MongoClient.connect(cloudURI, {
 		dbClient = client;
 		app.listen(port, () => console.info(`REST API running on port http://localhost:${port}`));
 		app.locals.pages = db.collection('pages');
+		app.locals.styles = db.collection('styles');
 	})
 	.catch((error) => console.error(error));
 

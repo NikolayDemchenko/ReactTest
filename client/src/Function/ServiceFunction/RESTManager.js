@@ -15,12 +15,14 @@ const get = async (requestName, params) => {
 };
 const post = async (requestName, data) => {
 	console.log(`%cpost :>> ${requestName}`, 'color:#700');
+	// console.log('data', data)
 	try {
 		const res = await axios({
 			method: 'post',
 			url: `${url}${requestName}`,
 			data,
 		});
+		// console.log('res.data', res.data)
 		return res.data;
 	} catch (e) {
 		console.error(e);
@@ -37,10 +39,10 @@ export const GetRESTManager = () => {
 		updatePage: (page) => post('updatePage', { page: JSON.stringify(page) }),
 		removePageById: (_id) => post('removePageById', { _id }),
 
-		getStyles: () => get('getStyles'),
-    getStyleById: (_id) => get('getStyleById', { _id }),
-		createStyle: (style) => post('createStyle', { style: JSON.stringify(style) }),
-		updateStyle: (style) => post('updateStyle', { style: JSON.stringify(style) }),
-		removeStyleById: (_id) => post('removeStyleById', { _id }),
+		// getStyles: () => get('getStyles'),
+    // getStyleById: (_id) => get('getStyleById', { _id }),
+		// createStyle: (style) => post('createStyle', { style: JSON.stringify(style) }),
+		// updateStyle: (style) => post('updateStyle', { style: JSON.stringify(style) }),
+		// removeStyleById: (_id) => post('removeStyleById', { _id }),
 	};
 };

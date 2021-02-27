@@ -29,8 +29,11 @@ function MainMenu() {
 			})
 		);
 	};
-	const updatePage = (page) => {
-		RESTManager.updatePage(page).then((page) => setState((state) => ({ ...state, page})));
+	const updatePage = (_page) => {
+		// console.log('_page', _page)
+		RESTManager.updatePage(_page).then((page) => {
+			// console.log('page', page)
+			setState((state) => ({ ...state, page}))});
 	};
 	const [show, setShow] = useState(false);
 	const [apps, setApps] = useState();
