@@ -39,7 +39,7 @@ function MainMenu() {
 	useEffect(() => {
 		getAppList();
 		return () => {};
-	}, [state]);
+	}, []);
 
 	// console.log('apps', apps);
 	return (

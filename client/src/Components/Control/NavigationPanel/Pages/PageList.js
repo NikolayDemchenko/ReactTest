@@ -21,7 +21,7 @@ function NavPage({ page, pageList, selection, setSelection, updatePage }) {
 	page = page._id === state.page._id ? state.page : page;
 
 	const getPageById = (id) => {
-		console.log('getPageById :>> ', id);
+		// console.log('getPageById :>> ', id);
 		RESTManager.getPageById(id).then((page) => {
 			console.log('page :>> ', page);
 			setState((state) => ({
@@ -32,7 +32,12 @@ function NavPage({ page, pageList, selection, setSelection, updatePage }) {
 	};
 
 	const remove = () => {
-		RESTManager.removePageById(page._id);
+		RESTManager.removePageById(page._id).then(() => {
+			setState((state) => ({
+				...state,
+				pageList: [...state.pageList.filter(({_id}) => page._id !== _id)],
+			}));
+		});
 		getPageById(pageList[0]._id);
 	};
 	let background = 'rgba(30,40,57,.8)';

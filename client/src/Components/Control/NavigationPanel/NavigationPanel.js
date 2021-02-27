@@ -7,7 +7,7 @@ import { Context } from '../../../AppFunction';
 import { log, funcLog } from '../../../Log';
 import PageCRUDbtn from './PageCRUDbtn';
 import PopupInput from '../Inputs/ModalInput/PopupInput/PopupInput';
-function NavigationPanel({ createNewPage, getAppList,updatePage }) {
+function NavigationPanel({ createNewPage, getAppList, updatePage }) {
 	const {
 		state: { page },
 		setState,
@@ -34,7 +34,7 @@ function NavigationPanel({ createNewPage, getAppList,updatePage }) {
 
 	let background = 'rgba(30,40,57,.8)';
 	let showButtons = false;
-	const { appName,domain } = page;
+	const { appName, domain } = page;
 	appName && selection === appName && (background = 'rgb(30,40,57)') && (showButtons = true);
 
 	const updateAppName = (newName) => {
@@ -93,10 +93,15 @@ function NavigationPanel({ createNewPage, getAppList,updatePage }) {
 			>
 				Domain:{' '}
 				<div style={{ padding: '0 8px' }} title={'application name'}>
-					<PopupInput value={domain} setValue={(domain)=>{updatePage({...page,domain})}} />
+					<PopupInput
+						value={domain}
+						setValue={(domain) => {
+							updatePage({ ...page, domain });
+						}}
+					/>
 				</div>
 			</div>
-			Pages: <PageList {...{ page, selection, setSelection,updatePage }} />
+			Pages: <PageList {...{ page, selection, setSelection, updatePage }} />
 		</div>
 	);
 }
