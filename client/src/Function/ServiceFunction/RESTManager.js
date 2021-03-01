@@ -32,7 +32,7 @@ const post = async (requestName, data) => {
 export const GetRESTManager = () => {
 	return {
 		getApps: () => get('getApps'),
-		updateAppName: (appName) => post('updateAppName', { appName: JSON.stringify(appName) }),
+		updateField: (value) => post('updateAppName', { value: JSON.stringify(value) }),
 		getPageById: (_id) => get('getPageById', { _id }),
 		getPagesByAppName: (appName) => get('getPagesByAppName', { appName }),
 		createPage: (page) => post('createPage', { page: JSON.stringify(page) }),

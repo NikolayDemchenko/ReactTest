@@ -35,15 +35,15 @@ router.get('/getPagesByAppName', (req, res) => {
 });
 
 router.post('/updateAppName', (req, res) => {
-	console.log('updateAppName');
 	const pages = req.app.locals.pages;
-	const { oldName, newName } = JSON.parse(req.body.appName);
+	const {field, oldValue, newValue } = JSON.parse(req.body.value);
+	console.log('updateAppName',JSON.parse(req.body.value));
 	pages.updateMany(
-		{ appName: oldName }, // критерий фильтрации
-		{ $set: { appName: newName } }, // параметр обновления
+		{ [field]: oldValue }, // критерий фильтрации
+		{ $set: { [field]: newValue } }, // параметр обновления
 		() => {
 			pages
-				.find({ appName: newName })
+				.find({ [field]: newValue })
 				.toArray()
 				.then((response) => {
 					console.log('response :>> ', response);
