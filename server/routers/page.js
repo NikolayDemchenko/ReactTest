@@ -1,27 +1,7 @@
-const express = require('express');
-const { ObjectId } = require('mongodb');
-const router = express.Router();
+// const express = require('express');
+const router = require('express').Router();
+const { createDocument, updateDocument, removeDocumentById, getCollection, getDocumentById } = require('../MongoCRUD/crud');
 
-router.get('/getPages', (req, res) => {
-	const pages = req.app.locals.pages;
-	pages
-		.find({})
-		.toArray()
-		.then((response) => res.status(200).json(response.map((res) => res.name)))
-		.catch((error) => console.error(error));
-});
-
-router.get('/getPageById', (req, res) => {
-	const _id = req.query._id;
-	req.app.locals.pages
-		.find({ _id: new ObjectId(_id) })
-		.toArray()
-		.then((response) => {
-			// console.log("response", response[0]);
-			res.status(200).json(response[0]);
-		})
-		.catch((error) => console.error(error));
-});
 router.get('/getApps', (req, res) => {
 	const pages = req.app.locals.pages;
 	pages
@@ -82,33 +62,10 @@ router.post('/updateAppName', (req, res) => {
 	);
 });
 
-router.post('/createPage', (req, res) => {
-	req.app.locals.pages.insertOne(JSON.parse(req.body.page), (err, result) => {
-		if (err) return console.log(err);
-		res.send(result.ops[0]);
-	});
-	console.log('createPage');
-});
+router.get('/getPages', (req, res) => getCollection(req, res, 'pages'));
+router.get('/getPageById', (req, res) => getDocumentById(req, res, 'pages'));
+router.post('/createPage', (req, res) => createDocument(req, res, 'pages', 'page'));
+router.post('/updatePage', (req, res) => updateDocument(req, res, 'pages', 'page'));
+router.post('/removePageById', (req, res) => removeDocumentById(req, res, 'pages'));
 
-router.post('/updatePage', (req, res) => {
-	const page = JSON.parse(req.body.page);
-	const _id = ObjectId(page._id);
-	req.app.locals.pages.findOneAndUpdate({ _id }, { $set: { ...page, _id } }, { returnOriginal: false }, (err, result) => {
-		console.log('updatePage');
-		// console.log('result', result.value);
-		if (err) return console.log(err);
-		res.send(result.value);
-	});
-});
-
-router.post('/removePageById', (req, res) => {
-	const _id = req.body._id;
-	console.log('removePageById!!!!', _id);
-	req.app.locals.pages
-		.deleteOne({ _id: new ObjectId(_id) })
-		.then(() => {
-			res.send(200);
-		})
-		.catch((error) => console.error(error));
-});
 module.exports = router;
