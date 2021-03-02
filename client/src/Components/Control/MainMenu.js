@@ -14,7 +14,7 @@ import NavigationPanel from './NavigationPanel/NavigationPanel';
 function MainMenu() {
 	const { state, setState, RESTManager } = useContext(Context);
 	const { page } = state;
-	const { createPage, getPagesByAppName, getApps } = RESTManager;
+	const { createPage, getDocsByField, getApps } = RESTManager;
 	const createNewPage = (newPage) => {
 		createPage(newPage).then((page) =>
 			setState((state) => {
@@ -33,7 +33,8 @@ function MainMenu() {
 		// console.log('_page', _page)
 		RESTManager.updatePage(_page).then((page) => {
 			// console.log('page', page)
-			setState((state) => ({ ...state, page}))});
+			setState((state) => ({ ...state, page }));
+		});
 	};
 	const [show, setShow] = useState(false);
 	const [apps, setApps] = useState();
@@ -71,7 +72,9 @@ function MainMenu() {
 					items={apps}
 					selected={''}
 					setItem={(appName) =>
-						getPagesByAppName(appName).then(({ pageList, page }) => setState({ pageList, page }))
+						getDocsByField({ name: 'appName', value: appName }).then((pageList) =>
+							setState({ pageList, page: pageList.find((page) => page.domain) })
+						)
 					}
 					button={
 						<div title={'Open'} className={buttonStyle}>

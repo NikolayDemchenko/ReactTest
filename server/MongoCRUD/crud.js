@@ -21,6 +21,17 @@ const updateDocument = (req, res, collectionName, docName) => {
 		}
 	);
 };
+const updateField = (req, res, collectionName) => {
+	const { name, value, newValue } = JSON.parse(req.body.value);
+	console.log(`update field: `, JSON.parse(req.body.value));
+	req.app.locals[collectionName]
+		.updateMany(
+			{ [name]: value }, // критерий фильтрации
+			{ $set: { [name]: newValue } } // параметр обновления
+		)
+		.then(() => res.status(200).json({}))
+		.catch((error) => console.error(error));
+};
 
 const removeDocumentById = (req, res, collectionName) => {
 	const _id = req.body._id;
@@ -52,5 +63,14 @@ const getDocumentById = (req, res, collectionName) => {
 		})
 		.catch((error) => console.error(error));
 };
+const getDocsByField = (req, res, collectionName) => {
+	const { name, value } = req.query;
+	console.log(`find ${collectionName} by field :>> `, name);
+	req.app.locals[collectionName]
+		.find({ [name]: value })
+		.toArray()
+		.then((response) => res.status(200).json(response))
+		.catch((error) => console.error(error));	
+};
 
-module.exports = { createDocument, updateDocument, removeDocumentById, getCollection, getDocumentById };
+module.exports = { createDocument, updateDocument, updateField, removeDocumentById, getCollection, getDocumentById,getDocsByField };
