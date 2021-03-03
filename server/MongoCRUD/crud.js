@@ -1,14 +1,14 @@
 const { ObjectId } = require('mongodb');
-const createDocument = (req, res, collectionName, docName) => {
-	req.app.locals[collectionName].insertOne(JSON.parse(req.body[docName]), (err, result) => {
+const createDoc = (req, res, collectionName) => {
+	req.app.locals[collectionName].insertOne(JSON.parse(req.body.value), (err, result) => {
 		if (err) return console.log(err);
 		res.send(result.ops[0]);
 	});
-	console.log(`create ${docName}`);
+	console.log(`create document`);
 };
 
-const updateDocument = (req, res, collectionName, docName) => {
-	const document = JSON.parse(req.body[docName]);
+const updateDoc = (req, res, collectionName) => {
+	const document = JSON.parse(req.body.value);
 	const _id = ObjectId(document._id);
 	req.app.locals[collectionName].findOneAndUpdate(
 		{ _id },
@@ -17,7 +17,7 @@ const updateDocument = (req, res, collectionName, docName) => {
 		(err, result) => {
 			if (err) return console.log(err);
 			res.send(result.value);
-			console.log(`update ${docName}`);
+			console.log(`update document`);
 		}
 	);
 };
@@ -33,7 +33,7 @@ const updateField = (req, res, collectionName) => {
 		.catch((error) => console.error(error));
 };
 
-const removeDocumentById = (req, res, collectionName) => {
+const removeDocById = (req, res, collectionName) => {
 	const _id = req.body._id;
 	req.app.locals[collectionName]
 		.deleteOne({ _id: new ObjectId(_id) })
@@ -52,7 +52,7 @@ const getCollection = (req, res, collectionName) => {
 		.catch((error) => console.error(error));
 };
 
-const getDocumentById = (req, res, collectionName) => {
+const getDocById = (req, res, collectionName) => {
 	const _id = req.query._id;
 	req.app.locals[collectionName]
 		.find({ _id: new ObjectId(_id) })
@@ -70,7 +70,32 @@ const getDocsByField = (req, res, collectionName) => {
 		.find({ [name]: value })
 		.toArray()
 		.then((response) => res.status(200).json(response))
-		.catch((error) => console.error(error));	
+		.catch((error) => console.error(error));
 };
 
-module.exports = { createDocument, updateDocument, updateField, removeDocumentById, getCollection, getDocumentById,getDocsByField };
+const getBaseRouter = (router, collectionName) => {
+	router.get(`/${collectionName}/getCollection`, (req, res) => getCollection(req, res, collectionName));
+	// Возвращает документ по id
+	router.get(`/${collectionName}/getDocById`, (req, res) => getDocById(req, res, collectionName));
+	// Создает новый документ и возвращает его
+	router.post(`/${collectionName}/createDoc`, (req, res) => createDoc(req, res, collectionName));
+	// Обновляет документ и возвращает обновленный 
+	router.post(`/${collectionName}/updateDoc`, (req, res) => updateDoc(req, res, collectionName));
+	// Возвращает все документы с одинаковым значением указанного поля
+	router.get(`/${collectionName}/getDocsByField`, (req, res) => getDocsByField(req, res, collectionName));
+	// Находит все документы с одинаковым значением указанного поля и обновляет указанное поле в этих документах
+	router.put(`/${collectionName}/updateField`, (req, res) => updateField(req, res, collectionName));
+	// Удаляет документ по id
+	router.post(`/${collectionName}/removeDocById`, (req, res) => removeDocById(req, res, collectionName));
+	return router;
+};
+module.exports = {
+	createDoc,
+	updateDoc,
+	updateField,
+	removeDocById,
+	getCollection,
+	getDocById,
+	getDocsByField,
+	getBaseRouter,
+};

@@ -22,7 +22,7 @@ function NavPage({ page, pageList, selection, setSelection, updatePage }) {
 
 	const getPageById = (id) => {
 		// console.log('getPageById :>> ', id);
-		RESTManager.getPageById(id).then((page) => {
+		RESTManager.getDocById(id).then((page) => {
 			console.log('page :>> ', page);
 			setState((state) => ({
 				pageList: state.pageList,
@@ -32,7 +32,7 @@ function NavPage({ page, pageList, selection, setSelection, updatePage }) {
 	};
 
 	const remove = () => {
-		RESTManager.removePageById(page._id).then(() => {
+		RESTManager.removeDocById(page._id).then(() => {
 			setState((state) => ({
 				...state,
 				pageList: [...state.pageList.filter(({_id}) => page._id !== _id)],

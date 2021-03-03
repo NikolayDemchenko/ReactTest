@@ -7,7 +7,7 @@ import { Context } from '../../../AppFunction';
 import { log, funcLog } from '../../../Log';
 import PageCRUDbtn from './PageCRUDbtn';
 import PopupInput from '../Inputs/ModalInput/PopupInput/PopupInput';
-function NavigationPanel({ createNewPage, getAppList, updatePage }) {
+function NavigationPanel({ createPage, getAppList, updatePage }) {
 	const {
 		state: { page },
 		setState,
@@ -74,7 +74,7 @@ function NavigationPanel({ createNewPage, getAppList, updatePage }) {
 						<PageCRUDbtn
 							{...{
 								create: (name) =>
-									createNewPage({
+								createPage({
 										name,
 										appName,
 										styles: [],

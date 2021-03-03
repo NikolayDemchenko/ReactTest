@@ -14,9 +14,9 @@ import NavigationPanel from './NavigationPanel/NavigationPanel';
 function MainMenu() {
 	const { state, setState, RESTManager } = useContext(Context);
 	const { page } = state;
-	const { createPage, getDocsByField, getApps } = RESTManager;
-	const createNewPage = (newPage) => {
-		createPage(newPage).then((page) =>
+	const { createDoc, getDocsByField, getApps } = RESTManager;
+	const createPage = (newPage) => {
+		createDoc(newPage).then((page) =>
 			setState((state) => {
 				console.log('state', state);
 				const { _id, name, domain, appName } = page;
@@ -31,7 +31,7 @@ function MainMenu() {
 	};
 	const updatePage = (_page) => {
 		// console.log('_page', _page)
-		RESTManager.updatePage(_page).then((page) => {
+		RESTManager.updateDoc(_page).then((page) => {
 			// console.log('page', page)
 			setState((state) => ({ ...state, page }));
 		});
@@ -85,7 +85,7 @@ function MainMenu() {
 
 				<PopupInputsForm
 					setItem={(data) =>
-						createNewPage({
+						createPage({
 							...data,
 							nodes: [],
 							styles: [],
@@ -117,16 +117,15 @@ function MainMenu() {
 					</div>
 				)}
 				{page && (
-					<SavePage page={page} savePage={updatePage} createPage={createNewPage} pageId={page._id}>
+					<SavePage {...{ createPage, getAppList, page, savePage: updatePage, pageId: page._id }}>
 						<div title={'Save'} className={buttonStyle}>
 							<Icon size={'100%'} icon={save} />
 						</div>
 					</SavePage>
 				)}
 			</div>
-			{show && <NavigationPanel {...{ createNewPage, getAppList, updatePage }} />}
+			{show && <NavigationPanel {...{ createPage, getAppList, updatePage }} />}
 		</div>
 	);
 }
 export default log(MainMenu);
-// export default NavigationPanel;
