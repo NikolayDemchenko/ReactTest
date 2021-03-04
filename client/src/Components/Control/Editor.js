@@ -4,7 +4,7 @@ import AttributesPanel from "./AttributesPanel/AttributesPanel";
 import { TagManager, Context } from "../../AppFunction";
 
 const Editor = () => {
-  const { state, setState, RESTManager } = useContext(Context);
+  const { state, setState, PageREST } = useContext(Context);
   console.log("Editor");
   const page = state.page;
   const node = page.nodes.find(({ id }) => state.nodeId === id);
@@ -24,7 +24,7 @@ const Editor = () => {
     <Context.Provider
       value={{
         updateTag,
-        RESTManager,
+        PageREST,
         page,
         node,
         nodeStyle,

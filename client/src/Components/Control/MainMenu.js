@@ -12,40 +12,12 @@ import { log, funcLog } from '../../Log';
 import { buttonStyle } from './Styles/BtnStyle';
 import NavigationPanel from './NavigationPanel/NavigationPanel';
 function MainMenu() {
-	const { state, setState, RESTManager } = useContext(Context);
-	const { page } = state;
-	const { createDoc, getDocsByField, getApps } = RESTManager;
-	const createPage = (newPage) => {
-		createDoc(newPage).then((page) =>
-			setState((state) => {
-				console.log('state', state);
-				const { _id, name, domain, appName } = page;
-				const pageTitle = { _id, name, domain, appName };
-				return {
-					...state,
-					page: { ...page },
-					pageList: !newPage.domain ? [...state.pageList, { ...pageTitle }] : [{ ...pageTitle }],
-				};
-			})
-		);
-	};
-	const updatePage = (_page) => {
-		// console.log('_page', _page)
-		RESTManager.updateDoc(_page).then((page) => {
-			// console.log('page', page)
-			setState((state) => ({ ...state, page }));
-		});
-	};
+	const { state, setState, PageREST } = useContext(Context);
+	const { page, apps } = state;
+	const { createPage, getPagesByAppName, updatePage } = PageREST;
+
 	const [show, setShow] = useState(false);
-	const [apps, setApps] = useState();
-	const getAppList = () => getApps().then((apps) => setApps(apps));
 
-	useEffect(() => {
-		getAppList();
-		return () => {};
-	}, []);
-
-	// console.log('apps', apps);
 	return (
 		<div
 			style={{
@@ -71,11 +43,7 @@ function MainMenu() {
 					closeAftSelect={true}
 					items={apps}
 					selected={''}
-					setItem={(appName) =>
-						getDocsByField({ name: 'appName', value: appName }).then((pageList) =>
-							setState({ pageList, page: pageList.find((page) => page.domain) })
-						)
-					}
+					setItem={getPagesByAppName}
 					button={
 						<div title={'Open'} className={buttonStyle}>
 							<Icon size={'100%'} icon={folderOpen} />
@@ -117,14 +85,14 @@ function MainMenu() {
 					</div>
 				)}
 				{page && (
-					<SavePage {...{ createPage, getAppList, page, savePage: updatePage, pageId: page._id }}>
+					<SavePage {...{ createPage, page, savePage: updatePage, pageId: page._id }}>
 						<div title={'Save'} className={buttonStyle}>
 							<Icon size={'100%'} icon={save} />
 						</div>
 					</SavePage>
 				)}
 			</div>
-			{show && <NavigationPanel {...{ createPage, getAppList, updatePage }} />}
+			{show && <NavigationPanel {...{ createPage, updatePage }} />}
 		</div>
 	);
 }

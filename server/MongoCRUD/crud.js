@@ -8,6 +8,7 @@ const createDoc = (req, res, collectionName) => {
 };
 
 const updateDoc = (req, res, collectionName) => {
+	console.log(`start update document`);
 	const document = JSON.parse(req.body.value);
 	const _id = ObjectId(document._id);
 	req.app.locals[collectionName].findOneAndUpdate(
@@ -17,7 +18,7 @@ const updateDoc = (req, res, collectionName) => {
 		(err, result) => {
 			if (err) return console.log(err);
 			res.send(result.value);
-			console.log(`update document`);
+			console.log(`updated document`);
 		}
 	);
 };
@@ -48,7 +49,7 @@ const getCollection = (req, res, collectionName) => {
 	req.app.locals[collectionName]
 		.find({})
 		.toArray()
-		.then((response) => res.status(200).json(response.map(({ _id, name }) => ({ _id, name }))))
+		.then((response) => res.status(200).json(response))
 		.catch((error) => console.error(error));
 };
 
@@ -65,7 +66,7 @@ const getDocById = (req, res, collectionName) => {
 };
 const getDocsByField = (req, res, collectionName) => {
 	const { name, value } = req.query;
-	console.log(`find ${collectionName} by field :>> `, name);
+	console.log(`get ${collectionName} by field :>> `, name);
 	req.app.locals[collectionName]
 		.find({ [name]: value })
 		.toArray()
@@ -74,12 +75,13 @@ const getDocsByField = (req, res, collectionName) => {
 };
 
 const getBaseRouter = (router, collectionName) => {
+	// Возвращает коллекцию
 	router.get(`/${collectionName}/getCollection`, (req, res) => getCollection(req, res, collectionName));
 	// Возвращает документ по id
 	router.get(`/${collectionName}/getDocById`, (req, res) => getDocById(req, res, collectionName));
 	// Создает новый документ и возвращает его
 	router.post(`/${collectionName}/createDoc`, (req, res) => createDoc(req, res, collectionName));
-	// Обновляет документ и возвращает обновленный 
+	// Обновляет документ и возвращает обновленный
 	router.post(`/${collectionName}/updateDoc`, (req, res) => updateDoc(req, res, collectionName));
 	// Возвращает все документы с одинаковым значением указанного поля
 	router.get(`/${collectionName}/getDocsByField`, (req, res) => getDocsByField(req, res, collectionName));

@@ -1,20 +1,21 @@
 import React, { useState, useContext } from 'react';
 import PageList from './Pages/PageList';
 import jss from 'jss';
-import Icon from 'react-icons-kit';
 import preset from 'jss-preset-default';
 import { Context } from '../../../AppFunction';
 import { log, funcLog } from '../../../Log';
 import PageCRUDbtn from './PageCRUDbtn';
 import PopupInput from '../Inputs/ModalInput/PopupInput/PopupInput';
-function NavigationPanel({ createPage, getAppList, updatePage }) {
+function NavigationPanel({ createPage, updatePage }) {
 	const {
 		state: { page },
 		setState,
-		RESTManager,
+		PageREST,
 	} = useContext(Context);
-	const [selection, setSelection] = useState();
-	console.log('selection', selection);
+	const { updateAppName } = PageREST;
+	const [selection, setSelection] = useState(page.name);
+	// console.log('selection', selection);
+
 	const style = {
 		minWidth: '280px',
 		maxWidth: '280px',
@@ -26,27 +27,12 @@ function NavigationPanel({ createPage, getAppList, updatePage }) {
 		'&::-webkit-scrollbar-thumb': { backgroundColor: '#567' },
 	};
 	jss.setup(preset());
-	const { classes } = jss
-		.createStyleSheet({
-			style,
-		})
-		.attach();
+	const { classes } = jss.createStyleSheet({ style }).attach();
 
 	let background = 'rgba(30,40,57,.8)';
 	let showButtons = false;
 	const { appName, domain } = page;
 	appName && selection === appName && (background = 'rgb(30,40,57)') && (showButtons = true);
-
-	const updateAppName = (newValue) => {
-		RESTManager.updateField({
-			name: 'appName',
-			value: appName,
-			newValue,
-		}).then(() => {	
-			RESTManager.getDocsByField({ name: 'appName', value: newValue }).then((pageList) => setState({ pageList, page:pageList.find((page) => page.domain) }));
-			getAppList();
-		});
-	};
 
 	return (
 		<div
@@ -65,16 +51,16 @@ function NavigationPanel({ createPage, getAppList, updatePage }) {
 					cursor: 'default',
 				}}
 			>
-				Application:{' '}
+				Application:
 				<div style={{ padding: '0 8px' }} title={'application name'}>
-					<PopupInput value={appName} setValue={updateAppName} />
+					<PopupInput value={appName} setValue={(value) => updateAppName(appName, value)} />
 				</div>
 				{showButtons && (
 					<div style={{ margin: '0 4px 4px auto' }}>
 						<PageCRUDbtn
 							{...{
 								create: (name) =>
-								createPage({
+									createPage({
 										name,
 										appName,
 										styles: [],
@@ -95,7 +81,7 @@ function NavigationPanel({ createPage, getAppList, updatePage }) {
 					cursor: 'default',
 				}}
 			>
-				Domain:{' '}
+				Domain:
 				<div style={{ padding: '0 8px' }} title={'application name'}>
 					<PopupInput
 						value={domain}
@@ -105,7 +91,7 @@ function NavigationPanel({ createPage, getAppList, updatePage }) {
 					/>
 				</div>
 			</div>
-			Pages: <PageList {...{ page, selection, setSelection, updatePage }} />
+			Pages: <PageList {...{ selection, setSelection, updatePage }} />
 		</div>
 	);
 }

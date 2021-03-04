@@ -1,45 +1,26 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { Context, TagManager } from '../../../../AppFunction';
 import TagCRUDbtn from '../TagCRUDbtn';
 import { tagList as elementList } from '../../../Class/HtmlCss';
 import { TagList } from '../Tags/TagList';
 import PopupInput from '../../Inputs/ModalInput/PopupInput/PopupInput';
-function NavPages({ selection, setSelection, updatePage }) {
+function PageList({ selection, setSelection, updatePage }) {
 	const { state } = useContext(Context);
 	const pageList = state && state.pageList ? state.pageList : [{ ...state.page }];
-	// console.log('pageList', pageList);
-	return pageList.map((page, index) => {
-		// console.log("page :>> ", page);
-		return <NavPage key={index} {...{ selection, setSelection, updatePage, pageList, page }} />;
+
+	return pageList.map((page, key) => {
+		return <NavPage {...{ key, selection, setSelection, updatePage, page }} />;
 	});
 }
-function NavPage({ page, pageList, selection, setSelection, updatePage }) {
+function NavPage({ page, selection, setSelection, updatePage }) {
 	// console.log('page :>> ', page);
-	const { RESTManager, state, setState } = useContext(Context);
+	console.log('selection', selection);
+	const { PageREST, state, setState } = useContext(Context);
+	const { getPageById, removePage } = PageREST;
 	const { createTag } = TagManager(state, setState);
 
 	page = page._id === state.page._id ? state.page : page;
 
-	const getPageById = (id) => {
-		// console.log('getPageById :>> ', id);
-		RESTManager.getDocById(id).then((page) => {
-			console.log('page :>> ', page);
-			setState((state) => ({
-				pageList: state.pageList,
-				page,
-			}));
-		});
-	};
-
-	const remove = () => {
-		RESTManager.removeDocById(page._id).then(() => {
-			setState((state) => ({
-				...state,
-				pageList: [...state.pageList.filter(({_id}) => page._id !== _id)],
-			}));
-		});
-		getPageById(pageList[0]._id);
-	};
 	let background = 'rgba(30,40,57,.8)';
 	let showButtons = false;
 	selection === page.name && (background = 'rgb(30,40,57)') && (showButtons = true);
@@ -77,13 +58,15 @@ function NavPage({ page, pageList, selection, setSelection, updatePage }) {
 				</div>
 				{showButtons && (
 					<div style={{ margin: '0 4px 4px auto' }}>
-						<TagCRUDbtn {...{ create: createTag, remove, elementList }} />
+						<TagCRUDbtn {...{ create: createTag, remove: () => removePage(page), elementList }} />
 					</div>
 				)}
 			</div>
-			<div style={{ marginLeft: '12px' }}>{page.nodes && <TagList {...{ selection, setSelection, page }} />}</div>
+			<div style={{ marginLeft: '12px' }}>
+				{state.page.name === page.name && page.nodes && <TagList {...{ selection, setSelection, page }} />}
+			</div>
 		</div>
 	);
 }
 
-export default NavPages;
+export default PageList;
