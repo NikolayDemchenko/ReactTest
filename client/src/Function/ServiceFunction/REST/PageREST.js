@@ -1,7 +1,6 @@
 import { getRESTManager } from './RESTManager';
 
 const {
-	get,
 	getCollection,
 	getDocById,
 	createDoc,
@@ -9,11 +8,12 @@ const {
 	getDocsByField,
 	updateField,
 	removeDocById,
+	getUniqueValues,
 } = getRESTManager('pages');
 
 const getPageREST = (setState) => {
 	return {
-		getAppList: () => get('/getApps').then((apps) => setState((state) => ({ ...state, apps }))),
+		getAppList: () => getUniqueValues('appName').then((apps) => setState((state) => ({ ...state, apps }))),
 
 		getPages: () => getCollection().then((pageList) => setState((state) => ({ ...state, pageList }))),
 
@@ -53,7 +53,7 @@ const getPageREST = (setState) => {
 				newValue,
 			}).then(() => {
 				getDocsByField({ name: 'appName', value: newValue }).then((pageList) =>
-					get('/getApps').then((apps) =>
+					getUniqueValues('appName').then((apps) =>
 						setState((state) => ({
 							...state,
 							pageList,
@@ -67,7 +67,7 @@ const getPageREST = (setState) => {
 		removePage: (page) => {
 			removeDocById(page._id).then(() => {
 				getDocsByField({ name: 'appName', value: page.appName }).then((pageList) =>
-					get('/getApps').then((apps) =>
+					getUniqueValues('appName').then((apps) =>
 						setState({
 							pageList,
 							page: pageList.find((page) => page.domain),

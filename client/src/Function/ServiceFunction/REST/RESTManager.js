@@ -52,6 +52,8 @@ export const getRESTManager = (collectionName) => {
 		put,
 		// Возвращает коллекцию
 		getCollection: () => get(`/${collectionName}/getCollection`),
+		// Возвращает массив уникальных значений указанного поля
+		getUniqueValues: (fieldName) => get(`/${collectionName}/getUniqueValues`, { fieldName }),
 		// Возвращает документ по id
 		getDocById: (_id) => get(`/${collectionName}/getDocById`, { _id }),
 		// Создает новый документ и возвращает его
@@ -62,7 +64,7 @@ export const getRESTManager = (collectionName) => {
 		getDocsByField: (value) => get(`/${collectionName}/getDocsByField`, value),
 		// Находит все документы с одинаковым значением указанного поля и обновляет указанное поле в этих документах
 		updateField: (value) => put(`/${collectionName}/updateField`, { value: JSON.stringify(value) }),
-	// Удаляет документ по id
+		// Удаляет документ по id
 		removeDocById: (_id) => post(`/${collectionName}/removeDocById`, { _id }),
 	};
 };
