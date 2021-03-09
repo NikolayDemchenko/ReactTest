@@ -74,13 +74,13 @@ const getDocsByField = (req, res, collectionName) => {
 		.catch((error) => console.error(error));
 };
 const getUniqueValues = (req, res, collectionName) => {
-	const { name } = req.query;
-	console.log(`get a list of unique values for the ${name} field in ${collectionName}`);
+	const { fieldName } = req.query;
+	console.log(`get a list of unique values for the ${fieldName} field in ${collectionName}`);
 	req.app.locals[collectionName]
 		.find({})
 		.toArray()
 		.then((response) => {
-			res.status(200).json(Array.from(new Set(response.map((res) => res[name]))));
+			res.status(200).json(Array.from(new Set(response.map((res) => res[fieldName]))));
 		})
 		.catch((error) => console.error(error));
 };
