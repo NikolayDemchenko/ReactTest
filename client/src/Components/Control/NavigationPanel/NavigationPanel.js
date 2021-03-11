@@ -4,12 +4,11 @@ import jss from 'jss';
 import preset from 'jss-preset-default';
 import { Context } from '../../../AppFunction';
 import { log, funcLog } from '../../../Log';
-import PageCRUDbtn from './PageCRUDbtn';
+import PageCRUDbtn from './Pages/PageCRUDbtn';
 import PopupInput from '../Inputs/ModalInput/PopupInput/PopupInput';
 function NavigationPanel({ createPage, updatePage }) {
 	const {
-		state: { page },
-		setState,
+		state: { page },	
 		PageREST,
 	} = useContext(Context);
 	const { updateAppName } = PageREST;
@@ -63,6 +62,7 @@ function NavigationPanel({ createPage, updatePage }) {
 									createPage({
 										name,
 										appName,
+										domain,
 										styles: [],
 										nodes: [],
 										bodyStyle: { background: 'inherit' },

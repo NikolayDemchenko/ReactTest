@@ -1,15 +1,15 @@
 import React, { useContext } from 'react';
 import { Context, TagManager } from '../../../../AppFunction';
-import TagCRUDbtn from '../TagCRUDbtn';
+import TagCRUDbtn from '../Tags/TagCRUDbtn';
 import { tagList as elementList } from '../../../Class/HtmlCss';
 import { TagList } from '../Tags/TagList';
 import PopupInput from '../../Inputs/ModalInput/PopupInput/PopupInput';
-function PageList({ selection, setSelection, updatePage }) {
+function PageList(props) {
 	const { state } = useContext(Context);
 	const pageList = state && state.pageList ? state.pageList : [{ ...state.page }];
 
 	return pageList.map((page, key) => {
-		return <NavPage {...{ key, selection, setSelection, updatePage, page }} />;
+		return <NavPage {...{...props, key, page }} />;
 	});
 }
 function NavPage({ page, selection, setSelection, updatePage }) {

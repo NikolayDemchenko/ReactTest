@@ -13,10 +13,7 @@ const App = () => {
 	console.log('state :>> ', state);
 
 	const PageREST = getPageREST(setState);
-	useEffect(() => {
-		PageREST.getAppList();
-		return () => {};
-	}, []);
+
 
 	return (
 		<ErrorBoundry>

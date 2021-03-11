@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import Icon from 'react-icons-kit';
 import { Link } from 'react-scroll';
 import { NavTags } from './TagList';
 import { tagList as elementList } from '../../../Class/HtmlCss';
-import TagCRUDbtn from '../TagCRUDbtn';
+import TagCRUDbtn from './TagCRUDbtn';
 import { log, funcLog } from '../../../../Log';
 import RotatingArrow from '../RotatingArrow';
 function NavTag(props) {

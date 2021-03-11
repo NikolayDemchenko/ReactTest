@@ -13,14 +13,13 @@ const {
 
 const getPageREST = (setState) => {
 	return {
-		getAppList: () => getUniqueValues('appName').then((apps) => setState((state) => ({ ...state, apps }))),
-
+		getAppList: (set) => getUniqueValues('appName').then((items) => set(items)),
 		getPages: () => getCollection().then((pageList) => setState((state) => ({ ...state, pageList }))),
 
 		getPageById: (id) => {
 			getDocById(id).then((page) => {
 				setState((state) => {
-					return { apps: state.apps, pageList: state.pageList, page };
+					return {pageList: state.pageList, page };
 				});
 			});
 		},
@@ -28,7 +27,7 @@ const getPageREST = (setState) => {
 		createPage: (newPage) => {
 			createDoc(newPage).then((page) => {
 				getDocsByField({ name: 'appName', value: page.appName }).then((pageList) =>
-					setState((state) => ({ apps: state.apps, pageList, page }))
+					setState((state) => ({pageList, page }))
 				);
 			});
 		},
@@ -43,7 +42,7 @@ const getPageREST = (setState) => {
 
 		getPagesByAppName: (value) =>
 			getDocsByField({ name: 'appName', value }).then((pageList) =>
-				setState((state) => ({ apps: state.apps, pageList, page: pageList.find((page) => page.domain) }))
+				setState({pageList, page: pageList.find((page) => page.startPage)||pageList[0] })
 			),
 
 		updateAppName: (value, newValue) => {
@@ -53,27 +52,21 @@ const getPageREST = (setState) => {
 				newValue,
 			}).then(() => {
 				getDocsByField({ name: 'appName', value: newValue }).then((pageList) =>
-					getUniqueValues('appName').then((apps) =>
-						setState((state) => ({
-							...state,
-							pageList,
-							page: pageList.find((page) => page.domain),
-							apps,
-						}))
-					)
+					setState((state) => ({
+						...state,
+						pageList,
+						page: pageList.find((page) => page.domain),
+					}))
 				);
 			});
 		},
 		removePage: (page) => {
 			removeDocById(page._id).then(() => {
 				getDocsByField({ name: 'appName', value: page.appName }).then((pageList) =>
-					getUniqueValues('appName').then((apps) =>
-						setState({
-							pageList,
-							page: pageList.find((page) => page.domain),
-							apps,
-						})
-					)
+					setState({
+						pageList,
+						page: pageList.find((page) => page.domain),
+					})
 				);
 			});
 		},

@@ -2,7 +2,7 @@ import React from 'react';
 import { plus } from 'react-icons-kit/icomoon/plus';
 import { cross } from 'react-icons-kit/icomoon/cross';
 import Icon from 'react-icons-kit';
-import PopupInputsForm from '../Inputs/ModalInput/PopupInput/PopupInputsForm';
+import PopupInputsForm from '../../Inputs/ModalInput/PopupInput/PopupInputsForm';
 function PageCRUDbtn({ create }) {
 	// console.log('htmlTagsVoid :>> ', Array.isArray(htmlTagsVoid) );
 	// console.log('htmlTags', htmlTags)

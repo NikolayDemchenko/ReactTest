@@ -3,10 +3,10 @@ import { createVariable, createUniqueName } from './Function/ServiceFunction/Dat
 import { TagManager } from './Function/ServiceFunction/TagManager';
 import { StyleManager } from './Function/ServiceFunction/StyleManager';
 
-import { getRESTManager as getRESTManager } from './Function/ServiceFunction/REST/RESTManager';
+import { getRESTManager} from './Function/ServiceFunction/REST/RESTManager';
 import React from 'react';
 
 const Context = React.createContext();
 const NavigationContext = React.createContext();
 
-export { SaveToJSON, createVariable, createUniqueName, TagManager, StyleManager, getRESTManager as getRESTManager, Context,NavigationContext };
+export { SaveToJSON, createVariable, createUniqueName, TagManager, StyleManager, getRESTManager, Context, NavigationContext };

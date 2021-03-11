@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 export default function Items(props) {
-	const { setItem, items, exItems, closeAftSelect, close } = props;
+	const { setItem, items, excludedItems, closeAftSelect, close } = props;
 
 	const arrayDiff = (arrA = [], arrB = []) => arrA.filter((el) => !arrB.includes(el));
 
-	const thisItems = arrayDiff(items, exItems);
+	const thisItems = arrayDiff(items, excludedItems);
 	const [search, setSearch] = useState('');
 	const [list, setList] = useState(thisItems);
 	const [selected, setSelected] = useState(props.selected);
@@ -16,7 +16,7 @@ export default function Items(props) {
 		return () => {
 			console.log('useEffect out');
 		};
-	}, [exItems]);
+	}, [excludedItems]);
 
 	// Поиск по подстроке и сортировка по позиции подстроки
 	const Search = (item, items) =>

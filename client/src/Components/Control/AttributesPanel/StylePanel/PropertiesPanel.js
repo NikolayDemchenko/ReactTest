@@ -92,7 +92,7 @@ function PropertiesPanel(props) {
             items={allStyleProps().map(({ key }) => key)}
             selected={""}
             setItem={addProperty}
-            exItems={Object.keys(panelStyle)}
+            excludedItems={Object.keys(panelStyle)}
             button={
               <div title={"Добавить свойство"} className={buttonStyle}>
                 <Icon size={"100%"} icon={ic_add_to_queue} />

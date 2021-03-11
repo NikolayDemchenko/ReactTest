@@ -15,7 +15,7 @@ const getTree = (nodes = [], _parentId) => {
 	});
 };
 export const TagManager = ({ page }, setState) => {
-	//   console.log("page :>> ", page);
+	  console.log("TagManager :>> ");
 	jss.setup(preset());
 	const myStyles = {};
 	page.styles &&
