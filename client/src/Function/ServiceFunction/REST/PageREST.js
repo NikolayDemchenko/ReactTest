@@ -14,6 +14,7 @@ const {
 const getPageREST = (setState) => {
 	return {
 		getAppList: (set) => getUniqueValues('appName').then((items) => set(items)),
+		
 		getPages: () => getCollection().then((pageList) => setState((state) => ({ ...state, pageList }))),
 
 		getPageById: (id) => {
