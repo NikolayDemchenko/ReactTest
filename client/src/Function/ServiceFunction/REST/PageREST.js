@@ -44,6 +44,10 @@ const getPageREST = (setState) => {
 			getDocsByField({ name: 'appName', value }).then((pageList) =>
 				setState({pageList, page: pageList.find((page) => page.startPage)||pageList[0] })
 			),
+		getPagesByAppId: (value) =>
+			getDocsByField({ name: 'appId', value }).then((pageList) =>
+				setState({pageList, page: pageList.find((page) => page.startPage)||pageList[0] })
+			),
 
 		updateAppName: (value, newValue) => {
 			updateField({

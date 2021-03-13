@@ -4,14 +4,15 @@ import jss from 'jss';
 import preset from 'jss-preset-default';
 import { Context } from '../../../AppFunction';
 import { log, funcLog } from '../../../Log';
-import PageCRUDbtn from './Pages/PageCRUDbtn';
-import PopupInput from '../Inputs/ModalInput/PopupInput/PopupInput';
+import Application from './Applications/Application';
+// import PageCRUDbtn from './Pages/PageCRUDbtn';
+// import PopupInput from '../Inputs/ModalInput/PopupInput/PopupInput';
 function NavigationPanel({ createPage, updatePage }) {
 	const {
-		state: { page },	
-		PageREST,
+		state: { page },
+		// PageREST,
 	} = useContext(Context);
-	const { updateAppName } = PageREST;
+	// const { updateAppName } = PageREST;
 	const [selection, setSelection] = useState(page.name);
 	// console.log('selection', selection);
 
@@ -28,21 +29,22 @@ function NavigationPanel({ createPage, updatePage }) {
 	jss.setup(preset());
 	const { classes } = jss.createStyleSheet({ style }).attach();
 
-	let background = 'rgba(30,40,57,.8)';
-	let showButtons = false;
-	const { appName, domain } = page;
-	appName && selection === appName && (background = 'rgb(30,40,57)') && (showButtons = true);
+	// let background = 'rgba(30,40,57,.8)';
+	// let showButtons = false;
+	// const { appName, domain } = page;
+	// appName && selection === appName && (background = 'rgb(30,40,57)') && (showButtons = true);
 
 	return (
 		<div
 			className={classes.style}
-			onClick={(e) => {
-				e.stopPropagation();
-				e.preventDefault();
-				setSelection(appName);
-			}}
+			// onClick={(e) => {
+			// 	e.stopPropagation();
+			// 	e.preventDefault();
+			// 	setSelection(appName);
+			// }}
 		>
-			<div
+			<Application {...{selection, setSelection}}/>
+			{/* <div
 				style={{
 					display: 'flex',
 					borderBottom: '2px solid #55667766',
@@ -90,7 +92,7 @@ function NavigationPanel({ createPage, updatePage }) {
 						}}
 					/>
 				</div>
-			</div>
+			</div> */}
 			Pages: <PageList {...{ selection, setSelection, updatePage }} />
 		</div>
 	);

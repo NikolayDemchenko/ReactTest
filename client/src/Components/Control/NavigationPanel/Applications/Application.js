@@ -1,59 +1,36 @@
-import React, { useState, useContext } from 'react';
-import PageList from './Pages/PageList';
-import jss from 'jss';
-import preset from 'jss-preset-default';
-import { Context } from '../../../AppFunction';
-import { log, funcLog } from '../../../Log';
-import PageCRUDbtn from './Pages/PageCRUDbtn';
-import PopupInput from '../Inputs/ModalInput/PopupInput/PopupInput';
-function NavigationPanel({ createPage, updatePage }) {
+import React, { useContext } from 'react';
+import { Context } from '../../../../AppFunction';
+import { log, funcLog } from '../../../../Log';
+import PageCRUDbtn from '../Pages/PageCRUDbtn';
+import PopupInput from '../../Inputs/ModalInput/PopupInput/PopupInput';
+import SelectPanel from '../../Inputs/ModalInput/SelectPanel/SelectPanel';
+function Application({ selection, setSelection }) {
 	const {
-		state: { page },	
+		state: { page },
 		PageREST,
 	} = useContext(Context);
-	const { updateAppName } = PageREST;
-	const [selection, setSelection] = useState(page.name);
-	// console.log('selection', selection);
-
-	const style = {
-		minWidth: '280px',
-		maxWidth: '280px',
-		maxHeight: '95vh',
-		overflowY: 'auto',
-		color: 'rgba(140, 200, 255, 0.8)',
-		boxShadow: '2px 10px 5px 2px #00000055',
-		'&::-webkit-scrollbar': { width: '20px' },
-		'&::-webkit-scrollbar-thumb': { backgroundColor: '#567' },
-	};
-	jss.setup(preset());
-	const { classes } = jss.createStyleSheet({ style }).attach();
-
+	const { updateAppName, createPage, updatePage } = PageREST;
 	let background = 'rgba(30,40,57,.8)';
 	let showButtons = false;
 	const { appName, domain } = page;
 	appName && selection === appName && (background = 'rgb(30,40,57)') && (showButtons = true);
 
+	const containerStyle = {
+		display: 'flex',
+		borderBottom: '2px solid #55667766',
+		background,
+		cursor: 'default',
+	};
 	return (
 		<div
-			className={classes.style}
 			onClick={(e) => {
 				e.stopPropagation();
 				e.preventDefault();
 				setSelection(appName);
 			}}
 		>
-			<div
-				style={{
-					display: 'flex',
-					borderBottom: '2px solid #55667766',
-					background,
-					cursor: 'default',
-				}}
-			>
-				Application:
-				<div style={{ padding: '0 8px' }} title={'application name'}>
-					<PopupInput value={appName} setValue={(value) => updateAppName(appName, value)} />
-				</div>
+			<div style={containerStyle}>
+				Application
 				{showButtons && (
 					<div style={{ margin: '0 4px 4px auto' }}>
 						<PageCRUDbtn
@@ -73,16 +50,15 @@ function NavigationPanel({ createPage, updatePage }) {
 					</div>
 				)}
 			</div>
-			<div
-				style={{
-					display: 'flex',
-					borderBottom: '2px solid #55667766',
-					background,
-					cursor: 'default',
-				}}
-			>
-				Domain:
+			<div style={containerStyle}>
+				Name:
 				<div style={{ padding: '0 8px' }} title={'application name'}>
+					<PopupInput value={appName} setValue={(value) => updateAppName(appName, value)} />
+				</div>
+			</div>
+			<div style={containerStyle}>
+				Domain:
+				<div style={{ padding: '0 8px' }} title={'domain'}>
 					<PopupInput
 						value={domain}
 						setValue={(domain) => {
@@ -90,9 +66,30 @@ function NavigationPanel({ createPage, updatePage }) {
 						}}
 					/>
 				</div>
-			</div>		
+			</div>
+			<div style={containerStyle}>
+				Start page:
+				<div style={{ padding: '0 8px' }} title={'start page'}>
+					{/* <PopupInput
+						value={domain}
+						setValue={(domain) => {
+							updatePage({ ...page, domain });
+						}}
+					/> */}
+					{/* <SelectPanel
+						closeAftSelect={true}
+						setItems={getAppList}
+						selected={''}
+						setItem={getPagesByAppName}
+						// button={
+						// 	<div title={'Open'} className={buttonStyle}>
+						// 		<Icon size={'100%'} icon={folderOpen} />
+						// 	</div>
+						// }
+					/> */}
+				</div>
+			</div>
 		</div>
 	);
 }
-export default log(NavigationPanel);
-// export default NavigationPanel;
+export default log(Application);

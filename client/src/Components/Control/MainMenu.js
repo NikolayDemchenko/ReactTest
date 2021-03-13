@@ -7,14 +7,14 @@ import { map } from 'react-icons-kit/icomoon/map';
 import { folderOpen } from 'react-icons-kit/icomoon/folderOpen';
 import Icon from 'react-icons-kit';
 import SavePage from './NavigationPanel/Pages/SavePage';
-import { Context} from '../../AppFunction';
+import { Context } from '../../AppFunction';
 import { log, funcLog } from '../../Log';
 import { buttonStyle } from './Styles/BtnStyle';
 import NavigationPanel from './NavigationPanel/NavigationPanel';
 function MainMenu() {
 	const { state, PageREST } = useContext(Context);
 	const { page } = state;
-	const { createPage, getPagesByAppName, updatePage,getAppList } = PageREST;
+	const { createPage, getPagesByAppName, updatePage, getAppList } = PageREST;
 
 	const [show, setShow] = useState(false);
 
@@ -40,7 +40,7 @@ function MainMenu() {
 				}}
 			>
 				<SelectPanel
-					closeAftSelect={true}				
+					closeAftSelect={true}
 					setItems={getAppList}
 					selected={''}
 					setItem={getPagesByAppName}
