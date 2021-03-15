@@ -10,8 +10,6 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json({ limit: '10mb' }));
 
-// app.use(pageRouter);
-
 const cloudURI = 'mongodb+srv://MainAdmin:123454321@clustermongodb-vzdz7.mongodb.net/test?retryWrites=true&w=majority';
 const localURI = 'mongodb://localhost:27017/LocalMongoBase';
 
@@ -36,3 +34,5 @@ process.on('SIGINT', () => {
 	dbClient.close();
 	process.exit();
 });
+// Определение домена
+// console.log(`hostname`, require("os").hostname())
