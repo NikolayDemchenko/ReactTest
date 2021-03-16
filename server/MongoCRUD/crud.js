@@ -66,11 +66,14 @@ const getDocById = (req, res, collectionName) => {
 };
 const getDocsByField = (req, res, collectionName) => {
 	const { name, value } = req.query;
-	console.log(`get ${collectionName} by field :>> `, name);
+	console.log(`get ${collectionName} by field :>> `, name, value);
 	req.app.locals[collectionName]
 		.find({ [name]: value })
 		.toArray()
-		.then((response) => res.status(200).json(response))
+		.then((response) => {
+			console.log(`response`, response)
+			res.status(200).json(response)
+		})
 		.catch((error) => console.error(error));
 };
 const getUniqueValues = (req, res, collectionName) => {

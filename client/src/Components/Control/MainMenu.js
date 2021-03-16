@@ -43,7 +43,8 @@ function MainMenu() {
 					closeAftSelect={true}
 					setItems={getAppList}
 					selected={''}
-					setItem={getPagesByAppName}
+					// setItem={getPagesByAppName}
+					setItem={()=>{}}
 					button={
 						<div title={'Open'} className={buttonStyle}>
 							<Icon size={'100%'} icon={folderOpen} />

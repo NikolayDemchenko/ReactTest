@@ -7,17 +7,18 @@ const Editor = () => {
 	const { state, setState, PageREST } = useContext(Context);
 	console.log('Editor');
 	const page = state.page;
-	const node = page.nodes.find(({ id }) => state.nodeId === id);
-	const nodeStyle = node && page.styles.find(({ id }) => id === node.styleId);
 	// console.log('nodeStyle', nodeStyle)
 	// console.log('node :>> ', node);
 	// console.log('state :>> ', state);
 	//   console.log("page.nodes :>> ", page.nodes);
 	const { updateTag, classes } = TagManager(state, setState);
 	const [assignStyleId, setAssignStyleId] = useState();
+	const [selectedId, setSelectedId] = useState();
+	const node = page.nodes.find(({ id }) => selectedId === id);
+	const nodeStyle = node && page.styles.find(({ id }) => id === node.styleId);
 	const onClick = assignStyleId
-		? (nodeId) => updateTag(nodeId, 'styleId', assignStyleId)
-		: (nodeId) => setState((state) => ({ ...state, nodeId }));
+		? (selectedId) => updateTag(selectedId, 'styleId', assignStyleId)
+		: (selectedId) => setSelectedId( selectedId );
 
 	return (
 		<Context.Provider
@@ -37,7 +38,7 @@ const Editor = () => {
 			<Page
 				{...{
 					bodyStyle: page.bodyStyle,
-					selectedId: state && state.nodeId,
+					selectedId,
 					onClick,
 					classes,
 				}}

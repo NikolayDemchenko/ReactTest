@@ -10,6 +10,7 @@ const App = () => {
 	// const [state, setState] = useState({});
 	// Тестовый
 	const [state, setState] = useState({ page: testPage });
+
 	console.log('state :>> ', state);
 
 	const PageREST = getPageREST(setState);

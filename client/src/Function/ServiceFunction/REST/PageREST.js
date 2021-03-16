@@ -14,13 +14,13 @@ const {
 const getPageREST = (setState) => {
 	return {
 		getAppList: (set) => getUniqueValues('appName').then((items) => set(items)),
-		
+
 		getPages: () => getCollection().then((pageList) => setState((state) => ({ ...state, pageList }))),
 
 		getPageById: (id) => {
 			getDocById(id).then((page) => {
 				setState((state) => {
-					return {pageList: state.pageList, page };
+					return { pageList: state.pageList, page };
 				});
 			});
 		},
@@ -28,7 +28,7 @@ const getPageREST = (setState) => {
 		createPage: (newPage) => {
 			createDoc(newPage).then((page) => {
 				getDocsByField({ name: 'appName', value: page.appName }).then((pageList) =>
-					setState((state) => ({pageList, page }))
+					setState((state) => ({ pageList, page }))
 				);
 			});
 		},
@@ -41,13 +41,19 @@ const getPageREST = (setState) => {
 			});
 		},
 
-		getPagesByAppName: (value) =>
-			getDocsByField({ name: 'appName', value }).then((pageList) =>
-				setState({pageList, page: pageList.find((page) => page.startPage)||pageList[0] })
-			),
+		getPagesByAppName: (set, value) =>
+			getDocsByField({ name: 'appName', value }).then((pages) => {
+				console.log(`value`, value);
+				console.log(`pages`, pages);
+				set(pages);
+			}),
+		// getPagesByAppName: (value) =>
+		// 	getDocsByField({ name: 'appName', value }).then((pageList) =>
+		// 		setState({pageList, page: pageList.find((page) => page.startPage)||pageList[0] })
+		// 	),
 		getPagesByAppId: (value) =>
 			getDocsByField({ name: 'appId', value }).then((pageList) =>
-				setState({pageList, page: pageList.find((page) => page.startPage)||pageList[0] })
+				setState({ pageList, page: pageList.find((page) => page.startPage) || pageList[0] })
 			),
 
 		updateAppName: (value, newValue) => {

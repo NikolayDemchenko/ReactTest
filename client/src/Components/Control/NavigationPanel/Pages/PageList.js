@@ -6,7 +6,8 @@ import { TagList } from '../Tags/TagList';
 import PopupInput from '../../Inputs/ModalInput/PopupInput/PopupInput';
 function PageList(props) {
 	const { state } = useContext(Context);
-	const pageList = state && state.pageList ? state.pageList : [{ ...state.page }];
+	const {pageList} = props
+	// const pageList = state && state.pageList ? state.pageList : [{ ...state.page }];
 
 	return pageList.map((page, key) => {
 		return <NavPage {...{...props, key, page }} />;
