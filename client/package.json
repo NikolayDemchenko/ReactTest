@@ -48,6 +48,7 @@
     "shortid": "^2.2.15",
     "style-to-object": "^0.3.0",
     "typeface-roboto": "^0.0.75",
+    "typescript": "^4.2.3",
     "uuid": "^8.1.0"
   }
 }
