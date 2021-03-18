@@ -5,7 +5,7 @@ import { tagList as elementList } from '../../../Class/HtmlCss';
 import { TagList } from '../Tags/TagList';
 import PopupInput from '../../Inputs/ModalInput/PopupInput/PopupInput';
 function PageList(props) {
-	const { state } = useContext(Context);
+	// const { state } = useContext(Context);
 	const {pageList} = props
 	// const pageList = state && state.pageList ? state.pageList : [{ ...state.page }];
 

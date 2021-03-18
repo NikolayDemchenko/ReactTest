@@ -28,6 +28,7 @@ export const TagManager = ({ page }, setState) => {
 	return {
 		classes,
 		getTagTree: (nodes) => getTree(nodes, null),
+		
 		createTag: (tag, parent, childrens) => {
 			console.log('createTag');
 			setState((state) => {

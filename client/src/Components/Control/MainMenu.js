@@ -12,8 +12,8 @@ import { log, funcLog } from '../../Log';
 import { buttonStyle } from './Styles/BtnStyle';
 import NavigationPanel from './NavigationPanel/NavigationPanel';
 function MainMenu() {
-	const { state, PageREST } = useContext(Context);
-	const { page } = state;
+	const { page, PageREST } = useContext(Context);
+	
 	const { createPage, getPagesByAppName, updatePage, getAppList } = PageREST;
 
 	const [show, setShow] = useState(false);

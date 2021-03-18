@@ -4,21 +4,21 @@ import AttributesPanel from './AttributesPanel/AttributesPanel';
 import { TagManager, Context } from '../../AppFunction';
 
 const Editor = () => {
-	const { state, setState, PageREST } = useContext(Context);
+	const { page, setPage, state, setState, PageREST } = useContext(Context);
 	console.log('Editor');
-	const page = state.page;
+
 	// console.log('nodeStyle', nodeStyle)
 	// console.log('node :>> ', node);
-	// console.log('state :>> ', state);
+	console.log('page :>> ', page);
 	//   console.log("page.nodes :>> ", page.nodes);
-	const { updateTag, classes } = TagManager(state, setState);
+	const { updateTag, classes } = TagManager(state, setPage);
 	const [assignStyleId, setAssignStyleId] = useState();
 	const [selectedId, setSelectedId] = useState();
 	const node = page.nodes.find(({ id }) => selectedId === id);
 	const nodeStyle = node && page.styles.find(({ id }) => id === node.styleId);
 	const onClick = assignStyleId
 		? (selectedId) => updateTag(selectedId, 'styleId', assignStyleId)
-		: (selectedId) => setSelectedId( selectedId );
+		: (selectedId) => setSelectedId(selectedId);
 
 	return (
 		<Context.Provider
@@ -30,7 +30,7 @@ const Editor = () => {
 				nodeStyle,
 				state,
 				setState,
-        assignStyleId,
+				assignStyleId,
 				setAssignStyleId,
 			}}
 		>

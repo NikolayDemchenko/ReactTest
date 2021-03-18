@@ -7,7 +7,7 @@ import { log, funcLog } from '../../../Log';
 import Application from './Applications/Application';
 function NavigationPanel({ updatePage }) {
 	const {
-		state: { page },
+		page,
 		PageREST: { getPagesByAppName },
 	} = useContext(Context);
 	const [pageList, setPageList] = useState();

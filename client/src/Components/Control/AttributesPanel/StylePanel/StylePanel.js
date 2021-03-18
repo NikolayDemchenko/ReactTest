@@ -6,11 +6,11 @@ import { StyleManager, Context } from '../../../../AppFunction';
 
 function StylePanel() {
 	// console.log("%cStylePanel-VerticalPanel-App", "color: green");
-	const { setState, page, node, nodeStyle } = useContext(Context);
+	const { setPage, page, node, nodeStyle } = useContext(Context);
 	console.log('nodeStyle', nodeStyle);
 	const [draggedProp, setDraggedProp] = useState();
 
-	const { cloneStyle, updateStyleData, updateStyleName, getDefaultStyleProps } = StyleManager(page, node, setState);
+	const { cloneStyle, updateStyleData, updateStyleName, getDefaultStyleProps } = StyleManager(page, node, setPage);
 
 	return (
 		<div style={{ background: 'rgba(30,40,57,.6)' }} title="CSS (JSS) Стили">
@@ -19,7 +19,7 @@ function StylePanel() {
 					nodeStyle,
 					updateStyleName,
 					updateStyleData,
-					setState,
+					setPage,
 					node,
 					cloneStyle,
 				}}

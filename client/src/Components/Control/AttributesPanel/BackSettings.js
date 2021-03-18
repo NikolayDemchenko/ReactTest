@@ -7,7 +7,7 @@ import { Context } from '../../../AppFunction';
 
 const BackSettings = () => {
 	// console.log("props :>> ", props.page.bodyStyle);
-	const { setState, state } = useContext(Context);
+	const { setPage, page } = useContext(Context);
 
 	// console.log('page', page)
 	const setPreview = (color) => {
@@ -17,13 +17,11 @@ const BackSettings = () => {
 		document.querySelector('body').classList.add(back.classes.body);
 	};
 	const setValue = (color) => {
-		setState((state) => {
-			return { ...state, page: { ...state.page, bodyStyle: { background: color } } };
-		});
+		setPage({ ...page, bodyStyle: { background: color } });
 	};
 	return (
 		<div
-			title={state.page.bodyStyle['background']}
+			title={page.bodyStyle['background']}
 			style={{
 				overflow: 'hidden',
 				display: 'flex',
@@ -35,7 +33,7 @@ const BackSettings = () => {
 			<div style={{ paddingRight: '2em' }}>Background</div>
 			<PopupInput
 				{...{
-					value: state.page.bodyStyle['background'],
+					value: page.bodyStyle['background'],
 					setValue,
 					setPreview,
 				}}

@@ -1,6 +1,6 @@
 import shortid from 'shortid';
 import { createVariable } from '../../../AppFunction';
-
+import { Page, Node, Style } from '../../../Types/BaseTypes';
 const app = {
 	pageIds: ['1', '2', '3', '4', '5'],
 };
@@ -78,7 +78,7 @@ const baseStyle = {
 
 const rootTagStyle = createVariable(baseStyle, 'baseStyle');
 
-const rootTagGenerator = (parentId, index, tag, styleId) => ({
+const rootTagGenerator = (parentId: string | null, index: number, tag: string, styleId: string) => ({
 	index,
 	id: shortid.generate(),
 	parentId,
@@ -89,15 +89,21 @@ const rootTagGenerator = (parentId, index, tag, styleId) => ({
 const rootTag_1 = rootTagGenerator(null, 0, 'div', rootTagStyle.id);
 const rootTag_2 = rootTagGenerator(null, 1, 'div', rootTagStyle.id);
 
-const bodyStyle = {
+const bodyStyle:object = {
 	background: '#3b485d',
 };
 
-const page = { name: 'TestPage', bodyStyle, styles: [rootTagStyle, childTagStyle, newTagStyle], nodes: [] };
+const page: Page = {
+	name: 'TestPage',
+	ApplicationId: 'TestApplication',
+	bodyStyle,
+	styles: [rootTagStyle, childTagStyle, newTagStyle],
+	nodes: [],
+};
 page.nodes.push(rootTag_1);
 // page.nodes.push(rootTag_2);
 
-const childGenerator = (amount, node, childStyle) => {
+const childGenerator = (amount: number, node: Node, childStyle: Style) => {
 	for (let i = 0; i < amount; i++) {
 		page.nodes.push(
 			JSON.parse(

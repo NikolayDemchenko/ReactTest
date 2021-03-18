@@ -48,7 +48,7 @@ export default function Items(props) {
 			<input
 				onKeyPress={handleKeyPress}
 				ref={(comp) => comp && ReactDOM.findDOMNode(comp).focus()}
-				// value={state.selected}
+		
 				onChange={handleChange}
 				style={{
 					background: 'rgba(30,40,57,.9)',

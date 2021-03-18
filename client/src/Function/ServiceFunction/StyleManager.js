@@ -1,40 +1,36 @@
 import { createVariable } from '../../AppFunction';
-export const StyleManager = (page,node, setState) => {
+export const StyleManager = (page, node, setPage) => {
 	const updateStyleById = (styleId, propName, propValue) => {
 		// console.log("page :>> ", page);
-		setState((state) => {
-			const styles = state.page.styles.map((style) => {
+		setPage((page) => {
+			const styles = page.styles.map((style) => {
 				if (style.id === styleId) {
 					return { ...style, [propName]: propValue };
 				} else {
 					return style;
 				}
 			});
-			return { ...state, page: { ...state.page, styles } };
+			return { ...page, styles };
 		});
 	};
 	return {
 		cloneStyle: () => {
-			setState((state) => {
-				const { name, data } = state.page.styles.find(({ id }) => id === node.styleId);
+			setPage((page) => {
+				const { name, data } = page.styles.find(({ id }) => id === node.styleId);
 				const styleName = name + '_copy';
 				const clonedStyle = createVariable(data, styleName);
 				console.log('clonedStyle', clonedStyle);
 				const changedTag = { ...node, styleId: clonedStyle.id };
 				return {
-					...state,
-					page: {
-						...state.page,
-						nodes: state.page.nodes.map((node) => {
-							if (changedTag.id === node.id) {
-								return changedTag;
-							} else {
-								return node;
-							}
-						}),
-						styles: [...state.page.styles, clonedStyle],
-					},
-					node: changedTag,
+					...page,
+					nodes: page.nodes.map((node) => {
+						if (changedTag.id === node.id) {
+							return changedTag;
+						} else {
+							return node;
+						}
+					}),
+					styles: [...page.styles, clonedStyle],
 				};
 			});
 		},

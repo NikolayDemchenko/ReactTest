@@ -1,26 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import ErrorBoundry from './ErrorBoundry';
 import { page as testPage } from './Components/View/Pages/CreateApp';
 import MainMenu from './Components/Control/MainMenu';
 import { Context } from './AppFunction';
 import Editor from './Components/Control/Editor';
 import getPageREST from './Function/ServiceFunction/REST/PageREST';
-const App:React.FC = () => {
+import { Page, AppContext } from './Types/BaseTypes';
+
+const App: React.FC = () => {
 	// Рабочий
 	// const [state, setState] = useState({});
 	// Тестовый
 	const [state, setState] = useState({ page: testPage });
+	const [page, setPage] = useState<Page>(testPage);
 
-	console.log('state :>> ', state);
-
+	console.log('page :>> ', page);
 	const PageREST = getPageREST(setState);
-
 
 	return (
 		<ErrorBoundry>
-			<Context.Provider value={{ PageREST, state, setState }}>
+			<Context.Provider value={{ PageREST, page, setPage }}>
 				<MainMenu />
-				{state.page && <Editor />}
+				{page && <Editor {...{ PageREST, page, setPage }} />}
 			</Context.Provider>
 		</ErrorBoundry>
 	);

@@ -6,7 +6,7 @@ import PopupInput from '../../Inputs/ModalInput/PopupInput/PopupInput';
 import SelectPanel from '../../Inputs/ModalInput/SelectPanel/SelectPanel';
 function Application({ selection, setSelection,pageList }) {
 	const {
-		state: { page},
+		page,
 		PageREST,
 	} = useContext(Context);
 	const { updateAppName, createPage, updatePage, getPagesByAppId } = PageREST;
