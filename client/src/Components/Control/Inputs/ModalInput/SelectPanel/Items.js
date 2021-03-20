@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 export default function Items(props) {
 	const { setItem, items, excludedItems, closeAftSelect, close } = props;
-
+	console.log(`items`, items);
 	const arrayDiff = (arrA = [], arrB = []) => arrA.filter((el) => !arrB.includes(el));
 
 	const thisItems = arrayDiff(items, excludedItems);
@@ -48,7 +48,6 @@ export default function Items(props) {
 			<input
 				onKeyPress={handleKeyPress}
 				ref={(comp) => comp && ReactDOM.findDOMNode(comp).focus()}
-		
 				onChange={handleChange}
 				style={{
 					background: 'rgba(30,40,57,.9)',

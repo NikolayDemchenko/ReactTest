@@ -14,9 +14,9 @@ import PopupInput from '../../Inputs/ModalInput/PopupInput/PopupInput';
 import { Context } from '../../../../AppFunction';
 function SettingsPanel(props) {
 	// console.log("props :>> ", props);
-	const { cloneStyle, updateStyleName, selected, updateStyleData, nodeStyle } = props;
+	const {node, cloneStyle, updateStyleName, selected, updateStyleData, nodeStyle } = props;
 
-	const { page, updateTag, setAssignStyleId, assignStyleId, node } = useContext(Context);
+	const { page, updateTag, setAssignStyleId, assignStyleId } = useContext(Context);
 	// console.log("props", props);
 	// console.log("Styles", Styles);
 

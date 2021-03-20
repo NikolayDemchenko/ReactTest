@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "@material-ui/core": "^4.9.5",
+    "@types/react-scroll": "^1.8.2",
     "@types/shortid": "^0.0.29",
     "axios": "^0.19.2",
     "convert-to-css": "^1.0.4",

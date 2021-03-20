@@ -2,10 +2,11 @@ import shortid from 'shortid';
 import jss from 'jss';
 import preset from 'jss-preset-default';
 import { createVariable, createUniqueName } from '../../AppFunction';
-import { ViewNode, Node, Page, Style } from '../../Types/BaseTypes';
+import { IViewNode, INode, IPage, IStyle, ITagManager } from '../../Types/BaseTypes';
+// import { IUpdateProp } from '../../Types/InterfacesOfFunctions';
 
-const getTree = (nodes: Node[] = [], _parentId: string | null) => {
-	const viewNodes:ViewNode[]=nodes
+const getTree = (nodes: INode[] = [], _parentId: string | null) => {
+	const viewNodes: IViewNode[] = nodes;
 	return viewNodes.filter((node) => {
 		if (node.parentId === _parentId) {
 			node.childrens = getTree(
@@ -16,7 +17,8 @@ const getTree = (nodes: Node[] = [], _parentId: string | null) => {
 		}
 	});
 };
-export const TagManager = (page: Page, setPage: Function) => {
+
+export const createTagManager = (page: IPage, setPage: React.Dispatch<React.SetStateAction<IPage>>):ITagManager => {
 	console.log('TagManager :>> ');
 	jss.setup(preset());
 	const myStyles: { [k: string]: any } = {};
@@ -29,11 +31,11 @@ export const TagManager = (page: Page, setPage: Function) => {
 
 	return {
 		classes,
-		getTagTree: (nodes: ViewNode[]) => getTree(nodes, null),
+		getTagTree: (nodes: IViewNode[]) => getTree(nodes, null),
 
-		createTag: (tag: string, parent: Node|ViewNode, childrens: Node[]|ViewNode[]) => {
+		createTag: (tag: string, parent: INode | IViewNode, childrens: INode[] | IViewNode[]) => {
 			console.log('createTag');
-			const newStyle: Style = createVariable(
+			const newStyle: IStyle = createVariable(
 				{},
 				createUniqueName(
 					'new_style',
@@ -56,8 +58,8 @@ export const TagManager = (page: Page, setPage: Function) => {
 			});
 		},
 		removeTag: (tagId: string) => {
-			const getAllChilds = (nodes: Node[], nodeId: string) => {
-				const newNodes: Node[] = [];
+			const getAllChilds = (nodes: INode[], nodeId: string) => {
+				const newNodes: INode[] = [];
 				nodes
 					.filter((child) => nodeId === child.parentId)
 					.forEach((node) => {
@@ -66,7 +68,7 @@ export const TagManager = (page: Page, setPage: Function) => {
 					});
 				return newNodes;
 			};
-			const getNewNodes = (nodes: Node[], nodeId: string) => {
+			const getNewNodes = (nodes: INode[], nodeId: string) => {
 				const deletedNodes = getAllChilds(nodes, nodeId);
 				const node = nodes.find((item) => item.id === nodeId);
 				node && deletedNodes.push(node);
@@ -74,7 +76,7 @@ export const TagManager = (page: Page, setPage: Function) => {
 			};
 			setPage({ ...page, nodes: getNewNodes(page.nodes, tagId) });
 		},
-		updateTag: (nodeId: string, propName: string, propValue: string | number | object) => {
+		updateTag:(nodeId: string, propName: string, propValue: string | number | object) => {
 			setPage({
 				...page,
 				nodes: page.nodes.map((_node) => (_node.id === nodeId ? { ..._node, [propName]: propValue } : _node)),

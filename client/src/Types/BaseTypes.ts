@@ -1,40 +1,49 @@
-interface Application {
+import { SetStateAction } from 'react';
+import {IUpdateProp} from './InterfacesOfFunctions'
+interface IApplication {
 	id: string;
 	name: string;
 	domain: string;
 	startPageId: string;
 }
-interface Page {
+interface IPage {
 	id?: string;
 	ApplicationId: string;
 	name: string;
 	bodyStyle: object;
-	styles: Style[];
-	nodes: Node[];
+	styles: IStyle[];
+	nodes: INode[];
 }
-interface Style {
+interface IStyle {
 	id: string;
 	name: string;
 	data: object;
 }
-interface Node {
+interface INode {
 	id: string;
 	index: number;
 	parentId: string | null;
 	tag: string;
 	styleId: string;
 }
-interface ViewNode extends Node {
-	childrens?: Node[];
+interface IViewNode extends INode {
+	childrens?: INode[];
 }
-interface AppContext {
-	page: Page;
-	setPage: Function;
+interface IAppContext {
+	page: IPage;
+	setPage: React.Dispatch<SetStateAction<IPage>>;
 	PageREST: object;
-	node?: Node;
+	node?: INode;
 	updateTag?: Function;
-	nodeStyle?: Style;
+	nodeStyle?: IStyle;
 	assignStyleId?: string;
 	setAssignStyleId?: Function;
 }
-export type { Application, Page, Node, ViewNode, Style, AppContext };
+interface ITagManager {
+	classes: { [k: string]: any };
+	getTagTree: Function;
+	createTag: Function;
+	removeTag: Function;
+	updateTag: IUpdateProp;
+}
+export type { IApplication, IPage, INode, IViewNode, IStyle, IAppContext,ITagManager};

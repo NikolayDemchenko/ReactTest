@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import NavTag from './NavTag';
-import { Context, TagManager } from '../../../../AppFunction';
+import { Context, createTagManager } from '../../../../AppFunction';
 function TagList(props) {
 	const { state, setState } = useContext(Context);
-	const { createTag, removeTag } = TagManager(state, setState);
+	const { createTag, removeTag } = createTagManager(state, setState);
 	// console.log('page', props.page)
 	const nodes = props.page.nodes.filter(({ parentId }) => parentId === null);
 	return <NavTags {...{...props, nodes, state, createTag, removeTag }} />;
