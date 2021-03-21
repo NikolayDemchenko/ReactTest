@@ -2,23 +2,19 @@ import React, { useState, useContext, useEffect } from 'react';
 import PageList from './Pages/PageList';
 import jss from 'jss';
 import preset from 'jss-preset-default';
-import { Context } from '../../../AppFunction';
 import { log, funcLog } from '../../../Log';
 import Application from './Applications/Application';
-function NavigationPanel({ updatePage }) {
-	const {
-		page,
-		PageREST: { getPagesByAppName },
-	} = useContext(Context);
+function NavigationPanel({ page, PageREST: { getPagesByAppName, updatePage } }) {
+
 	const [pageList, setPageList] = useState();
 	const [selection, setSelection] = useState(page.name);
 	// console.log('selection', selection);
 	// !pageList && getPagesByAppName(setPageList, page.appName);
-  // console.log(`pageList`, pageList);
+	// console.log(`pageList`, pageList);
 	useEffect(() => {
-    console.log(`pageList`, pageList);
+		console.log(`pageList`, pageList);
 
-    // page.appName Не существует, нужно сделать загрузку приложения потом получить его имя
+		// page.appName Не существует, нужно сделать загрузку приложения потом получить его имя
 		getPagesByAppName(setPageList, page.appName);
 		return () => {};
 	}, [page]);

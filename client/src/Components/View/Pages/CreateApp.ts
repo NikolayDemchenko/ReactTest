@@ -89,7 +89,7 @@ const rootTagGenerator = (parentId: string | null, index: number, tag: string, s
 const rootTag_1 = rootTagGenerator(null, 0, 'div', rootTagStyle.id);
 const rootTag_2 = rootTagGenerator(null, 1, 'div', rootTagStyle.id);
 
-const bodyStyle:object = {
+const bodyStyle = {
 	background: '#3b485d',
 };
 

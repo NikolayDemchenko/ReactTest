@@ -1,14 +1,16 @@
-import React from "react";
-import Popover from "../../ModalInput/Popover";
+import React, { FC } from "react";
+import Popover from "../Popover";
 import Paper from "./Paper";
-import PropertyValueSelector from "../Switch/DataTypeRecognizer";
-export default function PopupInput(props) {
+import DataTypeRecognizer from "../Switch/DataTypeRecognizer";
+import {IPopupInput} from '../../../../../Types/IProps'
+
+ const PopupInput:FC<IPopupInput>=(props) =>{
   // console.log('props.value :>> ',typeof props.value);
   
   // console.log('props.value', props.value)
   const value = props.value ? props.value : "none";
   // console.log('new Boolean(value)', new Boolean(value))
-  const type = PropertyValueSelector({ value });
+  const type = DataTypeRecognizer({ value });
   const width =
     type !== "number" ? "none" : value.length > 5 ? `${value.length}em` : "5em";
 
@@ -62,3 +64,4 @@ export default function PopupInput(props) {
     </Popover>
   );
 }
+export default PopupInput

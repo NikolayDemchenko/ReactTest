@@ -1,22 +1,22 @@
-import React, { useContext } from 'react';
+import React, { FC } from 'react';
 import { log, funcLog } from '../../../Log';
 import jss from 'jss';
 import preset from 'jss-preset-default';
 import PopupInput from '../Inputs/ModalInput/PopupInput/PopupInput';
-import { Context } from '../../../AppFunction';
+import { IBackSettings } from '../../../Types/IProps';
 
-const BackSettings = () => {
+const BackSettings: FC<IBackSettings> = ({ setPage, page }) => {
 	// console.log("props :>> ", props.page.bodyStyle);
-	const { setPage, page } = useContext(Context);
 
 	// console.log('page', page)
-	const setPreview = (color) => {
+	const setPreview = (color: string) => {
 		console.log('color', color);
 		jss.setup(preset());
-		const back = jss.createStyleSheet({ body: { background: color } }).attach();
-		document.querySelector('body').classList.add(back.classes.body);
+		const { classes } = jss.createStyleSheet({ style: { background: color } }).attach();
+		const element = document.querySelector('body');
+		element && element.classList.add(classes.style);
 	};
-	const setValue = (color) => {
+	const setValue = (color: string) => {
 		setPage({ ...page, bodyStyle: { background: color } });
 	};
 	return (
@@ -42,4 +42,5 @@ const BackSettings = () => {
 		</div>
 	);
 };
-export default React.memo(log(BackSettings));
+// export default React.memo(log(BackSettings));
+export default BackSettings;

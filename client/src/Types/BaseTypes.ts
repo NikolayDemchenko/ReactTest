@@ -1,5 +1,6 @@
 import { SetStateAction } from 'react';
-import {IUpdateProp} from './InterfacesOfFunctions'
+import { JssStyle, Classes } from 'jss';
+import { IUpdateProp } from './IFunctions';
 interface IApplication {
 	id: string;
 	name: string;
@@ -10,14 +11,15 @@ interface IPage {
 	id?: string;
 	ApplicationId: string;
 	name: string;
-	bodyStyle: object;
+	bodyStyle: {[propName:string]:string};
 	styles: IStyle[];
 	nodes: INode[];
 }
+type TSetPage = React.Dispatch<SetStateAction<IPage>>;
 interface IStyle {
 	id: string;
 	name: string;
-	data: object;
+	data: JssStyle;
 }
 interface INode {
 	id: string;
@@ -29,21 +31,17 @@ interface INode {
 interface IViewNode extends INode {
 	childrens?: INode[];
 }
+
 interface IAppContext {
-	page: IPage;
-	setPage: React.Dispatch<SetStateAction<IPage>>;
-	PageREST: object;
-	node?: INode;
-	updateTag?: Function;
-	nodeStyle?: IStyle;
-	assignStyleId?: string;
-	setAssignStyleId?: Function;
+	assignStyleId: string|undefined;
+	setAssignStyleId: React.Dispatch<SetStateAction<string|undefined>>;
 }
+type TJSSClasses = Classes<string | number>;
 interface ITagManager {
-	classes: { [k: string]: any };
+	classes: TJSSClasses;
 	getTagTree: Function;
 	createTag: Function;
 	removeTag: Function;
 	updateTag: IUpdateProp;
 }
-export type { IApplication, IPage, INode, IViewNode, IStyle, IAppContext,ITagManager};
+export type { IApplication, IPage, INode, IViewNode, IStyle, IAppContext, ITagManager, TSetPage };

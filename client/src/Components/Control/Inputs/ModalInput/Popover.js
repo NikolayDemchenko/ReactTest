@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import MuiPopover from '@material-ui/core/Popover';
 function Popover(props) {
 	const { children } = props;
-	const { setItems } = children[1].props;
+	const { getItems } = children[1].props;
 	const [anchorEl, setAnchorEl] = useState(null);
-	const [items, _setItems] = useState(!setItems && children[1].props.items);
+	const [items, _setItems] = useState(!getItems && children[1].props.items);
 
 	// console.log('children[1].props', children[1].props);
 	// console.log('items', items);
@@ -12,14 +12,14 @@ function Popover(props) {
 	const handleClick = (e) => {
 		e.stopPropagation();
 		setAnchorEl(e.currentTarget);
-		setItems && setItems(_setItems);
+		getItems && getItems(_setItems);
 	};
 	const handleClose = () => {
-		setItems &&_setItems();
+		getItems &&_setItems();
 		setAnchorEl();
 	};
 
-	const open = setItems ? (items ? Boolean(anchorEl) : false) : Boolean(anchorEl);
+	const open = getItems ? (items ? Boolean(anchorEl) : false) : Boolean(anchorEl);
 
 	const paper = {
 		...children[1],

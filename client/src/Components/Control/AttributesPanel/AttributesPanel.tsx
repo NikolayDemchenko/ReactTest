@@ -2,21 +2,22 @@ import React, { FC, useContext, ReactElement } from 'react';
 import StylePanel from './StylePanel/StylePanel';
 import { Link } from 'react-scroll';
 import { log, funcLog } from '../../../Log';
-import jss from 'jss';
+import jss, { JssStyle } from 'jss';
 import preset from 'jss-preset-default';
 import SelectPanel from '../Inputs/ModalInput/SelectPanel/SelectPanel';
 import { htmlTags } from '../../Class/HtmlCss';
 import BackSettings from './BackSettings';
-import { Context } from '../../../AppFunction';
+import { IAttributesPanel } from '../../../Types/IProps';
 
-const AttributesPanel: FC = () => {
+const AttributesPanel: FC<IAttributesPanel> = ({ setPage, page, selectedId, updateTag }) => {
 	//    console.log(
 	//     "%cVerticalPanel-App",
 	//     'color: green');
 
-	const { updateTag, node} = useContext(Context);
+	const node = page.nodes.find(({ id }) => selectedId === id);
+	const nodeStyle = node && page.styles.find(({ id }) => id === node.styleId);
 
-	const style: { [k: string]: any } = {
+	const style: JssStyle = {
 		flexWrap: 'wrap',
 		maxHeight: '95vh',
 		minWidth: '280px',
@@ -34,10 +35,10 @@ const AttributesPanel: FC = () => {
 	jss.setup(preset());
 	const { classes } = jss.createStyleSheet({ style }).attach();
 	return (
-		<div>
-			{node && (
+		<>
+			{node && nodeStyle && (
 				<div className={classes.style}>
-					<BackSettings />
+					<BackSettings {...{ setPage, page }} />
 					<div style={{ cursor: 'default', display: 'flex' }}>
 						<Link activeClass="active" to={node.id} spy={true} smooth={true} offset={-70} duration={500}>
 							<div
@@ -59,13 +60,11 @@ const AttributesPanel: FC = () => {
 						>
 							tag:
 						</div>
-						{updateTag && (
-							<SelectPanel
-								selected={node.tag}
-								items={htmlTags}
-								setItem={(tag: object) => updateTag(node.id, 'tag', tag)}
-							/>
-						)}
+						<SelectPanel
+							selected={node.tag}
+							items={htmlTags}
+							setItem={(tag: object) => updateTag(node.id, 'tag', tag)}
+						/>
 						<div
 							style={{
 								display: 'flex',
@@ -74,12 +73,12 @@ const AttributesPanel: FC = () => {
 						></div>
 					</div>
 					<Link activeClass="active" to={node.id} spy={true} smooth={true} offset={-70} duration={500}>
-						<StylePanel />
+						<StylePanel {...{ node, setPage, page, nodeStyle, updateTag }} />
 					</Link>
 					<div style={{ paddingBottom: '4em' }} />
 				</div>
 			)}
-		</div>
+		</>
 	);
 };
 
@@ -87,6 +86,5 @@ const AttributesPanel: FC = () => {
 //   return prevProps === nextProps;
 // }
 
-export default log(AttributesPanel);
-// export default React.memo(log(AttributesPanel));
-// export default React.memo(log(AttributesPanel), areEqual);
+export default AttributesPanel;
+// export default log<IAttributesPanel>(AttributesPanel);

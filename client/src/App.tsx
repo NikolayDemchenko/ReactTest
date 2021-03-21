@@ -16,13 +16,11 @@ const App: FC = () => {
 
 	console.log('page :>> ', page);
 	const PageREST = getPageREST(setState);
-	
+
 	return (
 		<ErrorBoundry>
-			<Context.Provider value={{ PageREST, page, setPage }}>
-				<MainMenu />
-				{page && <Editor />}
-			</Context.Provider>
+			<MainMenu {...{ page, PageREST }} />
+			{page && <Editor {...{ page, setPage }} />}
 		</ErrorBoundry>
 	);
 };

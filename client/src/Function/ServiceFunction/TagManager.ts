@@ -1,5 +1,5 @@
 import shortid from 'shortid';
-import jss from 'jss';
+import jss,{JssStyle} from 'jss';
 import preset from 'jss-preset-default';
 import { createVariable, createUniqueName } from '../../AppFunction';
 import { IViewNode, INode, IPage, IStyle, ITagManager } from '../../Types/BaseTypes';
@@ -21,7 +21,7 @@ const getTree = (nodes: INode[] = [], _parentId: string | null) => {
 export const createTagManager = (page: IPage, setPage: React.Dispatch<React.SetStateAction<IPage>>):ITagManager => {
 	console.log('TagManager :>> ');
 	jss.setup(preset());
-	const myStyles: { [k: string]: any } = {};
+	const myStyles: { [propName: string]: JssStyle } = {};
 	page.styles &&
 		page.styles.forEach(({ id, data }) => {
 			myStyles[id] = data;
