@@ -5,31 +5,29 @@ import DataTypeRecognizer from "../Switch/DataTypeRecognizer";
 import {IPopupInput} from '../../../../../Types/IProps'
 
  const PopupInput:FC<IPopupInput>=(props) =>{
-  // console.log('props.value :>> ',typeof props.value);
-  
-  // console.log('props.value', props.value)
+
+  const {height, width, onEnter, onExit}=props
   const value = props.value ? props.value : "none";
-  // console.log('new Boolean(value)', new Boolean(value))
   const type = DataTypeRecognizer({ value });
-  const width =
+  const paperWidth =
     type !== "number" ? "none" : value.length > 5 ? `${value.length}em` : "5em";
 
 
   return (
     <Popover    
       onEnter={() => {
-        props.onEnter && props.onEnter();
+       onEnter && onEnter();
         console.log("Открыто!");
       }}
       onExit={() => {
-        props.onExit && props.onExit();
+        onExit && onExit();
         console.log("Закрыто!");
       }}
       PaperProps={{
         style: {
           background: "rgba(43,50,66,.95)",
           border: "1px solid #678",
-          width,
+          width:paperWidth,
           overflow: "visible",
         },
       }}
@@ -43,8 +41,8 @@ import {IPopupInput} from '../../../../../Types/IProps'
         <div
           style={{
             cursor: "pointer",
-            height: props.height,
-            width: props.width,
+            height,
+            width,
           }}
         >
           {value}

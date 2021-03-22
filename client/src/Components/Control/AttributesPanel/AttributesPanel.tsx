@@ -9,7 +9,7 @@ import { htmlTags } from '../../Class/HtmlCss';
 import BackSettings from './BackSettings';
 import { IAttributesPanel } from '../../../Types/IProps';
 
-const AttributesPanel: FC<IAttributesPanel> = ({ setPage, page, selectedId, updateTag }) => {
+const AttributesPanel: FC<IAttributesPanel> = ({ setPage, page, selectedId, updateNode }) => {
 	//    console.log(
 	//     "%cVerticalPanel-App",
 	//     'color: green');
@@ -63,7 +63,7 @@ const AttributesPanel: FC<IAttributesPanel> = ({ setPage, page, selectedId, upda
 						<SelectPanel
 							selected={node.tag}
 							items={htmlTags}
-							setItem={(tag: object) => updateTag(node.id, 'tag', tag)}
+							setItem={(tag: object) => updateNode(node.id, 'tag', tag)}
 						/>
 						<div
 							style={{
@@ -73,7 +73,7 @@ const AttributesPanel: FC<IAttributesPanel> = ({ setPage, page, selectedId, upda
 						></div>
 					</div>
 					<Link activeClass="active" to={node.id} spy={true} smooth={true} offset={-70} duration={500}>
-						<StylePanel {...{ node, setPage, page, nodeStyle, updateTag }} />
+						<StylePanel {...{ node, setPage, page, nodeStyle, updateNode }} />
 					</Link>
 					<div style={{ paddingBottom: '4em' }} />
 				</div>

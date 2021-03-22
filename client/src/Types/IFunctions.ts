@@ -1,5 +1,5 @@
-interface IUpdateProp {
+interface IUpdateNode {
   (nodeId: string, propName: string, propValue: string | number | object): void;
 }
 
-export type { IUpdateProp };
+export type { IUpdateNode };

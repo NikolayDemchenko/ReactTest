@@ -1,6 +1,6 @@
 import { SetStateAction } from 'react';
 import { JssStyle, Classes } from 'jss';
-import { IUpdateProp } from './IFunctions';
+import { IUpdateNode } from './IFunctions';
 interface IApplication {
 	id: string;
 	name: string;
@@ -37,11 +37,11 @@ interface IAppContext {
 	setAssignStyleId: React.Dispatch<SetStateAction<string|undefined>>;
 }
 type TJSSClasses = Classes<string | number>;
-interface ITagManager {
+interface INodeManager {
 	classes: TJSSClasses;
-	getTagTree: Function;
-	createTag: Function;
-	removeTag: Function;
-	updateTag: IUpdateProp;
+	getNodeTree: Function;
+	createNode: Function;
+	removeNode: Function;
+	updateNode: IUpdateNode;
 }
-export type { IApplication, IPage, INode, IViewNode, IStyle, IAppContext, ITagManager, TSetPage };
+export type { IApplication, IPage, INode, IViewNode, IStyle, IAppContext, INodeManager, TSetPage };

@@ -2,7 +2,7 @@ import shortid from 'shortid';
 import jss,{JssStyle} from 'jss';
 import preset from 'jss-preset-default';
 import { createVariable, createUniqueName } from '../../AppFunction';
-import { IViewNode, INode, IPage, IStyle, ITagManager } from '../../Types/BaseTypes';
+import { IViewNode, INode, IPage, IStyle, INodeManager } from '../../Types/BaseTypes';
 // import { IUpdateProp } from '../../Types/InterfacesOfFunctions';
 
 const getTree = (nodes: INode[] = [], _parentId: string | null) => {
@@ -18,7 +18,7 @@ const getTree = (nodes: INode[] = [], _parentId: string | null) => {
 	});
 };
 
-export const createTagManager = (page: IPage, setPage: React.Dispatch<React.SetStateAction<IPage>>):ITagManager => {
+export const createNodeManager = (page: IPage, setPage: React.Dispatch<React.SetStateAction<IPage>>):INodeManager => {
 	console.log('TagManager :>> ');
 	jss.setup(preset());
 	const myStyles: { [propName: string]: JssStyle } = {};
@@ -31,9 +31,9 @@ export const createTagManager = (page: IPage, setPage: React.Dispatch<React.SetS
 
 	return {
 		classes,
-		getTagTree: (nodes: IViewNode[]) => getTree(nodes, null),
+		getNodeTree: (nodes: IViewNode[]) => getTree(nodes, null),
 
-		createTag: (tag: string, parent: INode | IViewNode, childrens: INode[] | IViewNode[]) => {
+		createNode: (tag: string, parent: INode | IViewNode, childrens: INode[] | IViewNode[]) => {
 			console.log('createTag');
 			const newStyle: IStyle = createVariable(
 				{},
@@ -57,7 +57,7 @@ export const createTagManager = (page: IPage, setPage: React.Dispatch<React.SetS
 				styles: [...page.styles, newStyle],
 			});
 		},
-		removeTag: (tagId: string) => {
+		removeNode: (tagId: string) => {
 			const getAllChilds = (nodes: INode[], nodeId: string) => {
 				const newNodes: INode[] = [];
 				nodes
@@ -76,7 +76,7 @@ export const createTagManager = (page: IPage, setPage: React.Dispatch<React.SetS
 			};
 			setPage({ ...page, nodes: getNewNodes(page.nodes, tagId) });
 		},
-		updateTag:(nodeId: string, propName: string, propValue: string | number | object) => {
+		updateNode:(nodeId: string, propName: string, propValue: string | number | object) => {
 			setPage({
 				...page,
 				nodes: page.nodes.map((_node) => (_node.id === nodeId ? { ..._node, [propName]: propValue } : _node)),

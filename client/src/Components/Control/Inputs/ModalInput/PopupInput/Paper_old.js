@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PropertyInputSwitch from "../Switch/PropertyInputSwitch";
-export default function Paper(props) {
+const  Paper=(props)=> {
   const { setValue, setPreview } = props;
   const [value, setThisValue] = useState(props.value);
   // const setPreview = props.setPreview ? props.setPreview : setValue;
@@ -59,3 +59,4 @@ export default function Paper(props) {
     </div>
   );
 }
+export default  Paper

@@ -4,31 +4,34 @@ interface IEditor {
 	page: IPage;
 }
 interface IAttributesPanel extends IEditor {
-	updateTag: Function;
+	updateNode: Function;
 	selectedId: string;
 }
-interface IStylePanel extends IEditor{
+interface IStylePanel extends IEditor {
 	node: INode;
 	nodeStyle: IStyle;
-	updateTag: Function;
+	updateNode: Function;
 }
 interface ISelectPanel {
 	items: readonly string[];
 	closeAftSelect?: boolean;
 	selected: string;
-	getItems?: Function;
 	setItem: Function;
+	getItems?: Function;
 	button?: JSX.Element;
 }
-interface IPopupInput {
+interface IPaper {
 	value: string;
 	setValue: Function;
 	setPreview: Function;
-	onEnter?:Function;
+	dataType?:string
+}
+interface IPopupInput extends IPaper{
+	onEnter?: Function;
 	onExit?: Function;
 	height?: string;
 	width?: string;
 }
 interface IBackSettings extends IEditor {}
 
-export type { IStylePanel, IAttributesPanel, IEditor, ISelectPanel, IBackSettings,IPopupInput };
+export type { IStylePanel, IAttributesPanel, IEditor, ISelectPanel, IBackSettings, IPopupInput, IPaper };

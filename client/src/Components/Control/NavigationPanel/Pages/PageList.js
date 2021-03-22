@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Context, createTagManager } from '../../../../AppFunction';
+import { Context, createNodeManager } from '../../../../AppFunction';
 import TagCRUDbtn from '../Tags/TagCRUDbtn';
 import { tagList as elementList } from '../../../Class/HtmlCss';
 import { TagList } from '../Tags/TagList';
@@ -18,7 +18,7 @@ function NavPage({ page, selection, setSelection, updatePage }) {
 	console.log('selection', selection);
 	const { PageREST, state, setState } = useContext(Context);
 	const { getPageById, removePage } = PageREST;
-	const { createTag } = createTagManager(state, setState);
+	const { createNode } = createNodeManager(state, setState);
 
 	page = page._id === state.page._id ? state.page : page;
 
@@ -59,7 +59,7 @@ function NavPage({ page, selection, setSelection, updatePage }) {
 				</div>
 				{showButtons && (
 					<div style={{ margin: '0 4px 4px auto' }}>
-						<TagCRUDbtn {...{ create: createTag, remove: () => removePage(page), elementList }} />
+						<TagCRUDbtn {...{ create: createNode, remove: () => removePage(page), elementList }} />
 					</div>
 				)}
 			</div>

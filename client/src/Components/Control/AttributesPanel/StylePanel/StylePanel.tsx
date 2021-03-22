@@ -4,7 +4,7 @@ import PropertiesPanel from './PropertiesPanel';
 import SettingsPanel from './SettingsPanel';
 import { StyleManager } from '../../../../AppFunction';
 import { IStylePanel } from '../../../../Types/IProps';
-const StylePanel: FC<IStylePanel> = ({ node, setPage, page, nodeStyle, updateTag }) => {
+const StylePanel: FC<IStylePanel> = ({ node, setPage, page, nodeStyle, updateNode }) => {
 	// console.log("%cStylePanel-VerticalPanel-App", "color: green");
 	console.log('nodeStyle', nodeStyle);
 	const [draggedProp, setDraggedProp] = useState();
@@ -13,7 +13,7 @@ const StylePanel: FC<IStylePanel> = ({ node, setPage, page, nodeStyle, updateTag
 	return (
 		<div style={{ background: 'rgba(30,40,57,.6)' }} title="CSS (JSS) Стили">
 			<SettingsPanel
-				{...{ page, updateTag, nodeStyle, updateStyleName, updateStyleData, setPage, node, cloneStyle }}
+				{...{ page, updateNode, nodeStyle, updateStyleName, updateStyleData, setPage, node, cloneStyle }}
 			/>
 			<PropertiesPanel
 				{...{

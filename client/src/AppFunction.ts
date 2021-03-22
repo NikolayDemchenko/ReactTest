@@ -1,6 +1,6 @@
 import { SaveToJSON } from './Function/ServiceFunction/Save';
 import { createVariable, createUniqueName } from './Function/ServiceFunction/DataFunction';
-import { createTagManager } from './Function/ServiceFunction/TagManager';
+import { createNodeManager } from './Function/ServiceFunction/TagManager';
 import { StyleManager } from './Function/ServiceFunction/StyleManager';
 import { IAppContext } from './Types/BaseTypes';
 import { getRESTManager } from './Function/ServiceFunction/REST/RESTManager';
@@ -13,7 +13,7 @@ export {
 	SaveToJSON,
 	createVariable,
 	createUniqueName,
-	createTagManager,
+	createNodeManager,
 	StyleManager,
 	getRESTManager,
 	Context,
