@@ -13,8 +13,8 @@ import Styles from '../JSON/Styles.json';
 import PopupInput from '../../Inputs/ModalInput/PopupInput/PopupInput';
 import { Context } from '../../../../AppFunction';
 function SettingsPanel(props) {
-	// console.log("props :>> ", props);
-	const { page, updateTag, node, cloneStyle, updateStyleName, selected, updateStyleData, nodeStyle } = props;
+	console.log("SettingsPanel :>> ");
+	const { page, updateNode, node, cloneStyle, updateStyleName, selected, updateStyleData, nodeStyle } = props;
 
 	const { setAssignStyleId, assignStyleId } = useContext(Context);
 	// console.log("props", props);
@@ -27,7 +27,7 @@ function SettingsPanel(props) {
 	};
 	const changeTagStyleByName = (name) => {
 		const style = page.styles.find((style) => style.name === name);
-		updateTag(node.id, 'styleId', style.id);
+		updateNode(node.id, 'styleId', style.id);
 	};
 
 	return (

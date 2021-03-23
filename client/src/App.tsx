@@ -11,10 +11,11 @@ const App: FC = () => {
 	// Рабочий
 	// const [state, setState] = useState({});
 	// Тестовый
+	console.log('App :>> ');
 	const [state, setState] = useState({ page: testPage });
 	const [page, setPage] = useState<IPage>(testPage);
 
-	console.log('page :>> ', page);
+	// console.log('page :>> ', page);
 	const PageREST = getPageREST(setState);
 
 	return (

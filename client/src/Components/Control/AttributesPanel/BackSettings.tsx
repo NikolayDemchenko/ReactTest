@@ -7,7 +7,7 @@ import { IBackSettings } from '../../../Types/IProps';
 
 const BackSettings: FC<IBackSettings> = ({ setPage, page }) => {
 	// console.log("props :>> ", props.page.bodyStyle);
-
+	console.log('BackSettings :>> ');
 	// console.log('page', page)
 	const setPreview = (color: string) => {
 		console.log('color', color);

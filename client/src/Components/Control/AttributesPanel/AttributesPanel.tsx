@@ -9,13 +9,16 @@ import { htmlTags } from '../../Class/HtmlCss';
 import BackSettings from './BackSettings';
 import { IAttributesPanel } from '../../../Types/IProps';
 
-const AttributesPanel: FC<IAttributesPanel> = ({ setPage, page, selectedId, updateNode }) => {
-	//    console.log(
-	//     "%cVerticalPanel-App",
-	//     'color: green');
-
-	const node = page.nodes.find(({ id }) => selectedId === id);
-	const nodeStyle = node && page.styles.find(({ id }) => id === node.styleId);
+const AttributesPanel: FC<IAttributesPanel> = ({
+	setPage,
+	page,
+	node,
+	nodeManager,
+	assignStyleId,
+	setAssignStyleId,
+}) => {
+	console.log('%cAttributesPanel', 'color: #059');
+	const nodeStyle = page.styles.find(({ id }) => id === node.styleId);
 
 	const style: JssStyle = {
 		flexWrap: 'wrap',
@@ -36,48 +39,52 @@ const AttributesPanel: FC<IAttributesPanel> = ({ setPage, page, selectedId, upda
 	const { classes } = jss.createStyleSheet({ style }).attach();
 	return (
 		<>
-			{node && nodeStyle && (
-				<div className={classes.style}>
-					<BackSettings {...{ setPage, page }} />
-					<div style={{ cursor: 'default', display: 'flex' }}>
-						<Link activeClass="active" to={node.id} spy={true} smooth={true} offset={-70} duration={500}>
-							<div
-								title={node.id}
-								style={{
-									display: 'inline-flex',
-									height: '1.5em',
-									padding: '0px 0.5em',
-									overflow: 'hidden',
-								}}
-							>
-								node.id: {node.id}
-							</div>
-						</Link>
+			(
+			<div className={classes.style}>
+				<BackSettings {...{ setPage, page }} />
+				<div style={{ cursor: 'default', display: 'flex' }}>
+					<Link activeClass="active" to={node.id} spy={true} smooth={true} offset={-70} duration={500}>
 						<div
+							title={node.id}
 							style={{
+								display: 'inline-flex',
+								height: '1.5em',
 								padding: '0px 0.5em',
+								overflow: 'hidden',
 							}}
 						>
-							tag:
+							node.id: {node.id}
 						</div>
-						<SelectPanel
-							selected={node.tag}
-							items={htmlTags}
-							setItem={(tag: object) => updateNode(node.id, 'tag', tag)}
-						/>
-						<div
-							style={{
-								display: 'flex',
-								marginLeft: 'auto',
-							}}
-						></div>
-					</div>
-					<Link activeClass="active" to={node.id} spy={true} smooth={true} offset={-70} duration={500}>
-						<StylePanel {...{ node, setPage, page, nodeStyle, updateNode }} />
 					</Link>
-					<div style={{ paddingBottom: '4em' }} />
+					<div
+						style={{
+							padding: '0px 0.5em',
+						}}
+					>
+						tag:
+					</div>
+					<SelectPanel
+						selected={node.tag}
+						items={htmlTags}
+						setItem={(tag: object) => nodeManager.updateNode(node.id, 'tag', tag)}
+					/>
+					<div
+						style={{
+							display: 'flex',
+							marginLeft: 'auto',
+						}}
+					></div>
 				</div>
-			)}
+				<Link activeClass="active" to={node.id} spy={true} smooth={true} offset={-70} duration={500}>
+					{nodeStyle && (
+						<StylePanel
+							{...{ node, setPage, page, nodeStyle, nodeManager, assignStyleId, setAssignStyleId }}
+						/>
+					)}
+				</Link>
+				<div style={{ paddingBottom: '4em' }} />
+			</div>
+			)
 		</>
 	);
 };

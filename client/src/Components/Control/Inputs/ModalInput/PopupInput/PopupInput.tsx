@@ -5,7 +5,7 @@ import DataTypeRecognizer from "../Switch/DataTypeRecognizer";
 import {IPopupInput} from '../../../../../Types/IProps'
 
  const PopupInput:FC<IPopupInput>=(props) =>{
-
+	console.log('PopupInput :>> ');
   const {height, width, onEnter, onExit}=props
   const value = props.value ? props.value : "none";
   const type = DataTypeRecognizer({ value });

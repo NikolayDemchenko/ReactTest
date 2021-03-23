@@ -1,6 +1,6 @@
 import { SetStateAction } from 'react';
 import { JssStyle, Classes } from 'jss';
-import { IUpdateNode } from './IFunctions';
+import { IGetDefaultCssProps, IUpdateNode } from './IFunctions';
 interface IApplication {
 	id: string;
 	name: string;
@@ -11,15 +11,16 @@ interface IPage {
 	id?: string;
 	ApplicationId: string;
 	name: string;
-	bodyStyle: {[propName:string]:string};
+	bodyStyle: { [propName: string]: string };
 	styles: IStyle[];
 	nodes: INode[];
 }
-type TSetPage = React.Dispatch<SetStateAction<IPage>>;
+type TSetState<T> = React.Dispatch<SetStateAction<T>>;
+type TJssStyle = JssStyle;
 interface IStyle {
 	id: string;
 	name: string;
-	data: JssStyle;
+	data: TJssStyle;
 }
 interface INode {
 	id: string;
@@ -33,15 +34,35 @@ interface IViewNode extends INode {
 }
 
 interface IAppContext {
-	assignStyleId: string|undefined;
-	setAssignStyleId: React.Dispatch<SetStateAction<string|undefined>>;
+	assignStyleId: string | undefined;
+	setAssignStyleId: React.Dispatch<SetStateAction<string | undefined>>;
 }
 type TJSSClasses = Classes<string | number>;
+
+
 interface INodeManager {
 	classes: TJSSClasses;
 	getNodeTree: Function;
+	getDefaultCssProps: IGetDefaultCssProps;
 	createNode: Function;
 	removeNode: Function;
 	updateNode: IUpdateNode;
 }
-export type { IApplication, IPage, INode, IViewNode, IStyle, IAppContext, INodeManager, TSetPage };
+interface IStyleManager {
+	cloneStyle: Function;
+	updateStyleData: Function;
+	updateStyleName: Function;
+}
+export type {
+	IApplication,
+	IPage,
+	INode,
+	IViewNode,
+	IStyle,
+	IAppContext,
+	INodeManager,
+	TSetState,
+	IStyleManager,
+	TJssStyle,
+	TJSSClasses,
+};

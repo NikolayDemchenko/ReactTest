@@ -1,21 +1,18 @@
 import React, { useState, useEffect, FC } from 'react';
 import PropertyInputSwitch from '../Switch/PropertyInputSwitch';
-import {IPaper} from '../../../../../Types/IProps'
-const Paper:FC<IPaper> = (props) => {
+import { IPaper } from '../../../../../Types/IProps';
+const Paper: FC<IPaper> = (props) => {
 	const { setValue, setPreview } = props;
 	const [value, setThisValue] = useState<string>(props.value);
-	// const setPreview = props.setPreview ? props.setPreview : setValue;
-	// console.log("Paper value", value);
-	// console.log("props.value", props.value);
-	// const [width] = useState("100%");
+
+	console.log('Paper :>> ');
+
 	useEffect(() => {
 		setThisValue(props.value);
-		return () => {
-
-		};
+		return () => {};
 	}, [props.value]);
 
-	const handleKeyPress = (e: { key: string; }) => {
+	const handleKeyPress = (e: { key: string }) => {
 		if (e.key === 'Enter') {
 			console.log('handleKeyPress');
 			console.log('value :>> ', value);

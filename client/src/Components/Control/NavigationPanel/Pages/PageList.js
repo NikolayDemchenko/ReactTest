@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Context, createNodeManager } from '../../../../AppFunction';
+import { Context, NodeManager } from '../../../../AppFunction';
 import TagCRUDbtn from '../Tags/TagCRUDbtn';
 import { tagList as elementList } from '../../../Class/HtmlCss';
 import { TagList } from '../Tags/TagList';
@@ -18,7 +18,7 @@ function NavPage({ page, selection, setSelection, updatePage }) {
 	console.log('selection', selection);
 	const { PageREST, state, setState } = useContext(Context);
 	const { getPageById, removePage } = PageREST;
-	const { createNode } = createNodeManager(state, setState);
+	const { createNode } =new NodeManager(state, setState);
 
 	page = page._id === state.page._id ? state.page : page;
 

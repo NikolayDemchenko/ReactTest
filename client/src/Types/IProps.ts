@@ -1,32 +1,55 @@
-import { IPage, TSetPage, IStyle, INode } from './BaseTypes';
+import { IPage, TSetState, IStyle, INode, INodeManager, TJssStyle, } from './BaseTypes';
+import { IUpdateNode } from './IFunctions';
 interface IEditor {
-	setPage: TSetPage;
+	setPage: TSetState<IPage>;
 	page: IPage;
 }
-interface IAttributesPanel extends IEditor {
-	updateNode: Function;
-	selectedId: string;
+interface IAssingStyle {
+	assignStyleId: string | undefined;
+	setAssignStyleId: TSetState<string | undefined>;
 }
-interface IStylePanel extends IEditor {
+interface IAttributesPanel extends IEditor, IAssingStyle {
+	nodeManager: INodeManager;
+	node: INode;
+}
+interface IStylePanel extends IEditor, IAssingStyle,IAttributesPanel {
+	nodeStyle: IStyle;
+}
+interface IPropertiesPanel extends IEditor, IAssingStyle {
+	node: INode;
+	panelStyle: TJssStyle;
+	name: string;
+	setName: Function;
+	updateStyleData: Function;
+	removePanel: Function;
+	defaultCssProps: string[];
+	previewBase: TJssStyle;
+}
+interface ISettingsPanel extends IAssingStyle {
+	page: IPage;
+	updateNode: IUpdateNode;
+	cloneStyle: Function;
+	updateStyleName: Function;
+	updateStyleData: Function;
 	node: INode;
 	nodeStyle: IStyle;
-	updateNode: Function;
 }
 interface ISelectPanel {
 	items: readonly string[];
-	closeAftSelect?: boolean;
-	selected: string;
 	setItem: Function;
+	excludedItems?:string[]
+	closeAftSelect?: boolean;
+	selected?: string;
 	getItems?: Function;
 	button?: JSX.Element;
 }
 interface IPaper {
 	value: string;
 	setValue: Function;
-	setPreview: Function;
-	dataType?:string
+	setPreview?: Function;
+	dataType?: string;
 }
-interface IPopupInput extends IPaper{
+interface IPopupInput extends IPaper {
 	onEnter?: Function;
 	onExit?: Function;
 	height?: string;
@@ -34,4 +57,14 @@ interface IPopupInput extends IPaper{
 }
 interface IBackSettings extends IEditor {}
 
-export type { IStylePanel, IAttributesPanel, IEditor, ISelectPanel, IBackSettings, IPopupInput, IPaper };
+export type {
+	IStylePanel,
+	IAttributesPanel,
+	IEditor,
+	ISelectPanel,
+	IBackSettings,
+	IPopupInput,
+	IPaper,
+	ISettingsPanel,
+	IPropertiesPanel,
+};

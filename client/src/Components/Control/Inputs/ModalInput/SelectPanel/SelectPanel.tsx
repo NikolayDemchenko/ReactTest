@@ -3,7 +3,7 @@ import Popover from "../Popover";
 import Items from "./Items";
 import {ISelectPanel} from '../../../../../Types/IProps'
  const SelectPanel:FC<ISelectPanel>=(props)=> {
-  // console.log("SelectPanel");
+  console.log("SelectPanel");
   return (
     <Popover
       PaperProps={{

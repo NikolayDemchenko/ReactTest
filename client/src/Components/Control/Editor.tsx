@@ -1,40 +1,36 @@
 import React, { FC, useState } from 'react';
 import PageComponent from '../View/Pages/Page';
 import AttributesPanel from './AttributesPanel/AttributesPanel';
-import { createNodeManager, Context } from '../../AppFunction';
+import { NodeManager } from '../../AppFunction';
 import { IEditor } from '../../Types/IProps';
+import { INode } from '../../Types/BaseTypes';
 
 const Editor: FC<IEditor> = ({ page, setPage }) => {
-	console.log('Editor');
+	console.log('Editor :>> ');
 	const [assignStyleId, setAssignStyleId] = useState<string>();
-	const [selectedId, setSelectedId] = useState<string>();
+	const [node, setNode] = useState<INode>();
 
-	console.log('page :>> ', page);
+	// console.log('page :>> ', page);
 	//   console.log("page.nodes :>> ", page.nodes);
-	const nodeManager = createNodeManager(page, setPage);
-	const { updateNode, classes } = nodeManager;
+	const nodeManager = new NodeManager(page, setPage);
+	const { classes } = nodeManager;
 
 	const onClick = assignStyleId
 		? (selectedId: string) => nodeManager.updateNode(selectedId, 'styleId', assignStyleId)
-		: (selectedId: string) => setSelectedId(selectedId);
+		: (node: INode) => setNode(node);
 
 	return (
-		<Context.Provider
-			value={{
-				assignStyleId,
-				setAssignStyleId,
-			}}
-		>
-			{selectedId && <AttributesPanel {...{ setPage, page, selectedId, updateNode }} />}
+		<>
+			{node && <AttributesPanel {...{ setPage, page, node, nodeManager, assignStyleId, setAssignStyleId }} />}
 			<PageComponent
 				{...{
 					page,
-					selectedId,
+					selectedId: node && node.id,
 					onClick,
 					classes,
 				}}
 			/>
-		</Context.Provider>
+		</>
 	);
 };
 

@@ -7,7 +7,7 @@ function Node(props) {
 
 	const click = (e) => {
 		e.stopPropagation();
-		onClick(node.id);
+		onClick(node);
 	};
 	const BaseNode = ({ children }) => (
 		<node.tag id={node.id} className={classes[node.styleId]} onClick={click}>

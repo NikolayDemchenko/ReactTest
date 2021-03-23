@@ -21,11 +21,11 @@ function PropertiesPanel(props) {
     updateStyleData,
     removePanel,
     node,
-    allStyleProps,
+    defaultCssProps,
     previewBase,
   } = props;
 
-  // console.log("%cPropertiesPanel-StylePanel", "color: green");
+  console.log("%cPropertiesPanel", "color: green");
 
   const [edit, setEdit] = useState();
 
@@ -44,11 +44,11 @@ function PropertiesPanel(props) {
     updateStyleData({ ..._style, "@media": {}, ...panelStyle });
   };
 
-  const addProperty = (_key) => {
-    const { key, value } = allStyleProps().find((style) => style.key === _key);
+  const addProperty = (cssProp) => {
+    const { cssProperty } = defaultCssProps.find(({cssProperty}) => cssProperty === cssProp);
 
-    console.log("add property", key, value);
-    updateStyleData({ [key]: value, ...panelStyle });
+    console.log("add cssProperty", cssProperty);
+    updateStyleData({ [cssProperty]: "", ...panelStyle });
   };
   // console.log("panelStyle", panelStyle);
   return (
@@ -89,7 +89,7 @@ function PropertiesPanel(props) {
             <Icon size={"100%"} icon={ic_credit_card} />
           </div>
           <SelectPanel
-            items={allStyleProps().map(({ key }) => key)}
+            items={defaultCssProps.map(({ cssProperty }) => cssProperty)}
             selected={""}
             setItem={addProperty}
             excludedItems={Object.keys(panelStyle)}

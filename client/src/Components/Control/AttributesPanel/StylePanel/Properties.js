@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Property from "./Property";
 import PropertiesPanel from "./PropertiesPanel";
 import RenameObjectProperty from "./Function/RenameObjectProperty";
@@ -14,13 +14,14 @@ function Properties(props) {
   //   'color: green');
   // console.log("props :>> ", props);
   const {
-    draggedProp,
-    setDraggedProp,
+    // draggedProp,
+    // setDraggedProp,
     panelStyle,
     updateStyleData,
     // setPreview,
   } = props;
-
+	const [draggedProp, setDraggedProp] = useState();
+  console.log(`draggedProp`, draggedProp)
   const properties = [];
   const propPanels = [];
   for (let key in panelStyle) {
@@ -56,8 +57,8 @@ function Properties(props) {
     return (
       <PropertiesPanel
         {...props}
-        name={panel.name}
         key={index}
+        name={panel.name}
         panelStyle={panel.value}
         setName={(name) => setName(panel, name)}
         updateStyleData={(panelStyle) => setValue(panel, panelStyle)}    
