@@ -2,13 +2,13 @@ import React, { FC, useState } from 'react';
 import PageComponent from '../View/Pages/Page';
 import AttributesPanel from './AttributesPanel/AttributesPanel';
 import { NodeManager } from '../../AppFunction';
-import { IEditor } from '../../Types/IProps';
-import { INode } from '../../Types/BaseTypes';
+import { IFCEditor } from '../../Types/IProps';
+import { TNode } from '../../Types/BaseTypes';
 
-const Editor: FC<IEditor> = ({ page, setPage }) => {
+const Editor: FC<IFCEditor> = ({ page, setPage }) => {
 	console.log('Editor :>> ');
 	const [assignStyleId, setAssignStyleId] = useState<string>();
-	const [node, setNode] = useState<INode>();
+	const [node, setNode] = useState<TNode>();
 
 	// console.log('page :>> ', page);
 	//   console.log("page.nodes :>> ", page.nodes);
@@ -17,7 +17,7 @@ const Editor: FC<IEditor> = ({ page, setPage }) => {
 
 	const onClick = assignStyleId
 		? (selectedId: string) => nodeManager.updateNode(selectedId, 'styleId', assignStyleId)
-		: (node: INode) => setNode(node);
+		: (node: TNode) => setNode(node);
 
 	return (
 		<>

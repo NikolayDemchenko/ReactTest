@@ -1,44 +1,45 @@
 import { SetStateAction } from 'react';
 import { JssStyle, Classes } from 'jss';
 import { IGetDefaultCssProps, IUpdateNode } from './IFunctions';
-interface IApplication {
+
+type TApplication = {
 	id: string;
 	name: string;
 	domain: string;
 	startPageId: string;
-}
-interface IPage {
+};
+type TPage = {
 	id?: string;
 	ApplicationId: string;
 	name: string;
 	bodyStyle: { [propName: string]: string };
-	styles: IStyle[];
-	nodes: INode[];
-}
+	styles: TStyle[];
+	nodes: TNode[];
+};
 type TSetState<T> = React.Dispatch<SetStateAction<T>>;
 type TJssStyle = JssStyle;
-interface IStyle {
+type TJSSClasses = Classes<string | number>;
+
+type TStyle = {
 	id: string;
 	name: string;
 	data: TJssStyle;
-}
-interface INode {
+};
+type TNode = {
 	id: string;
 	index: number;
 	parentId: string | null;
 	tag: string;
 	styleId: string;
-}
-interface IViewNode extends INode {
-	childrens?: INode[];
+};
+interface IViewNode extends TNode {
+	childrens?: TNode[];
 }
 
 interface IAppContext {
 	assignStyleId: string | undefined;
 	setAssignStyleId: React.Dispatch<SetStateAction<string | undefined>>;
 }
-type TJSSClasses = Classes<string | number>;
-
 
 interface INodeManager {
 	classes: TJSSClasses;
@@ -53,16 +54,20 @@ interface IStyleManager {
 	updateStyleData: Function;
 	updateStyleName: Function;
 }
+type TStyleProperty = {
+	[name: string]:string | number;
+};
 export type {
-	IApplication,
-	IPage,
-	INode,
-	IViewNode,
-	IStyle,
-	IAppContext,
-	INodeManager,
+	TApplication,
+	TPage,
+	TNode,
+	TStyle,
 	TSetState,
-	IStyleManager,
 	TJssStyle,
 	TJSSClasses,
+	TStyleProperty,
+	IViewNode,
+	IAppContext,
+	INodeManager,
+	IStyleManager,
 };

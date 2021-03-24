@@ -5,7 +5,7 @@ import MainMenu from './Components/Control/MainMenu';
 import { Context } from './AppFunction';
 import Editor from './Components/Control/Editor';
 import getPageREST from './Function/ServiceFunction/REST/PageREST';
-import { IPage, IAppContext } from './Types/BaseTypes';
+import { TPage, IAppContext } from './Types/BaseTypes';
 
 const App: FC = () => {
 	// Рабочий
@@ -13,7 +13,7 @@ const App: FC = () => {
 	// Тестовый
 	console.log('App :>> ');
 	const [state, setState] = useState({ page: testPage });
-	const [page, setPage] = useState<IPage>(testPage);
+	const [page, setPage] = useState<TPage>(testPage);
 
 	// console.log('page :>> ', page);
 	const PageREST = getPageREST(setState);

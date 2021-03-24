@@ -11,10 +11,10 @@ import { ic_library_add } from 'react-icons-kit/md/ic_library_add';
 import PopupInput from '../../Inputs/ModalInput/PopupInput/PopupInput';
 import SelectPanel from '../../Inputs/ModalInput/SelectPanel/SelectPanel';
 import Properties from './Properties';
-import { IPropertiesPanel } from '../../../../Types/IProps';
+import { IFCPropertiesPanel } from '../../../../Types/IProps';
 // import jss from "jss";
 // import { deleteObjectProps } from "./Function/ObjectManager";
-const PropertiesPanel: FC<IPropertiesPanel> = (props) => {
+const PropertiesPanel: FC<IFCPropertiesPanel> = (props) => {
 	const { name, setName, panelStyle, updateStyleData, removePanel, node, defaultCssProps, previewBase } = props;
 
 	console.log('%cPropertiesPanel', 'color: green');

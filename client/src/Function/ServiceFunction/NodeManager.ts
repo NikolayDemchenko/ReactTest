@@ -2,14 +2,14 @@ import shortid from 'shortid';
 import jss, { JssStyle } from 'jss';
 import preset from 'jss-preset-default';
 import { createVariable, createUniqueName } from '../../AppFunction';
-import { IViewNode, INode, IPage, IStyle, INodeManager, TSetState, TJSSClasses } from '../../Types/BaseTypes';
+import { IViewNode, TNode, TPage, TStyle, INodeManager, TSetState, TJSSClasses } from '../../Types/BaseTypes';
 import { IUpdateNode,IGetDefaultCssProps } from '../../Types/IFunctions';
 export class NodeManager implements INodeManager {
-	page: IPage;
-	setPage: TSetState<IPage>;
+	page: TPage;
+	setPage: TSetState<TPage>;
 	classes: TJSSClasses;
 
-	constructor(page: IPage, setPage: TSetState<IPage>) {
+	constructor(page: TPage, setPage: TSetState<TPage>) {
 		this.page = page;
 		this.setPage = setPage;
 
@@ -22,7 +22,7 @@ export class NodeManager implements INodeManager {
 			});
 		this.classes = jss.createStyleSheet({ ...myStyles }).attach().classes;
 	}
-	getTree = (nodes: INode[], _parentId: string | null) => {
+	getTree = (nodes: TNode[], _parentId: string | null) => {
 		const viewNodes: IViewNode[] = nodes;
 		return viewNodes.filter((node) => {
 			if (node.parentId === _parentId) {
@@ -36,9 +36,9 @@ export class NodeManager implements INodeManager {
 	};
 	getNodeTree = (nodes: IViewNode[]) => this.getTree(nodes, null);
 
-	createNode = (tag: string, parent: INode | IViewNode, childrens: INode[] | IViewNode[]) => {
+	createNode = (tag: string, parent: TNode | IViewNode, childrens: TNode[] | IViewNode[]) => {
 		console.log('createTag');
-		const newStyle: IStyle = createVariable(
+		const newStyle: TStyle = createVariable(
 			{},
 			createUniqueName(
 				'new_style',
@@ -61,8 +61,8 @@ export class NodeManager implements INodeManager {
 		});
 	};
 	removeNode = (nodeId: string) => {
-		const getAllChilds = (nodes: INode[], nodeId: string) => {
-			const newNodes: INode[] = [];
+		const getAllChilds = (nodes: TNode[], nodeId: string) => {
+			const newNodes: TNode[] = [];
 			nodes
 				.filter((child) => nodeId === child.parentId)
 				.forEach((node) => {
@@ -71,7 +71,7 @@ export class NodeManager implements INodeManager {
 				});
 			return newNodes;
 		};
-		const getNewNodes = (nodes: INode[], nodeId: string) => {
+		const getNewNodes = (nodes: TNode[], nodeId: string) => {
 			const deletedNodes = getAllChilds(nodes, nodeId);
 			const node = nodes.find((item) => item.id === nodeId);
 			node && deletedNodes.push(node);

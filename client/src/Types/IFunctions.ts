@@ -1,12 +1,12 @@
-import { INodeManager, IPage, IStyle, IStyleManager, INode } from './BaseTypes';
+import { INodeManager,TPage, TStyle, IStyleManager, TNode } from './BaseTypes';
 interface IUpdateNode {
 	(nodeId: string, propName: string, propValue: string | number | object): void;
 }
 interface IGetNodeManager {
-	(page: IPage, setPage: React.Dispatch<React.SetStateAction<IPage>>): INodeManager;
+	(page: TPage, setPage: React.Dispatch<React.SetStateAction<TPage>>): INodeManager;
 }
 interface IGetStyleManager {
-	(page: IPage, node: INode, setPage: React.Dispatch<React.SetStateAction<IPage>>, style: IStyle): IStyleManager;
+	(page: TPage, node: TNode, setPage: React.Dispatch<React.SetStateAction<TPage>>, style: TStyle): IStyleManager;
 }
 interface IGetDefaultCssProps {
 	(nodeId: string): string[] | undefined;

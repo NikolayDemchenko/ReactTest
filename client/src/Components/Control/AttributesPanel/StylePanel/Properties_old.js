@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Property from "./Property";
 import PropertiesPanel from "./PropertiesPanel";
 import RenameObjectProperty from "./Function/RenameObjectProperty";
-import {log,funcLog} from "../../../../Log";
+// import {log,funcLog} from "../../../../Log";
 import {
   addNewPropUp,
   addNewPropDown,
@@ -109,6 +109,6 @@ function Properties(props) {
     </div>
   );
 }
-// export default Properties;
-export default log(Properties);
+export default Properties;
+// export default log(Properties);
 // export default React.memo(log(Properties));

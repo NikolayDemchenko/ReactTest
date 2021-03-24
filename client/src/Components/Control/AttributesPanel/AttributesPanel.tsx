@@ -7,9 +7,9 @@ import preset from 'jss-preset-default';
 import SelectPanel from '../Inputs/ModalInput/SelectPanel/SelectPanel';
 import { htmlTags } from '../../Class/HtmlCss';
 import BackSettings from './BackSettings';
-import { IAttributesPanel } from '../../../Types/IProps';
+import { IFCAttributesPanel } from '../../../Types/IProps';
 
-const AttributesPanel: FC<IAttributesPanel> = ({
+const AttributesPanel: FC<IFCAttributesPanel> = ({
 	setPage,
 	page,
 	node,

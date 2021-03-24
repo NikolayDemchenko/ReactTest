@@ -1,22 +1,24 @@
-import { IPage, TSetState, IStyle, INode, INodeManager, TJssStyle, } from './BaseTypes';
+import { MouseEventHandler } from 'react';
+import { TPage, TSetState, TStyle, TNode, INodeManager, TJssStyle, TStyleProperty } from './BaseTypes';
 import { IUpdateNode } from './IFunctions';
-interface IEditor {
-	setPage: TSetState<IPage>;
-	page: IPage;
+interface IFCEditor {
+	setPage: TSetState<TPage>;
+	page: TPage;
 }
 interface IAssingStyle {
 	assignStyleId: string | undefined;
 	setAssignStyleId: TSetState<string | undefined>;
 }
-interface IAttributesPanel extends IEditor, IAssingStyle {
+interface IFCAttributesPanel extends IFCEditor, IAssingStyle {
 	nodeManager: INodeManager;
-	node: INode;
+	node: TNode;
 }
-interface IStylePanel extends IEditor, IAssingStyle,IAttributesPanel {
-	nodeStyle: IStyle;
+interface IFCStylePanel extends IFCEditor, IAssingStyle, IFCAttributesPanel {
+	nodeStyle: TStyle;
 }
-interface IPropertiesPanel extends IEditor, IAssingStyle {
-	node: INode;
+
+interface IFCPropertiesPanel {
+	node: TNode;
 	panelStyle: TJssStyle;
 	name: string;
 	setName: Function;
@@ -25,46 +27,66 @@ interface IPropertiesPanel extends IEditor, IAssingStyle {
 	defaultCssProps: string[];
 	previewBase: TJssStyle;
 }
-interface ISettingsPanel extends IAssingStyle {
-	page: IPage;
+
+interface IFCProperties extends IFCPropertiesPanel, IFCProperty {
+	parentName: string;
+}
+interface IFCProperty {
+	tabIndex: number;
+	name: string;
+	value: string | number;
+	setName: Function;
+	setValue: Function;
+	removeProperty: MouseEventHandler<HTMLDivElement>;
+	onDrop: Function;
+	draggedProp: TStyleProperty;
+	setDraggedProp: TSetState<TStyleProperty>;
+	previewBase: TJssStyle;
+	node: TNode;
+	panelStyle: TJssStyle;
+}
+interface IFCSettingsPanel extends IAssingStyle {
+	page: TPage;
 	updateNode: IUpdateNode;
 	cloneStyle: Function;
 	updateStyleName: Function;
 	updateStyleData: Function;
-	node: INode;
-	nodeStyle: IStyle;
+	node: TNode;
+	nodeStyle: TStyle;
 }
-interface ISelectPanel {
+interface IFCSelectPanel {
 	items: readonly string[];
 	setItem: Function;
-	excludedItems?:string[]
+	excludedItems?: string[];
 	closeAftSelect?: boolean;
 	selected?: string;
 	getItems?: Function;
 	button?: JSX.Element;
 }
-interface IPaper {
+interface IFCPaper {
 	value: string;
 	setValue: Function;
 	setPreview?: Function;
 	dataType?: string;
 }
-interface IPopupInput extends IPaper {
+interface IFCPopupInput extends IFCPaper {
 	onEnter?: Function;
 	onExit?: Function;
 	height?: string;
 	width?: string;
 }
-interface IBackSettings extends IEditor {}
+interface IFCBackSettings extends IFCEditor {}
 
 export type {
-	IStylePanel,
-	IAttributesPanel,
-	IEditor,
-	ISelectPanel,
-	IBackSettings,
-	IPopupInput,
-	IPaper,
-	ISettingsPanel,
-	IPropertiesPanel,
+	IFCStylePanel,
+	IFCAttributesPanel,
+	IFCEditor,
+	IFCSelectPanel,
+	IFCBackSettings,
+	IFCPopupInput,
+	IFCPaper,
+	IFCSettingsPanel,
+	IFCPropertiesPanel,
+	IFCProperties,
+	IFCProperty,
 };

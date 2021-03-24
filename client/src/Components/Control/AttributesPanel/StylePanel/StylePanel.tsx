@@ -2,9 +2,9 @@ import React, { FC, useState, useContext } from 'react';
 import { log, funcLog } from '../../../../Log';
 import PropertiesPanel from './PropertiesPanel';
 import SettingsPanel from './SettingsPanel';
-import { StyleManager, NodeManager } from '../../../../AppFunction';
-import { IStylePanel } from '../../../../Types/IProps';
-const StylePanel: FC<IStylePanel> = ({
+import { StyleManager} from '../../../../AppFunction';
+import { IFCStylePanel } from '../../../../Types/IProps';
+const StylePanel: FC<IFCStylePanel> = ({
 	setPage,
 	page,
 	node,
