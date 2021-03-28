@@ -12,8 +12,8 @@ import SelectPanel from '../../Inputs/ModalInput/SelectPanel/SelectPanel';
 import Styles from '../JSON/Styles.json';
 import PopupInput from '../../Inputs/ModalInput/PopupInput/PopupInput';
 import { Context } from '../../../../AppFunction';
-import { ISettingsPanel } from '../../../../Types/IProps';
-const SettingsPanel: FC<ISettingsPanel> = (props) => {
+import { IFCSettingsPanel } from '../../../../Types/IProps';
+const SettingsPanel: FC<IFCSettingsPanel> = (props) => {
 	console.log('SettingsPanel :>> ');
 	const {
 		page,

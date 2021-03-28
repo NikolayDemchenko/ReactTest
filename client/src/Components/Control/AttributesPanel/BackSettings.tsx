@@ -3,9 +3,9 @@ import { log, funcLog } from '../../../Log';
 import jss from 'jss';
 import preset from 'jss-preset-default';
 import PopupInput from '../Inputs/ModalInput/PopupInput/PopupInput';
-import { IBackSettings } from '../../../Types/IProps';
+import { IFCBackSettings } from '../../../Types/IProps';
 
-const BackSettings: FC<IBackSettings> = ({ setPage, page }) => {
+const BackSettings: FC<IFCBackSettings> = ({ setPage, page }) => {
 	// console.log("props :>> ", props.page.bodyStyle);
 	console.log('BackSettings :>> ');
 	// console.log('page', page)

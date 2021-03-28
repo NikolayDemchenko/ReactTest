@@ -1,6 +1,6 @@
 import shortid from 'shortid';
 import { createVariable } from '../../../AppFunction';
-import {IPage,INode, IStyle } from '../../../Types/BaseTypes';
+import {TPage, TNode, TStyle } from '../../../Types/BaseTypes';
 const app = {
 	pageIds: ['1', '2', '3', '4', '5'],
 };
@@ -93,7 +93,7 @@ const bodyStyle = {
 	background: '#3b485d',
 };
 
-const page: IPage = {
+const page: TPage = {
 	name: 'TestPage',
 	ApplicationId: 'TestApplication',
 	bodyStyle,
@@ -103,7 +103,7 @@ const page: IPage = {
 page.nodes.push(rootTag_1);
 // page.nodes.push(rootTag_2);
 
-const childGenerator = (amount: number, node: INode, childStyle: IStyle) => {
+const childGenerator = (amount: number, node: TNode, childStyle: TStyle) => {
 	for (let i = 0; i < amount; i++) {
 		page.nodes.push(
 			JSON.parse(

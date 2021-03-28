@@ -1,14 +1,19 @@
-import React, { FC, useState } from "react";
-import Property from "./Property";
-import PropertiesPanel from "./PropertiesPanel";
-import RenameObjectProperty from "./Function/RenameObjectProperty";
+import React, {
+  FC,
+  useState,
+} from 'react';
+
+import { IFCProperties } from '../../../../Types/IProps';
 // import {log,funcLog} from "../../../../Log";
 import {
-  addNewPropUp,
   addNewPropDown,
+  addNewPropUp,
   removeThisLevelPropByName as removeProp,
-} from "./Function/ObjectManager";
-import { IFCProperties } from "../../../../Types/IProps";
+} from './Function/ObjectManager';
+import RenameObjectProperty from './Function/RenameObjectProperty';
+import PropertiesPanel from './PropertiesPanel';
+import Property from './Property';
+
 const Properties:FC<IFCProperties>=(props)=> {
   // console.log(
   //   "%cProperties-PropertiesPanel",
@@ -29,13 +34,13 @@ const Properties:FC<IFCProperties>=(props)=> {
       propPanels.push({name: key,value: panelStyle[key] });
     }
   }
-  const setName = (item, newName) => {
-    const prop = RenameObjectProperty(panelStyle, item.name, newName);
+  const setName = (name:string, newName:string) => {
+    const prop = RenameObjectProperty(panelStyle, name, newName);
     updateStyleData(prop);  
   };
-  const setValue = (item, value) => {
+  const setValue = (name:string, value:string) => {
     // console.log('value :>> ', value);
-    updateStyleData({ ...panelStyle, [item.name]: value });
+    updateStyleData({ ...panelStyle, [name]: value });
   };
 
   const remove = (item) => {
@@ -58,8 +63,8 @@ const Properties:FC<IFCProperties>=(props)=> {
         key={index}
         name={panel.name}
         panelStyle={panel.value}
-        setName={(name) => setName(panel, name)}
-        updateStyleData={(panelStyle) => setValue(panel, panelStyle)}    
+        setName={(name) => setName(panel.name, name)}
+        updateStyleData={(panelStyle) => setValue(panel.name, panelStyle)}    
         removePanel={() => remove(panel)}  
       />
     );
@@ -92,8 +97,8 @@ const Properties:FC<IFCProperties>=(props)=> {
         key={index}      
         name={property.name}
         value={property.value}       
-        setName={(name) => setName(property, name)}
-        setValue={(value) => setValue(property, value)}
+        setName={(name) => setName(property.name, name)}
+        setValue={(value) => setValue(property.name, value)}
         removeProperty={() => remove(property)}
         onDrop={onDrop}
       />

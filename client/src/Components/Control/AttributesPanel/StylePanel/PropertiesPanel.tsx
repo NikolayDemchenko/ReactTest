@@ -11,6 +11,7 @@ import { ic_library_add } from 'react-icons-kit/md/ic_library_add';
 import PopupInput from '../../Inputs/ModalInput/PopupInput/PopupInput';
 import SelectPanel from '../../Inputs/ModalInput/SelectPanel/SelectPanel';
 import Properties from './Properties';
+// import PropertiesOld from './Properties_old';
 import { IFCPropertiesPanel } from '../../../../Types/IProps';
 // import jss from "jss";
 // import { deleteObjectProps } from "./Function/ObjectManager";
@@ -109,6 +110,7 @@ const PropertiesPanel: FC<IFCPropertiesPanel> = (props) => {
 			</div>
 
 			{edit && <EditPanel {...{ panelStyle, updateStyleData, styleId: node.styleId }} />}
+			{/* <PropertiesOld {...props} parentName={name} previewBase={{ ...previewBase, ...panelStyle }} /> */}
 			<Properties {...props} parentName={name} previewBase={{ ...previewBase, ...panelStyle }} />
 		</div>
 	);

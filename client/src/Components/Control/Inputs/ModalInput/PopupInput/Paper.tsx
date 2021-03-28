@@ -1,9 +1,9 @@
 import React, { useState, useEffect, FC } from 'react';
 import PropertyInputSwitch from '../Switch/PropertyInputSwitch';
-import { IPaper } from '../../../../../Types/IProps';
-const Paper: FC<IPaper> = (props) => {
+import { IFCPaper } from '../../../../../Types/IProps';
+const Paper: FC<IFCPaper> = (props) => {
 	const { setValue, setPreview } = props;
-	const [value, setThisValue] = useState<string>(props.value);
+	const [value, setThisValue] = useState<string|number>(props.value);
 
 	console.log('Paper :>> ');
 

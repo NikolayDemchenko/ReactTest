@@ -1,11 +1,11 @@
 import { createVariable } from '../../AppFunction';
-import { TJssStyle, IStyleManager, IPage, INode, TSetState, IStyle } from '../../Types/BaseTypes';
+import { TJssStyle, IStyleManager,TPage, TNode, TSetState, TStyle } from '../../Types/BaseTypes';
 export class StyleManager implements IStyleManager {
-	page: IPage;
-	node: INode;
-	setPage: TSetState<IPage>;
-	style: IStyle;
-	constructor(page: IPage, node: INode, setPage: TSetState<IPage>, style: IStyle) {
+	page: TPage;
+	node: TNode;
+	setPage: TSetState<TPage>;
+	style: TStyle;
+	constructor(page: TPage, node: TNode, setPage: TSetState<TPage>, style: TStyle) {
 		this.page = page;
 		this.setPage = setPage;
 		this.node = node;

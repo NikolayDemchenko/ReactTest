@@ -34,7 +34,7 @@ interface IFCProperties extends IFCPropertiesPanel, IFCProperty {
 interface IFCProperty {
 	tabIndex: number;
 	name: string;
-	value: string | number;
+	value: string;
 	setName: Function;
 	setValue: Function;
 	removeProperty: MouseEventHandler<HTMLDivElement>;

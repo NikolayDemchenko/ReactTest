@@ -2,9 +2,9 @@ import React, { FC } from "react";
 import Popover from "../Popover";
 import Paper from "./Paper";
 import DataTypeRecognizer from "../Switch/DataTypeRecognizer";
-import {IPopupInput} from '../../../../../Types/IProps'
+import {IFCPopupInput} from '../../../../../Types/IProps'
 
- const PopupInput:FC<IPopupInput>=(props) =>{
+ const PopupInput:FC<IFCPopupInput>=(props) =>{
 	console.log('PopupInput :>> ');
   const {height, width, onEnter, onExit}=props
   const value = props.value ? props.value : "none";
