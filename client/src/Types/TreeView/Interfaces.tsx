@@ -1,20 +1,23 @@
-interface IComponent {
-//   Component: FC;
+import React, { ReactElement } from 'react';
+import { FC } from 'react';
+
+interface IComponent<T> {
+	Component: FC<T>;
 }
 
-interface ITree extends IComponent {
-  nodes: ITreeNode[];
+interface ITree {
+	nodes: ITreeNode[];
 }
-interface ITreeNode extends IComponent {
-  parent: ITreeNode;
-  nodes: ITreeNode[];
+interface ITreeNode {
+	parent: ITreeNode;
+	nodes: ITreeNode[];
 }
 
-class Tree implements ITree{
-    nodes:ITreeNode[];
-    constructor(nodes: ITreeNode[]){
-        this.nodes=nodes
-    }
-    // Component: (props: ITree) =>( <div/>);
-  }
+class Tree implements ITree, IComponent<ITree> {
+	nodes: ITreeNode[];
+	constructor(nodes: ITreeNode[]) {
+		this.nodes = nodes;
+	}
+	Component: FC<ITree> = ({ children }) => <div>{children}</div>;
+}
 export type { ITree };
