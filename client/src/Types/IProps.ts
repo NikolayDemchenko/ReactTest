@@ -13,7 +13,7 @@ interface IFCAttributesPanel extends IFCEditor, IAssingStyle {
 	nodeManager: INodeManager;
 	node: TNode;
 }
-interface IFCStylePanel extends IFCEditor, IAssingStyle, IFCAttributesPanel {
+interface IFCStylePanel extends IFCAttributesPanel {
 	nodeStyle: TStyle;
 }
 
@@ -28,19 +28,31 @@ interface IFCPropertiesPanel {
 	previewBase: TJssStyle;
 }
 
-interface IFCProperties extends IFCPropertiesPanel, IFCProperty {
+interface IFCProperties extends IFCPropertiesPanel{
+	tabIndex?: number;
+	name: string;
+	value?: string;
+	setName: Function;
+	setValue?: Function;
+	removeProperty?: MouseEventHandler<HTMLDivElement>;
+	onDrop?: Function;
+	draggedProp?: TStyleProperty|undefined;
+	setDraggedProp?: TSetState<TStyleProperty|undefined>;
+	previewBase: TJssStyle;
+	node: TNode;
+	panelStyle: TJssStyle;
 	parentName: string;
 }
 interface IFCProperty {
-	tabIndex: number;
+	tabIndex?: number;
 	name: string;
 	value: string;
 	setName: Function;
 	setValue: Function;
 	removeProperty: MouseEventHandler<HTMLDivElement>;
 	onDrop: Function;
-	draggedProp: TStyleProperty;
-	setDraggedProp: TSetState<TStyleProperty>;
+	draggedProp: TStyleProperty|undefined;
+	setDraggedProp: TSetState<TStyleProperty|undefined>;
 	previewBase: TJssStyle;
 	node: TNode;
 	panelStyle: TJssStyle;

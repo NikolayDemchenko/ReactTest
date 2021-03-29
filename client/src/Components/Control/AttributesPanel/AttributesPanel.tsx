@@ -1,13 +1,14 @@
-import React, { FC, useContext, ReactElement } from 'react';
+import React, { FC } from 'react';
 import StylePanel from './StylePanel/StylePanel';
 import { Link } from 'react-scroll';
 import { log, funcLog } from '../../../Log';
-import jss, { JssStyle } from 'jss';
+import jss from 'jss';
 import preset from 'jss-preset-default';
 import SelectPanel from '../Inputs/ModalInput/SelectPanel/SelectPanel';
 import { htmlTags } from '../../Class/HtmlCss';
 import BackSettings from './BackSettings';
 import { IFCAttributesPanel } from '../../../Types/IProps';
+import { TJssStyle } from '../../../Types/BaseTypes';
 
 const AttributesPanel: FC<IFCAttributesPanel> = ({
 	setPage,
@@ -20,7 +21,7 @@ const AttributesPanel: FC<IFCAttributesPanel> = ({
 	console.log('%cAttributesPanel', 'color: #059');
 	const nodeStyle = page.styles.find(({ id }) => id === node.styleId);
 
-	const style: JssStyle = {
+	const style: TJssStyle = {
 		flexWrap: 'wrap',
 		maxHeight: '95vh',
 		minWidth: '280px',

@@ -1,8 +1,8 @@
 import shortid from 'shortid';
-import jss, { JssStyle } from 'jss';
+import jss from 'jss';
 import preset from 'jss-preset-default';
 import { createVariable, createUniqueName } from '../../AppFunction';
-import { IViewNode, TNode, TPage, TStyle, INodeManager, TSetState, TJSSClasses } from '../../Types/BaseTypes';
+import { TJssStyle,IViewNode, TNode, TPage, TStyle, INodeManager, TSetState, TJSSClasses } from '../../Types/BaseTypes';
 import { IUpdateNode,IGetDefaultCssProps } from '../../Types/IFunctions';
 export class NodeManager implements INodeManager {
 	page: TPage;
@@ -15,7 +15,7 @@ export class NodeManager implements INodeManager {
 
 		console.log('createNodeManager :>> ');
 		jss.setup(preset());
-		const myStyles: { [propName: string]: JssStyle } = {};
+		const myStyles: { [propName: string]: TJssStyle } = {};
 		page.styles &&
 			page.styles.forEach(({ id, data }) => {
 				myStyles[id] = data;

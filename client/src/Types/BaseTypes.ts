@@ -17,7 +17,8 @@ type TPage = {
 	nodes: TNode[];
 };
 type TSetState<T> = React.Dispatch<SetStateAction<T>>;
-type TJssStyle = JssStyle;
+// type TJssStyle = JssStyle;
+type TJssStyle = { [name: string]: string | number | TJssStyle };
 type TJSSClasses = Classes<string | number>;
 
 type TStyle = {
@@ -55,7 +56,7 @@ interface IStyleManager {
 	updateStyleName: Function;
 }
 type TStyleProperty = {
-	[name: string]:string | number;
+	[name: string]: string | number;
 };
 export type {
 	TApplication,
