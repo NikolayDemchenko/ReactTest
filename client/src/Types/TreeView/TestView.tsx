@@ -100,6 +100,17 @@ const ListItem: FC<IListItem> = ({ list }) => (
 	</>
 );
 
+const Item: FC = ({ children }) => {
+	return <>{children}</>;
+}
+const getTreeNode=(item:FC<{}>, listItem:FC<IListItem>): FC => () => {
+	return <>{item}{listItem}</>;
+}
+
+const TreeNode=getTreeNode(Item,ListItem)
+
+
+
 
 type TProperty = { name: string; value: string };
 
@@ -115,6 +126,7 @@ const ObjectArrayToReactNodes = (
 	ItemComponent: ({ name, value }: TProperty) => ReactElement | null,
 	ListComponent: ({ list }: IListItem) => ReactElement | null
 ): ReactElement[] => {
+
 	const reactElements: ReactElement[] = [];
 
 	list.forEach((li) => {
