@@ -33,9 +33,9 @@ import { FC } from 'react';
 // 	// return <NodeList {...{ list }} />;
 // };
 
-type TJssStyle = { [name: string]: string | number | TJssStyle };
+type TObject = { [name: string]: string | TObject };
 
-const styleData: TJssStyle = {
+const styleData: TObject = {
 	display: 'flex',
 	justifyContent: 'center',
 	flexWrap: 'wrap',
@@ -54,46 +54,87 @@ const styleData: TJssStyle = {
 	},
 };
 
-interface IObjectToArray {
-	(obj: object): [];
+interface IObjectToObjectArray {
+	(obj: TObject): TObjectArray;
 }
-const ObjectToArray: IObjectToArray = (obj: object) => {
-	
-	return [];
+const ObjectToArray: IObjectToObjectArray = (obj: TObject) => {
+	let arr: TObjectArray = [];
+	Object.keys(obj).map((key: string) => {
+		if (typeof obj[key] === 'string') {
+			// console.log(`obj[key]`, key, obj[key]);
+			arr.push({ [key]: obj[key] as string });
+		} else {
+			arr.push({ [key]: ObjectToArray(obj[key] as TObject) });
+		}
+	});
+	// console.log(`arr`, arr);
+	return arr;
+};
+const ObjectToReactNodes = (
+	obj: TObject,
+	ItemComponent: ({ name, value }: TProperty) => ReactElement | null,
+	ListComponent: ({ list }: IListItem) => ReactElement | null
+) => {
+	const reactElements: ReactElement[] = [];
+
+	Object.keys(obj).forEach((name: string) => {
+
+		if (typeof obj[name] === 'string') {
+			reactElements.push(<ItemComponent {...{ name, value: obj[name] as string }} />);
+			console.log(`li`, name, obj[name]);
+		} else {
+			reactElements.push(<ListComponent {...{ list: ObjectToReactNodes(obj[name] as TObject,ItemComponent,ListComponent) }} />);
+		}
+	});
+	return reactElements;
 };
 
-const ListItem: FC<{ list: ReactNode[] }> = ({ list }) => (
+interface IListItem {
+	list: ReactElement[];
+}
+const ListItem: FC<IListItem> = ({ list }) => (
 	<>
-		{list.map((item) => (
-			<>{item}</>
+		{list.map((item, key) => (
+			<div style={{border:"1px solid black"}} {...{ key }}>{item}</div>
 		))}
 	</>
 );
 
-const Item: FC = ({ children }) => {
-	return <>{children}</>;
+
+type TProperty = { name: string; value: string };
+
+const ViewProperty: FC<TProperty> = ({ name, value }) => {
+	return <>{`${name}: ${value}`}</>;
 };
 
-type TList = ({ [name: string]: string } | { [name: string]: { [name: string]: string }[] })[];
+type TObjectArray = { [name: string]: string | TObjectArray }[];
 
-const baseList: TList = [
-	{ item: 'Привет!' },
-	{ item: 'Как' },
-	{ item: 'твои' },
-	{ item: 'дела' },
-	{ item: ' ?' },
-	{ item: [{ item: 'Привет!' }, { item: 'Хорошо!' }, { item: 'Спасибо' }, { item: 'а' }, { item: 'твои ?' }] },
-];
 
-const list = [
-	<Item>Привет!</Item>,
-	<Item>Как</Item>,
-	<Item>твои</Item>,
-	<Item>дела</Item>,
-	<Item>?</Item>,
-	<ListItem
-		{...{ list: [<Item>Привет!</Item>, <Item>Как</Item>, <Item>твои</Item>, <Item>дела</Item>, <Item>?</Item>] }}
-	/>,
-];
+const ObjectArrayToReactNodes = (
+	list: TObjectArray,
+	ItemComponent: ({ name, value }: TProperty) => ReactElement | null,
+	ListComponent: ({ list }: IListItem) => ReactElement | null
+): ReactElement[] => {
+	const reactElements: ReactElement[] = [];
+
+	list.forEach((li) => {
+		const name = Object.keys(li)[0];
+
+		if (typeof li[name] === 'string') {
+			reactElements.push(<ItemComponent {...{ name, value: li[name] as string }} />);
+			console.log(`li`, name, li[name]);
+		} else {
+			reactElements.push(
+				<ListComponent
+					{...{ list: ObjectArrayToReactNodes(li[name] as TObjectArray, ItemComponent, ListComponent) }}
+				/>
+			);
+		}
+	});
+	return reactElements;
+};
+
+// const list = ObjectArrayToReactNodes(ObjectToArray(styleData), ViewProperty, ListItem);
+const list = ObjectToReactNodes(styleData, ViewProperty, ListItem);
 
 export const TestView = () => <ListItem {...{ list }} />;
