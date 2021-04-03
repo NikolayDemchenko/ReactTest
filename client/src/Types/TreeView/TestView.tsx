@@ -1,5 +1,7 @@
-import React, { ReactElement, ReactNode } from 'react';
-import { FC } from 'react';
+import React, {
+  FC,
+  ReactElement,
+} from 'react';
 
 // interface IComponent<T> {
 // 	Component: FC<T>;
@@ -92,6 +94,7 @@ const ObjectToReactNodes = (
 interface IListItem {
 	list: ReactElement[];
 }
+// Нужно в ListItem передать Item и список пропсов для него
 const ListItem: FC<IListItem> = ({ list }) => (
 	<>
 		{list.map((item, key) => (
@@ -103,11 +106,11 @@ const ListItem: FC<IListItem> = ({ list }) => (
 const Item: FC = ({ children }) => {
 	return <>{children}</>;
 }
-const getTreeNode=(item:FC<{}>, listItem:FC<IListItem>): FC => () => {
-	return <>{item}{listItem}</>;
+const getTreeNode=(Item:ReactElement, ListItem:ReactElement): FC => () => {
+	return <>{Item}{ListItem}</>;
 }
 
-const TreeNode=getTreeNode(Item,ListItem)
+const TreeNode=getTreeNode(<Item />,<ListItem/>)
 
 
 
