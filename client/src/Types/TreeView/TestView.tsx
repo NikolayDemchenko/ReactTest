@@ -1,7 +1,4 @@
-import React, {
-  FC,
-  ReactElement,
-} from 'react';
+import React, { FC, ReactElement, ReactNode } from 'react';
 
 // interface IComponent<T> {
 // 	Component: FC<T>;
@@ -59,17 +56,17 @@ const styleData: TObject = {
 interface IObjectToObjectArray {
 	(obj: TObject): TObjectArray;
 }
-const ObjectToArray: IObjectToObjectArray = (obj: TObject) => {
+const ObjToObjArray: IObjectToObjectArray = (obj: TObject) => {
 	let arr: TObjectArray = [];
 	Object.keys(obj).map((key: string) => {
 		if (typeof obj[key] === 'string') {
 			// console.log(`obj[key]`, key, obj[key]);
 			arr.push({ [key]: obj[key] as string });
 		} else {
-			arr.push({ [key]: ObjectToArray(obj[key] as TObject) });
+			arr.push({ [key]: ObjToObjArray(obj[key] as TObject) });
 		}
 	});
-	// console.log(`arr`, arr);
+	console.log(`arr`, arr);
 	return arr;
 };
 const ObjectToReactNodes = (
@@ -80,12 +77,13 @@ const ObjectToReactNodes = (
 	const reactElements: ReactElement[] = [];
 
 	Object.keys(obj).forEach((name: string) => {
-
 		if (typeof obj[name] === 'string') {
 			reactElements.push(<ItemComponent {...{ name, value: obj[name] as string }} />);
 			console.log(`li`, name, obj[name]);
 		} else {
-			reactElements.push(<ListComponent {...{ list: ObjectToReactNodes(obj[name] as TObject,ItemComponent,ListComponent) }} />);
+			reactElements.push(
+				<ListComponent {...{ list: ObjectToReactNodes(obj[name] as TObject, ItemComponent, ListComponent) }} />
+			);
 		}
 	});
 	return reactElements;
@@ -94,42 +92,67 @@ const ObjectToReactNodes = (
 interface IListItem {
 	list: ReactElement[];
 }
-// Нужно в ListItem передать Item и список пропсов для него
-const ListItem: FC<IListItem> = ({ list }) => (
+
+type TdataList=
+	{[key:string]:string|number}[]
+
+// Нужно в ListItem передать Item и dataList - массив объектов с свойствами типа string | number для него
+const ListItemCreator = (Item: FC<{ data: object }>, dataList: TdataList): FC => () => (
 	<>
-		{list.map((item, key) => (
-			<div style={{border:"1px solid black"}} {...{ key }}>{item}</div>
+		{dataList.map((data, key) => (
+			<Item {...{ key, data }} />
 		))}
 	</>
 );
 
-const Item: FC = ({ children }) => {
-	return <>{children}</>;
-}
-const getTreeNode=(Item:ReactElement, ListItem:ReactElement): FC => () => {
-	return <>{Item}{ListItem}</>;
-}
+const Item: FC<{ data: object }> = ({ data }) => {
+	return <div style={{ display:"inline-flex" , border: '1px solid black' }}>
+		<div>{Object.keys(data)}</div>
+		<div>{Object.values(data)}</div>
+		{/* {JSON.stringify(data)} */}
+		</div>;
+};
 
-const TreeNode=getTreeNode(<Item />,<ListItem/>)
+const myDataList:TdataList=[
+	{	display: 'flex'},
+	{	justifyContent: 'center'},
+	{	flexWrap: 'wrap'},
+	{	alignSelf: 'center'},
+		{height: '720px'},
+		{width: '700px'},
+		{backgroundColor: '#567'},
+		{margin: 'auto'},
+		{marginTop: '60px'},
+		{marginBottom: '60px'}]
+const ListItems = ListItemCreator(Item,myDataList );
 
+// const ListItem: FC<IListItem> = ({ list }) => (
+// 	<>
+// 		{list.map((item, key) => (
+// 			<div style={{border:"1px solid black"}} {...{ key }}>{item}</div>
+// 		))}
+// 	</>
+// );
 
+// const getTreeNode=(Item:ReactElement, ListItem:ReactElement): FC => () => {
+// 	return <>{Item}{ListItem}</>;
+// }
 
+// const TreeNode=getTreeNode(<Item />,<ListItem/>)
 
 type TProperty = { name: string; value: string };
 
-const ViewProperty: FC<TProperty> = ({ name, value }) => {
-	return <>{`${name}: ${value}`}</>;
-};
+// const ViewProperty: FC<TProperty> = ({ name, value }) => {
+// 	return <>{`${name}: ${value}`}</>;
+// };
 
 type TObjectArray = { [name: string]: string | TObjectArray }[];
-
 
 const ObjectArrayToReactNodes = (
 	list: TObjectArray,
 	ItemComponent: ({ name, value }: TProperty) => ReactElement | null,
 	ListComponent: ({ list }: IListItem) => ReactElement | null
 ): ReactElement[] => {
-
 	const reactElements: ReactElement[] = [];
 
 	list.forEach((li) => {
@@ -150,6 +173,7 @@ const ObjectArrayToReactNodes = (
 };
 
 // const list = ObjectArrayToReactNodes(ObjectToArray(styleData), ViewProperty, ListItem);
-const list = ObjectToReactNodes(styleData, ViewProperty, ListItem);
+// const list = ObjectToReactNodes(styleData, ViewProperty, ListItem);
 
-export const TestView = () => <ListItem {...{ list }} />;
+export const TestView = () => <ListItems />;
+// export const TestView = () => <ListItem {...{ list }} />;
