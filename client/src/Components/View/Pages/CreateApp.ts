@@ -1,6 +1,12 @@
 import shortid from 'shortid';
+
 import { createVariable } from '../../../AppFunction';
-import {TPage, TNode, TStyle } from '../../../Types/BaseTypes';
+import {
+  TNode,
+  TPage,
+  TStyle,
+} from '../../../Types/BaseTypes';
+
 const app = {
 	pageIds: ['1', '2', '3', '4', '5'],
 };
@@ -119,7 +125,6 @@ const childGenerator = (amount: number, node: TNode, childStyle: TStyle) => {
 	}
 };
 
-childGenerator(90, rootTag_1, childTagStyle);
+childGenerator(9, rootTag_1, childTagStyle);
 // childGenerator(200, rootTag_2, childTagStyle);
-
-export { page, createVariable };
+export { createVariable, page };
