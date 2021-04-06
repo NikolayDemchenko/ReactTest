@@ -1,7 +1,4 @@
-import React, {
-  FC,
-  useState,
-} from 'react';
+import React, { FC, useState } from 'react';
 
 import PageEditor from './Components/Control/Editor';
 import MainMenu from './Components/Control/MainMenu';
@@ -9,7 +6,7 @@ import { page as testPage } from './Components/View/Pages/CreateApp';
 import ErrorBoundry from './ErrorBoundry';
 import getPageREST from './Function/ServiceFunction/REST/PageREST';
 import { TPage } from './Types/BaseTypes';
-import { TestView } from './Types/TreeView/TestView';
+import { TestView , ObjToObjArray} from './Types/TreeView/TestView';
 
 const App: FC = () => {
 	// Рабочий
@@ -19,7 +16,7 @@ const App: FC = () => {
 	const [state, setState] = useState({ page: testPage });
 	const [page, setPage] = useState<TPage>(testPage);
 
-	// const Editor= 
+	// const Editor=
 
 	// console.log('page :>> ', page);
 	const PageREST = getPageREST(setState);
@@ -27,8 +24,8 @@ const App: FC = () => {
 	return (
 		<ErrorBoundry>
 			<MainMenu {...{ page, PageREST }} />
-			{page && new PageEditor(page,setPage).Component }	
-			<TestView/>	
+			{page && new PageEditor(page, setPage).Component}
+			<TestView {...{dataList:ObjToObjArray(page.styles[0])}}/>
 		</ErrorBoundry>
 	);
 };

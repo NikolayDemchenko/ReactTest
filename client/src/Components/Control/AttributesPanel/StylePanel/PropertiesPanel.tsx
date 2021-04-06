@@ -47,7 +47,7 @@ const PropertiesPanel: FC<IFCPropertiesPanel> = (props) => {
 		<div
 			style={{
 				borderTop: '4px solid rgba(140, 200, 255, 0.2)',
-				color: 'rgba(140, 200, 255, 0.7)',
+				// color: 'rgba(140, 200, 255, 0.7)',
 			}}
 			onDragOver={(e) => {
 				// console.log('div', div)
