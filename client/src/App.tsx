@@ -26,6 +26,7 @@ const App: FC = () => {
 			<MainMenu {...{ page, PageREST }} />
 			{page && new PageEditor(page, setPage).Component}
 			<TestView {...{dataList:ObjToObjArray(page.styles[0])}}/>
+			<TestView {...{dataList:page.nodes.map(node=>({node}))}}/>
 		</ErrorBoundry>
 	);
 };

@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
-import { TJssStyle } from '../BaseTypes';
+import { TJssStyle, TNode } from '../BaseTypes';
 import jss, { JssStyle, Classes, StyleSheet } from 'jss';
 import preset from 'jss-preset-default';
 import { Props } from 'react';
 type TObject = { [name: string]: string | number | boolean | TObject };
 type TObjectArray = {
-	[name: string]: string | number | boolean | TObject | TObjectArray;
+	[name: string]: string | number | boolean | TObject |TNode| TObjectArray;
 }[];
 type TData = { data: object };
 interface IObjectToObjectArray {
@@ -129,8 +129,9 @@ const { classes } = jss.createStyleSheet(nodeStyles).attach();
 const Node: FC<{ data: object }> = ({ data }) => {
 	return (
 		<div className={classes.container}>
-			<div className={classes.name}>{Object.keys(data)}</div>
-			<div className={classes.value}>{Object.values(data)}</div>
+			{/* <div className={classes.name}>{Object.keys(data)}</div>
+			<div className={classes.value}>{Object.values(data)}</div> */}
+			<div className={classes.value}>{JSON.stringify(data)}</div>
 		</div>
 	);
 };
