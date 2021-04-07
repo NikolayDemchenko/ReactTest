@@ -6,7 +6,7 @@ import { page as testPage } from './Components/View/Pages/CreateApp';
 import ErrorBoundry from './ErrorBoundry';
 import getPageREST from './Function/ServiceFunction/REST/PageREST';
 import { TPage } from './Types/BaseTypes';
-import { TestView , ObjToObjArray} from './Types/TreeView/TestView';
+import { TestView , StyleToTreeNodes, PageNodesToTreeNodes} from './Types/TreeView/TestView';
 
 const App: FC = () => {
 	// Рабочий
@@ -25,8 +25,8 @@ const App: FC = () => {
 		<ErrorBoundry>
 			<MainMenu {...{ page, PageREST }} />
 			{page && new PageEditor(page, setPage).Component}
-			<TestView {...{dataList:ObjToObjArray(page.styles[0])}}/>
-			<TestView {...{dataList:page.nodes.map(node=>({node}))}}/>
+			<TestView {...{nodes:StyleToTreeNodes(page.styles[0].data)}}/>
+			<TestView {...{nodes:PageNodesToTreeNodes(page.nodes)}}/>
 		</ErrorBoundry>
 	);
 };
