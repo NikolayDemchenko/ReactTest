@@ -25,8 +25,8 @@ const App: FC = () => {
 		<ErrorBoundry>
 			<MainMenu {...{ page, PageREST }} />
 			{page && new PageEditor(page, setPage).Component}
-			<TestView {...{nodes:StyleToTreeNodes(page.styles[0].data)}}/>
-			<TestView {...{nodes:PageNodesToTreeNodes(page.nodes)}}/>
+			<TestView {...{list:StyleToTreeNodes(page.styles[0].data)}}/>
+			<TestView {...{list:PageNodesToTreeNodes(page.nodes)}}/>
 		</ErrorBoundry>
 	);
 };
