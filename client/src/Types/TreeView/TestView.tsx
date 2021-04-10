@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
-import { classes } from './TestViewStyle';
+
 import { TNode } from '../BaseTypes';
+import { classes } from './TestViewStyle';
 
 type TObject = { [name: string]: string | number | boolean | null | TObject };
 interface IPageNodesToTreeNodeArray {
@@ -83,15 +84,15 @@ const List: FC<{ properties?: TObject }> = ({ children, properties }) => {
 
 const Item: FC<IItem> = ({ properties, children }) => {
 	return (
-		<>
+		<div className={classes.nodeContainer}>
 			{Object.keys(properties).map((name, index) => (
-					<div className={classes.nodeContainer} key={index}>
-						<div className={classes.nodePropName}>{name}</div>
-						<div className={classes.nodePropValue}>{properties[name]}</div>
+					<div className={classes.propContainer} key={index}>
+						<div className={classes.propName}>{name}</div>
+						<div className={classes.propValue}>{properties[name]}</div>
 					</div>
 				))}
 			{children}
-		</>
+		</div>
 	);
 };
 
