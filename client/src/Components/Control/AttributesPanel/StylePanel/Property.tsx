@@ -1,10 +1,16 @@
-import React, { useState, useEffect, FC } from 'react';
-import { log } from '../../../../Log';
+import React, {
+  FC,
+  useEffect,
+  useState,
+} from 'react';
+
+import jss from 'jss';
 import Icon from 'react-icons-kit';
 import { cross } from 'react-icons-kit/icomoon/cross';
-import PopupInput from '../../Inputs/ModalInput/PopupInput/PopupInput';
-import jss from 'jss';
+
 import { IFCProperty } from '../../../../Types/IProps';
+import PopupInput from '../../Inputs/ModalInput/PopupInput/PopupInput';
+
 const Property: FC<IFCProperty> = (props) => {
 	const {
 		tabIndex,
@@ -24,11 +30,13 @@ const Property: FC<IFCProperty> = (props) => {
 
 	//#region setPreview
 	const [partPreview, setPartPreview] = useState<boolean>();
+	
 	const setPreview = (value:string|number) => {
 		document.getElementById(node.id)!.className = jss
 			.createStyleSheet({ className: { ...previewBase, [name]: value } })
 			.attach().classes.className;
 	};
+
 	partPreview && setPreview(value);
 	useEffect(() => {
 		partPreview && setPreview(value);

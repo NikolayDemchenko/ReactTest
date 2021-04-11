@@ -1,5 +1,13 @@
 import { createVariable } from '../../AppFunction';
-import { TJssStyle, IStyleManager,TPage, TNode, TSetState, TStyle } from '../../Types/BaseTypes';
+import {
+  IStyleManager,
+  TJssStyle,
+  TNode,
+  TPage,
+  TSetState,
+  TStyle,
+} from '../../Types/BaseTypes';
+
 export class StyleManager implements IStyleManager {
 	page: TPage;
 	node: TNode;
@@ -50,6 +58,7 @@ export class StyleManager implements IStyleManager {
 	};
 
 	updateStyleData = (data: TJssStyle) => this.updateStyleById(this.node.styleId, 'data', data);
+	
 	updateStyleName = (name: string) => {
 		!this.page.styles.find((style) => style.name === name) && this.updateStyleById(this.node.styleId, 'name', name);
 	};

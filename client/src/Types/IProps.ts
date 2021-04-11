@@ -1,23 +1,33 @@
 import { MouseEventHandler } from 'react';
-import { TPage, TSetState, TStyle, TNode, INodeManager, TJssStyle, TStyleProperty } from './BaseTypes';
+
+import {
+  INodeManager,
+  TJssStyle,
+  TNode,
+  TPage,
+  TSetState,
+  TStyle,
+  TStyleProperty,
+} from './BaseTypes';
 import { IUpdateNode } from './IFunctions';
-interface IFCEditor {
+
+export interface IFCEditor {
 	setPage: TSetState<TPage>;
 	page: TPage;
 }
-interface IAssingStyle {
+export interface IAssingStyle {
 	assignStyleId: string | undefined;
 	setAssignStyleId: TSetState<string | undefined>;
 }
-interface IFCAttributesPanel extends IFCEditor, IAssingStyle {
+export interface IFCAttributesPanel extends IFCEditor, IAssingStyle {
 	nodeManager: INodeManager;
 	node: TNode;
 }
-interface IFCStylePanel extends IFCAttributesPanel {
+export interface IFCStylePanel extends IFCAttributesPanel {
 	nodeStyle: TStyle;
 }
 
-interface IFCPropertiesPanel {
+export interface IFCPropertiesPanel {
 	node: TNode;
 	panelStyle: TJssStyle;
 	name: string;
@@ -28,7 +38,7 @@ interface IFCPropertiesPanel {
 	previewBase: TJssStyle;
 }
 
-interface IFCProperties extends IFCPropertiesPanel{
+export interface IFCProperties extends IFCPropertiesPanel{
 	tabIndex?: number;
 	name: string;
 	value?: string;
@@ -43,7 +53,7 @@ interface IFCProperties extends IFCPropertiesPanel{
 	panelStyle: TJssStyle;
 	parentName: string;
 }
-interface IFCProperty {
+export interface IFCProperty {
 	tabIndex?: number;
 	name: string;
 	value: string;
@@ -57,7 +67,7 @@ interface IFCProperty {
 	node: TNode;
 	panelStyle: TJssStyle;
 }
-interface IFCSettingsPanel extends IAssingStyle {
+export interface IFCSettingsPanel extends IAssingStyle {
 	page: TPage;
 	updateNode: IUpdateNode;
 	cloneStyle: Function;
@@ -66,7 +76,7 @@ interface IFCSettingsPanel extends IAssingStyle {
 	node: TNode;
 	nodeStyle: TStyle;
 }
-interface IFCSelectPanel {
+export interface IFCSelectPanel {
 	items: readonly string[];
 	setItem: Function;
 	excludedItems?: string[];
@@ -75,30 +85,16 @@ interface IFCSelectPanel {
 	getItems?: Function;
 	button?: JSX.Element;
 }
-interface IFCPaper {
+export interface IFCPaper {
 	value: string;
 	setValue: Function;
 	setPreview?: Function;
 	dataType?: string;
 }
-interface IFCPopupInput extends IFCPaper {
+export interface IFCPopupInput extends IFCPaper {
 	onEnter?: Function;
 	onExit?: Function;
 	height?: string;
 	width?: string;
 }
-interface IFCBackSettings extends IFCEditor {}
-
-export type {
-	IFCStylePanel,
-	IFCAttributesPanel,
-	IFCEditor,
-	IFCSelectPanel,
-	IFCBackSettings,
-	IFCPopupInput,
-	IFCPaper,
-	IFCSettingsPanel,
-	IFCPropertiesPanel,
-	IFCProperties,
-	IFCProperty,
-};
+export interface IFCBackSettings extends IFCEditor {}

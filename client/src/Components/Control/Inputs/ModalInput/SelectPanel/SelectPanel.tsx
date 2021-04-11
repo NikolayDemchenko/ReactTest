@@ -1,9 +1,11 @@
-import React, { FC } from "react";
-import Popover from "../Popover";
-import Items from "./Items";
-import {IFCSelectPanel} from '../../../../../Types/IProps'
- const SelectPanel:FC<IFCSelectPanel>=(props)=> {
-  console.log("SelectPanel");
+import React, { FC } from 'react';
+
+import { IFCSelectPanel } from '../../../../../Types/IProps';
+import Popover from '../Popover';
+import Items from './Items';
+
+const SelectPanel:FC<IFCSelectPanel>=(props)=> {
+  // console.log("SelectPanel");
   return (
     <Popover
       PaperProps={{

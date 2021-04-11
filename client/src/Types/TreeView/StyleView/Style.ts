@@ -1,7 +1,7 @@
 import jss from 'jss';
 import preset from 'jss-preset-default';
 
-import { TJssStyle } from '../BaseTypes';
+import { TJssStyle } from '../../BaseTypes';
 
 const listContainer = {
   borderTop: "4px solid rgba(140, 200, 255)",
@@ -9,7 +9,7 @@ const listContainer = {
   color: "#8CC8FF",
   boxShadow: "2px 10px 5px 2px #00000055",
   maxWidth: "280px",
-  background: "#253756",
+  background: "#253446",
   // '&::-webkit-scrollbar': { width: '4px' },
   // '&::-webkit-scrollbar-thumb': { backgroundColor: '#567' },
 };
@@ -22,7 +22,7 @@ const nodeContainer = {
   //   display: "grid",
   //   overflow: "hidden",
   gridTemplateColumns: "60% 35% 1em",
-  borderTop: "5px solid #55667766",
+  // borderTop: "5px solid #55667766",
   //   height: "1.2em",
   //   "&:hover": { color: "#345" },
 };
@@ -59,4 +59,5 @@ const nodeStyles: { [name: string]: TJssStyle } = {
   propValue,
 };
 jss.setup(preset());
-export const { classes } = jss.createStyleSheet(nodeStyles).attach();
+const { classes } = jss.createStyleSheet(nodeStyles).attach();
+export const styleView=classes
