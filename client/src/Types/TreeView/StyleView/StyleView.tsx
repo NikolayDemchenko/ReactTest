@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
-import PopupInput from '../../../Components/Control/Inputs/ModalInput/PopupInput/PopupInput';
-import { IVariable, TProperties } from '../TreeView';
+
+import { TProperties } from '../TreeView';
 import { styleView } from './Style';
+
 interface IFCItem<T> {
 	item: T;
 	setItem(item: T): void;
@@ -16,20 +17,20 @@ interface IFCList<T> {
 export const instanceOfIList = <T,>(object: any): object is Array<T> => {
 	return object instanceof Array ? true : false;
 };
-
+type TKeyValue = [string, string|TKeyValue[]];
 interface IStyleToVariablesTree {
-	(obj: TProperties): IVariable[];
+	(obj: TProperties): TKeyValue[];
 }
-export const StyleToVariablesTree: IStyleToVariablesTree = (style) => {
-	const list: IVariable[] = [];
+export const StyleToKeyValueTree: IStyleToVariablesTree = (style) => {
+	const list: TKeyValue[] = [];
 	Object.keys(style).forEach((name) => {
 		if (style[name] instanceof Object) {
-			list.push({
+			list.push([
 				name,
-				value: StyleToVariablesTree(style[name] as TProperties),
-			});
+				StyleToKeyValueTree(style[name] as TProperties)
+			]);
 		} else {
-			list.push({ name, value: style[name] });
+			list.push([name, style[name] as string ]);
 		}
 	});
 	// console.log(`list`, list);
@@ -72,24 +73,24 @@ const Item = <T,>(props: React.PropsWithChildren<IFCItem<T>>) => {
 			{!instanceOfIList(Object.values(item)[1]) ? (
 				<div className={styleView.propContainer}>
 					<div className={styleView.propName}>
-						<PopupInput
+						{/* <PopupInput
 							{...{
 								value: Object.values(item)[0] as string,
 								setValue: setName,
 								setPreview: () => {},
 							}}
 							height="1em"
-						/>
+						/> */}
 					</div>
 					<div className={styleView.propValue}>
-						<PopupInput
+						{/* <PopupInput
 							{...{
 								value: Object.values(item)[1] as string,
 								setValue: setValue,
 								setPreview: () => {},
 							}}
 							height="1em"
-						/>
+						/> */}
 					</div>
 				</div>
 			) : (
