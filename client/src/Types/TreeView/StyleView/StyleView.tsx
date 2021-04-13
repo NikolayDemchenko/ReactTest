@@ -1,19 +1,56 @@
 import React, { FC } from 'react';
-
-import {
-  IFCItem,
-  TProperties,
-  TreeViewCreator,
-} from '../TreeView';
+import PopupInput from '../../../Components/Control/Inputs/ModalInput/PopupInput/PopupInput';
+import { IVariable, TProperties } from '../TreeView';
 import { styleView } from './Style';
+interface IFCItem<T> {
+	item: T;
+	setItem(item: T): void;
+	List: FC<IFCList<T>>;
+}
+interface IFCList<T> {
+	Item: FC<IFCItem<T>>;
+	list: T[];
+	setList(list: T[]): void;
+}
 
-const List: FC<{ properties?: TProperties }> = ({ children, properties }) => {
-  return (
-    <div className={styleView.listContainer}>
-      <div className={styleView.listTitle}>{properties && properties.name}</div>
-      {children}
-    </div>
-  );
+export const instanceOfIList = <T,>(object: any): object is Array<T> => {
+	return object instanceof Array ? true : false;
+};
+
+interface IStyleToVariablesTree {
+	(obj: TProperties): IVariable[];
+}
+export const StyleToVariablesTree: IStyleToVariablesTree = (style) => {
+	const list: IVariable[] = [];
+	Object.keys(style).forEach((name) => {
+		if (style[name] instanceof Object) {
+			list.push({
+				name,
+				value: StyleToVariablesTree(style[name] as TProperties),
+			});
+		} else {
+			list.push({ name, value: style[name] });
+		}
+	});
+	// console.log(`list`, list);
+	return list;
+};
+
+export const ListCreator = <T,>(
+	List: FC<IFCList<T>>,
+	Item: FC<IFCItem<T>>
+): FC<{ list: T[]; setList(list: T[]): void }> => ({ list, setList }) => <List {...{ Item, setList, list }} />;
+
+const List = <T,>(props: React.PropsWithChildren<IFCList<T>>) => {
+	const { Item, list, setList } = props;
+	return (
+		<div className={styleView.listContainer}>
+			{list.map((item, key) => {
+				const setItem = (item: T) => setList(list.map((li, index) => (index === key ? item : li)));
+				return <Item {...{ item, setItem, List, key }} />;
+			})}
+		</div>
+	);
 };
 
 // const setPreview = (nodeId:string,value:string|number) => {
@@ -22,31 +59,49 @@ const List: FC<{ properties?: TProperties }> = ({ children, properties }) => {
 // 		.attach().classes.className;
 // };
 
-const Item: FC<IFCItem> = ({ variable, setItem, children }) => {
-  const setValue = (value: string) => {
-    setItem({ name: variable!.name, value });
-  };
-  console.log(`variable.value`, variable.value)
-  return (
-    <div className={styleView.nodeContainer}>
-      <div className={styleView.propContainer}>
-        <div className={styleView.propName}>{variable.name}</div>
-        <div className={styleView.propValue}>
-		{/* {variable.value} */}
-          {/* <PopupInput
-                  {...{
-                    value: variable.value as string,
-                    setValue: setValue,
-                    setPreview: setValue,
-                  }}
-                  height="1em"
-                /> */}
-          {/* {properties[name]} */}
-        </div>
-      </div> 
-      {children}
-    </div>
-  );
+const Item = <T,>(props: React.PropsWithChildren<IFCItem<T>>) => {
+	const { item, setItem, List } = props;
+	const setName = (name: string) => {
+		setItem({ ...item, name });
+	};
+	const setValue = (value: string) => {
+		setItem({ ...item, value });
+	};
+	return (
+		<div className={styleView.nodeContainer}>
+			{!instanceOfIList(Object.values(item)[1]) ? (
+				<div className={styleView.propContainer}>
+					<div className={styleView.propName}>
+						<PopupInput
+							{...{
+								value: Object.values(item)[0] as string,
+								setValue: setName,
+								setPreview: () => {},
+							}}
+							height="1em"
+						/>
+					</div>
+					<div className={styleView.propValue}>
+						<PopupInput
+							{...{
+								value: Object.values(item)[1] as string,
+								setValue: setValue,
+								setPreview: () => {},
+							}}
+							height="1em"
+						/>
+					</div>
+				</div>
+			) : (
+				<List {...{ Item, list: Object.values(item)[1], setList: () => {} }} />
+			)}
+		</div>
+	);
 };
 
-export const StyleView = TreeViewCreator(List, Item);
+export const StyleView = ListCreator(List, Item);
+
+// Переделать структуру дерева в набор пар ключ значение - [key,value]
+// Сделать обратный ковертер для стилей
+// Вычленить неизменяемые элементы и сделать из них HOCs
+// собрать панель навигации

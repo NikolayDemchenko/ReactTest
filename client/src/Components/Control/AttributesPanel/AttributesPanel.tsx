@@ -7,8 +7,8 @@ import { Link } from 'react-scroll';
 
 import { TJssStyle } from '../../../Types/BaseTypes';
 import { IFCAttributesPanel } from '../../../Types/IProps';
-import { StyleToTreeNodes } from '../../../Types/TreeView/Converter';
-import { StyleView } from '../../../Types/TreeView/StyleView/StyleView';
+
+import { StyleToVariablesTree, StyleView } from '../../../Types/TreeView/StyleView/StyleView';
 import { htmlTags } from '../../Class/HtmlCss';
 import SelectPanel from '../Inputs/ModalInput/SelectPanel/SelectPanel';
 import BackSettings from './BackSettings';
@@ -113,7 +113,7 @@ const AttributesPanel: FC<IFCAttributesPanel> = ({
           )}
           <StyleView
             {...{
-              list: StyleToTreeNodes(nodeStyle!.data),
+              list: StyleToVariablesTree(nodeStyle!.data),
               setList: (data: any) => {
                 console.log(JSON.stringify(data));
               },
