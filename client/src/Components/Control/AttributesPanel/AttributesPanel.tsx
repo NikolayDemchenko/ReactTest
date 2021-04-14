@@ -7,10 +7,6 @@ import { Link } from 'react-scroll';
 
 import { TJssStyle } from '../../../Types/BaseTypes';
 import { IFCAttributesPanel } from '../../../Types/IProps';
-import {
-  StyleToKeyValueTree,
-  StyleView,
-} from '../../../Types/TreeView/StyleView/StyleView';
 import { htmlTags } from '../../Class/HtmlCss';
 import SelectPanel from '../Inputs/ModalInput/SelectPanel/SelectPanel';
 import BackSettings from './BackSettings';
@@ -24,7 +20,7 @@ const AttributesPanel: FC<IFCAttributesPanel> = ({
   assignStyleId,
   setAssignStyleId,
 }) => {
-  console.log("%cAttributesPanel", "color: #059");
+  // console.log("%cAttributesPanel", "color: #059");
   const nodeStyle = page.styles.find(({ id }) => id === node.styleId);
 
   const style: TJssStyle = {
@@ -113,14 +109,14 @@ const AttributesPanel: FC<IFCAttributesPanel> = ({
               }}
             />
           )}
-          <StyleView
+          {/* <StyleView
             {...{
               list: StyleToKeyValueTree(nodeStyle!.data),
               setList: (data: any) => {
                 console.log(JSON.stringify(data));
               },
             }}
-          />
+          /> */}
         </Link>
         <div style={{ paddingBottom: "4em" }} />
       </div>

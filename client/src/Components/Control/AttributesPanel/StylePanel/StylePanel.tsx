@@ -1,9 +1,10 @@
-import React, { FC, useState, useContext } from 'react';
-import { log, funcLog } from '../../../../Log';
+import React, { FC } from 'react';
+
+import { StyleManager } from '../../../../AppFunction';
+import { IFCStylePanel } from '../../../../Types/IProps';
 import PropertiesPanel from './PropertiesPanel';
 import SettingsPanel from './SettingsPanel';
-import { StyleManager} from '../../../../AppFunction';
-import { IFCStylePanel } from '../../../../Types/IProps';
+
 const StylePanel: FC<IFCStylePanel> = ({
 	setPage,
 	page,
@@ -13,7 +14,7 @@ const StylePanel: FC<IFCStylePanel> = ({
 	assignStyleId,
 	setAssignStyleId,
 }) => {
-	console.log('%cStylePanel', 'color: green');
+	// console.log('%cStylePanel', 'color: green');
 	// console.log('nodeStyle', nodeStyle);
 
 	const { cloneStyle, updateStyleData, updateStyleName } = new StyleManager(page, node, setPage, nodeStyle);

@@ -9,6 +9,7 @@ import { page as testPage } from './Components/View/Pages/CreateApp';
 import ErrorBoundry from './ErrorBoundry';
 import getPageREST from './Function/ServiceFunction/REST/PageREST';
 import { TPage } from './Types/BaseTypes';
+import { IsTypeOf } from './Types/TreeView/StyleView/StyleView';
 
 const App: FC = () => {
 	// Рабочий
@@ -17,6 +18,12 @@ const App: FC = () => {
 	console.log('App :>> ');
 	const [state, setState] = useState({ page: testPage });
 	const [page, setPage] = useState<TPage>(testPage);
+
+	IsTypeOf("Это строка?")
+	IsTypeOf(57)
+	IsTypeOf(true)
+	IsTypeOf({name:"Васян"})
+	IsTypeOf(["Васян","Писюнян"])
 
 	// const Editor=
 
