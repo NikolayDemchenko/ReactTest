@@ -7,9 +7,9 @@ import {
   TStyle,
 } from '../../../Types/BaseTypes';
 
-const app = {
-	pageIds: ['1', '2', '3', '4', '5'],
-};
+// const app = {
+// 	pageIds: ['1', '2', '3', '4', '5'],
+// };
 
 const newStyle = {
 	height: '200px',
@@ -93,7 +93,7 @@ const rootTagGenerator = (parentId: string | null, index: number, tag: string, s
 });
 
 const rootTag_1 = rootTagGenerator(null, 0, 'div', rootTagStyle.id);
-const rootTag_2 = rootTagGenerator(null, 1, 'div', rootTagStyle.id);
+// const rootTag_2 = rootTagGenerator(null, 1, 'div', rootTagStyle.id);
 
 const bodyStyle = {
 	background: '#3b485d',

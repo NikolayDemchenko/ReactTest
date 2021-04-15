@@ -1,13 +1,17 @@
-import React, { useState, useContext, useEffect } from 'react';
-import PageList from './Pages/PageList';
+import React, {
+  useEffect,
+  useState,
+} from 'react';
+
 import jss from 'jss';
 import preset from 'jss-preset-default';
-import { log, funcLog } from '../../../Log';
-import Application from './Applications/Application';
-function NavigationPanel({ page, PageREST: { getPagesByAppName, updatePage } }) {
+
+import { log } from '../../../Log';
+
+function NavigationPanel({ page, PageREST: { getPagesByAppName } }) {
 
 	const [pageList, setPageList] = useState();
-	const [selection, setSelection] = useState(page.name);
+	// const [selection, setSelection] = useState(page.name);
 	// console.log('selection', selection);
 	// !pageList && getPagesByAppName(setPageList, page.appName);
 	// console.log(`pageList`, pageList);

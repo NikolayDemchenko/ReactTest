@@ -1,9 +1,26 @@
-import shortid from 'shortid';
 import jss from 'jss';
 import preset from 'jss-preset-default';
-import { createVariable, createUniqueName } from '../../AppFunction';
-import { TJssStyle,IViewNode, TNode, TPage, TStyle, INodeManager, TSetState, TJSSClasses } from '../../Types/BaseTypes';
-import { IUpdateNode,IGetDefaultCssProps } from '../../Types/IFunctions';
+import shortid from 'shortid';
+
+import {
+  createUniqueName,
+  createVariable,
+} from '../../AppFunction';
+import {
+  INodeManager,
+  IViewNode,
+  TJSSClasses,
+  TJssStyle,
+  TNode,
+  TPage,
+  TSetState,
+  TStyle,
+} from '../../Types/BaseTypes';
+import {
+  IGetDefaultCssProps,
+  IUpdateNode,
+} from '../../Types/IFunctions';
+
 export class NodeManager implements INodeManager {
 	page: TPage;
 	setPage: TSetState<TPage>;
@@ -30,8 +47,8 @@ export class NodeManager implements INodeManager {
 					nodes.filter(({ parentId }) => parentId !== _parentId),
 					node.id
 				);
-				return node;
 			}
+			return node;
 		});
 	};
 	getNodeTree = (nodes: IViewNode[]) => this.getTree(nodes, null);

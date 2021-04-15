@@ -1,27 +1,5 @@
 import { FC } from 'react';
 
-type TJson = string | number | boolean | null | TJsonArr | TJsonObj;
-type TJsonArr = TJsonObj[];
-type TJsonObj = { [key: string]: TJson };
-
-export const IsTypeOf = (obj: any) => {
-  switch (typeof obj) {
-    case "string":
-      console.log(`${obj}  Да, сучка, это string!`);
-      break;
-    case "number":
-      console.log(`${obj} -  number нахуй!`);
-      break;
-    case "boolean":
-      console.log(`${obj} - boolean нахуй!`);
-      break;
-    case "object":
-      console.log(`${obj} - object нахуй!`);
-	  // После выяснить массив или нет
-      break;
-  }
-};
-
 interface IFCItem {
   //   item: TKeyValue;
   //   setItem(item: TKeyValue): void;

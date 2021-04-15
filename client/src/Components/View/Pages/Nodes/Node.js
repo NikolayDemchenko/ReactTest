@@ -1,7 +1,8 @@
 import React from 'react';
+
+import { log } from '../../../../Log';
 import Nodes from './Nodes';
-import { log, funcLog } from '../../../../Log';
-import { Context } from '../../../../AppFunction';
+
 function Node(props) {
 	const { node, onClick, classes,page } = props;
 

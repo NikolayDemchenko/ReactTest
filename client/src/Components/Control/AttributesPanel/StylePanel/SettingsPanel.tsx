@@ -1,18 +1,20 @@
-import React, { FC, useContext } from 'react';
+import React, { FC } from 'react';
+
 import Icon from 'react-icons-kit';
-import { buttonStyle } from '../../Styles/BtnStyle';
-import { copy } from 'react-icons-kit/icomoon/copy';
 import { exportIcon } from 'react-icons-kit/entypo/exportIcon';
-import { SaveToJSON } from '../../../../AppFunction';
-import { paintBrush } from 'react-icons-kit/fa/paintBrush';
 import { book } from 'react-icons-kit/fa/book';
-import { folderDownload } from 'react-icons-kit/icomoon/folderDownload';
+import { paintBrush } from 'react-icons-kit/fa/paintBrush';
 import { boxRemove } from 'react-icons-kit/icomoon/boxRemove';
-import SelectPanel from '../../Inputs/ModalInput/SelectPanel/SelectPanel';
-import Styles from '../JSON/Styles.json';
-import PopupInput from '../../Inputs/ModalInput/PopupInput/PopupInput';
-import { Context } from '../../../../AppFunction';
+import { copy } from 'react-icons-kit/icomoon/copy';
+import { folderDownload } from 'react-icons-kit/icomoon/folderDownload';
+
+import { SaveToJSON } from '../../../../AppFunction';
 import { IFCSettingsPanel } from '../../../../Types/IProps';
+import PopupInput from '../../Inputs/ModalInput/PopupInput/PopupInput';
+import SelectPanel from '../../Inputs/ModalInput/SelectPanel/SelectPanel';
+import { buttonStyle } from '../../Styles/BtnStyle';
+import Styles from '../JSON/Styles.json';
+
 const SettingsPanel: FC<IFCSettingsPanel> = (props) => {
 	console.log('SettingsPanel :>> ');
 	const {

@@ -1,9 +1,10 @@
 import React, { FC } from 'react';
-import { log, funcLog } from '../../../Log';
+
 import jss from 'jss';
 import preset from 'jss-preset-default';
-import PopupInput from '../Inputs/ModalInput/PopupInput/PopupInput';
+
 import { IFCBackSettings } from '../../../Types/IProps';
+import PopupInput from '../Inputs/ModalInput/PopupInput/PopupInput';
 
 const BackSettings: FC<IFCBackSettings> = ({ setPage, page }) => {
 	// console.log("props :>> ", props.page.bodyStyle);

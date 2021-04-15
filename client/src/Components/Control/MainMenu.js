@@ -1,18 +1,21 @@
-import React, { useState, useContext, useEffect } from 'react';
-import PopupInputsForm from './Inputs/ModalInput/PopupInput/PopupInputsForm';
-import SelectPanel from './Inputs/ModalInput/SelectPanel/SelectPanel';
+import React, { useState } from 'react';
+
+import Icon from 'react-icons-kit';
 import { fileTextO } from 'react-icons-kit/fa/fileTextO';
 import { save } from 'react-icons-kit/fa/save';
-import { map } from 'react-icons-kit/icomoon/map';
 import { folderOpen } from 'react-icons-kit/icomoon/folderOpen';
-import Icon from 'react-icons-kit';
-import SavePage from './NavigationPanel/Pages/SavePage';
-import { log, funcLog } from '../../Log';
-import { buttonStyle } from './Styles/BtnStyle';
+import { map } from 'react-icons-kit/icomoon/map';
+
+import { log } from '../../Log';
+import PopupInputsForm from './Inputs/ModalInput/PopupInput/PopupInputsForm';
+import SelectPanel from './Inputs/ModalInput/SelectPanel/SelectPanel';
 import NavigationPanel from './NavigationPanel/NavigationPanel';
+import SavePage from './NavigationPanel/Pages/SavePage';
+import { buttonStyle } from './Styles/BtnStyle';
+
 function MainMenu({ page, PageREST }) {	
 	
-	const { createPage, getPagesByAppName, updatePage, getAppList } = PageREST;
+	const { createPage, updatePage, getAppList } = PageREST;
 
 	const [show, setShow] = useState(false);
 
