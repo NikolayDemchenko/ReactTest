@@ -1,56 +1,44 @@
-import {
-  FCArray,
-  FCBoolean,
-  FCNumber,
-  FCObject,
-  FCString,
-  JsComponents,
-} from './JsComponents';
+import { FC, ReactElement } from 'react';
+import { JsComponents } from './JsComponents';
 
 export type TJs = string | number | boolean | null | TJsArr | TJsObj;
 export type TJsArr = TJs[];
 export type TJsObj = { [key: string]: TJs };
 
 interface IJsView {
-  // private components: IJsComponents;
-  createFC: (obj: TJs) => FCString | FCNumber | FCBoolean | FCArray | FCObject;
+	switcher: (obj: TJs) => FC;
+	component: FC;
 }
-type FCJsView = FCString | FCNumber | FCBoolean | FCArray | FCObject;
+export class JsView implements IJsView {
+	private components: JsComponents = new JsComponents();
+	component: FC;
+	obj: TJs;
+	constructor(obj: TJs) {
+		this.obj = obj;
+		this.component = this.switcher(this.obj);
+	}
+	switcher = (obj: TJs) => {
+		switch (typeof obj) {
+			case 'string':
+				console.log(`${obj}  Да, сучка, это string!`);
+				return this.components.String(obj);
 
-class JsView implements IJsView {
-  private components: JsComponents = new JsComponents();
-  component: FCJsView;
+			case 'number':
+				console.log(`${obj} -  number!`);
+				return this.components.Number(obj);
 
-  constructor(obj: TJs) {
-    this.component = this.createFC(obj);
-  }
+			case 'boolean':
+				console.log(`${obj} - boolean!`);
+				return this.components.Boolean(obj);
 
-  createFC = (obj: TJs) => {
-    // this.components.
-    switch (typeof obj) {
-      case "string":
-        // console.log(`${obj}  Да, сучка, это string!`);
-        return this.components.String;
-      //   return "string";
-      case "number":
-        // console.log(`${obj} -  number нахуй!`);
-        return this.components.Number;
-      //   return "number";
-      case "boolean":
-        // console.log(`${obj} - boolean нахуй!`);
-        return this.components.Boolean;
-      //   return "boolean";
-      case "object":
-        // !!!! // Передеть в компоненты сам свитчер
-        if (obj instanceof Array) {
-          // console.log(`${obj} - array нахуй!`);
-          return this.components.Array;
-          // return "array";
-        } else {
-          // console.log(`${obj} - object нахуй!`);
-          return this.components.Object;
-          // return "object";
-        }
-    }
-  };
+			case 'object':
+				if (obj instanceof Array) {
+					console.log(`${obj} - array!`);
+					return this.components.Array(this.switcher, obj);
+				} else {
+					console.log(`${obj} - object!`);
+					return this.components.Object(this.switcher, obj!);
+				}
+		}
+	};
 }

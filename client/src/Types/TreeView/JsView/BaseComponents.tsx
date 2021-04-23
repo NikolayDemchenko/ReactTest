@@ -1,26 +1,56 @@
-import React from 'react';
+import React, { FC } from 'react';
+import { TJsArr, TJsObj } from '.';
 
-import {
-  FCArray,
-  FCBoolean,
-  FCNumber,
-  FCObject,
-  FCString,
-} from './JsComponents';
+export const BaseString = (value: string): FC => () => {
+	return (
+		<div title={'string'}>
+			{'Строка: '}
+			{value}
+		</div>
+	);
+};
+export const BaseNumber = (value: number): FC => () => {
+	return (
+		<div title={'number'}>
+			{'Число: '}
+			{value}
+		</div>
+	);
+};
+export const BaseBoolean = (value: boolean): FC => () => {
+	return <input title={'boolean'} type={'checkbox'} checked={value} />;
+};
 
-export const BaseString: FCString = ({ value }) => {
-  return <div title={"string"}>{value}</div>;
+export const BaseArray = (switcher: Function, value: TJsArr): FC => () => {
+	return (
+		<>
+			{'Массив: '}
+			{value.map((item, index) => {
+				const Value = switcher(item);
+				return (
+					<div key={index}>
+						<Value />
+					</div>
+				);
+			})}
+		</>
+	);
 };
-export const BaseNumber: FCNumber = ({ value }) => {
-  return <div title={"number"}>{value}</div>;
-};
-export const BaseBoolean: FCBoolean = ({ value }) => {
-  return <input title={"boolean"} type={"checkbox"}  checked={value}/>;
-};
-// Нужно замапить массив и для каждого  элемента вызывать, свитчер который выберет и вставит нужный компонент
-export const BaseArray: FCArray = ({ value }) => {
-  return <div title={"array"} />;
-};
-export const BaseObject: FCObject = ({ value }) => {
-  return <div title={"object"} />;
+// Сделать для объекта подкомпонет Row объединяющий имя и значение
+export const BaseObject = (switcher: Function, value: TJsObj): FC => () => {
+	return (
+		<>
+			{'Объект: '}
+			{Object.keys(value).map((item, index) => {
+				const Name = switcher(item);
+				const Value = switcher(value[item]);
+				return (
+					<div key={index}>
+						<Name />
+						<Value />
+					</div>
+				);
+			})}
+		</>
+	);
 };
