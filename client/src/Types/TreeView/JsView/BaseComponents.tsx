@@ -1,5 +1,9 @@
 import React, { FC } from 'react';
-import { TJsArr, TJsObj } from '.';
+
+import {
+  TJsArr,
+  TJsObj,
+} from './';
 
 export const BaseString = (value: string): FC => () => {
 	return (
@@ -38,6 +42,7 @@ export const BaseArray = (switcher: Function, value: TJsArr): FC => () => {
 };
 // Сделать для объекта подкомпонет Row объединяющий имя и значение
 export const BaseObject = (switcher: Function, value: TJsObj): FC => () => {
+	console.log('Объект :>> ', value);
 	return (
 		<>
 			{'Объект: '}

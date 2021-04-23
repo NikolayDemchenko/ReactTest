@@ -22,6 +22,7 @@ const updateDoc = (req, res, collectionName) => {
 		}
 	);
 };
+// Переделать для возможности глубокого обновления без ограничений
 const updateField = (req, res, collectionName) => {
 	const { name, value, newValue } = JSON.parse(req.body.value);
 	console.log(`update field: `, JSON.parse(req.body.value));
