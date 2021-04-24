@@ -32,7 +32,7 @@ const nodes=HierarchycalEntitiesToJs(page.nodes) as unknown
 		<ErrorBoundry>
 			<MainMenu {...{ page, PageREST }} />
 			{page && new PageEditor(page, setPage).Component}
-			{JSON.stringify(nodes)}
+			{/* {JSON.stringify(nodes)} */}
 			<TreeViev />
 		</ErrorBoundry>
 	);

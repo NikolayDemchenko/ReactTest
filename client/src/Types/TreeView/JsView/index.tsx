@@ -5,7 +5,6 @@ import { JsComponents } from './JsComponents';
 export type TJs = string | number | boolean | null | TJsArr | TJsObj;
 export type TJsArr = TJs[];
 export type TJsObj = { [key: string]: TJs };
-
 interface IJsView {
   switcher: (obj: TJs) => FC;
   component: FC;
