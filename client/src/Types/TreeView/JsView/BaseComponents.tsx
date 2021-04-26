@@ -67,7 +67,7 @@ export const JsProperty = (
     <>
       {"property: "}
       {"key: "}
-      <Key />
+      {/* <Key /> */}
       {"value: "}
       {/* <Value /> */}
     </>

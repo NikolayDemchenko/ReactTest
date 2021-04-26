@@ -37,7 +37,7 @@
     "@types/react-scroll": "^1.8.2",
     "@types/shortid": "^0.0.29",
     "axios": "^0.19.2",
-    "caniuse-lite": "^1.0.30001205",
+    "caniuse-lite": "^1.0.30001216",
     "convert-to-css": "^1.0.4",
     "file-saver": "^2.0.2",
     "html-tags": "^3.1.0",
