@@ -5,57 +5,71 @@ import {
   TJsObj,
 } from './';
 
-export const BaseString = (value: string): FC => () => {
-	return (
-		<div title={'string'}>
-			{'Строка: '}
-			{value}
-		</div>
-	);
+export const JsString = (str: string): FC => () => {
+  return (
+    <div title={"string"}>
+      {"string: "}
+      {str}
+    </div>
+  );
 };
-export const BaseNumber = (value: number): FC => () => {
-	return (
-		<div title={'number'}>
-			{'Число: '}
-			{value}
-		</div>
-	);
+export const JsNumber = (num: number): FC => () => {
+  return (
+    <div title={"number"}>
+      {"number: "}
+      {num}
+    </div>
+  );
 };
-export const BaseBoolean = (value: boolean): FC => () => {
-	return <input title={'boolean'} type={'checkbox'} checked={value} />;
+export const JsBoolean = (bool: boolean): FC => () => {
+  return <input title={"boolean"} type={"checkbox"} checked={bool} />;
 };
 
-export const BaseArray = (switcher: Function, value: TJsArr): FC => () => {
-	return (
-		<>
-			{'Массив: '}
-			{value.map((item, index) => {
-				const Value = switcher(item);
-				return (
-					<div key={index}>
-						<Value />
-					</div>
-				);
-			})}
-		</>
-	);
+export const JsArray = (switcher: Function, arr: TJsArr): FC => () => {
+  return (
+    <>
+      {"Array: "}
+      {arr.map((element, index) => {
+        const Element = switcher(element);
+        return (
+          <div key={index}>
+            {"Element: "}
+            <Element />
+          </div>
+        );
+      })}
+    </>
+  );
 };
 // Сделать для объекта подкомпонет Row объединяющий имя и значение
-export const BaseObject = (switcher: Function, value: TJsObj): FC => () => {
-	console.log('Объект :>> ', value);
-	return (
-		<>
-			{'Объект: '}
-			{Object.keys(value).map((item, index) => {
-				const Name = switcher(item);
-				const Value = switcher(value[item]);
-				return (
-					<div key={index}>
-						<Name />
-						<Value />
-					</div>
-				);
-			})}
-		</>
-	);
+export const JsObject = (switcher: Function, value: TJsObj): FC => () => {
+  // console.log('Объект :>> ', value);
+  return (
+    <>
+      {"Object: "}
+      {Object.keys(value).map((_key, index) => {
+        const Property = JsProperty(switcher, _key, value);
+        return <Property key={index} />;
+      })}
+    </>
+  );
+};
+
+export const JsProperty = (
+  switcher: Function,
+  _key: string,
+  value: TJsObj
+): FC => () => {
+  // console.log('Объект :>> ', value);
+  const Key = switcher(_key);
+  const Value = switcher(value);
+  return (
+    <>
+      {"property: "}
+      {"key: "}
+      <Key />
+      {"value: "}
+      {/* <Value /> */}
+    </>
+  );
 };

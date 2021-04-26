@@ -1,7 +1,16 @@
 import { FC } from 'react';
 
-import { TJsArr, TJsObj } from './';
-import { BaseArray, BaseBoolean, BaseNumber, BaseObject, BaseString } from './BaseComponents';
+import {
+  TJsArr,
+  TJsObj,
+} from './';
+import {
+  JsArray,
+  JsBoolean,
+  JsNumber,
+  JsObject,
+  JsString,
+} from './BaseComponents';
 
 export interface HocFCString {
 	(value: string): FC;
@@ -41,11 +50,11 @@ export interface IJsComponents {
 }
 
 export class JsComponents implements IJsComponents {
-	String: HocFCString = BaseString;
-	Number: HocFCNumber = BaseNumber;
-	Boolean: HocFCBoolean = BaseBoolean;
-	Array: HocFCArray = BaseArray;
-	Object: HocFCObject = BaseObject;
+	String: HocFCString = JsString;
+	Number: HocFCNumber = JsNumber;
+	Boolean: HocFCBoolean = JsBoolean;
+	Array: HocFCArray = JsArray;
+	Object: HocFCObject = JsObject;
 
 	setComponents = ({
 		String,
