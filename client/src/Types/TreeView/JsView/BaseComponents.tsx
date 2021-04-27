@@ -1,24 +1,28 @@
 import React, { FC } from 'react';
 
 import {
+  TJs,
   TJsArr,
   TJsObj,
 } from './';
+import { ViewColor } from './Types/Types';
 
+const viewColor = new ViewColor();
+// viewColor.setArray({ color: "#578", "mix-blend-mode": "difference" });
 export const JsString = (str: string): FC => () => {
   return (
-    <div title={"string"}>
-      {"string: "}
+    <>
+      <viewColor.BaseType>{" string: "}</viewColor.BaseType>
       {str}
-    </div>
+    </>
   );
 };
 export const JsNumber = (num: number): FC => () => {
   return (
-    <div title={"number"}>
-      {"number: "}
+    <>
+      <viewColor.BaseType>{" number: "}</viewColor.BaseType>
       {num}
-    </div>
+    </>
   );
 };
 export const JsBoolean = (bool: boolean): FC => () => {
@@ -28,14 +32,14 @@ export const JsBoolean = (bool: boolean): FC => () => {
 export const JsArray = (switcher: Function, arr: TJsArr): FC => () => {
   return (
     <>
-      {"Array: "}
+      <viewColor.Array>{" Array: "}</viewColor.Array>
       {arr.map((element, index) => {
         const Element = switcher(element);
         return (
-          <div key={index}>
-            {"Element: "}
-            <Element />
-          </div>
+          <>
+            <viewColor.ArrayElement>{" Element: "}</viewColor.ArrayElement>
+            <Element key={index} />
+          </>
         );
       })}
     </>
@@ -46,9 +50,9 @@ export const JsObject = (switcher: Function, value: TJsObj): FC => () => {
   // console.log('Объект :>> ', value);
   return (
     <>
-      {"Object: "}
+        <viewColor.Object>{" Object: "}</viewColor.Object>
       {Object.keys(value).map((_key, index) => {
-        const Property = JsProperty(switcher, _key, value);
+        const Property = JsProperty(switcher, _key, value[_key]);
         return <Property key={index} />;
       })}
     </>
@@ -58,18 +62,18 @@ export const JsObject = (switcher: Function, value: TJsObj): FC => () => {
 export const JsProperty = (
   switcher: Function,
   _key: string,
-  value: TJsObj
+  value: TJs
 ): FC => () => {
   // console.log('Объект :>> ', value);
   const Key = switcher(_key);
   const Value = switcher(value);
   return (
     <>
-      {"property: "}
-      {"key: "}
-      {/* <Key /> */}
-      {"value: "}
-      {/* <Value /> */}
+       <viewColor.Property>{" property: "}</viewColor.Property>
+      <viewColor.Key>{" key: "}</viewColor.Key>
+      <Key />
+      <viewColor.Value> {" value: "}</viewColor.Value>
+      <Value />
     </>
   );
 };
