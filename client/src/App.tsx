@@ -25,7 +25,7 @@ const App: FC = () => {
 	// const [state, setState] = useState({ page: testPage });
 	const [page, setPage] = useState<TPage>(testPage);
 const nodes=HierarchycalEntitiesToJs(page.nodes) as unknown
-	const TreeViev = new JsView(nodes as TJs).component;
+	const Viev = new JsView(nodes as TJs).component;
 	const PageREST = getPageREST(setPage);
 
 	return (
@@ -33,7 +33,7 @@ const nodes=HierarchycalEntitiesToJs(page.nodes) as unknown
 			<MainMenu {...{ page, PageREST }} />
 			{page && new PageEditor(page, setPage).Component}
 			{/* {JSON.stringify(nodes)} */}
-			<TreeViev />
+			<Viev />
 		</ErrorBoundry>
 	);
 };

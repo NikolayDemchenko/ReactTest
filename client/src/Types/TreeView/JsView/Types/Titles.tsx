@@ -12,6 +12,7 @@ const arrayElement = {
   "mix-blend-mode": "difference",
 };
 const object = {
+  border:"1px solid #fff",
   color: "#999",
   "mix-blend-mode": "difference",
 };
@@ -27,20 +28,30 @@ const value = {
   color: "#aaf",
   "mix-blend-mode": "difference",
 };
-const baseType = {
+const string = {
+  color: "#cdf",
+  "mix-blend-mode": "difference",
+};
+const number = {
+  color: "#aaf",
+  "mix-blend-mode": "difference",
+};
+const boolean = {
   color: "#22f",
   "mix-blend-mode": "difference",
 };
 
 
-export class ViewColor {
+export class ViewTypes {
   private _array: JssStyle = array;
   private _arrayElement: JssStyle = arrayElement;
   private _object: JssStyle = object;
   private _property: JssStyle = property;
   private _key: JssStyle = key;
   private _value: JssStyle = value;
-  private _baseType: JssStyle = baseType;
+  private _string: JssStyle = string;
+  private _number: JssStyle = number;
+  private _boolean: JssStyle = boolean;
 
   private _Array!: FC;
   public get Array(): FC {
@@ -90,20 +101,36 @@ export class ViewColor {
     this._value = value;
     this.render();
   }
-  private _BaseType!: FC;
-  public get BaseType(): FC {
-    return this._BaseType;
+  private _String!: FC;
+  public get String(): FC {
+    return this._String;
   }
-  setBaseType(baseType: JssStyle) {
-    this._baseType = baseType;
+  setString(string: JssStyle) {
+    this._string = string;
+    this.render();
+  }
+  private _Number!: FC;
+  public get Number(): FC {
+    return this._Number;
+  }
+  setNumber(number: JssStyle) {
+    this._number = number;
+    this.render();
+  }
+  private _Boolean!: FC;
+  public get Boolean(): FC {
+    return this._Boolean;
+  }
+  setBoolean(boolean: JssStyle) {
+    this._boolean = boolean;
     this.render();
   }
 
   constructor() {
     this.render();
   }
-  private getTypeFC = (className: string): FC => ({ children }) => (
-    <span className={className}>{children}</span>
+  private getTypeFC = (className: string,type:string): FC => ({children}) => (
+    <div className={className}>{type}{children}</div>
   );
   private render() {
     jss.setup(preset());
@@ -115,16 +142,20 @@ export class ViewColor {
         property: this._property,
         key: this._key,
         value: this._value,
-        baseType: this._baseType,
+        string: this._string,
+        number: this._number,
+        boolean: this._boolean,
       })
       .attach();
 
-    this._Array = this.getTypeFC(classes.array);
-    this._ArrayElement = this.getTypeFC(classes.arrayElement);
-    this._Object = this.getTypeFC(classes.object);
-    this._Property = this.getTypeFC(classes.property);
-    this._Key = this.getTypeFC(classes.key);
-    this._Value = this.getTypeFC(classes.value);
-    this._BaseType = this.getTypeFC(classes.baseType);
+    this._Array = this.getTypeFC(classes.array," Array: ");
+    this._ArrayElement = this.getTypeFC(classes.arrayElement," Element: ");
+    this._Object = this.getTypeFC(classes.object," Object: ");
+    this._Property = this.getTypeFC(classes.property," Property: ");
+    this._Key = this.getTypeFC(classes.key," Key: ");
+    this._Value = this.getTypeFC(classes.value," Value: ");
+    this._String = this.getTypeFC(classes.string," string: ");
+    this._Number = this.getTypeFC(classes.number," number: ");
+    this._Boolean = this.getTypeFC(classes.boolean," boolean: ");
   }
 }

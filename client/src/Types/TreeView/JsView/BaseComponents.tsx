@@ -1,61 +1,49 @@
 import React, { FC } from 'react';
 
 import {
+  ISwitcher,
   TJs,
   TJsArr,
   TJsObj,
 } from './';
-import { ViewColor } from './Types/Types';
+import { ViewTypes as ViewTitles } from './Types/Titles';
 
-const viewColor = new ViewColor();
+const title = new ViewTitles();
 // viewColor.setArray({ color: "#578", "mix-blend-mode": "difference" });
 export const JsString = (str: string): FC => () => {
-  return (
-    <>
-      <viewColor.BaseType>{" string: "}</viewColor.BaseType>
-      {str}
-    </>
-  );
+  return <title.String>{str}</title.String>;
 };
 export const JsNumber = (num: number): FC => () => {
-  return (
-    <>
-      <viewColor.BaseType>{" number: "}</viewColor.BaseType>
-      {num}
-    </>
-  );
+  return <title.Number>{num}</title.Number>;
 };
 export const JsBoolean = (bool: boolean): FC => () => {
   return <input title={"boolean"} type={"checkbox"} checked={bool} />;
 };
 
-export const JsArray = (switcher: Function, arr: TJsArr): FC => () => {
+export const JsArray = (switcher: ISwitcher, arr: TJsArr): FC => () => {
   return (
-    <>
-      <viewColor.Array>{" Array: "}</viewColor.Array>
+    <title.Array>
       {arr.map((element, index) => {
         const Element = switcher(element);
         return (
-          <>
-            <viewColor.ArrayElement>{" Element: "}</viewColor.ArrayElement>
-            <Element key={index} />
-          </>
+          <title.ArrayElement key={"_" + index}>
+            <Element />
+          </title.ArrayElement>
         );
       })}
-    </>
+    </title.Array>
   );
 };
-// Сделать для объекта подкомпонет Row объединяющий имя и значение
-export const JsObject = (switcher: Function, value: TJsObj): FC => () => {
+
+export const JsObject = (switcher: ISwitcher, value: TJsObj): FC => () => {
   // console.log('Объект :>> ', value);
   return (
-    <>
-        <viewColor.Object>{" Object: "}</viewColor.Object>
+    <title.Object>
       {Object.keys(value).map((_key, index) => {
         const Property = JsProperty(switcher, _key, value[_key]);
-        return <Property key={index} />;
+        return <Property key={index}/>;
       })}
-    </>
+    </title.Object>
   );
 };
 
@@ -67,13 +55,15 @@ export const JsProperty = (
   // console.log('Объект :>> ', value);
   const Key = switcher(_key);
   const Value = switcher(value);
+
   return (
-    <>
-       <viewColor.Property>{" property: "}</viewColor.Property>
-      <viewColor.Key>{" key: "}</viewColor.Key>
-      <Key />
-      <viewColor.Value> {" value: "}</viewColor.Value>
-      <Value />
-    </>
+    <title.Property>
+      <title.Key>
+        <Key />
+      </title.Key>
+      <title.Value>
+        <Value />
+      </title.Value>
+    </title.Property>
   );
 };

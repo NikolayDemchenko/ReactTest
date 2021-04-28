@@ -5,8 +5,12 @@ import { JsComponents } from './JsComponents';
 export type TJs = string | number | boolean | null | TJsArr | TJsObj;
 export type TJsArr = TJs[];
 export type TJsObj = { [key: string]: TJs };
+
+export interface ISwitcher{
+  (obj: TJs) : FC
+}
 interface IJsView {
-  switcher: (obj: TJs) => FC;
+  switcher: ISwitcher;
   component: FC;
 }
 export class JsView implements IJsView {
