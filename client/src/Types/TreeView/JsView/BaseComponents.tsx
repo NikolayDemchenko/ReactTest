@@ -6,7 +6,7 @@ import {
   TJsArr,
   TJsObj,
 } from './';
-import { ViewTypes as ViewTitles } from './Types/Titles';
+import { ViewTitles } from './Titles/Titles';
 
 const title = new ViewTitles();
 // viewColor.setArray({ color: "#578", "mix-blend-mode": "difference" });
