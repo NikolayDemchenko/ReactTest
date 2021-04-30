@@ -42,7 +42,7 @@ const boolean = {
 };
 
 
-export class ViewTitles {
+export class TitlesStyles {
   private _array: JssStyle = array;
   private _arrayElement: JssStyle = arrayElement;
   private _object: JssStyle = object;

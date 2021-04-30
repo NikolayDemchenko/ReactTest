@@ -6,9 +6,9 @@ import {
   TJsArr,
   TJsObj,
 } from './';
-import { ViewTitles } from './Titles/Titles';
+import { TitlesStyles } from './Titles/Titles';
 
-const title = new ViewTitles();
+const title = new TitlesStyles();
 // viewColor.setArray({ color: "#578", "mix-blend-mode": "difference" });
 export const JsString = (str: string): FC => () => {
   return <title.String>{str}</title.String>;
