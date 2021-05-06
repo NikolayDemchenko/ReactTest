@@ -1,18 +1,36 @@
 import { FC } from 'react';
 
+import {
+  Element,
+  IElement,
+} from './Entity';
 import { JsComponents } from './JsComponents';
 
 export type TJs = string | number | boolean | null | TJsArr | TJsObj;
 export type TJsArr = TJs[];
 export type TJsObj = { [key: string]: TJs };
 
-export interface ISwitcher{
-  (obj: TJs) : FC
+export interface ISwitcher {
+  (obj: TJs): FC;
 }
 interface IJsView {
   switcher: ISwitcher;
   component: FC;
 }
+
+const entity = new Element(
+  {
+    id: "0001",
+    name: "Васян первый",
+    children: ["какие-то"],
+    type: "div",
+    attributes: {},
+  },
+  (value: IElement) => console.log(value)
+);
+entity.consoleThis();
+entity.name = "Васян";
+
 export class JsView implements IJsView {
   private components: JsComponents = new JsComponents();
   component: FC;
