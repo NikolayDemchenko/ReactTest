@@ -9,6 +9,9 @@ import { page as testPage } from './Components/View/Pages/CreateApp';
 import ErrorBoundry from './ErrorBoundry';
 import getPageREST from './Function/ServiceFunction/REST/PageREST';
 import { TPage } from './Types/BaseTypes';
+import { IElement } from './Types/Element/Element';
+import { createSimpleElement } from './Types/Element/ElementManager';
+import { MyElement } from './Types/Element/MyElement';
 import {
   HierarchycalEntitiesToJs,
 } from './Types/TreeView/Converters/HierarchicalEntities';
@@ -39,3 +42,13 @@ const nodes=HierarchycalEntitiesToJs(page.nodes) as unknown
 };
 
 export default App;
+
+
+const render = (value: IElement) => console.table(value);
+
+const element = new MyElement(createSimpleElement(),render);
+// element.consoleThis();
+element.setTag("p");
+element.setChildren([...element.children,"Нет! Теперь я текст в элементе","И я тоже!",createSimpleElement()]);
+element.setChildren([...element.children,"Хер вам всем! Теперь я текст в элементе",element]);
+element.removeChildren(["Хер вам всем! Теперь я текст в элементе"]);
