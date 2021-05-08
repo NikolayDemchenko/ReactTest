@@ -37,7 +37,7 @@ export class NodeManager implements INodeManager {
 			page.styles.forEach(({ id, data }) => {
 				myStyles[id] = data;
 			});
-		this.classes = jss.createStyleSheet({ ...myStyles }).attach().classes;
+		this.classes = jss.createStyleSheet(myStyles).attach().classes;
 	}
 	getTree = (nodes: TNode[], _parentId: string | null) => {
 		const viewNodes: IViewNode[] = nodes;
