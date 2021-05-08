@@ -10,11 +10,11 @@ export interface IVoidComponent extends IBaseComponent {
   valueAttribute: string;
 }
 export interface IContainerProperty extends IContainerComponent {
-  key: IBaseComponent;
-  value: IBaseComponent;
+  key: IContainerComponent;
+  value: IContainerComponent;
 }
 export interface IVoidProperty extends IContainerComponent {
-  key: IBaseComponent;
+  key: IContainerComponent;
   value: IVoidComponent;
 }
 export interface IObjectComponent extends IContainerComponent {
