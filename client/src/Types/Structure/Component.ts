@@ -12,6 +12,6 @@ export class Component implements IComponent {
     constructor(tag: string, props?: { [key: string]: any }) {
       this.tag = tag;
       this.props = props||{};  
-      this.render = (data) => React.createElement(this.tag, this.props, data);
+      this.render = (children) => React.createElement(this.tag, this.props, children);
     }
   }
