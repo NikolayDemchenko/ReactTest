@@ -1,5 +1,4 @@
 import { JssStyle } from 'jss';
-
 import { createStyleSheet } from '../../CreateJssStyle';
 
 const objectStyle: JssStyle = {

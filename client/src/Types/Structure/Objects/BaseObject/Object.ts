@@ -1,4 +1,4 @@
-import { Div } from '../../Components/ContainerComponents';
+import { Div } from '../../Components/Components';
 import {
   InputWithPlaceholderProperty,
 } from '../../Properties/BaseProperty/Property';

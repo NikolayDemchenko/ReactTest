@@ -1,6 +1,5 @@
-import { Div } from '../../Components/ContainerComponents';
-import { InputWithPlaceholder } from '../../Components/InputComponents';
-import { Span } from '../../Components/TextComponents';
+import { Div, InputWithPlaceholder, Span } from '../../Components/Components';
+
 import { createProperty } from '../CreateProperty';
 import { styleSheet } from './Styles';
 

@@ -1,9 +1,9 @@
-import { Component } from '../Component';
+import { IBaseComponent } from "../Model";
 
 export const createProperty = (
-    Container: Component,
-    Key: Component,
-    Value: Component
+    Container: IBaseComponent,
+    Key: IBaseComponent,
+    Value: IBaseComponent
   ) => {
     return (key: string, value: any) => {
       return Container.render([Key.render(key), Value.render(value)]);
