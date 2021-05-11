@@ -6,3 +6,11 @@ export const createStyleSheet = (styles: { [key: string]: JssStyle }) => {
   const { classes } = jss.createStyleSheet(styles).attach();
   return classes;
 };
+
+export const createJssStyles = (styles: { name: string; data: JssStyle }[]) => {
+  const myStyles: { [key: string]: JssStyle } = {};
+  styles.forEach(({ name, data }) => {
+    myStyles[name] = data;
+  });
+  return jss.createStyleSheet(myStyles).attach().classes;
+};

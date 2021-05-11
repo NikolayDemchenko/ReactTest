@@ -1,20 +1,112 @@
+import { JssStyle } from 'jss';
+
 import { Div } from '../../Components/Components';
+import { createJssStyles } from '../../CreateJssStyle';
+import {
+  Container,
+  Void,
+} from '../../Model';
 import {
   InputWithPlaceholderProperty,
 } from '../../Properties/BaseProperty/Property';
-import { styleSheet } from './Styles';
 
-const object = Div(styleSheet.objectStyle);
+type TChild = string | IObject;
+interface IChildren {
+  [index: number]: TChild;
+}
+export interface IObject {
+  type: string;
+  tag: string;
+  props?: {
+    [key: string]: string;
+  };
+  children?: IChildren;
+}
+
+export interface IPage {
+  objects: IObject[];
+  styles: { name: string; data: JssStyle }[]
+}
+
+const page: IPage = {
+  objects: [
+    {
+      type: "container",
+      tag: "div",
+      props: {
+        className: "keyStyle",
+      },
+      children: [
+        "Полное наименование организации",
+        {
+          type: "void",
+          tag: "input",
+          props: {
+            className: "valueStyle",
+            placeholder: "Общество с ограниченной ответственностью «Весна»",
+          },
+        },
+      ],
+    },
+  ],
+  styles: [
+    {
+      name: "objectStyle",
+      data: {
+        display: "flex",
+        flexDirection: "column",
+        cursor: "pointer",
+        marginLeft: "10px",
+        "&:hover": { background: "#567" },
+      },
+    },
+    {
+      name: "propertyStyle",
+      data: {
+        display: "flex",
+        cursor: "pointer",
+        marginLeft: "10px",
+        "&:hover": { color: "#fff" },
+      },
+    },
+    {
+      name: "keyStyle",
+      data: {
+        cursor: "pointer",
+        marginLeft: "10px",
+        color: "red",
+        "&:hover": { color: "#fff" },
+      },
+    },
+    {
+      name: "valueStyle",
+      data: {
+        cursor: "pointer",
+        marginLeft: "10px",
+        color: "blue",
+        "&:hover": { color: "#fff" },
+      },
+    },
+  ],
+};
+
+const styleSheet = createJssStyles(page.styles);
+
+const object = Div(styleSheet["objectStyle"]);
 object.props.onClick = (e: any) => {
   e.stopPropagation();
   console.log("Нажал на Objekt!!!");
 };
 
 export const baseObject = object.render([
-  InputWithPlaceholderProperty(
+  new Container("div", { className: styleSheet["keyStyle"] }, [
     "Полное наименование организации",
-    "Общество с ограниченной ответственностью «Весна»"
-  ),
+    new Void(
+      "input",
+      { className: styleSheet["valueStyle"] },
+      "placeholder"
+    ).render("Общество с ограниченной ответственностью «Весна»"),
+  ]).render(),
   InputWithPlaceholderProperty(
     "ЮРИДИЧЕСКИЙ АДРЕС",
     "123456, г. Москва, ул. Подвойского, д. 14, стр. 7"

@@ -32,6 +32,7 @@ export class NodeManager implements INodeManager {
 
 		console.log('createNodeManager :>> ');
 		jss.setup(preset());
+		
 		const myStyles: { [propName: string]: TJssStyle } = {};
 		page.styles &&
 			page.styles.forEach(({ id, data }) => {
