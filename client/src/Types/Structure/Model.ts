@@ -48,7 +48,7 @@ export class Container extends BaseComponent implements IContainerComponent {
 }
 
 export class Void extends BaseComponent implements IVoidComponent {
-  render: (data: any) => React.DOMElement<{ [key: string]: any }, Element>;
+  render: (data?: any) => React.DOMElement<{ [key: string]: any }, Element>;
   valueAttribute: string | undefined;
   constructor(
     tag: string,
