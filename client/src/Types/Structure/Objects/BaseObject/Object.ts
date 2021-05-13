@@ -169,21 +169,29 @@ const page: IPage = {
 
 const styleSheet = createJssStyles(page.styles);
 
-const object = Div(styleSheet['objectStyle']);
-object.props.onClick = (e: any) => {
-	e.stopPropagation();
-	console.log('Нажал на Objekt!!!');
-};
 
-export const baseObject = object.render([
-	new Container('div', { className: styleSheet['keyStyle'] }, [
-		'Полное наименование организации',
-		new Void('input', {
-			className: styleSheet['valueStyle'],
-			placeholder: 'Общество с ограниченной ответственностью «Весна»',
-		}).render(),
-	]).render(),
-	InputWithPlaceholderProperty('ЮРИДИЧЕСКИЙ АДРЕС', '123456, г. Москва, ул. Подвойского, д. 14, стр. 7'),
-	InputWithPlaceholderProperty('Почтовый адрес', '123456, г. Москва, ул. Подвойского, д. 14, стр. 7'),
-	InputWithPlaceholderProperty('ИНН', '7712345678'),
-]);
+
+const baseObject = new Container(
+	'div',
+	{
+		className: styleSheet['objectStyle'],
+		onClick: (e: any) => {
+			e.stopPropagation();
+			console.log('Нажал на Objekt!!!');
+		},
+	},
+	[
+		new Container('div', { className: styleSheet['keyStyle'] }, [
+			'Полное наименование организации',
+			new Void('input', {
+				className: styleSheet['valueStyle'],
+				placeholder: 'Общество с ограниченной ответственностью «Весна»',
+			}).render(),
+		]).render(),
+		InputWithPlaceholderProperty('ЮРИДИЧЕСКИЙ АДРЕС', '123456, г. Москва, ул. Подвойского, д. 14, стр. 7'),
+		InputWithPlaceholderProperty('Почтовый адрес', '123456, г. Москва, ул. Подвойского, д. 14, стр. 7'),
+		InputWithPlaceholderProperty('ИНН', '7712345678'),
+	]
+).render();
+
+export { baseObject };
