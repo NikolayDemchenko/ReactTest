@@ -1,6 +1,4 @@
 import { JssStyle } from 'jss';
-
-import { Div } from '../../Components/Components';
 import { createJssStyles } from '../../CreateJssStyle';
 import { Container, Void } from '../../Model';
 import { InputWithPlaceholderProperty } from '../../Properties/BaseProperty/Property';
@@ -22,6 +20,8 @@ export interface IPage {
 	objects: IObject[];
 	styles: { name: string; data: JssStyle }[];
 }
+
+
 
 const page: IPage = {
 	objects: [
@@ -167,24 +167,24 @@ const page: IPage = {
 	],
 };
 
-const styleSheet = createJssStyles(page.styles);
 
 
+export const ObjStyleSheet = createJssStyles(page.styles);
 
 const baseObject = new Container(
 	'div',
 	{
-		className: styleSheet['objectStyle'],
+		className: ObjStyleSheet['objectStyle'],
 		onClick: (e: any) => {
 			e.stopPropagation();
 			console.log('Нажал на Objekt!!!');
 		},
 	},
 	[
-		new Container('div', { className: styleSheet['keyStyle'] }, [
+		new Container('div', { className: ObjStyleSheet['keyStyle'] }, [
 			'Полное наименование организации',
 			new Void('input', {
-				className: styleSheet['valueStyle'],
+				className: ObjStyleSheet['valueStyle'],
 				placeholder: 'Общество с ограниченной ответственностью «Весна»',
 			}).render(),
 		]).render(),
