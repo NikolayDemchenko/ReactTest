@@ -10,7 +10,6 @@ import ErrorBoundry from './ErrorBoundry';
 import getPageREST from './Function/ServiceFunction/REST/PageREST';
 import { TPage } from './Types/BaseTypes';
 import { component } from './Types/Structure/Container';
-import { baseObject } from './Types/Structure/Objects/BaseObject/Object';
 
 const App: FC = () => {
 	// Рабочий
