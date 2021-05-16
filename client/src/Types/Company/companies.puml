@@ -1,0 +1,105 @@
+@startuml
+title Варианты использования системы (верхнего уровня)
+
+
+
+class "Row" as Row{
+    title:string
+    data:string
+    setData(data:string)
+    setTitle(data:string)
+}
+
+
+class "Person" as Person{
+    name:Row
+    fullName:Row
+    details:Row
+    contacts:List<Row>
+
+}
+Person *-- Row
+Person *-- List
+
+class "Employee" as Employee{
+    person:Person
+    post:Row
+}
+Employee *-- Row
+Employee *-- Person
+
+class "Company" as Company{
+    name:Row
+    contacts:List<Row>
+    remark:Row
+    details:CompanyDetails
+    products:List<Lot>
+    material:List<Lot>
+    employees:List<Employee>
+}
+Company *-- Row
+Company *-- CompanyDetails
+Company *-- List
+Company *-- Lot
+Company *-- Employee
+
+
+class "List<T>" as List{
+    list:T[]
+    add(t:T)
+    remove(t:T)
+}
+
+
+class "Lot" as Lot{
+    adress:Adress
+    product:Product
+    quantity:Row
+    price:Row
+    details:Row
+}
+Lot *-- Row
+Lot *-- Adress
+Lot *--Product
+
+
+
+class "Product" as Product{
+    name:Row
+    details:Row
+}
+Product *-- Row
+
+
+class "Adress" as Adress{
+    country:Row
+    district:Row
+    city:Row
+    index:Row
+    street:Row
+    house:Row
+    building:Row
+    appartment:Row
+}
+Adress *-- Row
+
+
+class "CompanyDetails" as CompanyDetails{
+
+    fullname:Row
+    legalAdress:Adress
+    postalAdress:Adress
+    inn:Row
+    kpp:Row
+    bic:Row
+    paymentAccount:Row
+    corrAccount:Row
+    OKPO:Row
+    OKATO:Row
+    OKVED:Row
+    OGRN:Row
+    CEO:Row
+}
+CompanyDetails *-- Row
+CompanyDetails *-l- Adress
+@enduml

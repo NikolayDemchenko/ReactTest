@@ -1,0 +1,39 @@
+@startuml
+title Варианты использования системы (верхнего уровня)
+
+
+interface "IComponent" as IComponent{
+    render()
+    getData()
+}
+class "Title" as Title{
+    title:string
+    setTitle(data:string)
+}
+
+class "PropertyArray" as PropertyArray{
+    data:Container
+    setData(data:Array)
+}
+PropertyArray --|> Title
+PropertyArray *-- Container
+PropertyArray ..|> IComponent
+class "PropertyString" as PropertyString{
+    data:string
+    setData(data:string)
+}
+PropertyString --|> Title
+PropertyString ..|> IComponent
+
+class "Container" as Container{
+    array:{PropertyArray|PropertyString}[]
+    add(Title:PropertyArray|PropertyString)
+    remove(Title:PropertyArray|PropertyString)
+}
+Container ..|> IComponent
+
+
+
+
+
+@enduml

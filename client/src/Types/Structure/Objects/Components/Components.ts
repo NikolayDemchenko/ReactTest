@@ -1,5 +1,7 @@
-import { Container } from '../Model';
-import { Void } from '../Model';
+import {
+  Container,
+  Void,
+} from '../BaseObject/Model';
 
 export const Div = (className: string) => new Container('div', { className });
 export const Span = (className: string) => new Container('span', { className });

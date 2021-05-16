@@ -1,5 +1,8 @@
-import { Div, InputWithPlaceholder, Span } from '../../Components/Components';
-
+import {
+  Div,
+  InputWithPlaceholder,
+  Span,
+} from '../../Objects/Components/Components';
 import { createProperty } from '../CreateProperty';
 import { styleSheet } from './Styles';
 

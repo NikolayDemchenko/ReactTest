@@ -1,4 +1,4 @@
-import { IBaseComponent } from "../Model";
+import { IBaseComponent } from '../Objects/BaseObject/Model';
 
 export const createProperty = (
     Container: IBaseComponent,

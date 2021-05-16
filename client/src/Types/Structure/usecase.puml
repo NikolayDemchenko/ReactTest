@@ -1,0 +1,59 @@
+@startuml
+title Варианты использования системы (верхнего уровня)
+
+interface "Площадь" as Area{
+    Границы: Многоугольник
+}
+class "Участок" as Farm
+class "Постройки" as Buildings
+class "Теплица" as GreenHouse
+class "Кухня" as Kitchen
+class "Баня" as Bath
+class "Сарай" as Shed
+class "Загон" as Corral
+
+
+Buildings<|-u-GreenHouse
+Buildings<|-u-Kitchen
+Buildings<|-u-Bath
+Buildings<|-u-Corral
+Buildings<|-u-Shed
+
+class "Зона посадок" as Zone
+class "Грядки" as SeedBed
+class "Клумба" as Bed
+Zone<|--SeedBed
+Zone<|--Bed
+
+Zone .r.|> Area
+Buildings ..|> Area
+Farm .l.|> Area
+
+class "Посадки" as Plants{
+    Вид:строка
+    Сорт:строка
+    Однолетнее:флаг
+}
+class "Одиночные посадки" as SinglePlants
+class "Множественные посадки" as MultiplePlants
+SinglePlants-r-|>Plants
+MultiplePlants-l-|>Plants
+
+class "Деревья" as Tree
+class "Кустарники" as Shrubs
+class "Виноградники" as Grape
+class "Овощи" as Vegetable
+class "Травы" as Grass
+
+SinglePlants<|--Tree
+SinglePlants<|--Shrubs
+MultiplePlants<|--Grape
+MultiplePlants<|--Vegetable
+MultiplePlants<|--Grass
+Farm o--Buildings
+Farm o--Zone
+GreenHouse"0..1"--->"1..4"SeedBed:может содержать
+Bed"*"-->"0..3"SinglePlants:могут расти
+SeedBed"*"-->"0..3"MultiplePlants:могут расти
+
+@enduml

@@ -2,12 +2,12 @@ import { JssStyle } from 'jss';
 
 import { createJssStyles } from '../../CreateJssStyle';
 import {
-  Container,
-  Void,
-} from '../../Model';
-import {
   InputWithPlaceholderProperty,
 } from '../../Properties/BaseProperty/Property';
+import {
+  Container,
+  Void,
+} from './Model';
 
 type TChild = string | IObject;
 interface IChildren {
@@ -139,7 +139,7 @@ const page: IPage = {
         cursor: "pointer",
         color: "black",
         marginLeft: "10px",
-        "&:hover": { background: "#567", color: "blue" },
+        "&:hover": { background: "#5678", color: "blue" },
       },
     },
     {
