@@ -1,39 +1,72 @@
 @startuml
-title Варианты использования системы (верхнего уровня)
+title Структура дерева данных
 
 
-interface "IComponent" as IComponent{
-    render()
+interface "IData" as IData{    
+    setData() 
     getData()
 }
-class "Title" as Title{
-    title:string
-    setTitle(data:string)
+interface "IRender" as IRender{ 
+    render()  
 }
 
-class "PropertyArray" as PropertyArray{
-    data:Container
-    setData(data:Array)
+' Компонент
+class "MyComponent" as MyComponent{
+    _id:string
+    tag:string
+    props:MyObject  
+    setData( tag:string , props: MyObject )
+    getData()
+    
 }
-PropertyArray --|> Title
-PropertyArray *-- Container
-PropertyArray ..|> IComponent
-class "PropertyString" as PropertyString{
-    data:string
-    setData(data:string)
+MyComponent *-- MyObject
+MyComponent ..|> IData
+
+
+' Объект
+class "MyObject" as MyObject{
+
+    object:{ [ key: string ] :any }
+    addProperty(  key: string , value :any )
+    removeProperty(  key: string )    
 }
-PropertyString --|> Title
-PropertyString ..|> IComponent
+MyObject ..|> IData
 
-class "Container" as Container{
-    array:{PropertyArray|PropertyString}[]
-    add(Title:PropertyArray|PropertyString)
-    remove(Title:PropertyArray|PropertyString)
+' Текст
+class "MyText" as MyText{
+    component:MyComponent
+    text: string
+    setData( text: string )
 }
-Container ..|> IComponent
+MyText ..|> IData
+MyText ..|> IRender
+MyText *-- MyComponent
 
+' Переменная
+class "MyVariable" as MyVariable{
+    component:MyComponent
+    name: MyText
+    value: MyText | MyArray
+    setData( name: MyText, value: MyText | MyArray )
+}
+MyVariable *-- MyText
+MyVariable ..|> IData
+MyVariable ..|> IRender
+MyVariable *-- MyComponent
 
-
-
+' Массив
+class "MyArray" as MyArray{
+    component:MyComponent
+array: { MyText | MyVariable | MyArray}[]
+setData( array: { MyText | MyVariable | MyArray}[] )
+add( element: MyText | MyVariable | MyArray)
+remove( element: MyText | MyVariable | MyArray)
+}
+MyArray ..|> IData
+MyArray ..|> IRender
+MyArray o-- MyArray
+MyArray o-l- MyVariable
+MyArray o-- MyText
+MyArray *-- MyComponent
 
 @enduml

@@ -1,36 +1,71 @@
-import React from 'react';
+import { MyArray } from './Entities/MyArray';
+import { MyComponent } from './Entities/MyComponent';
+import { MyText } from './Entities/MyText';
+import { MyVariable } from './Entities/MyVariable';
 
-import { Container } from './Entities/MyArray';
-import { PropertyArray } from './Entities/PropertyArray';
-import { PropertyString } from './Entities/PropertyString';
-
-export interface IString {
-  title: string
-  data:string
+export interface IMyTextData {
+  text: string;
 }
-export interface IArray {
-  title: string
-  data:TDataProperty[]
+export interface IMyVariableData {
+  name: IMyTextData;
+  value: IMyTextData | IMyArrayData;
 }
+export interface IMyArrayData {
+  array: MyElementData[];
+}
+export type MyElementData = IMyTextData | IMyVariableData | IMyArrayData;
 
+export type MyElement = MyVariable | MyText | MyArray;
 
-export type TDataProperty = IString | IArray;
-export type TData = TDataProperty | TDataProperty[];
-
-
-export type TClassProperty = PropertyString | PropertyArray;
-
-export interface IComponent {
+export interface IRender {
   render: () => React.DOMElement<{ [key: string]: any }, Element>;
-  getData: () =>TData;
+}
+export interface IData {
+  setData: Function;
+  getData: () => MyElementData;
 }
 
+const array = new MyArray([
+  new MyText("Первый текстовый элемент"),
+  new MyVariable(
+    new MyText(
+      "Переменная с текстом: ",
+      new MyComponent(undefined, "div", { style: { color: "red" } })
+    ),
+    new MyText("Первая текстовая переменная!")
+  ),
+  new MyVariable(
+    new MyText("Переменная с контейнером: "),
+    new MyArray([
+      new MyText("Второй текстовый элемент"),
+      new MyVariable(
+        new MyText("Переменная с текстом: "),
+        new MyText("Вторая текстовая переменная!")
+      ),
+    ])
+  ),
+  new MyArray([
+    new MyText("Третий текстовый элемент"),
+    new MyVariable(
+      new MyText("Переменная с текстом: "),
+      new MyText("Третья текстовая переменная!")
+    ),
+    new MyVariable(
+      new MyText("Переменная с контейнером: "),
+      new MyArray([
+        new MyText("Четвёртый текстовый элемент"),
+        new MyVariable(
+          new MyText("Переменная с текстом: "),
+          new MyText("Четвёртая текстовая переменная!")
+        ),
+      ])
+    ),
+  ]),
+]);
+const text = new MyText("Добавили меня!! ");
+array.add(text);
+// array.remove(text);
+export const baseProp = array.render();
 
-
-
-
-const array=new PropertyArray("Главный контейнер",new Container([new PropertyString("Наименование: ","Проект Инвест"),new PropertyArray("Адрес: ",new Container([new PropertyString("Страна: ","Россия")])),new PropertyArray("Главный контейнер",new Container([new PropertyString("Наименование: ","Проект Инвест"),new PropertyArray("Адрес: ",new Container([new PropertyString("Страна: ","Россия")]))]))]))
-export const baseProp=array.render()
-
-export const getDataTest=()=>  console.log(`array.getData()`, array.getData()) 
-
+export const getDataTest = () =>
+  console.log(`array.getData()`, array.getData());

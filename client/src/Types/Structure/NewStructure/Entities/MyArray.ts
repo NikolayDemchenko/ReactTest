@@ -1,37 +1,50 @@
 import React from 'react';
 
 import {
-  IComponent,
-  TClassProperty,
-  TData,
-  TDataProperty,
+  IData,
+  IMyArrayData,
+  IRender,
+  MyElement,
 } from '../Interfaces';
+import { MyComponent } from './MyComponent';
 
-export class Container implements IComponent {
-  private _array: TClassProperty[];
-  public get array(): TClassProperty[] {
+export class MyArray   implements IData, IRender {
+  private _component: MyComponent;
+  public get component(): MyComponent {
+    return this._component;
+  }
+  private _array: MyElement[];
+  public get array(): MyElement[] {
     return this._array;
   }
-  constructor(array: TClassProperty[]) {
-    this._array = array;
-    this.render = () => {
-      return React.createElement(
-        "div",
-        {},
-        this._array.map((property) => property.render())
-      );
-    };
-    this.getData = () =>
-      this._array.map((property) => property.getData() as TDataProperty);
-  }
-  getData: () => TData;
-  render: () => React.DOMElement<{ [key: string]: any }, Element>;
+  render: () => React.DOMElement<{ [key: string]: any }, Element> = () =>
+    React.createElement(
+      
+      this.component.tag,
+      { key: this.component._id, ...this.component.props },
+      this._array.map((property) => property.render())
+    );
 
-  add: (dataProp: TClassProperty) => void = (dataProp) => {
-    this._array.push(dataProp);
+  setData: Function = (array: MyElement[]) => {
+    this._array = array;
   };
-  remove: (dataProp: TClassProperty) => void = (dataProp) => {
+  getData: () => IMyArrayData = () => ({
+    array: this._array.map((property) => property.getData()),
+    component: this.component.getData() ,
+  });
+  constructor(
+    array: MyElement[],
+    component?: MyComponent,
+  ) {
+    this._component = component || new MyComponent();
+    this._array = array;
+  }
+
+  add: (element: MyElement) => void = (element) => {
+    this._array.push(element);
+  };
+  remove: (element: MyElement) => void = (element) => {
     if (this._array)
-      this._array = this._array.filter((item) => item !== dataProp);
+      this._array = this._array.filter((item) => item !== element);
   };
 }

@@ -22,8 +22,8 @@ const App: FC = () => {
 	// const [state, setState] = useState({ page: testPage });
 	const [page, setPage] = useState<TPage>(testPage);
 	const PageREST = getPageREST(setPage);
-	
 	getDataTest()
+
 	return (
 		<ErrorBoundry>
 			<MainMenu {...{ page, PageREST }} />
@@ -31,8 +31,8 @@ const App: FC = () => {
 			{/* {JSON.stringify(nodes)} */}
 			{/* <Viev /> */}
 			{/* {baseObject}  */}
-			{/* {component} */}
-			{baseProp}
+			{/* {component} */}	
+			{baseProp}	
 		</ErrorBoundry>
 	);
 };
