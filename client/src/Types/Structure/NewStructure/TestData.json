@@ -1,0 +1,119 @@
+{
+  "collection": [
+    {
+      "text": "Первый текстовый элемент",
+      "element": { "_id": "bJT8pptYXVU", "tag": "div", "props": {} }
+    },
+    {
+      "key": {
+        "text": "Переменная с текстом: ",
+        "element": {
+          "_id": "FhdFBO9bDUn",
+          "tag": "div",
+          "props": {
+            "title": "Я проверочный заголовок",
+            "style": { "border": "1px solid black", "color": "red" }
+          }
+        }
+      },
+      "value": {
+        "text": "Первая текстовая переменная!",
+        "element": {
+          "_id": "yP-LBM_CudL",
+          "tag": "div",
+          "props": {
+            "title": "Новый проверочный заголовок",
+            "style": { "border": "1px solid black", "color": "red" }
+          }
+        }
+      },
+      "element": { "_id": "-IPbdeO3NGV", "tag": "div", "props": {} }
+    },
+    {
+      "key": {
+        "text": "Переменная с контейнером: ",
+        "element": { "_id": "Nv_4k8XQAl3", "tag": "div", "props": {} }
+      },
+      "value": {
+        "collection": [
+          {
+            "text": "Второй текстовый элемент",
+            "element": { "_id": "hVsvTTJJFZ9", "tag": "div", "props": {} }
+          },
+          {
+            "key": {
+              "text": "Переменная с текстом: ",
+              "element": { "_id": "QTzIVAiPpYT", "tag": "div", "props": {} }
+            },
+            "value": {
+              "text": "Вторая текстовая переменная!",
+              "element": { "_id": "WnMorOZDENk", "tag": "div", "props": {} }
+            },
+            "element": { "_id": "G6RNsE6CcN6", "tag": "div", "props": {} }
+          }
+        ],
+        "element": {
+          "_id": "XPcIg_xHz6r",
+          "tag": "div",
+          "props": {
+            "title": "Я тоже проверочный заголовок",
+            "style": { "border": "1px solid black", "color": "red" }
+          }
+        }
+      },
+      "element": { "_id": "f0eA-IISe5X", "tag": "div", "props": {} }
+    },
+    {
+      "collection": [
+        {
+          "text": "Третий текстовый элемент",
+          "element": { "_id": "q7W5lluzk87", "tag": "div", "props": {} }
+        },
+        {
+          "key": {
+            "text": "Переменная с текстом: ",
+            "element": { "_id": "9-Zso5jtwsr", "tag": "div", "props": {} }
+          },
+          "value": {
+            "text": "Третья текстовая переменная!",
+            "element": { "_id": "XV9hflC4ZsA", "tag": "div", "props": {} }
+          },
+          "element": { "_id": "xb0yaiHQgPj", "tag": "div", "props": {} }
+        },
+        {
+          "key": {
+            "text": "Переменная с контейнером: ",
+            "element": { "_id": "LNll_3wHBd4", "tag": "div", "props": {} }
+          },
+          "value": {
+            "collection": [
+              {
+                "text": "Четвёртый текстовый элемент",
+                "element": { "_id": "YG9FgVPef5U", "tag": "div", "props": {} }
+              },
+              {
+                "key": {
+                  "text": "Переменная с текстом: ",
+                  "element": { "_id": "ft-0SCsVVrQ", "tag": "div", "props": {} }
+                },
+                "value": {
+                  "text": "Четвёртая текстовая переменная!",
+                  "element": { "_id": "Il6-SCKwvFt", "tag": "div", "props": {} }
+                },
+                "element": { "_id": "FoOKSXh7nH8", "tag": "div", "props": {} }
+              }
+            ],
+            "element": { "_id": "jx3tt60PQUp", "tag": "div", "props": {} }
+          },
+          "element": { "_id": "tAFQ6pHmPVR", "tag": "div", "props": {} }
+        }
+      ],
+      "element": { "_id": "dRvUn-82juR", "tag": "div", "props": {} }
+    },
+    {
+      "text": "Добавили меня!! ",
+      "element": { "_id": "kD5-9PU76nY", "tag": "div", "props": {} }
+    }
+  ],
+  "element": { "_id": "QE8tvpOLTc2", "tag": "div", "props": {} }
+}

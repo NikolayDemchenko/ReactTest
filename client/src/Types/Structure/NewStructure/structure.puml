@@ -2,6 +2,11 @@
 title Структура дерева данных
 
 
+interface "ICollection<T>" as ICollection {    
+collection: any
+add(element:T )
+remove( element: T)
+}
 interface "IData" as IData{    
     setData() 
     getData()
@@ -10,8 +15,15 @@ interface "IRender" as IRender{
     render()  
 }
 
-' Компонент
-class "MyComponent" as MyComponent{
+' Базовый компонент
+class "MyBaseComponent" as MyBaseComponent{
+    element:MyReactElement
+    baseRender(...children)
+    
+}
+MyBaseComponent *-l- MyReactElement
+' Элемент
+class "MyReactElement" as MyReactElement{
     _id:string
     tag:string
     props:MyObject  
@@ -19,54 +31,75 @@ class "MyComponent" as MyComponent{
     getData()
     
 }
-MyComponent *-- MyObject
-MyComponent ..|> IData
+MyReactElement *-l- MyObject
+MyReactElement .r.|> IData
 
 
 ' Объект
 class "MyObject" as MyObject{
 
-    object:{ [ key: string ] :any }
-    addProperty(  key: string , value :any )
-    removeProperty(  key: string )    
+    collection:{ [ key: string ] :any }
+    add(  key: string , value :any )
+    remove(  key: string )   
+    setData( collection:{ [ key: string ] :any } )
+    getData() 
 }
-MyObject ..|> IData
+MyObject .l.|> IData
+MyObject .u.|> ICollection
 
-' Текст
-class "MyText" as MyText{
-    component:MyComponent
+' Инпут
+class "MyInput" as MyInput{  
+    type: string
+    setData( type: string )
+    getData()
+    render()
+}
+' Кнопка
+class "MyButton" as MyButton{  
+    title: string
+    setData( title: string )
+    getData()
+    render()
+}
+class "MyText" as MyText{  
     text: string
     setData( text: string )
+    getData()
+    render()
 }
-MyText ..|> IData
+MyText .l.|> IData
 MyText ..|> IRender
-MyText *-- MyComponent
+MyText --|> MyBaseComponent
 
 ' Переменная
-class "MyVariable" as MyVariable{
-    component:MyComponent
-    name: MyText
+class "MyVariable" as MyVariable{   
+    key: MyText
     value: MyText | MyArray
     setData( name: MyText, value: MyText | MyArray )
+    getData()
+    render()
 }
 MyVariable *-- MyText
 MyVariable ..|> IData
 MyVariable ..|> IRender
-MyVariable *-- MyComponent
+MyVariable --|> MyBaseComponent
+
 
 ' Массив
 class "MyArray" as MyArray{
-    component:MyComponent
-array: { MyText | MyVariable | MyArray}[]
-setData( array: { MyText | MyVariable | MyArray}[] )
+collection: { MyText | MyVariable | MyArray}[]
 add( element: MyText | MyVariable | MyArray)
 remove( element: MyText | MyVariable | MyArray)
+setData( array: { MyText | MyVariable | MyArray}[] )
+getData()
+render()
 }
+MyArray ..|> ICollection
 MyArray ..|> IData
 MyArray ..|> IRender
 MyArray o-- MyArray
 MyArray o-l- MyVariable
 MyArray o-- MyText
-MyArray *-- MyComponent
+MyArray --|> MyBaseComponent
 
 @enduml

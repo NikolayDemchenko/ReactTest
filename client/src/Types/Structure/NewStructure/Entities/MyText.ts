@@ -1,30 +1,24 @@
-import React from 'react';
-
 import {
   IData,
   IRender,
 } from '../Interfaces';
-import { MyComponent } from './MyComponent';
+import { MyBaseComponent } from './MyBaseComponent';
+import { MyReactElement } from './MyReactElement';
 
-export class MyText implements IData, IRender {
+export class MyText extends MyBaseComponent implements IData, IRender {
   private _text: string;
   public get text(): string {
     return this._text;
   }
-  private _component: MyComponent;
-  public get component(): MyComponent {
-    return this._component;
-  }
-  setData = (text: string) => (this._text = text);
-  render = () =>
-    React.createElement(
-      this.component.tag,
-      { key: this.component._id, ...this.component.props },
-      this.text
-    );
-  getData = () => ({ text: this._text, component: this.component.getData() });
-  constructor(text: string, component?: MyComponent) {
-    this._component = component || new MyComponent();
+  setData = (text: string, element?: MyReactElement) => {
+    this._text = text;
+    element && this.element.setData(element.tag, element.props);
+  };
+  getData = () => ({ text: this._text, element: this.element.getData() });
+  render = () => this.baseRender(this.text);
+
+  constructor(text: string, element?: MyReactElement) {
+    super(element);
     this._text = text;
   }
 }

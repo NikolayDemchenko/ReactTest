@@ -1,19 +1,39 @@
 import { MyArray } from './Entities/MyArray';
-import { MyComponent } from './Entities/MyComponent';
+import { MyObject } from './Entities/MyObject';
+import { MyReactElement } from './Entities/MyReactElement';
 import { MyText } from './Entities/MyText';
 import { MyVariable } from './Entities/MyVariable';
 
+export type TObject = { [key: string]: any };
+export interface IReactElementData {
+  _id: string;
+  tag: string;
+  props: TObject;
+}
 export interface IMyTextData {
   text: string;
+  element:IReactElementData
 }
 export interface IMyVariableData {
-  name: IMyTextData;
+  key: IMyTextData;
   value: IMyTextData | IMyArrayData;
+  element:IReactElementData
 }
 export interface IMyArrayData {
-  array: MyElementData[];
+  collection: MyData[];
+  element:IReactElementData
 }
-export type MyElementData = IMyTextData | IMyVariableData | IMyArrayData;
+export type MyData = IMyTextData | IMyVariableData | IMyArrayData;
+
+
+
+
+
+export interface ICollection {
+  collection: any;
+  add: Function;
+  remove: Function;
+}
 
 export type MyElement = MyVariable | MyText | MyArray;
 
@@ -22,17 +42,29 @@ export interface IRender {
 }
 export interface IData {
   setData: Function;
-  getData: () => MyElementData;
+  getData: Function;
 }
 
-const array = new MyArray([
-  new MyText("Первый текстовый элемент"),
+const testElement = new MyArray([
+  new MyText("Первый текстовый элемент", new MyReactElement(
+    undefined,
+    "div",
+    new MyObject({title:"Новый проверочный заголовок", style: {border:"1px solid black", color: "#fff" } })
+  )),
   new MyVariable(
     new MyText(
       "Переменная с текстом: ",
-      new MyComponent(undefined, "div", { style: { color: "red" } })
+      new MyReactElement(
+        undefined,
+        "div",
+        new MyObject({title:"Я проверочный заголовок", style: {border:"1px solid black", color: "red" } })
+      )
     ),
-    new MyText("Первая текстовая переменная!")
+    new MyText("Первая текстовая переменная!",  new MyReactElement(
+      undefined,
+      "div",
+      new MyObject({title:"Новый проверочный заголовок", style: {border:"1px solid black", color: "red" } })
+    ))
   ),
   new MyVariable(
     new MyText("Переменная с контейнером: "),
@@ -42,7 +74,11 @@ const array = new MyArray([
         new MyText("Переменная с текстом: "),
         new MyText("Вторая текстовая переменная!")
       ),
-    ])
+    ],  new MyReactElement(
+      undefined,
+      "div",
+      new MyObject({ title:"Я тоже проверочный заголовок", style: {border:"1px solid black", color: "blue" } })
+    ))
   ),
   new MyArray([
     new MyText("Третий текстовый элемент"),
@@ -61,11 +97,8 @@ const array = new MyArray([
       ])
     ),
   ]),
-]);
+], );
 const text = new MyText("Добавили меня!! ");
-array.add(text);
+testElement.add(text);
 // array.remove(text);
-export const baseProp = array.render();
-
-export const getDataTest = () =>
-  console.log(`array.getData()`, array.getData());
+export { testElement };

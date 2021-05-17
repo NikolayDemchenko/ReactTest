@@ -1,49 +1,43 @@
-import React from 'react';
-
 import {
   IData,
   IRender,
 } from '../Interfaces';
 import { MyArray } from './MyArray';
-import { MyComponent } from './MyComponent';
+import { MyBaseComponent } from './MyBaseComponent';
+import { MyReactElement } from './MyReactElement';
 import { MyText } from './MyText';
 
-export class MyVariable  implements IData, IRender {
-
-  private _component: MyComponent;
-  public get component(): MyComponent {
-    return this._component;
-  }
-  private _name: MyText;
-  public get name(): MyText {
-    return this._name;
+export class MyVariable extends MyBaseComponent implements IData, IRender {
+  private _key: MyText;
+  public get key(): MyText {
+    return this._key;
   }
   private _value: MyText | MyArray;
   public get value(): MyText | MyArray {
     return this._value;
   }
-  setData = (name: MyText, value: MyText | MyArray) => {
-    this._name = name;
+
+  constructor(key: MyText, value: MyText | MyArray, element?: MyReactElement) {
+    super(element);
+    this._key = key;
     this._value = value;
-  };
-  render = () =>
-    React.createElement(
-      this.component.tag,
-      { key: this.component._id, ...this.component.props }, [
-      this.name.render(),
-      this.value.render(),
-    ]);
-  getData = () => ({
-    name: this._name.getData(),
-    value: this._value.getData(), component: this.component.getData() 
-  });
-  constructor(
-    name: MyText,
-    value: MyText | MyArray,
-    component?: MyComponent,
-  ) {  
-    this._name = name;
-    this._value = value;
-    this._component = component || new MyComponent();
   }
+
+  setData = (
+    key: MyText,
+    value: MyText | MyArray,
+    element?: MyReactElement
+  ) => {
+    this._key = key;
+    this._value = value;
+    element && this.element.setData(element.tag, element.props);
+  };
+
+  getData = () => ({
+    key: this._key.getData(),
+    value: this._value.getData(),
+    element: this.element.getData(),
+  });
+
+  render = () => this.baseRender([this.key.render(), this.value.render()]);
 }
