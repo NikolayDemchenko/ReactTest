@@ -2,8 +2,8 @@ import {
   IData,
   IRender,
 } from '../Interfaces';
-import { MyBaseComponent } from './MyBaseComponent';
-import { MyReactElement } from './MyReactElement';
+import { MyBaseComponent } from './BaseComponent/MyBaseComponent';
+import { MyReactElement } from './BaseComponent/MyReactElement';
 
 export class MyText extends MyBaseComponent implements IData, IRender {
   private _text: string;

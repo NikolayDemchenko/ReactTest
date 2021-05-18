@@ -1,0 +1,124 @@
+@startuml
+title Структура редактора приложений
+
+' Запускается SPAConstructor
+class "SPAConstructor" as SPAConstructor{    
+}
+' Loader загружает список основных данных приложений
+' Loader содержит 
+class "Loader" as Loader{        
+}
+class "SPABaseData" as SPABaseData{    
+}
+class "SPABaseDataList" as SPABaseDataList{    
+}
+
+
+' interface "ICollection<T>" as ICollection {    
+' collection: any
+' add(element:T )
+' remove( element: T)
+' }
+' interface "IData" as IData{    
+'     setData() 
+'     getData()
+' }
+' interface "IRender" as IRender{ 
+'     render()  
+' }
+
+' ' Генератор модели
+' class "ModelCreator" as ModelCreator{
+'     element:MyReactElement
+'     render(...children)
+    
+' }
+' ' Базовый компонент
+' class "MyBaseComponent" as MyBaseComponent{
+'     element:MyReactElement
+'     render(...children)
+    
+' }
+' MyBaseComponent *-l- MyReactElement
+' ' Элемент
+' class "MyReactElement" as MyReactElement{
+'     _id:string
+'     tag:string
+'     props:MyObject  
+'     setData( tag:string , props: MyObject )
+'     getData()
+    
+' }
+' MyReactElement *-l- MyObject
+' MyReactElement .r.|> IData
+
+
+' ' Объект
+' class "MyObject" as MyObject{
+
+'     collection:{ [ key: string ] :any }
+'     add(  key: string , value :any )
+'     remove(  key: string )   
+'     setData( collection:{ [ key: string ] :any } )
+'     getData() 
+' }
+' MyObject .l.|> IData
+' MyObject .u.|> ICollection
+
+' ' Инпут
+' class "MyInput" as MyInput{  
+'     type: string
+'     setData( type: string )
+'     getData()
+'     render()
+' }
+' ' Кнопка
+' class "MyButton" as MyButton{  
+'     title: string
+'     setData( title: string )
+'     getData()
+'     render()
+' }
+' ' Текст
+' class "MyText" as MyText{  
+'     text: string
+'     setData( text: string )
+'     getData()
+'     render()
+' }
+' MyText .l.|> IData
+' MyText ..|> IRender
+' MyText --|> MyBaseComponent
+
+' ' Переменная
+' class "MyVariable" as MyVariable{   
+'     key: MyText
+'     value: MyText | MyArray
+'     setData( name: MyText, value: MyText | MyArray )
+'     getData()
+'     render()
+' }
+' MyVariable *-- MyText
+' MyVariable ..|> IData
+' MyVariable ..|> IRender
+' MyVariable --|> MyBaseComponent
+
+
+' ' Массив
+' class "MyArray" as MyArray{
+' collection: { MyText | MyVariable | MyArray}[]
+' add( element: MyText | MyVariable | MyArray)
+' remove( element: MyText | MyVariable | MyArray)
+' setData( array: { MyText | MyVariable | MyArray}[] )
+' getData()
+' render()
+' }
+' MyArray ..|> ICollection
+' MyArray ..|> IData
+' MyArray ..|> IRender
+' MyArray o-- MyArray
+' MyArray o-l- MyVariable
+' MyArray o-- MyText
+' MyArray --|> MyBaseComponent
+
+@enduml

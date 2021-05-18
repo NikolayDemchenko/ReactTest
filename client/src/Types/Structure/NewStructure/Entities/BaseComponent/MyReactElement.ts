@@ -1,6 +1,6 @@
 import shortid from 'shortid';
 
-import { IData } from '../Interfaces';
+import { IData } from '../../Interfaces';
 import { MyObject } from './MyObject';
 
 export class MyReactElement implements IData {

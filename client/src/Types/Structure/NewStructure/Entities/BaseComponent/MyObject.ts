@@ -2,7 +2,7 @@ import {
   ICollection,
   IData,
   TObject,
-} from '../Interfaces';
+} from '../../Interfaces';
 
 export class MyObject  implements IData, ICollection {
   private _collection: TObject={};

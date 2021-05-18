@@ -15,10 +15,16 @@ interface "IRender" as IRender{
     render()  
 }
 
+' Генератор модели
+class "ModelCreator" as ModelCreator{
+    element:MyReactElement
+    render(...children)
+    
+}
 ' Базовый компонент
 class "MyBaseComponent" as MyBaseComponent{
     element:MyReactElement
-    baseRender(...children)
+    render(...children)
     
 }
 MyBaseComponent *-l- MyReactElement
@@ -61,6 +67,7 @@ class "MyButton" as MyButton{
     getData()
     render()
 }
+' Текст
 class "MyText" as MyText{  
     text: string
     setData( text: string )

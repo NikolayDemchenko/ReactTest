@@ -2,9 +2,9 @@ import {
   IData,
   IRender,
 } from '../Interfaces';
+import { MyBaseComponent } from './BaseComponent/MyBaseComponent';
+import { MyReactElement } from './BaseComponent/MyReactElement';
 import { MyArray } from './MyArray';
-import { MyBaseComponent } from './MyBaseComponent';
-import { MyReactElement } from './MyReactElement';
 import { MyText } from './MyText';
 
 export class MyVariable extends MyBaseComponent implements IData, IRender {

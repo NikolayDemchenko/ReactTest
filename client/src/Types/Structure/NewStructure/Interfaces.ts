@@ -1,6 +1,6 @@
+import { MyObject } from './Entities/BaseComponent/MyObject';
+import { MyReactElement } from './Entities/BaseComponent/MyReactElement';
 import { MyArray } from './Entities/MyArray';
-import { MyObject } from './Entities/MyObject';
-import { MyReactElement } from './Entities/MyReactElement';
 import { MyText } from './Entities/MyText';
 import { MyVariable } from './Entities/MyVariable';
 
@@ -38,7 +38,7 @@ export interface ICollection {
 export type MyElement = MyVariable | MyText | MyArray;
 
 export interface IRender {
-  render: () => React.DOMElement<{ [key: string]: any }, Element>;
+  render: (...children: React.ReactNode[]) => React.DOMElement<{ [key: string]: any }, Element>;
 }
 export interface IData {
   setData: Function;

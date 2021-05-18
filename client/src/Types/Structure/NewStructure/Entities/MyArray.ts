@@ -7,8 +7,8 @@ import {
   IRender,
   MyElement,
 } from '../Interfaces';
-import { MyBaseComponent } from './MyBaseComponent';
-import { MyReactElement } from './MyReactElement';
+import { MyBaseComponent } from './BaseComponent/MyBaseComponent';
+import { MyReactElement } from './BaseComponent/MyReactElement';
 
 export class MyArray
   extends MyBaseComponent
