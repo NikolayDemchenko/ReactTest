@@ -1,16 +1,48 @@
 @startuml
 title Структура редактора приложений
 
-' Запускается SPAConstructor
-class "SPAConstructor" as SPAConstructor{    
+
+class "Program" as Program{  
+    loadingMenu : LoadingMenu
+    siteEditor : SiteEditor
 }
-' Loader загружает список основных данных приложений
-' Loader содержит 
-class "Loader" as Loader{        
+Program *-- LoadingMenu
+Program *-- SiteEditor
+
+class "LoadingMenu" as LoadingMenu { 
+    siteList : SiteList       
 }
-class "SPABaseData" as SPABaseData{    
+LoadingMenu *-- SiteList
+
+class "SiteList" as SiteList{
+    collection : BasicSiteData []   
 }
-class "SPABaseDataList" as SPABaseDataList{    
+SiteList *-- BasicSiteData
+
+class "BasicSiteData" as BasicSiteData{
+    _id : string   
+    projectName : string   
+    domen : string   
+    startPageId : string   
+}
+
+class "SiteEditor" as SiteEditor{
+        navigationMenu : NavigationMenu
+        materialEditor : MaterialEditor
+        page : Page
+}
+SiteEditor *-- NavigationMenu
+SiteEditor *-- MaterialEditor
+SiteEditor *-- Page
+
+class "NavigationMenu" as NavigationMenu{ 
+      pageList : PageList
+}
+class "PageList" as PageList{    
+}
+class "MaterialEditor" as MaterialEditor{    
+}
+class "Page" as Page{    
 }
 
 

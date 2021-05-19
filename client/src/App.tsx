@@ -36,5 +36,4 @@ const App: FC = () => {
     </ErrorBoundry>
   );
 };
-
 export default App;
