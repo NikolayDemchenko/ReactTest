@@ -2,12 +2,12 @@
 title Структура редактора приложений
 
 
-class "Program" as Program{  
+class "Application" as Application{  
     loadingMenu : LoadingMenu
     siteEditor : SiteEditor
 }
-Program *-- LoadingMenu
-Program *-- SiteEditor
+Application *-- LoadingMenu
+Application *-- SiteEditor
 
 class "LoadingMenu" as LoadingMenu { 
     siteList : SiteList       
@@ -29,7 +29,7 @@ class "BasicSiteData" as BasicSiteData{
 class "SiteEditor" as SiteEditor{
         navigationMenu : NavigationMenu
         materialEditor : MaterialEditor
-        page : Page
+        page : Page   
 }
 SiteEditor *-- NavigationMenu
 SiteEditor *-- MaterialEditor
@@ -38,13 +38,24 @@ SiteEditor *-- Page
 class "NavigationMenu" as NavigationMenu{ 
       pageList : PageList
 }
-class "PageList" as PageList{    
+NavigationMenu *-- PageList
+' class "Render" as Render{    
+' }
+' Page *-- Render
+class "PageList" as PageList{   
 }
 class "MaterialEditor" as MaterialEditor{    
 }
-class "Page" as Page{    
+class "Page" as Page{  
+    ' render : Render  
 }
-
+class "BasicPageData" as BasicPageData{
+    _id : string   
+    applicationId : string   
+    pageName : string   
+    
+     
+}
 
 ' interface "ICollection<T>" as ICollection {    
 ' collection: any
