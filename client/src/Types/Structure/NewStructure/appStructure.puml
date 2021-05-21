@@ -36,13 +36,17 @@ SiteEditor *-- MaterialEditor
 SiteEditor *-- Page
 
 class "NavigationMenu" as NavigationMenu{ 
-      pageList : PageList
+      pageList : SelectionList
 }
-NavigationMenu *-- PageList
+NavigationMenu *-- SelectionList
 ' class "Render" as Render{    
 ' }
 ' Page *-- Render
-class "PageList" as PageList{   
+class "SelectionList" as SelectionList{ 
+    collection : string[]  
+    renderer : Renderer 
+    showCollection()  
+    getElement()
 }
 class "MaterialEditor" as MaterialEditor{    
 }
