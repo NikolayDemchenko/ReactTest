@@ -3,21 +3,16 @@ title Структура редактора приложений
 
 
 class "Application" as Application{  
-    loadingMenu : LoadingMenu
+    siteSelection : SiteSelection
     siteEditor : SiteEditor
 }
-Application *-- LoadingMenu
+Application *-- SiteSelection
 Application *-- SiteEditor
 
-class "LoadingMenu" as LoadingMenu { 
-    siteList : SiteList       
+class "SiteSelection" as SiteSelection { 
+   list : SelectionList       
 }
-LoadingMenu *-- SiteList
-
-class "SiteList" as SiteList{
-    collection : BasicSiteData []   
-}
-SiteList *-- BasicSiteData
+SiteSelection *-- SelectionList
 
 class "BasicSiteData" as BasicSiteData{
     _id : string   
@@ -36,17 +31,17 @@ SiteEditor *-- MaterialEditor
 SiteEditor *-- Page
 
 class "NavigationMenu" as NavigationMenu{ 
-      pageList : SelectionList
+      list : SelectionList
 }
 NavigationMenu *-- SelectionList
-' class "Render" as Render{    
-' }
-' Page *-- Render
+class "Render" as Render{    
+}
+Page *-- Render
 class "SelectionList" as SelectionList{ 
-    collection : string[]  
-    renderer : Renderer 
-    showCollection()  
-    getElement()
+    list : string[]  
+    renderEngine : RenderEngine  
+    showList()  
+    getListItem()
 }
 class "MaterialEditor" as MaterialEditor{    
 }
