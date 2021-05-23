@@ -2,61 +2,52 @@
 title Структура редактора приложений
 
 
-class "Application" as Application {  
-    siteSelection : SiteSelection
-    siteEditor : SiteEditor
+class "Application" as Application { 
+    site: Site    
+    siteSelector : LoadingSelector
+    pageEditor : PageEditor
     loadSite()
-    editSite()
+    loadPage()
+    editPage()
 }
-Application *-- SiteSelection
-Application *-- SiteEditor
+Application *-- PageEditor
+Application *-- LoadingSelector
+Application *-- Site
 
-class "SiteSelection" as SiteSelection { 
-   selections : Selections       
+
+
+class "Site" as Site {
+    pages: Page[]
+    pageSelector : LoadingSelector
+      
 }
-SiteSelection *-- Selections
-
-class "BasicSiteData" as BasicSiteData{
-    _id : string   
-    projectName : string   
-    domen : string   
-    startPageId : string   
+Site *-- Page
+class "PageEditor" as PageEditor {
+    styleEditor : StyleEditor
+        
 }
+PageEditor *-- StyleEditor
 
-class "SiteEditor" as SiteEditor{
-        navigationMenu : NavigationMenu
-        materialEditor : MaterialEditor
-        page : Page   
-}
-SiteEditor *-- NavigationMenu
-SiteEditor *-- MaterialEditor
-SiteEditor *-- Page
 
-class "NavigationMenu" as NavigationMenu{ 
+class "LoadingSelector" as LoadingSelector{ 
       selections : Selections
+      loader : Loader
 }
-NavigationMenu *-- Selections
-class "Render" as Render{    
-}
-Page *-- Render
+LoadingSelector *-- Selections
+
+
 class "Selections" as Selections{ 
-    list : string[]  
+    items : string[]  
     renderEngine : RenderEngine  
-    showList()  
-    getListItem()
+    showItems()  
+    getItems()
 }
-class "MaterialEditor" as MaterialEditor{    
+class "StyleEditor" as StyleEditor{    
 }
 class "Page" as Page{  
     ' render : Render  
 }
-class "BasicPageData" as BasicPageData{
-    _id : string   
-    applicationId : string   
-    pageName : string   
-    
-     
-}
+
 
 ' interface "ICollection<T>" as ICollection {    
 ' collection: any
