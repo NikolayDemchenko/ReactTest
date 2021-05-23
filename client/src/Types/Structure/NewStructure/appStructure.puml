@@ -2,17 +2,19 @@
 title Структура редактора приложений
 
 
-class "Application" as Application{  
+class "Application" as Application {  
     siteSelection : SiteSelection
     siteEditor : SiteEditor
+    loadSite()
+    editSite()
 }
 Application *-- SiteSelection
 Application *-- SiteEditor
 
 class "SiteSelection" as SiteSelection { 
-   list : SelectionList       
+   selections : Selections       
 }
-SiteSelection *-- SelectionList
+SiteSelection *-- Selections
 
 class "BasicSiteData" as BasicSiteData{
     _id : string   
@@ -31,13 +33,13 @@ SiteEditor *-- MaterialEditor
 SiteEditor *-- Page
 
 class "NavigationMenu" as NavigationMenu{ 
-      list : SelectionList
+      selections : Selections
 }
-NavigationMenu *-- SelectionList
+NavigationMenu *-- Selections
 class "Render" as Render{    
 }
 Page *-- Render
-class "SelectionList" as SelectionList{ 
+class "Selections" as Selections{ 
     list : string[]  
     renderEngine : RenderEngine  
     showList()  
