@@ -2,152 +2,172 @@
 title Структура редактора приложений
 
 
-class "Application" as Application { 
-    site: Site    
-    siteSelector : LoadingSelector
-    pageEditor : PageEditor
-    loadSite()
-    loadPage()
-    editPage()
-}
-Application *-- PageEditor
-Application *-- LoadingSelector
-Application *-- Site
+' class "Application" as Application {
+    '     site : Site
+    '     ' siteSelector : LoadingSelector
+    '     ' pageEditor : PageEditor
+    '     ' loadSite()
+    '     ' loadPage()
+    '     ' editPage()
+    '
+    '
+' }
+' Application *-- PageEditor
+' Application *-- LoadingSelector
+' Application *-- Site
 
 
 
 class "Site" as Site {
-    pages: Page[]
-    pageSelector : LoadingSelector
-      
+    - _id : string
+    - name : string
+    - domaine : string
+    - startPage_id : string
+    - pages : Pages
+    + updateName()
+    + updateDomaine()
+    + updateStartPage_id()
+    + render()
 }
-Site *-- Page
-class "PageEditor" as PageEditor {
-    styleEditor : StyleEditor
-        
-}
-PageEditor *-- StyleEditor
+Site *-- Pages
 
-
-class "LoadingSelector" as LoadingSelector{ 
-      selections : Selections
-      loader : Loader
+class "Pages" as Pages {
+    - pageNames : String[]
+    + constructor( site_id : string )
+    - findPageNamesBySite_id( site_id : string )
+    + create()
+    + selectPage()
+    + find( name : string )
+    + delete( page : Page )
 }
-LoadingSelector *-- Selections
-
-
-class "Selections" as Selections{ 
-    items : string[]  
-    renderEngine : RenderEngine  
-    showItems()  
-    getItems()
-}
-class "StyleEditor" as StyleEditor{    
-}
-class "Page" as Page{  
-    ' render : Render  
+Pages *-- Page
+class "Page" as Page {
+    - _id : string
+    - site_id : string
+    - style_id : string
+    - name : string
+    - styles : Styles
+    - elements : Elements
+    + render()
 }
 
+Page *-- Elements
+Page *-- Styles
 
-' interface "ICollection<T>" as ICollection {    
-' collection: any
-' add(element:T )
-' remove( element: T)
-' }
-' interface "IData" as IData{    
-'     setData() 
-'     getData()
-' }
-' interface "IRender" as IRender{ 
-'     render()  
-' }
+class "Elements" as Elements {
+    - elements : IElement[]
+    + constructor( parent_id : string )
+    - findElementsByParent_id( parent_id : string )
+    + create()
+    + selectElement()
+    + delete( element : Element )
+    + render()
+}
+Elements o-- Container
+Elements *-- IElement
+Elements o-- NamedText
+Elements o-- NamedInput
+Elements o-- Button
 
-' ' Генератор модели
-' class "ModelCreator" as ModelCreator{
-'     element:MyReactElement
-'     render(...children)
-    
-' }
-' ' Базовый компонент
-' class "MyBaseComponent" as MyBaseComponent{
-'     element:MyReactElement
-'     render(...children)
-    
-' }
-' MyBaseComponent *-l- MyReactElement
-' ' Элемент
-' class "MyReactElement" as MyReactElement{
-'     _id:string
-'     tag:string
-'     props:MyObject  
-'     setData( tag:string , props: MyObject )
-'     getData()
-    
-' }
-' MyReactElement *-l- MyObject
-' MyReactElement .r.|> IData
-
-
-' ' Объект
-' class "MyObject" as MyObject{
-
-'     collection:{ [ key: string ] :any }
-'     add(  key: string , value :any )
-'     remove(  key: string )   
-'     setData( collection:{ [ key: string ] :any } )
-'     getData() 
-' }
-' MyObject .l.|> IData
-' MyObject .u.|> ICollection
-
-' ' Инпут
-' class "MyInput" as MyInput{  
-'     type: string
-'     setData( type: string )
-'     getData()
-'     render()
-' }
-' ' Кнопка
-' class "MyButton" as MyButton{  
-'     title: string
-'     setData( title: string )
-'     getData()
-'     render()
-' }
-' ' Текст
-' class "MyText" as MyText{  
-'     text: string
-'     setData( text: string )
-'     getData()
-'     render()
-' }
-' MyText .l.|> IData
-' MyText ..|> IRender
-' MyText --|> MyBaseComponent
-
-' ' Переменная
-' class "MyVariable" as MyVariable{   
-'     key: MyText
-'     value: MyText | MyArray
-'     setData( name: MyText, value: MyText | MyArray )
-'     getData()
-'     render()
-' }
-' MyVariable *-- MyText
-' MyVariable ..|> IData
-' MyVariable ..|> IRender
-' MyVariable --|> MyBaseComponent
+interface "IElement" as IElement {
+    - _id : string
+    - parent_id : string
+    - style_id : string
+    - name : string
+    + render()
+}
+class "Container" as Container {
+    - _id : string
+    - parent_id : string
+    - style_id : string
+    - title : Text
+    - elements : Elements
+    + render()
+}
+Container *-- Text
+Container *-- Elements
+class Container implements IElement
+class "NamedText" as NamedText {
+    - _id : string
+    - parent_id : string
+    - style_id : string
+    - title : Text
+    - text : Text
+    + render()
+}
+NamedText *-- Text
+class NamedText implements IElement
+class "NamedInput" as NamedInput {
+    - _id : string
+    - parent_id : string
+    - style_id : string
+    - title : string
+    - input : Input
+    + render()
+}
+class NamedInput implements IElement
+NamedInput *-- Input
+NamedInput *-- Text
+class "Button" as Button {
+    - _id : string
+    - parent_id : string
+    - style_id : string
+    - title : Text    
+    + render()
+}
+Button *-- Text
+class Button implements IElement
 
 
-' ' Массив
-' class "MyArray" as MyArray{
-' collection: { MyText | MyVariable | MyArray}[]
-' add( element: MyText | MyVariable | MyArray)
-' remove( element: MyText | MyVariable | MyArray)
-' setData( array: { MyText | MyVariable | MyArray}[] )
-' getData()
-' render()
+class "Text" as Text {
+    - _id : string
+    - parent_id : string
+    - style_id : string
+    - text : string    
+    + render()
+}
+' class "PageEditor" as PageEditor {
+    '     styleEditor : StyleEditor
+
+    '
+    '
 ' }
+
+' PageEditor *-- StyleEditor
+
+
+' class "LoadingSelector" as LoadingSelector{
+
+    '       selections : Selections
+    '       loader : Loader
+    '
+    '
+' }
+' LoadingSelector *-- Selections
+
+
+' class "Selections" as Selections{
+
+    '     items : string[]
+    '     renderEngine : RenderEngine
+    '     showItems()
+    '     getItems()
+    '
+    '
+' }
+' class "StyleEditor" as StyleEditor{
+
+    '
+    '
+' }
+' class "Page" as Page{
+
+    '     ' render : Render
+    '
+    '
+' }
+
+
 ' MyArray ..|> ICollection
 ' MyArray ..|> IData
 ' MyArray ..|> IRender
