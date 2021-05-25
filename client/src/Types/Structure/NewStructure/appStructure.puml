@@ -2,21 +2,12 @@
 title Структура редактора приложений
 
 
-' class "Application" as Application {
-    '     site : Site
-    '     ' siteSelector : LoadingSelector
-    '     ' pageEditor : PageEditor
-    '     ' loadSite()
-    '     ' loadPage()
-    '     ' editPage()
-    '
-    '
-' }
-' Application *-- PageEditor
-' Application *-- LoadingSelector
-' Application *-- Site
-
-
+class "Application" as Application {
+    site : Site
+    run()
+    createSite()
+}
+Application *-r- Site
 
 class "Site" as Site {
     - _id : string
@@ -40,22 +31,22 @@ class "Pages" as Pages {
     + find( name : string )
     + delete( page : Page )
 }
-Pages *-- Page
+Pages *-r- Page
+
+
 class "Page" as Page {
-    - _id : string
-    - site_id : string
-    - style_id : string
-    - name : string
+    - title : Text
     - styles : Styles
     - elements : Elements
     + render()
 }
-
-Page *-- Elements
-Page *-- Styles
+Page  --|> Element
+Page *-r- Elements
+Page *-r- Text
+Page *-u- Styles
 
 class "Elements" as Elements {
-    - elements : IElement[]
+    - elements : Element[]
     + constructor( parent_id : string )
     - findElementsByParent_id( parent_id : string )
     + create()
@@ -63,117 +54,116 @@ class "Elements" as Elements {
     + delete( element : Element )
     + render()
 }
-Elements o-- Container
-Elements *-- IElement
-Elements o-- NamedText
-Elements o-- NamedInput
-Elements o-- Button
+Elements o-- Table
 
-interface "IElement" as IElement {
-    - _id : string
+
+class "Element" as Element {
+    - _id : string    
     - parent_id : string
-    - style_id : string
-    - name : string
-    + render()
+    - styleName : string
+    + baseRender()
 }
-class "Container" as Container {
-    - _id : string
-    - parent_id : string
-    - style_id : string
+
+class "Table" as Table {
     - title : Text
-    - elements : Elements
+    - form : Form
+    - instances : Instances
     + render()
 }
-Container *-- Text
-Container *-- Elements
-class Container implements IElement
+Table *-- Text
+Table *-- Form
+Table *-- Instances
+Table --|> Element
+
+
+class "Form" as Form {
+    - title : Text
+    - inputs : NamedInputs
+    - submit : Button
+    + render()
+}
+Form *-- Button
+Form *-- NamedInputs
+Form *-- Text
+Form  --|> Element
+
+class "NamedInput" as NamedInputs {
+    - namedInputs : NamedInput[]
+    + constructor( parent_id : string )
+    - findNamedInputsByParent_id( parent_id : string )
+    + create()   
+    + delete( namedInput : NamedInput )
+    + render()
+}
+NamedInputs *-- NamedInput
+
+
+class "NamedInput" as NamedInput {
+    - index : number
+    - title : Text
+    - input : Input
+    + render()
+}
+NamedInput  --|> Element
+NamedInput *-- Input
+NamedInput *-- Text
+
+class "Input" as Input {
+    - type : string
+    - value : string 
+    + getValue()  
+    + render()
+}
+Input  --|> Element
+
+class "Button" as Button {  
+    - title : Text
+    + onClick()
+    + render()
+}
+Button *-- Text
+Button  --|> Element
+
+
+class "Text" as Text {
+    - text : string
+    + changeText()
+    + render()
+}
+Text --|> Element
+
+class "Instances" as Instances {
+    - instances : Instance[]
+    + constructor( parent_id : string )
+    - findInstancesByTable_id( parent_id : string )
+    + create()
+    + delete( instance : Instance )
+    + render()
+}
+Instances *-- Instance
+
+class "Instance" as Instance {  
+    - title : Text
+    - namedText : NamedText    
+    + render()
+}
+Instance  --|> Element
+Instance *-- Text
+Instance *-- NamedTexts
+class "NamedTexts" as NamedTexts {
+    - namedTexts : NamedText[]
+    + constructor( parent_id : string )
+    - findNamedTextsByParent_id( parent_id : string ) 
+    + render()
+}
+NamedTexts *-- NamedText
+
 class "NamedText" as NamedText {
-    - _id : string
-    - parent_id : string
-    - style_id : string
+    - index : number
     - title : Text
     - text : Text
     + render()
 }
+NamedText  --|> Element
 NamedText *-- Text
-class NamedText implements IElement
-class "NamedInput" as NamedInput {
-    - _id : string
-    - parent_id : string
-    - style_id : string
-    - title : string
-    - input : Input
-    + render()
-}
-class NamedInput implements IElement
-NamedInput *-- Input
-NamedInput *-- Text
-class "Button" as Button {
-    - _id : string
-    - parent_id : string
-    - style_id : string
-    - title : Text    
-    + render()
-}
-Button *-- Text
-class Button implements IElement
-
-
-class "Text" as Text {
-    - _id : string
-    - parent_id : string
-    - style_id : string
-    - text : string    
-    + render()
-}
-' class "PageEditor" as PageEditor {
-    '     styleEditor : StyleEditor
-
-    '
-    '
-' }
-
-' PageEditor *-- StyleEditor
-
-
-' class "LoadingSelector" as LoadingSelector{
-
-    '       selections : Selections
-    '       loader : Loader
-    '
-    '
-' }
-' LoadingSelector *-- Selections
-
-
-' class "Selections" as Selections{
-
-    '     items : string[]
-    '     renderEngine : RenderEngine
-    '     showItems()
-    '     getItems()
-    '
-    '
-' }
-' class "StyleEditor" as StyleEditor{
-
-    '
-    '
-' }
-' class "Page" as Page{
-
-    '     ' render : Render
-    '
-    '
-' }
-
-
-' MyArray ..|> ICollection
-' MyArray ..|> IData
-' MyArray ..|> IRender
-' MyArray o-- MyArray
-' MyArray o-l- MyVariable
-' MyArray o-- MyText
-' MyArray --|> MyBaseComponent
-
 @enduml
