@@ -9,9 +9,9 @@ import { page as testPage } from './Components/View/Pages/CreateApp';
 import ErrorBoundry from './ErrorBoundry';
 import getPageREST from './Function/ServiceFunction/REST/PageREST';
 import { TPage } from './Types/BaseTypes';
+import { Site } from './Types/NewAppStructure/Application';
 import {
   createdElement,
-  ElementCreator,
 } from './Types/Structure/NewStructure/Function/ElementCreator';
 import { testElement } from './Types/Structure/NewStructure/Interfaces';
 
@@ -30,9 +30,10 @@ const App: FC = () => {
     <ErrorBoundry>
       <MainMenu {...{ page, PageREST }} />
       {page && new PageEditor(page, setPage).Component}
-      {testElement.render()}
+      {/* {testElement.render()} */}
       {/* {JSON.stringify(testElement.getData())} */}
-      <div>{ElementCreator(testElement.getData()).render()}</div>
+      {/* <div>{ElementCreator(testElement.getData()).render()}</div> */}
+      {new Site("1", "Первый сайт", "firstsite.com", "page_1").showData()}
     </ErrorBoundry>
   );
 };

@@ -3,11 +3,36 @@ title Структура редактора приложений
 
 
 class "Application" as Application {
-    site : Site
-    run()
-    createSite()
+    siteEditor : SiteEditor
+    run()  
 }
-Application *-r- Site
+Application *-- SiteEditor
+
+class "SiteEditor" as SiteEditor {
+    navigationPanel : NnavigationPanel    
+    stylePanel : StylePanelPanel  
+    showNavigationPanel()  
+    showStylePanel()  
+    
+}
+SiteEditor *-- NnavigationPanel
+
+class "NnavigationPanel" as NnavigationPanel {
+    sites : Sites
+    showSiteNames()   
+}
+NnavigationPanel *-- Sites
+
+class "Sites" as Sites {
+    - siteNames : String[]
+    + constructor( siteNames : String[] )
+    - findPageNamesBySite_id( site_id : string )
+    + create()
+    + showSiteNames()
+    + find( name : string )
+    + delete( site : Site )
+}
+Sites *-- Site
 
 class "Site" as Site {
     - _id : string
@@ -23,6 +48,7 @@ class "Site" as Site {
 Site *-- Pages
 
 class "Pages" as Pages {
+    - page : Page
     - pageNames : String[]
     + constructor( site_id : string )
     - findPageNamesBySite_id( site_id : string )
@@ -31,7 +57,7 @@ class "Pages" as Pages {
     + find( name : string )
     + delete( page : Page )
 }
-Pages *-r- Page
+Pages *-- Page
 
 
 class "Page" as Page {
@@ -41,9 +67,9 @@ class "Page" as Page {
     + render()
 }
 Page  --|> Element
-Page *-r- Elements
-Page *-r- Text
-Page *-u- Styles
+Page *-- Elements
+Page *-- Text
+Page *-- Styles
 
 class "Elements" as Elements {
     - elements : Element[]
@@ -149,18 +175,18 @@ class "Instance" as Instance {
 }
 Instance  --|> Element
 Instance *-- Text
-Instance *-- NamedTexts
-class "NamedTexts" as NamedTexts {
-    - namedTexts : NamedText[]
+Instance *-- InputValues
+class "InputValues" as InputValues {
+    - inputValues : InputValue[]
     + constructor( parent_id : string )
-    - findNamedTextsByParent_id( parent_id : string ) 
+    - findInputValuesByParent_id( parent_id : string ) 
     + render()
 }
-NamedTexts *-- NamedText
+InputValues *-- InputValue
 
-class "NamedText" as NamedText {
+class "InputValue" as InputValue {
     - index : number
-    - title : Text
+    - namedInput_id : string
     - text : Text
     + render()
 }
