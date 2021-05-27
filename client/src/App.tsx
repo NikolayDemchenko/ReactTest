@@ -9,7 +9,7 @@ import { page as testPage } from './Components/View/Pages/CreateApp';
 import ErrorBoundry from './ErrorBoundry';
 import getPageREST from './Function/ServiceFunction/REST/PageREST';
 import { TPage } from './Types/BaseTypes';
-import { Site } from './Types/NewAppStructure/Application';
+import { MyComopnent } from './Types/NewAppStructure/Render/BaseRender';
 import {
   createdElement,
 } from './Types/Structure/NewStructure/Function/ElementCreator';
@@ -33,7 +33,8 @@ const App: FC = () => {
       {/* {testElement.render()} */}
       {/* {JSON.stringify(testElement.getData())} */}
       {/* <div>{ElementCreator(testElement.getData()).render()}</div> */}
-      {new Site("1", "Первый сайт", "firstsite.com", "page_1").showData()}
+      {/* {new Site("1", "Первый сайт", "firstsite.com", "page_1").showData()} */}
+      {MyComopnent}
     </ErrorBoundry>
   );
 };

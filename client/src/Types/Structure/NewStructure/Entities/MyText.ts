@@ -15,7 +15,7 @@ export class MyText extends MyBaseComponent implements IData, IRender {
     element && this.element.setData(element.tag, element.props);
   };
   getData = () => ({ text: this._text, element: this.element.getData() });
-  render = () => this.baseRender(this.text);
+  render = () => this.baseRender(this._text);
 
   constructor(text: string, element?: MyReactElement) {
     super(element);
