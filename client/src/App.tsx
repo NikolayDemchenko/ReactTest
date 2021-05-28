@@ -9,7 +9,7 @@ import { page as testPage } from './Components/View/Pages/CreateApp';
 import ErrorBoundry from './ErrorBoundry';
 import getPageREST from './Function/ServiceFunction/REST/PageREST';
 import { TPage } from './Types/BaseTypes';
-import { MyComopnent } from './Types/NewAppStructure/Render/BaseRender';
+import { MyComopnent } from './Types/NewAppStructure/NewComponents/Components';
 import {
   createdElement,
 } from './Types/Structure/NewStructure/Function/ElementCreator';
@@ -24,8 +24,8 @@ const App: FC = () => {
   const [page, setPage] = useState<TPage>(testPage);
   const PageREST = getPageREST(setPage);
 
-  console.log(`array.getData()`, testElement.getData());
-  console.log("testSwitcher :>> ", createdElement);
+  // console.log(`array.getData()`, testElement.getData());
+  // console.log("testSwitcher :>> ", createdElement);
   return (
     <ErrorBoundry>
       <MainMenu {...{ page, PageREST }} />
