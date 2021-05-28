@@ -1,11 +1,13 @@
 import React, { createElement } from 'react';
+import ReactDOM from 'react-dom';
+
 import shortid from 'shortid';
 
 export class Component {
 	private type: string;
 	private props?: Properties;
 	private children?: Children;
-
+	
 	constructor(type: string, props: { [key: string]: any });
 	constructor(type: string, props: { [key: string]: any }, children: ChildrenType);
 	constructor(type: string, props?: { [key: string]: any }, children?: ChildrenType) {
@@ -13,7 +15,7 @@ export class Component {
 		this.props = new Properties({ ...props });
 		if (children) this.children = new Children(children);
 	}
-
+	
 	render = (): React.ReactElement => {
 		if (this.children) {
 			return createElement(this.type, this.props!.value(), this.children.render());
@@ -46,15 +48,15 @@ export class Children {
 	constructor(children: ChildrenType) {
 		this.children = children;
 	}
-
+	
 	add(child: ChildType): void {
 		this.children.push(child);
 	}
-
+	
 	remove(child: ChildType): void {			
-			this.children = this.children.filter((_child) => JSON.stringify(_child) !== JSON.stringify(child));	
+		this.children = this.children.filter((_child) => JSON.stringify(_child) !== JSON.stringify(child));	
 	}
-  
+	
 	removeByIndex(index: number): void {
 		if (index > -1 && this.children.length > 0) {
 			this.children.splice(index, 1);
@@ -71,13 +73,13 @@ export class Children {
 			});
 		}
 	}
-
+	
 	render = () => {
 		return this.children.map((child) =>
-			typeof child === 'string'
-				? child
-				: (child.children && new Component(child.type, child.props || {}, child.children).render()) ||
-				  new Component(child.type, child.props || {}).render()
+		typeof child === 'string'
+		? child
+		: (child.children && new Component(child.type, child.props || {}, child.children).render()) ||
+		new Component(child.type, child.props || {}).render()
 		);
 	};
 }
@@ -94,3 +96,5 @@ div.updateByIndex(2, { type: 'span', props: { style: { color: 'red' } }, childre
 // div.remove(	{ type: 'p', props: { style: { color: 'red' } }, children: ['Красный текст'] });
 // div.remove('Добавленный child');
 export const MyComopnent = div.render();
+
+ReactDOM.render(createElement("div", {}, div.render()), document.getElementById("page"));
