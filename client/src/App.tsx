@@ -7,7 +7,8 @@ import { page as testPage } from './Components/View/Pages/CreateApp';
 import ErrorBoundry from './ErrorBoundry';
 import getPageREST from './Function/ServiceFunction/REST/PageREST';
 import { TPage } from './Types/BaseTypes';
-import { MyComopnent } from './Types/NewAppStructure/NewComponents/Components';
+
+// import { MyComopnent } from './Types/NewAppStructure/NewComponents/Components';
 
 const App: FC = () => {
   console.log("App :>> ");  
@@ -19,7 +20,7 @@ const App: FC = () => {
     <ErrorBoundry>
       {/* <MainMenu {...{ page, PageREST }} /> */}
       {/* {page && new PageEditor(page, setPage).Component} */}
-      {MyComopnent}
+      {/* {MyComopnent} */}
     </ErrorBoundry>
   );
 };
