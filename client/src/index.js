@@ -6,7 +6,8 @@ import ReactDOM from 'react-dom';
 
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-
-ReactDOM.render(<App />, document.getElementById("root"));
+import { myPage } from './Types/NewAppStructure/NewComponents/Components';
+myPage.render()
+// ReactDOM.render(<App />, document.getElementById("root"));
 // ReactDOM.render(<App />, document.getElementById("page"));
 serviceWorker.unregister();
