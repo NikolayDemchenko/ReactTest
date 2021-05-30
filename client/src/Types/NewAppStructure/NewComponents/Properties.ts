@@ -3,7 +3,7 @@ import shortid from 'shortid';
 export type PropsType= { [key: string]: any }
 export class Properties {
   private props:PropsType;
-  constructor(props: { [key: string]: any }) {
+  constructor(props: PropsType) {
     this.props = props;
   }
   value = () =>

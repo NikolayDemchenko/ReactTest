@@ -1,57 +1,33 @@
 import ReactDOM from 'react-dom';
 
-import { BaseComponent } from './BaseComponent';
 import {
   Children,
-  ChildrenType,
-  ChildType,
+  ChildrenView,
 } from './Children';
+import {
+  Element,
+  ElementView,
+} from './Element';
 import { Properties } from './Properties';
 
-export class ComponentPage {
-  private component: ComponentContainer;
+export class PageView {
+  private elementView: ElementView;
+  private children: ChildrenView;
 
-  constructor(component: ComponentContainer) {
-    this.component = component;
-  }
-  add(child: ChildType): void {
-    this.component.add(child);
-  }
-  removeByIndex(index: number): void {
-    this.component.removeByIndex(index);
-  }
-  updateByIndex(index: number, child: ChildType): void {
-    this.component.updateByIndex(index, child);
-  }
-  render = () => {
-    ReactDOM.render(this.component.render(), document.getElementById("page"));
-  };
-}
-
-export class ComponentContainer {
-  private component: BaseComponent;
-  private children: Children;
-
-  constructor(component: BaseComponent, children: Children) {
-    this.component = component;
+  constructor(elementView: ElementView, children: ChildrenView) {
+    this.elementView = elementView;
     this.children = children;
   }
-  add(child: ChildType): void {
-    this.children.add(child);
-  }
-  removeByIndex(index: number): void {
-    this.children.removeByIndex(index);
-  }
-  updateByIndex(index: number, child: ChildType): void {
-    this.children.updateByIndex(index, child);
-  }
-
-  render = (): React.ReactElement => {
-    return this.component.render(this.children);
+  render = () => {
+    ReactDOM.render(
+      this.elementView.render(this.children),
+      document.getElementById("page")
+    );
   };
 }
 
-const children: ChildrenType = [
+
+const pageChildren = new Children([
   "Текст в массиве",
   { type: "p", children: ["Некий текст"] },
   {
@@ -59,51 +35,45 @@ const children: ChildrenType = [
     props: { style: { color: "red" } },
     children: ["Красный текст"],
   },
-];
-// const div = new Children([
-// 	'Текст в массиве',
-// 	{ type: 'p', children: ['Некий текст'] },
-// 	{ type: 'p', props: { style: { color: 'red' } }, children: ['Красный текст'] },
-// ]);
+]);
 
-const myPage = new ComponentPage(
-  new ComponentContainer(
-    new BaseComponent(
-      "div",
-      new Properties({ style: { background: "#4587" } })
-    ),
-    new Children(children)
-  )
+const myPage = new PageView(
+  new ElementView(
+    new Element("div", new Properties({ style: { background: "#4587" } }))
+  ),
+  new ChildrenView(pageChildren)
 );
 
-myPage.add("Добавленный child");
-myPage.add({
+pageChildren.add("Добавленный child");
+pageChildren.add({
   type: "p",
   props: { style: { color: "red" } },
   children: ["Красный текст"],
 });
-myPage.add({
+pageChildren.add({
   type: "input",
   props: { style: { color: "red" }, placeholder: "Введите красный текст" },
 });
-myPage.add({
+pageChildren.add({
   type: "button",
   props: { style: { color: "red" }, title: "Введите красный текст" },
   children: [
     "Нажми сюда!",
     {
       type: "p",
-      props: { onClick:()=>console.log(`Клик!!!`),style: { background: "black", color: "white" } },
+      props: {
+        onClick: () => console.log(`Клик!!!`),
+        style: { background: "black", color: "white" },
+      },
       children: [" текст"],
     },
   ],
 });
 // myPage.removeByIndex(3);
-myPage.updateByIndex(2, {
+pageChildren.updateByIndex(2, {
   type: "span",
   props: { style: { color: "blue" } },
   children: ["Обновлённый Красный текст"],
 });
 
 export { myPage };
-// export const MyComopnent = div.render();

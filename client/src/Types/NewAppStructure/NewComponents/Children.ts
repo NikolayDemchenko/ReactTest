@@ -1,5 +1,7 @@
-import { BaseComponent } from './BaseComponent';
-import { ComponentContainer } from './Components';
+import {
+  Element,
+  ElementView,
+} from './Element';
 import {
   Properties,
   PropsType,
@@ -45,20 +47,28 @@ export class Children {
       });
     }
   }
+  value = () => this.children;
+}
+
+export class ChildrenView {
+  private children: Children;
+  constructor(children: Children) {
+    this.children = children;
+  }
 
   render = () => {
-    return this.children.map((child) =>
-      typeof child === "string"
-        ? child
-        : (child.children &&
-            new ComponentContainer(
-              new BaseComponent(child.type, new Properties(child.props || {})),
-              new Children(child.children)
-            ).render()) ||
-          new BaseComponent(
-            child.type,
-            new Properties(child.props || {})
-          ).render()
-    );
+    return this.children
+      .value()
+      .map((element) =>
+        typeof element === "string"
+          ? element
+          : (element.children &&
+              new ElementView(
+                new Element(element.type, new Properties(element.props || {}))
+              ).render(new ChildrenView(new Children(element.children)))) ||
+            new ElementView(
+              new Element(element.type, new Properties(element.props || {}))
+            ).render()
+      );
   };
 }
