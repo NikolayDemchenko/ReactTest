@@ -5,7 +5,7 @@ export interface IMyElementView {
 }
 
 export interface IMyChildrenView {
-	returnReactElements(): (string | React.ReactElement<any, string | React.JSXElementConstructor<any>>)[];
+	returnReactElements(): (string | React.ReactElement<any, any> | null)[];
 }
 
 export interface IContainerView {
