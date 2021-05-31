@@ -1,6 +1,5 @@
 import { MyProperties } from '../Model/MyProperties';
 import { MyChildren } from '../Model/MyChildren';
-import { MyContainerView } from './MyContainerView';
 import React, { FC, useState } from 'react';
 import { PageView } from './MyPageView';
 
@@ -20,7 +19,18 @@ export const PreviewComponent: FC = () => {
 	const pageProperties = new MyProperties({ style: { background: '#4587' } });
 	// pageProperties.updateProperty("style", { background: '#9587' })
 	// pageProperties.removeProperty("style")
-	const myPage = new PageView(
+	// const myPage = new PageView(
+	// 	{properties: {}, children:[
+	// 		'Текст в массиве',
+	// 		{ type: 'p', properties: {}, children: ['Некий текст'] },
+	// 		{
+	// 			type: 'p',
+	// 			properties: { style: { color: 'red' } },
+	// 			children: ['Красный текст'],
+	// 		},
+	// 	]}
+	// );
+	const myPage =  PageView({page:
 		{properties: {}, children:[
 			'Текст в массиве',
 			{ type: 'p', properties: {}, children: ['Некий текст'] },
@@ -30,7 +40,7 @@ export const PreviewComponent: FC = () => {
 				children: ['Красный текст'],
 			},
 		]}
-	);
+	});
 
 	pageChildren.add('Добавленный child');
 	pageChildren.add({
