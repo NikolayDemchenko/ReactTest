@@ -7,11 +7,11 @@ export const PreviewComponent: FC = () => {
 
 	const pageChildren = new MyChildren([
 		'Текст в массиве',
-		{ type: 'p', properties: {}, children: ['Некий текст'] },
+		{ type: 'p', properties: {}, childs: ['Некий текст'] },
 		{
 			type: 'p',
 			properties: { style: { color: 'red' } },
-			children: ['Красный текст'],
+			childs: ['Красный текст'],
 		},
 	]);
 
@@ -21,7 +21,7 @@ export const PreviewComponent: FC = () => {
 	pageChildren.add({
 		type: 'p',
 		properties: { style: { color: 'red' } },
-		children: ['Красный текст'],
+		childs: ['Красный текст'],
 	});
 	pageChildren.add({
 		type: 'input',
@@ -30,7 +30,7 @@ export const PreviewComponent: FC = () => {
 	pageChildren.add({
 		type: 'button',
 		properties: { style: { color: 'red' }, title: 'Введите красный текст' },
-		children: [
+		childs: [
 			'Нажми сюда!',
 			{
 				type: 'p',
@@ -41,7 +41,7 @@ export const PreviewComponent: FC = () => {
 					},
 					style: { background: 'black', color: 'white' },
 				},
-				children: [' текст'],
+				childs: [' текст'],
 			},
 		],
 	});
@@ -49,18 +49,18 @@ export const PreviewComponent: FC = () => {
 	pageChildren.updateByIndex(2, {
 		type: 'span',
 		properties: { style: { color: 'blue' } },
-		children: ['Обновлённый Красный текст'],
+		childs: ['Обновлённый Красный текст'],
 	});
 
 	const [page, setPage] = useState<any>({
 		properties: {style:{ background: '#5587' }},
-		children: [
+		childs: [
 			'Текст в массиве',
-			{ type: 'p', properties: {}, children: ['Некий текст'] },
+			{ type: 'p', properties: {}, childs: ['Некий текст'] },
 			{
 				type: 'p',
 				properties: { style: { color: 'red' } },
-				children: ['Красный текст'],
+				childs: ['Красный текст'],
 			},
 			{
 				type: 'input',
@@ -69,7 +69,7 @@ export const PreviewComponent: FC = () => {
 			{
 				type: 'button',
 				properties: { style: { color: 'red' }, title: 'Введите красный текст' },
-				children: [
+				childs: [
 					'Нажми сюда!',
 					{
 						type: 'p',
@@ -79,7 +79,7 @@ export const PreviewComponent: FC = () => {
 							},
 							style: { background: 'black', color: 'white' },
 						},
-						children: [' текст'],
+						childs: [' текст'],
 					},
 				],
 			},

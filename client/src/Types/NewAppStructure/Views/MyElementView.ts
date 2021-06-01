@@ -1,33 +1,18 @@
-import React, { createElement, FC } from 'react';
-import { MyChildrenType, MyElementType } from '../Model/ValuesInterfacesAndTypes';
-import { IMyElementView } from './ViewsInterfacesAndTypes';
+import { createElement, FC } from 'react';
+import { MyChildsType, MyElementType } from '../Model/ValuesInterfacesAndTypes';
 import { MyChildrenView } from './MyChildrenView';
 
-// export class MyElementView implements IMyElementView {
-// 	private element: MyElementType;
-// 	constructor(element: MyElementType) {
-// 		this.element = element;
-// 	}
-// 	returnReactElement = (children?: MyChildrenType): React.ReactElement => {
-// 		if (children) {
-// 			return createElement(
-// 				this.element.type,
-// 				this.element.properties,
-// 				new MyChildrenView(children).returnReactElements()
-// 			);
-// 		} else {
-// 			return createElement(this.element.type, this.element.properties);
-// 		}
-// 	};
-// }
-
-export const ElementView:FC<{element: MyElementType, childs?: MyChildrenType}>=({element, childs})=>{
+export const ElementView:FC<{element: MyElementType, childs?: MyChildsType}>=({element, childs})=>{
+	
+	console.log(`childs`, childs)
 	if (childs) {
-			return createElement(
-				element.type,
-				element.properties,
-				MyChildrenView({childs}))
+		console.log(`withChilds`)
+		return createElement(
+			element.type,
+			element.properties,
+			MyChildrenView(childs))
 		} else {
+			console.log(`withOutChilds`)			
 			return createElement(element.type, element.properties);
 		}
 	};

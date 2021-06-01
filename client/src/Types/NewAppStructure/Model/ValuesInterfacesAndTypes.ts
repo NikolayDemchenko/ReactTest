@@ -1,10 +1,10 @@
-export type MyChildType = string | MyElementType|MyContainerType;
-export type MyChildrenType = MyChildType[];
+export type MyChildType = string | MyElementType|MyElementWithChildsType;
+export type MyChildsType = MyChildType[];
 export interface IMyChildren {
 	add(child: MyChildType): void;
 	removeByIndex(index: number): void;
 	updateByIndex(index: number, child: MyChildType): void;
-	value(): MyChildrenType;
+	value(): MyChildsType;
 }
 
 export type MyElementType = {
@@ -24,18 +24,18 @@ export interface IMyProperties {
 }
 
 // Пока не понятна необходимость наличия данного класса
-export type MyContainerType = {
+export type MyElementWithChildsType = {
 	type: string;
 	properties: MyPropertiesType;
-	children: MyChildrenType;
+	childs: MyChildsType;
 };
 export interface IMyContainer {
-	value () :MyContainerType
+	value () :MyElementWithChildsType
 }
 
 export type MyPageType = {
 	properties: MyPropertiesType;
-	children: MyChildrenType;
+	childs: MyChildsType;
 	// styles: StylesType;
 };
 export interface IMyPage {

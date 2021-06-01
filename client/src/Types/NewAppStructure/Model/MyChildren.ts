@@ -1,8 +1,8 @@
-import { IMyChildren, MyChildrenType, MyChildType } from './ValuesInterfacesAndTypes';
+import { IMyChildren, MyChildsType, MyChildType } from './ValuesInterfacesAndTypes';
 
 export class MyChildren implements IMyChildren{
-	private children: MyChildrenType;
-	constructor(children: MyChildrenType) {
+	private children: MyChildsType;
+	constructor(children: MyChildsType) {
 		this.children = children;
 	}
 	add(child: MyChildType): void {
