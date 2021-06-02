@@ -1,4 +1,4 @@
-export type MyChildType = string | MyElementType|MyElementWithChildsType;
+export type MyChildType = string | MyElementType
 export type MyChildsType = MyChildType[];
 export interface IMyChildren {
 	add(child: MyChildType): void;
@@ -10,6 +10,7 @@ export interface IMyChildren {
 export type MyElementType = {
 	type: string;
 	properties: MyPropertiesType;
+	childs?: MyChildsType;
 };
 export interface IMyElement {
 	updateType(type: string): void;
@@ -23,15 +24,7 @@ export interface IMyProperties {
 	value(): MyPropertiesType;
 }
 
-// Пока не понятна необходимость наличия данного класса
-export type MyElementWithChildsType = {
-	type: string;
-	properties: MyPropertiesType;
-	childs: MyChildsType;
-};
-export interface IMyContainer {
-	value () :MyElementWithChildsType
-}
+
 
 export type MyPageType = {
 	properties: MyPropertiesType;
