@@ -72,6 +72,7 @@ export const PreviewComponent: FC = () => {
 					properties: {
 						onClick: () => {
 							console.log(`Арбайтен!!!!`);
+							
 						},
 						style: { background: 'black', color: 'white' },
 					},
