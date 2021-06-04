@@ -1,17 +1,16 @@
 import { MyProperties } from '../Model/MyProperties';
-import { MyChildren } from '../Model/MyChildren';
+import { MyNodes as MyNodes } from '../Model/MyNodes';
 import { FC, useState } from 'react';
-import { PageView } from './MyPageView';
+import { MyElement } from '../Model/MyElement';
 
 export const PreviewComponent: FC = () => {
-
-	const pageChildren = new MyChildren([
+	const pageChildren = new MyNodes([
 		'Текст в массиве',
-		{ type: 'p', properties: {}, childs: ['Некий текст'] },
+		{ type: 'p', properties: {}, nodes: ['Некий текст'] },
 		{
 			type: 'p',
 			properties: { style: { color: 'red' } },
-			childs: ['Красный текст'],
+			nodes: ['Красный текст'],
 		},
 	]);
 
@@ -21,7 +20,7 @@ export const PreviewComponent: FC = () => {
 	pageChildren.add({
 		type: 'p',
 		properties: { style: { color: 'red' } },
-		childs: ['Красный текст'],
+		nodes: ['Красный текст'],
 	});
 	pageChildren.add({
 		type: 'input',
@@ -30,18 +29,17 @@ export const PreviewComponent: FC = () => {
 	pageChildren.add({
 		type: 'button',
 		properties: { style: { color: 'red' }, title: 'Введите красный текст' },
-		childs: [
+		nodes: [
 			'Нажми сюда!',
 			{
 				type: 'p',
 				properties: {
 					onClick: () => {
-						pageProperties.removeProperty('style');
-						// console.log(`Арбайтен!!!!`,myPage);
+						console.log(`Арбайтен!!!!`);
 					},
 					style: { background: 'black', color: 'white' },
 				},
-				childs: [' текст'],
+				nodes: [' текст'],
 			},
 		],
 	});
@@ -49,42 +47,46 @@ export const PreviewComponent: FC = () => {
 	pageChildren.updateByIndex(2, {
 		type: 'span',
 		properties: { style: { color: 'blue' } },
-		childs: ['Обновлённый Красный текст'],
+		nodes: ['Обновлённый Красный текст'],
 	});
 
-	const [page, setPage] = useState<any>({
-		properties: {style:{ background: '#5587' }},
-		childs: [
-			'Текст в массиве',
-			{ type: 'p', properties: {}, childs: ['Некий текст'] },
-			{
-				type: 'p',
-				properties: { style: { color: 'red' } },
-				childs: ['Красный текст'],
-			},
-			{
-				type: 'input',
-				properties: { style: { color: 'red' }, placeholder: 'Введите красный текст' },
-			},
-			{
-				type: 'button',
-				properties: { style: { color: 'red' }, title: 'Введите красный текст' },
-				childs: [
-					'Нажми сюда!',
-					{
-						type: 'p',
-						properties: {
-							onClick: () => {	
-								console.log(`Арбайтен!!!!`);
-							},
-							style: { background: 'black', color: 'white' },
+	const pageChilds = new MyNodes([
+		'Текст в массиве',
+		{ type: 'p', properties: {}, nodes: ['Некий текст'] },
+		{
+			type: 'p',
+			properties: { style: { color: 'red' } },
+			nodes: ['Красный текст'],
+		},
+		{
+			type: 'input',
+			properties: { style: { color: 'red' }, placeholder: 'Введите красный текст' },
+		},
+		{
+			type: 'button',
+			properties: { style: { color: 'red' }, title: 'Введите красный текст' },
+			nodes: [
+				'Нажми сюда!',
+				{
+					type: 'p',
+					properties: {
+						onClick: () => {
+							console.log(`Арбайтен!!!!`);
 						},
-						childs: [' текст'],
+						style: { background: 'black', color: 'white' },
 					},
-				],
-			},
-		],
-	});
+					nodes: [' текст'],
+				},
+			],
+		},
+	]);
 
-	return PageView({ page });
+	const pageObj = new MyElement({ type: 'div', properties: { style: { background: '#8587' } } });
+	const pageObj2 = new MyElement({ type: pageObj.value().type, properties: pageProperties.value() });
+	const pageObj3 = new MyElement(pageObj2.value(), pageChildren.value());
+	const pageObj4 = new MyElement(pageObj3.value());
+
+	const [page, setPage] = useState<MyElement>(pageObj4);
+
+	return page.view({});
 };

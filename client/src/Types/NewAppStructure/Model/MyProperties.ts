@@ -6,12 +6,11 @@ export class MyProperties implements IMyProperties{
   constructor(properties: MyPropertiesType) {
     this.properties = properties;
   }
-  updateProperty(key:string,value:any): void {
+  createOrUpdateProperty(key:string,value:any): void {
     this.properties[key]=value
   }
   removeProperty(key: string): void {
     delete this.properties[key];
   }
-  value = () =>
-    this.properties._id ? { ...this.properties, key: this.properties._id } : { ...this.properties, key: shortid.generate() };
+  value = () =>this.properties
 }
