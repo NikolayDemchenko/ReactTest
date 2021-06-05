@@ -1,7 +1,8 @@
-import { MyProperties } from '../Model/MyProperties';
-import { MyNodes as MyNodes } from '../Model/MyNodes';
-import { FC, useState } from 'react';
+import { FC } from 'react';
+
 import { MyElement } from '../Model/MyElement';
+import { MyNodes } from '../Model/MyNodes';
+import { MyProperties } from '../Model/MyProperties';
 
 export const PreviewComponent: FC = () => {
 	const pageChildren = new MyNodes([
@@ -82,12 +83,37 @@ export const PreviewComponent: FC = () => {
 		},
 	]);
 
-	const pageObj = new MyElement({ type: 'div', properties: { style: { background: '#8587' } } });
-	const pageObj2 = new MyElement({ type: pageObj.value().type, properties: pageProperties.value() });
-	const pageObj3 = new MyElement(pageObj2.value(), pageChildren.value());
-	const pageObj4 = new MyElement(pageObj3.value());
 
-	const [page, setPage] = useState<MyElement>(pageObj4);
+	// class TextElement implements IMyElement{
+	// 	baseElement:MyElement	
+	// 	text:string="Новый текст"
+	// 	constructor(baseElement:MyElement,text:string) {
+	// 	this.baseElement=baseElement
+	// 	this.text=text
+			
+	// 	}
+	// 	updateType=(type: string)=> this.baseElement.updateType(type)
+	// 	value(): MyElementType {
+	// 		return this.baseElement.value()
+	// 	}
+
+	// }
+
+	const text = new MyElement({ type: 'span', properties: { } });
+	
+	const title = new MyElement(text.value(),["Наименование организации"]);
+
+	const input = new MyElement({ type: 'input', properties: { style:{width:"300px"}} });
+
+	const flexContainer = new MyElement({ type: 'div', properties: {style:{display:"flex"}} });
+	const property = new MyElement(flexContainer.value(),[new MyElement(text.value(),["Наименование организации"]).value(),input.value()]);
+
+
+	const form = new MyElement({ type: 'form', properties: { } },[property.value()]);
+	const page = new MyElement({ type: 'div', properties: { style: { background: '#789' } } },[form.value()]);
+
+
+	// const [page, setPage] = useState<MyElement>(pageObj5);
 
 	return page.view({});
 };

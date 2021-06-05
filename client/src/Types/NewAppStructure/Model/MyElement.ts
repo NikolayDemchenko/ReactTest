@@ -1,10 +1,19 @@
-import { IMyElement, MyElementType, MyNodesType } from './ValuesInterfacesAndTypes';
-import { createElement, FC } from 'react';
+import {
+  createElement,
+  FC,
+} from 'react';
+
+import {
+  IMyElement,
+  MyElementType,
+  MyNodesType,
+} from './ValuesInterfacesAndTypes';
+
 export class MyElement implements IMyElement {
 	private element: MyElementType;
 	constructor(element: MyElementType, nodes?: MyNodesType) {
 		this.element = element;
-		this.element.nodes = element.nodes || nodes;
+		this.element.nodes = nodes || element.nodes;
 		console.log(`element.nodes||nodes`, element.nodes || nodes);
 		console.log(`this.element.nodes`, this.element.nodes);
 	}
