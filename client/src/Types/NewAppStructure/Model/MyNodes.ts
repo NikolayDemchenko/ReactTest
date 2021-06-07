@@ -1,4 +1,5 @@
-import { IMyChilds as IMyNodes, MyNodesType, MyNodeType } from './ValuesInterfacesAndTypes';
+import {IMyNodes, MyNodesType, MyNodeType } from './ValuesInterfacesAndTypes';
+
 
 export class MyNodes implements IMyNodes{
 	private nodes: MyNodesType;

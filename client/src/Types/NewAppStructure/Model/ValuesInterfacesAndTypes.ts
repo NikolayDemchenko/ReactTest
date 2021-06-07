@@ -1,6 +1,8 @@
-export type MyNodeType = string | MyElementType
+import { FC } from "react";
+
+export type MyNodeType = string | IMyElement
 export type MyNodesType = MyNodeType[];
-export interface IMyChilds {
+export interface IMyNodes {
 	add(node: MyNodeType): void;
 	removeByIndex(index: number): void;
 	updateByIndex(index: number, node: MyNodeType): void;
@@ -16,6 +18,7 @@ export type MyElementType = {
 export interface IMyElement {
 	// updateElement(element: MyElementType):{};
 	// value(): MyElementType;
+	view: FC
 }
 
 export type MyPropertiesType = { [key: string]: any };

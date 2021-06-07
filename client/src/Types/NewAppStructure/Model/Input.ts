@@ -10,8 +10,8 @@ export class Input {
     this.input = input;
   }
   name = (name: string) => {
-    this.container = new MyElement({ ...this.container.value(), id: name });
-    this.title = new MyElement(this.title.withNodes([name]).value());
+    this.container = this.container;
+    this.title =  this.title.withNodes([name]);
     return this
   };
   element = () => {

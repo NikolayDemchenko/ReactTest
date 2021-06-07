@@ -30,16 +30,16 @@ export const PreviewComponent: FC = () => {
     type: "div",
     properties: {},
   }).withNodes([
-    formInput.name("Наименование организации").element().value(),
-    formInput.name("Адрес").element().value(),
-    buttonEl.value(),
+    formInput.name("Наименование организации").element(),
+    formInput.name("Адрес").element(),
+    buttonEl,
   ]);
 
   const page = new MyElement({
     id: "6",
     type: "div",
     properties: { style: { background: "#789" } },
-  }).withNodes([form.value()]);
+  }).withNodes([form]);
 
   // const [page, setPage] = useState<MyElement>(pageObj5);
 
