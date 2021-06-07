@@ -8,13 +8,14 @@ export interface IMyChilds {
 }
 
 export type MyElementType = {
+	id: string;
 	type: string;
 	properties: MyPropertiesType;
 	nodes?: MyNodesType
 };
 export interface IMyElement {
-	updateType(type: string): void;
-	value(): MyElementType;
+	// updateElement(element: MyElementType):{};
+	// value(): MyElementType;
 }
 
 export type MyPropertiesType = { [key: string]: any };

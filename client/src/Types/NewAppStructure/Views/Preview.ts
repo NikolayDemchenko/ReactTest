@@ -1,119 +1,47 @@
 import { FC } from 'react';
 
+import { Input } from '../Model/Input';
 import { MyElement } from '../Model/MyElement';
-import { MyNodes } from '../Model/MyNodes';
-import { MyProperties } from '../Model/MyProperties';
 
 export const PreviewComponent: FC = () => {
-	const pageChildren = new MyNodes([
-		'Текст в массиве',
-		{ type: 'p', properties: {}, nodes: ['Некий текст'] },
-		{
-			type: 'p',
-			properties: { style: { color: 'red' } },
-			nodes: ['Красный текст'],
-		},
-	]);
+  const spanEl = new MyElement({ id: "1", type: "span", properties: {} });
 
-	const pageProperties = new MyProperties({ style: { background: '#4587' } });
+  const inputEl = new MyElement({
+    id: "2",
+    type: "input",
+    properties: { style: { width: "300px" } },
+  });
 
-	pageChildren.add('Добавленный child');
-	pageChildren.add({
-		type: 'p',
-		properties: { style: { color: 'red' } },
-		nodes: ['Красный текст'],
-	});
-	pageChildren.add({
-		type: 'input',
-		properties: { style: { color: 'red' }, placeholder: 'Введите красный текст' },
-	});
-	pageChildren.add({
-		type: 'button',
-		properties: { style: { color: 'red' }, title: 'Введите красный текст' },
-		nodes: [
-			'Нажми сюда!',
-			{
-				type: 'p',
-				properties: {
-					onClick: () => {
-						console.log(`Арбайтен!!!!`);
-					},
-					style: { background: 'black', color: 'white' },
-				},
-				nodes: [' текст'],
-			},
-		],
-	});
-	// myPage.removeByIndex(3);
-	pageChildren.updateByIndex(2, {
-		type: 'span',
-		properties: { style: { color: 'blue' } },
-		nodes: ['Обновлённый Красный текст'],
-	});
+  const flexContainerEl = new MyElement({
+    id: "3",
+    type: "div",
+    properties: { style: { display: "flex" } },
+  });
+  const buttonEl = new MyElement({
+    id: "4",
+    type: "button",
+    properties: {},
+  }).withNodes(["Нажать!"]);
 
-	const pageChilds = new MyNodes([
-		'Текст в массиве',
-		{ type: 'p', properties: {}, nodes: ['Некий текст'] },
-		{
-			type: 'p',
-			properties: { style: { color: 'red' } },
-			nodes: ['Красный текст'],
-		},
-		{
-			type: 'input',
-			properties: { style: { color: 'red' }, placeholder: 'Введите красный текст' },
-		},
-		{
-			type: 'button',
-			properties: { style: { color: 'red' }, title: 'Введите красный текст' },
-			nodes: [
-				'Нажми сюда!',
-				{
-					type: 'p',
-					properties: {
-						onClick: () => {
-							console.log(`Арбайтен!!!!`);
-							
-						},
-						style: { background: 'black', color: 'white' },
-					},
-					nodes: [' текст'],
-				},
-			],
-		},
-	]);
+  const formInput = new Input(flexContainerEl, spanEl, inputEl);
 
+  const form = new MyElement({
+    id: "5",
+    type: "div",
+    properties: {},
+  }).withNodes([
+    formInput.name("Наименование организации").element().value(),
+    formInput.name("Адрес").element().value(),
+    buttonEl.value(),
+  ]);
 
-	// class TextElement implements IMyElement{
-	// 	baseElement:MyElement	
-	// 	text:string="Новый текст"
-	// 	constructor(baseElement:MyElement,text:string) {
-	// 	this.baseElement=baseElement
-	// 	this.text=text
-			
-	// 	}
-	// 	updateType=(type: string)=> this.baseElement.updateType(type)
-	// 	value(): MyElementType {
-	// 		return this.baseElement.value()
-	// 	}
+  const page = new MyElement({
+    id: "6",
+    type: "div",
+    properties: { style: { background: "#789" } },
+  }).withNodes([form.value()]);
 
-	// }
+  // const [page, setPage] = useState<MyElement>(pageObj5);
 
-	const text = new MyElement({ type: 'span', properties: { } });
-	
-	const title = new MyElement(text.value(),["Наименование организации"]);
-
-	const input = new MyElement({ type: 'input', properties: { style:{width:"300px"}} });
-
-	const flexContainer = new MyElement({ type: 'div', properties: {style:{display:"flex"}} });
-	const property = new MyElement(flexContainer.value(),[new MyElement(text.value(),["Наименование организации"]).value(),input.value()]);
-
-
-	const form = new MyElement({ type: 'form', properties: { } },[property.value()]);
-	const page = new MyElement({ type: 'div', properties: { style: { background: '#789' } } },[form.value()]);
-
-
-	// const [page, setPage] = useState<MyElement>(pageObj5);
-
-	return page.view({});
+  return page.view({});
 };

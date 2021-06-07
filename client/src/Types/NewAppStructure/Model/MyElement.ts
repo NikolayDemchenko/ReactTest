@@ -10,48 +10,54 @@ import {
 } from './ValuesInterfacesAndTypes';
 
 export class MyElement implements IMyElement {
-	private element: MyElementType;
-	constructor(element: MyElementType, nodes?: MyNodesType) {
-		this.element = element;
-		this.element.nodes = nodes || element.nodes;
-		console.log(`element.nodes||nodes`, element.nodes || nodes);
-		console.log(`this.element.nodes`, this.element.nodes);
-	}
-	updateType(type: string): void {
-		this.element.type = type;
-	}
-	value = () =>
-		this.element.nodes
-			? { type: this.element.type, properties: this.element.properties, nodes: this.element.nodes }
-			: { type: this.element.type, properties: this.element.properties };
+  private element: MyElementType;
 
-	view: FC = () => {
-		console.log(`this.element.nodes`, this.element.nodes);
-		if (this.element.nodes) {
-			console.log(`withNodes`);
-			return createElement(this.element.type, this.element.properties, this.nodesView(this.element.nodes));
-		} else {
-			console.log(`withOutNodes`);
-			return createElement(this.element.type, this.element.properties);
-		}
-	};
-	private nodesView = (childs: MyNodesType) => {
-		console.log(`childs`, childs);
-		return childs.map((element) =>
-			typeof element === 'string'
-				? element
-				: (element.nodes &&
-						new MyElement(
-							{
-								type: element.type,
-								properties: element.properties || {},
-							},
-							element.nodes
-						).view({})) ||
-				  new MyElement({
-						type: element.type,
-						properties: element.properties || {},
-				  }).view({})
-		);
-	};
+  constructor(element: MyElementType) {
+    this.element = element;
+    console.log(`this.element.nodes`, this.element.nodes);
+  }
+//   updateElement(element: MyElementType) {
+//     this.element = element;
+//     return this;
+//   }
+  withNodes(nodes: MyNodesType) {
+    this.element.nodes = nodes;
+    return this;
+  }
+//   value = (): MyElementType =>
+//     this.element.nodes
+//       ? {
+//           id: this.element.id,
+//           type: this.element.type,
+//           properties: this.element.properties,
+//           nodes: this.element.nodes,
+//         }
+//       : {
+//           id: this.element.id,
+//           type: this.element.type,
+//           properties: this.element.properties,
+//         };
+
+  view: FC = () => {
+    console.log(`this.element.nodes`, this.element.nodes);
+    if (this.element.nodes) {
+      console.log(`withNodes`);
+      return createElement(
+        this.element.type,
+        { ...this.element.properties,key:this.element.id, id: this.element.id },
+        this.element.nodes.map((node) =>
+          typeof node === "string"
+            ? node
+            : new MyElement({
+                ...node,
+                properties: { ...node.properties, key: node.id, id: node.id },
+              }).view({})
+        )
+      );
+    } else {
+      console.log(`withOutNodes`);
+      return createElement(this.element.type, this.element.properties);
+    }
+  };
+
 }
