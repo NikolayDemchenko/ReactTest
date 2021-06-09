@@ -1,47 +1,61 @@
-import { FC } from 'react';
+import { FC, ReactElement, useState } from 'react';
 
 import { Input } from '../Model/Input';
 import { MyElement } from '../Model/MyElement';
+import { MyElementType } from '../Model/ValuesInterfacesAndTypes';
 
 export const PreviewComponent: FC = () => {
-  const spanEl = new MyElement({ id: "1", type: "span", properties: {} });
 
-  const inputEl = new MyElement({
-    id: "2",
-    type: "input",
-    properties: { style: { width: "300px" } },
-  });
+  const [state, setstate] = useState()
+	const spanEl: MyElementType = { id: '1', type: 'span', properties: {} };
 
-  const flexContainerEl = new MyElement({
-    id: "3",
-    type: "div",
-    properties: { style: { display: "flex" } },
-  });
-  const buttonEl = new MyElement({
-    id: "4",
-    type: "button",
-    properties: {},
-  }).withNodes(["Нажать!"]);
+	const inputEl: MyElementType = {
+		id: '2',
+		type: 'input',
+		properties: { style: { width: '300px' } },
+	};
 
-  const formInput = new Input(flexContainerEl, spanEl, inputEl);
+	const flexContainerEl: MyElementType = {
+		id: '3',
+		type: 'div',
+		properties: { style: { display: 'flex' } },
+	};
 
-  const form = new MyElement({
-    id: "5",
-    type: "div",
-    properties: {},
-  }).withNodes([
-    formInput.name("Наименование организации").element(),
-    formInput.name("Адрес").element(),
-    buttonEl,
-  ]);
+	const formInput = new Input(flexContainerEl, spanEl, inputEl);
 
-  const page = new MyElement({
-    id: "6",
-    type: "div",
-    properties: { style: { background: "#789" } },
-  }).withNodes([form]);
+	const buttonEl = new MyElement({
+		id: '4',
+		type: 'button',
+		properties: { key: 'submit' },
+	}).withNodes(['Нажать!']);
 
-  // const [page, setPage] = useState<MyElement>(pageObj5);
+	const form = new MyElement({
+		id: '5',
+		type: 'div',
+		properties: { key: 'form' },
+	}).withNodes([
+		formInput.withName('Наименование организации',(e: {  target: {name: any, value: any } }) =>
+    console.log(`name : ${e.target.name}, value : ${e.target.value}`),),
+		formInput.withName('Адрес',(e: {  target: {name: any, value: any } }) =>
+    console.log(`name : ${e.target.name}, value : ${e.target.value}`),),
+		formInput.withName('Наименование организации2',(e: {  target: {name: any, value: any } }) =>
+    console.log(`name : ${e.target.name}, value : ${e.target.value}`),),
+	]);
+	// (formInput.withName("Наименование организации").value().nodes![1] as MyElement).view({})
+	const dataList = new MyElement({
+		id: '6',
+		type: 'div',
+		properties: { style: { background: '#789' } },
+	}).withNodes([form, buttonEl]);
+  form.withNodes([
+		formInput.withName('Наименование организации',(e: {  target: {name: any, value: any } }) =>
+    console.log(`name : ${e.target.name}, value : ${e.target.value}`),),
+		formInput.withName('Наименование организации2',(e: {  target: {name: any, value: any } }) =>
+    console.log(`name : ${e.target.name}, value : ${e.target.value}`),),
+	])
 
-  return page.view({});
+
+	// const [page, setPage] = useState<MyElement>(pageObj5);
+
+	return dataList.view({});
 };

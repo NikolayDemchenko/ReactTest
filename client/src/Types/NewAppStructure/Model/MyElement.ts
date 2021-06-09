@@ -19,36 +19,37 @@ export class MyElement implements IMyElement {
 		this.element.nodes = nodes;
 		return this;
 	}
-	//   value = (): MyElementType =>
-	//     this.element.nodes
-	//       ? {
-	//           id: this.element.id,
-	//           type: this.element.type,
-	//           properties: this.element.properties,
-	//           nodes: this.element.nodes,
-	//         }
-	//       : {
-	//           id: this.element.id,
-	//           type: this.element.type,
-	//           properties: this.element.properties,
-	//         };
+	value = (): MyElementType =>
+		this.element.nodes
+			? {
+					id: this.element.id,
+					type: this.element.type,
+					properties: this.element.properties,
+					nodes: this.element.nodes,
+			  }
+			: {
+					id: this.element.id,
+					type: this.element.type,
+					properties: this.element.properties,
+			  };
+
 
 	view: FC = () => {
 		console.log(`this.element.nodes`, this.element.nodes);
-		if (this.element.nodes) {
+		const props = this.element.properties;
+		// const key = this.element.id;
+		const id = this.element.id;
+		const type = this.element.type;
+		const nodes = this.element.nodes;
+		if (nodes) {
 			console.log(`withNodes`);
 			return createElement(
-				this.element.type,
-				{ ...this.element.properties, key: this.element.id, id: this.element.id },
-				this.element.nodes.map((node) => (typeof node === 'string' ? node : node.view({})))
+			type,{ ...props, id },
+			nodes.map((node) => (typeof node === 'string' ? node : node.view({})))
 			);
 		} else {
 			console.log(`withOutNodes`);
-			return createElement(this.element.type, {
-				...this.element.properties,
-				key: this.element.id,
-				id: this.element.id,
-			});
+			return createElement(type, { ...props, id });
 		}
 	};
 }

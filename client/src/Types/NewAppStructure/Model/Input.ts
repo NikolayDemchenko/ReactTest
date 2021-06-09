@@ -1,24 +1,44 @@
 import { MyElement } from './MyElement';
+import { MyElementType } from './ValuesInterfacesAndTypes';
 
 export class Input {
-  container: MyElement;
-  title: MyElement;
-  input: MyElement;
-  constructor(container: MyElement, title: MyElement, input: MyElement) {
-    this.container = container;
-    this.title = title;
-    this.input = input;
-  }
-  name = (name: string) => {
-    this.container = this.container;
-    this.title =  this.title.withNodes([name]);
-    return this
-  };
-  element = () => {
-    return new MyElement(this.container.value()).withNodes([
-      this.title.value(),
-      this.input.value(),
-    ]);
-  };
-  inputValue = () => {};
+	container: MyElementType;
+	title: MyElementType;
+	input: MyElementType;
+	constructor(container: MyElementType, title: MyElementType, input: MyElementType) {
+		this.container = container;
+		this.title = title;
+		this.input = input;
+	}
+	withName = (name: string,onChange:Function) => {
+		const container = new MyElement({
+			...this.container,
+			properties: { ...this.container.properties, key: name },
+		});
+		const title = new MyElement({
+			...this.title,
+			properties: { ...this.title.properties, key: 'title' },
+		}).withNodes([name]);
+		const input = new MyElement({
+			...this.input,
+			properties: {
+				...this.input.properties,
+				name,
+				key: 'input',
+				onChange 
+			},
+		});
+		return container.withNodes([title, input]);
+	};
 }
+
+// export class InputElement {
+//   element: MyElement
+// 	constructor(element: MyElement) {
+//     this.element=element
+// 	}
+// 	targetValue = () => {
+//     this.element.value().nodes
+// 	};
+
+// }

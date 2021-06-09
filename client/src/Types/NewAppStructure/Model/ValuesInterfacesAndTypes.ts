@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, ReactElement } from "react";
 
 export type MyNodeType = string | IMyElement
 export type MyNodesType = MyNodeType[];
