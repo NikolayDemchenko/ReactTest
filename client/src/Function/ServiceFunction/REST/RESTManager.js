@@ -45,7 +45,7 @@ const put = async (requestName, data) => {
 	}
 };
 
-export const getRESTManager = (collectionName) => {
+export const RESTManager = (collectionName) => {
 	return {
 		get,
 		post,

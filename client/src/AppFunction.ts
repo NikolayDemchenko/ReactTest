@@ -3,7 +3,7 @@ import { createVariable, createUniqueName } from './Function/ServiceFunction/Dat
 import { NodeManager } from './Function/ServiceFunction/NodeManager';
 import { StyleManager } from './Function/ServiceFunction/StyleManager';
 import { IAppContext } from './Types/BaseTypes';
-import { getRESTManager } from './Function/ServiceFunction/REST/RESTManager';
+import { RESTManager } from './Function/ServiceFunction/REST/RESTManager';
 import React from 'react';
 
 const Context = React.createContext<Partial<IAppContext>>({});
@@ -15,7 +15,7 @@ export {
 	createUniqueName,
 	NodeManager,
 	StyleManager,
-	getRESTManager,
+	RESTManager as getRESTManager,
 	Context,
 	NavigationContext,
 };

@@ -22,7 +22,7 @@ const App: FC = () => {
     <ErrorBoundry>
       {/* <MainMenu {...{ page, PageREST }} /> */}
       {/* {page && new PageEditor(page, setPage).Component} */}
-      <PreviewComponent/>
+      {/* <PreviewComponent/> */}
       <Contacts/>
     </ErrorBoundry>
   );

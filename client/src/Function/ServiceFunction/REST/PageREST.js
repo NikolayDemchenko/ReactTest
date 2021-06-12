@@ -1,4 +1,4 @@
-import { getRESTManager } from './RESTManager';
+import { RESTManager } from './RESTManager';
 
 const {
 	getCollection,
@@ -9,7 +9,7 @@ const {
 	updateField,
 	removeDocById,
 	getUniqueValues,
-} = getRESTManager('pages');
+} = RESTManager('pages');
 
 const getPageREST = (setState) => {
 	return {
@@ -28,7 +28,7 @@ const getPageREST = (setState) => {
 		createPage: (newPage) => {
 			createDoc(newPage).then((page) => {
 				getDocsByField({ name: 'appName', value: page.appName }).then((pageList) =>
-					setState((state) => ({ pageList, page }))
+					setState({ pageList, page })
 				);
 			});
 		},
