@@ -10,17 +10,15 @@ const createDoc = (req, res, collectionName) => {
 const updateDoc = (req, res, collectionName) => {
 	console.log(`start update document`);
 	const document = JSON.parse(req.body.value);
+	// console.log(`document`,document);
 	const _id = ObjectId(document._id);
-	req.app.locals[collectionName].findOneAndUpdate(
+	req.app.locals[collectionName].replaceOne(
 		{ _id },
-		{ $set: { ...document, _id } },
-		{ returnOriginal: false },
-		(err, result) => {
-			if (err) return console.log(err);
-			res.send(result.value);
-			console.log(`updated document`);
-		}
-	);
+		 { ...document, _id },
+	).then(() => {
+		res.send(200);
+		console.log(`replaced ${collectionName} with id`, _id);
+	});
 };
 // Переделать для возможности глубокого обновления без ограничений
 const updateField = (req, res, collectionName) => {

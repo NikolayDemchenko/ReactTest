@@ -26,7 +26,7 @@ MongoClient.connect(cloudURI, {
 		dbClient = client;
 		app.listen(port, () => console.info(`REST API running on port http://localhost:${port}`));
 
-		getMongoCollections(app, db, ['pages', 'styles','people']);
+		getMongoCollections(app, db, ['pages', 'styles','person']);
 	})
 	.catch((error) => console.error(error));
 
