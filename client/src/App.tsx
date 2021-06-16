@@ -7,8 +7,7 @@ import { page as testPage } from './Components/View/Pages/CreateApp';
 import ErrorBoundry from './ErrorBoundry';
 import getPageREST from './Function/ServiceFunction/REST/PageREST';
 import { TPage } from './Types/BaseTypes';
-import { Contacts } from './Types/NewAppStructure/Views/Organization';
-import { PreviewComponent } from './Types/NewAppStructure/Views/Preview';
+import { Contacts } from './Types/EntityBase/Organization';
 
 // import { MyComopnent } from './Types/NewAppStructure/NewComponents/Components';
 
