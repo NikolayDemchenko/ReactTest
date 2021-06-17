@@ -2,19 +2,21 @@ import React, { FC } from 'react';
 
 export class Property {
 	name: string;
-	constructor(name: string) {
+	value: string;
+	constructor(name: string,value?: string) {
 	this.name=name	
+	this.value=value||""	
 		
 	}
 	view: FC<{
 		setValue? (value:{name:string,value:string}):void;	
 		value?: string;
-	  }> = ({ value = "", setValue }) => {
+	  }> = ({ setValue }) => {
 		return (
 		  <div>
 			<div>{this.name}</div>
 			<input
-			  value={value}
+			  value={this.value}
 			  onChange={(e) => {
 				setValue && setValue({ name:this.name, value: e.target.value });
 			  }}
@@ -22,9 +24,12 @@ export class Property {
 		  </div>
 		);
 	  };
-	value?: string;
 	setValue?: Function;
 }
+
+
+
+
 export const PropertyComponent: FC<{
   setValue?: Function;
   name: string;

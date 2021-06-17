@@ -2,50 +2,21 @@
 title Структура базы данных
 
 
-class "Table" as Table {
-    siteEditor : SiteEditor
-    run()  
+class "Entities" as Entities {
+    entities: IEntity[];
+    view()
 }
-Application *-- SiteEditor
+class "Entity" as Entity {
+    properties: IProperty[];
+    view()
+}
 
-class "SiteEditor" as SiteEditor {
-    navigationPanel : NnavigationPanel    
-    stylePanel : StylePanelPanel  
-    showNavigationPanel()  
-    showStylePanel()  
-    
+class "Property" as Property {
+  name: string;
+  view()
 }
-SiteEditor *-- NnavigationPanel
 
-class "NnavigationPanel" as NnavigationPanel {
-    sites : Sites
-    showSiteNames()   
-}
-NnavigationPanel *-- Sites
 
-class "Sites" as Sites {
-    - siteNames : String[]
-    + constructor( siteNames : String[] )
-    - findPageNamesBySite_id( site_id : string )
-    + create()
-    + showSiteNames()
-    + find( name : string )
-    + delete( site : Site )
-}
-Sites *-- Site
-
-class "Site" as Site {
-    - _id : string
-    - name : string
-    - domaine : string
-    - startPage_id : string
-    - pages : Pages
-    + updateName()
-    + updateDomaine()
-    + updateStartPage_id()
-    + render()
-}
-Site *-- Pages
 
 
 @enduml
