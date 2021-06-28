@@ -7,17 +7,17 @@ export interface IMyComponent {
   component: FC;
   renderTo(component: IMyContainerComponent): void;
 }
-interface IMyText extends IMyComponent {}
+
 interface IMyContainerComponent extends IMyComponent {
   addChildren(child: IMyComponent): void;
 }
 
 abstract class MyComponent implements IMyComponent {
   tag: string;
-  className: string;
-  constructor(tag: string, className: string) {
-    this.tag = tag;
-    this.className = className;
+  props: {[key:string]:any}
+  constructor(tag: string, props: {[key:string]:any}) {
+    this.tag = tag;  
+    this.props = props;  
   }
   abstract component: FC;
   renderTo(component: IMyContainerComponent): void {
@@ -25,14 +25,12 @@ abstract class MyComponent implements IMyComponent {
   }
 }
 
-class MyElement<T> extends MyComponent implements IMyText {
-  private data: T;
-  constructor(tag: string, className: string, data: any) {
-    super(tag, className);
-    this.data = data;
+class BaseElement<T> extends MyComponent implements IMyComponent { 
+  constructor(tag: string, props: {[key:string]:any}) {
+    super(tag, props);
   }
-  component: FC = () => {
-    return createElement(this.tag, { className: this.className }, this.data);
+  component:FC = () => {
+    return createElement(this.tag, this.props);
   };
 }
 class Container extends MyComponent implements IMyContainerComponent {
@@ -40,8 +38,8 @@ class Container extends MyComponent implements IMyContainerComponent {
   /**
    *
    */
-  constructor(tag: string, className: string, children?: IMyComponent[]) {
-    super(tag, className);
+  constructor(tag: string, props: {[key:string]:any}, children?: IMyComponent[]) {
+    super(tag, props);
     this.children = children || [];
   }
 
@@ -50,43 +48,68 @@ class Container extends MyComponent implements IMyContainerComponent {
   }
 
   component: FC = (props) => {
-    return createElement(this.tag, { className: this.className }, [
+    return createElement(this.tag, this.props, [
       this.children.map((child) => child.component(props)),
     ]);
   };
 }
 
-class StringFactory {
+class BaseFactory {
   private tag: string;
   private className: string;
-  private сontainer: Container;
+  сontainer: Container;
   constructor(tag: string, className: string, сontainer: Container) {
     this.сontainer = сontainer;
     this.tag = tag;
     this.className = className;
   }
-  create = (data: string) => {
-    const element=new MyElement(this.tag, this.className, data);
+  create = (props: {[key:string]:any}) => {
+    const element=new BaseElement(this.tag, {className:this.className,...props});
     element.renderTo(this.сontainer);
    return element
   };
 }
 
-const сontainer = new Container("div", "title");
-const сontainer1 = new Container("div", "title");
-const сontainer2 = new Container("div", "title")
+class ImageFactory {
+factory:BaseFactory
+  constructor(factory:BaseFactory) {
+    this.factory = factory;
+  }
+  create = (src: string) => this.factory.create({src})
+}
 
-const title = new StringFactory("h1", "title",сontainer1);
-const text = new StringFactory("span", "title",сontainer1);
+class StringFactory {
+factory:BaseFactory
+  constructor(factory:BaseFactory) {
+    this.factory = factory;
+  }
+  create = (text: string) => this.factory.create({children:text})
+}
+
+
+
+const сontainer = new Container("div", {className:"title"});
+const сontainer1 = new Container("div", {className:"title"});
+const сontainer2 = new Container("div",{className: "title"})
+
+const title = new StringFactory(new BaseFactory("h1", "title",сontainer1));
+const image = new ImageFactory(new BaseFactory("img", "title",сontainer1));
+const text = new StringFactory(new BaseFactory("span", "title",сontainer1));
 
 title.create("Некий текст");
 title.create("Некий текст");
 title.create("Некий текст");
+image.create("https://pbs.twimg.com/media/DbLTMIJXcAE3RDE.jpg");
+image.create("https://pbs.twimg.com/media/DbLTMIJXcAE3RDE.jpg");
+image.create("https://pbs.twimg.com/media/DbLTMIJXcAE3RDE.jpg");
+
 const copytext=text.create("Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст Некий текст ");
+image.create("https://pbs.twimg.com/media/DbLTMIJXcAE3RDE.jpg");
 title.create("Вот так");
 title.create("Некий текст");
-title.create("Некий текст");
+image.create("https://pbs.twimg.com/media/DbLTMIJXcAE3RDE.jpg");
 copytext.renderTo(сontainer1)
+title.create("Некий текст");
 copytext.renderTo(сontainer1)
 copytext.renderTo(сontainer1)
 copytext.renderTo(сontainer1)
